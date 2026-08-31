@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Chat – PaaS Help</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <header>
+      <img src="t-mobile-logo.png" alt="T-Mobile" class="logo">
+      <h1>T-Cloud</h1>
+      <span class="subtitle" data-i18n="subtitle">PaaS Cloud Help</span>
+      <div id="lang-buttons">
+        <button class="lang-btn active" data-lang="cz" title="Čeština">🇨🇿</button>
+        <button class="lang-btn" data-lang="en" title="English">🇬🇧</button>
+        <button class="lang-btn" data-lang="de" title="Deutsch">🇩🇪</button>
+      </div>
+      <button id="clear-btn" title="Smazat historii">&times;</button>
+    </header>
+    <div id="faq" class="faq-collapsed">
+      <div id="faq-header">
+        <span data-i18n="faq-header">Nejčastější dotazy</span>
+        <button id="faq-toggle" title="Přepnout FAQ">▸</button>
+      </div>
+      <div id="faq-body"></div>
+    </div>
+    <div id="chat"></div>
+    <div id="input-area">
+      <textarea id="input" rows="1" data-i18n="input-placeholder" placeholder="Napiš zprávu..."></textarea>
+      <button id="send-btn" disabled>▶</button>
+    </div>
+  </div>
+  <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+node_modules/
+package-lock.json
+.env
+
+# Regenerable data caches (kept out of the repo)
+data/docs_cache/
+data/page-images.json
+
+# Python cache (FastAPI fallback)
+__pycache__/
+*.pyc
+
+# Logs
+*.log
+/tmp/*
