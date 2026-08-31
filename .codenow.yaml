@@ -4,7 +4,8 @@ advancedMode:
   enabled: true
 build:
   # Image used by CI pipelines in build tasks, recommendation: use the official node repo if you want to change runtime version: https://hub.docker.com/_/node
-  image: docker.io/node:20.2.0
+  # cheerio/undici require node >=20.18.1, so use a recent 20.x (not 20.2.0)
+  image: docker.io/node:20.18.1
   # definitions of environment variables that will be used in all stages of your pipeline
   environmentVariables: []
   #- key: variable1

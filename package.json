@@ -4,6 +4,7 @@
   "description": "AI chat with RAG over PaaS help documentation",
   "main": "server.js",
   "scripts": {
+    "build": "echo \"No build step required\"; exit 0",
     "start": "node server.js",
     "scrape": "node scripts/scrape.js"
   },
