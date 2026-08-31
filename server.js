@@ -20,19 +20,23 @@ const io = new Server(server, {
   path: BASE_PATH + '/socket.io'
 })
 
-// Serve static assets and inject BASE_PATH into HTML
+// Serve static assets and inject BASE_PATH into HTML.
+// Always inject window.BASE_PATH and the Socket.IO client so `main.js`
+// (which calls io(...)) works whether or not BASE_PATH is configured.
 const publicDir = path.join(__dirname, 'public')
+
+function serveIndex(req, res) {
+  const injectedScript =
+    `<script>window.BASE_PATH=${JSON.stringify(BASE_PATH)}</script>` +
+    `<script src="${BASE_PATH}/socket.io/socket.io.js"></script>` +
+    `<script src="${BASE_PATH}/main.js"></script>`
+  const html = fs.readFileSync(path.join(publicDir, 'index.html'), 'utf-8')
+    .replace(/<script[^>]*src="main\.js"[^>]*><\/script>/, injectedScript)
+  res.type('html').send(html)
+}
+
 if (BASE_PATH) {
-  // Dynamic index.html (route first, before static middleware)
-  app.get(BASE_PATH + '/', (req, res) => {
-    const injectedScript =
-      `<script>window.BASE_PATH=${JSON.stringify(BASE_PATH)}</script>` +
-      `<script src="${BASE_PATH}/socket.io/socket.io.js"></script>` +
-      `<script src="${BASE_PATH}/main.js"></script>`
-    const html = fs.readFileSync(path.join(publicDir, 'index.html'), 'utf-8')
-      .replace(/<script[^>]*src="main\.js"[^>]*><\/script>/, injectedScript)
-    res.type('html').send(html)
-  })
+  app.get(BASE_PATH + '/', serveIndex)
   app.get(BASE_PATH, (req, res) => res.redirect(BASE_PATH + '/'))
   // Other static assets (not index.html — already handled above)
   app.use(BASE_PATH, (req, res, next) => {
@@ -40,6 +44,8 @@ if (BASE_PATH) {
     express.static(publicDir)(req, res, next)
   })
 } else {
+  // Serve index.html with the Socket.IO client injected
+  app.get('/', serveIndex)
   app.use(express.static(publicDir))
 }
 
