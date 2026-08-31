@@ -57,7 +57,7 @@ const LANG_INSTRUCTION = {
 }
 const LANG_LABEL = { cz: 'Čeština', en: 'English', de: 'Deutsch' }
 const LANG_NAME = { cz: 'Czech', en: 'English', de: 'German' }
-const TRANSLATION_DIR = path.join(dataDir, 'docs_cache')
+const TRANSLATION_DIR = process.env.DOCS_CACHE_DIR || path.join(dataDir, 'docs_cache')
 
 function docsUrl(lang, path) {
   return `${BASE_PATH}/docs/${lang}/${path.replace(/^\//, '')}`

@@ -5,6 +5,8 @@
 
 PORT=3002
 BASE_PATH=
+# Writable cache dir (pod has read-only rootfs; /tmp is a mounted tmpfs in the helm chart)
+DOCS_CACHE_DIR=/tmp/docs_cache
 LLM_ENDPOINT=http://193.85.150.110:8000
 LLM_MODEL=mistralai/Mistral-7B-Instruct-v0.3
 LLM_TEMPERATURE=0.3
