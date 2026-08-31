@@ -20,19 +20,8 @@ codenow:
 # Runtime environment variables injected as a Kubernetes Secret (values must be
 # base64-only safe plain text here — see templates/secret.yaml). Never commit
 # real API keys with plain values; set them in the CI/CD pipeline instead.
-# Mirror of .env.example (API keys left blank here and must be filled via CI/CD).
-environmentVariables:
-  PORT: "3002"
-  BASE_PATH: ""
-  LLM_ENDPOINT: "http://193.85.150.110:8000"
-  LLM_MODEL: "mistralai/Mistral-7B-Instruct-v0.3"
-  LLM_TEMPERATURE: "0.3"
-  LLM_MAX_TOKENS: "2048"
-  LLM_API_KEY: ""
-  HELP_URL: "https://www.virtuozzo.com/application-management-docs/"
-  OPENAI_API_KEY: ""
-  OPENAI_MODEL: "gpt-5.5"
-  FALLBACK_URL: "http://localhost:8001"
+# The full set of app env vars lives in codenow/config/environment-variables.
+environmentVariables: {}
 
 buildNumber: "${env.BUILD_NUMBER}"
 

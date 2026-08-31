@@ -1,0 +1,14 @@
+# Runtime environment variables (mirror of .env.example)
+# API keys left blank here — fill them via CI/CD (never commit real keys).
+
+PORT=3002
+BASE_PATH=
+LLM_ENDPOINT=http://193.85.150.110:8000
+LLM_MODEL=mistralai/Mistral-7B-Instruct-v0.3
+LLM_TEMPERATURE=0.3
+LLM_MAX_TOKENS=2048
+LLM_API_KEY=
+HELP_URL=https://www.virtuozzo.com/application-management-docs/
+OPENAI_API_KEY=
+OPENAI_MODEL=gpt-5.5
+FALLBACK_URL=http://localhost:8001

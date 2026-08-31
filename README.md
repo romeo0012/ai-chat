@@ -45,10 +45,11 @@ Kopíruj ze šablony: `cp .env.example .env`
 Projekt používá CodeNow (Kubernetes platforma) se stejným vzorem jako `iaas-api-mgmt`:
 
 - `.codenow.yaml` — definice CI/CD (Dockerfile + helm descriptor)
+- `codenow/config/environment-variables` — runtime environment proměnné aplikace (mirror `.env.example`)
 - `Dockerfile` — produkční image (node:20-alpine, ne-root `USER 1000`, port `3002`)
 - `helm/ai-chat/` — Helm chart (Deployment, Service, Secret, ConfigMap, Istio VirtualService)
 
-Runtime proměnné se předávají jako `environmentVariables` v `helm/ai-chat/values.yaml` a CodeNow je vloží přes Kubernetes Secret (`templates/secret.yaml`). Reálné API klíče vkládej v CI/CD pipeline, ne commitovat.
+Environment proměnné aplikace žijí v `codenow/config/environment-variables`. Reálné API klíče vkládej v CI/CD pipeline, ne commitovat.
 
 - Exponovaný port aplikace: `3002` (shodně `.codenow.yaml runtime.port`, `Dockerfile EXPOSE`, `values.yaml service.port`)
 - Externí endpoint přes `codenow.domainName` v Istio VirtualService
