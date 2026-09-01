@@ -58,12 +58,34 @@ const LANG_INSTRUCTION = {
 const LANG_LABEL = { cz: 'Čeština', en: 'English', de: 'Deutsch' }
 const LANG_NAME = { cz: 'Czech', en: 'English', de: 'German' }
 const COMMITTED_TRANSLATION_DIR = path.join(dataDir, 'docs_cache')
-const TRANSLATION_DIR = process.env.DOCS_CACHE_DIR || COMMITTED_TRANSLATION_DIR
+
+// Determine a writable cache dir. In CodeNOW the rootfs is read-only, so the
+// committed data/docs_cache may not be writable. Auto-fall back to /tmp if the
+// configured dir (DOCS_CACHE_DIR or the committed one) cannot be written to.
+function pickWritableCacheDir() {
+  const candidates = []
+  if (process.env.DOCS_CACHE_DIR) candidates.push(process.env.DOCS_CACHE_DIR)
+  candidates.push(COMMITTED_TRANSLATION_DIR)
+  candidates.push('/tmp/docs_cache')
+  for (const dir of candidates) {
+    try {
+      fs.mkdirSync(dir, { recursive: true })
+      const probe = path.join(dir, '.write-probe')
+      fs.writeFileSync(probe, 'ok')
+      fs.unlinkSync(probe)
+      return dir
+    } catch (e) {
+      console.log(`[docs-cache] ${dir} not writable, trying next`)
+    }
+  }
+  return candidates[candidates.length - 1]
+}
+
+const TRANSLATION_DIR = pickWritableCacheDir()
 
 // If translations are shipped in the image (read-only COMMITTED_TRANSLATION_DIR)
-// but the active cache lives elsewhere (DOCS_CACHE_DIR, e.g. a writable /tmp
-// in CodeNOW with a read-only rootfs), seed the active dir from the committed
-// data so shipped translations are available AND still writable.
+// but the active cache lives elsewhere (writable /tmp), seed the active dir from
+// the committed data so shipped translations are available AND still writable.
 if (TRANSLATION_DIR !== COMMITTED_TRANSLATION_DIR &&
     fs.existsSync(COMMITTED_TRANSLATION_DIR) &&
     !fs.existsSync(path.join(TRANSLATION_DIR, 'en'))) {
