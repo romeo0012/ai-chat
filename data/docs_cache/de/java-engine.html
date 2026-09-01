@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Java Engine Server</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Java Engine Server</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Java-Basis-Server (Java Engine)<br>Das Java Engine Server ist eine Abbildung einer Grundlage-Vorlage von CentOS/AlmaLinux mit vorinstalliertem JDK. Es bietet ein minimal notwendiges für die Wartung von Java-Anwendungen, während es die Kompatibilität mit allen Plattform-Funktionen sichert (automatisierte vertikale und horizontale Skalierung, öffentliche IP, Isolierungsgruppen, Firewall-Regeln, API- und SSH-Zugriff usw.). Das Java Engine Server ist für die Bereitstellung und Wartung von Java-Anwendungen auf Basis des fat JAR / uber JAR (d.h., ausführbaren JAR mit allen Klassen, Ressourcen und Abhängigkeiten) konzipiert. Es nutzt den Java Memory Agent, um Ihre Anwendung automatisch zu optimieren, indem es Konfigurationen anpasst, je nach Last und verfügbaren Ressourcen. Hinweis: Diese Vorlage nutzt ein modernes systemd-Initialisierungs-Daemon.</p><p>Java Engine erstellen<br>Folgen Sie den nachfolgenden einfachen Schritten, um eine neue Umgebung mit dem Java Engine Server zu erstellen.<ol>
+<li>Melden Sie sich bei der Plattform-Benutzeroberfläche an und klicken Sie auf den Knopf New Environment in der oberen linken Ecke.</li>
+</ol><ol>
+<li>Im geöffneten Topologie-Assistenten wechseln Sie zum Java-Tab, wählen Sie den Java Engine Server und die erforderliche JDK-Version (markiert im Bild unten). Personalisieren Sie weitere Parameter nach Ihren Bedürfnissen, z.B., Ressourcenbegrenzungen, Speicherplatz, externe IPs, Region (falls verfügbar), usw. Klicken Sie auf Create, um fortzufahren.</li>
+</ol><ol>
+<li>Ihre Umgebung sollte innerhalb von einer Minute bereitstehen.</li>
+</ol></p><p>Jetzt können Sie Ihre Umgebung verwalten:<br>Bereitstellen Sie eine Anwendung<br>Binden Sie eine benutzerdefinierte Domäne<br>Monitoren Sie die Statistiken &amp; Anzeigen Sie die Log-Dateien<br>Tun Sie die Server-Konfigurationen an<br>Zugriff auf die Umgebung über SSH<br>Referenzieren Sie den Java Developer Center für eine vollständige Übersicht über die Java-Hosting innerhalb der Plattform.</p><div class="doc-image"><img src="/images/docs/java-engine/01-create-new-environment-button_hu08753fb831e531293fa12c6b94ab4cf4_9171_480x0_resize_box_3.png" alt="create new environment button hu08753fb831e531293fa12c6b94ab4cf4 9171 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/java-engine/02-java-engine-in-topology-wizard_hu75f44c5e72c53d70ff7af389fedfbc79_132682_480x0_resize_box_3.png" alt="java engine in topology wizard hu75f44c5e72c53d70ff7af389fedfbc79 132682 480x0 resize box 3" loading="lazy"></div><p>Was kommt nachher?<br>Java Developer Center<br>Deployment Guide<br>Tomcat Server<br>GlassFish Server</p><div class="doc-image"><img src="/images/docs/java-engine/03-java-engine-environment-created_hu21f42aaeb79ffb75cb49708c07fb96cd_26924_480x0_resize_box_3.png" alt="java engine environment created hu21f42aaeb79ffb75cb49708c07fb96cd 26924 480x0 resize box 3" loading="lazy"></div>
+</main>
+</body>
+</html>

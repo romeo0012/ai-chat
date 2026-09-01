@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kubernetes Cluster: Versions & Change Logs</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Kubernetes Cluster: Versions & Change Logs</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Kubernetes Klaster: Verze a Změny<br>Platforma poskytuje předinstalované řešení Kubernetes (K8s) Klastru s automatickou instalací. Kubernetes je portabilní, rozšiřitelná a otevřená platforma pro správu kontejnerových úloh a služeb, která umožňuje jak deklarativní konfiguraci, tak automatizaci. Jeho funkce se velmi překrývají s PaaS, což umožňuje nastavit aplikace na základě systému Kubernetes přímo v platformě. Výhody, které získáte v rámci hostování Kubernetes Klastru v platformě:
+<ul>
+<li>Jednoduché spuštění - automatická instalace za několik kliknutí nevyžaduje žádnou ruční intervenci</li>
+</ul><ul>
+<li>Hyper škálovatelnost - klastr může být automaticky škálován vertikálně i horizontálně</li>
+</ul><ul>
+<li>Multi-Cloud Dostupnost - možnost kombinovat různé možnosti cloudu podle potřeby projektu</li>
+</ul><ul>
+<li>Zjednodušená správa - jediný bod správy prostřednictvím intuitivního UI a vbudovaného Web SSH</li>
+</ul><ul>
+<li>Flexibilní automatizace - automatizace procesů DevOps pomocí otevřeného API a Cloud Scripting</li>
+</ul><ul>
+<li>Ekonomická efektivita - platíte pouze za spotřebované zdroje, získáváte výhody z hustoty kontejnerů a škálovatelnosti</li>
+</ul></p><p>Doporučení: Další podrobnosti a rozsáhlejší popis s příklady použití naleznete v příslušném článku Kubernetes Klastru v našem blogu. Níže přehledně popíšeme všechny verze Kubernetes Klastru a popisujeme implementované změny a upravování.</p><p>Změny v balíčku Kubernetes<br>Můžete si prohlédnout zdrojový kód balíčku Kubernetes Klastru na GitHubu.</p><div class="doc-image"><img src="/images/docs/kubernetes-cluster-versions/01-kubernetes-cluster-topology-scheme.png" alt="kubernetes cluster topology scheme" loading="lazy"></div><p> Přehled všech verzí Kubernetes Clusteru a popis implementovaných změn a uprav. Záznam změn K8s Balíčku Můžete si prohlédnout zdrojový kód balíčku Kubernetes Clusteru na GitHubu. Můžete prohlédnout změny v každé verzi kliknutím na požadovaný záznam v následujícím seznamu. Poznámka: Implementace nových funkcí/komponent pro řešení Kubernetes Clusteru (stejně jako testování stability) vyžaduje určitou dobu. Proto je verze balíčku obvykle o jednu nebo dvě menší verzi zaostávala vůči Kubernetes upstream tagům. Aktuální verze K8s K8s 1.31.3 přidalo verzi 1.31.3 pro nové instalace Kubernetes clusteru K8s 1.30.6 přidalo verzi 1.30.6 pro nové instalace Kubernetes clusteru K8s 1.29.9 přidalo verzi 1.29.9 pro nové instalace Kubernetes clusteru Archiv zpráv o vydáních K8s K8s 1.28.0 přidalo verzi 1.28.0 pro nové instalace Kubernetes clusteru odstranilo zastaralou integraci s GitLab (GitLab Integrace přídavku pro Kubernetes) upravilo formátování úspěšného zobrazení instalace z HTML na markdown zlepšilo validaci pro přídavný Certificate Manager upravilo pre-instalaci: "cert-manager" může být nyní nasazen pro potřeby uživatele i když je Jaeger povolen při vytváření Kubernetes clusteru K8s 1.27.4 přidalo verzi 1.27.4 pro nové instalace Kubernetes clusteru.</p><p> Můžete nyní nasadit aplikaci pro individuální potřeby uživatelů i když je aktivován Jaeger při vytváření Kubernetes clusteru K8s 1.27.4 přidalo 1.27.4 verzi pro nové instalace Kubernetes clusterů odstranilo zastaralou integraci s GitLab (GitLab Integrace pro Kubernetes) zlepšilo platnost pro Certificate Manager add-on předinstalace: "cert-manager" můžete nyní nasadit pro individuální potřeby uživatelů i když je aktivován Jaeger při vytváření Kubernetes clusteru K8s 1.26.7 přidalo 1.26.7 verzi pro nové instalace Kubernetes clusterů znovu povolilo instalaci nástroje správy Rancher po řešení kompatibilitního problému s aktuální 1.26.x verzí Kubernetes zastaralou integraci s GitLab (GitLab Integrace pro Kubernetes) zlepšilo platnost pro Certificate Manager add-on předinstalace: "cert-manager" můžete nyní nasadit pro individuální potřeby uživatelů i když je aktivován Jaeger při vytváření Kubernetes clusteru K8s 1.25.4 přidalo 1.25.4 verzi pro nové instalace Kubernetes clusterů obnovilo implementaci Jaeger Tracing Tools (aktualizovaná verze, zásobník operátorů, závislosti) v důsledku změn API aktualizovalo komponenty Kubernetes clusteru: ingress-nginx 1.5.1 k9s 0.26.7 metallb 0.13.7 kubernetes-dashboard 2.7.0 metrics-server 0.6.2 cert-manager 1.10.1 cert-manager-nginx 4.4.4.</p><p> API změny aktualizovaly komponenty Kubernetes clusteru:<br>ingress-nginx 1.5.1 k9s 0.26.7 metallb 0.13.7 kubernetes-dashboard 2.7.0 metrics-server 0.6.2 cert-manager 1.10.1 cert-manager-nginx 4.4.0 vyřešily problém s instalací komponenty Stern po přesunu jejich úložiště v repozitáři v čase, částečně zablokovaly instalaci nástroje správy Rancher pro neslučitelnost s aktuální verzí 1.25.x Kubernetes; vyřešily problém s připojením po instalaci přídavného modulu GitLab Integration, který přešel na Custom Resource Definition (CRD), zlepšily kompatibilitu a migraci konfigurace pro MetalLB; vyřešily problém s doménovým zařízením pomocí přídavného modulu Certificate Manager add-on K8s 1.24.8přidaly verzi 1.24.8 pro nové instalace clusteru Kubernetes vyřešily problém s instalací komponenty Stern po přesunu jejich úložiště v repozitáři v čase, zlepšily kompatibilitu a migraci konfigurace pro MetalLB; vyřešily problém s doménovým zařízením pomocí přídavného modulu Certificate Manager add-on K8s 1.23.14přidaly verzi 1.23.14 pro nové instalace clusteru Kubernetes vyřešily problém s instalací komponenty Stern po přesunu jejich úložiště v repozitáři v čase, vyřešily problém s doménovým zařízením pomocí přídavného modulu Certificate Manager add-on K8s 1.24.4přidaly verzi 1.24.4 pro nové instalace clusteru Kubernetes aktualizovaly komponenty Kubernetes clusteru:ingress-nginx 1.3.0 helm 3.9.4 k9s 0.26.3 metallb 0.</p><p> Verze 1.24.4 pro nové instalace klastru Kubernetes byla aktualizována komponenty klastru Kubernetes: ingress-nginx 1.3.0, helm 3.9.4, k9s 0.26.3, metallb 0.13.4, kubernetes-dashboard 2.6.1, K8s 1.23.10 bylo přidáno 1.23.10 verze pro nové instalace klastru Kubernetes, K8s 1.22.12 bylo přidáno 1.22.12 verze pro nové instalace klastru Kubernetes, bylo aktualizováno OpenLiberty operátor na 0.8.2, K8s 1.21.14 bylo přidáno 1.21.14 verze pro nové instalace klastru Kubernetes, K8s 1.23.6 bylo přidáno 1.23.6 verze pro nové instalace klastru Kubernetes, opravy chyb: opravilo nezpracovanou chybu při konfiguraci GitLab Integrace přídavku pro stejný server, implementovalo aktivní aktualizaci pro seznam prostředí v GitLab Integrace přídavku k poskytnutí přesných výsledků, opravilo chybu při odstraňování GitLab Integrace s už odstraněným prostředím, K8s 1.22.10 bylo přidáno 1.22.10 verze pro nové instalace klastru Kubernetes, bylo aktualizováno balíčkové vytvoření nástroje automounter - autofs 5.1.8, K8s 1.21.12 bylo přidáno 1.21.12 verze pro nové instalace klastru Kubernetes, bylo aktualizováno balíčkové vytvoření nástroje automounter - autofs 5.1.8, opravilo chybu s chybějícími přihlašovacími údaji pro nástroj Rancher management v pop-upu po instalaci a v e-mailu, K8s 1.22.6 bylo přidáno 1.22.6 verze pro nové instalace klastru Kubernetes.</p><p> Opravil jsem problém s chybějícími přihlašovacími údaji pro nástroj správy Rancheru v okně po instalaci a v e-mailu K8s 1.22.6<br>Přidán 1.22.6 verze pro nové instalace Kubernetesu clusteru<br>Přidán podporu SSL koncového bodu pro Traefik ingress controller<br>Přidán podporu pro nejnovější verze Open Liberty Operator<br>Aktualizován komponenty Kubernetes clusteru:<ul>
+<li>ingress-nginx 1.1.1</li>
+</ul><ul>
+<li>ingress-haproxy 1.6.9</li>
+</ul><ul>
+<li>k9s 0.25.18<br>Opravy chyb:</li>
+</ul><ul>
+<li>oprava selhání k8sm-config pro chybějící ClusterStatus data v ConfigMap kubeadm</li>
+</ul><ul>
+<li>zakázání možnosti povolení režimu stavového měření pro uzly Kubernetesu</li>
+</ul><ul>
+<li>oprava chyby při instalaci Rancher add-onu</li>
+</ul><ul>
+<li>oprava chyby při integraci GitLabu s Kubernetesem Clusterem K8s 1.21.10</li>
+</ul><ul>
+<li>přidán 1.21.10 verze pro nové instalace Kubernetesu clusteru</li>
+</ul><ul>
+<li>oprava chyby při integraci GitLabu s Kubernetesem Clusterem K8s 1.23.4</li>
+</ul><ul>
+<li>přidán 1.23.4 verze pro nové instalace Kubernetesu clusteru<br>Aktualizován komponenty Kubernetes clusteru:</li>
+</ul><ul>
+<li>metrics-server 0.6.1</li>
+</ul><ul>
+<li>kubernetes-dashboard 2.5.1</li>
+</ul><ul>
+<li>metallb-controller 0.12.1</li>
+</ul><ul>
+<li>helm 3.7.2</li>
+</ul><ul>
+<li>cert-manager 1.7.1</li>
+</ul><ul>
+<li>cert-manager-nginx 4.0.18</li>
+</ul><ul>
+<li>ingress-nginx 1.1.2<br>Opravy chyb:</li>
+</ul><ul>
+<li>oprava chyby při instalaci Rancher add-onu</li>
+</ul><ul>
+<li>oprava chyby při integraci GitLabu s Kubernetesem Clusterem K8s 1.22.4</li>
+</ul><ul>
+<li>přidán 1.22.4 verze pro nové instalace Kubernetesu clusteru</li>
+</ul><ul>
+<li>implementace podpory IngressClass API a aktualizace ingress resources k přechodu z deprekovaného cluster API</li>
+</ul><ul>
+<li>aktualizace operátoru Jaegeru na verzi 1.</li>
+</ul></p><p> Překlad z angličtiny na česky:</p><p>TEXT:<br>Podpora API IngressClass a aktualizované prostředky ingress pro přechod z deprekované API clusteru k aktualizovanému operátoru Jaeger na verzi 1.27, který operuje s novou API IngressClass aktualizoval komponenty Kubernetes clusteru:<br>k9s 1.25.6<br>ingress-nginx 1.1.0<br>metrics-server 0.5.2<br>helm 3.6.3<br>cert-manager 1.5.4<br>ingress-nginx-cert 4.0.11<br>upravil texty v instalaci Kubernetes a přidalo okno úspěchu při restartování konfiguraci souboru redeploy.conf do oblíbených zkratek správce souborů (podobně jako ostatní certifikované šablony) dočasně přešlo k nasazení "hello-world" místo "openliberty-operator", který je kompatibilní s verzemi Kubernetes 1.22+ ještě ne, dočasně zneškodnil instalaci nástroje správy Rancher, protože není kompatibilní s verzemi Kubernetes 1.22+, opravy chyb:<br>opravil nezpracovanou chybu při pokusu o instalaci doplňku Konfigurace clusteru &gt; Úložiště s nevyhovujícími quota účtu<br>opravil chybu v manifestu aplikace Kubernetes Cluster<br>upravil počáteční konfigurace Grafany, aby automaticky přiřadily platformní výchozí dashboard<br>opravil doplněk DockerHub Registry Credentials, aktualizoval RBAC a verzi kontroléru registry-creds<br>opravil selhání k8sm-config z důvodu chybějících dat o stavu clusteru v ConfigMap kubeadm<br>přidalo verzi 1.21.6 pro nové instalace clusteru Kubernetes<br>aktualizovalo komponenty Kubernetes clusteru:<br>ingress-haproxy 1.6.7<br>ingress-nginx 0.49.3<br>metrics-server 0.5.1<br>hello-kubernetes 1.10.1<br>metallb 0.11</p><p> Pro nové instalacích Kubernetes klastrů byly aktualizovány komponenty Kubernetes klastru:<br>ingress-haproxy 1.6.7<br>ingress-nginx 0.49.3<br>metrics-server 0.5.1<br>hello-kubernetes 1.10.1<br>metallb 0.11.0<br>kubernetes-dashboard 2.4.0</p><p>Byly upraveny texty v instalaci Kubernetes a opraveny bug v okne úspěchu:<ul>
+<li>Opraveno nezpracované chybění při snahě instalovat přídavný Cluster Configuration &gt; Uložiště s nedostatečnými quota účtu</li>
+</ul><ul>
+<li>Opraveno chybné slovo v manifestu aplikace Kubernetes Cluster</li>
+</ul><ul>
+<li>Upraveny počáteční konfigurace Grafany, aby automaticky přiřadily platformní výchozí dashboard</li>
+</ul><ul>
+<li>Opraveno přídavný DockerHub Registry Credentials, aktualizováno RBAC a verzi kontroléru registry-creds K8s 1.20.12</li>
+</ul></p><p>Byly přidány následující verze pro nové instalace Kubernetes klastrů:<ul>
+<li>K8s 1.20.12</li>
+</ul></p><p>Byly upraveny texty v instalaci Kubernetes a opraveny bug v okne úspěchu:<ul>
+<li>Opraveno nezpracované chybění při snahě instalovat přídavný Cluster Configuration &gt; Uložiště s nedostatečnými quota účtu</li>
+</ul><ul>
+<li>Opraveno chybné slovo v manifestu aplikace Kubernetes Cluster</li>
+</ul><ul>
+<li>Upraveny počáteční konfigurace Grafany, aby automaticky přiřadily platformní výchozí dashboard</li>
+</ul><ul>
+<li>Opraveno přídavný DockerHub Registry Credentials, aktualizováno RBAC a verzi kontroléru registry-creds K8s 1.19.16</li>
+</ul></p><p>Byly přidány následující verze pro nové instalace Kubernetes klastrů:<ul>
+<li>K8s 1.19.16</li>
+</ul></p><p> Přiřaďte platformní výchozí panel kontrolního panely DockerHub Registry Credentials add-on, aktualizujte RBAC a kontrolér registry-creds verze K8s 1.19.16, přidajte verzi 1.19.16 pro nové instalace klastru Kubernetes, upravte texty v instalaci a okně úspěchu klastru Kubernetes, opravte nezpracovanou chybu při instalaci přídavného programu Cluster Configuration &gt; Storage add-on s nedostatečnými quota účtu oprava chyby v manifestu aplikace klastru Kubernetes, upravte nastavení počátečního Grafana na automatické přiřazení výchozího platformního panelu, opravte chybu v DockerHub Registry Credentials add-on, aktualizujte RBAC a kontrolér registry-creds verze K8s 1.21.4, přidajte verzi 1.21.4 pro nové instalace klastru Kubernetes, přidajte kontrolu komponenty CoreDNS do stavu klastru K8s 1.20.10, přidajte verzi 1.20.10 pro nové instalace klastru Kubernetes, přejmenujte utilitu k8dash na skooner (pozor, že některé metriky v panelu skooner nefungují s HAProxy ingress controller) explicitně změňte NGINX ingress chart na verzi 3.x z důvodu nekompatibility verzí 4.x s ingress controller cert-manager chyby:<br>oprava chyby při instalaci selhání klastru Kubernetes, vytvořeného s NGINX ingress controller<br>oprava chyby při pokusu o připojení klastru Kubernetes k serveru GitLab, který již má integraci s jiným klastry<br>odeberte popeye jako samostatný nástroj, protože je již součástí utilitu k9s Kubernetes 1.19.14, přidajte verzi 1.19.14 pro nové instalace klastru Kubernetes.</p><p> Na GitLab server, který už má integraci s jiným clusterem, bylo odebráno nástroj popeye jako samostatný nástroj, protože je již součástí nástroje k9s pro K8s 1.19.14.</p><p>Přidáno:<ul>
+<li>1.19.14 verze pro nové instalace Kubernetes clusterů</li>
+</ul><ul>
+<li>Přejmenování nástroje k8dash na skooner (pozor, některé metriky v panelu skooner nefungují s HAProxy ingress controller)</li>
+</ul><ul>
+<li>Jasně změněno NGINX ingress chart na verzi 3.x z důvodu nekompatibility verzí 4.x s cert-manager ingress controller</li>
+</ul></p><p>Opravy:<ul>
+<li>Oprava chyby při instalaci Kubernetes clusteru, která selhala při vytvoření s NGINX ingress controller</li>
+</ul><ul>
+<li>Oprava chyby při pokusu o připojení Kubernetes clusteru k GitLab serveru, který už má integraci s jiným clusterem</li>
+</ul><ul>
+<li>Odebrání popeye jako samostatného nástroje, protože je již součástí nástroje k9s</li>
+</ul><ul>
+<li>Oprava selhání kontrolní kontrolky při aktualizaci na intermediální verzi 1.19.x K8s</li>
+</ul><ul>
+<li>Přidáno: 1.21.2 verze pro nové instalace Kubernetes clusterů</li>
+</ul><ul>
+<li>Aktualizace Traefik ingress controller na verzi 2.4.x z důvodu nové architektury, staré verze Traefik 1.x budou úplně odstraněny při aktualizaci Kubernetes clusteru</li>
+</ul><ul>
+<li>Během aktualizace Traefik na verzi 2.x bude aktualizační skript automaticky aktualizovat všechny standardní zdroje ingresu, ale nutno kontrolovat a upravovat (pokud je to nutné) všechny vlastní zdroje ingresu</li>
+</ul></p><p>Custom Resource Definition (CRD) pro typ IngressRoute byla přidána v Traefik 2.x.</p><p> Měla by se kontrolovat a upravovat (pokud to potřebuje) Definice vlastních zdrojů (CRD) pro typ IngressRoute byla přidána do Traefik 2.x (kromě standardní Ingress Kubernetes) byly aktualizovány komponenty Kubernetes clusteru:
+<ul>
+<li>metallb-controller 0.10.2</li>
+</ul><ul>
+<li>kubernetes-dashboard 2.3.1</li>
+</ul><ul>
+<li>ingress-nginx 0.48.1</li>
+</ul><ul>
+<li>metrics-server 0.5.0</li>
+</ul><ul>
+<li>ingress-haproxy 1.6.6</li>
+</ul><ul>
+<li>k9s 0.24.15</li>
+</ul><ul>
+<li>kubectx 0.9.4</li>
+</ul></p><p>Název utilitu k8dash byl změněn na skooner (pozor, některé metriky v dashboardu skooneru nefungují s ingres kontrolérem HAProxy).</p><p>Byly aktualizovány metriky clusteru v výchozím dashboardu Grafany.</p><p>Bylo explicitně změněno NGINX ingress chart na verzi 3.x z důvodu nekompatibility verze 4.x s ingres kontrolérem cert-manager.</p><p>Opravy:
+<ul>
+<li>opravil chybu s instalací selhání Kubernetes clusteru, která vznikla při vytváření s NGINX ingres kontrolérem</li>
+</ul><ul>
+<li>opravil chybu při pokusu o připojení Kubernetes clusteru k GitLab serveru, který již má integraci s jiným clusterem</li>
+</ul><ul>
+<li>popeye byl odstraněn jako samostatný nástroj, protože je již součástí utilitu k9s</li>
+</ul><ul>
+<li>přidán 1.20.8 verze pro nové instalace Kubernetes clusterů</li>
+</ul><ul>
+<li>zastaveno automatické nasazení runner-gitlab z důvodu zastavení podpory funkce GitLab Managed Apps</li>
+</ul><ul>
+<li>aktualizovány metriky clusteru v výchozím dashboardu Grafany</li>
+</ul><ul>
+<li>přidán 1.19.12 verze pro nové instalace Kubernetes clusterů</li>
+</ul></p><p> Pro změně podpory funkce GitLab Managed Apps skutečnily se metriky clusteru v predvoleném grafańském dashboardu K8s 1.19.12. Přidána byla verze 1.19.12 pro nové instalace Kubernetes clusterů, ale zastavena byla automatická nasazování runneru-gitlab z důvodu změny podpory funkce GitLab Managed Apps. Skutečnily se metriky clusteru v predvoleném grafańském dashboardu K8s 1.18.20. Přidána byla verze 1.18.20 pro nové instalace Kubernetes clusterů, ale zastavena byla automatická nasazování runneru-gitlab z důvodu změny podpory funkce GitLab Managed Apps. Skutečnily se metriky clusteru v predvoleném grafańském dashboardu K8s 1.20.6. Proběhla aktualizace na 1.20.6 pro existující Kubernetes cluster. Změněno bylo staré označení "master" na "control plane" v parametrech, akcích, protokolech atd. (Tato změna se aplikuje pouze na nové instalace.) Obnovena byla integrace GitLab pro Kubernetes Cluster 1.20+ (tedy po změně runtime). Provedena byla aktualizace komponent Kubernetes clusteru: hello-kubernetes 1.10, ingress-nginx 0.46.0, ingress-haproxy 1.6.1, helm 3.5.4, cert-manager 1.3.1, metrics-server 0.4.4, open-liberty 0.7.1, k9s 0.24.10, popeye 0.9.1. Přidána byla kontrola pro službu admission-service připravenosti před importem ingressů. Zlepšena byla procedura clusteru upgrade: upravil se tok upgrade pro přeskočení neznámých (neobjevených) komponent a odpovídajících závislostí. Zastaralé anotace byly přidány na pracovních uzlech při aktualizaci na 1.20.</p><p> Přeškodíte neznámým (neobjeveným) komponentám a odpovídajícím závislostem a aktualizujte zastaralé anotace na uzlích pracovníků při aktualizaci na 1.20.x z předchozích verzí (v důsledku změny runtime). Implementovali jste chybovou obslužnou rutinu pro konflikt kořenového ingresu při snahách o instalaci nástroje řízení Rancher na vrstvu existující nevýchozí aplikace opravy chyb:<ul>
+<li>Opravili chybu při výchozí instalaci aplikace Open Liberty příkladu během nasazení na instalace s ingresovým kontrolérem HAProxy</li>
+</ul><ul>
+<li>Opravili chybu s odstraňováním tajného klíče DockerHub při opětovném přidávání přihlašovacích údajů prostřednictvím DockerHub Credentials add-on</li>
+</ul><ul>
+<li>Opravili chybu při konfiguraci integrace GitLab prostřednictvím vhodného Kubernetes add-on</li>
+</ul></p><p>K8s 1.19.10<br>Implementovali jste chybovou obslužnou rutinu pro konflikt kořenového ingresu při snahách o instalaci nástroje řízení Rancher na vrstvu existující nevýchozí aplikace<br>Přidali kontrolu pro připravenost služby přijímání pro import ingresů před importem ingresů<br>Zlepšili postup aktualizace clusteru:<ul>
+<li>Upravili tok aktualizace k přeskočení neznámých (neobjevených) komponent a odpovídajících závislostí</li>
+</ul><ul>
+<li>Aktualizovali zastaralé anotace na uzlích pracovníků při aktualizaci na 1.20.x</li>
+</ul><ul>
+<li>Přidali kontrolu pro připravenost služby přijímání pro import ingresů před importem ingresů</li>
+</ul><ul>
+<li>Zlepšili postup aktualizace clusteru</li>
+</ul></p><p> Přeškodíte neznámé (neobjevené) komponenty a odpovídající závislosti aktualizováním zastaralých anotací na uzlech pracovníků při aktualizaci na 1.20.x z předchozích verzí (v důsledku změny runtime) konfigurace kubeadm bootstrap neměla být uložena při nové nasazení, aby se jistě, že se teprve aktuální obrázky stažou opravy:
+<ul>
+<li>Opravil chybu při výchozím nasazení příkladové aplikace Open Liberty na instalacích s ingres kontrolérem HAProxy</li>
+</ul><ul>
+<li>Informace o přihlašovacích údajech pro Jaeger a Monitoring Tools po opětovném instalování odpovídajících doplňků</li>
+</ul><ul>
+<li>Staré přihlašovací údaje pro Jaeger a Monitoring Tools jsou zobrazeny v zobrazení po opětovném instalování doplňků</li>
+</ul><ul>
+<li>Opravil chybu při aktualizaci Kubernetes clusteru z 1.18.10 na 1.20.6 nahradil starou API nfs-client-provisioner alternativou nfs-subdir-external-provisioner</li>
+</ul><ul>
+<li>Opravil chybu při odstraňování tajného klíče DockerHub při opětovném přidávání přihlašovacích údajů prostřednictvím DockerHub Credentials doplňku</li>
+</ul><ul>
+<li>Opravil chybu při konfiguraci integrace GitLab prostřednictvím vhodného Kubernetes doplňku K8s 1.18.</li>
+</ul></p><p> Přeložení textu z angličtiny na česky:</p><p>Kredențály pomocí DockerHub Credentials přídavným modulům opravilo chybu při konfiguraci integrace GitLab pomocí vhodného Kubernetes přídavného modulu K8s 1.18.18.<br>Implementovalo správu chyb pro překrývající se kořenový ingress problém při instalaci Rancher management toolu na vrstvě existující nevýchozí aplikace.<br>Dodalo kontrolu pro připravenost služby admission před importem ingressů.<br>Zlepšilo postup aktualizace clusteru: upravilo proud aktualizace tak, aby se přeskočily neznámé (nebyly nalezeny) komponenty a odpovídající závislosti.<br>Implementovalo automatické přepínání do výchozího prostoru názvů před aktualizací clusteru.<br>Aktualizovalo zastaralé anotace na uzlích pracovníků při aktualizaci na 1.20.x z předchozích verzí (v důsledku změny runtime).<br>Chyby opravilo:<ul>
+<li>HTTP automatický přesměrování by měl být vypnutý pro Kubernetes uzly v dalších vrstvách</li>
+</ul><ul>
+<li>Chyba při konfiguraci integrace GitLab pomocí vhodného Kubernetes přídavného modulu K8s 1.20.4</li>
+</ul><ul>
+<li>Přidalo aktualizaci na 1.20.4 pro existující Kubernetes cluster</li>
+</ul><ul>
+<li>Přidalo výběr verze Kubernetes (tři poslední verze v sestupném pořadí) do okna instalace</li>
+</ul><ul>
+<li>Přešlo na runtime containerd, upravilo odpovídající konfigurace a postup aktualizace</li>
+</ul><ul>
+<li>Integrovalo Rancher management tool pro Kubernetes cluster</li>
+</ul><ul>
+<li>Aktualizovalo komponenty Kubernetes clusteru:<br>  - kubernetes-dashboard 2.2.0<br>  - helm 3.5.3<br>  - k9s 0.24.7<br>  - metrics-server 0.4.2<br>  - weave 2.8.1<br>  - autofs 5.1.6<br>  - HAProxy ingress-resources a ingress-controller 1.5.1<br>  - NGINX ingress-controller 0.</li>
+</ul></p><p> komponenty:kubernetes-dashboard 2.2.0 helm 3.5.3 k9s 0.24.7 metrics-server 0.4.2 weave 2.8.1 autofs 5.1.6 HAProxy ingress-resources a ingress-controller 1.5.1 NGINX ingress-controller 0.44 aktualizovala verzi monitorovacích nástrojů Jaeger, jejich CRD, ingress a konfigurace hotrod aplikace, která upravila výchozí pravidla brány zabezpečení při vytváření clusteru, aby se zabránilo nepravým omezením. Podpora pro GlusterFS pro sdílené úložiště v Kubernetes clusteru byla přidána a možnost integrovat sdílené úložiště do topologie Kubernetes clusteru po inicializaci - stačí ho přidat prostřednictvím věnovaného add-onu. Implementovala se možnost přidávat pracovní uzly na různých vrstvách, zlepšila postup aktualizace clusteru: přidala kontrolu stavu uzlů a udržovala uživatele definované přihlašovací údaje z $HOME/.</p><p>zlepšila postup aktualizace clusteru: přidala kontrolu stavu uzlů a udržovala uživatele definované přihlašovací údaje z $HOME/.kube/config implementovala automatické přepínání do výchozího prostoru názvů před aktualizací clusteru optimizovala konfigurace k odstranění zastaralých možností Kubelet z ConfigMap konfigurační soubor kubeadm bootstrap by neměl být uložen při přehrážce, aby se zabránilo tahání zastaralých obrázků odstranila zastaralé anotace "dockershim" pro master uzly v clusteru implementovala add-on pro správu přihlašovacích údajů DockerHub (k obejít omezení anonymního uživatele DockerHub) odstranila add-ony neslučitelné s aktuální verzí Kubernetes clusteru přesunula komponenty Kubernetes clusteru do produkce na AWS, aby se zabránilo limitu pool přesunula Kubernetes artefakty na AWS pro lepší dostupnost zlepšila postup přehrážky Kubernetes clusteru, aby se zachovala data definovaná v souboru redeploy.conf přesunul zastaralý příznak fail-swap-on z souboru sysconfig/kubelet do souboru /var/lib/kubelet/config.yaml konfigurace zlepšil texty na upozornění při aktualizaci clusteru přidaly Apache 2.</p><p> Text v anglickém originále:</p><p>flag z souboru sysconfig/kubelet přesunout do /var/lib/kubelet/config.yaml konfigurace<br>zlepšené texty na upozornění o aktualizaci clusteru<br>přidání Apache 2.0 Licence do projektu<br>oprava chyb:<ul>
+<li>migrace omezených Kubernetes clusterů mezi regiony (způsobuje selhání clusteru)</li>
+</ul><ul>
+<li>chyba s neplatným/chybějícím admin tokenem pro složité topologie clusterů</li>
+</ul><ul>
+<li>chyba s neupravenými veřejnými IP adresami v metallb-config po škálování pracovních uzlů<br>optimalizace metallb-config pro přeskočení upravování konfiguračního souboru při škálování pracovních uzlů bez veřejných IP adres<br>řešení nesouhlasících RBAC konfigurací v registry-creds manifestu<br>zásuvné pole pro ověřování hodnot username, password a email v Docker Hub Credentials add-on<br>zakázání nepodporovaných kontrol SSL-konců v HAProxy controlleru<br>oprava chyby s cestou k aplikaci při vytváření Kubernetes clusteru s Traefik ingress-controller<br>přesun k8dash dashboardu do samostatného prostoru k vyhnutí se nekompatibilitě s HAProxy ingress-controller<br>zakázání automatického přesměrování HTTP pro uzly Kubernetes v Extra layers<br>chybějící informace o přihlašovacích údajech pro Jaeger a Monitoring Tools po opětovné instalaci příslušných add-onů<br>staré přihlašovací údaje pro Jaeger a Monitoring Tools zobrazeny v pop-up po opětovné instalaci příslušných add-onů<br>kapitalizace názvu NGINX ingress controlleru v instalačním okně<br>oprava chyby při aktualizaci Kubernetes clusteru z verze 1.18.10 na 1.20</li>
+</ul></p><p>Text v češtině:</p><p>flag z souboru sysconfig/kubelet přesunout do /var/lib/kubelet/config.yaml konfigurace<br>zlepšené texty na upozornění o aktualizaci clusteru<br>přidání Apache 2.0 Licence do projektu<br>oprava chyb:<ul>
+<li>migrace omezených Kubernetes clusterů mezi regiony (způsobuje selhání clusteru)</li>
+</ul><ul>
+<li>chyba s neplatným/chybějícím admin tokenem pro složité topologie clusterů</li>
+</ul><ul>
+<li>chyba s neupravenými veřejnými IP adresami v metallb-config po škálování pracovních uzlů<br>optimalizace metallb-config pro přeskočení upravování konfiguračního souboru při škálování pracovních uzlů bez veřejných IP adres<br>řešení nesouhlasících RBAC konfigurací v registry-creds manifestu<br>zásuvné pole pro ověřování hodnot username, password a email v Docker Hub Credentials add-on<br>zakázání nepodporovaných kontrol SSL-konců v HAProxy controlleru<br>oprava chyby s cestou k aplikaci při vytváření Kubernetes clusteru s Traefik ingress-controller<br>přesun k8dash dashboardu do samostatného prostoru k vyhnutí se nekompatibilitě s HAProxy ingress-controller<br>zakázání automatického přesměrování HTTP pro uzly Kubernetes v Extra layers<br>chybějící informace o přihlašovacích údajech pro Jaeger a Monitoring Tools po opětovné instalaci příslušných add-onů<br>staré přihlašovací údaje pro Jaeger a Monitoring Tools zobrazeny v pop-up po opětovné instalaci příslušných add-onů<br>kapitalizace názvu NGINX ingress controlleru v instalačním okně<br>oprava chyby při aktualizaci Kubernetes clusteru z verze 1.18.10 na 1.20</li>
+</ul></p><p> Překlad z angličtiny do češtiny:</p><p>TEXT:<br>NGINX ingress controller name v okně instalace opravil chybu při aktualizaci Kubernetes clusteru z 1.18.10 na 1.20.4 nahradil zastaralou API nfs-client-provisioner alternativou nfs-subdir-external-provisioner K8s 1.19.8přidalo Aktualizovat na 1.19.8 pro existující Kubernetes cluster, přidalo vybradatele verze Kubernetes (tři poslední verze v pořadí sestupném) do okna instalace, integrovalo nástroj Rancher pro správu Kubernetes clusteru, aktualizovalo komponenty Kubernetes clusteru:metrics-server 0.4.2 weave 2.8.1 autofs 5.1.6 hello-kubernetes 1.9 kubernetes-dashboard v2.0.5 cert-manager 1.2.0 helm 3.5.2 metallb 0.9.6 kubectx (kubens, kubects) 0.9.3 k9s 0.24.4 HAProxy ingress-resources a ingress-controller 1.5.1 NGINX ingress-controller 0.44 aktualizovalo nástroje pro monitorování Jaeger, jeho CRD, ingress a konfigurace hotrod app, zlepšilo výchozí pravidla brány firewall při vytváření clusteru, aby se vyhnulo nepravým omezením, přidalo podporu pro GlusterFS pro sdílené úložiště v Kubernetes clusteru, přidal možnost integrovat sdílené úložiště do topologie Kubernetes clusteru po inicializaci - stačí ho přidat prostřednictvím věnovaného add-onu, implementovalo možnost přidávat pracovní uzly na různých vrstvách, zlepšilo postup aktualizace clusteru:přidalo kontrolu stavu uzlů, zachovalo uživatelská definovaná přihlašovací údaje z $HOME/.</p><p> Na různých vrstvách zlepšily postup aktualizace clusteru:
+<ul>
+<li>Přidali kontroly pro ověření stavu uzlů</li>
+</ul><ul>
+<li>Zachovali uživatelská definovaná přihlašovací údaje z $HOME/.kube/config</li>
+</ul><ul>
+<li>Optimalizovali konfigurace pro lepší čištění přechodních dat</li>
+</ul><ul>
+<li>Optimalizovali konfigurace pro odstranění zastaralých možností Kubeletu z ConfigMap</li>
+</ul><ul>
+<li>Implementovali automatické přepínání do výchozího namespace před aktualizací clusteru</li>
+</ul><ul>
+<li>Implementovali add-on pro správu přihlašovacích údajů DockerHub (k tomu aby se obešly omezení anonymního uživatele DockerHub)</li>
+</ul><ul>
+<li>Přesunuli komponenty Kubernetes clusteru do AWS, aby se odstranily limity poolu</li>
+</ul><ul>
+<li>Přesunuli artefakty Kubernetes do AWS pro lepší dostupnost</li>
+</ul><ul>
+<li>Zlepšili postup přehrázení Kubernetes clusteru, aby se zachovala data definovaná v přehrázení.conf</li>
+</ul><ul>
+<li>Přesunuli zastaralý flag fail-swap-on z souboru sysconfig/kubelet do konfiguračního souboru /var/lib/kubelet/config.yaml</li>
+</ul><ul>
+<li>Zlepšili texty na pop-up notifikacích aktualizace clusteru</li>
+</ul><ul>
+<li>Přidali licenci Apache 2.</li>
+</ul></p><p> Text v češtině:</p><p>Zastavka z souboru sysconfig/kubelet se přenesla do souboru /var/lib/kubelet/config.yaml. Zlepšené texty se objevily v upozorněních na aktualizaci clusteru. Přidány licence Apache 2.0 do projektu. Opravy chyb:<ul>
+<li>Migrace omezených Kubernetes clusterů mezi regiony (způsobuje selhání clusteru) opraveno</li>
+</ul><ul>
+<li>Chyba s neplatným/chybějícím tokenem správce pro složité topologie clusterů opravena</li>
+</ul><ul>
+<li>Chyba s nepravými IP adresami v konfiguraci metallb-config po skalování pracovních uzlů opravena</li>
+</ul><ul>
+<li>Optimizace konfigurace metallb-config pro přeskočení úpravy souboru konfigurace při skalování pracovních uzlů bez veřejných IP adres</li>
+</ul><ul>
+<li>Vyrovnání nekonzistentních konfigurací RBAC v manifestu registry-creds</li>
+</ul><ul>
+<li>Základní kontrola hodnot pole username, password a email v přídavku Docker Hub Credentials zakázána</li>
+</ul><ul>
+<li>Zablokování kontrol nepodporovaných SSL-konců v HAProxy controlleru opraveno</li>
+</ul><ul>
+<li>Chyba s cestou k aplikaci při vytváření Kubernetes clusteru s Traefik ingress-controller opravena</li>
+</ul><ul>
+<li>Přesun k8dash dashboardu do samostatného prostoru k vyhnutí se nekompatibilitě s ingress-controllerem HAProxy</li>
+</ul><ul>
+<li>Nalezeno, že HTTP auto-redirect by měl být vypnutý pro uzly Kubernetes v okně Nastavení dalších vrstev</li>
+</ul><ul>
+<li>Název NGINX ingress controlleru v okně instalace kapitalizován</li>
+</ul><ul>
+<li>Přidán Upgrade k verzi 1.18.16 pro existující Kubernetes cluster</li>
+</ul><ul>
+<li>Přidán výběr verze Kubernetes (tři poslední verze v pořadí sestupně) do okna instalace</li>
+</ul><ul>
+<li>Integrace nástroje správy Rancher pro Kubernetes cluster</li>
+</ul><ul>
+<li>Aktualizace komponent Kubernetes clusteru:<br>  - k9s 0.24.2<br>  - popeye 0.9</li>
+</ul></p><p> Do do v okně instalace integrovali nástroj pro správu Rancher pro Kubernetes cluster. Aktualizovali jsem komponenty Kubernetes clusteru:
+<ul>
+<li>k9s 0.24.2</li>
+</ul><ul>
+<li>popeye 0.9.0</li>
+</ul><ul>
+<li>cert-manager 1.0.4</li>
+</ul><ul>
+<li>cert-manager nginx (nový)</li>
+</ul><ul>
+<li>metrics-server 0.4.2</li>
+</ul><ul>
+<li>weave 2.8.1</li>
+</ul><ul>
+<li>autofs 5.1.6</li>
+</ul></p><p>Aktualizovali jsem verze grafikonů pro node-problem-detector, Grafana a Prometheus. Zlepšil jsem postup upgrade clusteru:
+<ul>
+<li>přidali jsem kontroly pro kontrolu stavu uzlů</li>
+</ul><ul>
+<li>zachovával jsem uživatelská přihlašování definovaná v $HOME/.kube/config</li>
+</ul><ul>
+<li>opravil jsem chybu při aktualizaci helm upgrade</li>
+</ul><ul>
+<li>implementoval jsem add-on pro správu přihlašovacích údajů DockerHub (k tomu, aby se byly překonány omezení anonymního uživatele DockerHub)</li>
+</ul><ul>
+<li>zlepšil jsem výchozí pravidla brány firewall při vytváření clusteru, aby se nevytvářely nepravé omezení</li>
+</ul><ul>
+<li>přesunul jsem Kubernetes artefakty do AWS pro lepší dostupnost</li>
+</ul><ul>
+<li>přidal jsem podporu GlusterFS pro sdílené úložiště v Kubernetes clusteru</li>
+</ul><ul>
+<li>přidal jsem možnost integrovat sdílené úložiště do topologie Kubernetes clusteru po inicializaci instalace - stačí ho přidat prostřednictvím věnovaného add-onu</li>
+</ul><ul>
+<li>zlepšil jsem postup při přehrázení Kubernetes clusteru, aby se zachovaly data definovaná v souboru redeploy.conf</li>
+</ul><ul>
+<li>zlepšil jsem texty na upozornění při upgrade clusteru</li>
+</ul><ul>
+<li>přidal jsem Apache 2.</li>
+</ul></p><p> Skupina, aby se data definovaná v souboru redeploy.conf udržela po aktualizaci clusteru, byly vylepšeny texty na clusteru po aktualizaci pop-up notifikací. Bylo přidáno Apache 2.0 Licenci do projektu. Opravy chyb:
+<ul>
+<li>Migrace Kubernetes clusteru mezi regiony (protože to narušuje operabilitu clusteru)</li>
+</ul><ul>
+<li>Chyba s neplatným/chybějícím admin tokenem pro složité topologie clusterů</li>
+</ul><ul>
+<li>Chyba s neupravenými veřejnými IP adresami v souboru metallb-config po skalování pracovních uzlů</li>
+</ul><ul>
+<li>Optimizace metallb-config pro přeskočení upravování konfiguračního souboru při skalování pracovních uzlů bez veřejných IP adres</li>
+</ul><ul>
+<li>Nekonzistentní RBAC konfigurace v manifestu registry-creds</li>
+</ul><ul>
+<li>Zkontrolování platnosti hodnot pole username, password a email v Docker Hub Credentials add-on</li>
+</ul><ul>
+<li>Zveličení názvu NGINX ingress controlleru v okně instalace</li>
+</ul><ul>
+<li>Chyba při aktualizaci Kubernetes clusteru z 1.18.10 na 1.20.4</li>
+</ul></p><p>K8s 1.18.10:<ul>
+<li>Aktualizace na 1.18.10 pro existující Kubernetes cluster</li>
+</ul><ul>
+<li>Aktualizace komponent Kubernetes clusteru: helm 2.16.12, dashboard 2.0.3, metallb 0.9.4, nginx-ingress 0.40.2, haproxy-ingress 0.9.1</li>
+</ul></p><p>K8s 1.17.12:<ul>
+<li>Aktualizace na 1.17.12 pro existující Kubernetes cluster</li>
+</ul><ul>
+<li>Aktualizace komponent Kubernetes clusteru: weave 2.7.0, cni-plugins 0.8.7, Docker Engine CE 19.03.9, containerd 1.3.7, k9s v0.22.1, popeye 0.8.10, poskytnutí operator-driven verze OpenLiberty (místo dosavadní Helm-based), oprava nesprávného zdravotního stavu pro K8dash dashboard</li>
+</ul></p><p>K8s 1.17.4:<ul>
+<li>Aktualizace na 1.17.4 pro existující Kubernetes cluster</li>
+</ul></p><p> Překlad z angličtiny na češtinu:</p><p>TEXT:</p><p>OpenLiberty (místo dřívějšího Helm-based) opravil chybné kontrolní zkoušení pro dashboard K8dash dashboard K8s 1.17.4přidalo Upgrade na 1.17.4 pro existující Kubernetes klastru omezilo instalaci balíčku Kubernetes Cluster pro účty na zkoušku implementovalo GitLab Integration add-on pro Kubernetes k automatizaci CI/CD pipelines; s detailními informacemi:přidalo funkci odhlášení z k8s synchronizovanou s nejnovější verzí GitLab přidalo zaznamenávání operace odhlášení GitLab integration přidalo možnost přiřadit veřejný IP adresu k Kubernetes klastruzlepšil zabezpečení brány firewall zablokoval přiřazení veřejné IP adresy k k8sm a mbl přidalo MetalLB kontrolér Kubernetes LoadBalancer pro IP poskytovánízlepšil metallb-config utilitu k přeskočení konfigurace IPv6 aktualizovalo komponenty Kubernetes clusteru:weave 2.6.2 cni-plugins 0.8.5 certificate-manager 0.15.1 Docker Engine 19.03.8 kubernetes-dashboard v2.0.0-rc7 k9s 0.19.6 popeye 0.8.3 helm 2.16.5 cri-tools 1.</p><p> clusterové komponenty:<br>weave 2.6.2<br>cni-plugins 0.8.5<br>certificate-manager 0.15.1<br>Docker Engine 19.03.8<br>kubernetes-dashboard v2.0.0-rc7<br>k9s 0.19.6<br>popeye 0.8.3<br>helm 2.16.5<br>cri-tools 1.17</p><p>Interní optimizace clusteru:<br>Optimizace zprovoznění Kubernetes Clusteru s offloadem a souběžným instalováním komponent:<br>Změna řidiče cgroups z cgroupfs na systemd<br>Přidání společného mechanismu integrace - integrace skriptů jsou nasazovány na vrstvě k8sm a poskytovány pracovním uzlům při konfiguraci (re)uzlů nebo při aktualizaci clusteru<br>Přechod na poslední mechanismus přehrady platformy<br>Přesun idempotentní logiky na konfiguraci instance clusteru do samostatné služby skriptu<br>Zlepšení postupu aktualizace clusteru:<br>Oprava zobrazení příkazového řádku konzoly v instancech<br>Aktualizace seznamu doplňků<br>Oprava kontroly stavu komponent clusteru<br>Oprava nesouhlasu verze helmu mezi klientem a serverem<br>UI/UX zlepšení:<br>Zlepšení zobrazení přístupového tokenu ve výzvě po instalaci<br>Přidání adresy clusteru do zprávy o úspěšné instalaci<br>Zaměna zastaralé možnosti Kubernetes Dashboard v1 za K8Dash při instalaci a aktualizaci<br>Zlepšení zobrazení verze Kubernetes v názvu clusteru<br>Opravy chyb:<br>Oprava selhání instalace clusteru způsobeného problémy s helmem 2.16.</p><p> Přepracování verze Kubernetes na cluster s názvem opravy:<ul>
+<li>Vypravěč instalace clusteru: řešeno selhání instalace clusteru způsobené problémy s verzí Helm 2.16.4</li>
+</ul><ul>
+<li>Zlepšení detekce komponent úložiště pro cluster</li>
+</ul><ul>
+<li>Oprava nejedinečných hodnot ID systemd pro instancie Kubernetes</li>
+</ul><ul>
+<li>Zlepšení ověřování komponent clusteru v nástroji systému platformy</li>
+</ul><ul>
+<li>Zlepšení zpracování volání konfigurace souběžně v clusteru</li>
+</ul><ul>
+<li>K8s 1.16.6 přidáno:<br>  - Aktualizace na verzi 1.16.6 pro existující K8s cluster<br>  - Aktualizace komponent Kubernetes: Popeye 0.7.1, k9s 0.17.5, kubectx 0.8.0, hello-kubernetes 1.7, dashboard 2.0.0-rc3<br>  - Aktualizace NGINX ingress controlleru na nejnovější verzi 0.30 a změna typu služby z Deployment na DaemonSet<br>  - Změna instalačního procesu, aby všechny mastery měly roli a NoSchedule taint před tím, než se na nich worker nodes POD rozdělí<br>  - Optimalizace spotřeby zdrojů k snížení dopadu na výkon clusteru v případě pomalého sítě a omezené kapacity I/O<br>  - Přidání komponenty crictl s podporou automatického dokončování Bash<br>  - Přidání kontrolních bodů Docker CT do kontroly zdraví clusteru pro lepší detekci problémů<br>  - Nastavení verze Helm na 2.16.3 explicitně z důvodu problémů s ověřováním nasazení v pozdějších vydáních<br>  - Změna logotypů a titulků výchozích přídavků dostupných po instalaci Kubernetes Cluster</li>
+</ul></p><p>K8s 1.16.3 přidáno:<ul>
+<li>Aktualizace na verzi 1.16.3 pro existující K8s cluster</li>
+</ul></p><p> Přepracované loga a názvy výchozích doplňků, které jsou k dispozici po instalaci Kubernetes Clusteru K8s 1.16.3:
+<ul>
+<li>Upgrade na 1.16.3 pro existující K8s clustery zlepšil proces upgradeu tím, že přeskočil nasazení na mezivývojové verze clusteru a kontrolu verzí komponent K8s.</li>
+</ul><ul>
+<li>Minimální požadavek na 8 cloudletů pro Kubernetes obraz.</li>
+</ul><ul>
+<li>Varování pro instalace na zkušebních účtech o nek dispozici monitorovacích komponent.</li>
+</ul><ul>
+<li>Aktualizace komponent Kubernetes:<br>  * cri-tools 1.16<br>  * metrics-server 0.3.6<br>  * popeye 0.6.0<br>  * k9s 0.13.3<br>  * kubectx 0.7.1<br>  * dashboard 2.0.0-rc2<br>  * oprava neprávého oznámení po upgradeu clusteru K8s 1.15.6</li>
+</ul><ul>
+<li>Upgrade na 1.15.6 pro existující K8s clustery rozdělil jeden doplněk pro K8s cluster do dvou samostatných (pro operace upgradeu a konfigurace, respektive).</li>
+</ul><ul>
+<li>Instalace monitorovacích a Jaeger nástrojů je omezena, pokud je možnost vědeckého úložiště NFS zakázána.</li>
+</ul><ul>
+<li>Optimalizace Kubernetes Docker obrazu; nová verze je lehčí o více než 100 MB díky optimalizaci vrstev Docker a čistění nepotřebných souborů.</li>
+</ul><ul>
+<li>Aktualizace balíčku Docker Engine CE používaného v K8s obrazu na nejnovější verzi 19.03.4.</li>
+</ul><ul>
+<li>Aktualizace cni-plugins na nejnovější verzi 0.8.3.</li>
+</ul><ul>
+<li>Aktualizace Jaeger na nejnovější verzi 1.15.</li>
+</ul></p><p> Obnovil svoji verzi Docker Engine CE používanou v obrazci K8s na nejnovější 19.03.4 verzi. Aktualizoval si cni-plugins na nejnovější 0.8.3 verzi. Aktualizoval si Jaeger na nejnovější 1.15.1 verzi. Aktualizoval si také výchozí aplikaci (Open Liberty) tak, aby nainstaloval nejnovější dostupnou verzi automaticky. Opravil chybu v počtu uzlů v grafaně dashboardu po skalování K8s clusteru. Opravil také problém s tím, že dashboard Kubernetes Cluster nebyl nastaven jako výchozí po instalaci nástrojů pro sledování. Opravil také problém s tím, že pody Jaeger stále byly v stavu konfigurace po oznámení o úspěšné instalaci clusteru. Opravil také problém s tím, že K8s cluster s produkční topologií se neprobudil po zastavení prostředí. K8s 1.15.5 přidáno:
+<ul>
+<li>Upgrade na 1.15.5 pro existující 1.15.4 K8s cluster</li>
+</ul><ul>
+<li>Přidání systému pro sledování a řešení problémů Jaeger pro monitorování a řešení problémů (může být povoleno pro nové clustery při instalaci nebo pomocí přídavného modulu Monitoring pro existující cluster)</li>
+</ul><ul>
+<li>Přidání podpory pro dva nové kontroléry vstupu - NGINX a HAProxy - kromě Traefik (můžete vybrat požadovanou možnost při instalaci)</li>
+</ul><ul>
+<li>Přidání daemona node-problem-detector k identifikaci a zprávě o problémech s K8s podmi</li>
+</ul><ul>
+<li>Aktualizoval schéma uložení přihlašovacích údajů tak, aby vyloučil NFS, což zjednodušuje interakci instancí a snižuje dobu nasazení</li>
+</ul><ul>
+<li>Aktualizoval sledování K8s prostřednictvím refaktoringu kódu (zlepšil detekci, podmínění, algoritmus šifrování atd.)</li>
+</ul></p><p>Poznámka: Technické termíny, kódy, příkazy, cesty souborů, adresy URL a formátování zůstávají v původní anglické podobě.</p><p> Přeloženo do češtiny:</p><p>instancí a snížením doba nasazení aktualizováno monitorování K8s prostřednictvím kódu přepracování (zlepšeno detekce, podmínění, algoritmus šifrování, atd.) aktualizováno ověřování přístupu pro kube-proxy operacím čtení/zápisu do souborů sysfs opraveno omezení DNS serverů a konfigurací DNS, která způsobují více varování v části Log událostí opraveno problém s neprávými adresami, které byly rozlišovány pro názvy hostů prostředí zvnitř podů opraveno problémy s nastavením proměnných prostředí v uzlech Kubernetes způsobené nedostupností balíčku gettext K8s 1.15.4přidáno</p><p>Aktualizace na 1.15.4 pro existující K8s cluster 1.15.3přidáno podporu monitorování prostřednictvím integrace Prometheus &amp; Grafana (může být povoleno pro nové cluster při instalaci nebo prostřednictvím Monitorovacího přídavku pro existující) přidáno možnost použití K8s Dashboard v2 (Beta) přidáno službu kube-postconf pro konfiguraci upravování na základě platformy a specifických vlastností K8s clusteru přidáno e-mailové oznámení pro Remote API a Monitorování povolení na existujícím K8s clusteru přidáno paralelizace pro pracovníky horizontální škálování aktualizováno Metrics server na verzi 0.3.3 aktualizovány cni-plugins na verzi 0.8.2 aktualizovány další komponenty: k9s 0.8.4; popeye 0.4.3; kubectx 0.7.</p><p> Přepracování Metrics serveru na verzi 0.3.3<br>Aktualizace pluginů CNI na verzi 0.8.2<br>Aktualizace dalších komponent: k9s 0.8.4; popeye 0.4.3; kubectx 0.7.0<br>Aktualizace automatického dokončování, aby podporovalo příkazy stern<br>Aktualizace instalace helmu a weave, aby tyto nástroje byly funkční na všech uzlech master<br>Oprava chyby s úspěšným popupem poskytujícím odkaz na Remote API pro instalace bez vhodného nastavení<br>Oprava chyby s nepravým zobrazením stavu funkce v Remote API add-onu pro existující cluster<br>Oprava chyby s nepravým stavem služby hello-world po nasazení prostředí (LoadBalancer vždy v stavu pending)<br>Oprava nepravdivého textu v potvrzení okna Monitoring add-on pro existující cluster<br>Oprava chyby, která způsobuje chyby v logu pod kube-controller-manager po instalaci clusteru<br>Oprava chyb v akci logu po restartu uzlů K8s<br>Oprava chyby s neúspěšným oznámením a e-mailem pro Monitoring po přepnutí na Remote API na existujícím clusteru<br>Oprava chyby s nepodporovanými Traefik flagy K8s 1.15.3<br>Přidání tlačítka pro aktualizaci na 1.15.3 pro existující K8s cluster 1.15.0<br>Zakázání ručného přehrádkování uzlů, aby se zajistila stabilita clusteru (měla by se použít Upgrade add-on)<br>Oprava chyby s nefunkčním správcem konfiguračních souborů v dashboardu K8s 1.15.</p><p> Chybí zákaz ručně vytvářených uzlů při novém nasazení pro zajištění stability clusteru (Použijte doplněk pro aktualizaci) opravil chybu v správci konfiguračních souborů, který nefungoval v panelu K8s 1.15.0přidáno "režim nebezpečí", který umožňuje instalaci na zkušebních účtech přidalo další nástroje K8s: k9s, kubectx, kubens, popeye, a stern přidalo automatické dokončování pro kubectl v terminálu opravilo varování v logu komponenty K8s během instalace balíčku opravilo chybu s Weave NPC chybějící cílovou trasu opravil špatně nastavený ID stroje K8s během horizontálního škálování K8s 1.14.3První veřejná verze s všemi jádrovými funkcemi a funkcemi: Plug-in CNI pro podporu sítě přesahu (vytvořený Weave) pro podporu sítě přesahu Traefik pro kontrolu přenosu požadavků HTTP/HTTPS na služby Správce balíčku HELM pro automatickou instalaci přednastavených řešení z repozitářů CoreDNS pro vnitřní rozlišování jmen Metrics Server pro shromažďování statistik dynamické poskytovatele objemových složek Síť SSL zabudovaná pro ochranu sítě přenosu Kubernetes Dashboard Co dále? Přehled Kubernetes K8s Požadavky na systém K8s Instalace clusteru K8s Přístup k clusteru K8s K8s</p><p>Co dále?<br>Přehled Kubernetes<br>K8s Požadavky na systém<br>K8s Instalace clusteru<br>Přístup k clusteru<br>K8s</p><p>Kubernetes Dashboard<br>Co dále?<br>Přehled Kubernetes<br>K8s Požadavky na systém<br>K8s Instalace clusteru<br>Přístup k clusteru<br>K8s</p><p>Kubernetes Overview<br>K8s System Requirements<br>K8s Cluster Installation<br>K8s Cluster Access<br>Kubernetes</p><p>Kubernetes Dashboard<br>Co dále?<br>Přehled Kubernetes<br>K8s Požadavky na systém<br>K8s Instalace clusteru<br>Přístup k clusteru<br>K8s</p><p>Kubernetes Overview<br>K8s System Requirements<br>K8s Cluster Installation<br>K8s Cluster Access<br>Kubernetes</p><p>Kubernetes Dashboard</p>
+</main>
+</body>
+</html>

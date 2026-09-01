@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Deploy Liferay</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>How to Deploy Liferay</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Jak nasadit Liferay Liferay Portal je populární enterprise Java-základní webová platforma pro vytváření řešení pro podniky, vybavená funkcemi, které běžně požadují při vývoji webů a portálů. Obsahuje vlastní webový CMS s balíčkem témat, stránek, portletů a gadgetů. Automatická Instalace Můžete mít Liferay instance spuštěnou za několik minut pomocí přednastavených řešení Virtuozzo Application Management. Pro nasazení Liferay Portal do cloudu následujte níže uvedené instrukce. Pokud už máte účet Virtuozzo Application Management, můžete nasadit Liferay Portal s vlastní databázovou clusterem v jednom kliku pomocí integrovaného Marketplace. Poznámka: Pokud ještě nemáte účet, můžete se dostat na stránku balíčku na GitHubu a kliknout na tlačítko Deploy to Cloud. Následujte kroky na otevřené stránce k automatické vytvoření účtu a nasazení řešení Liferay Portal.
+<ol>
+<li>Přihlaste se k PaaS panelu a klikněte na tlačítko Marketplace na vrcholu stránky.</li>
+</ol><ol>
+<li>Naleznete Liferay aplikaci v seznamu dostupných řešení a klikněte na Install.</li>
+</ol><ol>
+<li>V otevřeném dialogu zadejte prostředí a zobrazovací název pro svůj Liferay instance. Pokud je k dispozici, můžete také vybrat oblast. Klikněte na Install.</li>
+</ol><ol>
+<li>Počkejte několik minut na dokončení instalačního procesu. Poté klikněte na Open in Browser, abyste mohli přístup k svému Liferay Portal. Při prvním spuštění Liferay nainstaluje potřebné závislosti, což může trvat až 5 minut.</li>
+</ol></p><p> Proces k dokončení. Poté klikněte na Tlačítko Otevřít v prohlížeči, abyste mohli přístupovat k Vašemu Liferay Portalu. Při prvním spuštění Liferay instaluje potřebné závislosti, což může trvat až 5 minut. Po tomto kroku musíte provést počáteční konfigurace a vytvořit si svůj účet. Dokončte konfiguraci, abyste mohli začít používat Vaši Liferay Portál! Pokud byste chtěli nakonfigurovat a spustit Vaši Liferay instanci ručně, použijte následující kroky. Ruční instalace</p><p>Můžete ručně instalovat Docker-závislý Liferay Portál řešení do Virtuozzo Application Management.
+<ol>
+<li>Přihlaste se k panelu správy pomocí svých údajů a klikněte na tlačítko Nový prostředí.</li>
+</ol><ol>
+<li>V topologickém vizualizátoru přejděte na kartu Vlastní a klikněte na tlačítko Vybrat obrázek. Hledejte po obrázku liferay/portal a přidejte ho do prostředí. Nastavte požadované množství zdrojů (minimálně 32 cloudletů je doporučeno) a klikněte na Tvořit.</li>
+</ol><ol>
+<li>Po vytvoření prostředí otevřete správce konfiguračních souborů kontaineru a vytvořte nový soubor s názvem portal-ext.properties v adresáři /opt/liferay.</li>
+</ol><ol>
+<li>Přidejte následující parametr do souboru: 1 web.server.host={hostname} Zde místo {hostname} musí být nahrazeno skutečným názvem vašeho prostředí. Můžete ho nalézt pod názvem prostředí v panelu správy (viz na obrázku).</li>
+</ol><ol>
+<li>Uložte změny a restartujte kontainer Liferay.</li>
+</ol><ol>
+<li>Po restartu kontaineru klikněte na tlačítko Otevřít v prohlížeči, abyste mohli začít používat Vaši Liferay Portál.</li>
+</ol></p><div class="doc-image"><img src="/images/docs/liferay-deploy/01-liferay-marketplace_huce997f0f789868124723ffc8906e8dac_38038_480x0_resize_box_3.png" alt="liferay marketplace huce997f0f789868124723ffc8906e8dac 38038 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/liferay-deploy/02-install-liferay_hu9230a11eff3420f878f79dfe60e163dd_71159_480x0_resize_box_3.png" alt="install liferay hu9230a11eff3420f878f79dfe60e163dd 71159 480x0 resize box 3" loading="lazy"></div><p>Na obrázku). 5. Uložte změny a restartujte kontainer Liferay. 6. Po restartu kontaineru klikněte na tlačítko Otevřít v prohlížeči, abyste mohli začít používat Vaši Liferay Portál. Přihlaste se do Liferay pomocí emailové adresy "test@liferay.com" a hesla "test" (musíte si ho změnit při prvním přihlášení). Nyní můžete začít používat všechny poskytované možnosti Liferay Portálu aplikace! Co dále? Naučení se podle kategorií Java Naučení se Vývojovém prostředí Nastavení prostředí</p><div class="doc-image"><img src="/images/docs/liferay-deploy/04-liferay-portal-docker_hu882826558909afbf97deaa4b97cacf12_70413_480x0_resize_box_3.png" alt="liferay portal docker hu882826558909afbf97deaa4b97cacf12 70413 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/liferay-deploy/05-create-portal-ext-properties_hu9135fe4faeacbb950531fdc983ac9793_57129_480x0_resize_box_3.png" alt="create portal ext properties hu9135fe4faeacbb950531fdc983ac9793 57129 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/liferay-deploy/06-webserver-hostname_hu74ae36769f0cf81d3a313ff29517ee1c_59366_480x0_resize_box_3.png" alt="webserver hostname hu74ae36769f0cf81d3a313ff29517ee1c 59366 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/liferay-deploy/07-restart-container_huba22e886782613cc598e905458fc858f_28709_480x0_resize_box_3.png" alt="restart container huba22e886782613cc598e905458fc858f 28709 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/liferay-deploy/08-welcome-to-liferay_hubbc209eaf040059fbd5627dd730613d4_176309_480x0_resize_box_3.png" alt="welcome to liferay hubbc209eaf040059fbd5627dd730613d4 176309 480x0 resize box 3" loading="lazy"></div>
+</main>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Connection to PostgreSQL for PHP Applications</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Connection to PostgreSQL for PHP Applications</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Připojení k PostgreSQL pro PHP aplikace Následující instrukce vám ukáže, jak připojit svou PHP aplikaci, hostovanou na platformě, k serveru PostgreSQL databáze: vytvořit prostředí, nakonfigurovat server PHP, zkontrolovat připojení</p><p>Vytvořte prostředí<ol>
+<li>Přihlaste se k panelu správy platformy.</li>
+</ol><ol>
+<li>Vytvořte prostředí s serverem PHP aplikace (např., Apache PHP) a serverem databáze PostgreSQL.</li>
+</ol><ol>
+<li>Otevřete svůj poštovní box, abyste získali zprávu s přihlašovacími údaji k databázi (přihlašovací jméno a heslo). Nyní můžete přístup k databázi získat prostřednictvím webového panelu správy a připojit ji k vaší PHP aplikaci.</li>
+</ol></p><p>Nakonfigurujte připojení k databázi<ol>
+<li>Klikněte na tlačítko Konfigurace pro svůj server Apache.</li>
+</ol><ol>
+<li>Přejděte do složky etc a otevřete soubor php.ini. Přidejte řádek extension=pgsql.so, jak je znázorněno na následujícím obrázku.</li>
+</ol><ol>
+<li>Uložte změny a restartujte uzly pro svůj Apache server(y).</li>
+</ol><ol>
+<li>Nejdůležitější PG funkce pro práci s databázovým serverem:</li>
+</ol><br>   - Otevření spojení s PostgreSQL: pg_connect("host={host} port={port} dbname={dbname} user={user} password={password}");<br>     kde: {host} - adresa serveru PostgreSQL (tj. přístupová adresa bez http://), kterou jste získali prostřednictvím e-mailu, např. node171206-php-postgresql.jelastic.com<br>     {port} - port spojení (výchozí je 5432)<br>     {dbname} - název vaší databáze<br>     {user} - uživatelské jméno pro přístup k databázi (budeme používat výchozí uživatelské jméno webadmin)<br>     {password} - heslo pro uživatele<br>   - Zavření spojení s PostgreSQL: pg_close()</p><div class="doc-image"><img src="/images/docs/connection-to-postgresql-php/01-php-postgresql-topology-wizard_hu3c0eaa0c1269a438178163899179f7d2_136966_480x0_resize_box_3.png" alt="php postgresql topology wizard hu3c0eaa0c1269a438178163899179f7d2 136966 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/connection-to-postgresql-php/02-postgresql-credentials-email_hu0ecf5e336dfd350b8eb068e9c1d33ca1_119041_480x0_resize_box_3.png" alt="postgresql credentials email hu0ecf5e336dfd350b8eb068e9c1d33ca1 119041 480x0 resize box 3" loading="lazy"></div><p> Váš databáze {user} - jméno účtu pro přístup k databázi (budeme používat výchozí webadmin). {hesla} - heslo pro správného uživatele. Zavření spojení s PostgreSQL: pg_close().
+<ol>
+<li>Musíte napsat potřebné funkce na každé stránce *.php, která by měla být spojena s databází. Kontrola spojení provede tento kód:</li>
+</ol><br>1 2 3 4 5 6 7 8 9
+<pre><code class="lang-php">&amp;lt;?php<br>$dbconn = pg_connect("host=postgres.jelastic.com port=5432 dbname=postgres user=webadmin password=passw0rd");<br>//připojení k databázi s názvem "postgres" na hostiteli "host" s uživatelským jménem a heslem<br>if (!$dbconn){<br> echo "&amp;lt;center&amp;gt;&amp;lt;h1&amp;gt;Nefunguje =(&amp;lt;/h1&amp;gt;&amp;lt;/center&amp;gt;";<br>}else echo "&amp;lt;center&amp;gt;&amp;lt;h1&amp;gt;Dobrý spojení&amp;lt;/h1&amp;gt;&amp;lt;/center&amp;gt;";<br>pg_close($dbconn);<br>?&amp;gt;</code></pre><br>Vykonání jednoduchého požadavku a jeho zobrazení do tabulky:<br>1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
+<pre><code class="lang-php">&amp;lt;?php<br>$conn = pg_connect("host=postgres.jelastic.com port=5432 dbname=postgres user=webadmin password=passw0rd");<br>if (!$conn) {<br> echo "Chyba se stala.\n";<br> exit;<br>}<br>$result = pg_query($conn, "SELECT * FROM test_table");<br>if (!$result) {<br> echo "Chyba se stala.\n";<br> exit;<br>}<br>while ($row = pg_fetch_row($result)) {<br> echo "hodnota1: $row[0] hodnota2: $row[1]";<br> echo "&amp;lt;br /&amp;gt;\n";<br>}<br>?&amp;gt;</code></pre><br>Použijte uvedené příklady k vytvoření vlastní aplikace PHP, která využívá spojení k databázi PostgreSQL. Co dále? Vzdálený přístup k PostgreSQL</p><p>PostgreSQL Vzdálený přístup</p><p>Konfigurace databáze PostgreSQL</p><div class="doc-image"><img src="/images/docs/connection-to-postgresql-php/03-apache-php-config-button_hued3bcdab68d62c2c37324a140953ab30_27687_480x0_resize_box_3.png" alt="apache php config button hued3bcdab68d62c2c37324a140953ab30 27687 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/connection-to-postgresql-php/04-apache-add-pgsql-module_hu0daecf6cae079fd9f69c4ff1d6a0ba91_78622_480x0_resize_box_3.png" alt="apache add pgsql module hu0daecf6cae079fd9f69c4ff1d6a0ba91 78622 480x0 resize box 3" loading="lazy"></div><p>PostgreSQL Replikace</p><div class="doc-image"><img src="/images/docs/connection-to-postgresql-php/05-restart-apache-php-nodes_hu68b4e7124f8b380ad907fc209b5514ab_28592_480x0_resize_box_3.png" alt="restart apache php nodes hu68b4e7124f8b380ad907fc209b5514ab 28592 480x0 resize box 3" loading="lazy"></div>
+</main>
+</body>
+</html>

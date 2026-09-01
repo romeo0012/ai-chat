@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GlassFish Application Server</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>GlassFish Application Server</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> GlassFish Anwendungsserver</p><p>GlassFish ist ein offener Quelltext-Anwendungsserver-Projekt, das von Sun Microsystems für die Java EE-Plattform gestartet wurde und jetzt von Oracle Corporation gesponsert wird. Die unterstützte Version heißt Oracle GlassFish Server. GlassFish ist freie Software und wird unter zwei freien Softwarelizenzen bereitgestellt: der Common Development and Distribution License (CDDL) und der GNU General Public License (GPL) mit der classpath-Ausnahme. GlassFish bietet auf Unternehmensniveau Zuverlässigkeit und Leistung mit voller Klustering und hat eine breite Funktionalitätsspektrum. Es ist ziemlich cool, dass es Ihnen erlaubt, die zentrale Repository-Verwaltung über die Admin-Oberfläche zu verwalten, die alle in GlassFish verfügbaren Funktionen unterstützt. Allerdings ist bekannt, dass mehr Funktionen = mehr Ressourcen bedeuten.</p><p>GlassFish-Installation</p><div class="doc-image"><img src="/images/docs/glassfish/01wizard_hu53a8386bccbaf8e21a2d934ac140e531_119520_480x0_resize_box_3.png" alt="01wizard hu53a8386bccbaf8e21a2d934ac140e531 119520 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/glassfish/02serv-run_hu71d0ed453278c1ed33ddce2c47a531f4_67152_480x0_resize_box_3.png" alt="02serv run hu71d0ed453278c1ed33ddce2c47a531f4 67152 480x0 resize box 3" loading="lazy"></div><p>Um Ihr GlassFish-Server-System in der Plattform zu erhalten, führen Sie einfach folgende Schritte aus:
+<ol>
+<li>Melden Sie sich bei Ihrer PaaS-Benutzeroberfläche an und klicken Sie auf New Environment.</li>
+</ol><ol>
+<li>Wechseln Sie zum Java-Tab und wählen Sie GlassFish innerhalb der Anwendungsserver-Abschnitt aus, wie auf dem Bild unten dargestellt:</li>
+</ol></p><p>![GlassFish-Auswahl](URL-zu-Bild)
+<ol>
+<li>Sobald die Umgebung erstellt wurde, können Sie auf den Open in browser-Button neben dem GlassFish-Server klicken, der dem System (erweitern Sie die Umgebung in der Umgebungen-Leiste am oberen Rand des Bildschirms):</li>
+</ol><ol>
+<li>Jetzt können Sie das Java-Anwendungspaket WAR hochladen und es in die Umgebung bereitstellen.</li>
+</ol><ol>
+<li>Die Glassfish-Verwaltungsseite kann direkt von der Plattform-Benutzeroberfläche erreicht werden: Die Admin-Seite wird in einem neuen Tab verfügbar sein.</li>
+</ol></p><p> PAKET War und bereitstelle es in der Umgebung. 5. Das Glassfish-Verwaltungspanel kann direkt über die Plattformendashboard erreicht werden: Die Admin-Seite wird in einem neuen Tab verfügbar sein. Hinweis: Die Plattform verwendet gfcluster als Cluster, also bitte Änderungen anwenden, wenn Sie etwas ändern möchten, auf gfcluster. Wenn Sie eine öffentliche IP an den Anwendungsserverknoten angehängt haben, kann die Standard-GlassFish-Verwaltungspanel-Port (4848) in der Konfigurationsdatei /opt/glassfish3/glassfish/domains/domain1/config/domain.xml geändert werden (ein Serverkürzel in Favoriten) indem Sie folgenden String hinzufügen:</p><div class="doc-image"><img src="/images/docs/glassfish/03dash_hueaa12b84e9725f9700726cc521ccba1d_29532_480x0_resize_box_3.png" alt="03dash hueaa12b84e9725f9700726cc521ccba1d 29532 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/glassfish/04admin_hu0941421373505aa5910e7d15b25577f6_135701_480x0_resize_box_3.png" alt="04admin hu0941421373505aa5910e7d15b25577f6 135701 480x0 resize box 3" loading="lazy"></div><p>1 2 &lt;http-listener id="admin-listener" port="4848" address="0.0.0.0" default-virtual-server="__asadmin" server-name="" /&gt;</p><p>GlassFish Derby Interner Datenbankserver ist standardmäßig ausgeschaltet, um den Ressourcenverbrauch zu verringern. Ressourcenverbrauch<br>Wenn wir die verschiedenen Anwendungsserver vergleichen, sieht GlassFish etwas wie ein Ressourcenverbraucher aus, aber seine Gierigkeit wird durch seine Funktionalität, Zuverlässigkeit und zahlreichen anderen Vorteilen ausgeglichen.</p><p>Servlet-Container-Konfiguration<br>Ressourcen, die durch die Umgebung verbraucht werden<br>Mit aktiviertem admin-Panel<br>GF 530-540 Mb (5 cloudlet)<br>800-820 Mb (7 cloudlets)<br>2 GF (HA aus) 820-830 Mb (9 cloudlets)<br>980-1000 Mb (10 cloudlets)<br>3 GF 1050-1060 Mb (11 cloudlets)<br>1210-1220 Mb (13 cloudlets)<br>4 GF (HA aus) 1430-1450 Mb (14 cloudlets)<br>1560-1580 Mb (15 cloudlets)<br>2 GF (HA an) 830-850 Mb (9 cloudlets)<br>1030-1050 Mb (10 cloudlets)<br>4 GF (HA an) 1360-1380 Mb (14 cloudlets)<br>1590-1610 Mb (16 cloudlets)</p><div class="doc-image"><img src="/images/docs/glassfish/05config_hua83480d5d9caa0f73693341d52b18888_109396_480x0_resize_box_3.png" alt="05config hua83480d5d9caa0f73693341d52b18888 109396 480x0 resize box 3" loading="lazy"></div><p>Was kommt nach?<br>Umgebungsvariablen im GlassFish-Verwaltungspanel<br>Java-Anwendungserver-Konfiguration<br>GlassFish-Cluster<br>GlassFish-Automatik-Clustering</p>
+</main>
+</body>
+</html>

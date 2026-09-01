@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WordPress Installation Kit Features</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>WordPress Installation Kit Features</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> WordPress-Installations-Kit-Funktionen<br>Beim Installieren der Virtuozzo Application Management WordPress-Pakete können Sie Ihre WordPress-Umgebung individualisieren, indem Sie die erforderlichen Optionen in der Installationsfenster auswählen. Folgende Funktionen stehen für die Konfiguration zur Verfügung:</p><p>LiteSpeed Hochleistungs-Webserver - installiert eine WordPress-Lösung basierend auf dem LiteSpeed Web Server. Diese Option bietet die höchste mögliche Geschwindigkeit der Inhalterlieferung an Kunden über das moderne HTTP/3-Protokoll. Wenn Sie diese Option unticken, wird die NGINX-basierte Lösung installiert. Die folgenden zwei zusätzlichen Funktionen stehen nur für LiteSpeed-basierte Installationen zur Verfügung:</p><p>Brute Force Attack Protection sichert die WordPress-Admin-Panel durch Begrenzung der fehlgeschlagenen Anmeldeversuche. Die Standardaktion ist Throttle, und die Anzahl erlaubter Versuche beträgt 100. Web Application Firewall (WAF) aktiviert/deaktiviert die Funktion, die Ihre WordPress-Website durch Anwendung von Regeln für die Filterung von angreifenden Anfragen schützt, indem sie nach bekannten Angriffssignaturen sucht.</p><p>Hinweis: Weitere Informationen zu diesen Funktionen und ihrer Konfiguration finden Sie in der LiteSpeed Web Server-Dokumentation.</p><p>Let’s Encrypt SSL mit Auto-Renewal-Add-on erstellt einen vertrauenswürdigen, kostenlosen Zertifikat für eine benutzerdefinierte Domäne. Die integrierte Funktionalität verwendet periodische Renovierung, um die Zertifikatsablauf zu verhindern. Die entsprechenden Benachrichtigungen werden per E-Mail gesendet.</p><p>WordPress Multisite Network aktiviert die gleichnamige Funktion.</p><p> periodische Wiederholung, um die Zertifikatsablaufzeit zu verhindern. Die passenden Benachrichtigungen werden per E-Mail gesendet. WordPress Multisite Network ermöglicht die gleichnamige Funktion. Sie erlaubt der Anwendung, als WordPress-Netzwerk-Hub zu fungieren, wo das Netzwerk aus mehreren Websites bestehen kann. Mit dieser integrierten Funktion und der Plattform-Automatisierung können Sie ein unabhängiges Netzwerk von Websites erstellen und andere dazu einladen, ihre Websites auf demselben Netzwerk zu entwickeln, auch für kommerzielle Verwendung. WooCommerce ist ein kostenloses, offenes WordPress-Plugin, das der WordPress-Website e-commerce-Funktionalität hinzufügt. Aktiviere diese Option, um diesen hervorragenden Ladenplattform automatisch für einen Laden beliebiger Größe zu installieren. Einige zusätzliche Funktionen sind nur für die WordPress-Cluster-Pakete verfügbar: MariaDB Galera Cluster ist ein Mehrprimärdatenbankcluster auf Basis synchroner Replikation und dem InnoDB-Engine. Mit dem Galera Cluster können Sie direkte Lesevorgänge und Schreibvorgänge an jedem Knoten durchführen. Im Fall eines einzelnen Instanzen-Fehlers gibt es keine Cluster-Downtime und keine komplexen Failover-Verfahren. Wenn Sie das Kontrollkästchen abwählen, wird eine Primary-Primary-Datenbankcluster installiert.Tip: Verwenden Sie die MariaDB/MySQL/Percona Auto-Clustering-Dokumentation für weitere Details zu Implementierungseigenschaften und Vergleich von Replikationsarten. GlusterFS Cluster bietet eine fehlerverträgliche Speicherlösung für statische Assets Ihres WordPress-Clusters.</p><p>und Vergleich von Replikationsarten. GlusterFS Cluster bietet eine fehlerverträgliche Speicherlösung für statische Assets Ihres WordPress-Clusters. Er garantiert Datenkonsistenz und Integrität, sowie Hochverfügbarkeit und Skalierbarkeit. Was kommt Nächstes? WordPress-Pakete-Übersicht WordPress LiteSpeed Server WordPress Let's Encrypt SSL WordPress Multisite Network WordPress WooCommerce Hosting</p>
+</main>
+</body>
+</html>

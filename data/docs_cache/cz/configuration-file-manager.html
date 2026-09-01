@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Configuration File Manager</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Configuration File Manager</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Správce Konfiguračních Souborů<br>Správce konfiguračních souborů je mocným nástrojem, který umožňuje ovládat všechny soubory v kontejneru dané platformy. Tímto způsobem můžete snadno a rychle aplikovat některé běžné konfigurace na vaše uzly prostřednictvím pohodlného GUI přímo v prohlížeči, bez nutnosti zřídit připojení SSH, které může být požadováno pro některé složité operace. Chcete-li otevřít správce konfiguračních souborů, přejděte nad požadovaný uzel a klikněte na tlačítko Config (ikona klíče). V horní části panelu se otevře odpovídající konfigurační karta. Zde jsou následující sekce k dispozici: Kořen (Správce souborů) - poskytuje přístup k lokálnímu soustavu souborů kontejneru, kde můžete spravovat různé nastavení v konfiguračních souborech vaší aplikace Bodové Mounty - seznam složek, které jsou fyzicky uloženy na vzdáleném uzlu, ale mohou být použity na aktuálním uzlu (dozvíte se, jak můžete na platformě připojit data) Exporty - seznam složek, které jsou sdíleny s ostatními uzly, tedy tyto soubory jsou uloženy místně, ale jsou také dostupné na vzdálených instancích (zjistěte více na stránce dokumentace věnované zasahovaným exportům) Oblíbené - soubory a složky, které jste označili jako oblíbené, abyste měli rychlý a jednoduchý přístup k nim Dále v tomto průvodci se zaměříme na základní použití správce konfiguračních souborů, které jsou přijatelné pro každý kontejner platformy.</p><p>Poznámka: Technické termíny, kódy, příkazy, cesty souborů, adresy URL a struktura odstavců zůstávají v původním jazyce.</p><p> Prostřednictvím tohoto průvodce můžete rychle a jednoduše přístup k nim Dále v tomto průvodci se zaměříme na základní konfigurace správce konfigurací, které se vztahují na každý typ platformového kontejneru. Pokud však potřebujete zjistit konkrétní nastavení pro určitý typ uzlu, vyberte si jednu z následujících dokumentací: Konfigurace aplikace Java Server Konfigurace aplikace PHP Server Konfigurace aplikace Ruby Server Konfigurace databáze NGINX Balancer Konfigurace Memcached Konfigurace Maven Konfigurace Práce s řídicím panelem Systém v budoucnu vytvořený řídicí panel pro správu souborů umožňuje rychlý a užitečný přístup k souborům vašeho kontejneru a umožňuje provádět většinu běžných operací přímo z panelu. Tip: Můžete se také připojit k kontejneru pomocí SSH, abyste měli více možností pro jeho správu.
+<ol>
+<li>Při přechodu do části Kořenové konfigurace správce konfigurací zobrazíte se v pravé části stromovou strukturu souborového systému s cestou a se rozevíracím seznamem možností akcí pro aktuální adresář v horní části nástrojů. Tyto možnosti poskytují následující funkce: snadno přepnutí mezi adresáři v cestě kliknutím na jakékoliv mezilehlé složky.</li>
+</ol></p><div class="doc-image"><img src="/images/docs/configuration-file-manager/1_hua023b573c4719d2f682548825e2c108a_29870_480x0_resize_box_3.png" alt="1 hua023b573c4719d2f682548825e2c108a 29870 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/configuration-file-manager/2_hue9efee7c56b7f6149afbaeed23370cde_81467_480x0_resize_box_3.png" alt="2 hue9efee7c56b7f6149afbaeed23370cde 81467 480x0 resize box 3" loading="lazy"></div><p>Pokud máte další dotazy, neváhejte nám se obrátit!</p><p> Možnosti poskytují následující funkce: snadno přepínat mezi adresáři v cestě kliknutím na jakékoliv z mezilehlých složek. Další možností je ručně zadat cílovou lokaci, napsáním jejího názvu do vhodného vstupního pole, které se objeví po kliknutí na prázdný prostor v libovolném místě cestovního panelu. V seznamu akcí obsahujícím počet funkcí pro správu vybraného adresáře se nachází například funkce obnovy obsahu, vytvoření nového položky, přidání vybrané položky do oblíbených, jejího odstranění nebo připojení vzdáleného adresáře 2. Pod panelem nástrojů můžete vidět strom s soubory, určený pro jednoduchou navigaci mezi nimi a zobrazení dalších informací o obsahujících souborech. V jeho sloupcích je následující data zobrazena: Jméno - název souboru, který můžete upravit kliknutím na ikonu pera (vyskytuje se při přejímaní kurzorem); také můžete spravovat vybraný soubor pomocí seznamu Dalších možností Velikost - množství diskového prostoru, které zabírá soubor Poslední změna - datum vytvoření nebo poslední změny souboru Druh - kategorie, do které patří soubor (k dispozici jsou typy běžný soubor, adresář, jmenovaný pipe, socket, zařízení pro čtení a zařízení pro zápis) Poznámka: Pouze typ běžný soubor můžete upravovat pomocí Konfiguračního manažera. 3. Každý otevřený soubor (dvojklíčem ho otevřete nebo vyberte odpovídající akci Otevřít pro něj) bude zobrazen v samostatném podtabulkovém panelu, takže můžete mezi nimi přepínat bez zavření předchozího, co vám umožňuje snadněji prozkoumávat soustavu souborů.</p><p> Pro přehledu) budou zobrazeny v oddělené podkartě, takže můžete mezi nimi přepínat bez zavření předchozího, což vám umožní snadněji prozkoumávat systém souborů. Dále, k jednoduššímu správě a úpravě souborů, můžete použít odpovídající možnost Hledat, dostupnou prostřednictvím stejnojmenného tlačítka v horní panelu. Prohledejte požadovaný kus textu, aby byly všechny shody zvýrazněny v celém souboru. Použijte další možnosti k úžšímu filtrování výsledků hledání: Match Case - umožňuje provést citlivý na velká a malá písmena hledání Regex - umožňuje použít regulární výrazy pro určení podmínek hledání.
+<ol>
+<li>Po dokončení úprav souborů nezapomeňte Uložit změny, které jste provedli pomocí odpovídajícího tlačítka v horní části. V případě, že pracujete s vrstvou více uzlů, budete navíc požádáni, zda je požadováno uložit změny pouze pro aktuální instance nebo pro všechny instance. Tip: Při ukládání změn v jakémkoli souboru konfigurace se zobrazí potvrzení. Pokud jste si jisti a chcete tento zprávu v budoucnu zobrazovat, zvěčněte si možnost "Neukazovat tento dialog opět". Výsledkem je, že všechny další úpravy budou okamžitě uloženy bez dalšího potvrzení. Tato nastavení se aplikuje na všechny typy souborů konfigurace všech vašich prostředí.</li>
+</ol>
+<ol>
+<li>Chcete-li provedět změny na jiném uzlu v rámci stejné vrstvy, můžete použít automaticky získaný seznam k dispozici v horní části správce v levém rohu. Pozor: Otevřené soubory budou automaticky znovu načteny pro odpovídající uzly při přepínání. To je vše hlavní funkce správce souborů, která, naděje se, vám pomůže během práce s naší Platformou. Co dále? Mount Points Exporting Data pro sdílení SSH Přístup.</li>
+</ol></p><div class="doc-image"><img src="/images/docs/configuration-file-manager/3_hua0f2bf5fe55288fe624e9fe4d3640aec_24597_480x0_resize_box_3.png" alt="3 hua0f2bf5fe55288fe624e9fe4d3640aec 24597 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/configuration-file-manager/4_hu409c9a99d4181fe3172c66a03ade4964_45568_480x0_resize_box_3.png" alt="4 hu409c9a99d4181fe3172c66a03ade4964 45568 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/configuration-file-manager/5_hu1f7b8cf5a7f1dc463720b6bc70788d02_50736_480x0_resize_box_3.png" alt="5 hu1f7b8cf5a7f1dc463720b6bc70788d02 50736 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/configuration-file-manager/6_hu05812163f7b00b44119b209dded07c0d_66388_480x0_resize_box_3.png" alt="6 hu05812163f7b00b44119b209dded07c0d 66388 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/configuration-file-manager/7_hubc429f83b2f0e34cfe6f4d6f39fa132e_31242_480x0_resize_box_3.png" alt="7 hubc429f83b2f0e34cfe6f4d6f39fa132e 31242 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/configuration-file-manager/8.png" alt="8" loading="lazy"></div>
+</main>
+</body>
+</html>

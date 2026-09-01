@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Java Options and Arguments</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Java Options and Arguments</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Java-Option und Argumente<br>Um Kosteneffizienz zu gewährleisten, werden alle Java-Server, die von der Plattform verwaltet werden, automatisch konfiguriert, um die Speicherressourcen in der vorteilhaftesten Weise zu nutzen. Dies wird erreicht, indem die Hauptparameter des Java-Speichers aufgrund der zugewiesenen Ressourcen eines Containers angepasst werden. Tip: Benutzerdefinierte Java-Server (z.B. innerhalb von Docker-Containern oder VPS) können ähnlich optimiert werden, indem Sie den Java-Speicher-Agent-Anhang verwenden. Die Standardoptionen können manuell geändert werden, um eine hohe Leistung zu sichern oder eine benutzerdefinierte Implementierung zu unterstützen.
+<ol>
+<li>Um alle bevorzugten Java-Optionen gleichzeitig bereitzustellen, kann die Datei variables.conf verwendet werden. Je nachdem, welcher Anwendungserver Sie verwenden, kann die genaue Position variieren: Tomcat, TomEE - /opt/tomcat/conf/variables.conf Jetty - /opt/jetty/etc/variables.conf Spring Boot - /opt/shared/conf/variables.conf GlassFish - /opt/glassfish/glassfish/domains/domain1/config/variables.conf Payara - /opt/payara/glassfish/domains/domain1/config/variables.conf WildFly - /opt/wildfly/conf/variables.conf Wenn nötig, können die Hauptspeicheroptionen über Containervariablen neu definiert werden.</li>
+</ol>
+<ol>
+<li>Erinnern Sie sich bitte, die Knoten neu zu starten, um Änderungen anzuwenden. Das ist es! Jetzt läuft Ihre Anwendung mit Ihren benutzerdefinierten Java-Optionen. Neu definieren der Haupt-Java-Parameter</li>
+</ol><br>Die wichtigsten Speicherparameter (-Xms, -Xmn, -Xmx, -Xminf, -Xmaxf, -XX:MaxPermSize, *-XX:+Use.GC) können neu definiert werden, indem Sie die dedizierten Umgebungsvariablen verwenden. Als Beispiel können Sie das -Xmx-Option hinzufügen (z.B.).</p><p>Wenn Sie Fragen haben, bitte führen Sie eine weitere Anfrage aus. Ich bin hier, um Ihnen zu helfen!</p><p> -XX:MaxPermSize, *-XX:+Use.GC) können über die zugewiesenen Umgebungsvariablen neu definiert werden. Als Beispiel kannst du die -Xmx Option hinzufügen (also Maximum Größe für die Java Heap-Speicher): Tip: Die Plattform unterstützt zwei zusätzliche Variablen, die die Haupt-RAM-Parameter auf Prozent des verfügbaren Gesamtspeichers einstellen können: XMS_DEF_PERCENT - die initiale Größe (%) des Speicher-Zuweisungspools XMX_DEF_PERCENT - die maximale Größe (%) des Speicher-Zuweisungspools Diese Werte werden automatisch überprüft - wenn XMS größer als XMX ist, wird sein tatsächlicher Wert auf XMX gesetzt. Bei der Verwendung der Spring Boot und Java Engine Vorlagen können zwei zusätzliche Variablen bereitgestellt werden: JAVA_OPTS - um Java-Optionen für Ihre App anzupassen (ähnlich dem variables.conf-File) JAVA_ARGS - um Ihrer Anwendung Hauptfunktion einige benutzerdefinierte Argumente zu übergeben Sollte vergessen werden, Ihre Anwendungserver(s) neu zu starten, um Änderungen anzuwenden. Was kommt nach? Variablen Liste Umgebungsvariablen Zusätzliche Umgebungsvariablen</p><div class="doc-image"><img src="/images/docs/java-options-arguments/01-variables-conf-file_huf4eccb69ed35557055974161e51ae8c5_81683_480x0_resize_box_3.png" alt="variables conf file huf4eccb69ed35557055974161e51ae8c5 81683 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/java-options-arguments/02-restart-nodes-button_hu4660c2566faac9d72ade8934da77bb92_25952_480x0_resize_box_3.png" alt="restart nodes button hu4660c2566faac9d72ade8934da77bb92 25952 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/java-options-arguments/03-memory-optimization-variables_hub6b12f76ca47fbdfd062b385c3c4c259_44178_480x0_resize_box_3.png" alt="memory optimization variables hub6b12f76ca47fbdfd062b385c3c4c259 44178 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/java-options-arguments/04-spring-boot-java-options-arguments_hu6ed58d8dc432c39a02909a605bd19802_44453_480x0_resize_box_3.png" alt="spring boot java options arguments hu6ed58d8dc432c39a02909a605bd19802 44453 480x0 resize box 3" loading="lazy"></div>
+</main>
+</body>
+</html>

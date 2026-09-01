@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kubernetes Cluster: Versions & Change Logs</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Kubernetes Cluster: Versions & Change Logs</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Kubernetes-Cluster: Versionen &amp; Änderungsprotokolle<br>Diese Plattform bietet eine vorgefertigte Lösung für den automatischen Einrichtung von Kubernetes (K8s) Cluster. Kubernetes ist ein portables, erweiterbares, offenes Plattform für die Verwaltung von containerbasierten Arbeitslasten und Diensten, die sowohl deklarative Konfiguration als auch Automatisierung unterstützt. Es korreliert sehr gut mit dem PaaS, sodass Anwendungen direkt innerhalb der Plattform auf Basis des Kubernetes-Systems eingerichtet werden können. Durch die Hostung eines Kubernetes-Clusters auf der Plattform erhalten Sie folgende Vorteile:</p><p>Einfache Startphase - automatisierte Installation in wenigen Klicks erfordert keine manuelle Intervention<br>Hyper Skalierbarkeit - der Cluster kann automatisch senkrecht und waagerecht skaliert werden<br>Mehrcloud-Verfügbarkeit - Möglichkeit, die Cloudoptionen nach den Projektbedürfnissen zu kombinieren<br>Einfache Verwaltung - ein einziger Verwaltungspunkt über eine intuitiven Benutzeroberfläche und integriertes Web SSH<br>Flexible Automatisierung - Automatisierung von DevOps-Prozessen mit offener API und Cloud-Skripting<br>Kosteneffizienz - nur für verbrauchte Ressourcen bezahlen, was durch die Containerdichte und Skalierbarkeit profitiert wird</p><p>Tippschlussel: Weitere Details und umfassende Beschreibungen mit Beispielanwendungen finden Sie in dem passenden Kubernetes-Cluster-Artikel unserer Blogseite. Hier werden wir alle Kubernetes-Cluster-Versionen und die implementierten Änderungen und Anpassungen beschreiben.</p><div class="doc-image"><img src="/images/docs/kubernetes-cluster-versions/01-kubernetes-cluster-topology-scheme.png" alt="kubernetes cluster topology scheme" loading="lazy"></div><p>K8s-Paket-Änderungsprotokoll<br>Sie können den Quellcode des Kubernetes-Cluster-Pakets auf GitHub überprüfen.</p><p> Übersicht über alle Versionen des Kubernetes-Cluster und Beschreibung der implementierten Änderungen und Anpassungen. K8s Paket-Änderungsprotokoll<br>Sie können die Quellcode des Kubernetes-Cluster-Paketes auf GitHub überprüfen. Sie können die Änderungen in jeder Version durch Klicken auf den erforderlichen Eintrag in der untenstehenden Liste überprüfen. Hinweis: Die Implementierung neuer Funktionen/Komponenten für die Lösung des Kubernetes-Clusters (wie auch die Stabilitätsprüfungen) erfordert eine bestimmte Menge an Zeit. Daher ist die Paketversion meistens eine oder zwei minor-Releases hinter den Kubernetes-upstream-Tags zurück. Aktuelle Versionen<br>K8s 1.31.3<br>hinzugefügt: 1.31.3 Version für neue Kubernetes-Cluster-Installationen</p><p>K8s 1.30.6<br>hinzugefügt: 1.30.6 Version für neue Kubernetes-Cluster-Installationen</p><p>K8s 1.29.9<br>hinzugefügt: 1.29.9 Version für neue Kubernetes-Cluster-Installationen</p><p>Release Notes Archive<br>K8s 1.28.0<br>hinzugefügt: 1.28.0 Version für neue Kubernetes-Cluster-Installationen<br>entfernt: Ausdatierte Integration mit GitLab (die GitLab-Integration-Erweiterung für Kubernetes)<br>aktualisiert: Formatierung der erfolgreich installierten Pop-up von HTML auf Markdown<br>verbessert: Validierung für den Certificate Manager-Erweiterung bei der Vorgängerinstallation<br>Vorinstallation: "cert-manager" kann nun für benutzer spezifische Anforderungen bereitgestellt werden, selbst wenn Jaeger während der Erstellung des Kubernetes-Clusters aktiviert ist</p><p>K8s 1.27.4<br>hinzugefügt: 1.27.4 Version für neue Kubernetes-Cluster-Installationen</p><p> Jetzt können Sie für benutzer spezifische Anforderungen bereitgestellt werden, auch wenn Jaeger während der Erstellung des Kubernetes-Cluster mit K8s 1.27.4 aktiviert ist. Die 1.27.4-Version wurde für neue Kubernetes-Cluster-Installationen hinzugefügt, die alte Integration mit GitLab (die GitLab-Integration Erweiterung für Kubernetes) wurde entfernt, die Validierung für den Certificate Manager-Anbieter wurde verbessert. Vorinstallation: "cert-manager" kann nun für benutzer spezifische Anforderungen bereitgestellt werden, auch wenn Jaeger während der Erstellung des Kubernetes-Clusters aktiviert ist.</p><p>K8s 1.26.7 hat die 1.26.7-Version für neue Kubernetes-Cluster-Installationen hinzugefügt, die Installation des Rancher-Management-Tools wurde wieder aktiviert, nachdem die Kompatibilitätsprobleme mit der aktuellen 1.26.x-Kubernetes-Version gelöst wurden. Die alte Integration mit GitLab (die GitLab-Integration Erweiterung für Kubernetes) wurde entfernt, die Validierung für den Certificate Manager-Anbieter wurde verbessert. Vorinstallation: "cert-manager" kann nun für benutzer spezifische Anforderungen bereitgestellt werden, auch wenn Jaeger während der Erstellung des Kubernetes-Clusters aktiviert ist.</p><p>K8s 1.25.4 hat die 1.25.4-Version für neue Kubernetes-Cluster-Installationen hinzugefügt. Die Jaeger Tracing Tools Implementierung wurde aktualisiert (aktualisierte Version, Operator Bereitstellung, Abhängigkeiten) aufgrund von API-Änderungen. Die Kubernetes-Cluster-Komponenten wurden aktualisiert: ingress-nginx 1.5.1, k9s 0.26.7, metallb 0.13.7, kubernetes-dashboard 2.7.0, metrics-server 0.6.2, cert-manager 1.10.1, cert-manager-nginx 4.4.</p><p> API-Änderungen haben die Komponenten des Kubernetes-Cluster aktualisiert:
+<ul>
+<li>ingress-nginx 1.5.1</li>
+</ul><ul>
+<li>k9s 0.26.7</li>
+</ul><ul>
+<li>metallb 0.13.7</li>
+</ul><ul>
+<li>kubernetes-dashboard 2.7.0</li>
+</ul><ul>
+<li>metrics-server 0.6.2</li>
+</ul><ul>
+<li>cert-manager 1.10.1</li>
+</ul><ul>
+<li>cert-manager-nginx 4.4.0</li>
+</ul></p><p>Diese Änderungen haben den Stern-Komponenten-Installationsfehler behoben, nachdem dessen upstream-Repository verlagert wurde. Dadurch wurde die Installation des Rancher-Management-Tools vorübergehend behindert, da es mit der aktuellen 1.25.x-Kubernetes-Version unvereinbar war.</p><p>Außerdem wurde der Verbindungsfehler nach der Installation des GitLab Integration Add-ons behoben, indem es auf Custom Resource Definition (CRD) umgestellt wurde, sowie die Verträglichkeit und Konfigurationsmigration für MetalLB verbessert.</p><p>Weiterhin wurde der Problem mit der Domänen-Appliance über den Certificate Manager Add-on behoben.</p><p>K8s 1.24.8:
+<ul>
+<li>Hinzufügen der 1.24.8-Version für neue Kubernetes-Cluster-Installationen</li>
+</ul><ul>
+<li>Behebung des Stern-Komponenten-Installationsfehlers nach dem upstream-Repository-Verschieben</li>
+</ul><ul>
+<li>Behebung des Verbindungsproblems nach der Installation des GitLab Integration Add-ons, Verbesserung der Verträglichkeit und Konfigurationsmigration für MetalLB; Behebung des Problems mit der Domänen-Appliance über den Certificate Manager Add-on</li>
+</ul></p><p>K8s 1.23.14:
+<ul>
+<li>Hinzufügen der 1.23.14-Version für neue Kubernetes-Cluster-Installationen</li>
+</ul><ul>
+<li>Behebung des Problems mit der Domänen-Appliance über den Certificate Manager Add-on</li>
+</ul></p><p>API-Änderungen haben die Komponenten des Kubernetes-Cluster aktualisiert:
+<ul>
+<li>ingress-nginx 1.3.0</li>
+</ul><ul>
+<li>helm 3.9.4</li>
+</ul><ul>
+<li>k9s 0.26.3</li>
+</ul><ul>
+<li>metallb 0.13.7</li>
+</ul></p><p>Diese Änderungen haben die Verträglichkeit und Konfigurationsmigration für MetalLB verbessert. Weiterhin wurde der Problem mit der Domänen-Appliance über den Certificate Manager Add-on behoben.</p><p> 1.24.4-Version für die Neuinstallationen von Kubernetes-Cluster aktualisiert die Komponenten des Kubernetes-Clusters:<ul>
+<li>ingress-nginx 1.3.0</li>
+</ul><ul>
+<li>helm 3.9.4</li>
+</ul><ul>
+<li>k9s 0.26.3</li>
+</ul><ul>
+<li>metallb 0.13.4</li>
+</ul><ul>
+<li>kubernetes-dashboard 2.6.1</li>
+</ul><ul>
+<li>K8s 1.23.10 hinzugefügt</li>
+</ul><ul>
+<li>1.23.10-Version für die Neuinstallationen von Kubernetes-Cluster hinzugefügt</li>
+</ul><ul>
+<li>K8s 1.22.12 hinzugefügt</li>
+</ul><ul>
+<li>1.22.12-Version für die Neuinstallationen von Kubernetes-Cluster aktualisiert den OpenLiberty Operator auf 0.8.2</li>
+</ul><ul>
+<li>K8s 1.21.14 hinzugefügt</li>
+</ul><ul>
+<li>1.21.14-Version für die Neuinstallationen von Kubernetes-Cluster hinzugefügt</li>
+</ul><ul>
+<li>K8s 1.23.6 hinzugefügt</li>
+</ul><ul>
+<li>1.23.6-Version für die Neuinstallationen von Kubernetes-Cluster Fehlerbehebungen:<br>  - Behebt ein unbehandeltes Fehler, wenn die GitLab Integration-Erweiterung konfiguriert wird, eine zweite Mal für denselben Server<br>  - Implementiert eine aktive Aktualisierung für die Umgebungsliste in der GitLab Integration-Erweiterung, um genaue Ergebnisse zu liefern<br>  - Behebt ein Fehler, wenn die GitLab Integration entfernt wird, während die Umgebung bereits gelöscht wurde</li>
+</ul><ul>
+<li>K8s 1.22.10 hinzugefügt</li>
+</ul><ul>
+<li>1.22.10-Version für die Neuinstallationen von Kubernetes-Cluster aktualisiert den automounter-Paket-Suite-Version - autofs 5.1.8</li>
+</ul><ul>
+<li>K8s 1.21.12 hinzugefügt</li>
+</ul><ul>
+<li>1.21.12-Version für die Neuinstallationen von Kubernetes-Cluster aktualisiert den automounter-Paket-Suite-Version - autofs 5.1.8</li>
+</ul><ul>
+<li>Behebt ein Problem mit fehlenden Credentials für die Rancher Management Tool in der nachinstallierten Pop-up und E-Mail</li>
+</ul></p><p> Ich habe ein Problem mit fehlenden Credentials für das Rancher-Verwaltungstool in der nachinstallations-Pop-up und der Email K8s 1.22.6 behoben.</p><p>Hinzugefügt wurde die Version 1.22.6 für neue Installationen von Kubernetes-Clustern.</p><p>Für den Traefik-Eingangskontroller wurde die Unterstützung von SSL-Endpunkten hinzugefügt.</p><p>Für die neuesten Versionen des Open Liberty Operators wurde die Unterstützung aktualisiert.</p><p>Die Komponenten des Kubernetes-Clusters wurden aktualisiert:<ul>
+<li>ingress-nginx 1.1.1</li>
+</ul><ul>
+<li>ingress-haproxy 1.6.9</li>
+</ul><ul>
+<li>k9s 0.25.18</li>
+</ul></p><p>Behebung von Fehlern:<ul>
+<li>Behebung des Fehlers bei der k8sm-config aufgrund fehlender ClusterStatus-Daten in der kubeadm ConfigMap</li>
+</ul><ul>
+<li>Es wurde die Möglichkeit verhindert, ein skalierbares Skalierungsmodus für die Kubernetes-Knoten zu aktivieren</li>
+</ul><ul>
+<li>Behebung eines Fehlers während der Installation des Rancher-Add-ons</li>
+</ul><ul>
+<li>Behebung eines Fehlers während der GitLab-Integration mit dem Kubernetes-Cluster</li>
+</ul></p><p>K8s 1.21.10 wurde hinzugefügt für neue Installationen von Kubernetes-Clustern.</p><p>Behebung eines Fehlers während der GitLab-Integration mit dem Kubernetes-Cluster</p><p>K8s 1.23.4 wurde hinzugefügt für neue Installationen von Kubernetes-Clustern.</p><p>Die Komponenten des Kubernetes-Clusters wurden aktualisiert:<ul>
+<li>metrics-server 0.6.1</li>
+</ul><ul>
+<li>kubernetes-dashboard 2.5.1</li>
+</ul><ul>
+<li>metallb-controller 0.12.1</li>
+</ul><ul>
+<li>helm 3.7.2</li>
+</ul><ul>
+<li>cert-manager 1.7.1</li>
+</ul><ul>
+<li>cert-manager-nginx 4.0.18</li>
+</ul><ul>
+<li>ingress-nginx 1.1.2</li>
+</ul></p><p>Behebung von Fehlern:<ul>
+<li>Behebung eines Fehlers während der Installation des Rancher-Add-ons</li>
+</ul><ul>
+<li>Behebung eines Fehlers während der GitLab-Integration mit dem Kubernetes-Cluster</li>
+</ul></p><p>K8s 1.22.4 wurde hinzugefügt für neue Installationen von Kubernetes-Clustern.</p><p>Implementierung der IngressClass API-Unterstützung und Aktualisierung der ingress-Ressourcen, um von der abgelehnten Cluster-API abzuwandeln.</p><p>Die Jaeger-Operator wurde auf die Version 1 aktualisiert.</p><p> IngressClass-API-Unterstützung und aktualisierte ingress-Ressourcen, um vom abgelösten cluster-API auf die 1.27-Version des Jaeger-Operators umzuschalten, die mit der neuen IngressClass-API arbeitet. Dies hat die Kubernetes-Clusterkomponenten ausgewirkt:
+<ul>
+<li>k9s 1.25.6</li>
+</ul><ul>
+<li>ingress-nginx 1.1.0</li>
+</ul><ul>
+<li>metrics-server 0.5.2</li>
+</ul><ul>
+<li>helm 3.6.3</li>
+</ul><ul>
+<li>cert-manager 1.5.4</li>
+</ul><ul>
+<li>ingress-nginx-cert 4.0.11</li>
+</ul><ul>
+<li>Anpassungen im Text der Kubernetes-Installation und Erweiterung der Erfolgsfenster, indem der Datei-Verwalter-Favoriten-Einstellungen die Datei "redeploy.conf" hinzugefügt wurde (ähnlich anderen zertifizierten Vorlagen)</li>
+</ul><ul>
+<li>Zurzeitiger Wechsel zum "hello-world"-Bereitstellung anstelle von "openliberty-operator", der noch nicht mit den Kubernetes-Versionen 1.22+ kompatibel ist</li>
+</ul><ul>
+<li>Zurzeitige Deaktivierung der Installation der Rancher-Management-Tool, da diese mit den Kubernetes-Versionen 1.22+ nicht kompatibel ist</li>
+</ul><ul>
+<li>Fehlerbehebungen:<br>  * Behebung eines unbehandelten Fehlers, der beim Versuch, das Cluster-Konfiguration &gt; Speicher-Add-on zu installieren, mit unzureichenden Konten-Quoten auftrat<br>  * Korrektur eines Fehlers in der Manifestdatei der Kubernetes-Cluster-Anwendung<br>  * Anpassung der initialen Grafana-Konfigurationen, um automatisch die Plattformstandard-Dashboard zuzuweisen<br>  * Behebung des Fehlers des DockerHub-Registry-Credentials-Add-ons, Aktualisierung der RBAC und der Version des Controller "registry-creds"<br>  * Behebung des Fehlers des k8sm-config aufgrund fehlender ClusterStatus-Daten in der kubeadm ConfigMap</li>
+</ul><ul>
+<li>K8s 1.21.6:<br>  * Hinzufügen der 1.21.6-Version für neue Kubernetes-Cluster-Installationen<br>  * Aktualisierung der Kubernetes-Clusterkomponenten:<br>    * ingress-haproxy 1.6.7<br>    * ingress-nginx 0.49.3<br>    * metrics-server 0.5.1<br>    * hello-kubernetes 1.10.1<br>    * metallb 0.11.</li>
+</ul></p><p> Für die neu erstellten Kubernetes-Cluster-Installationen wurden die Komponenten des Kubernetes-Clusters aktualisiert:
+<ul>
+<li>ingress-haproxy 1.6.7</li>
+</ul><ul>
+<li>ingress-nginx 0.49.3</li>
+</ul><ul>
+<li>metrics-server 0.5.1</li>
+</ul><ul>
+<li>hello-kubernetes 1.10.1</li>
+</ul><ul>
+<li>metallb 0.11.0</li>
+</ul><ul>
+<li>kubernetes-dashboard 2.4.0</li>
+</ul></p><p>An den Texten in der Kubernetes-Installation und den Erfolgsfenstern wurden Fehlerbehebungen vorgenommen:
+<ul>
+<li>Behandlung unbehandelter Fehler, die beim Versuch, den Cluster-Konfiguration &gt; Speicher-Add-on zu installieren, mit unzureichenden Konten-Quoten aufgetreten sind, wurden behoben.</li>
+</ul><ul>
+<li>In der Anwendungsmanifest des Kubernetes-Clusters wurde ein Fehler behoben.</li>
+</ul><ul>
+<li>Die initialen Konfigurationen von Grafana wurden angepasst, um die Plattformstandard-Dashboard automatisch zuzuweisen.</li>
+</ul><ul>
+<li>Der Fehler im DockerHub-Registry-Kredential-Add-on wurde behoben, die RBAC wurde aktualisiert und der registry-creds-Controller wurde auf Version K8s 1.20.12 aktualisiert.</li>
+</ul></p><p>Zusätzlich wurde die Version 1.20.12 für die neuen Kubernetes-Cluster-Installationen hinzugefügt.</p><p>An den Texten in der Kubernetes-Installation und den Erfolgsfenstern wurden Fehlerbehebungen vorgenommen:
+<ul>
+<li>Behandlung unbehandelter Fehler, die beim Versuch, den Cluster-Konfiguration &gt; Speicher-Add-on zu installieren, mit unzureichenden Konten-Quoten aufgetreten sind, wurden behoben.</li>
+</ul><ul>
+<li>In der Anwendungsmanifest des Kubernetes-Clusters wurde ein Fehler behoben.</li>
+</ul><ul>
+<li>Die initialen Konfigurationen von Grafana wurden angepasst, um die Plattformstandard-Dashboard automatisch zuzuweisen.</li>
+</ul><ul>
+<li>Der Fehler im DockerHub-Registry-Kredential-Add-on wurde behoben, die RBAC wurde aktualisiert und der registry-creds-Controller wurde auf Version K8s 1.19.16 aktualisiert.</li>
+</ul></p><p>Zusätzlich wurde die Version 1.19.16 für die neuen Kubernetes-Cluster-Installationen hinzugefügt.</p><p> Zuweisung der Standard-Dashboard-Plattform, festgelegt die DockerHub Registry-Anmeldeinformationen Erweiterung, aktualisiert RBAC und den registry-creds Controllerversion K8s 1.19.16, hinzugefügt 1.19.16 Version für neue Kubernetes-Cluster-Installationen, angepasst Texte in der Kubernetes-Installation und Erfolgsfenster, Fehlerbehebung: unbehandelte Fehler beim Versuch, das Cluster-Konfiguration &gt; Speicher Erweiterung mit unzureichenden Kontenquoten zu installieren, korrigiert Schreibfehler im Kubernetes-Cluster-Anwendungsmanifest, angepasst Initialkonfigurationen von Grafana, um die Standard-Plattform-Dashboard automatisch zuzuweisen, korrigiert Fehler bei der DockerHub Registry-Anmeldeinformationen Erweiterung, aktualisiert RBAC und den registry-creds Controllerversion K8s 1.21.4, hinzugefügt 1.21.4 Version für neue Kubernetes-Cluster-Installationen, hinzugefügt CoreDNS-Komponentenprüfung zum Clusterstatus K8s 1.20.10, hinzugefügt 1.20.10 Version für neue Kubernetes-Cluster-Installationen, umbenannt die k8dash-Utility in skooner (Hinweis: einige Metriken im skooner-Dashboard funktionieren nicht mit dem HAProxy-Eingangskontrolller) explizit geändert den NGINX-Eingangskontrollchart in die 3.x-Version aufgrund der Unvereinbarkeit der 4.x-Versionen mit dem cert-manager-Eingangskontrolller Fehlerbehebung: korrigiert Fehler beim Versuch, die Kubernetes-Cluster-Installation zu fehlschlagen, wenn sie mit NGINX-Eingangskontrolller erstellt wurde, korrigiert Fehler beim Versuch, den Kubernetes-Cluster mit dem GitLab-Server zu verbinden, der bereits mit einem anderen Cluster integriert ist, entfernt popeye als separate Werkzeug, da es bereits Teil des k9s-Utilities ist K8s 1.19.14, hinzugefügt 1.19.14 Version für neue Kubernetes-Cluster-Installationen.</p><p> Zur GitLab-Serveranbindung, die bereits mit einem anderen Cluster integriert ist, wurde Popeye als eigenes Werkzeug entfernt, da es bereits Teil des k9s-Utilities K8s 1.19.14 ist.</p><p>Hinzugefügt wurde die 1.19.14-Version für neue Kubernetes-Clusterinstallationen.</p><p>Umbenannt wurde die k8dash-Utility in skooner (beachten Sie, dass einige Metriken im skooner-Dashboard mit dem HAProxy-Eingangskontrolller nicht funktionieren).</p><p>Im expliziten Sinne wurde die NGINX-Eingangskontrollkarte auf die 3.x-Version geändert, da die 4.x-Versionen mit dem cert-manager-Eingangskontrolller unvereinbar sind.</p><p>Bugfixes:<ul>
+<li>Behebt ein Fehlermeldung bei der Installation des Kubernetes-Clusters mit NGINX-Eingangskontrolller</li>
+</ul><ul>
+<li>Behebt ein Fehlermeldung, die auftreten kann, wenn versucht wird, den Kubernetes-Cluster mit der GitLab-Serveranbindung zu verbinden, die bereits mit einem anderen Cluster integriert ist</li>
+</ul><ul>
+<li>Behebt ein Popeye-Werkzeug-Fehlermeldung, da es bereits Teil des k9s-Utilities ist</li>
+</ul><ul>
+<li>Behebt ein Fehlermeldung bei der Überprüfung von Eingangskontrollen, die während des Upgrades auf eine intermediäre 1.19.x-Version auftreten können</li>
+</ul></p><p>Zusätzlich wurde die 1.21.2-Version für neue Kubernetes-Clusterinstallationen hinzugefügt.</p><p>Aktualisiert wurde der Traefik-Eingangskontrollcontroller auf die 2.4.x-Version, da eine neue Architektur die alten Traefik 1.x-Versionen bei Kubernetes-Clusterupgrades vollständig entfernt.</p><p>Beim Upgrade von Traefik auf 2.x wird das Upgradeskript automatisch alle standardmäßigen Eingangskontrollressourcen aktualisieren, jedoch sollten alle benutzerdefinierten überprüft und angepasst werden (falls nötig).</p><p>Zusätzlich wurde eine Custom Resource Definition (CRD) für einen IngressRoute-Typ in Traefik 2 hinzugefügt.</p><p> Es sollte überprüft und (wenn nötig) angepasst werden, die benutzerdefinierte Ressourcendefinition (CRD) für einen IngressRoute-Typ wurde in Traefik 2.x hinzugefügt (zusätzlich zu den standardmäßigen Kubernetes-Ingress) aktualisiert die Kubernetes-Clusterkomponenten:
+<ul>
+<li>metallb-controller 0.10.2</li>
+</ul><ul>
+<li>kubernetes-dashboard 2.3.1</li>
+</ul><ul>
+<li>ingress-nginx 0.48.1</li>
+</ul><ul>
+<li>metrics-server 0.5.0</li>
+</ul><ul>
+<li>ingress-haproxy 1.6.6</li>
+</ul><ul>
+<li>k9s 0.24.15</li>
+</ul><ul>
+<li>kubectx 0.9.4</li>
+</ul></p><p>Umbenennung der k8dash-Utility in skooner (Hinweis: Einige Metriken in der skooner-Dashboard funktionieren nicht mit dem HAProxy-Ingress-Controller)</p><p>Aktualisierung der Cluster-Metriken in der Standard-Grafana-Dashboard</p><p>Implicites Ändern des NGINX-Ingress-Chart auf die 3.x-Version aufgrund der Unkompatibilität der 4.x-Versionen mit dem cert-manager-Ingress-Controller</p><p>Fehlerbehebungen:
+<ul>
+<li>Behebung eines Fehlers beim Installationsfehlschlag des Kubernetes-Clusters, wenn er mit dem NGINX-Ingress-Controller erstellt wurde</li>
+</ul><ul>
+<li>Behebung eines Fehlers beim Versuch, den Kubernetes-Cluster mit dem GitLab-Server zu verbinden, der bereits mit einem anderen Cluster integriert ist</li>
+</ul><ul>
+<li>Entfernung von popeye als eigenständige Werkzeug, da es bereits Teil der k9s-Utility ist</li>
+</ul></p><p>Hinzufügen der 1.20.8-Version für neue Kubernetes-Cluster-Installationen</p><p>Einstellung der automatischen GitLab-Runner-Deployment aufgrund des eingestellten Unterstützung der GitLab Managed Apps-Funktion</p><p>Aktualisierung der Cluster-Metriken in der Standard-Grafana-Dashboard</p><p>Hinzufügen der 1.19.12-Version für neue Kubernetes-Cluster-Installationen</p><p> Um die Beendigung der Unterstützung der GitLab Managed Apps-Funktion aktualisierten die Metriken des Standard-Grafana-Dashboards K8s 1.19.12. Die Bereitstellung von GitLab Runner wurde automatisch eingestellt, da die Unterstützung der GitLab Managed Apps-Funktion beendet wurde.</p><p>Für neue Installationen von Kubernetes-Clustern wurde die Version 1.19.12 hinzugefügt.</p><p>Die Unterstützung der GitLab Managed Apps-Funktion hat zur Folge, dass die Metriken des Standard-Grafana-Dashboards K8s 1.18.20 aktualisiert wurden. Die Bereitstellung von GitLab Runner wurde automatisch eingestellt, da die Unterstützung der GitLab Managed Apps-Funktion beendet wurde.</p><p>Für neue Installationen von Kubernetes-Clustern wurde die Version 1.18.20 hinzugefügt.</p><p>Die Metriken des Standard-Grafana-Dashboards K8s 1.20.6 wurden aktualisiert. Die Upgrade auf 1.20.6 wurde für bestehende Kubernetes-Clustern durchgeführt.</p><p>Der Begriff "master" wurde in Parametern, Aktionen, Logs usw. umbenannt, was nur auf neuen Installationen angewendet wird. Die GitLab-Integration für Kubernetes-Clustern 1.20+ (also nach der Laufzeitänderung) wurde wiederhergestellt.</p><p>Die Komponenten des Kubernetes-Clusters wurden aktualisiert:<ul>
+<li>hello-kubernetes 1.10</li>
+</ul><ul>
+<li>ingress-nginx 0.46.0</li>
+</ul><ul>
+<li>ingress-haproxy 1.6.1</li>
+</ul><ul>
+<li>helm 3.5.4</li>
+</ul><ul>
+<li>cert-manager 1.3.1</li>
+</ul><ul>
+<li>metrics-server 0.4.4</li>
+</ul><ul>
+<li>open-liberty 0.7.1</li>
+</ul><ul>
+<li>k9s 0.24.10</li>
+</ul><ul>
+<li>popeye 0.9.1</li>
+</ul></p><p>Eine Überprüfung des Zustands des Admission-Services wurde hinzugefügt, bevor Ingresses importiert werden. Die Upgrade-Prozedur wurde verbessert: Der Upgrade-Flow wurde angepasst, um unbekannte (nicht gefundene) Komponenten und die entsprechenden Abhängigkeiten zu überspringen.</p><p>Alte Anmerkungen auf Arbeiterknoten wurden bei der Upgrade auf 1.20.0 entfernt.</p><p> Überspringe unbekannte (nicht gefundene) Komponenten und die entsprechenden Abhängigkeiten, aktualisiere veraltete Annotations auf Arbeiterknoten bei der Aufwertung auf 1.20.x aus den herrschenden Versionen (aufgrund von Laufzeitänderung) implementiert Fehlerbehandlung für das überschneidende Wurzel-Eingangssystem bei Versuchen, das Rancher-Management-Tool installieren zu wollen auf dem vorhandenen nichtstandardmäßigen Anwendungsfall Fehlerbehebungen:<ul>
+<li>Behebt einen Fehler bei der Standardbereitstellung der Open Liberty Beispielanwendung auf Installationen mit dem HAProxy Eingangskontroller</li>
+</ul><ul>
+<li>Behebt einen Fehler, wenn der DockerHub-Geheimnis entfernt wird, wenn man die Credentials erneut hinzufügt über den DockerHub-Geheimnis-Add-on</li>
+</ul><ul>
+<li>Behebt einen Fehler bei der Konfiguration der GitLab-Integration über das passende Kubernetes-Add-on</li>
+</ul></p><p>K8s 1.19.10<br>implementiert Fehlerbehandlung für das überschneidende Wurzel-Eingangssystem bei Versuchen, das Rancher-Management-Tool installieren zu wollen auf dem vorhandenen nichtstandardmäßigen Anwendungsfall<br>fügt Checkup für die Bereitstellung des admission-service vor der Importierung von Eingängen hinzu<br>verbessert das Cluster-Aufwertungsverfahren:<ul>
+<li>passiert den Aufwertungsfluss so, dass unbekannte (nicht gefundene) Komponenten und die entsprechenden Abhängigkeiten übersprungen werden und veraltete Annotations auf Arbeiterknoten bei der Aufwertung auf 1.20.x aktualisiert werden</li>
+</ul></p><p> Überspringe unbekannte (nicht gefundene) Komponenten und die entsprechenden Abhängigkeiten. Aktualisierte veraltete Annotations auf Arbeiterknoten bei der Aufwertung auf 1.20.x aus den herrschenden Versionen (aufgrund von Laufzeitänderung) sollte das kubeadm Bootstrap-Konfiguration nicht erhalten werden während der Neuausgabe, um sicherzustellen, dass nur aktuelle Images gezogen werden. Fehlerbehebungen:
+<ul>
+<li>Behebt einen Fehler bei der Standardbereitstellung der Open Liberty Beispielanwendung auf den Installationen mit dem HAProxy Eingangskontrolller fehlend</li>
+</ul><ul>
+<li>Liefert Informationen über die Jaeger und Monitoring Tools Credentials nach der angemessenen Wiederinstallation des Add-ons</li>
+</ul><ul>
+<li>Alte Jaeger und Monitoring Tools Credentials werden in der Popup angezeigt nach der angemessenen Wiederinstallation des Add-ons</li>
+</ul><ul>
+<li>Behebt einen Fehler bei der Kubernetes-Cluster-Aufwertung von 1.18.10 auf 1.20.6 durch Austausch des abgelösten nfs-client-provisioner API mit dem nfs-subdir-external-provisioner Alternativ</li>
+</ul><ul>
+<li>Behebt einen Fehler bei der Entfernung des DockerHub-Geheimnisses, wenn die Credentials erneut hinzugefügt werden über den DockerHub Credentials Add-on</li>
+</ul><ul>
+<li>Behebt einen Fehler bei der Konfiguration der GitLab-Integration über das angemessene Kubernetes Add-on</li>
+</ul><ul>
+<li>K8s 1.18.x</li>
+</ul></p><p> Anfeuerung über das DockerHub-Anmeldeerweiterung wurde ein Fehler bei der Konfiguration von GitLab-Integration über die passenden Kubernetes-Erweiterung K8s 1.18.18 behoben. Fehlerbehandlung wurde für das Überschneidungsproblem der Wurzel-Eingang implementiert, wenn versucht wurde, das Rancher-Management-Tool auf dem vorhandenen nichtstandardmäßigen Anwendung zu installieren. Überprüfung wurde für die Bereitstellung des Zugriffs auf die Zulassungsdienst vor der Importierung von Eingängen durchgeführt. Die Prozedur der Klusteraktualisierung wurde verbessert:
+<ul>
+<li>Die Aktualisierungsfluss wurde angepasst, um die unbekannten (nicht gefundenen) Komponenten und die entsprechenden Abhängigkeiten zu überspringen</li>
+</ul><ul>
+<li>Automatisches Wechseln zum Standardnamespace vor der Klusteraktualisierung</li>
+</ul><ul>
+<li>Obsoletes Annotations auf Arbeiterknoten bei der Aktualisierung auf 1.20.x von den vorherigen Versionen (aufgrund von Laufzeitänderung) wurden aktualisiert</li>
+</ul></p><p>Fehlerbehebungen:
+<ul>
+<li>HTTP-Automorouting soll für die Kubernetes-Knoten in den zusätzlichen Schichten deaktiviert werden</li>
+</ul><ul>
+<li>Fehlerbehebung bei der Konfiguration von GitLab-Integration über die passenden Kubernetes-Erweiterung K8s 1.20.4</li>
+</ul><ul>
+<li>Aktualisierung auf 1.20.4 für die bestehenden Kubernetes-Kluster</li>
+</ul><ul>
+<li>Kubernetes-Versionauswahl (drei letzten Versionen in absteigender Reihenfolge) in der Installationsfenster wurden hinzugefügt</li>
+</ul><ul>
+<li>Wechsel auf den containerd-Laufzeitumgebung, angepasste Konfigurationen und die Aktualisierungsprozedur</li>
+</ul><ul>
+<li>Integration des Rancher-Management-Tools für Kubernetes-Kluster</li>
+</ul><ul>
+<li>Aktualisierung der Komponenten des Kubernetes-Klusters:<br>  * kubernetes-Dashboard 2.2.0<br>  * helm 3.5.3<br>  * k9s 0.24.7<br>  * metrics-Server 0.4.2<br>  * weave 2.8.1<br>  * autofs 5.1.6<br>  * HAProxy ingress-Ressourcen und ingress-Controller 1.5.1<br>  * NGINX ingress-Controller 0.</li>
+</ul></p><p> Komponenten: kubernetes-Dashboard 2.2.0, Helm 3.5.3, k9s 0.24.7, metrics-Server 0.4.2, Weave 2.8.1, autofs 5.1.6, HAProxy, ingress-Ressourcen und ingress-Controller 1.5.1, NGINX ingress-Controller 0.44, aktualisiert die Überwachungswerkzeuge von Jaeger, ihre CRD, Eingang, und hotrod Anwendungskonfigurationen. Dies hat die Standardfeuerwehrregelnanwendung während der Klustererstellung verbessert, um unzutreffende Einschränkungen zu vermeiden. Unterstützung für GlusterFS für den gemeinsamen Speicher in Kubernetes-Kluster hinzugefügt. Möglichkeit gegeben, den gemeinsamen Speicher in den Kubernetes-Kluster-Topologie zu integrieren, nach der initialen Installation - nur fügen Sie es über den dedizierten Add-on hinzu. Implementiert eine Fähigkeit, Arbeiterknoten auf verschiedenen Ebenen hinzuzufügen. Verbessert das Kluster-Aktualisierungsverfahren: Hinzugefügt wurden Überprüfungen für den Zustand der Knoten, Nutzerdefinierte Anmeldeinformationen aus dem $HOME/.kube/config erhalten wurden erhalten.</p><p>Auf verschiedenen Ebenen verbessert das Kluster-Aktualisierungsverfahren: Hinzugefügt wurden Überprüfungen für den Zustand der Knoten, Nutzerdefinierte Anmeldeinformationen aus dem $HOME/.kube/config erhalten wurden erhalten. Implementiert automatisches Wechseln zum Standardnamespace vor dem Kluster-Aktualisierung, optimiert Konfigurationen, um abgestellte Kubelet-Optionen aus ConfigMap zu entfernen. Die kubeadm Bootstrap-Konfiguration sollte während der Neuausgabe nicht erhalten werden, um sicherzustellen, dass nur aktuelle Bilder gezogen werden. Entfernt unnötige "dockershim"-Anmerkungen für Masterknoten im Kluster. Implementiert Add-on für die Verwaltung von DockerHub-Anmeldeinformationen (um die Beschränkungen des anonymen DockerHub-Nutzers zu umgehen). Entfernt Add-ons, die mit der aktuellen Kubernetes-Klusterversion unvereinbar sind. Verschiebt Kubernetes-Produktionskomponenten auf AWS, um den Poolgrenze zu eliminieren. Verschiebt Kubernetes-Artifacts auf AWS für bessere Verfügbarkeit. Verbessert das Verfahren zur Neuausgabe des Kubernetes-Klusters, um die Daten, die in dem redeploy.conf-Datei definiert sind, zu erhalten. Verschiebt den abgestellten fail-swap-on-Flag aus dem sysconfig/kubelet-Datei in das /var/lib/kubelet/config.yaml-Konfigurierungsdatei. Verbessert die Texte auf den Kluster-Aktualisierungs-Pop-up-Benachrichtigungen. Hinzugefügt Apache 2.</p><p> flag aus dem sysconfig/kubelet-Datei zur /var/lib/kubelet/config.yaml-Konfiguration verbessert Texte auf dem Cluster-Upgrade-Benachrichtigung hinzugefügt<br>Apache 2.0 Lizenz zur Projekt-Lizenz hinzugefügt<br>Bugfixes:<ul>
+<li>Restriktiver Kubernetes-Cluster-Migration zwischen Regionen (da sie die Cluster-Betriebsfähigkeit unterbricht) behoben</li>
+</ul><ul>
+<li>Fehler mit einem ungültigen/fehlenden admin-Token für komplexe Cluster-Topologien behoben</li>
+</ul><ul>
+<li>Fehler mit den nicht angepassten öffentlichen IPs in metallb-config nach Skalierung der Worker-Knoten behoben</li>
+</ul><ul>
+<li>Optimierung von metallb-config, um die Anpassung der Konfigurationsdatei zu überspringen, wenn Worker-Knoten ohne öffentliche IPs skaliert werden</li>
+</ul><ul>
+<li>Inkonsistente RBAC-Konfigurationen in der registry-creds-Manifest hinzugefügt</li>
+</ul><ul>
+<li>Validierung der Werte der Felder username, password und email in der Docker Hub Credentials-Erweiterung deaktiviert</li>
+</ul><ul>
+<li>Ununterstützte SSL-Endpunkt-Überprüfungen auf dem HAProxy-Controller behoben</li>
+</ul><ul>
+<li>Fehler beim Anwendungsweg, wenn ein Kubernetes-Cluster mit dem Traefik ingress-Controller erstellt wird, behoben</li>
+</ul><ul>
+<li>k8dash-Dashboard in ein separates Namespace verlegt, um Kompatibilitätsprobleme mit dem HAProxy ingress-Controller zu vermeiden</li>
+</ul><ul>
+<li>HTTP-Automatische Umleitung sollte für die Kubernetes-Knoten in den zusätzlichen Schichten deaktiviert sein</li>
+</ul><ul>
+<li>Fehlende Informationen zu den Jaeger und Monitoring Tools-Kredentialen nach der passenden add-on-Wiederherstellung angezeigt</li>
+</ul><ul>
+<li>Alte Jaeger und Monitoring Tools-Kredentiale werden in der Benachrichtigung angezeigt, nach der passenden add-on-Wiederherstellung</li>
+</ul><ul>
+<li>Name des NGINX ingress controller in der Installationsfenster großgeschrieben</li>
+</ul><ul>
+<li>Fehler während dem Upgrade des Kubernetes-Clusters von 1.18.10 auf 1.20 behoben</li>
+</ul></p><p> NGINX-Ingress-Controller-Name im Installationsfenster festgelegt, hat während der Upgrade-Aktion des Kubernetes-Cluster von 1.18.10 auf 1.20.4 einen Fehler behoben, indem er den veralteten nfs-client-provisioner-API durch den alternativen nfs-subdir-external-provisioner ersetzte. K8s 1.19.8 hat Upgrade auf 1.19.8 für die vorhandenen Kubernetes-Cluster hinzugefügt. Kubernetes-Version-Auswahl (die drei letzten Versionen in absteigender Reihenfolge) wurde dem Installationsfenster hinzugefügt. Der Rancher-Management-Tool für Kubernetes-Cluster wurde aktualisiert. Die Kubernetes-Cluster-Komponenten wurden aktualisiert: metrics-server 0.4.2, weave 2.8.1, autofs 5.1.6, hello-kubernetes 1.9, kubernetes-dashboard v2.0.5, cert-manager 1.2.0, helm 3.5.2, metallb 0.9.6, kubectx (kubens, kubects) 0.9.3, k9s 0.24.4, HAProxy ingress-Resources und ingress-Controller 1.5.1, NGINX ingress-Controller 0.44 wurde aktualisiert, die Jaeger-Monitoring-Tools-Version, ihre CRD, ingress und hotrod-App-Konfigurationen verbessert. Die Standard-Firewall-Regeln-Anwendung während der Cluster-Erstellung wurde verbessert, um falsche Einschränkungen zu vermeiden. GlusterFS-Unterstützung für das Shared Storage in Kubernetes-Cluster wurde hinzugefügt. Es wurde die Möglichkeit gegeben, Shared Storage in den Kubernetes-Cluster-Topologie nach der initialen Installation einzubinden - nur fügen Sie es über den dedizierten Add-on hinzu. Es wurde eine Fähigkeit zur Hinzufügung von Arbeiterknoten auf verschiedenen Ebenen implementiert. Die Cluster-Upgrade-Prozedur wurde verbessert: Zusätzliche Überprüfungen für die Nodes-Zustandsverifikation wurden hinzugefügt, Nutzerdefinierte Anmeldeinformationen aus dem $HOME/. wurden erhalten.</p><p> Auf verschiedenen Schichten hat die Kluster-Aktualisierungsvorgang verbessert:
+<ul>
+<li>Hinzugefügt wurden Prüfungen für den Zustand der Knoten-Verifikation</li>
+</ul><ul>
+<li>Benutzerdefinierte Credentials aus dem $HOME/.kube/config wurden beibehalten</li>
+</ul><ul>
+<li>Konfigurationen wurden optimiert, um Übergangsdaten besser aufzulösen</li>
+</ul><ul>
+<li>Konfigurationen wurden optimiert, um abgekürzte Kubelet-Optionen aus dem ConfigMap zu entfernen</li>
+</ul><ul>
+<li>Automatisches Wechseln zum Standardnamespace vor der Kluster-Aktualisierung implementiert</li>
+</ul><ul>
+<li>Add-on für die Verwaltung von DockerHub-Credentials (um die Beschränkungen des anonymen DockerHub-Nutzers zu umgehen) implementiert</li>
+</ul><ul>
+<li>Kubernetes-Cluster-Produktionskomponenten wurden auf AWS verlegt, um den Pool-Limit zu eliminieren</li>
+</ul><ul>
+<li>Kubernetes-Artifacts wurden auf AWS gespeichert, um bessere Verfügbarkeit zu erreichen</li>
+</ul><ul>
+<li>Verbessertes Bereitstellungsverfahren für Kubernetes-Cluster, um die in dem redeploy.conf-Datei definierten Daten zu erhalten</li>
+</ul><ul>
+<li>Die deprecated fail-swap-on-Flag wurde aus dem sysconfig/kubelet-Datei in das /var/lib/kubelet/config.yaml-Konfigurationsdatei verschoben</li>
+</ul><ul>
+<li>Text der Kluster-Aktualisierung-Pop-up-Benachrichtigungen verbessert</li>
+</ul><ul>
+<li>Apache 2 hinzugefügt</li>
+</ul></p><p>Die folgenden Code-Blöcke, Befehle, Dateipfade und URLs wurden nicht übersetzt, da sie nicht in der Prosa enthalten sind:</p><p><pre><code class="lang-"># Code block</p><p>kubectl get nodes</p><p><h1>Command</h1></p><p>$HOME/.kube/config</p><p><h1>File path</h1></p><p>/var/lib/kubelet/config.yaml</p><p><h1>URL</h1></p><p>https://hub.docker.com/</code></pre></p><p> flag aus dem sysconfig/kubelet-Datei zur /var/lib/kubelet/config.yaml-Konfiguration verbessert Texte auf dem Cluster-Aktualisierungs-Benachrichtigungs-Popup hinzugefügt Apache 2.0 Lizenz zur Projekt-Lizenz hinzugefügt Fehlerbehebungen:<ul>
+<li>Restriktiver Kubernetes-Cluster-Migration zwischen Regionen (da sie die Cluster-Betriebsfähigkeit unterbricht) behoben</li>
+</ul><ul>
+<li>Fehler mit einem ungültigen/fehlenden Admin-Token für komplexe Cluster-Topologien behoben</li>
+</ul><ul>
+<li>Fehler mit öffentlichen IPs, die nach Skalierung der Arbeiter-Knoten nicht angepasst wurden in metallb-config behoben</li>
+</ul><ul>
+<li>Optimierung von metallb-config, um die Anpassung der Konfigurationsdatei zu überspringen, wenn Arbeiter-Knoten ohne öffentliche IPs skaliert werden</li>
+</ul><ul>
+<li>Inkonsistente RBAC-Konfigurationen in der registry-creds-Manifest hinzugefügt</li>
+</ul><ul>
+<li>Validierung der Werte der Felder username, password und email in der Docker Hub Credentials-Erweiterung deaktiviert</li>
+</ul><ul>
+<li>Ununterstützte SSL-Endpunkt-Überprüfungen auf dem HAProxy-Controller behoben</li>
+</ul><ul>
+<li>Fehler mit dem Anwendungspfad bei der Erstellung eines Kubernetes-Clusters mit dem Traefik ingress-Controller behoben</li>
+</ul><ul>
+<li>K8dash-Dashboard in ein separates Namespace verlegt, um Kompatibilitätsprobleme mit dem HAProxy ingress-Controller zu vermeiden</li>
+</ul><ul>
+<li>HTTP-Automatische Umleitung soll für die Kubernetes-Knoten im Fenster "Zusätzliche Ebenen" deaktiviert sein</li>
+</ul><ul>
+<li>Name des NGINX ingress controller in der Installations-Fenster großgeschrieben</li>
+</ul><ul>
+<li>Upgrade auf 1.18.16 für die bestehenden Kubernetes-Clusters hinzugefügt</li>
+</ul><ul>
+<li>Kubernetes-Version-Auswahl (die drei letzten Versionen in absteigender Reihenfolge) zum Installations-Fenster hinzugefügt</li>
+</ul><ul>
+<li>Integration des Rancher-Management-Tools für Kubernetes-Cluster hinzugefügt</li>
+</ul><ul>
+<li>Aktualisierung der Kubernetes-Cluster-Komponenten:<br>  - k9s 0.24.2<br>  - popeye 0.9</li>
+</ul></p><p> Zur Installationsfenster wurde der Rancher-Management-Tool für den Kubernetes-Cluster integriert und die Komponenten des Kubernetes-Clusters aktualisiert:
+<ul>
+<li>k9s 0.24.2</li>
+</ul><ul>
+<li>popeye 0.9.0</li>
+</ul><ul>
+<li>cert-manager 1.0.4</li>
+</ul><ul>
+<li>cert-manager nginx (neu)</li>
+</ul><ul>
+<li>metrics-server 0.4.2</li>
+</ul><ul>
+<li>weave 2.8.1</li>
+</ul><ul>
+<li>autofs 5.1.6</li>
+</ul><ul>
+<li>aktualisierte Chart-Versionen für node-problem-detector, Grafana, und Prometheus</li>
+</ul><ul>
+<li>verbesserte Cluster-Aktualisierungsprozedur:<br>	+ hinzugefügte Kontrollen für den Zustand der Knoten<br>	+ erhaltene Benutzerdefinierte Credentials aus $HOME/.kube/config<br>	+ behoben wurde der Helm-Upgrade-Fehler<br>	+ verbessert wurden die Monitoring- und Jaeger-Tools auf dem Kubernetes-Cluster nach der Aktualisierung<br>	+ hinzugefügter Add-on für die DockerHub-Kredentialverwaltung (um die Beschränkungen des anonymen DockerHub-Benutzers zu umgehen)<br>	+ verbesserte Standard-Firewall-Regeln während der Cluster-Erstellung, um falsche Einschränkungen zu vermeiden<br>	+ Kubernetes-Artifacts wurden auf AWS gespeichert, um bessere Verfügbarkeit zu erreichen<br>	+ Unterstützung für GlusterFS für das Shared Storage in Kubernetes-Cluster hinzugefügt<br>	+ Möglichkeit, Shared Storage in den Kubernetes-Cluster-Topologie einzubinden, nach der initialen Installation - nur über den dedizierten Add-on hinzufügen<br>	+ verbesserte Wiederverteilungsprozedur für Kubernetes-Cluster, um Daten aus dem redeploy.conf-Datei zu erhalten<br>	+ verbesserte Texte auf den Cluster-Aktualisierungs-Pop-up-Benachrichtigungen hinzugefügt<br>	+ hinzugefügte Apache 2.</li>
+</ul></p><p>Bitte beachten Sie, dass technische Terme, Codeblöcke, Befehle, Dateipfade und URLs genau so gelassen wurden, wie sie in der Originaltext sind. Die Übersetzung bezieht sich nur auf die Prosa-Text.</p><p> Cluster um Daten, wie in dem redeploy.conf-Datei definiert sind, verbessert:<br>Im Cluster-Aktualisierungsfenster angezeigte Texte verbessert:<br>Apache 2.0 Lizenz hinzugefügt:<br>Fehlerbehebungen:<ul>
+<li>Restriktiver Kubernetes-Cluster-Migration zwischen Regionen (da sie den Cluster-Betrieb unterbrechen) behoben</li>
+</ul><ul>
+<li>Fehler mit einem ungültigen/fehlenden Admin-Token für komplexe Cluster-Topologien behoben</li>
+</ul><ul>
+<li>Fehler mit nicht angepassten öffentlichen IPs in metallb-config nach Skalierung der Worker-Knoten behoben</li>
+</ul><ul>
+<li>Optimierung von metallb-config, um die Anpassung der Konfigurationsdatei zu überspringen, wenn Worker-Knoten ohne öffentliche IPs skaliert werden</li>
+</ul><ul>
+<li>Inkonsistente RBAC-Konfigurationen im registry-creds-Manifest korrigiert</li>
+</ul><ul>
+<li>Validierung der Werte der Felder Benutzername, Passwort und E-Mail in dem Docker Hub Credentials-Add-on hinzugefügt</li>
+</ul><ul>
+<li>NGINX ingress controllername in der Installationsfenster kapitalisiert</li>
+</ul><ul>
+<li>Fehler während dem Kubernetes-Cluster-Aktualisierung von 1.18.10 auf 1.20.4 behoben<br>K8s 1.18.10:</li>
+</ul><ul>
+<li>Aktualisierung auf 1.18.10 für bestehende Kubernetes-Cluster</li>
+</ul><ul>
+<li>Aktualisierung der Kubernetes-Cluster-Komponenten:<br>  - helm 2.16.12<br>  - Dashboard 2.0.3<br>  - metallb 0.9.4<br>  - nginx-ingress 0.40.2<br>  - haproxy-ingress 0.9.1</li>
+</ul></p><p>K8s 1.17.12:<ul>
+<li>Aktualisierung auf 1.17.12 für bestehende Kubernetes-Cluster</li>
+</ul><ul>
+<li>Aktualisierung der Kubernetes-Cluster-Komponenten:<br>  - weave 2.7.0<br>  - cni-plugins 0.8.7<br>  - Docker Engine CE 19.03.9<br>  - containerd 1.3.7<br>  - k9s v0.22.1<br>  - popeye 0.8.10<br>  - Anstelle des bisherigen Helm-basierten bereitgestellt: operator-getriebene Version von OpenLiberty<br>  - Korrektur falscher Gesundheitsprüfung für den K8dash-Dashboard</li>
+</ul></p><p>K8s 1.17.4:<ul>
+<li>Aktualisierung auf 1.17.4 für bestehende Kubernetes-Cluster</li>
+</ul></p><p> Von OpenLiberty (statt des vorherigen Helm-basierten) hat die Fehlermeldung für den Health Check des K8dash Dashboards K8s 1.17.4 korrigiert.</p><p>Zusätzlich wurde auf 1.17.4 für die bestehenden Kubernetes-Cluster begrenzt.</p><p>Die Installation des Kubernetes Cluster Pakets wurde für Versuchskonten eingeschränkt.</p><p>Es wurde die GitLab Integration Add-on für Kubernetes implementiert, um die CI/CD Pipelines automatisieren zu können. Die Integration spezifischen Details:</p><p>Es wurde die Funktionalität zum Entfernen von k8s hinzugefügt, die mit der neuesten GitLab-Version synchronisiert wurde.</p><p>Es wurde die Entfernung der GitLab-Integration-Operation protokolliert.</p><p>Es wurde der Funktionalität zur Zuweisung einer öffentlichen IP an den Kubernetes-Cluster die Möglichkeit gegeben.</p><p>Es wurden die Firewall-Sicherheiten verbessert, indem die öffentliche IP-Zuweisung an k8sm und mbl verhindert wurde.</p><p>Es wurde der MetalLB Kubernetes LoadBalancer Controller für IP-Provisionierung hinzugefügt.</p><p>Die metallb-config-Utility wurde verbessert, um die IPv6-Konfiguration zu überspringen.</p><p>Es wurden die Komponenten des Kubernetes-Clusters aktualisiert:</p><p>weave 2.6.2<br>cni-plugins 0.8.5<br>certificate-manager 0.15.1<br>Docker Engine 19.03.8<br>kubernetes-dashboard v2.0.0-rc7<br>k9s 0.19.6<br>popeye 0.8.3<br>helm 2.16.5<br>cri-tools 1.</p><p> cluster-Komponenten:<br>weave 2.6.2<br>cni-plugins 0.8.5<br>certificate-manager 0.15.1<br>Docker Engine 19.03.8<br>kubernetes-Dashboard v2.0.0-rc7<br>k9s 0.19.6<br>popeye 0.8.3<br>helm 2.16.5<br>cri-tools 1.17</p><p>cluster interne Optimierungen:<br>Optimierte Bereitstellung von Kubernetes-Clustern mit Offload und parallelen Komponenteninstallation<br>Wechsel des cgroup-Treibers von cgroupfs auf systemd<br>Hinzufügen eines gemeinsamen Integrationsmechanismus - Integrationsskripte werden auf der k8sm-Schicht bereitgestellt und für Arbeiter während der (Neu-)Konfiguration oder des Cluster-Upgrades bereitgestellt<br>Wechsel auf das neueste Plattform-Wiederverteilungsmechanismus<br>Verschiebung idempotenter Logik auf die Clusterinstanzen (Neu-)Konfiguration in ein separates Service-Skript<br>Verbesserung des Cluster-Upgrade-Verfahrens:<ul>
+<li>Feste CLI-Konsolenprompt in Instanzen</li>
+</ul><ul>
+<li>Aktualisierung der Liste der Add-ons</li>
+</ul><ul>
+<li>Verbesserung des Zustandschecks der Cluster-Komponenten</li>
+</ul><ul>
+<li>Behebung von Helm-Version-Unterschieden auf der Client- und Server-Seite<br>UI/UX-Verbesserungen:</li>
+</ul><ul>
+<li>Verbesserung der Anzeige des Access-Tokens im nachinstallierten Fenster</li>
+</ul><ul>
+<li>Hinzufügen der Cluster-URL zum Installationserfolg-Pop-up</li>
+</ul><ul>
+<li>Ersetzung des veralteten Kubernetes-Dashboard v1-Optionen durch K8Dash während der Installation und Upgrade</li>
+</ul><ul>
+<li>Hinzufügen der Kubernetes-Version zur Cluster-Bezeichnung<br>Fehlerbehebungen:</li>
+</ul><ul>
+<li>Behebung des Cluster-Installationsfehlers durch Probleme mit Helm 2.16.</li>
+</ul></p><p> Aktualisierung: Kubernetes-Version in Clustername aktualisiert, Fehlerbehebungen:<ul>
+<li>Behebung des Fehlers bei der Clusterinstallation aufgrund von Problemen mit der Helm-Version 2.16.4</li>
+</ul><ul>
+<li>Verbesserte Speicherkomponenten-Erkennung für den Cluster</li>
+</ul><ul>
+<li>Behebung von nicht eindeutigen systemd-machine-id-Werten für Kubernetes-Instanzen</li>
+</ul><ul>
+<li>Verbesserte Validierung der Clusterkomponenten in der Plattform-System-Utility</li>
+</ul><ul>
+<li>Behebung des Problems bei der Kubernetes-Cluster-systemd-Journal-Protokollierung</li>
+</ul><ul>
+<li>Verbesserte Bearbeitung von zeitgleichen Konfigurationsaufrufen im Cluster</li>
+</ul><ul>
+<li>Aktualisierung auf K8s 1.16.6 für bestehende K8s-Clusters</li>
+</ul><ul>
+<li>Aktualisierung der Kubernetes-Komponenten:<br>  - Popeye 0.7.1<br>  - k9s 0.17.5<br>  - kubectx 0.8.0<br>  - hello-kubernetes 1.7<br>  - Dashboard 2.0.0-rc3</li>
+</ul><ul>
+<li>Aktualisierung des NGINX-Eingangskontrollers auf die neueste Version 0.30 und Änderung des Diensttyps von Deployment auf DaemonSet</li>
+</ul><ul>
+<li>Änderung des Installationsprozesses, um sicherzustellen, dass alle Masters eine Rolle und ein NoSchedule-Taint vor der Worker-Knoten-POD-Platzierung haben</li>
+</ul><ul>
+<li>Optimierung des Ressourcenverbrauchs, um den Einfluss auf die Clusterleistung bei langsamen Netzwerken und begrenzter I/O-Leistung zu reduzieren</li>
+</ul><ul>
+<li>Hinzufügen des crictl-Komponenten mit Bash-Autovervollständigung</li>
+</ul><ul>
+<li>Hinzufügen von Docker CT-Überprüfungen zum Cluster-Gesundheitscheck für besseres Problemaufspüren</li>
+</ul><ul>
+<li>Festlegung der Helm-Version auf 2.16.3 aus Gründen von Deployment-Validierungsproblemen in späteren Versionen</li>
+</ul><ul>
+<li>Aktualisierung von Logos und Titeln der standardmäßig verfügbaren Add-ons nach der Installation des Kubernetes-Clusters</li>
+</ul><ul>
+<li>Aktualisierung auf K8s 1.16.3</li>
+</ul></p><p> Aktualisierte Logos und Titel der Standard-Erweiterungen, die nach der Installation des Kubernetes-Clusters verfügbar sind, werden bereitgestellt. Die Upgrade auf 1.16.3 für bestehende K8s-Cluster wurde verbessert, indem die Wiederverwendung auf Zwischenversionen des Clusters und die Überprüfung der Versionen von K8s-Komponenten hinzugefügt wurde. Eine minimale Anforderung von 8 Cloudlets für die Kubernetes-Bilder wurde eingeführt. Warnungen für Installationen auf Testkonten wurden hinzugefügt, da Monitoring-Komponenten nicht verfügbar sind. Die Kubernetes-Komponenten wurden aktualisiert: cri-tools 1.16, metrics-server 0.3.6, popeye 0.6.0, k9s 0.13.3, kubectx 0.7.1, Dashboard 2.0.0-rc2. Die falsche Benachrichtigung nach dem Cluster-Upgrade K8s 1.15.6 wurde korrigiert.</p><p>Folgendes wurde für K8s 1.15.6 hinzugefügt:<ul>
+<li>Upgrade auf 1.15.6 für bestehende K8s-Cluster</li>
+</ul><ul>
+<li>Einzelne Erweiterung für den K8s-Cluster in zwei separate wurden geteilt (für die Upgrade- und Konfigurationsoperationen)</li>
+</ul><ul>
+<li>Die Installation von Monitoring- und Jaeger-Werkzeugen wurde eingeschränkt, wenn die dedizierte NFS-Speicheroption deaktiviert ist</li>
+</ul><ul>
+<li>Die Optimierung des Kubernetes-Docker-Bildes; die neue Version ist um mehr als 100 MB leichter, da es sich um eine Optimierung von Docker-Schichten und die Entfernung unnötiger Dateien handelt</li>
+</ul><ul>
+<li>Die Docker Engine CE-Paket, das in der K8s-Bilder verwendet wird, wurde auf die neueste 19.03.4-Version aktualisiert</li>
+</ul><ul>
+<li>Die cni-Plugins wurden auf die neueste 0.8.3-Version aktualisiert</li>
+</ul><ul>
+<li>Jaeger wurde auf die neueste 1.15-Version aktualisiert</li>
+</ul></p><p> Die folgende Textstelle wurde auf die aktuelle Docker Engine CE-Paketversion 19.03.4 in der K8s-Bilddatei aktualisiert. Zudem wurden die cni-Plugins auf die aktuelle Version 0.8.3 aktualisiert. Jaeger wurde auf die aktuelle Version 1.15.1 aktualisiert. Darüber hinaus wurde die Standard-Anwendung (Open Liberty) so konfiguriert, dass sie automatisch die neueste verfügbare Version installiert.</p><p>Es wurde ein Fehler behoben, der dazu führte, dass die angezeigten Knotenanzahl im Grafana-Dashboard nach der Skalierung des K8s-Clusters falsch war. Außerdem wurde ein Problem mit dem Kubernetes Cluster-Dashboard behoben, das nach der Installation von Überwachungswerkzeugen nicht als Standard-Dashboard festgelegt war.</p><p>Ein Problem mit den Jaeger-Pods, die noch in Konfigurationszustand waren, nachdem der Erfolg der Clusterinstallation gemeldet wurde, wurde behoben. Zudem wurde ein Problem mit dem K8s-Cluster mit der Produktions-Topologie behoben, der nach der Umgebungsschlafphase nicht mehr erwachen konnte.</p><p>Zusätzlich wurde der K8s-Cluster auf Version 1.15.5 aktualisiert. Zudem wurde ein Jaeger-Tracing-System für die Überwachung und Problembehebung hinzugefügt (kann für neue Cluster während der Installation aktiviert werden oder über das Monitoring-Add-on für bestehende Cluster aktiviert werden).</p><p>Zusätzlich wurden die beiden neuen Ingress-Controllers NGINX und HAProxy hinzugefügt, neben dem Traefik-Controller (die erforderliche Option kann während der Installation ausgewählt werden). Zudem wurde der node-problem-detector-Daemon hinzugefügt, um Probleme mit K8s-Pods zu finden und zu melden.</p><p>Die Kreditialspeicherungsschemata wurden aktualisiert, um NFS auszuschließen, was die Interaktion von Instanzen vereinfacht und die Bereitstellungsdauer verringert. Zudem wurde die K8s-Überwachung durch Code-Refactoring verbessert (verbesserte Überwachungsplugin-Erkennung, Bedingungen, Verschlüsselungsalgorithmus usw.).</p><p> Aktualisierte Instanzen und verkürzte Bereitstellungsdauer durch Aktualisierung der K8s-Monitoring über den Code-Refactoring (verbesserte Monitoring-Plugin-Erkennung, Bedingung, Verschlüsselungsalgorithmus usw.) aktualisierte Zugriffsverifikation für die kube-Proxy-Lesevorgänge an den sysfs-Dateien korrigiert Nameserver-Grenzen und DNS-Konfigurationen, die mehrere Warnungen im Ereignisprotokoll auslösen fixed ein Problem mit falschen Adressen, die für die Umgebungshostnamen innerhalb der Pods aufgelöst wurden fixed Umgebungsvariablen-Einstellungsprobleme in Kubernetes-Knoten, die durch die Abwesenheit des gettext-Pakets verursacht wurden K8s 1.15.4hinzugefügt:
+<ul>
+<li>Aktualisierung auf 1.15.4 für bestehende 1.15.3 K8s-Cluster</li>
+</ul><ul>
+<li>Monitoring-Unterstützung über die Prometheus &amp; Grafana Integration (kann für neue Cluster während der Installation aktiviert oder über den Monitoring-Add-on für bestehende Cluster aktiviert werden)</li>
+</ul><ul>
+<li>Option zur Verwendung des K8s-Dashboard v2 (Beta)</li>
+</ul><ul>
+<li>kube-postconf-Dienst für die Konfiguration anpassung basierend auf der Plattform und K8s-Cluster-Eigenschaften</li>
+</ul><ul>
+<li>E-Mail-Benachrichtigungen für den Remote-API und Monitoring-Aktivierung auf dem bestehenden K8s-Cluster</li>
+</ul><ul>
+<li>Parallelisierung für die Arbeiter horizontal skaliert</li>
+</ul><ul>
+<li>Aktualisierung des Metrics-Servers auf die Version 0.3.3</li>
+</ul><ul>
+<li>Aktualisierung der cni-Plugins auf die Version 0.8.2</li>
+</ul><ul>
+<li>Aktualisierung zusätzlicher Komponenten: k9s 0.8.4; popeye 0.4.3; kubectx 0.7.</li>
+</ul></p><p> Skalierung des Metrics Servers auf Version 0.3.3 aktualisiert<br>CNI-Plugins auf Version 0.8.2 aktualisiert<br>Zusätzliche Komponenten aktualisiert: k9s 0.8.4; popeye 0.4.3; kubectx 0.7.0<br>Autovervollständigung aktualisiert, um die stern-Befehle zu unterstützen<br>Helm und Weave Installationslogik aktualisiert, um diese Werkzeuge auf allen Master-Knoten betriebsbereit zu machen<br>Ein Problem mit der Erfolgsmeldung, die den Remoten-API-Link für die Installationen ohne die passende Option bereitstellt, behoben<br>Ein Problem mit der falschen Darstellung des Feature-Zustands im Remoten-API-Add-on für den bestehenden Cluster behoben<br>Fehler im hello-world-Dienst nach Umgebungsbereitstellung (LoadBalancer immer im pending-Zustand) behoben<br>Falsche Textdarstellung in der Bestätigungsfenster des Monitoring-Add-ons für den bestehenden Cluster behoben<br>Ein Problem behoben, das zu Fehlern im kube-controller-Manager-Pod-Logs nach der Clusterinstallation führt<br>Fehler im Aktionsprotokoll nach Neustart von K8s-Knoten behoben<br>Ein Problem behoben, das zu keiner Erfolgsmeldung und keinem E-Mail-Benachrichtigung nach dem Aktivieren des Monitorings recht nach der Konfiguration des Remoten-APIs auf dem bestehenden Cluster führt<br>Ein Problem behoben, das zu Fehlern mit ununterstützten Traefik-Flags K8s 1.15.3 führt<br>Aktualisierung auf 1.15.3-Button für die bestehenden 1.15.0-K8s-Clusters hinzugefügt, um manuelle Knoten-Wiederverwendung zu verhindern, um die Stabilität des Clusters sicherzustellen (die Upgrade-Add-on sollte verwendet werden)<br>Ein Fehler mit dem Konfigurationsdateimanager, der nicht funktioniert hat, in der Dashboard K8s 1.15 behoben.</p><p> clusters verboten manuell neu einrichtete Knoten um sicherheit des Clusters sicherzustellen (die Upgrade Erweiterung sollte verwendet werden) hat einen Fehler im Konfigurationsdateimanager im Dashboard behoben K8s 1.15.0 hat "ungesicherte Modus" hinzugefügt, der die Installation auf Testkonten ermöglicht hat zusätzliche k8s Tools hinzugefügt: k9s, kubectx, kubens, popeye, und stern hat autovervollständigung für kubectl im Shell bereitgestellt hat Warnungen in den k8s Komponentenlog während des Paketinstallations behoben hat Fehler mit dem Weave NPC fehlenden Endpoint Route behoben hat falsche k8s machine-id während des horizontalen Skalierens des Workers K8s 1.14.3Erste öffentliche Veröffentlichung mit allen Kernfunktionen und Funktionen: CNI Plugin (betrieben von Weave) für Unterstützung von Overlay-Netzwerken Traefik Ingress Control für Übertragung von HTTP/HTTPS-Anfragen an Dienste HELM Paketmanager zur automatischen Installation von vorgefertigten Lösungen aus Repositories CoreDNS für interne Namenauflösung Metrics Server für Sammlung von Statistiken persistenten Speicherbereiche mit dem dynamischen Bereitsteller Implementiert Built-In SSL für den Schutz der ingress-Netzwerke Kubernetes Dashboard Was kommt nach? Kubernetes Übersicht K8s Systemanforderungen K8s Cluster Installation K8s Clusterzugang</p>
+</main>
+</body>
+</html>

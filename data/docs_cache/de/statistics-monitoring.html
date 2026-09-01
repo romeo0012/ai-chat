@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Statistics Monitoring</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Statistics Monitoring</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Statistische Überwachung<br>Die statistische Überwachung ist ein einfaches, aber mächtiges Werkzeug, das zur effizienten Verwaltung von Umgebungen hilft. Die von der von der Plattform integrierten statistischen Modul bereitgestellten Informationen umfassen den Verbrauch aller bezahlbaren Ressourcen, sodass sie helfen, die Topologie nach Ihren Bedürfnissen anzupassen und die Ausgaben enorm zu reduzieren. Anzeigen Statistiken Sie können die Verwendungsstatistiken für alle Knoten in Ihrer Umgebung verfolgen: Anwendungsserver, Lastenausgleich, Webserver und Datenbanken. Dafür klicken Sie einfach auf den entsprechenden Knopf neben der gewünschten Instanz (oder einer Gruppe gleichtypischer Knoten): In der geöffneten Registerkarte finden Sie die Statistiken zu allen Arten von verbrauchten Ressourcen und ihren Grenzen: RAM - Speicherverbrauch (in MiB) CPU - Prozessorlast (in MHz) Netzwerk - internes und externes Verkehr (in MB) Speicher - gespeicherte Datenmenge (in MB) und I/O-Operationenmenge (in IOPS) Die RAM- und CPU-Grenzen hängen von der Anzahl von Cloudlets ab. Der Speicher kann innerhalb des zulässigen Bereichs eingestellt werden, während die Netzwerk- und IOPS-Grenzen durch Ihren Hosting-Anbieter definiert sind. Bitte beachten Sie auch, dass Netzwerk nicht durch den Gesamtverbrauch, sondern durch die Menge des externen Verkehrs pro Sekunde (Mbps) begrenzt wird. Sie können die dargestellten Statistiken weiter analysieren, indem Sie die Einstellungen Intervall und Dauer variieren und die entsprechenden Abschnitte oben im Werkzeugleisten-Panel aktivieren/deaktivieren: Hinweis: Die Plattform sammelt Statistiken jede Minute und speichert sie für eine Stunde, um ein genaues Pay-per-Use-Ansatzmodell zu implementieren.</p><p> Anmerkung: Die Plattform sammelt Statistiken alle Minute und speichert sie für eine Stunde, um ein genaues Pay-per-Use-Tarifmodell umzusetzen. Danach wird die Daten automatisch in Blocks von einer Stunde aggregiert, wobei einer von zwei Methoden verwendet wird, je nachdem, welcher Ressourcetyp betroffen ist: Summe aller Werte für CPU, Netzwerk, Disk-IOPS und Disk-IO oder das Maximum für RAM und Disk. Mit den Statistikdaten können Sie leicht die Ressourcenverbrauchsmenge Ihrer Anwendung (Ziehen Sie hierbei für Details zu einem bestimmten Zeitraum zu) verfolgen, damit Sie die Analyse und Vorhersage Ihrer zukünftigen Ausgaben und somit die Möglichkeit haben, die beste Methode für die Umgebungswirtschaftung zu wählen. Um noch mehr Komfort zu bieten, können Sie die Konfiguration eines Alarmsets einrichten, um über den Verbrauchswachstum oder Verbrauchsabnahme bis zu einem bestimmten Prozentualwert per E-Mail zu informieren. Dies kann Ihnen enorm helfen, Geld zu sparen! Siehe Preis-FAQ, um zusätzliche Informationen zu erhalten. Hier werden wir die Spezifizitäten der I/O-Verwendungstracking genauer betrachten.</p><p>I/O-Verwendungsmessung<br>Die Messung der Input/Output Operations per Second (IOPS) ist ein sehr häufig und beliebtes Messverfahren für den Speicher, das Ihnen helfen kann, die Effizienz des Containers anhand seiner Fähigkeit, eine bestimmte Anzahl von Lesevorgängen und Schreibvorgängen gleichzeitig auszuführen, ohne dass die Leistung abnimmt, zu analysieren. Anmerkung: Aktuell werden IOPS-Statistiken für Windows-basierte Knoten nicht bereitgestellt.
+<ol>
+<li>Und schreibe gleichzeitige Schreibvorgänge ohne Leistungsabwärtsspirale. Hinweis: Aktuell werden IOPS-Statistiken für die Windows-basierten Knoten nicht bereitgestellt.</li>
+</ol>
+<ol>
+<li>Die IOPS-Daten werden innerhalb der Disk-Statistiken-Sektion rechts neben dem Diagramm (wir haben alle anderen Abschnitte deaktiviert, um uns auf die Informationen zu konzentrieren, die wir wirklich interessiert sind): Offensichtlich, je mehr Operationen bearbeitet werden - desto höher ist das Systemlast. Um die Hardware-Effizienz zu verhindern, wird die zulässige Anzahl an IOPS begrenzt - die angemessene Schwellenwert (definiert von Ihrem Hosting-Anbieter) ist mit dem roten gestrichelten Linien oben im Diagramm markiert. Das Erreichen dieses Punktes bedeutet, dass die Leistung Ihrer Container negativ beeinflusst werden kann, sodass es erforderlich ist, den Anzahl der Server zu erhöhen oder die Anwendung selbst zu optimieren.</li>
+</ol><ol>
+<li>Wenn Sie über einen bestimmten Punkt im Disk/IOPS-Diagramm hüpfen, sehen Sie sich eine Popup-Tooltip an, die folgende Details enthält: Datum und Uhrzeit der gesammelten Statistiken, Disk - der tatsächlich verwendete Speicherplatz des Containers, Disk-Speicher-Grenze - die maximale Menge an Daten, die in einem Container gespeichert werden darf, IOPS - die Anzahl der I/O-Operationen, die während des angegebenen Intervalls bearbeitet wurden, IOPS-Grenze - die maximale Anzahl an I/O-Operationen, die ein Container während des angegebenen Intervalls ausführen darf. Hinweis: Beide Grenzen (z.B. für Disk-Speicher und IOPS) werden in einer einzigen Zeile, die im Legenden des Diagramms als Grenze bezeichnet wird, angezeigt.</li>
+</ol></p><div class="doc-image"><img src="/images/docs/statistics-monitoring/env_hu2a74c1fe93a8b115bfdc8da2d648f98a_41637_480x0_resize_box_3.png" alt="env hu2a74c1fe93a8b115bfdc8da2d648f98a 41637 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/statistics-monitoring/statistics_hu4f6e055a4850786beef7ac23ab7fdbff_71066_480x0_resize_box_3.png" alt="statistics hu4f6e055a4850786beef7ac23ab7fdbff 71066 480x0 resize box 3" loading="lazy"></div><p> Auszuführen im Container während der angegebenen Intervalle<br>Hinweis: Beide Grenzen (z.B. für Speicherplatz und IOPS) werden auf einer einzigen Zeile, genannt Grenze im Legendenbereich des Diagramms, angezeigt. Die genauen Schwellenwerte für jeden dieser Ressourcentypen können an den passenden Achsen links und rechts gesehen werden - für den verwendeten Speicherplatz und die Anzahl von IOPS jeweils.<ol>
+<li>Wie oben erwähnt, hängt die IOPS-Grenze von dem gewählten Interval ab. Also, z.B. wenn Sie für Ihre Umgebung 1 Stunde Interval angeben, wird die vorherige Grenze für 1 Minute (die gleich 6000 ist - siehe das Bild in der vorherigen Schrittanweisung) um 60 mal erhöht (da 1 Stunde = 60 Minuten): 6000 * 60 = 360 000 Dadurch erhalten Sie die tatsächlichen Lastinformationen des Speichers und können die Lage des Speichers in Echtzeit überwachen. Was kommt dann? Log Files Preise FAQ Last Alerts</li>
+</ol></p><div class="doc-image"><img src="/images/docs/statistics-monitoring/disk-1_hu7f236a7c9b672b8accaa3972beb980f0_42889_480x0_resize_box_3.png" alt="disk 1 hu7f236a7c9b672b8accaa3972beb980f0 42889 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/statistics-monitoring/disk-2_huf77c297a65a9bfee300ea060c475165a_54081_480x0_resize_box_3.png" alt="disk 2 huf77c297a65a9bfee300ea060c475165a 54081 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/statistics-monitoring/disk-3_hu1efdb84102d55ce4c8f768762ad8aa9b_54583_480x0_resize_box_3.png" alt="disk 3 hu1efdb84102d55ce4c8f768762ad8aa9b 54583 480x0 resize box 3" loading="lazy"></div>
+</main>
+</body>
+</html>

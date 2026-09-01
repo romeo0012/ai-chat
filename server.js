@@ -57,7 +57,23 @@ const LANG_INSTRUCTION = {
 }
 const LANG_LABEL = { cz: 'Čeština', en: 'English', de: 'Deutsch' }
 const LANG_NAME = { cz: 'Czech', en: 'English', de: 'German' }
-const TRANSLATION_DIR = process.env.DOCS_CACHE_DIR || path.join(dataDir, 'docs_cache')
+const COMMITTED_TRANSLATION_DIR = path.join(dataDir, 'docs_cache')
+const TRANSLATION_DIR = process.env.DOCS_CACHE_DIR || COMMITTED_TRANSLATION_DIR
+
+// If translations are shipped in the image (read-only COMMITTED_TRANSLATION_DIR)
+// but the active cache lives elsewhere (DOCS_CACHE_DIR, e.g. a writable /tmp
+// in CodeNOW with a read-only rootfs), seed the active dir from the committed
+// data so shipped translations are available AND still writable.
+if (TRANSLATION_DIR !== COMMITTED_TRANSLATION_DIR &&
+    fs.existsSync(COMMITTED_TRANSLATION_DIR) &&
+    !fs.existsSync(path.join(TRANSLATION_DIR, 'en'))) {
+  try {
+    fs.cpSync(COMMITTED_TRANSLATION_DIR, TRANSLATION_DIR, { recursive: true })
+    console.log(`[docs-cache] seeded ${TRANSLATION_DIR} from committed cache`)
+  } catch (e) {
+    console.error(`[docs-cache] seeding failed: ${e.message}`)
+  }
+}
 
 function docsUrl(lang, path) {
   return `${BASE_PATH}/docs/${lang}/${path.replace(/^\//, '')}`

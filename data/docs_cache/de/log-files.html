@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>View Log Files</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>View Log Files</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Logdateien sind die Hauptquelle für die wichtigsten Informationen über, was in Ihrer Umgebung passiert ist. Beispielsweise benötigt jede Entwicklung oder Testaufgabe Zugriff auf diese kritische Information. Um also die Logdateien Ihres Knotens anzuzeigen, folgen Sie den Schritten:
+<ol>
+<li>Melden Sie sich bei der Plattform-Dashboard-Anmeldeaufforderung mit Ihren Anmeldeinformationen an.</li>
+</ol><ol>
+<li>Klicken Sie auf das Log-Symbol für den erforderlichen Knoten.</li>
+</ol><ol>
+<li>Das Log-Tab wird unten auf Ihrem Dashboard angezeigt. Wenn Ihre Umgebung mehrere Knoten desselben Typs enthält, können Sie den gewünschten Knoten in der Auswahlliste auswählen, um die Logdateien anzuzeigen. Mit den Schaltflächen oberhalb des Logtexts können Sie das Log löschen oder neu laden. Mit den Vorher und Nachher-Schaltflächen können Sie durch die Log-Körper-Anzeige navigieren, wenn sie groß ist. Tipps: Um die Logdateien-Überwachung noch mehr komfortabel zu gestalten, wird die Auto-Aktualisierungsfunktion verwendet, die standardmäßig aktiviert ist. Sie erneuert den aktuell geöffneten Logdatei-Ordner jede 3 Sekunden und entfernt somit jede Verzögerung oder Notwendigkeit, die Logdateien manuell zu aktualisieren, um aktuelle Informationen zu erhalten, um die real-time-Prozesse wie Installation oder Aktualisierung leicht zu verfolgen. Wenn ein Problem auftritt, können Sie die Auto-Aktualisierung deaktivieren, um sich auf diese Information zu konzentrieren, anstatt auf neue Informationen. Dafür deaktivieren Sie die entsprechende Option in der Aktualisierungsdrodownliste oberhalb des Logausgabefensters. Genau so können Sie die Auto-Aktualisierungsfunktion wieder aktivieren.</li>
+</ol><ol>
+<li>Jede Logdatei im Ordner kann leicht direkt aus der Logliste gelöscht werden.</li>
+</ol></p><p> Fenster. Genau wie zuvor können Sie auch die Option Auto-Aktualisierung wieder aktivieren. 4. Jedes Log-Datei im Ordner kann leicht direkt aus der Log-Liste gelöscht werden. Dazu müssen Sie den erforderlichen Server-Log über die Maus zeigen und den aufgeführten Kreuz-Button klicken oder es auswählen und dann Delete im oberen Werkzeugleisten-Panel drücken. 5. Logs können auch über FTP heruntergeladen werden. Um mehr über die Installation und den Einsatz des FTP-Moduls zu erfahren, siehe das Dokument FTP/FTPS-Unterstützung. 6. Hier eine Liste der verfügbaren Log-Dateien, die Sie ansehen können, je nachdem, welcher Knoten verwendet wird: Knoten Verfügbare Log-Dateien Tomcat 6, 7 TomEE manager localhost_access_log catalina host-manager localhost Jetty {Datum} request GlassFish {Datum} request MySQL MariaDB mysqld PosgreSQL postgresql-{Tag der Woche} CouchDB couch Apache access-log dummy-host error_log NGINX PHP error access php-fpm NGINX load balancer tcp_access error error_log access localhost Memcached memcached Node.js node Tip: Wenn Sie den entfernten GIT/SVN-Repository für die Bereitstellung Ihrer Anwendung verwenden, wird ein neuer vcs_update pull Log-Datei Ihrem Maven-Knoten (für Java) oder Apache/NGINX-Anwendungsspeicher (für PHP) hinzugefügt, der Informationen zu Ihrem Projekt-Bau und Bereitstellung enthält. Was kommt danach? Statistiken anzeigen Lade Alarme Konfigurationsdatei Managerdatei</p><p>Hinweis: Wenn Sie den entfernten GIT/SVN-Repository für die Bereitstellung Ihrer Anwendung verwenden, wird ein neuer vcs_update pull Log-Datei Ihrem Maven-Knoten (für Java) oder Apache/NGINX-Anwendungsspeicher (für PHP) hinzugefügt, der Informationen zu Ihrem Projekt-Bau und Bereitstellung enthält. Was kommt danach? Statistiken anzeigen Lade Alarme Konfigurationsdatei Managerdatei</p><div class="doc-image"><img src="/images/docs/log-files/1-log_hu70edab696fee3ee5bfb5cf4d43e07baf_28615_480x0_resize_box_3.png" alt="log hu70edab696fee3ee5bfb5cf4d43e07baf 28615 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/log-files/2-select-node_huc13cd3d9a8afd10345574343cc9cbefb_70985_480x0_resize_box_3.png" alt="select node huc13cd3d9a8afd10345574343cc9cbefb 70985 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/log-files/3-auto-refresh_hu11d4aafa7b2af98a4f3236cd5a40269a_79901_480x0_resize_box_3.png" alt="auto refresh hu11d4aafa7b2af98a4f3236cd5a40269a 79901 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/log-files/4-delete_hu44c8e9eb7921048a19fda22f51080be2_107489_480x0_resize_box_3.png" alt="delete hu44c8e9eb7921048a19fda22f51080be2 107489 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/log-files/5-vcsupdate_hueb5a501287fb0e84897970b195bfd46e_61942_480x0_resize_box_3.png" alt="vcsupdate hueb5a501287fb0e84897970b195bfd46e 61942 480x0 resize box 3" loading="lazy"></div>
+</main>
+</body>
+</html>

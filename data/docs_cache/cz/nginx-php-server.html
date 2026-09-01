@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NGINX PHP Server</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>NGINX PHP Server</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> NGINX PHP Server Serceň se věnuje návodu k nasazení a správě NGINX PHP serverů v Virtuozzo Application Management. Tento oddíl zahrnuje základy NGINX PHP serverů, konfiguraci cachingu, zpevnění bezpečnosti, a použití modulu WebDAV. Tento oddíl také popisuje podporu Apache a NGINX modulů pro rozšíření funkčnosti serveru. V tomto oddílu:
+<ul>
+<li>NGINX PHP</li>
+</ul><ul>
+<li>Konfigurace bezpečnosti NGINX</li>
+</ul><ul>
+<li>Moduly NGINX</li>
+</ul><ul>
+<li>Modul WebDAV NGINX</li>
+</ul><ul>
+<li>Caching v NGINX App Serveru</li>
+</ul></p><p>NGINX PHP
+<hr></p><p>NGINX PHP je open-source web server, který spolupracuje s PHP. Je určen pro rychlé a efektivní službu webových stránek.</p><p>NGINX Security Configurations
+<hr></p><p>Zpevnění bezpečnosti NGINX je důležité pro ochranu serveru před útoky. Následující konfigurace poskytují základní zpevnění pro NGINX server.
+<ul>
+<li>Zakázání direktiv <code>allow</code> a <code>deny</code> v oddílu <code>http</code></li>
+</ul><ul>
+<li>Použití <code>server_tokens off</code> pro zakázání zobrazení verze serveru</li>
+</ul><ul>
+<li>Použití <code>server_names_hash_bucket_size</code> pro optimalizaci zpracování názvů serveru</li>
+</ul><ul>
+<li>Použití <code>server_names_hash_max_size</code> pro omezení počtu názvů serveru</li>
+</ul><ul>
+<li>Použití <code>ssl_certificate</code> a <code>ssl_certificate_key</code> pro zabezpečení SSL</li>
+</ul><ul>
+<li>Použití <code>access_log</code> pro záznam přístupu</li>
+</ul><ul>
+<li>Použití <code>error_log</code> pro záznam chyb</li>
+</ul></p><p>NGINX Modules
+<hr></p><p>NGINX moduly poskytují rozšíření funkčnosti serveru. Následující moduly jsou k dispozici pro NGINX:
+<ul>
+<li><code>http_auth_basic_module</code> pro základní autentizaci</li>
+</ul><ul>
+<li><code>http_auth_digest_module</code> pro zabezpečenou autentizaci</li>
+</ul><ul>
+<li><code>http_gzip_module</code> pro kompresi odpovědí</li>
+</ul><ul>
+<li><code>http_realip_module</code> pro zjišťování IP adresy klienta</li>
+</ul><ul>
+<li><code>http_rewrite_module</code> pro přesměrování adres</li>
+</ul><ul>
+<li><code>http_ssl_module</code> pro podporu SSL</li>
+</ul><ul>
+<li><code>http_sub_module</code> pro podporu podmnožin URL</li>
+</ul><ul>
+<li><code>http_upstream_module</code> pro distribuci zatížení</li>
+</ul></p><p>NGINX WebDav Module
+<hr></p><p>NGINX WebDAV module umožňuje klientům ovládat soubory na serveru pomocí WebDAV protokolu. Následující konfigurace poskytují základní konfiguraci pro WebDAV module:
+<ul>
+<li>Použití <code>listen</code> pro určení portu pro WebDAV</li>
+</ul><ul>
+<li>Použití <code>location</code> pro určení adresy pro WebDAV</li>
+</ul><ul>
+<li>Použití <code>auth_basic</code> pro základní autentizaci</li>
+</ul><ul>
+<li>Použití <code>auth_pam</code> pro autentizaci pomocí PAM</li>
+</ul><ul>
+<li>Použití <code>limit_rate</code> pro omezení rychlosti přenosu souborů</li>
+</ul><ul>
+<li>Použití <code>if_modified_since</code> pro kontrolu verze souboru</li>
+</ul><ul>
+<li>Použití <code>if_none_match</code> pro kontrolu verze souboru</li>
+</ul></p><p>Caching v NGINX App Serveru
+<hr></p><p>Caching v NGINX App Serveru umožňuje zlepšit výkon serveru. Následující konfigurace poskytují základní konfiguraci pro caching v NGINX App Serveru:
+<ul>
+<li>Použití <code>proxy_cache</code> pro určení cache</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_key</code> pro určení klíče pro cache</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_methods</code> pro určení metod pro cache</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_min_uses</code> pro určení minimálního počtu použití pro cache</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_use_stale</code> pro použití staré odpovědi, pokud je nová odpověď nek dispozici</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid</code> pro určení platnosti cache</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_lock</code> pro zabezpečení cache</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_purge</code> pro čistění cache</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_revalidate</code> pro kontrolu platnosti cache</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_timeout</code> pro určení časového limitu pro cache</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_path</code> pro určení cesty k cache</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_size</code> pro určení velikosti cache</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_store</code> pro určení typu cache</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_use</code> pro určení použití cache</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_any</code> pro určení platnosti cache pro libovolnou metodu</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_http_10</code> pro určení platnosti cache pro HTTP 10</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_http_206</code> pro určení platnosti cache pro HTTP 206</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_http_304</code> pro určení platnosti cache pro HTTP 304</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_mime_type</code> pro určení platnosti cache pro určité typy souborů</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_expires</code> pro určení platnosti cache podle platnosti souboru</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_arg</code> pro určení platnosti cache podle argumentů</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_referer</code> pro určení platnosti cache podle refereru</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status</code> pro určení platnosti cache podle stavových kódů</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_code</code> pro určení platnosti cache podle konkrétních stavových kódů</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_message</code> pro určení platnosti cache podle zpráv stavových kódů</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_reason</code> pro určení platnosti cache podle příčin stavových kódů</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_time</code> pro určení platnosti cache podle času stavových kódů</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_response_time</code> pro určení platnosti cache podle času odpovědi</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_request_time</code> pro určení platnosti cache podle času požadavku</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_request_length</code> pro určení platnosti cache podle délky požadavku</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_request_method</code> pro určení platnosti cache podle metody požadavku</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_request_uri</code> pro určení platnosti cache podle adresy požadavku</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_request_protocol</code> pro určení platnosti cache podle protokolu požadavku</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_request_query</code> pro určení platnosti cache podle dotazu požadavku</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_request_header</code> pro určení platnosti cache podle hlavičky požadavku</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_request_body</code> pro určení platnosti cache podle těla požadavku</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_response_header</code> pro určení platnosti cache podle hlavičky odpovědi</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_response_body</code> pro určení platnosti cache podle těla odpovědi</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_upstream_status</code> pro určení platnosti cache podle stavového kódu serveru</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_upstream_response_length</code> pro určení platnosti cache podle délky odpovědi serveru</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_upstream_response_time</code> pro určení platnosti cache podle času odpovědi serveru</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_upstream_connect_time</code> pro určení platnosti cache podle času připojení k serveru</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_upstream_header_time</code> pro určení platnosti cache podle času zpracování hlavičky serveru</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_upstream_request_time</code> pro určení platnosti cache podle času požadavku serveru</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_upstream_response_time</code> pro určení platnosti cache podle času odpovědi serveru</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_upstream_request_length</code> pro určení platnosti cache podle délky požadavku serveru</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_upstream_response_status</code> pro určení platnosti cache podle stavového kódu serveru</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_upstream_response_length</code> pro určení platnosti cache podle délky odpovědi serveru</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_upstream_response_time</code> pro určení platnosti cache podle času odpovědi serveru</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_upstream_connect_time</code> pro určení platnosti cache podle času připojení k serveru</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_upstream_header_time</code> pro určení platnosti cache podle času zpracování hlavičky serveru</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_upstream_request_time</code> pro určení platnosti cache podle času požadavku serveru</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_upstream_response_time</code> pro určení platnosti cache podle času odpovědi serveru</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_upstream_request_length</code> pro určení platnosti cache podle délky požadavku serveru</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_upstream_response_status</code> pro určení platnosti cache podle stavového kódu serveru</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_upstream_response_length</code> pro určení platnosti cache podle délky odpovědi serveru</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_upstream_response_time</code> pro určení platnosti cache podle času odpovědi serveru</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_upstream_connect_time</code> pro určení platnosti cache podle času připojení k serveru</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_upstream_header_time</code> pro určení platnosti cache podle času zpracování hlavičky serveru</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_upstream_request_time</code> pro určení platnosti cache podle času požadavku serveru</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_upstream_response_time</code> pro určení platnosti cache podle času odpovědi serveru</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_upstream_request_length</code> pro určení platnosti cache podle délky požadavku serveru</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_upstream_response_status</code> pro určení platnosti cache podle stavového kódu serveru</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_upstream_response_length</code> pro určení platnosti cache podle délky odpovědi serveru</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_upstream_response_time</code> pro určení platnosti cache podle času odpovědi serveru</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_upstream_connect_time</code> pro určení platnosti cache podle času připojení k serveru</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_upstream_header_time</code> pro určení platnosti cache podle času zpracování hlavičky serveru</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_upstream_request_time</code> pro určení platnosti cache podle času požadavku serveru</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_upstream_response_time</code> pro určení platnosti cache podle času odpovědi serveru</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_upstream_request_length</code> pro určení platnosti cache podle délky požadavku serveru</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_upstream_response_status</code> pro určení platnosti cache podle stavového kódu serveru</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_upstream_response_length</code> pro určení platnosti cache podle délky odpovědi serveru</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_upstream_response_time</code> pro určení platnosti cache podle času odpovědi serveru</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_upstream_connect_time</code> pro určení platnosti cache podle času připojení k serveru</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_upstream_header_time</code> pro určení platnosti cache podle času zpracování hlavičky serveru</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_upstream_request_time</code> pro určení platnosti cache podle času požadavku serveru</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_upstream_response_time</code> pro určení platnosti cache podle času odpovědi serveru</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_upstream_request_length</code> pro určení platnosti cache podle délky požadavku serveru</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_upstream_response_status</code> pro určení platnosti cache podle stavového kódu serveru</li>
+</ul><ul>
+<li>Použití <code>proxy_cache_valid_sub_status_upstream_response_length</code> pro určení platnosti cache podle délky odpovědi serveru</li>
+</ul><br>* Použití `proxy_cache_valid_sub_status_upstream</p>
+</main>
+</body>
+</html>

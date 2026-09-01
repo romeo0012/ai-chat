@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kubernetes Cluster: Exposing Services</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Kubernetes Cluster: Exposing Services</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Kubernetes-Cluster: Exponieren von Diensten</p><p>Während die Komponenten Ihrer Anwendung miteinander kommunizieren können, indem sie Dienstnamen im internen Netzwerk verwenden, erfordern externe Verbindungen zusätzliche Konfigurationen. Kubernetes unterstützt drei Diensttypen, um eine Verbindung innerhalb und außerhalb der Anwendung herzustellen: ClusterIP, NodePort und LoadBalancer. ClusterIP</p><p>Der ClusterIP-Dienst ist der Standard-Dienst von K8s. Er macht die Anwendung über anderen Anwendungen innerhalb des K8s-Clusters zugänglich. Keine externen Zugriffe werden bereitgestellt. Einfaches Beispiel für ClusterIP:</p><div class="doc-image"><img src="/images/docs/kubernetes-exposing-services/01-endpoint-to-expose-kubernetes-service_huca3767dafbefdbdf25b15561e0497cee_112207_480x0_resize_box_3.png" alt="endpoint to expose kubernetes service huca3767dafbefdbdf25b15561e0497cee 112207 480x0 resize box 3" loading="lazy"></div><p><pre><code class="lang-">1 2 3 4 5 6 7 8 9 10 11<br>kind: Service<br>apiVersion: v1<br>metadata:<br>  name: nginx1<br>  namespace: test<br>spec:<br>  type: ClusterIP<br>  selector:<br>    app: nginx<br>  ports:<br>    - port: 80</code></pre></p><p>Der einfachste Weg, eine externe Verbindung zu einem Dienst zu etablieren, ist es, ihn direkt über NodePort zu exponieren. Wie der Name andeutet, ist dieses Diensttyp eine bestimmte Port auf den Knoten geöffnet, und jedes Verkehrsentwicklungen auf diesem Port werden an Ihren Dienst weitergeleitet. Voreingenommen wird der Port für Ihren Dienst zufällig aus dem Bereich 30000-32767 ausgewählt. Hinweis: Diese Methode hat mehrere Nachteile, die bei der Konfiguration des Kubernetes-Clusters berücksichtigt werden sollten (ein Dienst pro Port, beschränkter Portbereich usw.). Daher kann der NodePort-Diensttyp für Demos oder temporäre Anwendungen verwendet werden. Allerdings benötigen produktionsnahe Lösungen meist eine komplexere Konfiguration mit ingresses und LoadBalancer-Dienstoptionen.</p><p> Beispielanwendungen oder andere temporäre Anwendungen. Allerdings benötigen die Produktlösungen meistens eine komplexere Konfiguration mit Eingängen und Dienstoptionen LoadBalancer. Folge unserem Leitfaden(n), um für Ihre Anwendung überprüfte Konfigurationen zu erstellen und in Produktion zu bringen: Eingänge mit öffentlichen IP-Adressen in Kubernetes-Dienst Hier ist ein Beispiel für die Konfiguration eines Service-Typs NodePort:</p><p><pre><code class="lang-">1 2 3 4 5 6 7 8 9 10 11 12 13 14<br>kind: Service<br>apiVersion: v1<br>metadata:<br>  name: nginx1<br>  namespace: test<br>labels:<br>  run: nginx<br>spec:<br>  type: NodePort<br>  selector:<br>    run: nginx<br>  ports:<br>    - port: 80<br>      targetPort: 80</code></pre></p><p>Wenn nötig, kann für Ihren Dienst ein bestimmter nodePort ausgewählt werden. Beispiel: Das folgende Codebeispiel kann verwendet werden, um eine Umleitung von Port 30984 zu konfigurieren:</p><p><pre><code class="lang-">1 2 3 4<br>ports:<br>  - port: 80<br>    targetPort: 80<br>    nodePort: 30984</code></pre></p><p>Hinweis: Wenn Sie einen manuell bereitgestellten nodePort-Wert verwenden, sollte er aus dem zulässigen Bereich (30000-32767) und eindeutig (um Kollisionen mit anderen Diensten zu vermeiden) sein. Wenn eine öffentliche IP an die Kubernetes-Arbeiterknoten angehängt ist, sind keine zusätzlichen Schritte erforderlich. Andernfalls muss die erhaltene Portnummer von der Plattformseite ausgesetzt werden. Navigieren Sie zu den Einstellungen des Kubernetes-Umfelds und klicken Sie auf Hinzufügen. In dem offenen Fenster geben Sie die folgenden Daten ein:</p><p>Node - wählen Sie einen Arbeiterknoten aus der Liste aus Name - legen Sie einen bevorzugten Endpunktnamen fest Private Port - geben Sie den nodePort aus dem vorherigen Schritt ein Protokoll - wählen Sie das TCP-Option aus Klicken Sie auf Hinzufügen, um zu bestätigen.</p><p> Von der Liste Name - gib einen bevorzugten Endpunktnamen an Private Port - gib die NodePort aus dem vorherigen Schritt an Protocol - wähle die TCP-Option klicken Sie auf Add, um zu bestätigen. Es kann bis zu einigen Minuten dauern, bis die Plattform einen Port aussetzt und Anfragen an den NodePort-Dienst leitet. LoadBalancer Der Dienst LoadBalancer-Typ ist die häufigste Methode, um einen Dienst auf dem Internet bereitzustellen. Er benötigt die öffentliche IP, die an jedem Arbeiterknoten angehängt ist. Denken Sie daran, dass mit LoadBalancer-Typ alle Verkehr direkt an den Dienst weitergeleitet wird, ohne Filterung, Routing usw. Der Parameter port ist der eingehende Port auf dem Internet, den der Dienst auf der Anwendungsseite auf eine targetPort mapt. Beispiel:</p><p>1 2 3 4 5 6 7 8 9 10 11 12<br>kind: Service<br>apiVersion: v1<br>metadata:<br> name: nginx1<br> namespace: test<br>spec:<br> type: LoadBalancer<br> selector: app: nginx<br> ports:<br> - port: 80<br> targetPort: 8080</p><p>Was kommt nachher? K8s Helm Integration K8s YAML-Bereitstellung K8s Internes Netzwerk K8s Erstellung von Ingresses</p>
+</main>
+</body>
+</html>

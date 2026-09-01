@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Automatic Vertical Scaling</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Automatic Vertical Scaling</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Automatisches senkrechtes Skalieren<br>Die Plattform ist die einzige Cloud PaaS, die beliebige Anwendungen automatisch skalieren kann, sowohl senkrecht als auch horizontal, was das Hosting Ihrer Anwendungen wirklich flexibel macht. Das automatische senkrechte Skalieren ist durch die Fähigkeit der Plattform möglich, dynamisch den zugeordneten Serverressourcen (RAM und CPU) zu ändern, je nach aktuellen Anforderungen, ohne dass manuelle Eingriffe erforderlich sind. Diese Funktion garantiert Ihnen, dass Sie nie für ungenutzte Ressourcen überbezahlen und Ihre Zeit durch die Eliminierung der Notwendigkeit, lastenbezogene Anpassungen oder architektonische Änderungen zu verarbeiten sparen. Sie entscheiden sich lediglich über die maximale Grenze, die Sie konsumieren möchten, und die Plattform definiert automatisch die optimale Menge an Ressourcen, die für Ihre App erforderlich sind, indem sie den einströmenden Last in Echtzeit verfolgt. Wie es funktioniert<br>Somit ist die Grundidee des automatischen Skalierens recht einfach - sobald die Last einer Anwendung wächst, macht die Plattform zusätzliche Ressourcen für sie verfügbar; und wenn die Last wieder abnimmt, reduziert die Plattform die Ressourcen automatisch. Dabei werden die Ressourcen sofort zugewiesen, ohne Verzögerungen oder negative Auswirkungen auf Ihre Anwendung, was innerhalb des nächsten Videos zu sehen ist: Tip: Das senkrechte Skalierungs-Feature ist für jeden Typ von Instanz in der Umgebung (z.B. Anwendungsschaltwerk, Datenbank, Lastverteiler, Docker-Container, Elastische VPS, Cache-Instanz und Build-Knoten) anwendbar.</p><p> Art der Instanz in der Umgebung (z.B., Anwendungsserver, Datenbank, Lastenausgleich, Docker-Container, Elastische VPS, Cache-Instanz und Bauknoten). Wie Sie im oben angeführten Video beobachten können, misst die Plattform Ressourcen in speziellen Einheiten namens Cloudlets, die Sie bei der Skalierung mit einer überlegenen Genauigkeit verwenden. Ein Cloudlet entspricht ungefähr 128 MiB RAM und 400MHz CPU-Kern. Es gibt zwei Arten von Cloudlets: reserviert und dynamisch. Die reservierten Cloudlets werden verwendet, um die Menge an Ressourcen anzugeben, die sicher Ihre Anwendung verbrauchen wird und für die Sie unabhängig von der tatsächlichen Nutzung bezahlen. Sie werden jedoch mit niedrigeren Preisen verrechnet, als die dynamischen Cloudlets. Die dynamischen Cloudlets definieren die Menge an Ressourcen, die Ihre Anwendung zugreifen kann, basierend auf Bedarf. Sie zahlen für sie nur im Fall der tatsächlichen Nutzung. Die automatische vertikale Skalierung erfolgt innerhalb der angegebenen Grenzen der angegebenen dynamischen Cloudlets-Anzahl. Sie können Ihre Skalierungsgrenzen mit den passenden Einstellungen wählen und so effektiv Begrenzungen auf den zu verbrauchenden Budget setzen, um unerwartete oder hohe Rechnungen zu verhindern. Sie können die Verwendung beider Cloudlet-Typen in verschiedenen Weisen kombinieren, indem Sie die passende Preismodell für Sie wählen. Anpassen von Ressourcenbegrenzungen Erhält eine neu erstellte Umgebung eine bestimmte Menge an Cloudlets. Die Ressourcenverbrauch hängt von der Art und der Menge Ihrer Softwarestacks ab.</p><p> Umgebung erhalten bei der Erstellung eine bestimmte Anzahl an Cloudlets. Die Ressourcenverbrauch hängt von der Art und der Menge Ihrer Softwarestacks ab. Sobald ein Stack der Umgebung hinzugefügt wird, erhält er die standardmäßige Anzahl an zugewiesenen Cloudlets, entsprechend der optimalen Ressourcenmenge, die für seine korrekte Funktion erforderlich ist. Klicken Sie hier, um die Standardwerte für Cloudlets für einige beliebte Stacks anzuzeigen.Name des Knotens Reservierte Skalierungsgrenze Tomcat, Jetty 1 6 TomEE 1 8 GlassFish 6 16 Apache, NGINX 1 4 NGINX-Balancer 1 4 Nginx-Ruby 1 6 Apache-Ruby 1 8 Apache-Python 1 8 NodeJS 4 8 Name des Knotens Reservierte Skalierungsgrenze MySQL, MariaDB 1 6 PostgreSQL 1 6 Name des Knotens Reservierte Skalierungsgrenze Memcached 1 4 VPS 1 16 Maven 1 16</p><div class="doc-image"><img src="/images/docs/automatic-vertical-scaling/01-pay-per-use-pricing_hu954e3eb8d5ff754453212b90cfde7766_89098_480x0_resize_box_3.png" alt="pay per use pricing hu954e3eb8d5ff754453212b90cfde7766 89098 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/automatic-vertical-scaling/02-cloudlet-resources.png" alt="cloudlet resources" loading="lazy"></div><p>Wenn Sie diese Werte ändern und Ihre Umgebung skalieren möchten, kann die maximale Anzahl an verfügbaren Ressourcen (Cloudlets) manuell über die Umgebungstopologie-Assistenten erhöht/verringert werden. Dafür können Sie die Cloudlet-Schalter in der Vertikalen Skalierung-Abschnitt des zentralen Panels verwenden. Hinweis: Wenn Sie die Skalierungsgrenze (also die Anzahl der dynamischen Cloudlets) für die existierende Anwendung, Datenbank oder Cache-Knoten ändern, wird die entsprechende Schicht neu gestartet. Hiermit wird direkt in der Topologie-Assistenten ein entsprechendes Warnungsbanner angezeigt: Sie können die automatisch gesammelten Statistiken verwenden, um den Verbrauch für die letzten 30 Tage zu überprüfen und die Ressourcenmenge entsprechend zu setzen.</p><p>direkt in der Topologie-Assistenten: Sie können die automatisch gesammelten Statistiken verwenden, um den Verbrauch für die letzten 30 Tage zu überprüfen und die Ressourcenmenge entsprechend zu setzen. Und im Falle, dass Ihre Anwendung sehr beliebt wird und die Kapazität eines einzelnen Servers nicht ausreicht, können Sie sie horizontal skalieren, indem Sie die Anzahl der Knoten manuell erhöhen oder eine Menge von Triggern für die automatische horizontale Skalierung Ihrer Anwendungserver konfigurieren. Was kommt danach? Automatische Horizontale Skalierung Horizontale Skalierung Isolierte Container</p><div class="doc-image"><img src="/images/docs/automatic-vertical-scaling/03-automatic-vertical-scaling_hu0b8206624697bb85f10d0bb9c26c9509_74760_480x0_resize_box_3.png" alt="automatic vertical scaling hu0b8206624697bb85f10d0bb9c26c9509 74760 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/automatic-vertical-scaling/04-environment-wizard_huc9717bd774bb6ce44c73b20af3bff46e_115073_480x0_resize_box_3.png" alt="environment wizard huc9717bd774bb6ce44c73b20af3bff46e 115073 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/automatic-vertical-scaling/05-adjust-cloudlets-restart-warning_hu4ebdd34788f916ad816b8afe170af3d3_64061_480x0_resize_box_3.png" alt="adjust cloudlets restart warning hu4ebdd34788f916ad816b8afe170af3d3 64061 480x0 resize box 3" loading="lazy"></div>
+</main>
+</body>
+</html>

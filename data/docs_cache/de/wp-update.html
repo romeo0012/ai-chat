@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WordPress Update Guide</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>WordPress Update Guide</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> WordPress-Aktualisierungs-Leitfaden</p><p>Aktualisieren von WordPress ist ein wichtiger Bestandteil des Sicherheits- und Leistungsmanagements Ihrer Website. Regelmäßige Aktualisierungen sichern Sie, dass Sie die neuesten Funktionen, Fehlerbehebungen und Sicherheitsupdates haben. Dieser Leitfaden führt Sie durch den Aktualisierungsprozess Ihrer WordPress-Installation: Hinweis: Es ist eine gute Praxis, Ihre WordPress-Website vor der Durchführung von Änderungen, einschließlich der Aktualisierungen, zu sichern. Dadurch können Sie Ihre Website auf einen vorherigen Zustand zurücksetzen, falls etwas schief geht während des Aktualisierungsprozesses.
+<ol>
+<li>WordPress-Softwareaktualisierungen (Kern, Themen und Plugins) können über die WordPress-Admin-Oberfläche durchgeführt werden. Falls es Aktualisierungen gibt, sieht Sie eine Benachrichtigung in Ihrer WordPress-Admin-Oberfläche. Sie können WordPress-Kern durch gehen von Dashboard &gt; Updates und klicken auf den Button Update to version X.X.X.</li>
+</ol><ol>
+<li>Plugins und Themen können über dieselbe Seite aktualisiert werden. Einfach die gewünschten Elemente auswählen und klicken Sie auf den Button Update Plugins oder Update Themes.</li>
+</ol><ol>
+<li>Um die Serverkomponenten zu aktualisieren, auf denen Ihr WordPress läuft (Anwendungsserver, Datenbank usw.), finden Sie die erforderliche Komponente im Virtuozzo-Anwendungsmanagement-Dashboard und klicken Sie auf den Button Redeploy. Dadurch wird das Redeployment-Fenster geöffnet, in dem Sie die neueste Version der Server auswählen können, einschließlich der PHP-Version für den Anwendungsserver: Tip: Wenn Sie skalierte Komponenten des WordPress-Clusters neu bereitstellen, können Sie die Ausfallzeit vermeiden, indem Sie die sequentielle Bereitstellungswahl auswählen.</li>
+</ol></p><p>server: Tip: Wenn Sie skalierte Komponenten des WordPress-Clusters neu bereitstellen, können Sie die Ausfallzeit vermeiden, indem Sie die sequentielle Bereitstellungswahl auswählen. Dadurch werden Instanzen einzeln aktualisiert, was sicherstellt, dass Ihre WordPress-Website während des Aktualisierungsprozesses verfügbar bleibt. Klicken Sie auf den Button Redeploy, um Ihre WordPress-Daten nicht zu beeinflussen, denn er aktualisiert nur das Server-Software. Nächste Schritte? WordPress-Hosting WordPress-Migration Guide WordPress All-in-One Guide WordPress Backup Guide WordPress Pakete</p><div class="doc-image"><img src="/images/docs/wp-update/01-update-wordpress-core_hu8a9dda81d0601a8c271cf4983d5a18f6_114126_480x0_resize_box_3.png" alt="update wordpress core hu8a9dda81d0601a8c271cf4983d5a18f6 114126 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/wp-update/02-update-plugins-themes_huaf36e6a8ee8e078d062add43f8b1d1a2_138279_480x0_resize_box_3.png" alt="update plugins themes huaf36e6a8ee8e078d062add43f8b1d1a2 138279 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/wp-update/03-redeploy-server.png" alt="redeploy server" loading="lazy"></div>
+</main>
+</body>
+</html>

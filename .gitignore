@@ -3,7 +3,7 @@ package-lock.json
 .env
 
 # Regenerable data caches (kept out of the repo)
-data/docs_cache/
+# (docs_cache is now committed so translations ship in the image)
 data/page-images.json
 
 # Python cache (FastAPI fallback)

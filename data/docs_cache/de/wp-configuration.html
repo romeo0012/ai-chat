@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WordPress Configuration</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>WordPress Configuration</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> WordPress-Konfiguration<br>Dieser Abschnitt erläutert Konfigurationsoptionen für WordPress-Webseiten in Virtuozzo Application Management. Er behandelt die Bindung eines benutzerdefinierten Domains, die Konfiguration von DNS-basierter Lastverteilung für den Verkehrsausgleich und die Integration eines CDN, um die Inhalterlieferungspflicht zu verbessern. In diesem Abschnitt:</p><p>Benutzerdefinierter Domain Bindung<br>DNS-basierter Lastverteilung<br>CDN-Bindung</p><p>Custom Domain Binding<br>Um einen benutzerdefinierten Domainnamen für Ihre WordPress-Webseite zu binden, müssen Sie zunächst den Domainnamen in Ihrem Hosting-Konto registrieren und die DNS-Einstellungen konfigurieren. In Virtuozzo Application Management können Sie die benutzerdefinierte Domain mithilfe der folgenden Schritte binden:
+<ol>
+<li>Navigieren Sie zu Ihrer WordPress-Webseite in Virtuozzo Application Management und klicken Sie auf die Schaltfläche "Einstellungen".</li>
+</ol><ol>
+<li>Klicken Sie auf die Registerkarte "Domänen".</li>
+</ol><ol>
+<li>Geben Sie den benutzerdefinierten Domainnamen ein und klicken Sie auf "Speichern".</li>
+</ol><ol>
+<li>Aktualisieren Sie die DNS-Einstellungen Ihres Domainnamens in Ihrem Hosting-Konto, um die Verbindung zu Ihrer WordPress-Webseite herzustellen.</li>
+</ol></p><p>DNS Load Balancing<br>Um DNS-basierte Lastverteilung für Ihre WordPress-Webseite zu konfigurieren, müssen Sie zunächst eine Lastverteilungsgruppe in Virtuozzo Application Management erstellen und Ihre WordPress-Webseiten zu den Gruppen hinzufügen. Anschließend können Sie die DNS-Einstellungen Ihres Domainnamens so konfigurieren, dass sie auf die Lastverteilungsgruppe zeigen.</p><p>Bind CDN<br>Um einen CDN für Ihre WordPress-Webseite zu integrieren, müssen Sie zunächst einen CDN-Dienst auswählen und Ihre CDN-Kontoinformationen in Ihrem Hosting-Konto eintragen. In Virtuozzo Application Management können Sie die CDN-Integration mithilfe der folgenden Schritte durchführen:
+<ol>
+<li>Navigieren Sie zu Ihrer WordPress-Webseite in Virtuozzo Application Management und klicken Sie auf die Schaltfläche "Einstellungen".</li>
+</ol><ol>
+<li>Klicken Sie auf die Registerkarte "CDN".</li>
+</ol><ol>
+<li>Geben Sie die CDN-Kontoinformationen ein und klicken Sie auf "Speichern".</li>
+</ol><ol>
+<li>Aktualisieren Sie die CDN-Einstellungen Ihres Domainnamens in Ihrem Hosting-Konto, um die CDN-Integration zu aktivieren.</li>
+</ol></p>
+</main>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Deploy Cyclos 4</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>How to Deploy Cyclos 4</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Wie ein Cyclos 4-Instanz bereitzustellen, kannst du innerhalb von Minuten erledigen, indem du die ein-Klick-Installationsoptionen für beide die kostenlose und die PRO-Version von Cyclos 4 nutzt: Hinweis: Um die PRO-Version (Widget unten) zu nutzen, musst du einen gültigen Cyclos-Lizenzkauf vornehmen, während eine kostenlose Lizenz nach der Registrierung bei license.cyclos.org erhalten werden kann. Der Vorgang ist einfach - klicke einfach auf Get it hosted now, gib deine E-Mail-Adresse ein und installiere Cyclos innerhalb von einer Minute, indem du die manuelle Installationsschritte überspringst. Tip: Auch der automatisierte Installationspaket für Cyclos 4 PRO ist direkt im Dashboard über den Marktplatz verfügbar: Als Alternative folgen Sie den untenstehenden Anweisungen zur manuellen Bereitstellung. Umgebung erstellen<ol>
+<li>Melde dich bei der Plattform-Dashboard an und klicke auf den Knopf New Environment.</li>
+</ol><ol>
+<li>Im Fenster Umgebungstopologie wähle Tomcat als deinen Anwendungssервер und PostgreSQL als Datenbank aus. Hinweis: Stelle sicher, dass deine Topologie die Anforderungen von Cyclos 4 erfüllt. Wenn du bereit bist, gib deinen Umgebungsnamen (z.B., cyclos) ein und klicke auf Create.</li>
+</ol><ol>
+<li>Es dauert nur eine Minute, bis deine Umgebung erstellt wird. Cyclos-Paket hochladen</li>
+</ol><ol>
+<li>Navigiere zu license.cyclos.org und melde dich an (registriere dich). Klicke auf den Button Download Cyclos 4.x, um das aktuelle Paket herunterzuladen.</li>
+</ol><ol>
+<li>Extrahiere die Dateien aus dem heruntergeladenen .zip-Archiv und gehe in den Unterordner cyclos-4.x/web.</li>
+</ol><ol>
+<li>Füge den Inhalt dieses Web-Verzeichnisses einem separaten Archiv (z.B., Cyclos4.zip) hinzu und lade es im Deployment Manager hoch.</li>
+</ol><ol>
+<li>Alternativ folgen Sie den untenstehenden Anweisungen zur manuellen Bereitstellung. Umgebung erstellen</li>
+</ol><ol>
+<li>Melde dich bei der Plattform-Dashboard an und klicke auf den Knopf New Environment.</li>
+</ol><ol>
+<li>Im Fenster Umgebungstopologie wähle Tomcat als deinen Anwendungssерver und PostgreSQL als Datenbank aus. Hinweis: Stelle sicher, dass deine Topologie die Anforderungen von Cyclos 4 erfüllt. Wenn du bereit bist, gib deinen Umgebungsnamen (z.B., cyclos) ein und klicke auf Create.</li>
+</ol><ol>
+<li>Es dauert nur eine Minute, bis deine Umgebung erstellt wird. Cyclos-Paket hochladen</li>
+</ol><ol>
+<li>Navigiere zu license.cyclos.org und melde dich an (registriere dich). Klicke auf den Button Download Cyclos 4.x, um das aktuelle Paket herunterzuladen.</li>
+</ol><ol>
+<li>Extrahiere die Dateien aus dem heruntergeladenen .zip-Archiv und gehe in den Unterordner cyclos-4.x/web.</li>
+</ol><ol>
+<li>Füge den Inhalt dieses Web-Verzeichnisses einem separaten Archiv (z.B., Cyclos4.zip) hinzu und lade es im Deployment Manager hoch.</li>
+</ol><ol>
+<li>archive und gehe in das Verzeichnis cyclos-4.x/web innerhalb.</li>
+</ol><ol>
+<li>Füge den Inhalt dieses Web-Verzeichnisses in eine separate Archivdatei (z.B. Cyclos4.zip) ein und lade sie auf den Bereitstellungsmanger hoch.</li>
+</ol><ol>
+<li>Sobald das Paket auf der Plattform ist, lade es in die Umgebung, die Sie gerade erstellt haben, ein.</li>
+</ol></p><p>Database Configuration<ol>
+<li>Klicke auf den Button Open in Browser neben Ihrer PostgreSQL-Datenbank, um das phpPgAdmin-Panel zu öffnen.</li>
+</ol><ol>
+<li>Melde dich mit den Credentials, die Sie per E-Mail nach der Umgebungskreation erhalten haben, an und erstelle eine neue PostgreSQL-Datenbank.</li>
+</ol><ol>
+<li>Im offenen Fenster geben Sie den Datenbanknamen (z.B. cyclos4), das Template (template0) und die Zeichenkodierung (UTF8) an. Klicke auf Create, um fortzufahren.</li>
+</ol><ol>
+<li>Klicke auf den Namen Ihrer Datenbank und wechsle zum SQL-Tab. Führe das folgende einfache SQL-Code aus, um die erforderlichen Erweiterungen zu erstellen:</li>
+</ol><br>1 2 3 4 5<br>create extension cube;<br>create extension earthdistance;<br>create extension postgis;<br>create extension unaccent;<br>create extension pgcrypto;<br>Entferne die Eigenschaft Paginate results und klicke auf Execute.</p><p>Cyclos Configuration<ol>
+<li>Kehre zurück zum Plattform-Dashboard und klicke auf den Button Config für Ihren Tomcat-Server.</li>
+</ol><ol>
+<li>Navigiere zum Verzeichnis /opt/tomcat/webapps/ROOT/WEB-INF/classes und erstelle eine neue Datei namens cyclos.properties.</li>
+</ol><ol>
+<li>Kopiere den Inhalt des Datei cyclos-release.properties aus demselben Verzeichnis und füge ihn der neu erstellten Datei cyclos.properties hinzu. Führe zusätzliche Anpassungen durch, um eine Verbindung mit Ihrer PostgreSQL herzustellen:</li>
+</ol><br>cyclos.datasource.</p><div class="doc-image"><img src="/images/docs/cyclos-4/01-cyclos4-marketplace_huf36080412e296317d29894d744b4f2ce_103391_480x0_resize_box_3.png" alt="cyclos4 marketplace huf36080412e296317d29894d744b4f2ce 103391 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/cyclos-4/02-new-environment_hu96bb9b04022fa2a9e7a31e58da5959f1_8755_480x0_resize_box_3.png" alt="new environment hu96bb9b04022fa2a9e7a31e58da5959f1 8755 480x0 resize box 3" loading="lazy"></div><p> Füge es dem neu erstellten cyclos.properties-Dateihin ein und mache folgende zusätzlichen Anpassungen, um mit Ihrer PostgreSQL zu verbinden:</p><p>cyclos.datasource.dataSourceClassName - JDBC-Klasse für PostgreSQL (ist standardmäßig angegeben - org.postgresql.ds.PGSimpleDataSource)<br>cyclos.datasource.dataSource.portNumber - Port für die Datenbankverbindung (5432)<br>cyclos.datasource.dataSource.serverName - Host, um auf die Datenbank zuzugreifen (aus der Email)<br>cyclos.datasource.dataSource.databaseName - Datenbankname (in der vorherigen Abschnitt, cyclos4, erstellt)<br>cyclos.datasource.dataSource.user - Datenbankbenutzer (aus der Email)<br>cyclos.datasource.dataSource.password - Datenbankpasswort (aus der Email)
+<ol>
+<li>Speichere die Änderungen und starten Sie Tomcat neu, um sie anzuwenden.</li>
+</ol><ol>
+<li>Wenn Tomcat gestartet ist, öffnen Sie Ihre Umgebung im Browser. Hinweis: Der Start von Cyclos zum ersten Mal kann einige Zeit in Anspruch nehmen, da die Datenbankinitialisierung erfolgt. Herzlichen Glück! Ihre Cyclos-Anwendung ist jetzt aufgestellt und nur noch die Authentifizierung zu vollenden, um zu arbeiten! Was ist nächstes? Cyclos 3 Cyclos SMS-Modul mit Mobil-Gateway</li>
+</ol></p><div class="doc-image"><img src="/images/docs/cyclos-4/03-topology-wizard_hubb53f7555b9882d47d2162a1cab85a7a_135917_480x0_resize_box_3.png" alt="topology wizard hubb53f7555b9882d47d2162a1cab85a7a 135917 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/cyclos-4/04-cyclos-environment_hu3c39866094eb8fffa76fdbb3559a07ed_20574_480x0_resize_box_3.png" alt="cyclos environment hu3c39866094eb8fffa76fdbb3559a07ed 20574 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/cyclos-4/05-download-cyclos_huee10a2486ba7bf2fc0c382bd58587723_133503_480x0_resize_box_3.png" alt="download cyclos huee10a2486ba7bf2fc0c382bd58587723 133503 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/cyclos-4/06-cyclos-web-folder_hu030dcb48f2d81bc0df5b401c05c7edc6_89322_480x0_resize_box_3.png" alt="cyclos web folder hu030dcb48f2d81bc0df5b401c05c7edc6 89322 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/cyclos-4/07-upload-cyclos.png" alt="upload cyclos" loading="lazy"></div><div class="doc-image"><img src="/images/docs/cyclos-4/08-deploy-cyclos.png" alt="deploy cyclos" loading="lazy"></div><div class="doc-image"><img src="/images/docs/cyclos-4/09-open-postgresql_hu3a7d5dceb6ff5675107c28543d41ccd2_31312_480x0_resize_box_3.png" alt="open postgresql hu3a7d5dceb6ff5675107c28543d41ccd2 31312 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/cyclos-4/10-create-database_hud6e4b6982ed02344bb9eb72366b5c106_69048_480x0_resize_box_3.png" alt="create database hud6e4b6982ed02344bb9eb72366b5c106 69048 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/cyclos-4/11-create-database-parameters_hucf5dde6a1d2e1384c42d76a3a579cdec_62235_480x0_resize_box_3.png" alt="create database parameters hucf5dde6a1d2e1384c42d76a3a579cdec 62235 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/cyclos-4/12-execute-sql_hubb1e8161193bb6926e81f71fa094a676_95943_480x0_resize_box_3.png" alt="execute sql hubb1e8161193bb6926e81f71fa094a676 95943 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/cyclos-4/13-tomcat-configuration-files_hu8b7d55b5cf1be2a75d55a68d733d7b3d_27346_480x0_resize_box_3.png" alt="tomcat configuration files hu8b7d55b5cf1be2a75d55a68d733d7b3d 27346 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/cyclos-4/14-create-cyclos-properties_hue7e4147c5d1ea28170f00bb2f17d70d5_84082_480x0_resize_box_3.png" alt="create cyclos properties hue7e4147c5d1ea28170f00bb2f17d70d5 84082 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/cyclos-4/15-database-connection-data_hu21771cdd81b85b6235a5b352b8d21977_107902_480x0_resize_box_3.png" alt="database connection data hu21771cdd81b85b6235a5b352b8d21977 107902 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/cyclos-4/16-restart-tomcat_hu42b1b3a2a9c9c31ecce748d44b413007_28297_480x0_resize_box_3.png" alt="restart tomcat hu42b1b3a2a9c9c31ecce748d44b413007 28297 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/cyclos-4/17-cyclos-authentication_hu876b98653490b680cdd376e8b62da78a_59005_480x0_resize_box_3.png" alt="cyclos authentication hu876b98653490b680cdd376e8b62da78a 59005 480x0 resize box 3" loading="lazy"></div>
+</main>
+</body>
+</html>

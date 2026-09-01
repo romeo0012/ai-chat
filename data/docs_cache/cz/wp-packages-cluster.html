@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WordPress Cluster Package</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>WordPress Cluster Package</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> WordPress Klasterový Balíček</p><p>WordPress Klasterový balíček je automatizovanou řešením pro vysokou dostupnost instalace WordPressu v klastru lehkých kontejnerů. Balíček provede všechny nutné konfigurační kroky k nastavení WordPressu v klastru, včetně instalace webového serveru, databáze, balanceru zatížení a sdíleného úložiště. Také konfiguruje automatickou horizontální škálování podle zatížení a propojuje všechny komponenty, aby fungovaly jako jeden systém. To umožňuje spouštět velká města s vysokým provozem a zajišťuje, že vaše WordPressová stránka zůstane dostupná i při vrcholných zatíženích. Nabízí podnikovou kvalitu výkonu a spolehlivosti bez nutnosti rozsáhlé znalosti DevOps. Chcete-li získat nejvýhodnější z WordPress Clustera, mohou být následující výhody nakonfigurovány:
+<ul>
+<li>Instalace WordPressu klastru s rychlým LiteSpeed a vysokou dostupností MariaDB Galera clusteru</li>
+</ul><ul>
+<li>Připojení vadové odolného Shared Storage clusteru na základě GlusterFS software</li>
+</ul><ul>
+<li>Získání zdarma Let’s Encrypt SSL certifikátu s automatickou obnovou</li>
+</ul><ul>
+<li>Připojení vlastního domény a aktualizace certifikátu</li>
+</ul><ul>
+<li>Škálování dynamicky podle zatížení</li>
+</ul></p><p>Instalace WordPress Clustera</p><div class="doc-image"><img src="/images/docs/wp-packages-cluster/01-wordpress-cluster-schema_hu6a6f9edf02f33c666cb5b8f5fe2a413e_38364_480x0_resize_box_3.png" alt="wordpress cluster schema hu6a6f9edf02f33c666cb5b8f5fe2a413e 38364 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/wp-packages-cluster/02-marketplace-button_hu0a90f42be406071ca807c43afbee15a5_9926_480x0_resize_box_3.png" alt="marketplace button hu0a90f42be406071ca807c43afbee15a5 9926 480x0 resize box 3" loading="lazy"></div><p>Chcete-li nainstalovat WordPress Cluster balíček, proveďte následující kroky:
+<ol>
+<li>Klikněte na tlačítko Marketplace na vrcholu Virtuozzo Application Management dashboardu.</li>
+</ol><ol>
+<li>Použijte vyhledávací pole, abyste nalezli balíček WordPress Cluster Kit a klikněte na *Instalovat.</li>
+</ol></p><p> 1. Klikněte na tlačítko Marketplace na vrcholu správního panelu Virtuozzo Application Management.<ol>
+<li>Použijte vyhledávací pole, abyste nalezli balíček WordPress Cluster Kit a klikněte na *Instalovat.</li>
+</ol><ol>
+<li>V otevřeném okně instalace můžete zvolit Scaling Strategy podle očekávané zátěže. Podle našich zkušeností nabízíme tři běžné scénáře automatizace zátěže pro WordPress, aby se zabránilo přetížení (these settings mohou být upravovány po instalaci): Malá zátěž přidá 1 serverovou instanci aplikace (až 16) pokud je zátěž vyšší než 70% odstraňuje 1 serverovou instanci aplikace (od 2) pokud je zátěž nižší než 20% Střední zátěž přidá 1 serverovou instanci aplikace (až 16) pokud je zátěž vyšší než 50% odstraňuje 1 serverovou instanci aplikace (od 2) pokud je zátěž nižší než 20% Vysoká zátěž přidá 2 serverové instanci aplikace (až 16) pokud je zátěž vyšší než 30% odstraňuje 1 serverovou instanci aplikace (od 2) pokud je zátěž nižší než 10%</li>
+</ol></p><p> Přetížení 2 uzlů serveru aplikace (až 16) se přidá, pokud je zatížení vyšší než 30%, odstraňuje se 1 uzl serveru aplikace (minimálně 2), pokud zatížení klesne pod 10%.<ol>
+<li>Nastavte potom svůj cluster aplikace WordPress zvolením nutných vyspělých funkcí:</li>
+</ol><ul>
+<li>Vyberte LiteSpeed High-Performance Web Server místo výchozího NGINX web serveru</li>
+</ul><ul>
+<li>Povolte funkce Brute Force Attack Protection a Web Application Firewall pro LiteSpeed</li>
+</ul><ul>
+<li>Vyberte MariaDB Galera Cluster místo výchozího Primary-Primary databázového clusteru</li>
+</ul><ul>
+<li>Nainstalujte Let’s Encrypt SSL s funkcí Auto-Renewal k vydání automaticky bezplatného SSL certifikátu</li>
+</ul><ul>
+<li>Vyberte GlusterFS Cluster místo výchozího Shared Storage</li>
+</ul><ul>
+<li>Nastavte WordPress Multisite Network</li>
+</ul><br>- Nainstalujte WooCommerce addon pro WordPress<br>Konečně, zadejte prostředí a název zobrazení, vyberte dostupnou oblast (pokud je k dispozici), a klikněte na Install.<ol>
+<li>V průběhu několika minut bude vytvořen a nastaven WordPress Cluster podle zvolených možností. To je vše! Můžete nyní přistupovat k prostředí WordPress Cluster a začít stavět svůj web. Platforma automaticky řeší škálování a správu WordPress Clusteru, což vám umožní se soustředit na obsah a růst svého podniku. Co další? WordPress Packages Overview WordPress Standalone Package WordPress Multi-Region Packages WordPress Package Features</li>
+</ol></p><div class="doc-image"><img src="/images/docs/wp-packages-cluster/03-wordpress-packages_hu4c6a779f9e6b61a087d8f278615e30fd_73548_480x0_resize_box_3.png" alt="wordpress packages hu4c6a779f9e6b61a087d8f278615e30fd 73548 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/wp-packages-cluster/04-cluster-scaling-strategy_hu7bbc7cd226a3be8e6e0336cd1f983975_125440_480x0_resize_box_3.png" alt="cluster scaling strategy hu7bbc7cd226a3be8e6e0336cd1f983975 125440 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/wp-packages-cluster/05-install-wordpress-cluster_hu31af06a9baf9588be6e3230b081a98bd_134580_480x0_resize_box_3.png" alt="install wordpress cluster hu31af06a9baf9588be6e3230b081a98bd 134580 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/wp-packages-cluster/06-wordpress-cluster-environment_hud30058d9420efd5b8d29d689d8651394_51492_480x0_resize_box_3.png" alt="wordpress cluster environment hud30058d9420efd5b8d29d689d8651394 51492 480x0 resize box 3" loading="lazy"></div>
+</main>
+</body>
+</html>

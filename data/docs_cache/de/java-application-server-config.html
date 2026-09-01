@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Java Application Server Configuration</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Java Application Server Configuration</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Java Anwendungserver-Konfiguration</p><p>Um die notwendigen Konfigurationen durchzuführen, drücken Sie bitte auf den Config-Button neben Ihrem Anwendungserver. Im Fall, dass Sie mehrere Anwendungserver haben, können Sie sie zusammen oder separat konfigurieren. Dazu folgen Sie den Schritten:
+<ol>
+<li>Öffnen Sie den Dropdown-Menü am oberen Rand der Konfigurationstab. Es enthält die Liste aller App-Server in Ihrer Umgebung.</li>
+</ol><ol>
+<li>Wählen Sie den benötigten Server aus und konfigurieren Sie ihn.</li>
+</ol><ol>
+<li>Um die Änderungen anzuwenden: nur für den ausgewählten Server - klicken Sie auf den Save nur für aktuelles Instanz-Button aus dem Dropdown-Menü. Für alle Server - klicken Sie auf Save.</li>
+</ol></p><p>Hinweis: Wenn Sie eine Datei oder Ordner in der Konfigurations-Manager erzeugen oder umbenennen, wird dies nur in der Liste des ausgewählten Knotens angewendet. Sie können diese Änderung nicht für alle verfügbaren App-Server in der Umgebung speichern. Wenn Sie auch in den anderen Servern die Datei oder den Ordner erzeugen oder umbenennen möchten, müssen Sie dies manuell tun.</p><div class="doc-image"><img src="/images/docs/java-application-server-config/1.png" alt="1" loading="lazy"></div><div class="doc-image"><img src="/images/docs/java-application-server-config/4.png" alt="4" loading="lazy"></div><p>Unterhalb sehen Sie die Liste der Konfigurationsdateien, die in den Java-Anwendungservern bearbeitet werden können:
+<ul>
+<li>Tomcat</li>
+</ul><ul>
+<li>TomEE</li>
+</ul><ul>
+<li>GlassFish</li>
+</ul><ul>
+<li>Jetty</li>
+</ul></p><p>Um mehr Informationen über die veränderbaren Einstellungen in den bereitgestellten Konfig-Ordnern zu erhalten, verwenden Sie die entsprechenden Beschreibungen:
+<ul>
+<li>server home</li>
+</ul><ul>
+<li>webapps/work</li>
+</ul><ul>
+<li>JAVA_HOME</li>
+</ul><ul>
+<li>lib</li>
+</ul><ul>
+<li>cron</li>
+</ul><ul>
+<li>keys</li>
+</ul><ul>
+<li>contexts</li>
+</ul><ul>
+<li>server_lib</li>
+</ul><ul>
+<li>apps</li>
+</ul><ul>
+<li>SERVER</li>
+</ul></p><p>Die Hauptkonfigurationen des Java-Servlet-Containers werden in den Dateien, die im server-Ordner liegen, durchgeführt. Mit den folgenden Konfig-Dateien können Sie die unten aufgeführten Aktionen durchführen (dies sind nur einige Beispiele):
+<ul>
+<li>context.xml</li>
+</ul></p><div class="doc-image"><img src="/images/docs/java-application-server-config/9_hu795666e8a212236fed91fac25c4bdd4c_32145_480x0_resize_box_3.png" alt="9 hu795666e8a212236fed91fac25c4bdd4c 32145 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/java-application-server-config/list-of-app-servers_hu341751b46ca128b41dd1c992d38b1952_20636_480x0_resize_box_3.png" alt="list of app servers hu341751b46ca128b41dd1c992d38b1952 20636 480x0 resize box 3" loading="lazy"></div><p>Mit diesen Konfig-Dateien können Sie die unten aufgeführten Aktionen durchführen (dies sind nur einige Beispiele):
+<ul>
+<li>web.xml</li>
+</ul><ul>
+<li>server.xml</li>
+</ul><ul>
+<li>application.xml</li>
+</ul><ul>
+<li>log4j.properties</li>
+</ul><ul>
+<li>persistence.xml</li>
+</ul><ul>
+<li>web.xml (Web-Module)</li>
+</ul><ul>
+<li>context.xml (Web-Module)</li>
+</ul><ul>
+<li>application.xml (Web-Module)</li>
+</ul><ul>
+<li>log4j.properties (Web-Module)</li>
+</ul><ul>
+<li>persistence.xml (Web-Module)</li>
+</ul></p><p> container-Konfigurationen werden in den Dateien durchgeführt, die sich im Server-Ordner befinden. Mithilfe der folgenden Konfigurationsdateien können Sie die unten aufgeführten Aktionen durchführen (dies sind nur einige Beispiele):
+<ul>
+<li>context.xml - Session-Replikation über Memcached konfigurieren</li>
+</ul><ul>
+<li>web.xml - Remotezugriff über WebDav server konfigurieren</li>
+</ul><ul>
+<li>server.xml - Mehrere Domänen aktivieren</li>
+</ul><ul>
+<li>variables.conf - Speichere Speicherparameter für Ihre Java-Container durch Angabe Ihrer eigenen GC, -Xmx, -Xms-Parameter (Verwende Standardparameter, indem jedes auf einer neuen Zeile angegeben wird):</li>
+</ul></p><p>1<br>2<br>-Xmx&lt; Größe &gt;m<br>-Xms&lt; Größe &gt;m</p><div class="doc-image"><img src="/images/docs/java-application-server-config/save-for-current_hua59a90d0483ede6b1401967cdf34a0de_29044_480x0_resize_box_3.png" alt="save for current hua59a90d0483ede6b1401967cdf34a0de 29044 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/java-application-server-config/home_hu133cbce6ebb36144050fa4bcec1255ec_26569_0x0_q75_h2__3.webp" alt="home hu133cbce6ebb36144050fa4bcec1255ec 26569 0x0 q75 h2  3" loading="lazy"></div><p>Setze Ihre eigenen systemeigenen Eigenschaften für Ihren Tomcat, TomEE, Jetty oder GlassFish:</p><p>1<br>2<br>-Dvar1=value1<br>-Dvar2=value2<br>-Dmy.var3=/my/value</p><p>Konfiguriere JavaAgent-Interceptor für Fernabfrage-Debuggen:</p><div class="doc-image"><img src="/images/docs/java-application-server-config/java-home.png" alt="java home" loading="lazy"></div><div class="doc-image"><img src="/images/docs/java-application-server-config/lib.png" alt="lib" loading="lazy"></div><p>1<br>2<br>-Xdebug<br>-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address={port_number}</p><p>Hinweis: Dieser Datei ist nur für Tomcat und TomEE-Anwendungssysteme verfügbar. Für die Konfiguration eines GlassFish-Servers verwenden Sie die Admin-Panel. Zurück zur Übersicht HOME</p><p>Wenn Sie für die Konfiguration Ihrer Anwendung beliebige benutzerdefinierte Dateien/Verzeichnisse verwenden möchten, können Sie sie in der Home-Verzeichnis herunterladen/erstellen, das als Speicherort in Ihrem Java-Server verwendet wird. Dadurch können Sie Konfigurationen durchführen, indem Sie den Pfad zu Ihrer heruntergeladenen/erstellten Dateien in der variables.conf-Datei (server-Ordner) angeben (server-Ordner). Hinweis: Obwohl der Server-Ordner, der sich auf dieses Verzeichnis bezieht, bei einigen Servern den Namen temp hat, wird er nie automatisch von dem Betriebssystem gereinigt.</p><div class="doc-image"><img src="/images/docs/java-application-server-config/java-key.png" alt="java key" loading="lazy"></div><div class="doc-image"><img src="/images/docs/java-application-server-config/context_hud419e2a33153303ead5f4774f1905a27_44664_480x0_resize_box_3.png" alt="context hud419e2a33153303ead5f4774f1905a27 44664 480x0 resize box 3" loading="lazy"></div><p> variables.conf-Datei (Server-Ordner). Hinweis: Obwohl der Server-Ordner, der auf diesen Ordner verweist, bei manchen Servern den Namen "temp" tragen kann, wird er vom Plattensystem nie automatisch gereinigt. Zurück zur Übersicht WEBAPPS / ARBEIT Die Ordner WEBAPPS (für Tomcat/TomEE) und ARBEIT (für Jetty) werden verwendet, um die ausgelöste Anwendung in der Umgebung zu speichern. Zurück zur Übersicht JAVA_HOME Der Ordner JAVA_HOME enthält die Konfigurationsdateien von Java und libs. Hier können Sie die Java-Einstellungen bearbeiten und zusätzliche Java-Bibliotheken hochladen. Zurück zur Übersicht LIB Der Ordner LIB wird verwendet, um Standard- und benutzerdefinierte jar-Bibliotheken zu speichern. Zurück zur Übersicht CRON App-Server enthalten einen Ordner "cron", in dem die Konfigurationsdatei für die cronjobs liegt, wo diese konfiguriert werden können. Detailinformationen zur Konfiguration von Cronjobs finden Sie im Dokument "Einrichten eines Cronjobs". Zurück zur Übersicht KEYS Der Ordner KEYS dient als Speicherort für die hochladen von beliebigen privaten Schlüsseln, die für Ihre Anwendung benötigt werden. Generieren Sie den Schlüssel, speichern Sie ihn als einfaches Dateiformat und hochladen Sie ihn in den Ordner KEYS. Er kann für verschiedene Fälle verwendet werden, indem Sie einfach den Pfad zu Ihrem Schlüssel angeben: 1 /var/lib/jelastic/keys/{key_file_name} Zurück zur Übersicht CONTEXTS Der Ordner CONTEXTS enthält XML-Konfigurationsdateien für jeden bereitgestellten Kontext. Alle diese Dateien sind für Bearbeitung offen. Zurück zur Übersicht SERVER_LIB Der Ordner SERVER_LIB ist die GlassFish-Konfigurationsordner mit allen verfügbaren Server-Bibliotheken.</p><p> Für jede bereitgestellte Kontextdatei. Alle diese Dateien sind für die Bearbeitung offen. Zurück zur Liste <strong>SERVER_LIB</strong> Der Ordner server_lib ist die GlassFish Konfigurationsordnerung mit allen verfügbaren Serverbibliotheken. Zurück zur Liste <strong>APPS</strong> Der Ordner apps TomEE wird verwendet, um die unzippten EE-Anwendungen, die in die Umgebung bereitgestellt wurden, zu speichern. Zurück zur Liste <strong>Tomcat</strong> Ordner Pfad conf catalina.policy catalina.properties context.xml jaspic-providers.xml jaspic-providers.xsd jelastic-ha.xml jelastic-ssl.xml logging.properties server.xml tomcat-env.sh tomcat-users.xml tomcat-users.xsd variables.conf web.xml /opt/tomcat/conf temp /opt/tomcat/temp webapps /opt/tomcat/webapps latest /usr/java/latest lib /opt/tomcat/lib cron tomcat /var/spool/cron keys /var/lib/jelastic/keys Zurück zur Liste <strong>TomEE</strong> Ordner Pfad server catalina.policy server.xml catalina.properties tomcat-users.xml context.xml web.xml variables.conf logging.properties tomee.xml system.properties /opt/tomcat/conf/ home /opt/tomcat/temp webapps /opt/tomcat/webapps apps /opt/tomcat/apps JAVA_HOME /usr/java/default lib /opt/tomcat/lib cron tomcat /var/spool/cron keys /var/lib/jelastic/keys Zurück zur Liste <strong>GlassFish</strong> Ordner Pfad server default-web.xml domain.xml domain.xml.bak domain.xml.orig local-password logging.properties logging.properties.orig login.conf server.policy sun-acc.xml wss-server-config-1.0.xml wss-server-config-2.0.xml /opt/glassfish3/glassfish/domains/ domain1/config gfcluster-config (in server Ordner)</p><p> server default-web.xml domain.xml domain.xml.bak domain.xml.orig lokales-Passwort logging.properties logging.properties.orig login.conf server.policy sun-acc.xml wss-server-config-1.0.xml wss-server-config-2.0.xml /opt/Glassfish3/glassfish/domains/ domain1/config gfcluster-config (in server Verzeichnis) logging.properties /opt/Glassfish3/glassfish/domains/ domain1/config/gfcluster-config home /opt/Glassfish3/temp JAVA_HOME /usr/java/latest server_lib /opt/Glassfish3/glassfish/lib/ cron glassfish /var/spool/cron keys /var/lib/jelastic/keys Zurück zur Übersicht Jetty Verzeichnis File Path server jdbcRealm.properties jetty-ajp.xml jetty-bio.xml jetty-jaas.xml jetty-jmx.xml jetty-logging.xml jetty-plus.xml jetty-rewrite.xml jetty-setuid.xml jetty-sslengine.xml jetty-ssl.xml jetty-stats.xml jetty.xml login.conf login.properties realm.properties spnego.properties variables.conf webdefault.xml /opt/jetty/etc home /opt/jetty/home contexts /opt/jetty/contexts/ work /opt/jetty/work JAVA_HOME /usr/java/latest lib /opt/jetty/lib cron jetty /var/spool/cron keys /var/lib/jelastic/keys Zurück zur Übersicht Was kommt nächstes? Tomcat Server TomEE Jetty GlassFish Datenbank-Konfiguration</p><div class="doc-image"><img src="/images/docs/java-application-server-config/serverlib.png" alt="serverlib" loading="lazy"></div><div class="doc-image"><img src="/images/docs/java-application-server-config/apps.png" alt="apps" loading="lazy"></div>
+</main>
+</body>
+</html>

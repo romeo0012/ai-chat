@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Java Application Server Configuration</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Java Application Server Configuration</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Česká konfigurace Java Application Server<br>Provedení potřebných konfigurací stiskněte tlačítko Config uvažující na vašem aplikačním serveru. V případě, že máte více aplikačních serverů, můžete je konfigurovat společně nebo samostatně. K tomu následují kroky:<ol>
+<li>Otevřete rozevírací seznam v horní části karty konfigurace. Zahrnuje seznam všech aplikačních serverů v vašem prostředí.</li>
+</ol><ol>
+<li>Vyberte ten, který potřebujete a provedete konfiguraci.</li>
+</ol><ol>
+<li>Chcete-li uložit změny: pouze pro zvolený server - stiskněte tlačítko Uložit pouze pro aktuální instance z rozevíracího seznamu, pro všechny servery - stiskněte tlačítko Uložit Poznámka: Pokud vytvoříte/přejmenujete soubor nebo složku v Konfiguračním manažeru, bude to platit pouze pro seznam zvoleného uzlu. Nemůžete uložit tuto změnu pro všechny dostupné aplikační servery v prostředí. Pokud chcete také vytvořit/přejmenovat soubor nebo složku v ostatních serverech, musíte to provést ručně. Níže naleznete seznam konfiguračních souborů dostupných ke změně v Java aplikačních serverech: Tomcat TomEE GlassFish Jetty</li>
+</ol><br>Chcete-li získat další informace o možných nastaveních v poskytnutých konfiguračních složkách, použijte odpovídající popisy: server home webapps/work JAVA_HOME lib cron keys contexts server_lib apps SERVER<br>Hlavní konfigurace Java servlet containeru se provádí v souborech, umístěných v adresáři server. Pomocí následujících konfiguračních souborů můžete provést akce uvedené níže (jedná se o některé příklady): context.xml</p><p>V následující tabulce jsou uvedeny některé možnosti, které můžete nastavit v uvedených konfiguračních souborech:</p><p>| Soubor | Popis |<br>|--------|--------|<br>| context.xml | Konfigurace aplikace, která je nasazena do serveru |<br>| web.xml | Konfigurace webové aplikace |<br>| server.xml | Konfigurace serveru |<br>| log4j.properties | Konfigurace logování |<br>| persistence.xml | Konfigurace databáze |<br>| jdbc.properties | Konfigurace databáze |<br>| datasources.xml | Konfigurace datových zdrojů |<br>| ejb-jar.xml | Konfigurace EJB aplikace |<br>| application.properties | Konfigurace aplikace |<br>| pom.xml | Konfigurace projektu |</p><div class="doc-image"><img src="/images/docs/java-application-server-config/1.png" alt="1" loading="lazy"></div><div class="doc-image"><img src="/images/docs/java-application-server-config/4.png" alt="4" loading="lazy"></div><p> Konfigurace kontejnerů se provádí v souborech, které se nacházejí v adresáři na serveru. Pomocí následujících konfiguračních souborů můžete provést akce, které jsou uvedeny níže (jedná se o několik příkladů):
+<ul>
+<li>context.xml - konfigurace replikace relací sezení pomocí Memcached</li>
+</ul><ul>
+<li>web.xml - konfigurace přístupu vzdáleně pomocí WebDav serveru</li>
+</ul><ul>
+<li>server.xml - povolení proměnných pro více domén</li>
+</ul><ul>
+<li>variables.conf - konfigurace nastavení paměti pro vaše Java kontejnery, uvedením vlastních parametrů GC, -Xmx, -Xms (použijte standardní parametry, každý na novém řádku):</li>
+</ul></p><p>1<br>2<br>-Xmx&lt; velikost &gt;m<br>-Xms&lt; velikost &gt;m
+<ul>
+<li>Konfigurace vlastních systémových proměnných pro Tomcat, TomEE, Jetty nebo GlassFish:</li>
+</ul></p><p>1<br>2<br>-Dvar1=value1<br>-Dvar2=value2<br>-Dmy.var3=/my/value
+<ul>
+<li>Konfigurace JavaAgent interceptoru pro povolení vzdáleného ladění:</li>
+</ul></p><div class="doc-image"><img src="/images/docs/java-application-server-config/9_hu795666e8a212236fed91fac25c4bdd4c_32145_480x0_resize_box_3.png" alt="9 hu795666e8a212236fed91fac25c4bdd4c 32145 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/java-application-server-config/list-of-app-servers_hu341751b46ca128b41dd1c992d38b1952_20636_480x0_resize_box_3.png" alt="list of app servers hu341751b46ca128b41dd1c992d38b1952 20636 480x0 resize box 3" loading="lazy"></div><p>1<br>2<br>-Xdebug<br>-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address={port_number}</p><p>Poznámka: Tento soubor je k dispozici pouze pro aplikační servery Tomcat a TomEE. Pro konfiguraci serveru GlassFish použijte Admin Panel. Zpět k seznamu HOME</p><p>Pokud potřebujete použít jakékoliv vlastní soubory/adresáře pro konfiguraci vaší aplikace, můžete je stáhnout/vytvořit v adresáři, který se používá jako úložiště v Java serveru. Výsledkem je možnost konfigurací, které určíte cestu k vašim stáhnutým/vytvořeným souborům v souboru variables.conf (adresář serveru). Poznámka: Adresář serveru, který se týká tohoto adresáře, může být nazván temp pro některé servery, ale nikdy jej nečistí systém operačního systému.</p><div class="doc-image"><img src="/images/docs/java-application-server-config/save-for-current_hua59a90d0483ede6b1401967cdf34a0de_29044_480x0_resize_box_3.png" alt="save for current hua59a90d0483ede6b1401967cdf34a0de 29044 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/java-application-server-config/home_hu133cbce6ebb36144050fa4bcec1255ec_26569_0x0_q75_h2__3.webp" alt="home hu133cbce6ebb36144050fa4bcec1255ec 26569 0x0 q75 h2  3" loading="lazy"></div><p> soubor variables.conf (složka serveru). Poznámka: Although the server's directory, which refers to this folder, can be named temp for some servers, it is never automatically cleaned by the platform system. Zpět k seznamu WEBAPPS / PRACE Složky webapps (pro Tomcat/TomEE) a prace (pro Jetty) slouží k uložení nezabalované aplikace nasazené do prostředí. Zpět k seznamu JAVA_HOME Složka JAVA_HOME obsahuje konfigurační soubory a knihovny Java. Zde můžete upravovat nastavení Java a nahrát další knihovny Java. Zpět k seznamu LIB Složka LIB slouží k uložení výchozích a nahrání vlastních souborů .jar. Zpět k seznamu CRON Servery obsahují složku cron s konfiguračním souborem, kde mohou být konfigurovány cronjobs. Podrobnější informace o konfiguraci cronjobů naleznete v dokumentu Nastavení cronjobu. Zpět k seznamu KEYS Složka keys slouží jako umístění pro nahrání libovolného soukromého klíče, který je potřebný pro vaši aplikaci. Vytvořte klíč, uložte ho jako jednoduchý soubor a nahrávejte do složky keys. Může být použit pro různé případy, pouze uvedením cesty k vašemu klíči: 1 /var/lib/jelastic/keys/{key_file_name} Zpět k seznamu CONTEXTS Složka contexts obsahuje XML konfigurační soubory pro každý nasazený kontext. Všechny tyto soubory jsou otevřené pro úpravy. Zpět k seznamu SERVER_LIB Složka server_lib je konfigurační složka GlassFish s všemi dostupnými knihovnami serveru.</p><p> Pro každý nasazený kontext. Všechny tyto soubory jsou otevřené pro úpravy. Zpět k seznamu <strong>SERVER_LIB</strong> Složka server_lib je konfigurační adresář GlassFish s všemi dostupnými knihovnami serveru. Zpět k seznamu <strong>APPS</strong> Složka apps TomEE slouží k ukládání nezabalovaného EE aplikace nasazené do prostředí. Zpět k seznamu <strong>Tomcat</strong> Adresář souborů conf:<br>catalina.policy<br>catalina.properties<br>context.xml<br>jaspic-providers.xml<br>jaspic-providers.xsd<br>jelastic-ha.xml<br>jelastic-ssl.xml<br>logging.properties<br>server.xml<br>tomcat-env.sh<br>tomcat-users.xml<br>tomcat-users.xsd<br>variables.conf<br>web.xml<br>Cesta k souborům:<br>/opt/tomcat/conf<br>temp /opt/tomcat/temp<br>webapps /opt/tomcat/webapps<br>latest /usr/java/latest<br>lib /opt/tomcat/lib<br>cron tomcat<br>/var/spool/cron<br>keys /var/lib/jelastic/keys<br>Zpět k seznamu <strong>TomEE</strong> Cesta k souborům:<br>server<br>catalina.policy<br>server.xml<br>catalina.properties<br>tomcat-users.xml<br>context.xml<br>web.xml<br>variables.conf<br>logging.properties<br>tomee.xml<br>system.properties<br>Cesta k souborům:<br>/opt/tomcat/conf/<br>home<br>/opt/tomcat/temp<br>webapps<br>/opt/tomcat/webapps<br>apps<br>/opt/tomcat/apps<br>JAVA_HOME<br>/usr/java/default<br>lib<br>/opt/tomcat/lib<br>cron tomcat<br>/var/spool/cron<br>keys /var/lib/jelastic/keys<br>Zpět k seznamu <strong>GlassFish</strong> Cesta k souborům:<br>server<br>default-web.xml<br>domain.xml<br>domain.xml.bak<br>domain.xml.orig<br>local-password<br>logging.properties<br>logging.properties.orig<br>login.conf<br>server.policy<br>sun-acc.xml<br>wss-server-config-1.0.xml<br>wss-server-config-2.0.xml<br>/opt/glassfish3/glassfish/domains/<br>domain1/config<br>gfcluster-config (v adresáři server)<br>/opt/glassfish3/glassfish/domains/domain1/config</p><p> server default-web.xml domain.xml domain.xml.bak domain.xml.orig lokální-hesla logging.properties logging.properties.orig login.conf server.policy sun-acc.xml wss-server-config-1.0.xml wss-server-config-2.0.xml /opt/glassfish3/glassfish/domény/ domain1/konfigurace gfcluster-config (v adresáři serveru) logging.properties /opt/glassfish3/glassfish/domény/ domain1/konfigurace/gfcluster-config domovský adresář /opt/glassfish3/temp JAVA_HOME /usr/java/nejnovější server_lib /opt/glassfish3/glassfish/lib/ cron glassfish /var/spool/cron klíče /var/lib/jelastic/keys Zpět na seznam Jetty Adresář/Cesta server jdbcRealm.properties jetty-ajp.xml jetty-bio.xml jetty-jaas.xml jetty-jmx.xml jetty-logging.xml jetty-plus.xml jetty-rewrite.xml jetty-setuid.xml jetty-sslengine.xml jetty-ssl.xml jetty-stats.xml jetty.xml login.conf login.properties realm.properties spnego.properties proměnné.conf webdefault.xml /opt/jetty/etc domovský adresář /opt/jetty/home kontexty /opt/jetty/contexts/ pracovní adresář /opt/jetty/work JAVA_HOME /usr/java/nejnovější knihovna /opt/jetty/lib cron jetty /var/spool/cron klíče /var/lib/jelastic/keys Zpět na seznam Co dále? Tomcat Server TomEE Jetty Konfigurace databáze</p><div class="doc-image"><img src="/images/docs/java-application-server-config/java-home.png" alt="java home" loading="lazy"></div><div class="doc-image"><img src="/images/docs/java-application-server-config/lib.png" alt="lib" loading="lazy"></div><div class="doc-image"><img src="/images/docs/java-application-server-config/java-key.png" alt="java key" loading="lazy"></div><div class="doc-image"><img src="/images/docs/java-application-server-config/context_hud419e2a33153303ead5f4774f1905a27_44664_480x0_resize_box_3.png" alt="context hud419e2a33153303ead5f4774f1905a27 44664 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/java-application-server-config/serverlib.png" alt="serverlib" loading="lazy"></div><div class="doc-image"><img src="/images/docs/java-application-server-config/apps.png" alt="apps" loading="lazy"></div>
+</main>
+</body>
+</html>

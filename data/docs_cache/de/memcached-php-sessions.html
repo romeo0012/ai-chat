@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PHP Sessions Clustering</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>PHP Sessions Clustering</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> PHP-Session-Klustering Das hohe Verfügbarkeitsniveau Ihrer PHP-Anwendung kann durch die Implementierung von PHP-Session-Klustering in der Cloud erreicht werden. Um den Fallback der Anwendungsserver erfolgreich zu bearbeiten, richten wir eine Umgebung mit Memcached, mehreren Apache-Servern und einem NGINX-Load Balancer ein:
+<ol>
+<li>Melden Sie sich bei Ihrem PaaS-Konto an.</li>
+</ol><ol>
+<li>Klicken Sie auf den Schaltflächen "Umgebung erstellen".</li>
+</ol><ol>
+<li>Wählen Sie im Fenster "Umgebungstopologie" zwei oder mehr Server aus (z.B. zwei Instanzen von Apache) und einen Memcached-Knoten aus. Geben Sie einen Namen für die Umgebung ein und klicken Sie auf "Erstellen". Der Memcached-Knoten wird als verteilter Speicher in der Umgebung mit mehreren Knoten verwendet. In unserem Fall dient er als Web-Session mit dem Sticky-Sessions auf mehreren Anwendungsservern laufend. Wenn ein Server ausfällt, werden die Sessions für den Backup auf dem Memcached-Knoten gespeichert. Die anderen Server können die Sessions aus dem Memcached holen und die Session starten.</li>
+</ol></p><p>Wie es funktioniert:<br>Bei jedem abgeschlossenen Session-Anforderung wird die Session auf den Memcached-Knoten gespeichert, um als Backup zu dienen. Diese Session bleibt auf dem ursprünglichen Anwendungsserver verfügbar und kann für die nächste Anforderung verwendet werden. Nach der zweiten Anforderung wird die Session in Memcached aktualisiert. Wenn der ursprüngliche Server ausfällt, wird die nächste Anforderung an einen anderen Anwendungsserver weitergeleitet. Der neu angeforderte Server fragt nach der Session, die er nicht kennt. Somit sucht dieser neue Server die benötigte Session im Memcached-Knoten.</p><p>Beispiel:<br>Wenn eine Session-Anforderung abgeschlossen ist, wird die Session auf den Memcached-Knoten gespeichert, um als Backup zu dienen. Diese Session bleibt auf dem ursprünglichen Anwendungsserver verfügbar und kann für die nächste Anforderung verwendet werden. Nach der zweiten Anforderung wird die Session in Memcached aktualisiert. Wenn der ursprüngliche Server ausfällt, wird die nächste Anforderung an einen anderen Anwendungsserver weitergeleitet. Der neu angeforderte Server fragt nach der Session, die er nicht kennt. Somit sucht dieser neue Server die benötigte Session im Memcached-Knoten.</p><div class="doc-image"><img src="/images/docs/memcached-php-sessions/memcached-environment_hud03799e6d7a51d7d94b04399dd8c9502_76264_480x0_resize_box_3.png" alt="memcached environment hud03799e6d7a51d7d94b04399dd8c9502 76264 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/memcached-php-sessions/phpcluster4_hu09965e876e372b9a23154a178ea9d00b_30319_480x0_resize_box_3.png" alt="phpcluster4 hu09965e876e372b9a23154a178ea9d00b 30319 480x0 resize box 3" loading="lazy"></div><p> Routed auf ein weiteres Anwendungsserver. Der neu angeforderte Server wird für die Session, die er nicht kennt, angefragt. Somit sucht dieser neue Server die benötigte Session im Memcached-Knoten nach. Diese wird gemäß dem angehängten ID an der SessionID bei der Sessionerstellung identifiziert. Dadurch kann der Server die Session aus dem Memcached-Knoten holen. Wenn der Server auf die Anfrage antwortet, aktualisiert er auch die Session im Memcached-Knoten. Dadurch entsteht kein Abbruch der App durch den Ausfall des ursprünglichen Servers - der Fallover wird erfolgreich abgearbeitet. Gleichzeitig verteilt der NGINX-Load Balancer den Verkehr über die Cluster enthaltenden HTTP-Ressourcen. Sie können die Lastverteilung auf der Plattform über verschiedene Lastverteilungswerkzeuge überprüfen.
+<ol>
+<li>Navigiere in dein Umgebung im Dashboard und klicke auf den Config-Button für Apache.</li>
+</ol><ol>
+<li>Öffne im neuen Fenster die Datei etc &gt; php.ini.</li>
+</ol><ol>
+<li>Füge die folgende Zeile zur Dynamic Extensions hinzu: 1 extension=memcached.so</li>
+</ol><ol>
+<li>Führe die Änderungen im [Session] Block durch:</li>
+</ol><br>   1. 2. session.save_handler = memcached<br>   2. session.save_path = "&lt; server &gt;:11211"<br>   Hinweis: &lt;server&gt; steht für die IP oder URL des Memcached-Knotens, die Sie durch Klicken des Info-Buttons für den Memcached-Knoten in Ihrer Umgebung finden können.<ol>
+<li>Speichere die Änderungen und starten Sie den Apache-Knoten neu. Das ist alles! Jetzt wechselt sich ein Server automatisch aus, wenn einer der Instanzen ausfällt, und die Benutzer merken sich keinen Änderungen. Was kommt nach? Memcached-Konfiguration WordPress Cluster Einrichten Einrichten eines Cronjobs</li>
+</ol></p><div class="doc-image"><img src="/images/docs/memcached-php-sessions/memcached-enabling_hub9a0fc4d38e214d901f48147679cfa6a_33361_480x0_resize_box_3.png" alt="memcached enabling hub9a0fc4d38e214d901f48147679cfa6a 33361 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/memcached-php-sessions/session-save-path_hu27c23ff52cef5c5f65a80aeeb8cb4b6d_45907_480x0_resize_box_3.png" alt="session save path hu27c23ff52cef5c5f65a80aeeb8cb4b6d 45907 480x0 resize box 3" loading="lazy"></div>
+</main>
+</body>
+</html>

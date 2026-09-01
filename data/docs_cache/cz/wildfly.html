@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WildFly Application Server</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>WildFly Application Server</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> WildFly Aplikaceový Server</p><p>WildFly je moderní, flexibilní, lehký a spravovaný běhový prostředí aplikací, které je napsané v Java a implementuje nejnovější standardy a technologie Java Platform Enterprise Edition (Java EE) specifikace. WildFly je plně zdarma a otevřený zdrojový kód, dostupný k běhu na více platformách. Mezi hlavní vlastnosti tohoto aplikace serveru:
+<ul>
+<li>Přizpůsobitelný runtime na základě pluggable subsystemů, které mohou být integrované nebo odstraněny na požadavek</li>
+</ul><ul>
+<li>Podpora Java EE8 k implementaci nejnovějších standardů enterprise Java v modulárním přístupu s možností spouštět každou službu v izolaci, což umožňuje rychlou, lehkou a optimální pro nejlepší výkon</li>
+</ul></p><p>Chcete-li vytvořit WildFly aplikaceový server pro Java projekt, následujte níže uvedené jednoduché kroky. Poznámka: Tento šablon používá moderní daemon systému systemd pro inicializaci.</p><div class="doc-image"><img src="/images/docs/wildfly/02-create-new-environment-button_hu08753fb831e531293fa12c6b94ab4cf4_9171_480x0_resize_box_3.png" alt="create new environment button hu08753fb831e531293fa12c6b94ab4cf4 9171 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/wildfly/03-wildfly-server-topology-wizard_huee7e7b6b70f902b3138a537f6a573beb_153568_480x0_resize_box_3.png" alt="wildfly server topology wizard huee7e7b6b70f902b3138a537f6a573beb 153568 480x0 resize box 3" loading="lazy"></div><p>Vytvoření WildFly Serveru<ol>
+<li>Přihlaste se k svému PaaS účtu a klikněte na tlačítko New Environment v horní levém rohu panelu nástrojů.</li>
+</ol><ol>
+<li>V otevřeném okně topologie prostředí přejděte na kartu Java a vyberte z seznamu dostupných aplikace serverů WildFly (podporované verze 10-16). Poté nastavte limit přidělených zdrojů pomocí sliderů cloudlet, zvolte oblast (pokud je k dispozici více) a upravte název svého prostředí.</li>
+</ol></p><p> Seznam dostupných aplikačních serverů. Poté nastavte limit přiřazených zdrojů pomocí klávesiček cloudlet, vyberte oblast (pokud je k dispozici více), a upravte název vašeho prostředí. Poznámka: WildFly není kompatibilní s Java 6 a 7; tudíž tyto verze nejsou k dispozici z důvodu minimálních požadavků na zdroje WildFly. Silně se doporučuje přiřadit více než 1 cloudlet pro tento uzel. Jinak můžete mít nízkou výkonnost serveru a dokonce jeho selhání. WildFly můžete spustit v režimu Standalone pomocí konfiguračního souboru definovaného v prostředí proměnné STANDALONE_MODE_CONFIG, které platforma poskytuje zásobníkem. Platforma poskytuje výchozí podporu pro WildFly servery Auto-Clustering v režimu Managed Domain pomocí odpovídajícího přepínače v topologickém vizualizátoru. Klikněte na tlačítko Vytvořit, když budete připraveni. 3. Počkejte několik minut na vytvoření vašeho prostředí a klikněte na tlačítko Otevřít v prohlížeči vedle něj. 4. Výchozí stránka WildFly zobrazuje několik užitečných odkazů, aby vás pomohla začít. Chcete-li přistupovat k WildFly Administration Console, klikněte na odkaz (označený v obrázku výše) nebo získáte URL z e-mailu (odoslaného po vytvoření serveru) spolu s ostatními přístupovými údaji. Také můžete zřídit SSH spojení s vaším WildFly serverem a použít vbudovanou utilitu WildFly CLI pro správu.</p><p>Překlad provedl David Novák, překladatel technických textů.</p><div class="doc-image"><img src="/images/docs/wildfly/04-wildfly-open-in-browser_hu0fe1dcf37b96ac085ea329204901b00a_27058_480x0_resize_box_3.png" alt="wildfly open in browser hu0fe1dcf37b96ac085ea329204901b00a 27058 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/wildfly/05-wildfly-home-page_huaf1f95eecbff358ea4ca11dea9ea68d6_90980_480x0_resize_box_3.png" alt="wildfly home page huaf1f95eecbff358ea4ca11dea9ea68d6 90980 480x0 resize box 3" loading="lazy"></div><p> E-mail (obdržené po vytvoření serveru) spolu s ostatními přístupovými kredenzami. Vývojář může také zřídit připojení SSH k WildFly serveru a použít vnitřní utilitu WildFly CLI pro správu. Výchozím režimem je WildFly aplikační server spuštěn v režimu "standalone", tak aby každý instance byl nezávislý proces podle konfiguračního souboru definovaného prostřednictvím proměnné prostředí STANDALONE_MODE_CONFIG. V režimu standalone je certifikováno čtyři profily: standalone.xml (výchozí) - konfigurace pro Java Enterprise Edition 8 Web s požadovanými technologiemi, standalone-full.xml - konfigurace pro Java Enterprise Edition 8 Full s všemi EE 8 technologiemi, standalone-ha.xml - konfigurace pro Java Enterprise Edition 8 Web s vysokou dostupností, standalone-full-ha.xml - konfigurace pro Java Enterprise Edition 8 Full s vysokou dostupností. V případě použití konfigurací HA (poslední dvě možnosti) je pro komunikaci mezi uzly použit protokol jgroups. Je konfigurován k použití autorizace s MD5 tokenem a asymetrickou šifrováním výchozím nastavením. Tato implementace zabraňuje neautorizovaným uzlům připojit se k clusteru a nečlenům komunikovat s členy clusteru. Poznámka: Je velmi doporučeno změnit výchozí hodnotu parametru auth_value v souboru standalone HA konfigurace na produkčních prostředích. Tímto končí naši kurz instalace WildFly serveru!</p><p>Nyní můžete konfigurovat server podle potřeby a pokračovat v nasazování aplikace. Co dále? Nastavení prostředí Prostředí nasazování Průvodce nástroji Konfigurace proměnných souboru Správce</p><p>Toto ukončuje naši kurz instalace WildFly serveru! Nyní můžete ho konfigurovat podle potřeby a pokračovat v nasazování aplikace. Co dále? Nastavení prostředí Prostředí nasazování Průvodce nástroji Konfigurace proměnných souboru Správce</p><div class="doc-image"><img src="/images/docs/wildfly/06-wildfly-standalone-config-variable_hu50c5598b7853263733c71238c3c35190_53006_480x0_resize_box_3.png" alt="wildfly standalone config variable hu50c5598b7853263733c71238c3c35190 53006 480x0 resize box 3" loading="lazy"></div>
+</main>
+</body>
+</html>

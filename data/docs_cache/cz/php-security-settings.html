@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PHP.INI Security Settings</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>PHP.INI Security Settings</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Bezpečnostní nastavení PHP.INI</p><p>Existují několik funkcí PHP, které je doporučeno správně konfigurovat, aby ochránily vaši server před škodou. Zřejmě celkové zajištění systému může být poměrně složité a vyžadovat mnoho specifických nástrojů, ale v tomto kurzu se budeme zabývat základními kroky, které nevyžadují žádné další výdaje. Takže, nechte se nám ukázat, jak provedeme některé počáteční konfigurace, aby zlepšily bezpečnost vašeho PHP aplikace, hostované na platformě. Hlavní PHP konfigurační soubor, nazvaný php.ini, obsahuje řadu výchozích nastavení, která můžete upravit, nebo dokonce přidat vlastní podle potřeby vaší aplikace. Nachází se v adresáři etc vašeho Apache nebo NGINX-PHP aplikačního serveru. Tento soubor je plně upravitelný pro vás zákazníka platformy, takže nechte se nám podívat, která nastavení můžete aplikovat, aby zlepšila bezpečnost vašeho serveru. Poznamenejte si, že hodnoty popsané níže jsou pouze doporučení. Než je aplikujete, ujistěte se, že požadavky vaší aplikace se shodují s těmito nastaveními, aby nezmenšila její výkonnost. Stiskněte tlačítko Konfigurace pro svůj Apache nebo NGINX server. V otevřeném okně přejděte do adresáře etc a otevřete soubor php.ini. Následující instrukce vám pomůžou provedení potřebných konfigurací:
+<ol>
+<li>Tlačítko pro vaši Apache nebo NGINX server. Ve vytvořeném panelu přejděte do adresáře etc a otevřete soubor php.ini. Následující instrukce vám pomůžou provedení potřebných nastavení:</li>
+</ol><ol>
+<li>Přidejte následující řetězec k deaktivaci nebezpečných funkcí:</li>
+</ol>
+<pre><code class="lang-">disable_functions = phpinfo, system, mail, exec</code></pre><br>Další bezpečnost můžete získat deaktivací následujících funkcí:
+<pre><code class="lang-">disable_functions = exec,passthru,shell_exec,system,proc_open,popen,curl_exec,curl_multi_exec,parse_ini_file,show_source</code></pre><ol>
+<li>Omezte počet povolených zdrojů, pokud to přijme vaše aplikace:</li>
+</ol><ul>
+<li>Maximální doba spouštění skriptu (v sekundách) max_execution_time = 30</li>
+</ul><ul>
+<li>Maximální doba zpracování dat požadavku každým skriptem max_input_time = 60</li>
+</ul><ul>
+<li>Maximální velikost nahrávaného souboru upload_max_filesize = 2M</li>
+</ul><ul>
+<li>Maximální množství paměti pro skript (8MB) memory_limit = 8M (výchozí hodnota je 128M, ale je přijatelné nastavit nižší hodnotu, pokud to nezhorší výkon vaší aplikace)</li>
+</ul><ul>
+<li>Maximální velikost POST dat, přijatelná pro PHP post_max_size = 8M</li>
+</ul></p><p> Překlad:
+<ol>
+<li>Hodnota je 128M, ale je přijatelné nastavit nižší hodnotu, pokud to nezpomalí výkon vašeho aplikace. Maximální velikost POST dat, přijatelná pro PHP, je post_max_size = 8M</li>
+</ol><ol>
+<li>Níže uvedené funkce mohou být omezeny v případě, že nejsou pro vaši aplikaci potřebné:</li>
+</ol><br>   Zakázat HTTP file uploads: file_uploads = Off<br>   Zakázat zobrazování PHP chybových zpráv pro uživatele: display_errors = Off<br>   Omezit externí přístup k vašemu PHP prostředí: safe_mode_allowed_env_vars = PHP_<br>   Omezit vracení PHP informací: expose_php = Off<br>   Zakázat registraci globálních proměnných pro vstupní data: register_globals = Off<br>   Zakázat otevírání vzdálených souborů: allow_url_fopen = Off<ol>
+<li>Chcete-li získat více informací o stavu bezpečnosti, zapněte následující funkce:</li>
+</ol><br>   Ujistěte se o přijatelnosti PHP přesměrování: cgi.force_redirect = 0<br>   Zapněte všechny možné záznamy chyb: log_errors = On<ol>
+<li>Zapněte k dispozici dostupné bezpečnostní režimy:</li>
+</ol><br>   Zapněte bezpečnostní režim: safe_mode = On<br>   Zapněte SQL bezpečnostní režim: sql.safe_mode = On<br>   Poznámka: Při nastavování uvedených nastavení se musíte věnovat požadavkům vaší aplikace, v některých případech mohou být některé funkce nek dispozici. Co dál? Konfigurace PHP Application Server</p><div class="doc-image"><img src="/images/docs/php-security-settings/php.ini-config.png" alt="php.ini config" loading="lazy"></div><div class="doc-image"><img src="/images/docs/php-security-settings/insecure-php-functions_hubb6846be36c4182d9d897960750daa27_38737_480x0_resize_box_3.png" alt="insecure php functions hubb6846be36c4182d9d897960750daa27 38737 480x0 resize box 3" loading="lazy"></div><p>Poznámka: Při překladu jsem se snažil zachovat původní strukturu a technické termíny. Pokud máte otázky nebo potřebujete další informace, neváhejte se obrátit na mne.</p>
+</main>
+</body>
+</html>

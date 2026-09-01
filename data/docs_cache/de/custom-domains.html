@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Custom Domain Name</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Custom Domain Name</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Mit der Plattform haben Sie die Möglichkeit, für Ihre Seite einen externen Domainnamen festzulegen, anstatt der Standard-Umgebungs-URL (z.B., {env_name}.hoster_domain_name). Der benutzerdefinierte Domainname ermöglicht es Ihnen, Ihre einzigartige Markenidentität zu vermarkten und die Erkennbarkeit Ihrer Web-Anwendung im Internet zu verbessern. Bevor wir einschreiten, lassen wir uns einige Grundbegriffe zu, um besser verständnisvoll zu sein: Der Domainname ist der Name, den Sie innerhalb eines Browsers eingeben, um eine Website zu erreichen. Der rechte Teil des Namens (z.B. .com oder .org) heißt Top-Level-Domain (TLD), und der linke Teil - der zweite-Level-Domain (SLD). Subdomain ist eine optionaler Teil, der vor der SLD platziert und durch einen Punkt getrennt wird. Siehe das folgende Bild für ein Beispiel. Wurzel-Domain ist eine Kombination aus den zweiten- und Top-Level-Domain-Namen ohne den Subdomain. Solche Adresse repräsentiert eine ganze Website anstatt einer bestimmten Webseite. Jede Seite hat eine einzigartige Wurzel-Domain, die in allen ihren Seiten und Unterdomains enthalten ist. DNS ist ein System, das textuelle Domainnamen in numerische IP-Adressen umwandelt, die benötigt werden, um Webdienste zu lokalisieren und zu identifizieren. Zum Beispiel sucht Sie, wenn Sie www.mydomain.com in den Browser-Adressleiste eingeben, nach der tatsächlichen IP-Adresse des Servers, der diese Seite hostet, z.B., 209.50.246.12. Wenn Sie https://209.50.246.12/ eingeben, gelangen Sie auf dieselbe Seite.</p><p> Adressleiste, sucht nach der tatsächlichen IP-Adresse des Servers, der diese Seite hostet, z.B., 209.50.246.12. Wenn Sie https://209.50.246.12/ eingeben, gelangen Sie auf die gleiche Seite. Tip: Die Plattform bietet auch die volle Unterstützung von gTLD + IDN Domain Names, sodass Sie sowohl internationalisierte als auch generic top-level Names für Ihre externen Domains verwenden können. Um Ihre eigene Domäne anbinden zu können, sollten Sie die folgenden Schritte befolgen:
+<ol>
+<li>Ihre eigene Domäne kaufen</li>
+</ol><ol>
+<li>DNS-Eintrag konfigurieren</li>
+</ol><ol>
+<li>Domänenname binden (falls nötig)</li>
+</ol></p><p>Wie kann ich eine Domäne kaufen? Die genauen Schritte variieren je nach Ihrem Domain-Registrar. Als Beispiel verwenden wir GoDaddy.
+<ol>
+<li>Melden Sie sich bei Ihrem Konto an oder registrieren Sie sich neu. Klicken Sie auf die Expand-Option Sign In am oberen Rand und klicken Sie auf den gleichen Namen.</li>
+</ol><ol>
+<li>Wechseln Sie zu Ihrer Kontoverwaltungsseite, indem Sie auf den Button Visit My Account klicken.</li>
+</ol><ol>
+<li>Wenn Sie noch keine Domäne besitzen, klicken Sie auf den Link Get one now und folgen Sie den angegebenen Schritten, um eine Domäne auszuwählen und zu kaufen.</li>
+</ol></p><div class="doc-image"><img src="/images/docs/custom-domains/02-domain-name-components-scheme.png" alt="domain name components scheme" loading="lazy"></div><div class="doc-image"><img src="/images/docs/custom-domains/03-log-into-domain-registrar_hu0dcf1360c4741118295f697f39083a7b_50833_480x0_resize_box_3.png" alt="log into domain registrar hu0dcf1360c4741118295f697f39083a7b 50833 480x0 resize box 3" loading="lazy"></div><p>Wie kann ich meinen DNS-Eintrag konfigurieren? Sobald Sie Ihre eigene Domäne haben, ist der Fluss, um einen neuen DNS-Eintrag hinzuzufügen, einfach (GoDaddy Beispiel): Es gibt verschiedene Arten von DNS-Einträgen, die verwendet werden können, um Ihre Umgebung zu verweisen:</p><p>CNAME - verweist Ihre eigene Domäne auf die Umgebungsdomäne (erfordert zusätzliche Domänenbindung über die Plattform-Dashboard)</p><p>ANAME (falls unterstützt von Ihrem DNS-Server) - verweist den gesamten Wurzeldomänennamen (z.B., example.)</p><div class="doc-image"><img src="/images/docs/custom-domains/04-manage-dns-account_huc36b885af8ccdadf6221d9c01d041787_54659_480x0_resize_box_3.png" alt="manage dns account huc36b885af8ccdadf6221d9c01d041787 54659 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/custom-domains/05-get-custom-domain-name_hub39356272737c54d0f66172bb3e6f61a_25178_480x0_resize_box_3.png" alt="get custom domain name hub39356272737c54d0f66172bb3e6f61a 25178 480x0 resize box 3" loading="lazy"></div><p>Hier ist ein Beispiel für die Konfiguration eines DNS-Eintrags bei GoDaddy:
+<ol>
+<li>Navigieren Sie zu Ihrer Domäne und klicken Sie auf DNS.</li>
+</ol><ol>
+<li>Klicken Sie auf Add und wählen Sie den Typ der DNS-Rekord aus, den Sie hinzufügen möchten.</li>
+</ol><ol>
+<li>Geben Sie die entsprechenden Informationen ein und klicken Sie auf Save.</li>
+</ol></p><p> - verknüpft Ihre benutzerdefinierte Domäne mit der Umgebungsdomäne (erfordert zusätzliche Domänenbindung über die Plattform-Dashboard) ANAME (falls von Ihrem DNS-Server unterstützt) - verknüpft die gesamte Wurzeldomäne (z.B., example.com) mit Ihrer Umgebungsdomäne oder einer anderen Wurzeldomäne A-Eintrag - verknüpft Ihre benutzerdefinierte Domäne mit einer öffentlichen IP (erfordert eine externen IP-Adresse, die an die Umgebung angehängt ist) Hinweis: Die CNAME/ANAME-DNS-Einträge können mit dem Shared Load Balancer (also ohne öffentliche IP) verwendet werden. Allerdings wird für Produktionsumgebungen empfohlen, eine öffentliche IP anzuhängen und die A-Eintrag zu konfigurieren. Bei einer Private Cloud-Setup, bei der die Plattform-Besitzer alle Umgebungen steuern, können die Einschränkungen des Shared Load Balancer deaktiviert werden, sodass die CNAME-Verwendung eine produktionsbereite Option ist. Hier werden wir Schritt-für-Schritt-Anweisungen zur Konfiguration eines Eintrags für Ihre Domänenname bereitstellen.
+<ol>
+<li>Suche die erforderliche Domäne in Ihrem Domain-Registrar und klicke auf Manage DNS für sie.</li>
+</ol><ol>
+<li>Am Ende der Records-Sektion klicken Sie auf den Add-Button.</li>
+</ol><ol>
+<li>Im angezeigten Add Zone Record-Fenster wählen Sie den erforderlichen Optionen aus der Type-Auswahlliste aus (z.B., A-Eintrag).</li>
+</ol><ol>
+<li>Führen Sie die Auswahl des Eintrags ab. In unserem Fall, für den A-Eintrag: Host - geben Sie den Hostnamen ein, den der A-Eintrag verknüpft ist - in unserem Fall geben Sie @ ein, um den Eintrag direkt auf Ihre Domänenname zu zeigen Points to - geben Sie die externe IP-Adresse Ihrer Umgebungseingangspunkt anTip: Um diese IP-Adresse zu erhalten, erweitern Sie Ihren Anwendungsspeicher (Load Balancer) Knoten, um Ihre öffentliche IP-Adresse anzuzeigen.</li>
+</ol></p><p> Punkte zu - spezifiziere die externe IP-Adresse Ihrer Umgebung-Einstiegspunkt<br>Tipp: Um diese IP zu erhalten, erweitern Sie Ihren Anwendungsserver (Load Balancer) Knoten, um Ihre öffentliche IP-Adresse anzuzeigen. TTL - wählen Sie aus, wie lange der DNS-Server Ihre A-Eintrag-Informationen im Cache speichern soll (d.h., die Verzögerung, bevor neue Einstellungen für sie angewendet werden, wenn sie geändert werden) Klicken Sie auf Speichern. Hinweis: Jede DNS-Änderung, die Sie vornehmen, kann bis zu 48 Stunden, um sich im Internet wide auszuwirken. Welche DNS-Eintrag zu verwenden? Überprüfen Sie die folgenden allgemeinen Regeln und Beispiele: Verwenden Sie A-Eintrag, wenn Ihre Umgebung über eine öffentliche IP-Namen laufen wird: name1.mydomain.com &gt; 111.111.111.111 name2.mydomain.com &gt; 111.111.111.112 Verwenden Sie CNAME, wenn Sie einen benutzerdefinierten Domainnamen auf die Umgebung verweisen möchten (erfordert Domainbinding): name1.mydomain.com &gt; env1.hosterdomain.com name2.mydomain.com &gt; env2.hosterdomain.com Verwenden Sie ANAME, wenn Sie eine DNS-Zone (Wurzeldomäne) auf eine andere verweisen müssen, wobei alle Unterdomänen über die gleichen Unterdomänen aufgelöst werden: mydomain.com &gt; hosterdomain.com. Dadurch wird jede Unterdomäne auf Ihrer Domäne auf die entsprechende auf dem Dienstleistungsanbieter geleitet: {subdomain}.mydomain.com &gt; {subdomain}.hosterdomain.com. mynewcompany.com &gt; myoldcompany.com Dadurch können Sie alle Verkehr von Ihrer alten Domäne auf eine neue verweisen, während alle Unterdomänen gleich bleiben: {subdomain}.mynewcompany.com &gt; {subdomain}.myoldcompany.com. mydomain.com &gt; env1.hosterdomain.com</p><div class="doc-image"><img src="/images/docs/custom-domains/06-manage-domain-name_hufc0c867848b36a5f43b10fd454010e2e_26105_480x0_resize_box_3.png" alt="manage domain name hufc0c867848b36a5f43b10fd454010e2e 26105 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/custom-domains/07-add-dns-record-to-domain-name_hu58beb12c4338cd9ae0fca15e8d0a5a0b_43462_480x0_resize_box_3.png" alt="add dns record to domain name hu58beb12c4338cd9ae0fca15e8d0a5a0b 43462 480x0 resize box 3" loading="lazy"></div><p> Von Ihrer alten Domäne zu einer neuen, dabei alle Unterdomänen gleich bleiben: {subdomain}.meinneuerfirma.com &gt; {subdomain}.meinealtefirma.com. meindomain.com &gt; env1.hosterdomain.com (erfordert Domainbindung) Als Ergebnis zeigen Unterdomänen Ihrer benutzerdefinierten Domäne auf die entsprechenden innerhalb der Zielumgebung zeigen: {subdomain}.meindomain.com &gt; {subdomain}.env1.hosterdomain.com. Wie binden Sie eine Domäne an eine Umgebung? Wenn Sie ohne öffentliche IP-Adressen verbunden sind (d.h., DNS-Eintrag zeigt auf die Umgebungsname über CNAME oder ANAME), müssen Sie die entsprechende Domänenbezeichnung binden. Dies ist erforderlich, um die Shared Load Balancers richtig auf die Zielumgebung zu leiten. Hinweis: Benutzerdefinierte Domänenbindung über die Plattform-Benutzeroberfläche ist unnötig, wenn für die Umgebung eine öffentliche IP aktiviert ist, da der Verkehr die SLBs umgeht.
+<ol>
+<li>Im Plattform-Dashboard klicken Sie auf den Einstellungs-Schaltfläche (das Wrench-Icon) für die Umgebung, die Sie eine Domänenbezeichnung binden möchten.</li>
+</ol><ol>
+<li>Im automatisch ausgewählten Custom Domains Menütab klicken Sie auf die Domänenbindung-Abschnitt, um Ihre Domänenbezeichnung (z.B., www.meineexterne-domain.com oder meineexterne-domain.com) und sie mit dem entsprechenden Button binden. Hinweis: Es kann bis zu mehreren Minuten dauern, bis die neuen URL-Einstellungen wirksam werden. Super! Ihre Umgebung ist jetzt unter ihrer eindeutigen Domänenbezeichnung zugänglich. Was kommt jetzt? Shared Load Balancer Öffentliche IP-Adressen Austausch Domänen SSL-Sockets</li>
+</ol></p><p>Quelle: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/using-features.managing.customdomains.html</p><div class="doc-image"><img src="/images/docs/custom-domains/08-select-dns-record-type_hue1257575f4973736778bfa6b34bb70db_121103_480x0_resize_box_3.png" alt="select dns record type hue1257575f4973736778bfa6b34bb70db 121103 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/custom-domains/09-configure-dns-a-record_huc9d2997b250c4b539d25cec17cc372db_10848_480x0_resize_box_3.png" alt="configure dns a record huc9d2997b250c4b539d25cec17cc372db 10848 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/custom-domains/10-copy-public-ip-address_huf538fd0511289666ec36e204759fb97c_23536_480x0_resize_box_3.png" alt="copy public ip address huf538fd0511289666ec36e204759fb97c 23536 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/custom-domains/11-environment-settings_hu0c716835a6e343762d3f46e76979b71e_13381_480x0_resize_box_3.png" alt="environment settings hu0c716835a6e343762d3f46e76979b71e 13381 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/custom-domains/12-bind-custom-domain-to-environment_hu219bbc4b17e8c1bdd960d9ebceb06d9d_74057_480x0_resize_box_3.png" alt="bind custom domain to environment hu219bbc4b17e8c1bdd960d9ebceb06d9d 74057 480x0 resize box 3" loading="lazy"></div>
+</main>
+</body>
+</html>

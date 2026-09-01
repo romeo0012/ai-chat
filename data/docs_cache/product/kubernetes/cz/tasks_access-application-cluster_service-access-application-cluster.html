@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Use a Service to Access an Application in a Cluster</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Use a Service to Access an Application in a Cluster</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Použití služby k přístupu k aplikaci v clusteru<br>Tato stránka ukazuje, jak vytvořit objekt služby Kubernetes, který mohou externí klienti použít k přístupu k aplikaci běžící v clusteru. Služba poskytuje rozložení zátěže pro aplikaci, která má dvě běžící instanci.<br>Než začnete<br>Musíte mít Kubernetes cluster a nástroj kubectl pro příkazovou řadu musí být nakonfigurován k komunikaci s vaším clusterem. Doporučujeme spustit tento kurz na clusteru s alespoň dvěma uzly, které nejsou hosty řídícího uzlu. Pokud ještě nemáte cluster, můžete ho vytvořit pomocí minikube nebo můžete použít jeden z těchto Kubernetes playgroundů:<br>iximiuz Labs<br>Killercoda<br>KodeKloud<br>Cíle<br>Spustit dvě instanci aplikace World Hello.<br>Vytvořit objekt služby, který exponuje port node.<br>Použít objekt služby k přístupu k běžící aplikaci.<br>Vytváření služby pro aplikaci běžící v dvou pod<br>Zde je konfigurační soubor pro aplikaci Deployment:<br>service/access/hello-application.yaml<br>apiVersion: apps/v1<br>kind: Deployment<br>metadata:<br>  název: hello-world<br>spec:<br>  selektor:<br>    label: run: load-balancer-example<br>  replicas: 2<br>  template:<br>    metadata:<br>      label: run: load-balancer-example<br>    spec:<br>      kontainer:<br>        - název: hello-world<br>          image: us-docker.pkg.dev/google-samples/containers/gke/hello-app:2.0<br>          porty:<br>            - containerPort: 8080<br>              protocol: TCP<br>Spusťte aplikaci World Hello v clusteru:<br>Vytvořte aplikaci Deployment pomocí souboru výše:<br>kubectl apply -f https://k8s.</p><p> TCP Spusťte aplikaci "Hello World" ve vašem clusteru: Vytvořte nasazení aplikace pomocí souboru výše:
+<pre><code class="lang-">kubectl apply -f https://k8s.io/examples/service/access/hello-application.yaml</code></pre><br>Tento příkaz vytvoří Nasazení a spojený ReplicaSet. ReplicaSet má dva Pods, každý z nich spouští aplikaci "Hello World". Zobrazte informace o Nasazení:
+<pre><code class="lang-">kubectl get deployments hello-world<br>kubectl describe deployments hello-world</code></pre><br>Zobrazte informace o Vašich objektech ReplicaSet:
+<pre><code class="lang-">kubectl get replicasets<br>kubectl describe replicasets</code></pre><br>Vytvořte objekt Service, který vystaví nasazení:
+<pre><code class="lang-">kubectl expose deployment hello-world --type=NodePort --name=example-service</code></pre><br>Zobrazte informace o Service:
+<pre><code class="lang-">kubectl describe services example-service</code></pre><br>Výstup je podobný tomuto:
+<pre><code class="lang-">Název: example-service<br>Prostor: výchozí<br>Značky: run=load-balancer-example<br>Anotace: &amp;lt;žádné&amp;gt;<br>Selektor: run=load-balancer-example<br>Typ: NodePort<br>IP: 10.32.0.16<br>Port: &amp;lt;neupraveno&amp;gt; 8080/TCP<br>TargetPort: 8080/TCP<br>NodePort: &amp;lt;neupraveno&amp;gt; 31496/TCP<br>Endpoints: 10.200.1.4:8080,10.200.2.5:8080<br>Sesízní vazba: Žádná<br>Události: &amp;lt;žádné&amp;gt;</code></pre><br>Zapište si hodnotu NodePort pro Service. Například v předchozím výstupu je hodnota NodePort 31496.Zobrazte pods, které spouští aplikaci "Hello World":
+<pre><code class="lang-">kubectl get pods --selector="run=load-balancer-example" --output=wide</code></pre><br>Výstup je podobný tomuto:
+<pre><code class="lang-">Jméno Připojeno Stav ... IP NODE<br>hello-world-2895499144-bsbk5 1/1 Běží ... 10.200.1.4</code></pre></p><p> Přeložte následující text z angličtiny do češtiny. Pouze přeložte prozaický text. Zachovejte technické termíny, bloky kódu, příkazy, cesty k souborům a adresy URL v originální podobě. Zachovejte strukturu odstavců.</p><p>TEXT:<br>get pods --selector="run=load-balancer-example" --output=wide The output is similar to this:<br>NAME READY STATUS ... IP NODE<br>hello-world-2895499144-bsbk5 1/1 Running ... 10.200.1.4 worker1<br>hello-world-2895499144-m1pwt 1/1 Running ... 10.200.2.5 worker2</p><p>Získání veřejné IP adresy jednoho z vašich uzlů, který spouští pod Hello World, závisí na tom, jak jste nastavili cluster. Například pokud používáte Minikube, můžete vidět IP adresu uzlu spuštěním příkazu kubectl cluster-info. Pokud používáte Google Compute Engine instances, můžete použít příkaz gcloud compute instances list, abyste viděli veřejné adresy vašich uzlů.<br>Na vašem zvoleném uzlu vytvořte pravidlo firewallu, které umožňuje TCP provoz na vašem uzlovém portu. Například pokud má Vaše služba hodnotu NodePort 31568, vytvořte pravidlo firewallu, které umožňuje TCP provoz na portu 31568. Různé cloudové poskytovatele nabízejí různé způsoby konfigurace pravidel firewallu.<br>Použijte IP adresu uzlu a uzlový port k přístupu k aplikaci Hello World:<br>curl http://&lt;public-node-ip&gt;:&lt;node-port&gt;<br>kde &lt;public-node-ip&gt; je veřejná IP adresa vašeho uzlu, a &lt;node-port&gt; je hodnota NodePort pro vaši službu. Odpověď na úspěšnou žádost je zpráva:<br>Hello, world! Version: 2.0.0 Hostname: hello-world-cdd4458f4-m47c8</p><p>Použitím konfiguračního souboru služby<br>Jako alternativu k použití příkazu kubectl expose můžete použít konfigurační soubor služby k vytvoření služby.</p><p> služba konfigurační soubor</p><p>Alternativou k použití příkazu kubectl expose je možné použít soubor konfigurace služby k vytvoření služby.</p><p>Zrušení</p><p>Chcete-li odstranit službu, zadejte následující příkaz:
+<pre><code class="lang-">kubectl delete services example-service</code></pre></p><p>Chcete-li odstranit nasazení, ReplicaSet a Pods, která spouští aplikaci Hello World, zadejte následující příkaz:
+<pre><code class="lang-">kubectl delete deployment hello-world</code></pre></p><p>Další kroky</p><p>Následujte průvodce Připojování aplikací k službám.</p><p>Zpětná vazba</p><p>Bylo to vám pomocné?<br>Ano Ne<br>Děkuji za zpětnou vazbu. Pokud máte konkrétní, odpovídající otázku o použití Kubernetes, zadejte ji na Stack Overflow. Otevřete problém v repozitáři GitHub, pokud chcete zpracovat problém nebo navrhnout úpravy.</p><p>Poslední úpravy 28. května 2024 v 9:50 hodin PST: Aktualizace obrázku node-hello na novější obrázek Google (fa033cd15f)</p>
+</main>
+</body>
+</html>

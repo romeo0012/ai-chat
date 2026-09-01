@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Install Apache Roller Weblogger</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>How to Install Apache Roller Weblogger</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Jak nainstalovat Apache Roller Weblogger</p><p>Apache Roller je velmi populární server pro skupinové blogy vhodný pro blogy jak malé, tak velké. Stejně jako s jakýmkoli jiným aplikací napsanou v jazyce Java, je nasazení Rolleru na platformu velmi snadné. Vytvořte prostředí:
+<ol>
+<li>Přihlaste se do panelu správy platformy.</li>
+</ol><ol>
+<li>Kliknutím na tlačítko Create environment vytvořte nové prostředí.</li>
+</ol><ol>
+<li>V dialogu Environment topology vyberte GlassFish jako vaši aplikační server, MySQL jako databázi, kterou chcete použít, a zadejte název prostředí, například webroller. Poté klikněte na Create. Počkejte jen minutu, než bude vytvořeno vaše prostředí.</li>
+</ol></p><p>Nahrání Java balíčku:
+<ol>
+<li>Navštivte stránku Apache Roller a stáhněte si soubor roller-weblogger-5.0.0-for-javaee.zip.</li>
+</ol><ol>
+<li>Extrahujte soubory z balíčku, který jste právě stáhli.</li>
+</ol><ol>
+<li>Vrátíte se zpět na panel správy platformy a nahrávejte balíček roller-5.0.0-javaee.war (roller-weblogger-5.0.0-for-javaee/webapp/roller-5.0.0-javaee.war) do správce nasazení.</li>
+</ol></p><div class="doc-image"><img src="/images/docs/apache-roller/01-create-environment.png" alt="create environment" loading="lazy"></div><div class="doc-image"><img src="/images/docs/apache-roller/02-environment-wizard_hu6deb2e7e6bf05715b38b470c3aad799d_75781_480x0_resize_box_3.png" alt="environment wizard hu6deb2e7e6bf05715b38b470c3aad799d 75781 480x0 resize box 3" loading="lazy"></div><p>Konfigurace databáze:
+<ol>
+<li>Kliknutím na tlačítko Open in Browser pro MySQL otevřete databázi.</li>
+</ol><ol>
+<li>Během vytváření prostředí vám platforma odesílá e-mail s přihlašovacími údaji k databázi. Vytvořte účet a databázi s aplikací pomocí těchto přihlašovacích údajů.</li>
+</ol></p><p>Konfigurace Apache Roller:
+<ol>
+<li>Kliknutím na tlačítko Config pro GlassFish nahrávejte MySQL connector do složky lib.</li>
+</ol><ol>
+<li>Vytvořte soubor s názvem roller-custom.properties s následujícím obsahem:</li>
+</ol></p><p><pre><code class="lang-">1 2 3 4<br>installation.type=auto<br>mediafiles.storage.dir=/home/rollerdata/mediafiles<br>search.index.</code></pre></p><div class="doc-image"><img src="/images/docs/apache-roller/03-download-apache-roller_hub891de679506f27c57e48760d13e0bd6_50148_480x0_resize_box_3.png" alt="download apache roller hub891de679506f27c57e48760d13e0bd6 50148 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/apache-roller/04-apache-roller-for-javaee_hua328686126ceb8c4a4369e14564f28a6_68197_480x0_resize_box_3.png" alt="apache roller for javaee hua328686126ceb8c4a4369e14564f28a6 68197 480x0 resize box 3" loading="lazy"></div><p> text:<br>složka lib. 2. Vytvořte soubor s názvem roller-custom.properties s následujícím obsahem:<br>1 2 3 4<br>installation.type=auto<br>mediafiles.storage.dir=/domu/rollerdata/mediafiles<br>search.index.dir=/domu/rollerdata/searchindex<br>log4j.appender.roller.File=/domu/rollerdata/roller.log<ol>
+<li>Vložte soubor roller-custom.properties do adresáře tříd (lib/třídy).</li>
+</ol><ol>
+<li>Vytvořte adresář rollerdata v domovském adresáři. Poté vyberte adresář rollerdata a vytvořte v něm adresáře mediafiles a searchindex.</li>
+</ol><ol>
+<li>Během vytváření prostředí vám platforma poslala e-mail s přihlašovacími údaji k vašemu GlassFish DAS uzlu. Přejděte do panelu správy GlassFish a přihlaste se pomocí těchto údajů.</li>
+</ol><ol>
+<li>Vytvořte pool spojení s názvem WebRollerPool. Vyberte java.sql.Driver jako typ zdroje a MySQL jako dodavatele řadiče databáze. Klikněte na Další. Přejděte k vlastnostem doplňkových a zadejte vaši databáze URL, uživatelské jméno a heslo.</li>
+</ol><ol>
+<li>Vytvořte zdroj JDBC s názvem jdbc/rollerdb a vyberte vytvořený WebRollerPool jako pool používaný tímto zdrojem.</li>
+</ol><ol>
+<li>Vytvořte sezení pošty s názvem mail/Sessions (používáme Gmail jako příklad).</li>
+</ol><ol>
+<li>Vracete se zpět na panel správy platformy a nasazte vaši Java balíček do prostředí, které jste vytvořili dříve. Nyní můžete otevřít Apache Roller v prohlížeči webu, dokončit instalační proces a začít s ním pracovat! Co dále? Kategorie tutorialy Java Tutorials Nastavení prostředí</li>
+</ol></p><div class="doc-image"><img src="/images/docs/apache-roller/05-upload-roller-application.png" alt="upload roller application" loading="lazy"></div><div class="doc-image"><img src="/images/docs/apache-roller/06-open-mysql-in-browser_hu2c7f6b5e7745f986b610d24ebaf642af_17824_480x0_resize_box_3.png" alt="open mysql in browser hu2c7f6b5e7745f986b610d24ebaf642af 17824 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/apache-roller/07-database-create-user_hubd04bb8a795b36a2337620336d990b46_62059_480x0_resize_box_3.png" alt="database create user hubd04bb8a795b36a2337620336d990b46 62059 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/apache-roller/08-create-dedicated-database_hu28e406bcb36c3860fa7e180ae1dff343_29349_480x0_resize_box_3.png" alt="create dedicated database hu28e406bcb36c3860fa7e180ae1dff343 29349 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/apache-roller/09-upload-mysql-connector_hub9e62f3ca63cef0402cb742c48a81541_21664_480x0_resize_box_3.png" alt="upload mysql connector hub9e62f3ca63cef0402cb742c48a81541 21664 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/apache-roller/10-roller-custom-properties_huf16dbe0ec10f3dcca0e67111094b9351_23419_480x0_resize_box_3.png" alt="roller custom properties huf16dbe0ec10f3dcca0e67111094b9351 23419 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/apache-roller/11-create-directories-for-roller_hu4e8eb2088e55f213810855e74636b67d_22580_480x0_resize_box_3.png" alt="create directories for roller hu4e8eb2088e55f213810855e74636b67d 22580 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/apache-roller/12-glasfish-admin-panel-button_hu21485e11576f1972859aa15db73c1fc6_21181_480x0_resize_box_3.png" alt="glasfish admin panel button hu21485e11576f1972859aa15db73c1fc6 21181 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/apache-roller/13-glassfish-admin-login_hu48a83e9afe68c794780782ad27a0eb7b_36209_480x0_resize_box_3.png" alt="glassfish admin login hu48a83e9afe68c794780782ad27a0eb7b 36209 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/apache-roller/14-jdbc-connection-pool_hu507f1375086bb3f990087000b465a509_50509_480x0_resize_box_3.png" alt="jdbc connection pool hu507f1375086bb3f990087000b465a509 50509 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/apache-roller/15-database-credentials_huf09e655de2f202beca76730f2c2735e0_11325_480x0_resize_box_3.png" alt="database credentials huf09e655de2f202beca76730f2c2735e0 11325 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/apache-roller/16-new-jdbc-resource_hu52b2a1dcc8fb3bccf118f7b5b773d1fc_50714_480x0_resize_box_3.png" alt="new jdbc resource hu52b2a1dcc8fb3bccf118f7b5b773d1fc 50714 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/apache-roller/17-java-mail-session_hu5df46b787e5e5534e52c1e9b2ccc5600_76934_480x0_resize_box_3.png" alt="java mail session hu5df46b787e5e5534e52c1e9b2ccc5600 76934 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/apache-roller/18-deploy-apache-roller.png" alt="deploy apache roller" loading="lazy"></div><div class="doc-image"><img src="/images/docs/apache-roller/19-apache-roller_hu2c76133716f7188df362148c4234d6c6_26225_480x0_resize_box_3.png" alt="apache roller hu2c76133716f7188df362148c4234d6c6 26225 480x0 resize box 3" loading="lazy"></div>
+</main>
+</body>
+</html>

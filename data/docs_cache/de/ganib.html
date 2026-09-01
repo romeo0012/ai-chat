@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Deploy Ganib to PaaS</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>How to Deploy Ganib to PaaS</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Wie das Deployen von Ganib auf PaaS Ganib Enterprises erfolgt:</p><p>Ganib Enterprises ist eines der weltweit beliebtesten und am häufigsten verwendeten Open Source Projektmanagement-Software. Das Open Source Ganib Produktpaket umfasst eine Reihe von Modulen, die ein Projektmanagement-System (PMS), Projektportfolio-Management (PPM), Projektpläne, Projektdashboard, Dokumentenmanagement, Zeiterfassung und Zeitarbeit (PTO), Zeitarbeitsscheine, Desktop-Zeiterfassung und Bildschirmfotografiewerkzeuge bereitstellen. Hier sehen wir uns, wie man Ganib auf die Plattform deployen kann.</p><p>A. Umgebung erstellen<ol>
+<li>Öffne die Umgebungsvorlage-Assistent durch Klicken auf den Schaltflächen "Umgebung erstellen" und wähle den Tomcat Anwendungsspeicher und MySQL Datenbankknoten aus. Setze Ressourcenbegrenzungen für sie, gib einen Umgebungsnamen ein und drücke auf "Erstellen".</li>
+</ol><ol>
+<li>Innerhalb kürzester Zeit sollte Ihre neue Umgebung im Panel erscheinen.</li>
+</ol></p><div class="doc-image"><img src="/images/docs/ganib/7883b5f904f95966acba7e076383da9aenv-topology_hu79baeb55662e43b0d2a6a5ef6a00130c_84560_480x0_resize_box_3.png" alt="7883b5f904f95966acba7e076383da9aenv topology hu79baeb55662e43b0d2a6a5ef6a00130c 84560 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/ganib/7883b5f904f95966acba7e076383da9anew-env_hu2e4b56842f265c60dd93d003bff42850_8801_480x0_resize_box_3.png" alt="7883b5f904f95966acba7e076383da9anew env hu2e4b56842f265c60dd93d003bff42850 8801 480x0 resize box 3" loading="lazy"></div><p>B. Ganib Deployment<ol>
+<li>Navigiere zur Seite von Sourceforge, um die Community Edition des Ganib Projektmanagement-Systems herunterzuladen.</li>
+</ol><ol>
+<li>Öffne das letzte Release-Verzeichnis (z.B. Ganib 3.3 in unserem Fall) und lade das ganib.war-Datei herunter, das es enthält.</li>
+</ol><ol>
+<li>Navigiere zurück zur Plattform-Dashboard und lade das .war-Datei, das Sie gerade heruntergeladen haben, hoch.</li>
+</ol><ol>
+<li>Klicken Sie schließlich auf den Schaltflächen "Deployen" und wählen Sie die vorher erstellte Umgebung aus der Liste aus.</li>
+</ol><ol>
+<li>Innerhalb von einer Minute wird das Ganib-Anwendung auf die ausgewählte Umgebung deployen.</li>
+</ol></p><p>C. MySQL-Konfiguration<ol>
+<li>Klicken Sie auf den Schaltflächen "Browser öffnen" neben dem MySQL-Knoten in Ihrer Umgebung.</li>
+</ol><ol>
+<li>Während Sie die Umgebung erstellten, hat die Plattform Ihnen per E-Mail die Datenbankanmeldedaten zugesandt.</li>
+</ol></p><p> Öffne die Browser-Schaltfläche neben dem MySQL-Knoten in Ihrer Umgebung. 2. Während Sie die Umgebung erstellten, hat die Plattform Ihnen per E-Mail die Datenbank-Anmeldedaten gesendet. Erstelle einen Benutzer und eine Datenbank (z.B. ganib) mithilfe dieser Anmeldedaten. 3. Danach entpacken Sie den heruntergeladenen Ganib .war-Datei und finden Sie die ganib.sql-Datei in dem Datenbank-Ordner. Importiere sie in die Datenbank, die Sie in der vorherigen Schritt erstellt haben. Warten Sie einige Minuten, bis diese Operation abgeschlossen ist. D. Ganib-Konfiguration 1. Navigiere zurück zur Dashboard und klicke auf den Config-Button für den Tomcat-Server: 2. Öffne den Ordner lib und lade die MySQL-Connector und die Java-Mail-Bibliothek hoch. 3. Danach navigiere zu dem Ordner server &gt; context.xml-Datei und füge die folgenden Zeilen am Ende vor dem Schließen des Context-Tags ein.</p><div class="doc-image"><img src="/images/docs/ganib/7883b5f904f95966acba7e076383da9asourceforge_hu8f23e8102d353c73f42840e4f43073f8_69006_480x0_resize_box_3.png" alt="7883b5f904f95966acba7e076383da9asourceforge hu8f23e8102d353c73f42840e4f43073f8 69006 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/ganib/7883b5f904f95966acba7e076383da9aganib-war_hu1974bb3b1fe269d37af0b0457ec158d5_24366_480x0_resize_box_3.png" alt="7883b5f904f95966acba7e076383da9aganib war hu1974bb3b1fe269d37af0b0457ec158d5 24366 480x0 resize box 3" loading="lazy"></div><p>&lt;Resource name=“jdbc/GanibDB” auth=“Container” type=“javax.sql.DataSource” username=“root” password="" driverClassName=“com.mysql.jdbc.Driver” url="" maxActive=“125” maxIdle=“25” /&gt;</p><p>Notiert Sie, dass Sie die Einstellungen Ihrer Datenbank in diese Zeichenfolgen eintragen müssen: Anmeldedaten, die Sie während der Umgebungskonfiguration erhalten haben und URL für Ihre Datenbank im folgenden Format:</p><p>1 jdbc:mysql://mysql-{env_name}.{[hoster's_domain](/hosting-providers/)}:3306/{database_name}?useUnicode=true&amp;characterEncoding=utf-8&amp;autoReconnect=true
+<ol>
+<li>Speichere die Änderungen, die Sie vorgenommen haben.</li>
+</ol><ol>
+<li>Klicke auf Restart neben dem Tomcat-Knoten, um die Konfigurationsänderungen anzuwenden. E. Starten der Anwendung 1. Schließlich klicke auf die Schaltfläche Öffne in Browser neben Ihrer Umgebung. 2.</li>
+</ol>
+<ol>
+<li>Klicke auf Restart neben dem Tomcat-Knoten, um die Konfigurationsänderungen anzuwenden. E. Starten der Anwendung 1. Schließlich klicke auf die Schaltfläche Öffne in Browser neben Ihrer Umgebung. 2.</li>
+</ol></p><div class="doc-image"><img src="/images/docs/ganib/7883b5f904f95966acba7e076383da9auplod-war.png" alt="7883b5f904f95966acba7e076383da9auplod war" loading="lazy"></div><div class="doc-image"><img src="/images/docs/ganib/7883b5f904f95966acba7e076383da9adeploy-to_hu4dc08ed62cf1769b1890be21819ccb5a_9807_480x0_resize_box_3.png" alt="7883b5f904f95966acba7e076383da9adeploy to hu4dc08ed62cf1769b1890be21819ccb5a 9807 480x0 resize box 3" loading="lazy"></div><p>Du wirst die Ganib-Startseite sehen und kannst fortfahren, sie zu nutzen. Jetzt hast Du deine eigene Ganib-Anwendung auf der Plattform bereitgestellt. Viel Spaß!</p><div class="doc-image"><img src="/images/docs/ganib/7883b5f904f95966acba7e076383da9aganib-deployed_hu8f77498e44bfcff4b7fa8acc18ef8010_13771_480x0_resize_box_3.png" alt="7883b5f904f95966acba7e076383da9aganib deployed hu8f77498e44bfcff4b7fa8acc18ef8010 13771 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/ganib/7883b5f904f95966acba7e076383da9amysql-open_hu3d46d46d1010d142aa64f604c519aeb8_14494_480x0_resize_box_3.png" alt="7883b5f904f95966acba7e076383da9amysql open hu3d46d46d1010d142aa64f604c519aeb8 14494 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/ganib/7883b5f904f95966acba7e076383da9aadd-db-user_hu185a4e17b6837efce8e564030c92d2bf_27103_480x0_resize_box_3.png" alt="7883b5f904f95966acba7e076383da9aadd db user hu185a4e17b6837efce8e564030c92d2bf 27103 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/ganib/7883b5f904f95966acba7e076383da9aimport-sql_hub4493899232ffd61641d29589dcb9e6e_37112_480x0_resize_box_3.png" alt="7883b5f904f95966acba7e076383da9aimport sql hub4493899232ffd61641d29589dcb9e6e 37112 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/ganib/7883b5f904f95966acba7e076383da9atomcat-config_hu408bc9e369665191d416993849e91d64_15136_480x0_resize_box_3.png" alt="7883b5f904f95966acba7e076383da9atomcat config hu408bc9e369665191d416993849e91d64 15136 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/ganib/7883b5f904f95966acba7e076383da9alibs.png" alt="7883b5f904f95966acba7e076383da9alibs" loading="lazy"></div><div class="doc-image"><img src="/images/docs/ganib/7883b5f904f95966acba7e076383da9acontext-xml_hu2bf224217a12b8f4edd6cfac4eb9eece_62867_480x0_resize_box_3.png" alt="7883b5f904f95966acba7e076383da9acontext xml hu2bf224217a12b8f4edd6cfac4eb9eece 62867 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/ganib/7883b5f904f95966acba7e076383da9arestart-tomcat_hue3ca973e63cce3ea3155fe906ad65351_15523_480x0_resize_box_3.png" alt="7883b5f904f95966acba7e076383da9arestart tomcat hue3ca973e63cce3ea3155fe906ad65351 15523 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/ganib/7883b5f904f95966acba7e076383da9aopen-in-browser_hu194042551813a68033c8243971e3db2f_15162_480x0_resize_box_3.png" alt="7883b5f904f95966acba7e076383da9aopen in browser hu194042551813a68033c8243971e3db2f 15162 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/ganib/7883b5f904f95966acba7e076383da9aganib-welcome-page_hua1026d2e9ec5de0c78ce82816bd824bb_58588_480x0_resize_box_3.png" alt="7883b5f904f95966acba7e076383da9aganib welcome page hua1026d2e9ec5de0c78ce82816bd824bb 58588 480x0 resize box 3" loading="lazy"></div>
+</main>
+</body>
+</html>

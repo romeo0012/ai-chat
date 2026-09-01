@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apache TomEE</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Apache TomEE</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Apache TomEE</p><p>Apache TomEE je Java server připravený pro podnikové použití, vytvořený na základě Apache Tomcat s implementací funkcí MicroProfile a Jakarta EE. Porovnání podporované funkce je k dispozici na stránce dokumentace. Platforma poskytuje čtyři různé distribuce TomEE: WebProfile - poskytuje Jakarta EE implementaci, včetně Servletů, JSP, JSF, JTA, JPA, CDI, Bean Validation a EJB Lite MicroProfile - rozšiřuje možnosti WebProfile o plnou podporu MicroProfile Plus - obsahuje všechny technologie v MicroProfile s přidáním JAX-WS, JEE Connectorů a JMS PluME - podporuje vše, co je v profilu Plus, včetně Eclipse Mojarra a EclipseLink (tato distribuce je potřebná pro organizace, které migrují z Eclipse Glassfish na projekt Apache TomEE)</p><p>Poznámka: Tento šablon používá moderní daemon systému systemd pro inicializaci. Server aplikace TomEE běží bez žádných dalších požadavků na běhový prostředí nebo zahájení pro větší aplikace a je kompatibilní s většinou nástrojů Tomcat-vědomých a Tomcat-testovaných. Níže popisujeme, jak spustit Apache TomEE na platformě.
+<ol>
+<li>Přihlaste se k dashboardu PaaS a klikněte na tlačítko New Environment.</li>
+</ol><ol>
+<li>V dialogu topologie wizard vyberte TomEE jako svůj server aplikace (na kartě Java). Pokud je nutné, nastavte škálování uzlů (vertikální a horizontální), veřejné IP adresy, název prostředí atd. Klikněte na Create, když jste připraveni.</li>
+</ol></p><div class="doc-image"><img src="/images/docs/apache-tomee/01-new-environment_hu08753fb831e531293fa12c6b94ab4cf4_9171_480x0_resize_box_3.png" alt="new environment hu08753fb831e531293fa12c6b94ab4cf4 9171 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/apache-tomee/02-tomee-envronment-topology-wizard_hub998b8edba9ed169166fdda23ff50953_93069_480x0_resize_box_3.png" alt="tomee envronment topology wizard hub998b8edba9ed169166fdda23ff50953 93069 480x0 resize box 3" loading="lazy"></div><p> Český překlad:
+<ol>
+<li>Kliknutím na kartu Java). Pokud je nutné, nastavte škálování uzlu (vertikální a horizontální), veřejné IP adresy, název prostředí apod. Kliknutím na Tvořit se připravíte. Tip: Platforma poskytuje možnost jednoklikové automatické klasifikace, která automaticky konfiguruje vysokojícivou TomEE klastr. Výsledkem je hotový Java klastr s měnitelným počtem připojených TomEE serverů s přednastavenou replikací relací a balancováním zatížení.</li>
+</ol><ol>
+<li>V novém prostředí s Apache TomEE Java aplikační serverem se vytvoří za minutu. Kliknutím na tlačítko Otevřít v prohlížeči můžete přistoupit k výchozí stránce serveru. Nyní můžete pokračovat v nasazování aplikace. Tip: Tomcat a TomEE servery jsou poskytovány s speciální proměnnou HOT_DEPLOY (ne nastavenou vzhledem k výchozímu nastavení), která definuje, zda server by měl být obnoven (false, zakázáno, 0) nebo ne (true, povoleno, 1) během nasazování aplikace. Hot deploy (beze restartu) je rychlejší a umožňuje vyhnout se zastavení během procesu nasazování. Nicméně není podporováno některými aplikacemi a tak je vypnuté výchozí nastavení. Co dál? Tomcat Server Java Application Server Configuration Tomcat Multiple Domains Deployment Guide Environment Variables Tomcat Security</li>
+</ol></p><div class="doc-image"><img src="/images/docs/apache-tomee/03-tomee-auto-clustering_hu9ea4e7e947d29e4f4634b4c0d042172c_104186_480x0_resize_box_3.png" alt="tomee auto clustering hu9ea4e7e947d29e4f4634b4c0d042172c 104186 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/apache-tomee/04-open-tomee-in-browser_hudea12c95842db5e4e382ddfef89757c2_19923_480x0_resize_box_3.png" alt="open tomee in browser hudea12c95842db5e4e382ddfef89757c2 19923 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/apache-tomee/05-apache-tomee-home-page_hu417c154ed35849da4475ebeb593d473e_76853_480x0_resize_box_3.png" alt="apache tomee home page hu417c154ed35849da4475ebeb593d473e 76853 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/apache-tomee/06-tomee-hot-deploy-variable_hue47a404684cbf78d10064542facca787_40877_480x0_resize_box_3.png" alt="tomee hot deploy variable hue47a404684cbf78d10064542facca787 40877 480x0 resize box 3" loading="lazy"></div>
+</main>
+</body>
+</html>

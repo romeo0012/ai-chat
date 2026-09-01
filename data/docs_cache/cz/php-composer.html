@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PHP Composer for Smart Dependency Management of Your Cloud Applications</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>PHP Composer for Smart Dependency Management of Your Cloud Applications</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> PHP Composer pro správné řízení závislostí vašich cloudových aplikací<br>Composer je jedním z nejpopulárnějších nástrojů pro řízení závislostí v PHP, inspirovaných npm pro Node.js a bundlerem pro Ruby. Tento nástroj vám umožní inteligentně spravovat všechny potřebné knihovny a balíčky pro vaši aplikaci. Běží na úrovni jednotlivých projektů a určuje, které verze kterých balíčků vaše aplikace závisí a instaluje je do pracovního adresáře. Dalším výhodným vlastností je autoload, který vám umožní udržovat balíčky aktuální. Tento nástroj je v integrální součásti všech serverů PHP (Apache, NGINX, LiteSpeed, LEMP a LSSMP) a je instalován do adresáře /usr/local/bin, který je přidán do proměnné PATH, což znamená, že Composer je operovatelný z libovolného místa na uzlu prostřednictvím komandového příkazu composer (např. composer about). Pokud má vaše aplikace soubor composer.json, Composer může spravovat závislosti přímo během instalace pomocí skriptu Post-Deploy hook. Všechno, co musíte udělat, je přesunout se do adresáře svého projektu a spustit příkaz composer install:<br>1 2<br>cd $WEBROOT/{project_name}<br>composer install</p><p>Aktualizace Composeru<br>Vašemu uzlu je automaticky poskytnut nejnovější verze Composeru při vytváření uzlu. Pokud však vydá novější verzi Composeru, můžete ji snadno získat bez nutnosti vytvořit celý kontejner. Následující kroky vám pomohou instalovat nejnovější verzi Composeru do svého kontejneru PHP:<ol>
+<li>Připojte se k vhodnému uzlu pomocí SSH.</li>
+</ol></p><p>Překlad provedl:<br>David Štěpánek<br>david.stepanek@gmail.com<br>www.davidstepanek.cz</p><div class="doc-image"><img src="/images/docs/php-composer/02-apache-web-ssh-access_hu5720db43283bae025bc22deba636e9f7_19233_480x0_resize_box_3.png" alt="apache web ssh access hu5720db43283bae025bc22deba636e9f7 19233 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/php-composer/03-ssh-download-composer-installer_hu52edf0cffbbbdbf5e871ec9f92818262_21954_480x0_resize_box_3.png" alt="ssh download composer installer hu52edf0cffbbbdbf5e871ec9f92818262 21954 480x0 resize box 3" loading="lazy"></div><p> Není nutné vytvořit celý kontejner znovu. Následující kroky vám pomůžou nainstalovat nejnovější verzi Composer do svého PHP kontejneru:<ol>
+<li>Připojte se k vhodnému uzlu pomocí SSH. Například pomocí vbudovaného Web SSH.</li>
+</ol><ol>
+<li>Stáhněte si instalační skript Composer pomocí následujícího příkazu:</li>
+</ol><br>  1 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"<ol>
+<li>Nainstalujte Composer do aktuálního adresáře.</li>
+</ol><br>  1 php composer-setup.php --install-dir=./ --filename=composer<br>Doporučení: Pokud je nutné, můžete se přesunout do požadovaného adresáře před operací nebo upravit cestu pomocí parametru install-dir. Však není možné nainstalovat do adresáře /usr/local/bin/ s prvním instancem Composer.<ol>
+<li>Nyní spusťte tuto místní verzi Composer (tedy pomocí relativní nebo absolutní cesty) k ověření, že funguje správně. Například:</li>
+</ol><br>  1 ./composer about<br>Doporučení: Pokud funguje správně správce závislostí, doporučujeme odstranit instalační skript (protože již není potřeba).<br>  1 php -r "unlink('composer-setup.php');"<br>Tady je vše! Nejnovější verze Composer byla úspěšně nainstalována a je připravena k použití. Co dál? Návod k nasazování Nasazovací nástroje Nasazovací zásady Konfigurační soubor Správce souborů PHP Extenze PHP Akcelerátory</p><div class="doc-image"><img src="/images/docs/php-composer/04-ssh-install-php-composer_huf7d32c891772ba080ec449e92dfaf068_31534_480x0_resize_box_3.png" alt="ssh install php composer huf7d32c891772ba080ec449e92dfaf068 31534 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/php-composer/05-ssh-php-composer-about_huae97aa6a269547d6c8ab716bea812b89_30079_480x0_resize_box_3.png" alt="ssh php composer about huae97aa6a269547d6c8ab716bea812b89 30079 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/php-composer/06-ssh-remove-composer-installer_hucf3920d5be1824d15e893359bd465d0c_20365_480x0_resize_box_3.png" alt="ssh remove composer installer hucf3920d5be1824d15e893359bd465d0c 20365 480x0 resize box 3" loading="lazy"></div>
+</main>
+</body>
+</html>

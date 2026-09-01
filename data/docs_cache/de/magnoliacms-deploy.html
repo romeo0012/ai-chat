@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Deploy Magnolia CMS</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>How to Deploy Magnolia CMS</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Wie eine Magnolia CMS-Installation durchzuführen</p><p>Magnolia ist eine open-source Java-basierte Content Management System (CMS), die über JCR (Content Repository API for Java) die Daten speichert, verarbeitet und abruft. Ihr Block-Struktur ermöglicht es, das System-Kern und alle damit verbundenen Komponenten (z.B. Seiten-Editor, Cache, Repository usw.) in separate Modulen zu verpacken, was zu einer hohen Flexibilität führt. Zusätzlich ist diese CMS einfach genug, um auch unbekannte Benutzer eine einfache Inhaltsverwaltung zu ermöglichen, während erfahrene Entwickler durch die flüssige Integration zusätzlicher Werkzeuge für fortgeschrittenen Entwicklungsbedarf sorgen. Dadurch bietet die Magnolia CMS mehrere Wege der Interaktion für verschiedene Benutzertypen an und kann somit jede Management-, Geschäfts- und Marketinganforderung erfüllen. Um sofort eine vorkonfigurierte und lauffähige Magnolia CMS-Instanz unter der Community Edition Lizenz zu erhalten, verwenden Sie den folgenden dedizierten Ein-Klick-Installations-Widget: Klicken Sie bitte auf "Jetzt hosten" und geben Sie Ihre E-Mail-Adresse ein, um Magnolia zu starten, um die Schritte der manuellen Installation zu überspringen (die Vollständige Liste ähnlicher vorbereiteter Lösungen für schnelle Bereitstellung finden Sie im Marketplace der Plattform). Wenn Sie jedoch bevorzugen, sich über die Ausführung der Installation zu informieren oder eine andere Version dieser CMS benötigen, finden Sie im folgenden kurzen Video-Tutorial Einblicke in die Bereitstellung der Magnolia CMS auf der Plattform.</p><p>Wenn Sie jedoch bevorzugen, sich über die Ausführung der Installation zu informieren oder eine andere Version dieser CMS benötigen, finden Sie im folgenden kurzen Video-Tutorial Einblicke in die Bereitstellung der Magnolia CMS auf der Plattform.</p><div class="doc-image"><img src="/images/docs/magnoliacms-deploy/3.png" alt="3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/magnoliacms-deploy/4_hu6aed3750f1213fec4f0b28bbece93b92_28810_480x0_resize_box_3.png" alt="4 hu6aed3750f1213fec4f0b28bbece93b92 28810 480x0 resize box 3" loading="lazy"></div><p>[Video-Tutorial zur Bereitstellung der Magnolia CMS auf der Plattform]</p><p> Wie die Installation durchgeführt wird oder eine andere Version dieses CMS benötigt, überprüfen Sie bitte den kurzen Video-Tutorial unten, um Einblicke in die Bereitstellung von Magnolia CMS auf der Plattform zu erhalten. Um weitere Details zu erhalten, lesen Sie bitte die Anleitung unten durch, in der wir beschreiben, wie man die Magnolia CMS-Bereitstellung innerhalb der Plattform manuell mit den folgenden Schritten durchführt:
+<ol>
+<li>Neues Umgebung erstellen</li>
+</ol><ol>
+<li>Bereitstellung des Magnolia CMS-Pakets</li>
+</ol><ol>
+<li>Installation eigener Magnolia CMS-Instanz</li>
+</ol><ol>
+<li>Neues Umgebung erstellen</li>
+</ol></p><p>Melden Sie sich bitte bei der Plattform-Dashboard-Anmeldung mit Ihren Anmeldeinformationen (oder, wenn Sie noch kein Erfahrungswert mit unserer Plattform haben, wählen Sie einen geeigneten Hosting-Anbieter aus unseren Partnern und erstellen Sie ein Konto zuerst) und gehen wir weiter.
+<ol>
+<li>Klicken Sie im oberen linken Eck des Dashboards auf „Neues Umgebung“, wechseln Sie zum Java-Tab und wählen Sie Tomcat 7 oder 8 als Ihre Anwendungsserver-Plattform aus. Anschließend legen Sie die gewünschte Ressourcenmenge für dieses Knoten mit Skalierungsgrenzschiebern fest, spezifizieren Sie eine Region und einen Namen für Ihre neue Umgebung und klicken Sie auf „Erstellen“. In wenigen Minuten sollte es im Dashboard erscheinen; währenddessen gehen wir weiter, um Zeit zu sparen.</li>
+</ol></p><div class="doc-image"><img src="/images/docs/magnoliacms-deploy/5.png" alt="5" loading="lazy"></div><div class="doc-image"><img src="/images/docs/magnoliacms-deploy/6_hu5ce443ebc0693237bf27ca6c1928bf92_16523_480x0_resize_box_3.png" alt="6 hu5ce443ebc0693237bf27ca6c1928bf92 16523 480x0 resize box 3" loading="lazy"></div><p>Magnolia CMS-Paket-Bereitstellung</p><p>Während die Umgebung erstellt wird, können Sie das Magnolia CMS-Paket herunterladen.
+<ol>
+<li>Navigieren Sie zur Magnolia Download-Seite und klicken Sie auf die bevorzugte Edition-Version, um Sie auf die entsprechenden Quelldateien zu leiten.</li>
+</ol><ol>
+<li>In der geöffneten Seite finden Sie den Abschnitt „War-Dateien“ und kopieren Sie die Linkadresse für das Paket „magnolia-enterprise-standard-webapp“.</li>
+</ol></p><p> Speichern Sie die Dateien. 2. Öffnen Sie die Seite und suchen Sie in der Abschnitt War files nach dem Link zum Paket magnolia-enterprise-standard-webapp kopieren. Hinweis: Magnolia CMS ist proprietäre Software, die für ihre Nutzung eine Lizenzkauf erforderlich ist. Sie können jedoch nach einer einfachen Registrierung eine 30-Tage-Lizenz der Enterprise Edition erhalten oder die kostenlose Community Edition nutzen. 3. Kehren Sie zur Plattform-Dashboard zurück (wir nehmen an, dass die Umgebungsbereitstellung bis zu diesem Zeitpunkt abgeschlossen ist) und klicken Sie auf "Hochladen" unter Deployment manager. In dem aufgerufenen Dialogfeld wechseln Sie zum Tab URL, fügen Sie den kopierten Link ein und Hochladen Sie das Paket. Innerhalb von einer Minute wird Ihr WAR-Paket in der Liste der verfügbaren Pakete aufgelistet. 4. Nun bewegen Sie den Mauszeiger über das gerade hochgeladene Projekt, klicken Sie auf den Button "Deploy zu..." neben ihm und wählen Sie die Umgebung, auf die Ihre Anwendung deployen soll (magnolia in unserem Fall). Sie können zusätzlich im offenen Bestätigungsfenster das gewünschte Kontextnamen angeben (oder lassen Sie das entsprechende Feld leer, um die Standard-LOCATION ROOT zu verwenden). Warten Sie, bis die Bereitstellung erfolgreich abgeschlossen ist und wechseln Sie zur nächsten Sektion.</p><div class="doc-image"><img src="/images/docs/magnoliacms-deploy/7_huf5866769249f64a8461bca759f420d23_26639_480x0_resize_box_3.png" alt="7 huf5866769249f64a8461bca759f420d23 26639 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/magnoliacms-deploy/8_hu36f2a49f0fd83b50f374dde12aa24898_29462_480x0_resize_box_3.png" alt="8 hu36f2a49f0fd83b50f374dde12aa24898 29462 480x0 resize box 3" loading="lazy"></div><p>Installation von Magnolia CMS<ol>
+<li>Klicken Sie auf den Button "Im Browser öffnen", um Ihre Magnolia CMS-Instanz zu starten.</li>
+</ol><ol>
+<li>Sie benötigen eine Menge erforderlicher Module, die während dem folgenden Installationsprozess automatisch integriert werden.</li>
+</ol>
+<ol>
+<li>Klicken Sie auf den Button Open in browser, um Ihre Magnolia CMS-Instanz zu starten.</li>
+</ol><ol>
+<li>In der geöffneten Magnolia-Installationsseite können Sie die Liste der zu installierenden Module überprüfen. Wenn Sie bereit sind, klicken Sie auf Start Installation und warten Sie ein paar Minuten, bis dieses Vorgang abgeschlossen ist.</li>
+</ol><ol>
+<li>Sobald alle notwendigen Operationen abgeschlossen sind, sehen Sie die entsprechende Benachrichtigung. Jetzt klicken Sie auf den Button Start Up Magnolia, um auf die Magnolia-Lizenzseite weitergeleitet zu werden, wo Sie Ihre Magnolia CMS-Kopie registrieren können.</li>
+</ol><ol>
+<li>In der geöffneten Seite beachten Sie den Link im ersten Schritt, um eine 30-Tage-Testlizenz zu erhalten und sie in der zweiten Abschnitt (oder füllen Sie die entsprechenden Felder ein, wenn Sie sie vorher erhalten haben) mit Ihrer E-Mail-Adresse anzugeben. Wenn Sie fertig sind, wählen Sie Use License.</li>
+</ol><ol>
+<li>Cool, alles ist bereit - jetzt können Sie sich mit den Standardanmeldeinformationen des superusers (die als Ihr Benutzername und Passwort angegeben sind) in die eigene Magnolia CMS-Admin-Seite einloggen. Klicken Sie auf Login, um die Authentifizierung durchzuführen und die Magnolia CMS-Shell anzusehen. Das ist es! Ihre Magnolia-Inhaltsverwaltungssystem ist nun innerhalb der Plattform eingerichtet! Jetzt können Sie das erforderliche Inhalt durch die Empfehlungen der offiziellen Magnolia-Dokumentationsseite organisieren und verwalten. Was kommt nach?</li>
+</ol></p><p>Sie können jetzt das erforderliche Inhalt durch die Empfehlungen der offiziellen Magnolia-Dokumentationsseite organisieren und verwalten. Was kommt nach? Tutorials by Category Java Tutorials Setting Up Environment</p><div class="doc-image"><img src="/images/docs/magnoliacms-deploy/9_hua638be82498121bd3d9a8916d9ea14ea_37289_480x0_resize_box_3.png" alt="9 hua638be82498121bd3d9a8916d9ea14ea 37289 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/magnoliacms-deploy/10_hu3c9f65b82602a4d9f7dc13cb391f6195_69851_480x0_resize_box_3.png" alt="10 hu3c9f65b82602a4d9f7dc13cb391f6195 69851 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/magnoliacms-deploy/11.png" alt="11" loading="lazy"></div><div class="doc-image"><img src="/images/docs/magnoliacms-deploy/12_hu3f80dd9bc5d0b3a72ced2ab3fcfe58e5_43052_480x0_resize_box_3.png" alt="12 hu3f80dd9bc5d0b3a72ced2ab3fcfe58e5 43052 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/magnoliacms-deploy/2-magnolia-cms-new-environment_hu7c2a53fd75093830ce7bb43e8f1a9ec7_141913_480x0_resize_box_3.png" alt="magnolia cms new environment hu7c2a53fd75093830ce7bb43e8f1a9ec7 141913 480x0 resize box 3" loading="lazy"></div>
+</main>
+</body>
+</html>

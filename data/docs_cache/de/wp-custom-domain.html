@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WordPress Custom Domain Binding</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>WordPress Custom Domain Binding</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Um Ihre WordPress-Webseite für die Produktion bereitzustellen, sollte ein benutzerdefinierter Domainname hinzugefügt und gebunden werden. Dadurch können Sie Ihre Website über einen Domainnamen Ihrer Wahl zugreifen, anstatt dem Standard-Domainnamen des Plattformen-Anbieters. Betrachten wir, dass Sie eine WordPress-Anwendung mit der Verknüpfung aller Stack-Schichten haben. Das bedeutet, dass der Cluster zwei LiteSpeed Web ADC (Load Balancer) hat, die als Eingangspunkte (Origins oder Endpoints) dienen.
+<ol>
+<li>Bevor Sie einen benutzerdefinierten Domainnamen für Ihre WordPress-Anwendung verwenden können, müssen Sie ihn bei einem beliebigen Domain-Registrar erwerben. Siehe die Abschnitt "Wählen Sie einen Domainnamen" im All-in-One Guide für einige Tipps zum Auswählen eines Domainnamens.</li>
+</ol><ol>
+<li>Danach können Sie ihn Ihrer WordPress-Anwendung binden, indem Sie DNS-Einträge erstellen. Bei dem Domain-Registrar erstellen Sie für jeden Endpunkt einen A-Eintrag, der auf einen benutzerdefinierten Domainnamen zeigt, z.B. wordpress-enterprise.jele.website. Hinweise: Wenn Sie eine einzelne WordPress-Paketversion verwenden, benötigen Sie nur einen A-Eintrag, der auf die öffentliche IP-Adresse des LLSMP/LEMP-Container mit Ihrer WordPress-Anwendung zeigt. Wenn Sie die Load Balancer horizontal skalieren wollen, registrieren Sie jede neu bereitgestellte öffentliche IP-Adresse unter demselben benutzerdefinierten Domainnamen als zusätzlicher A-Eintrag. Wenn Sie eine mehrregionale WordPress-Installation verwenden, müssen Sie A-Einträge für jeden Eingangspunkt in jedem Region bereitstellen.</li>
+</ol><ol>
+<li>Ausstellen Sie ein SSL-Zertifikat für den benutzerdefinierten Domainnamen.</li>
+</ol></p><p> record. Wenn Sie eine mehrregionale WordPress-Installation verwenden, müssen Sie A-Einträge für jeden Eintrittspunkt in jeder Region hinzufügen. 3. Lassen Sie sich eine SSL-Zertifikat für den benutzerdefinierten Domänennamen ausstellen. Gehen Sie zum Registerkartenabschnitt für die Schicht des Load Balancers Ihrer WordPress-Cluster und finden Sie den Let’s Encrypt Free SSL-Add-on. 4. Klicken Sie auf den Konfigurieren-Button, um das Konfigurationsfenster zu öffnen, und ersetzen Sie den von der Plattform generierten Domänennamen durch Ihren benutzerdefinierten. Drücken Sie auf Anwenden, um ein gültiges SSL-Zertifikat auszustellen. 5. Nun müssen Sie die URL für Ihre WordPress-Website aktualisieren, was mit dem dedizierten WordPress-Website-Adresse (URL)-Add-on an der Anwendungsschicht Ihrer WordPress-Cluster durchgeführt werden kann. 6. Klicken Sie auf den Site-URL-Button und geben Sie den neuen Domänennamen ein. Das Add-on wird automatisch die WordPress-Konfigurationsdatei und die Datenbank mit dem neuen URL aktualisieren. 7. In diesem Punkt wird Ihre Website über den DNS-Round-Robin-Algorithmus bereitgestellt. Wenn Sie den Domänennamen auflösen, erhalten Sie jedes Mal alle Adressen, die Sie für ihn registriert haben (auch die unerreichbaren). Ab jetzt sollten Sie den benutzerdefinierten Domänennamen zur Zugriffsmöglichkeit auf die WordPress-Website und Admin-Panel verwenden. Wenn Sie mehrere Eintrittspunkte zu Ihrer WordPress-Anwendung haben, sollten Sie eine DNS-Lastenausgleichung einrichten, um sicherzustellen, dass der Verkehr nur an die gesunden Endpunkte geleitet wird. Was kommt danach? WordPress All-in-One Guide WordPress Backup Guide WordPress Troubleshooting Guide WordPress DNS Lastenausgleich WordPress Bind CDN</p><div class="doc-image"><img src="/images/docs/wp-custom-domain/01-custom-domain-a-record_hu3dc8a620aa5c50954a05254c67fb5de5_79935_480x0_resize_box_3.png" alt="custom domain a record hu3dc8a620aa5c50954a05254c67fb5de5 79935 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/wp-custom-domain/02-le-addon_hu926f1b6566be21360ee6fbc4952e8d5c_96105_480x0_resize_box_3.png" alt="le addon hu926f1b6566be21360ee6fbc4952e8d5c 96105 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/wp-custom-domain/03-le-configuration_hu7098881e425ed7b97be7da1f075e9e30_29034_480x0_resize_box_3.png" alt="le configuration hu7098881e425ed7b97be7da1f075e9e30 29034 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/wp-custom-domain/04-wp-site-url-addon_hu8ad6564e960fe550b92382eb50fb8f14_92759_480x0_resize_box_3.png" alt="wp site url addon hu8ad6564e960fe550b92382eb50fb8f14 92759 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/wp-custom-domain/05-change-site-url_hu502cb5cf55666bfd628fa67f071685f8_29886_480x0_resize_box_3.png" alt="change site url hu502cb5cf55666bfd628fa67f071685f8 29886 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/wp-custom-domain/06-resolve-custom-domain_hu5fc7429f868743ea914f514a1fba15ff_35471_480x0_resize_box_3.png" alt="resolve custom domain hu5fc7429f868743ea914f514a1fba15ff 35471 480x0 resize box 3" loading="lazy"></div>
+</main>
+</body>
+</html>

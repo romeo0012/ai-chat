@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kubernetes Cluster: Creating Ingresses</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Kubernetes Cluster: Creating Ingresses</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Kubernetes-Cluster: Erstellung von Ingressen</p><p>Ingress ist ein Load Balancer im Kubernetes-Cluster, der die externen Zugriffe auf die Dienste verwaltet, SSL-Termination bereitstellt und namensbasierte virtuelle Hosting bereitstellt. Er wird über eine Menge von Regeln (spec) verwaltet, die gegen alle einkommenden Anfragen abgeglichen werden. Tip: Verglichen mit der Dienstausgabe über NodePort ist Ingress eine mächtigere, aber auch komplexere Option. Er ist am meisten nützlich, wenn Sie mehrere Dienste unter der gleichen IP-Adresse ausgeben müssen. Zusätzlich werden Ingresses von einem Controller verwaltet, der eine Reihe von Funktionen aus dem Box ausbietet (SSL, Auth, Routing usw.). Ingresses im Kubernetes-Cluster werden standardmäßig durch den Traefik-Ingress-Controller verwaltet, mit den Optionen HAProxy und NGINX verfügbar werden in der Version 1.15.5 des Pakets. Er beobachtet Objekte, parst Specs/Annotations und übersetzt sie in Umleitungsregeln. Hinweis: Es ist nicht möglich, den ausgewählten Ingress-Controller durch die Kubernetes-Verwaltungserweiterung oder eine andere Automatisierungswerkzeug zu ändern, nach der Installation. Die Operation kann noch immer manuell durchgeführt werden, kontaktieren Sie bitte den Support, wenn Sie Hilfe benötigen. Ein Ingress-Spec ist eine Kombination aus Pfadregel, Backend-Dienst und Port. Beispielhaft kann Ihr Ingress wie folgt aussehen:</p><p>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18</p><p><pre><code class="lang-yaml">apiVersion: extensions/v1beta1<br>kind: Ingress<br>metadata:<br>  labels:<br>    app: myapp<br>  name: myapp<br>annotations:<br>  kubernetes.io/ingress.class: traefik<br>  ingress.kubernetes.io/secure-backends: "true"<br>  traefik.frontend.rule.type: PathInfix<br>  traefik.frontend.rule.path: /myapp<br>  traefik.backend.serviceName: myapp<br>  traefik.backend.servicePort: 80</code></pre></p><p>Hinweis: Es ist nicht möglich, den ausgewählten Ingress-Controller durch die Kubernetes-Verwaltungserweiterung oder eine andere Automatisierungswerkzeug zu ändern, nach der Installation. Die Operation kann noch immer manuell durchgeführt werden, kontaktieren Sie bitte den Support, wenn Sie Hilfe benötigen. Ein Ingress-Spec ist eine Kombination aus Pfadregel, Backend-Dienst und Port. Beispielhaft kann Ihr Ingress wie folgt aussehen:</p><p>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18</p><p><pre><code class="lang-yaml">apiVersion: extensions/v1beta1<br>kind: Ingress<br>metadata:<br>  labels:<br>    app: myapp<br>  name: myapp<br>annotations:<br>  kubernetes.io/ingress.class: traefik<br>  ingress.kubernetes.io/secure-backends: "true"<br>  traefik.frontend.rule.type: PathInfix<br>  traefik.frontend.rule.path: /myapp<br>  traefik.backend.serviceName: myapp<br>  traefik.backend.servicePort: 80</code></pre></p><p> 15 16 17 18 apiVersion: extensions/v1beta1<br>kind: Ingress<br>metadata:<br>  labels:<br>    app: myapp<br>    name: myapp<br>  annotations:<br>    kubernetes.io/ingress.class: traefik<br>    ingress.kubernetes.io/secure-backends: "true"<br>    traefik.frontend.rule.type: PathPrefixStrip<br>spec:<br>  rules:<br>    - http:<br>      paths:<br>        - path: /myapp<br>          backend:<br>            serviceName: myapp<br>            servicePort: 8080</p><p>Dieses Beispiel stellt den myapp-Dienst bereit, der an Port 8080 in Ihrer Kubernetes-Umgebung auf dem Standard-Domänennamen (z.B., https://\${envName}.\${platformDomain.com}/myapp) verfügbar gemacht wird. Weitere Informationen zur Konfiguration der Eingangsbereichsregeln (einschließlich Pfad- und Unterdomänenbasierter Routing) finden Sie in der offiziellen Dokumentation. Was kommt nachher? K8s Helm Integration K8s YAML Bereitstellung K8s Internes Netzwerk K8s Exponieren von Diensten K8s Volumenbereitstellung</p>
+</main>
+</body>
+</html>

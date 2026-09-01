@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Deploy Cyclos</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>How to Deploy Cyclos</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Jak nasadit Cyclos Můžete mít instance Cyclosu spuštěnou za několik minut pomocí možnosti jednoklikové instalace. Proces je jednoduchý - stačí kliknout na Get it hosted now, zadat svůj email a nainstalovat Cyclos za minutu, přeskočíme-li kroky manuální instalace. Zjistěte ještě více řešení na našem platformě Marketplace. Návod k manuálnímu nasazení Cyclosu Cyclos je kompletní online bankovní systém s doplňkovými moduly jako e-commerce a nástroje pro komunikaci. Je to velmi snadné nasadit, stačí následovat níže uvedené kroky: Vytvoření prostředí 1. Přihlaste se k panelu správy platformy. 2. Z panelu správy platformy klikněte na tlačítko Create environment: 3. V okně Topologie prostředí vyberte Tomcat jako vaši aplikační server. Vyberte MySQL jako databázi, kterou chcete použít, a poté zadejte název svého prostředí, například Cyclos, a klikněte na Create. Váš prostředí bude vytvořeno za jednu minutu. Nahrání Java balíčku 1. Navigujte k webu Cyclos a stáhněte si základní instalační balíček. 2. Extrahujte soubory z balíčku zip, který jste právě stáhli, a vytvořte z obsahu webové složky .WAR soubor. 3. Nahrávejte svůj Java balíček do Správce nasazení. 4. Jakmile balíček je na platformě, nasaďte ho do prostředí, které jste vytvořili dříve. Konfigurace databáze 1. Klikněte na tlačítko Open in Browser pro MySQL. 2. Když vytvořili prostředí, platforma vám poslala email s přihlašovacími údaji k databázi.</p><p> Jako profesionální technický překladatel jsem vám přeložil následující text z angličtiny do češtiny. Použil jsem při překladu standardní terminologii a zachoval jsem všechny technické termíny, kódy, příkazy, cesty k souborům, adresy URL a strukturu odstavců.</p><p>TEXT:<br>Jenom teď jsem vytvořil. Nastavte Databázi 1. Klikněte na tlačítko Open in Browser pro MySQL.<ol>
+<li>Když jste vytvořili prostředí, platforma vám poslala e-mail s přihlašovacími údaji k databázi. Použijte tyto přihlašovací údaje k vytvoření účtu uživatele a databáze s aplikací. Nastavte Cyclos 1. Vrátíte se zpět na panel platformy a klikněte na tlačítko Config pro Tomcat.</li>
+</ol><ol>
+<li>Otevřete soubor Cyclos konfigurace (/home/webapps/ROOT/WEB-INF/classes/cyclos.properties) a zadejte adresu URL hostitele.</li>
+</ol><ol>
+<li>Ve stejném souboru musíte nastavit konfiguraci databáze (adresa URL databáze, uživatelské jméno a heslo). Nezapomeňte uložit své změny a restartovat Tomcat. Spusťte Cyclos Nakonec můžete spustit Cyclos a použít všechny jeho funkce! Výchozí přihlašovací údaje jsou admin/1234. Co dále? Java Tutorials Cyclos 4 Cyclos SMS Module s mobilním bránou</li>
+</ol></p><div class="doc-image"><img src="/images/docs/cyclos-deploy/01-create-environment-button.png" alt="create environment button" loading="lazy"></div><div class="doc-image"><img src="/images/docs/cyclos-deploy/02-cyclos-environment-topology_hub30ba7db9c918cdf0ccfb7eeba460447_81998_480x0_resize_box_3.png" alt="cyclos environment topology hub30ba7db9c918cdf0ccfb7eeba460447 81998 480x0 resize box 3" loading="lazy"></div><p>Pokud máte další otázky nebo potřebujete další pomoc, neváhejte se obrátit na mne.</p><div class="doc-image"><img src="/images/docs/cyclos-deploy/03-cyclos-environment-created_huede21b4d5cad9c16829314f9d7f9b08b_42733_480x0_resize_box_3.png" alt="cyclos environment created huede21b4d5cad9c16829314f9d7f9b08b 42733 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/cyclos-deploy/04-cyclos-download_hu4ac3d045586f03a17ff555971bbbc113_297566_480x0_resize_box_3.png" alt="cyclos download hu4ac3d045586f03a17ff555971bbbc113 297566 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/cyclos-deploy/05-cyclos-basic-installation-package_hu3ad9b447395691337e82e3e50ec68cf9_174305_480x0_resize_box_3.png" alt="cyclos basic installation package hu3ad9b447395691337e82e3e50ec68cf9 174305 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/cyclos-deploy/06-upload-cyclos-package.png" alt="upload cyclos package" loading="lazy"></div><div class="doc-image"><img src="/images/docs/cyclos-deploy/07-deploy-cyclos-application.png" alt="deploy cyclos application" loading="lazy"></div><div class="doc-image"><img src="/images/docs/cyclos-deploy/08-mysql-open-in-browser_hu22b5540bc8362881852860b86417cfba_58540_480x0_resize_box_3.png" alt="mysql open in browser hu22b5540bc8362881852860b86417cfba 58540 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/cyclos-deploy/09-database-add-new-user_hu0547af1a097230421f3bf4187da9beda_54193_480x0_resize_box_3.png" alt="database add new user hu0547af1a097230421f3bf4187da9beda 54193 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/cyclos-deploy/10-configure-new-database-user_hue2a7c1584bca20a81562f5f0cf4e1822_141399_480x0_resize_box_3.png" alt="configure new database user hue2a7c1584bca20a81562f5f0cf4e1822 141399 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/cyclos-deploy/11-tomcat-configs_hu3f0e92264e65627fdce83ca01788d143_56550_480x0_resize_box_3.png" alt="tomcat configs hu3f0e92264e65627fdce83ca01788d143 56550 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/cyclos-deploy/12-cyclos-configuration-file_hu857bc4e588a43eaf065d606a94ef1c63_324611_480x0_resize_box_3.png" alt="cyclos configuration file hu857bc4e588a43eaf065d606a94ef1c63 324611 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/cyclos-deploy/13-configure-cyclos-database-connection_huc52938b021ec327e4c4ff36cf458c958_450870_480x0_resize_box_3.png" alt="configure cyclos database connection huc52938b021ec327e4c4ff36cf458c958 450870 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/cyclos-deploy/14-cyclos-successfully-deployed_hu74aa84390fabd3ca75b517e681558bba_251437_480x0_resize_box_3.png" alt="cyclos successfully deployed hu74aa84390fabd3ca75b517e681558bba 251437 480x0 resize box 3" loading="lazy"></div>
+</main>
+</body>
+</html>

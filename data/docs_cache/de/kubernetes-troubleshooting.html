@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kubernetes Cluster: Troubleshooting</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Kubernetes Cluster: Troubleshooting</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Kubernetes-Cluster: Problembehandlung</p><p>Der Kubernetes-Cluster-Paket ist ein extrem komplexes Produkt, das mehrere Schritte zur Einrichtung der Lösung umfasst. Jede Aktion kann aufgrund von verschiedenen Gründen fehlschlagen, die analysiert werden müssen, um das Auftreten von Problemen in Zukunft zu verhindern. Hierunter werden die wichtigsten Problembehandlungsschritte während verschiedener Phasen und für mehrere Log-Dateien überprüft: K8s Installation Events Tracking Pod Logs</p><p>Die Installation eines Kubernetes-Clusters ist ein komplexes, aber vollständig automatisiertes Verfahren, das bereits ein Fehlerbehandlungsmechanismus enthält. Die Plattform verarbeitet automatisch die häufigsten Probleme und zeigt ihre Ursache direkt im Dashboard an. Hiermit können für komplexere Probleme Berichte an die Support-Mannschaft übermittelt werden, indem Sie das passende Widget verwenden. Solcher Bericht enthält Installationsprotokolle, Fehlermeldungen und alle anderen Debug-Informationen, die erforderlich sind. Außerdem überprüft das Paket automatisch alle Komponenten des Clusters nach der Installation. Die relevanten Details können über die Datei /var/log/k8s-health-check.log auf dem Master-Knoten angesehen werden. Ein dediziertes Utility-Skript überprüft den Gesundheitszustand der folgenden Komponenten:</p><div class="doc-image"><img src="/images/docs/kubernetes-troubleshooting/01-kubernetes-cluster-installation-error.png" alt="kubernetes cluster installation error" loading="lazy"></div><div class="doc-image"><img src="/images/docs/kubernetes-troubleshooting/02-kubernetes-dashboard-events_hue387ee7ae5ad830f50a23a99757e3584_66837_480x0_resize_box_3.png" alt="kubernetes dashboard events hue387ee7ae5ad830f50a23a99757e3584 66837 480x0 resize box 3" loading="lazy"></div><p>Weave CNI Plugin, Ingres Controller, Metrics Server, Kubernetes Dashboard, Node Problem Detector, Monitoring Tools, Remote API, NFS Storage, Sample App. Wenn der Gesundheitsprüfer nicht in der Lage ist, den Laufstatus einer Komponente zu überprüfen, wird die entsprechende Benachrichtigung in dem Installationserfolg-Fenster angezeigt.</p><p> Remotes API, NFS-Speicher, Beispiel-App. Wenn der Gesundheitsprüfer nicht überprüfen kann, ob ein Komponentenstatus aktiv ist, wird die passende Benachrichtigung in dem Installationserfolgrahmen angezeigt. Hierbei wird solch ein Warnung nicht immer durch den Fehler des Clusters verursacht (z.B. können Bereitstellungen noch in Arbeit sein). Sie können den Befehl <code>kubectl get pods --all-namespaces</code> ausführen, um den Zustand der Pods zu überprüfen. Wenn sie alle laufen, funktioniert Ihr Cluster perfekt. Andernfalls wenden Sie sich bitte an die Plattform-Unterstützung und fügen Sie K8s-bezogene Logs aus dem Verzeichnis <code>/var/log</code> an.</p><p>Ereignisverfolgung<br>Sie können <code>kubectl</code> oder den Kubernetes-Dashboard verwenden, um Ereignisse für bestimmte oder alle Namespaces zu verfolgen und zu analysieren (für dieses sind ausreichende Berechtigungen erforderlich): Ereignisse im Kubernetes-Dashboard-Beispielausgabe von dem Befehl <code>kubectl get events -n $namespace</code> Pod-Logs<br>Nach der Planung von Pod(s), um sie auf einem freien Knoten auszuführen, können Sie die entsprechenden Logs überwachen:</p><div class="doc-image"><img src="/images/docs/kubernetes-troubleshooting/03--kubectl-get-events_hu65c90461b396679dc1ff2cce03580fe0_173825_480x0_resize_box_3.png" alt=" kubectl get events hu65c90461b396679dc1ff2cce03580fe0 173825 480x0 resize box 3" loading="lazy"></div><p>Kubernetes-Dashboard - navigieren Sie zur Pod-Seite und klicken Sie auf den Logs-Button in der oberen rechten Ecke
+<code>kubectl</code> - verwenden Sie Befehle für die Pod-Verwaltung<br>Beispielhaft können diese Logs helfen, den Ursprung des Ereignisses "Back-off restart failed container" für Ihre Pods zu finden.</p><p>Was kommt nach?<br>K8s-Clusterzugriff<br>K8s-Zugriffskontrolle<br>K8s-Cluster-Aktualisierung</p>
+</main>
+</body>
+</html>

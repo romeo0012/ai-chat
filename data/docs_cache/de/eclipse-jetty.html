@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eclipse Jetty</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Eclipse Jetty</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Eclipse Jetty<br>Eclipse Jetty ist ein offener Quelltextbasierter Java-basierter HTTP (Web) Server, der die neueste Java Servlet API, das HTTP/2-Protokoll, WebSocket-Unterstützung und mehr bereitstellt. Jetty wird in zahlreichen Projekten und Produkten (beides in der Entwicklung und Produktion) verwendet, da es die folgenden Eigenschaften bietet: offen Quelltext und kommerziell nutzbar, flexibel und erweiterbar, asynchron, kleiner Fußabdruck, betriebssystemskonform, skalierbar</p><p>Hinweis: Dieser Vorlage wird eine moderne systemd-Initialisierungsdaemon-Anwendung zugeordnet. Um einen Eclipse Jetty Anwendungserver auf der Plattform zu erhalten, müssen Sie Folgendes tun:<ol>
+<li>Melden Sie sich bei Ihrem PaaS-Konto an und klicken Sie auf den New Environment-Button oben.</li>
+</ol><ol>
+<li>In dem geöffneten Topologie-Assistenten wechseln Sie zum Java-Tab und wählen Sie Jetty als Ihren Anwendungserver: Anpassen Sie andere Einstellungen nach Ihren Bedürfnissen (z.B. vertikale und horizontale Skalierung oder öffentliche IPs) und klicken Sie auf Create.</li>
+</ol><ol>
+<li>Sobald die Umgebung erstellt wurde, können Sie auf den Open in Browser-Button neben ihm klicken. Eine Jetty-Server-Startseite wird in einem neuen Browserfenster geöffnet:</li>
+</ol><br>Wie Sie sehen können, ist der Eclipse Jetty-Server laufend, sodass Sie mit der Anwendungsbereitstellung fortfahren können. Was kommt nachher? Deployment Guide<br>Jetty Sicherheit<br>Java App Server Konfiguration<br>Umgebungsvariablen<br>Java Optionen und Argumente</p><div class="doc-image"><img src="/images/docs/eclipse-jetty/01-new-environment-button_hu08753fb831e531293fa12c6b94ab4cf4_9171_480x0_resize_box_3.png" alt="new environment button hu08753fb831e531293fa12c6b94ab4cf4 9171 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/eclipse-jetty/02-topology-wizard-eclipse-jetty-server-_hu04a7962485a2f5e5302c7d1cba386bb2_130374_480x0_resize_box_3.png" alt="topology wizard eclipse jetty server  hu04a7962485a2f5e5302c7d1cba386bb2 130374 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/eclipse-jetty/03-jetty-server-open-in-browser-button_hu176cccbe250dd5e1a66b6cf69af6c00b_25609_480x0_resize_box_3.png" alt="jetty server open in browser button hu176cccbe250dd5e1a66b6cf69af6c00b 25609 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/eclipse-jetty/04-jetty-application-server-home-page_hubcc1b3eefa9e05d2158b88fe29acb506_259343_480x0_resize_box_3.png" alt="jetty application server home page hubcc1b3eefa9e05d2158b88fe29acb506 259343 480x0 resize box 3" loading="lazy"></div>
+</main>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WordPress Optimization</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>WordPress Optimization</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Optimizace WordPressu<br>Tento oddíl vysvětluje, jak optimizovat výkon a bezpečnost WordPressu v Virtuozzo Application Management. Pokrývá zlepšení rychlosti prostřednictvím správného využití mezipaměti, optimizace obrázků a konfigurace webhostingu. Tento oddíl také popisuje optimizace bezpečnosti, která je určena k zpevnění instalací WordPressu proti běžným hrozbám. V tomto oddílu: Optimizace webhostingu Optimizace mezipaměti Optimizace obrázků Bezpečnostní optimizace</p><p>Web Hosting Optimization<br>Webhostingová optimizace je klíčová pro zlepšení výkonu WordPressu. Níže naleznete několik důležitých kroků k optimizaci webhostingu:
+<ol>
+<li>Vyberte správnou webhostingovou společnost, která nabízí rychlou a spolehlivou službu.</li>
+</ol><ol>
+<li>Vyberte správný typ serveru, který odpovídá vašim potřebám.</li>
+</ol><ol>
+<li>Nastavte správné nastavení PHP a MySQL.</li>
+</ol><ol>
+<li>Nastavte správné nastavení pro mezipaměť a gzip kompresi.</li>
+</ol><ol>
+<li>Nastavte správné nastavení pro SSL a HTTPS.</li>
+</ol></p><p>Caching Optimization<br>Mezipaměť je klíčový faktor pro zlepšení rychlosti WordPressu. Níže naleznete několik důležitých kroků k optimizaci mezipaměti:
+<ol>
+<li>Nainstalujte a nakonfigurujte plugin pro mezipaměť, jako je W3 Total Cache nebo WP Super Cache.</li>
+</ol><ol>
+<li>Nastavte mezipaměť pro statické soubory, jako jsou HTML, CSS a JavaScript.</li>
+</ol><ol>
+<li>Nastavte mezipaměť pro databázi.</li>
+</ol><ol>
+<li>Nastavte mezipaměť pro objekty v paměti (OPcache).</li>
+</ol><ol>
+<li>Nastavte mezipaměť pro CDN (Content Delivery Network).</li>
+</ol></p><p>Images Optimization<br>Optimizace obrázků je důležitá pro zlepšení rychlosti WordPressu. Níže naleznete několik důležitých kroků k optimizaci obrázků:
+<ol>
+<li>Komprimujte obrázky pomocí nástroje, jako je TinyPNG nebo Kraken.io.</li>
+</ol><ol>
+<li>Nastavte správné rozměry obrázků pro každou stránku.</li>
+</ol><ol>
+<li>Nastavte správné formáty obrázků.</li>
+</ol><ol>
+<li>Nastavte správné nastavení pro lazy loading obrázků.</li>
+</ol><ol>
+<li>Nastavte správné nastavení pro obrázky ve formátu WebP.</li>
+</ol></p><p>Security Optimization<br>Bezpečnostní optimizace je důležitá pro zpevnění instalací WordPressu proti běžným hrozbám. Níže naleznete několik důležitých kroků k optimizaci bezpečnosti:
+<ol>
+<li>Nainstalujte a nakonfigurujte plugin pro bezpečnost, jako je Wordfence Security nebo Sucuri Security.</li>
+</ol><ol>
+<li>Nastavte správné nastavení pro uživatele a role.</li>
+</ol><ol>
+<li>Nastavte správné nastavení pro hesla.</li>
+</ol><ol>
+<li>Nastavte správné nastavení pro aktualizace.</li>
+</ol><ol>
+<li>Nastavte správné nastavení pro bránu firewall.</li>
+</ol><ol>
+<li>Nastavte správné nastavení pro monitorování a odstraňování nebezpečných souborů.</li>
+</ol><ol>
+<li>Nastavte správné nastavení pro zabezpečení formulářů.</li>
+</ol><ol>
+<li>Nastavte správné nastavení pro zabezpečení FTP.</li>
+</ol><ol>
+<li>Nastavte správné nastavení pro zabezpečení databáze.</li>
+</ol><ol>
+<li>Nastavte správné nastavení pro zabezpečení WordPressu proti DDoS útokům.</li>
+</ol></p>
+</main>
+</body>
+</html>

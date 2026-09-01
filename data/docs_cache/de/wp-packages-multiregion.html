@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Multi-Region WordPress Packages</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Multi-Region WordPress Packages</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Mehrregionale WordPress-Pakete</p><p>Mit den spezialisierten Paketen für die Virtuozzo-Anwendungsverwaltung mit mehreren Verfügbarkeitszonen (Datenzentren) können Sie Ihre WordPress-Anwendung (einzeln und Cluster) in mehreren Regionen bereitstellen. Dadurch können Sie eine verteilte WordPress-Anwendung erstellen, die hohe Verkehrslasten verarbeiten und bessere Leistung für Nutzer in verschiedenen geographischen Regionen bietet. In den folgenden Abschnitten finden Sie detaillierte Informationen und Installationsanweisungen für die Mehrregionale WordPress-Pakete:</p><p>Mehrregionale WordPress-Einzelanwendung<br>Mehrregionale WordPress-Cluster<br>Mehrregionale WordPress-Einzelanwendung</p><div class="doc-image"><img src="/images/docs/wp-packages-multiregion/02-multiregion-standalone-install_hua18310ddb10528520ef5763dbc4d21f1_110341_480x0_resize_box_3.png" alt="multiregion standalone install hua18310ddb10528520ef5763dbc4d21f1 110341 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/wp-packages-multiregion/03-multiregion-standalone-environments_hufd80850f2c64fea719e4d416cf3c1323_49966_480x0_resize_box_3.png" alt="multiregion standalone environments hufd80850f2c64fea719e4d416cf3c1323 49966 480x0 resize box 3" loading="lazy"></div><p>Das Mehrregionale WordPress-Einzelanwendungspaket installiert zwei Instanzen der WordPress-Einzelanwendungen in verschiedenen Regionen und verbindet sie zu einer einzigen Mehrregion-WordPress-Lösung.
+<ol>
+<li>Um das Mehrregionale WordPress-Einzelanwendungspaket zu installieren, klicken Sie auf den Marketplace-Button auf der oberen Virtuozzo-Anwendungsverwaltungstafel. In dem darauf geöffneten Fenster verwenden Sie den Suchfeld, um das Paket zu finden, und klicken Sie auf den Install-Button.</li>
+</ol><ol>
+<li>Die Installationspaket-Features umfassen die folgenden fortgeschrittenen Funktionen:</li>
+</ol><br>   - Installation des LiteSpeed High-Performance Web Servers statt des Standard-NGINX Web Servers<br>   - Aktivierung der Brute Force Attack Protection und Web Application Firewall-Funktionen für LiteSpeed<br>   - Installation von Let’s Encrypt SSL mit Auto-Renewal-Add-on, um eine kostenlose SSL-Zertifikat automatisch auszustellen<br>   Das Paket benötigt zwei Regionen für die Installation.</p><p> Auto-Renewal-Add-on zum automatischen Ausstellen einer kostenlosen SSL-Zertifikat<br>Das Paket benötigt zwei Regionen für die Installation. Klicken Sie auf den Install-Button, um den Installationsprozess zu starten. 3. Die WordPress-Einzelumgebungen werden automatisch erstellt und konfiguriert, je nach den ausgewählten Optionen innerhalb einer wenigen Minuten. Sobald die Bereitstellung abgeschlossen ist, verfügen Sie über zwei WordPress-Einzelumgebungen, die jeweils in einer separaten Region laufen. Die Umgebungen werden miteinander verbunden, um als ein einheitliches multi-region WordPress-Lösung zu funktionieren. 4. Alle URLs der Admin-Panels und die Zugangsdaten werden im Erfolgsnachrichtentext und an Ihre E-Mail-Adresse gesendet. Voreingestellt wird die erste Umgebung als primäre verwendet, während die zweite als Replik verwendet wird. Sie können Ihrer primären Umgebung einen benutzerdefinierten Domainnamen zuweisen, wie in der verlinkten Anleitung beschrieben. Um ein geodistribuitetes WordPress-Lösung zu erstellen, müssen Sie öffentliche IP-Adressen an beide Umgebungen anschließen und die DNS-Lastenausgleichskonfiguration konfigurieren, um den Verkehr zwischen ihnen zu verteilen.</p><p>Multi-Region WordPress-Cluster<br>Das Multi-Region WordPress-Cluster-Paket installiert mehrere Instanzen der WordPress-Cluster-Anwendungen in verschiedenen Regionen und verbindet sie zu einem einheitlichen multi-region WordPress-Lösung.</p><div class="doc-image"><img src="/images/docs/wp-packages-multiregion/04-multiregion-cluster-async-schema_hu2c445e8fc306cb2562be42cd83b68122_209714_480x0_resize_box_3.png" alt="multiregion cluster async schema hu2c445e8fc306cb2562be42cd83b68122 209714 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/wp-packages-multiregion/05-multiregion-cluster-sync-schema_hu95211c1b6eacb8f7ad5ab123fb638987_225774_480x0_resize_box_3.png" alt="multiregion cluster sync schema hu95211c1b6eacb8f7ad5ab123fb638987 225774 480x0 resize box 3" loading="lazy"></div><p> installiert mehrere Instanzen der WordPress-Cluster-Anwendungen in verschiedenen Regionen und verbindet sie zu einer einzigen multi-region WordPress-Lösung. Je nach ausgewählter Datenbank-Topologie variiert das Paket leicht in seiner Topologie: Asynchrone Primär-Replikation (mindestens zwei Regionen) - zwei miteinander verbundene primäre Datenbanken basierend auf asynchroner Replikation. Der Primärserver in der ersten Region bearbeitet Schreib-/Leseanfragen, und der Primärserver in der zweiten Region bearbeitet nur Leseanfragen. Wenn der erste Primärserver ausfällt, beginnt der zweite, Leseoperationen anzunehmen. Wenn mehr als zwei Regionen ausgewählt werden, haben alle anderen Regionen Replikat-Datenbankserver. Diese Topologie ist effizienter für Fälle, in denen:</p><p>Leseoperationen deutlich dominieren über Schreib-/Aktualisierungsoperationen</p><p>Die Verbindungsverzögerung zwischen Regionen mehr als einige zehn Millisekunden beträgt</p><div class="doc-image"><img src="/images/docs/wp-packages-multiregion/06-multiregion-cluster-glusterfs-schema_hub979bd3ce8fc8c7b9ce2fd98ff6909ef_41428_480x0_resize_box_3.png" alt="multiregion cluster glusterfs schema hub979bd3ce8fc8c7b9ce2fd98ff6909ef 41428 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/wp-packages-multiregion/07-multiregion-cluster-install_hu54dfe6e158eec248f34a669caebb8355_116407_480x0_resize_box_3.png" alt="multiregion cluster install hu54dfe6e158eec248f34a669caebb8355 116407 480x0 resize box 3" loading="lazy"></div><p>Die Dauer der Transaktion während des Replikationsprozesses nicht wichtig ist und viel länger dauern kann, verglichen mit einer einzelnen Kluster</p><p>Synchrone Galera-Verteilung (mindestens drei Regionen) - die MariaDB Galera Cluster verwendet eine multi-datenbank-Topologie (d.h., ein einzelnes Cluster mit Knoten in Segmente unterteilt und in verschiedenen Regionen verteilt). Aufgrund der wahren multi-primary-Topologie mit automatischer Neu-Knoten-Bereitstellung sichert Galera keinen Datenverlust bei einem Knotenabsturz, keine verlorenen Transaktionen und unterstützt multi-cloud und multi-region-Bereitstellungen.</p><p> Galera sichert vor, dass kein Datenverlust entsteht, wenn ein Knoten abstürzt, dass keine Transaktionen verloren gehen und unterstützt multi-cloud und multi-region-Bereitstellungen. Diese Topologie kann für Projekte als geeignet angesehen werden, wenn:
+<ul>
+<li>die sofortige Verfügbarkeit von Daten in allen Regionen erforderlich ist, sobald eine Transaktion abgeschlossen ist</li>
+</ul><ul>
+<li>die Verzögerung zwischen Regionen sehr gering ist</li>
+</ul></p><p>Tip: Wenn Sie sich nicht sicher sind, welche Option zu wählen ist, empfehlen wir, die Verzögerung zwischen Regionen zu evaluieren. Wenn der Durchschnittspingzeit für alle Regionen weniger als 20ms ist, können Sie die Sync-Galera-Verteilung option verwenden. Andernfalls ist es besser, die Async Primary-Replica-Verteilungoption zu verwenden. Zusätzlich verwendet das Paket den GlusterFS-Cluster, um eine fehlertolerante gemeinsame Speicherlösung für statische Assets bereitzustellen. Es bietet Funktionalität ähnlich der RAID 1-Konfiguration über dem Netzwerk. Jede unabhängige Server enthält seine eigene Kopie der Daten, sodass WordPress jede dieser Kopien zugreifen kann, was den Leselasten ausgleicht. Um die Daten synchronisierung zwischen Regionen sicherzustellen, wird die native Geo-Replikation von GlusterFS verwendet. Sie basiert auf dem Primary-Replica-Modell, bei dem ein GlusterFS-Cluster als primär dient und Schreiboperationen annimmt. Aufgrund der Plattform-Netzarchitektur sind alle verfügbaren Regionen transparent auf Umgebungsebene miteinander verbunden, wie sie in demselben LAN sind. Somit wird die GlusterFS Geo-Replikation über Local Area Network Deployment Scenario implementiert.
+<ol>
+<li>Um in demselben LAN wie sie sind zu arbeiten. Somit wird der GlusterFS Geo-Replication über lokale Netzwerksituation umgesetzt.</li>
+</ol><ol>
+<li>Um das Multi-Region WordPress Cluster-Paket zu installieren, klicken Sie auf den Marktplatz-Button auf der oberen Virtuozzo-Anwendungsverwaltungstafel. In dem darauf geöffneten Fenster verwenden Sie den Suchfeld, um das Paket zu finden, und klicken Sie auf den Install-Button.</li>
+</ol><ol>
+<li>Das Installationspaket enthält die folgenden Konfigurationsoptionen:</li>
+</ol><br>   - Database Topology - wählen Sie das verwendete Datenbankschema für den multi-region Cluster aus.<br>   - Regions - wählen Sie die Regionen aus, in denen die WordPress-Cluster bereitgestellt werden sollen. Mindestens zwei Regionen sind für die Async Primary-Replica Distribution erforderlich und mindestens drei Regionen für die Sync Galera Distribution.<br>   - Umgebung - geben Sie den Umgebungsnamen an, der für den multi-region WordPress-Cluster verwendet wird.<br>   - Skalierungsfaktoren - wählen Sie die Skalierungsfaktoren basierend auf der erwarteten Belastung (siehe die Tooltips oder beziehen Sie sich auf die Dokumentation des WordPress-Clusters für Details der Optionen).<br>   - Erweiterte Funktionen - wählen Sie die erweiterten Funktionen aus, die mit dem WordPress-Cluster-Paket installiert werden sollen. Aktivieren Sie die Brute Force Attack Protection und Web Application Firewall Funktionen für LiteSpeed, erhalten Sie Let’s Encrypt SSL mit Auto-Renewal Add-on, um kostenlose SSL-Zertifikate automatisch auszustellen, konfigurieren Sie WordPress Multisite Network. Bitte seien Sie geduldig, denn je nach der Anzahl der Regionen und ausgewählten Optionen kann der Installationsprozess einige Zeit in Anspruch nehmen.<ol>
+<li>Bitte führen Sie kostenlos ein SSL-Zertifikat automatisch aus und konfigurieren Sie WordPress Multisite Network. Bitte habe Geduld, denn je nach Anzahl der Regionen und ausgewählten Optionen kann der Installationsprozess einige Zeit in Anspruch nehmen.</li>
+</ol>
+<ol>
+<li>Sie werden in der Dashboard-Oberfläche einen Erfolgs-Pop-up sehen und werden per E-Mail informiert, sobald die Installation abgeschlossen ist. Alle erforderlichen Zugangsdaten werden in diesen Benachrichtigungen bereitgestellt. Um jedoch die beste Erfahrung zu erzielen, empfehlen wir, Ihrem multi-region WordPress-Cluster einen individuellen Domainnamen zuzuweisen und die DNS-Lastenausgleichskonfiguration zu konfigurieren, um den Verkehr zwischen den Regionen zu verteilen.</li>
+</ol></p><p>Was kommt Nächstes? WordPress-Pakete Übersicht
+<ul>
+<li>WordPress Standalone-Paket</li>
+</ul><ul>
+<li>WordPress Cluster-Paket</li>
+</ul><ul>
+<li>WordPress-Paket-Features</li>
+</ul></p><p>Weitere Informationen finden Sie in unserer Dokumentation.</p>
+</main>
+</body>
+</html>

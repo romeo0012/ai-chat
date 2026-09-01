@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Choosing Environment Region</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Choosing Environment Region</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Vybírání regionu prostředí Poskytující významnou flexibilitu, PaaS umožňuje poskytovatelům služeb hostování skupovat různé typy hardware v rámci jedné platformy, což umožňuje vytvářet různorodé a komplexní řešení cloudových služeb. Tyto skupiny hardware se nazývají regiony prostředí a mohou mít různou kapacitu, cenu a umístění, ale jsou řízeny prostřednictvím jedné infrastruktury. Ano, koncept je velmi jednoduchý, ale takový přístup může přinést řadu výhod, umožňující vybrat vhodné hardware pro hostování aplikace podle:
+<ul>
+<li>geografického umístění - pro získání lepší odpovědi a kvality rozšíření služeb a kapacity - pro upravování podmínek hostování podle současných potřeb, například levnější hardware - pro vývoj a testování, více výkonné hardware - pro produkci, cena - pro volbu nejlevnější cenové politiky podle dostupného rozpočtu</li>
+</ul></p><p>Výsledkem je tedy velká flexibilita při organizaci životního cyklu a rozšíření aplikace. Při vytváření nového prostředí můžete vybrat požadovanou skupinu hardware, a pokud je potřeba, můžete ji již běžící projekt přesunout do jiného umístění. Tento proces můžete provést za několik kliknutí - podrobnosti najdete v dokumentu Migration between Environment Regions.</p><p>Tímto způsobem získáte velkou flexibilitu při organizaci životního cyklu a rozšíření aplikace.</p><div class="doc-image"><img src="/images/docs/choosing-region/01-topology-wizard-select-region_hud19ba430742e30d0eaf114380e616b91_146529_480x0_resize_box_3.png" alt="topology wizard select region hud19ba430742e30d0eaf114380e616b91 146529 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/choosing-region/02-platform-marketplace-select-region_huc4635b4367368333c00adef97e59c8d6_72611_480x0_resize_box_3.png" alt="platform marketplace select region huc4635b4367368333c00adef97e59c8d6 72611 480x0 resize box 3" loading="lazy"></div><p> text:<br>dokument. Tímto způsobem získáte výbornou flexibilitu pro organizaci životního cyklu vaší aplikace a její politiku rozšíření. Pročtete si celou návodnou instrukci o správě oblastí prostředí pro vaše aplikace níže a získáte maximální efektivitu této významné funkce - objevte, jak to:</p><p>Vybrat oblast prostředí<br>V případě, že poskytovatel služeb hostování nabízí více oblastí prostředí, můžete vidět vhodný výběrový seznam na všech rámechch, která jsou určena k inicializaci vytvoření nového prostředí: topologický vizuální nástroj tržiště prostředí import</p><p>Výjimkou je operace klonování - v tomto případě vytvoří se nové prostředí v stejné oblasti hardware automaticky. Nicméně, může být snadno přesunuto do požadované lokace ručně, pomocí možnosti migrace. Poznámka: počet/jména/popisy/parametry poskytovaných oblastí jsou definovány jednotlivými poskytovateli hardware individuálně; takže mohou být různé u různých instalací PaaS při výběru určitého hardware, prostředí dominikum (zobrazené vedle pole se svým názvem) může být také změněno, podle nastavení oblasti. Vyberte libovolnou z poskytovaných oblastí (je vhodné si předem dozvědět informace o každé z nich) pro umístění svého prostředí tam automaticky.</p><div class="doc-image"><img src="/images/docs/choosing-region/03-environment-import-select-region_hub410738937b383cf5e70e72c5ada9a83_74290_480x0_resize_box_3.png" alt="environment import select region hub410738937b383cf5e70e72c5ada9a83 74290 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/choosing-region/04-view-environment-regions-in-dashboard_hu075abfa77fbeecc1daadd9b5e0b94880_22671_480x0_resize_box_3.png" alt="view environment regions in dashboard hu075abfa77fbeecc1daadd9b5e0b94880 22671 480x0 resize box 3" loading="lazy"></div><p>Vyberte libovolnou z poskytovaných oblastí (je vhodné si předem dozvědět informace o každé z nich) pro umístění svého prostředí tam automaticky.</p><p> Závisí na nastavení oblasti Vyberte si libovolnou z nabízených oblastí (především si prostudujte jejich detailní informace před tím, než je vyberete) pro umístění svého prostředí tam automaticky. Po vytvoření ho uvidíte na panelu s dashboardem s malým speciálním ikonkou přiřazenou pro oblast: Při přejížení nad ni se zobrazí správné jméno oblasti. Tímto způsobem mohou být vaše prostředí rychle rozlišována podle oblasti/umístění. Další informace o oblastech Doporučujeme seznámit se s detailními informacemi o každé dostupné oblasti před tím, než si vyberete. Tato informace můžete zobrazit následujícími způsoby: každá oblast má krátký popis přímo v seznamu, kliknutím na další informace v seznamu nahoře se otevře karta Oblasti v okně Quotas &amp; Pricing informací. Zde můžete nalézt podrobné informace o dostupných oblastech, například obecný popis se seznamem poskytovaných parametrů a zahrnutých funkcí. Však podle nastavení vašeho poskytovatele služeb může tento odkaz vést na samostatnou stránku nebo dokument.</p><p>Obecný popis se seznamem poskytovaných parametrů a zahrnutých funkcí. Však podle nastavení vašeho poskytovatele služeb může tento odkaz vést na samostatnou stránku nebo dokument. Část cen v rámci stejného rámce, můžete zobrazit podrobnosti o poplatkovaných zdrojích (RAM/CPU, Disková prostora, Síťové provoz a Opcie karty) a náklady na licence (Software karta) pro každou oblast - použijte rozevírací seznam v horní části, aby se přepnul mezi nimi Pokud potřebujete další informace o určité oblasti, kontaktujte svého poskytovatele služeb, aby vám poskytl odpovídající podporu. Také, v případě, že jste objevili nějakou jinou lokaci, která vám lépe odpovídá, můžete snadno migrovat a využít nových podmínek. Co dál? Migrace mezi oblastmi Poplatkované zdroje Životní cyklus aplikace Správa životního cyklu aplikace Migrace mezi oblastmi Migrace mezi oblastmi můžete zobrazit podrobnosti o poplatkovaných zdrojích (RAM/CPU, Disková prostora, Síťové provoz a Opcie karty) a náklady na licence (Software karta) pro každou oblast - použijte rozevírací seznam v horní části, aby se přepnul mezi nimi Pokud potřebujete další informace o určité oblasti, kontaktujte svého poskytovatele služeb, aby vám poskytl odpovídající podporu. Také, v případě, že jste objevili nějakou jinou lokaci, která vám lépe odpovídá, můžete snadno migrovat a využít nových podmínek. Co dál? Migrace mezi oblastmi</p><div class="doc-image"><img src="/images/docs/choosing-region/05-environment-regions-short-description.png" alt="environment regions short description" loading="lazy"></div><div class="doc-image"><img src="/images/docs/choosing-region/06-available-regions-detailed-overview_hu7b4d2d5bb2f29fb5f20a0a442a14a034_84463_480x0_resize_box_3.png" alt="available regions detailed overview hu7b4d2d5bb2f29fb5f20a0a442a14a034 84463 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/choosing-region/07-environment-regions-pricing_hua7dddb92401e591a34b84eb50d727ed3_121883_480x0_resize_box_3.png" alt="environment regions pricing hua7dddb92401e591a34b84eb50d727ed3 121883 480x0 resize box 3" loading="lazy"></div>
+</main>
+</body>
+</html>

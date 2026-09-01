@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Install LibrePlan</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>How to Install LibrePlan</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Jak nainstalovat LibrePlan<br>LibrePlan je otevřený zdrojový webový aplikátor pro plánování, monitorování a řízení projektů prostřednictvím bohatého webového rozhraní, které se přizpůsobuje podle zkušeností uživatele. Umožňuje všem členům týmu účastnit se plánování a umožňuje skutečné plánování v reálném čase. S LibrePlanem můžete spravovat více projektů najednou, i v situacích, kdy zdroje účastní v několika projektech. Aplikace poskytuje širokou sadu webových služeb pro import/export dat v případě, kdy je potřeba pro plánování nějaká data uložená v jiných aplikacích. LibrePlan je také připraven k sdílení a aktualizaci plánů mezi různými společnostmi, pokud spolupracují na dodání projektu včas. Takže nyní se dozvíme, jak snadno nainstalovat nástroj LibrePlan na platformu. Vytvořte prostředí<ol>
+<li>Přihlaste se k platformě a klikněte na tlačítko Create environment v horní levém rohu panelu nástrojů.</li>
+</ol><ol>
+<li>Přejděte na kartu Java v zobrazeném prostředí topologickém vytváření a vyberte Tomcat 7 a MySQL instance. Poté určete množství potřebných zdrojů pomocí sliderů cloudletů a zadejte název pro vaše prostředí, například libreplan. Pokračujte tlačítkem Create.</li>
+</ol><ol>
+<li>Za několik chvíle bude vytvořeno vaše prostředí. Nahrávejte a nasazujte aplikaci</li>
+</ol><ol>
+<li>Přesuňte se na stránku stahování LibrePlanu na úložišti SourceForge a stáhněte si nejnovější verze souborů libreplan_mysql_x.x.x.war a install_mysql_x.x.x.sql (v našem případě 1.4.0).</li>
+</ol></p><p>Poznámka: Tento text je přeložený z angličtiny a může obsahovat chyby. Pro správnou a přesnou informaci se doporučuje přejít na původní anglickou verzi textu.</p><p> Stránka na úložišti SourceForge a stáhněte si nejnovější verze souborů libreplan_mysql_x.x.x.war a install_mysql_x.x.x.sql (v našem případě 1.4.0).<ol>
+<li>Vracete se zpět na svou platformu dashboard a klikněte na ikonu Nahrát v části Deployment Manager. V otevřeném okně prohledejte si stáhnutý .war soubor.</li>
+</ol><ol>
+<li>Po úspěšném nahrání klikněte na ikonu Nasadit do vedle vašeho .war souboru v seznamu dostupných balíčků. Poté vyberte prostředí, které jste dříve vytvořili a potvrďte nasazení kliknutím na Nasadit v otevřeném okně.</li>
+</ol><br>Nastavení databáze<ol>
+<li>K zahájení nastavování databáze potřebujete otevřít panel phpMyAdmin tlačítkem Open in browser vedle vašeho MySQL uzlu.</li>
+</ol><ol>
+<li>Nyní se přihlaste pomocí přihlašovacích údajů, která vám byly dříve odeslána po e-mailu.</li>
+</ol><ol>
+<li>V otevřeném okně přepněte na kartu Uživatelé a klikněte na odkaz Přidat uživatele.</li>
+</ol><ol>
+<li>Nyní musíte zadat Uživatelské jméno (např., libreplan) a Heslo do zobrazeného rámečku. Potvrďte heslo v poli Zopakujte heslo a zaškrtněte možnosti Vytvořit databázi se stejným jménem a udělit všechny oprávnění a Udělit všechny oprávnění na zástupný název (username\_%). Projděte dále tlačítkem Go v dolní pravé části.</li>
+</ol><ol>
+<li>Poté přejděte na kartu Databáze a klikněte na vaši nově vytvořenou databázi (libreplan v našem případě).</li>
+</ol><ol>
+<li>Přejděte na kartu Import v otevřeném okně s databází. Poté klikněte na tlačítko Prohlédnutí a vyberte předchozího stáhnutý soubor install_mysql_x.x.x.sql.</li>
+</ol></p><div class="doc-image"><img src="/images/docs/libreplan/01-create-environment.png" alt="create environment" loading="lazy"></div><div class="doc-image"><img src="/images/docs/libreplan/02-environment-wizard_hu9ee40659c70d509fb8dc3df5a2bb167f_110714_480x0_resize_box_3.png" alt="environment wizard hu9ee40659c70d509fb8dc3df5a2bb167f 110714 480x0 resize box 3" loading="lazy"></div><p> Dojďte se na kartu Import v otevřeném rámci databáze. Poté klikněte na tlačítko Browse a vyberte předchozího stahovaný soubor install_mysql_x.x.x.sql. Nakonec stiskněte tlačítko Go v dolní levém rohu, aby začalo importovat. 7. Počkejte, až se zobrazí upozornění o úspěšném importu. Budte trpěliví - může to trvat několik minut. Konfigurace aplikace LibrePlan potřebuje další knihovnu mysql-connector-java pro správnou funkci. Můžete ji stáhnout zde. Prosím vyberte v políčku Výběr platformy Platform Independent a stiskněte tlačítko Download vedle jeho .zip verze. 2. Přihlaste se k svému účtu Oracle Web (můžete si sepsat zařízení zdarma) nebo prostě stiskněte No thanks, just start my download link v otevřeném okně. 3. Rozbalte si stáhnutý archiv. 4. Nyní stiskněte Config vedle svého Tomcatového uzlu. 5. Najděte si v zobrazeném správci konfigurací složku lib a stiskněte tlačítko Upload v přední části. 6. Vyhledejte potřebný soubor mysql-connector-java-x.x.x-bin.jar v kořenu předchozího rozbaleného archivu a vyberte ho pro nahrání. 7. Poté přejděte do složky webapps/ROOT/META-INF/ v tom samém Tomcatových konfiguracích tabulíku a upravte soubor context.xml nahrazením jeho obsahu následujícím kódem:<br>1 2 3 4 5 6<br>&lt;Context antiJARLocking="true" path=""&gt;<br>&lt;Resource name="jdbc/libreplan-ds" auth="Container" type="javax.sql.DataSource" maxActive="100" maxIdle="30" maxWait="10000" username="{db-username}" password="{db-password}" driverClassName="com.mysql.jdbc."&gt;<br>&lt;/Context&gt;</p><p> text:<br>kód: 1 2 3 4 5 6 &lt;Context antiJARLocking="pravda" cesta=""&gt;<br>&lt;Resource jméno="jdbc/libreplan-ds" auth="Container" typ="javax.sql.DataSource" maxActive="100" maxIdle="30" maxWait="10000" uživatelské jméno="{db-uživatel}" hesló="{db-heslo}" driverClassName="com.mysql.jdbc.Driver" url="jdbc:mysql://{mysql-url}/{db-databáze}"/&gt;<br>&lt;/Context&gt;<br>Musíte nahradit následující hodnoty vlastními daty:<br>{db-uživatel} - zadejte jméno uživatele, které jste vytvořili při Konfiguraci databáze (libreplan v našem případě)<br>{db-heslo} - zadejte heslo pro tento uživatele<br>{mysql-url}/{db-databáze} - zadejte URL k vašemu MySQL serveru a název vaší databáze, oddělené lomítkem (tudíž mysql-libreplan.jelastic.com/libreplan pro tento příklad)<ol>
+<li>Stisknutím tlačítka Save, které je nad upraveným kódem, a restartováním Tomcat serveru pomocí tlačítka Restart node se provedou změny.</li>
+</ol><ol>
+<li>Nakonec spusťte aplikaci stisknutím tlačítka Open v prohlížeči vedle vašeho prostředí. Ovocujeme! Můžete začít používat vlastní LibrePlan. Rádi vás pozdravujeme z moci hostingu v cloudu s PaaS! Co dále? Naučte se pomocí kategorií Java Naučte se Nastavení prostředí</li>
+</ol></p><p>Poznámka: Technické termíny, kódové bloky, příkazy, cesty souborů a URL zůstávají v původní anglické podobě. Struktura odstavců zůstává zachována.</p><div class="doc-image"><img src="/images/docs/libreplan/03-libreplan-environment-created_hu7c60839c0868982e7cf5dbb197810845_10502_480x0_resize_box_3.png" alt="libreplan environment created hu7c60839c0868982e7cf5dbb197810845 10502 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/libreplan/04-libreplan-download_hud30766c952062c26c4711a714519fdd3_42546_480x0_resize_box_3.png" alt="libreplan download hud30766c952062c26c4711a714519fdd3 42546 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/libreplan/05-upload-libreplan-archive.png" alt="upload libreplan archive" loading="lazy"></div><div class="doc-image"><img src="/images/docs/libreplan/06-deploy-libreplan_huea3b196fc1554bddb85dd3f8f844ba8d_10241_480x0_resize_box_3.png" alt="deploy libreplan huea3b196fc1554bddb85dd3f8f844ba8d 10241 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/libreplan/07-open-database-in-browser_hue238db96b4156fd4e7915a22e95f62d5_21627_480x0_resize_box_3.png" alt="open database in browser hue238db96b4156fd4e7915a22e95f62d5 21627 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/libreplan/08-database-admin-log-in.png" alt="database admin log in" loading="lazy"></div><div class="doc-image"><img src="/images/docs/libreplan/09-database-add-user_hu97c7190dd9ad7c64776252a5c707ca5c_55666_480x0_resize_box_3.png" alt="database add user hu97c7190dd9ad7c64776252a5c707ca5c 55666 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/libreplan/10-create-database_hu4b94dddfe394658ea54bc4b9a060fb47_21342_480x0_resize_box_3.png" alt="create database hu4b94dddfe394658ea54bc4b9a060fb47 21342 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/libreplan/11-libreplan-database_hu7f0d3cf4c01a7fad457f25ba70d3cc81_43497_480x0_resize_box_3.png" alt="libreplan database hu7f0d3cf4c01a7fad457f25ba70d3cc81 43497 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/libreplan/12-import-libreplan-sql_hu836174f76e89c346ff6db01704153583_29276_480x0_resize_box_3.png" alt="import libreplan sql hu836174f76e89c346ff6db01704153583 29276 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/libreplan/13-sql-import-success_hu0b403c77cf09f5a5c4c20bb588323337_14754_480x0_resize_box_3.png" alt="sql import success hu0b403c77cf09f5a5c4c20bb588323337 14754 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/libreplan/14-download-mysql-connector_hud55a9a840ca975acfec7b8f1fb68ee18_25711_480x0_resize_box_3.png" alt="download mysql connector hud55a9a840ca975acfec7b8f1fb68ee18 25711 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/libreplan/15-skip-oracle-log-in_hu76a80364763e9fb28a4807bee241fb2e_31538_480x0_resize_box_3.png" alt="skip oracle log in hu76a80364763e9fb28a4807bee241fb2e 31538 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/libreplan/16-tomcat-config_hud3f3d3b80656b67e1d1117b5a5a86081_20891_480x0_resize_box_3.png" alt="tomcat config hud3f3d3b80656b67e1d1117b5a5a86081 20891 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/libreplan/17-upload-libraries.png" alt="upload libraries" loading="lazy"></div><div class="doc-image"><img src="/images/docs/libreplan/18-upload-mysql-connector.png" alt="upload mysql connector" loading="lazy"></div><div class="doc-image"><img src="/images/docs/libreplan/19-connection-data_hu8dadf3f48bd8980cee87daa84000a611_42303_480x0_resize_box_3.png" alt="connection data hu8dadf3f48bd8980cee87daa84000a611 42303 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/libreplan/20-restart-tomcat_hudb16188881ba1c84a94b6a1c949f879b_21408_480x0_resize_box_3.png" alt="restart tomcat hudb16188881ba1c84a94b6a1c949f879b 21408 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/libreplan/21-open-libreplan-in-browser_hu97981641a5d6db4e587208a714f608a0_21492_480x0_resize_box_3.png" alt="open libreplan in browser hu97981641a5d6db4e587208a714f608a0 21492 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/libreplan/22-libreplan_huda9787e868b14c9853c76cbd88737775_37862_480x0_resize_box_3.png" alt="libreplan huda9787e868b14c9853c76cbd88737775 37862 480x0 resize box 3" loading="lazy"></div>
+</main>
+</body>
+</html>

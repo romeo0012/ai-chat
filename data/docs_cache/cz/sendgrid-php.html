@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Using SendGrid</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Using SendGrid</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Použitím SendGrid je to spolehlivá a škálovatelná cloudová infrastruktura pro odesílání e-mailů s flexibilními API, která vám umožní snadno integrovat do vašeho aplikace. Platforma a spojení s SendGrid vám poskytuje možnost odesílat e-maily přímo z vašeho PHP aplikace bez nutnosti podporovat vlastní e-mailový systém. Níže naleznete jednoduchý příklad integrace SendGrid s PHP aplikací hostovanou v PaaS.</p><p>Zaregistrujte se na SendGrid<ol>
+<li>Nejprve vytvořte nový účet na SendGrid. Pro první pokus s platformou a integrací SendGrid můžete vybrat zdarma cenovou úroveň, která umožňuje odesílání e-mailů s limitem 200 e-mailů denně. Poznamenejte si, že pro verifikaci účtu je potřeba nějaký čas. Zapamatujte si své uživatelské jméno a heslo po registraci, potřebujete je pro konfiguraci aplikace níže.</li>
+</ol></p><p>Vytvořte prostředí<ol>
+<li>Přihlaste se k účtu PaaS a stisknutím tlačítka Create Environment. Poté vyberte kartu PHP language wizard a zadejte název prostředí, například sendgrid-php.</li>
+</ol><ol>
+<li>V Deployment Manageru stisknutím tlačítka Upload můžete nahrát ukázkovou aplikaci SendGrid, společně s knihovnou SendGrid PHP, která je hostována na GitHub. Můžete použít přímo odkaz na archiv: https://github.com/sendgrid/sendgrid-php-sample-app/archive/master.zip</li>
+</ol><ol>
+<li>Po nahrání archivu se zobrazí v panelu s balíčky. Stisknutím tlačítka Deploy to.. vedle master se balíček nasadí.</li>
+</ol></p><div class="doc-image"><img src="/images/docs/sendgrid-php/create-environment_huba985530353332be1709450dca4053e2_41949_480x0_resize_box_3.png" alt="create environment huba985530353332be1709450dca4053e2 41949 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/sendgrid-php/upload-sendgrid.png" alt="upload sendgrid" loading="lazy"></div><p> Po nahrání archivu bude zobrazen v panelu balíčků. Stisknutím tlačítka Deploy do... u boku master.zip archivu a výběrem prostředí, které jste v minulých krocích vytvořili. 4. Zadejte kontext (pokud ho potřebujete) do otevřeného okna a stisknutím tlačítka Deploy. Konfigurace aplikace Po nasazení ukázkové aplikace můžete konfigurovat a určit své přihlašovací jméno a heslo SendGrid. 1. Stisknutím tlačítka Config u Apache serveru. 2. Budete mít před sebou seznam složek a konfiguračních souborů. Projděte si složku webroot &gt; {context_name} a otevřete soubor index.php. Upravte zobrazené řetězce (viz obrázek) k určení svého SendGrid účtu uživatelského jména, hesla a e-mailu, ze kterého chcete odesílat e-maily. Nezapomeňte stisknout tlačítko Save. Kontrola výsledků . Naleznete si své prostředí SendGrid na panelu a otevřete ho (tlačítko Otevřít v prohlížeči u boku aplikačního kontextu). 2. Budete mít před sebou jednoduchou základní formulář pro odesílání e-mailů. Do pole To: zadejte příjemce, do pole Subject: zadejte předmět a do pole Content: zadejte obsah e-mailu. Stisknutím tlačítka Odeslat. 3. Po několika minutách budou e-maily, které jste odeslali, zobrazeny v poštovní schránce příjemce. Takto jste schopni odesílat až 200 e-mailů denně prostřednictvím své PHP aplikace hostované na platformě. Další informace o mnoha dalších funkcích můžete nalézt v dokumentaci SendGrid. Máte šťastný den! Co dále? Naučení se podle kategorií PHP Nastavení prostředí PHP Tutorials</p><div class="doc-image"><img src="/images/docs/sendgrid-php/deploy-sendgrid_hu381d8b9dc72db14130e061516f44f5cf_21243_480x0_resize_box_3.png" alt="deploy sendgrid hu381d8b9dc72db14130e061516f44f5cf 21243 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/sendgrid-php/apache-configuration_hue12e0ad44405ffcbf75462b05315a584_22159_480x0_resize_box_3.png" alt="apache configuration hue12e0ad44405ffcbf75462b05315a584 22159 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/sendgrid-php/sendgrid-settings_huac4145f828971bae4416c932097fe3ea_159256_480x0_resize_box_3.png" alt="sendgrid settings huac4145f828971bae4416c932097fe3ea 159256 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/sendgrid-php/open-sendgrid_hucad9d7ec1fb21a3850859912bf45973c_15923_480x0_resize_box_3.png" alt="open sendgrid hucad9d7ec1fb21a3850859912bf45973c 15923 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/sendgrid-php/sending-form_hu927084d118116fbbd0851881eaf2218d_27328_480x0_resize_box_3.png" alt="sending form hu927084d118116fbbd0851881eaf2218d 27328 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/sendgrid-php/sendgrid-email_hu945b264b983433f5955aa58a19b2b268_27101_480x0_resize_box_3.png" alt="sendgrid email hu945b264b983433f5955aa58a19b2b268 27101 480x0 resize box 3" loading="lazy"></div>
+</main>
+</body>
+</html>

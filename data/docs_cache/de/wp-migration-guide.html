@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WordPress Migration Guide</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>WordPress Migration Guide</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> WordPress-Migrations-Leitfaden<br>Dieser Leitfaden dient dazu, die problemlose Migration von WordPress-Webseiten zur Verwendung der Virtuozzo-Anwendungsverwaltung mit vorkonfigurierten WordPress-Paketen im Marktplatz zu unterstützen. Folgen Sie den einfachen Schritten, um die Migration flüssig und sicher zu gestalten. Hinweis: Wenn Sie auf die Migration zu WordPress mit dem Galera-Cluster zielen, stellen Sie sicher, dass alle Tabellen in Ihrer Datenbank eine explizite Primärschlüssel haben, entweder eine einzelne oder eine Mehrspalten-Index. Ignorieren Sie diese Anforderung, wird zu einer Replikationsfehlschlag führen. Sie können sich mit der Vollständigen Liste der Einschränkungen des Galera-Clusters vertraut machen.<ol>
+<li>Melden Sie sich bei Ihrer Virtuozzo-Anwendungsverwaltungsdashboard an und erstellen Sie eine neue WordPress-Umgebung (Cluster oder Einzelanwendung) aus dem Marktplatz.</li>
+</ol><ol>
+<li>Sobald die Umgebung erstellt wurde, navigieren Sie zur WordPress-Admin-Panel und installieren Sie das Migrate Guru-Plugin.</li>
+</ol><ol>
+<li>Aktivieren Sie es und navigieren Sie zum Plugin-Tab. Hier können Sie den Migration Key finden, der für den Migrationsprozess verwendet wird.</li>
+</ol><ol>
+<li>Jetzt wechseln Sie zur Quell-WordPress-Webseite, die Sie migrieren möchten. Installieren Sie dort das gleiche Migrate Guru-Plugin und aktivieren Sie es. Navigieren Sie zum Plugin-Tab, geben Sie Ihre E-Mail-Adresse ein und akzeptieren Sie die Nutzungsbedingungen. Klicken Sie auf den Migrate-Button, um fortzufahren. Tip: Wir empfehlen, eine vollständige Backup-Kopie Ihrer Quell-WordPress-Webseite vor dem Starten des Migrationsprozesses zu erstellen, falls etwas schief geht.</li>
+</ol><ol>
+<li>Klicken Sie auf den Migrate-Button, um fortzufahren. Tip: Wir empfehlen, eine vollständige Backup-Kopie Ihrer Quell-WordPress-Website vor dem Start des Migrationsprozesses zu erstellen, um im Fall eines Fehlers sicherzustellen. 5. Öffnen Sie die angezeigte Seite und wählen Sie die Option Other Hosts aus und geben Sie den Migrationsschlüssel ein, den Sie aus der Zielumgebung kopiert haben. Konfigurieren Sie, falls nötig, weitere Einstellungen. Hinweis: Alternativ können Sie sich auf die Option Manually Input Host Details umstellen und die erforderlichen Felder ausfüllen (erfordert eine öffentliche SSH-Schlüssel hinzufügen zur Plattform): Destination Site URL ist ein Link zu einer neuen WordPress-Website (eigener Domain oder Standard-Domäne, die von der Plattform nach Umgebungskreation bereitgestellt wird). SFTP-Protokoll, um sichere Migration zu gewährleisten. Destination Server IP/FTP Address und Port können aus den Feldern Host und Port der Virtuozzo Application Management dashboard kopiert werden. Gehen Sie zu den Einstellungen des Kontos oder der Umgebung, öffnen Sie die SSH-Sektion und wechseln Sie zu der Tabseite SFTP / Direct SSH Access (wählen Sie den WordPress-Anwendungsspeicherknoten aus). FTP-Benutzername sollte aus demselben Abschnitt kopiert werden, wie im obigen Bild gezeigt. SSH Key ist eine private Schlüssel, die mit der hinzugefügten öffentlichen Schlüssel der Plattform verbunden ist. Directory Path ist der Pfad, an dem die WordPress-Anwendung installiert ist. In unserem Fall ist es der /var/www/webroot/ROOT/ Pfad. Klicken Sie auf den Migrate-Button, um den Prozess zu starten. 6. Der Plugin wird alles für Sie automatisch bearbeiten, einschließlich der Dateikopie und der Datenbankkopie. Sie können den Migrationsfortschritt auf derselben Seite verfolgen.</li>
+</ol></p><p> Migrationsstarten, um den Vorgang zu starten. 6. Der Plugin wird alles automatisch für Sie bearbeiten, einschließlich der Dateien und der Datenbankkopie. Sie können den Migrationsfortschritt auf der gleichen Seite überwachen. Sobald er abgeschlossen ist, sehen Sie eine Erfolgsnachricht und erhalten eine E-Mail-Benachrichtigung mit den Migrationsdetails. Jetzt können Sie Ihre neu migrierte WordPress-Seite im Virtuozzo Application Management besuchen und überprüfen, ob alles wie erwartet funktioniert. Das ist alles! Genießen Sie die Leistung und Verfügbarkeit Ihrer WordPress-Seite, die durch das Virtuozzo Application Management an einem breiten Netzwerk von Dienstleistern weltweit unterstützt wird. Was kommt Nächstes? WordPress Hosting WordPress All-in-One Guide WordPress Backup Guide WordPress Pakete</p><div class="doc-image"><img src="/images/docs/wp-migration-guide/01-install-wordpress-package_hu4c6a779f9e6b61a087d8f278615e30fd_73548_480x0_resize_box_3.png" alt="install wordpress package hu4c6a779f9e6b61a087d8f278615e30fd 73548 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/wp-migration-guide/02-install-migrate-guru-plugin_hu52ae5393c544fb3e16a4eaa27c6a465b_180849_480x0_resize_box_3.png" alt="install migrate guru plugin hu52ae5393c544fb3e16a4eaa27c6a465b 180849 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/wp-migration-guide/03-migration-key_hu4d3a74ca633d7e827d45c1354b8ab53d_27428_480x0_resize_box_3.png" alt="migration key hu4d3a74ca633d7e827d45c1354b8ab53d 27428 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/wp-migration-guide/04-migrate-guru-plugin-tab_hu9fba3b739d49c9ea58b009d25b86c7fc_30720_480x0_resize_box_3.png" alt="migrate guru plugin tab hu9fba3b739d49c9ea58b009d25b86c7fc 30720 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/wp-migration-guide/05-migrate-using-key_hu2ee17e2c0301225c058dd2248463d9cd_47268_480x0_resize_box_3.png" alt="migrate using key hu2ee17e2c0301225c058dd2248463d9cd 47268 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/wp-migration-guide/06-sftp-ssh-access_huf7811878fe37dff4e3e7c987c9a442e4_115267_480x0_resize_box_3.png" alt="sftp ssh access huf7811878fe37dff4e3e7c987c9a442e4 115267 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/wp-migration-guide/07-migrate-using-ftp_hu3273ba427c2db38bb1ea2450b237cb31_90865_480x0_resize_box_3.png" alt="migrate using ftp hu3273ba427c2db38bb1ea2450b237cb31 90865 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/wp-migration-guide/08-migration-success_hu121fd328224b3c5db51987f8d3bd84d2_36974_480x0_resize_box_3.png" alt="migration success hu121fd328224b3c5db51987f8d3bd84d2 36974 480x0 resize box 3" loading="lazy"></div>
+</main>
+</body>
+</html>

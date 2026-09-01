@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>New Relic Monitoring for Your Application inside the PaaS</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>New Relic Monitoring for Your Application inside the PaaS</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Nový Relic Monitoring pro Vaši aplikaci v rámci PaaS</p><p>Nový Relic je nástroj pro monitorování výkonu aplikací (APM) pro vývojáře a Ops, zaměřený na poskytování hloubkových informací o výkonu a spolehlivosti projektu v reálném čase. Navržený k identifikaci a diagnostice vzniklých problémů, může sledovat propustnost vašich webových transakcí, analyzovat výjimky aplikace, hledat zpomalení v dotazech nebo webových požadavcích a obecně poskytuje velké množství užitečných dat pro rychlou a pohodlnou řešení problémů. Od Nového Relic je jedna z nejčastěji používaných a velmi populárních řešení pro kontrolu metrik aplikací, a proto jsme připravili speciální doplněk k jeho snadnějšímu poskytování. Implementován na základě JPS (Standard na balíčkování), umožňuje instalovat toto software v jednom kliknutí myši a začít sledovat nejdůležitější informace o serveru aplikace v řádku minut. Dále můžete být vždy na aktuální úrovni díky vložené možnosti pro automatickou instalaci dostupných aktualizací Nového Relic. Takže, nechte se nám projít, jak odhalit skryté výkonnostní kapacity vaší aplikace pomocí Nového Relic - abyste se mohli s doplňkem instalovat, budete potřebovat: již zaregistrovaný účet Nového Relic, s vaším unikátním identifikátorem uživatele (tj.).</p><p> Přeložení aplikace pomocí New Relic - k instalaci doplněk je třeba mít následující: již zaregistrovaný účet New Relic s vaším unikátním identifikátorem (tj. klíčem licence) alespoň jedno prostředí vytvořené na jakékoli z našich partnerských platform, s nasazenou aplikací, kterou chcete sledovat<br>Pokud tyto podmínky splníte, můžete snadno integrovat New Relic agent do vašeho cloudového prostředí - prostě následujte níže uvedené kroky. Poznámka: Po instalaci může New Relic monitoring software být snadno aktualizováno na nejnovější verzi pomocí odpovídajícího vbudovaného možnosti doplněk. Doplněk New Relic můžete instalovat pomocí následujících kroků. Poznámka: V budoucnu se plánuje podpora monitorování dalších serverů.<ol>
+<li>Začněte tlačítkem Marketplace v horní panelu dashboardu.</li>
+</ol><ol>
+<li>Přepněte se na sekci Doplněk v otevřené kartě, najděte řešení New Relic APM v seznamu, který se zobrazí (můžete využít vyhledávací pole nahoře) a klikněte na Install pro něj.</li>
+</ol></p><div class="doc-image"><img src="/images/docs/new-relic-installation/01-new-relic-monitoring-addon.png" alt="new relic monitoring addon" loading="lazy"></div><div class="doc-image"><img src="/images/docs/new-relic-installation/02-paas-main-buttons_hu08753fb831e531293fa12c6b94ab4cf4_9171_480x0_resize_box_3.png" alt="paas main buttons hu08753fb831e531293fa12c6b94ab4cf4 9171 480x0 resize box 3" loading="lazy"></div><p>Překlad:</p><p>Pokud chcete instalovat doplněk New Relic do aplikace, musíte splnit následující podmínky:
+<ul>
+<li>Máte již zaregistrovaný účet New Relic s vaším unikátním identifikátorem (tj. klíčem licence)</li>
+</ul><ul>
+<li>Máte alespoň jedno prostředí vytvořené na jakékoli z našich partnerských platform, s nasazenou aplikací, kterou chcete sledovat</li>
+</ul></p><p>Pokud tyto podmínky splníte, můžete snadno integrovat New Relic agent do vašeho cloudového prostředí - prostě následujte níže uvedené kroky. Poznámka: Po instalaci může New Relic monitoring software být snadno aktualizováno na nejnovější verzi pomocí odpovídajícího vbudovaného možnosti doplněk. Doplněk New Relic můžete instalovat pomocí následujících kroků. Poznámka: V budoucnu se plánuje podpora monitorování dalších serverů.
+<ol>
+<li>Začněte tlačítkem Marketplace v horní panelu dashboardu.</li>
+</ol><ol>
+<li>Přepněte se na sekci Doplněk v otevřené kartě, najděte řešení New Relic APM v seznamu, který se zobrazí (můžete využít vyhledávací pole nahoře) a klikněte na Install pro něj.</li>
+</ol></p><div class="doc-image"><img src="/images/docs/new-relic-installation/03-new-relic-add-on-package_hudb416d682a9ce169d9ff0984473e0d30_23403_480x0_resize_box_3.png" alt="new relic add on package hudb416d682a9ce169d9ff0984473e0d30 23403 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/new-relic-installation/04-new-relic-add-on-installation_hu8f0340288ccb26e9a215d7985a3792f8_75763_480x0_resize_box_3.png" alt="new relic add on installation hu8f0340288ccb26e9a215d7985a3792f8 75763 480x0 resize box 3" loading="lazy"></div><p> Oddíl Přílohy v otevřené kartě, najděte řešení New Relic APM v seznamu, který se zobrazí (můžete využít vyhledávací pole nahoře). Klikněte na Install pro něj. Tip: Agent New Relic APM je také k dispozici v JPS Collection, společně s počtem dalších užitečných řešení, která poskytuje platforma. Můžete importovat a integrovat každé z nich pomocí odkazu na soubor manifest.jps v příslušném repozitáři.
+<ol>
+<li>Budete mít zobrazen rámec instalace: Zde by měla být následující data zadána do odpovídajících polí:</li>
+</ol>
+<ul>
+<li>Název aplikace - zadejte etiketu pro tuto aplikaci, aby se zobrazila na vašem dashboardu New Relic, např., my-project (doména prostředí je zde nahrazena výchozím hodnotou, pokud se přepínáme mezi několika dostupnými)</li>
+</ul><ul>
+<li>Klíč licence - jedinečný identifikátor, který je vázán na každého uživatele New Relic a můžete ho zobrazit v sekci Nastavení účtu v panelu správy (tímto si jistíte, že sbíraná data budou zobrazena na vašem účtu)</li>
+</ul></p><p>Poznámka: Pole Klíč licence v rámci instalace přílohy obsahuje masku klíče výchozí. Můžete dokončit instalaci ponecháním tohoto pole nezměněné, ale zřejmě nebudete schopni prozkoumávat shromážděné statistiky (protože chybí vázaný účet New Relic). Můžete však tento parametr zadat později v nastaveních přílohy New Relic pomocí správce konfigurace platformy.</p><p>Cesty k požadovanému souboru: pro Java aplikační servery: TomEE, Tomcat - /opt/tomcat/lib/newrelic/newrelic.</p><div class="doc-image"><img src="/images/docs/new-relic-installation/05-new-relic-apm-admin-panel_huccdd447f5eddc114006103184e61faa5_128164_480x0_resize_box_3.png" alt="new relic apm admin panel huccdd447f5eddc114006103184e61faa5 128164 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/new-relic-installation/06-new-relic-successfully-installed.png" alt="new relic successfully installed" loading="lazy"></div><p> Nastavení prostřednictvím platformy Configuration Manager. Cesty k požadovanému souboru: pro Java app servery: TomEE, Tomcat - /opt/tomcat/lib/newrelic/newrelic.yml Jetty - /opt/jetty/lib/newrelic/newrelic.yml pro PHP app servery: vhodný parametr newrelic.license najdete v souboru /etc/php.d/newrelic.ini, další parametry add-on mohou být upravovány i v těchto souborech. Název prostředí - vyberte název prostředí, do kterého by měl být New Relic agent instalován (vhodné názvy jsou zvýrazněny v seznamu dostupných možností) Uzly - vyberte instance pro monitorování (v současné době jsou k dispozici pouze app servery pro výběr) Stisknutím tlačítka Install potvrďte vaše zadání a spustíte proces nasazení. 4. Za několik minut bude přidán add-on k vaší aplikaci: 5. Podle zobrazeného výše uvedeného zprávy je nutné povinně Restartovat node(s) k zahájení sběru trendů efektivity vaší aplikace. Toho můžete provést tlačítkem vhodném pro vaši aplikační server. Prosím, pozorujte, že pokud je vaše projektování v jednom uzlu app serveru, restart bude způsobit dočasný odpočet vaší aplikace, takže se rozhodnete, kdy provést tuto operaci. V opačném případě, pokud je vaši aplikační server horizontálně škálován, doba odpočtu bude minimální, protože všechny instancie serveru budou restartovány postupně.</p><p> Chcete-li určit, kdy provést tuto operaci. Však v případě, že je vaše aplikační server horizontálně škálován, doba nefunkce bude minimální, protože všechny instancie serveru budou restartovány postupně. Můžete se zbavit tohoto nevýhody všechny, přesunutím zpoždění pro provedení této operace na každém dalším uzlu v jedné vrstvě. Takovým způsobem, zatímco jeden uzel je v údržbě, zbylé zůstanou aktivní. 6. Nyní můžete se přihlásit k vaší účtu New Relic a prohlédnout se do shromážděných dat o výkonu vaší aplikace. Sledujte nejdůležitější parametry v reálném čase prostřednictvím vašich vlastních panelů dashboards, dostávejte se automatické upozornění na vzniklé kritické problémy a mnoho dalších - viz plný seznam poskytovaných funkcí monitorování. Jako se můžete dočinit, instalace přídavku New Relic je skutečně jednoduchá a nebude to trvat dlouho. Ve stejné době je dostatečně silná, aby pomohla řešit vzniklé problémy a zabránit nedostatku výkonu. Co dále? Monitorování aplikace New Relic Update Java Agent Integration PHP Extensions JPS Collection</p><div class="doc-image"><img src="/images/docs/new-relic-installation/07-restart-tomcat-server_hu1029b6dc38e41285b4aea4243dc8b863_24482_480x0_resize_box_3.png" alt="restart tomcat server hu1029b6dc38e41285b4aea4243dc8b863 24482 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/new-relic-installation/08-monitoring-with-new-relic_hu422dee63861a183125ed81fed5399650_77407_480x0_resize_box_3.png" alt="monitoring with new relic hu422dee63861a183125ed81fed5399650 77407 480x0 resize box 3" loading="lazy"></div>
+</main>
+</body>
+</html>

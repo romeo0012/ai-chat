@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apache PHP</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Apache PHP</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Apache PHP Platform přizpůsobuje silnou, komerční a otevřenou verzi Apache HTTP Server ("httpd") k vytvoření bezpečného, efektivního a škálovatelného serveru pro hostování PHP. Stack Apache PHP platformy poskytuje zásadní podporu jazyka PHP a protokolu HTTP/2 (je nutné SSL) díky použití modulů php7_module a http2_module. Poznámky: Tato šablona využívá moderní daemon inicializace systemd. Seznam všech modulů na serveru můžete zobrazit pomocí příkazu apachectl -M nebo na výchozí stránce phpinfo. Chcete-li získat svůj Apache PHP server, následujte níže uvedené kroky:
+<ol>
+<li>Přihlaste se k svému PaaS účtu a klikněte na New Environment v horní části.</li>
+</ol><ol>
+<li>V otevřeném topologickém vizualizátoru přepněte na kartu PHP a vyberte Apache jako svůj server aplikace. Nastavte ostatní konfigurace podle svých potřeb (např., limit cloudletů, veřejné IP adresy, oblast, atd.). Zadejte jméno svého prostředí a klikněte na Create.</li>
+</ol><ol>
+<li>Po vytvoření prostředí můžete kliknutím na tlačítko Open in Browser vedle Apache application server otevřít.</li>
+</ol><ol>
+<li>Na otevřené výchozí stránce zobrazíte informace o vašem serveru phpinfo. Nyní můžete svou PHP aplikaci nasadit do prostředí.</li>
+</ol></p><p>Konfigurace Apache<br>Apache PHP má několik hlavních konfiguračních souborů, které můžete upravit k přizpůsobení svého serveru aplikace podle svých specifických potřeb:</p><p>/etc/php.ini - obsahuje direktivy, které konfigurují vaši PHP nastavení<br>/etc/httpd/conf.d/php.ini - obsahuje konfiguraci Apache pro PHP</p><div class="doc-image"><img src="/images/docs/apache-php/01-phpinfo-loaded-modules_hu9a88ddd21b1b431349e520c44415e7f9_63250_480x0_resize_box_3.png" alt="phpinfo loaded modules hu9a88ddd21b1b431349e520c44415e7f9 63250 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/apache-php/02-new-environment-button_hu08753fb831e531293fa12c6b94ab4cf4_9171_480x0_resize_box_3.png" alt="new environment button hu08753fb831e531293fa12c6b94ab4cf4 9171 480x0 resize box 3" loading="lazy"></div><p> Chcete si přizpůsobit vaši aplikační server k vašim konkrétním potřebám: /etc/php.ini - obsahuje direktivy, které konfigurují vaši nastavení PHP /etc/httpd/conf.d/php.conf - konfiguruje provádění skriptů PHP /etc/httpd/conf/httpd.conf - obsahuje direktivy, které konfigurují vaši Apache server</p><p>Konkrétním příkladem bude ukázání, jak změnit velikost souborů, které mohou být nahrány do vaší aplikace.<ol>
+<li>Kliknutím na tlačítko Config pro vaši Apache server přistupujete k správci konfiguračních souborů:</li>
+</ol><ol>
+<li>Otevřete soubor /etc/php.ini (dostupný prostřednictvím zkratky Oblíbené) a vyhledejte následující parametry:</li>
+</ol><br>   - upload_max_filesize - maximální velikost souborů, které mohou být nahrány na server (100MB vůbec)<br>   - post_max_size - maximální velikost dat POST, která přijme PHP (100MB vůbec)</p><p>Poznámka: Tyto nastavení neovlivňují maximální velikost souboru, který může být nahrán prostřednictvím platformního manažera souborů z lokálního počítače. Maximální velikost souboru, který může být nahrán, je 150MB (může se lišit podle nastavení poskytovatele služeb). Pro operaci větších souborů použijte možnost URL nebo připojte veřejný IP a použijte vlastní manažer (např. přídavný modul FTP).<ol>
+<li>Nezapomeňte Uložit změny a Restartovat uzly vašeho aplikačního serveru, aby se nová nastavení aplikovala. Pro podrobnější informace o konfiguraci serveru PHP se přejděte na odpovídající návody: PHP Dev Center PHP.INI Security Settings PHP Extensions PHP Accelerators PHP Auto Configurations</li>
+</ol></p><div class="doc-image"><img src="/images/docs/apache-php/03-apache-php-topology-wizard_hub134b1145437fc8e80667652bb0d4c57_130998_480x0_resize_box_3.png" alt="apache php topology wizard hub134b1145437fc8e80667652bb0d4c57 130998 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/apache-php/04-apache-php-open-in-browser_hu4af7cb9836d65ad3f14f4bcb576cf4c6_27441_480x0_resize_box_3.png" alt="apache php open in browser hu4af7cb9836d65ad3f14f4bcb576cf4c6 27441 480x0 resize box 3" loading="lazy"></div><p>Další krok?</p><p>Pro podrobnější informace o konfiguraci Apache se přejděte na odpovídající návody: Apache Security Configurations Apache Modules Add Apache Modules Apache WebDav Module Apache Statistics Module Name-Based Virtual Host in Apache</p><div class="doc-image"><img src="/images/docs/apache-php/05-apache-phpinfo-start-page_hua82aafbd2cead994bca0251a2dae659e_133241_480x0_resize_box_3.png" alt="apache phpinfo start page hua82aafbd2cead994bca0251a2dae659e 133241 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/apache-php/06-apache-php-config-button_hud2d04d53c6a7455d067c0fe3bf979e34_26290_480x0_resize_box_3.png" alt="apache php config button hud2d04d53c6a7455d067c0fe3bf979e34 26290 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/apache-php/07-apache-adjust-phpini-file_hud92ca45c17a17bc493f2c54748d84dd8_59610_480x0_resize_box_3.png" alt="apache adjust phpini file hud92ca45c17a17bc493f2c54748d84dd8 59610 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/apache-php/08-file-upload-via-url_hu74eacacc5f3c837a51081c7ae79263d5_22253_480x0_resize_box_3.png" alt="file upload via url hu74eacacc5f3c837a51081c7ae79263d5 22253 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/apache-php/09-apache-php-restart-nodes_huc86901b203c3a1bf6088437d6e4d27c4_27469_480x0_resize_box_3.png" alt="apache php restart nodes huc86901b203c3a1bf6088437d6e4d27c4 27469 480x0 resize box 3" loading="lazy"></div>
+</main>
+</body>
+</html>

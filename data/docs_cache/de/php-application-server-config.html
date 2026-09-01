@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PHP Application Server Configuration</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>PHP Application Server Configuration</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> PHP Anwendungserver-Konfiguration</p><p>Um die notwendigen Konfigurationen durchzuführen, drücken Sie bitte auf den Config-Button neben Ihrem Anwendungserver. Im Falle, dass Sie mehrere Anwendungserver haben, können Sie sie zusammen oder separat konfigurieren. Dazu folgen Sie den Schritten:
+<ol>
+<li>Öffnen Sie den Dropdown-Menü an der Spitze der Konfigurationstab. Es enthält die Liste aller App-Server in Ihrer Umgebung.</li>
+</ol><ol>
+<li>Wählen Sie den erforderlichen Server aus und konfigurieren Sie ihn.</li>
+</ol><ol>
+<li>Um die Änderungen anzuwenden: nur für den ausgewählten Server klicken Sie auf den Speichern-Button nur für die aktuelle Instanz aus dem Dropdown-Menü; für alle Server klicken Sie auf Speichern für alle Instanzen. Hinweis: Wenn Sie eine Datei oder Verzeichnis im Konfigurationsmanager erstellen oder umbenennen, wird dies nur in der Liste des ausgewählten Knotens angewendet. Sie können diese Änderung nicht für alle verfügbaren App-Server in der Umgebung speichern. Wenn Sie auch in den anderen Servern dieselbe Datei oder Verzeichnis erstellen oder umbenennen möchten, müssen Sie dies manuell tun.</li>
+</ol></p><p>Hier können Sie die Liste der Konfigurationsdateien sehen, die in den PHP-Anwendungservern bearbeitet werden können:</p><div class="doc-image"><img src="/images/docs/php-application-server-config/01-multiple-php-nodes.png" alt="multiple php nodes" loading="lazy"></div><div class="doc-image"><img src="/images/docs/php-application-server-config/02-save-for-current-all-instances_hu096ad75c2e30ef4132d95e862db201d2_40513_480x0_resize_box_3.png" alt="save for current all instances hu096ad75c2e30ef4132d95e862db201d2 40513 480x0 resize box 3" loading="lazy"></div><p>Apache Verzeichnis Dateipfad etc php.ini /etc conf.d modules.conf aliases.conf geoip.conf mod_security.conf php.conf ssl.conf welcome.conf /etc/httpd/conf.d/ conf httpd.conf /etc/httpd/conf/ webroot /var/www/webroot cron apache /var/spool/cron keys /var/lib/jelastic/keys modules /usr/lib64/php/modules</p><p>NGINX-PHP Verzeichnis Dateipfad etc php-fpm.conf php.ini /etc conf.d virtual.conf ssl.conf /etc/nginx/conf.d conf nginx.conf</p><p> apache /var/spool/cron Schlüssel /var/lib/jelastic/keys Modulteile /usr/lib64/php/modules NGINX-PHP Ordner Pfad usw php-fpm.conf php.ini /etc Konfigurationselemente virtual.conf ssl.conf /etc/nginx/konfigurationselemente conf nginx.conf /etc/nginx Websturzstelle /var/www/websturzstelle cron nginx /var/spool/cron Schlüssel /var/lib/jelastic/keys Modulteile /usr/lib64/php/modules Klicke auf die Links, um mehr Informationen über die veränderbaren Einstellungen in den entsprechenden Ordnern zu erhalten. ETC Die Hauptkonfigurationen des PHP-Servers werden in der php.ini-Datei vorgenommen, die sich im etc-Ordner befindet. Beispielhaft können hier folgendes eingestellt werden:
+<ul>
+<li>PHP-Erweiterungen</li>
+</ul><ul>
+<li>PHP-Beschleuniger</li>
+</ul><ul>
+<li>PHP-Sessions in Memcached speichern</li>
+</ul><ul>
+<li>PHP.INI-Sicherheitskonfigurationen</li>
+</ul></p><div class="doc-image"><img src="/images/docs/php-application-server-config/03-php-ini-configuration-file_hue41987ce911377ee9ca2c2ec1f895e3b_29059_480x0_resize_box_3.png" alt="php ini configuration file hue41987ce911377ee9ca2c2ec1f895e3b 29059 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/php-application-server-config/04-httpd-configuration-file.png" alt="httpd configuration file" loading="lazy"></div><p>Zurück zum Überblick CONF Apache</p><p>Für den Apache-Anwendungsspeicherserver ist die Hauptkonfigurationsdatei die httpd.conf, die sich im conf-Ordner befindet. Beispielhaft können hier folgendes vorgenommen werden:
+<ul>
+<li>Einrichtung von Mehrdomänen</li>
+</ul><ul>
+<li>Aktivierung von benutzerdefinierten Apache-Modulen</li>
+</ul><ul>
+<li>Verwendung des WebDav-Moduls</li>
+</ul><ul>
+<li>Durchführung notwendiger Sicherheitskonfigurationen</li>
+</ul><ul>
+<li>Konfiguration von namensbasierten virtuellen Hosts</li>
+</ul><ul>
+<li>Aktivierung des Statistikmoduls, um Ihre Serverstatistiken anzuzeigen</li>
+</ul></p><p>Hinweis: Um in der httpd.conf-Datei beliebige benutzerdefinierte Konfigurationen durchzuführen, muss der #Jelastic-Autokonfiguration-Zeichenstreifen am Anfang der Datei entfernt werden:</p><div class="doc-image"><img src="/images/docs/php-application-server-config/05-autoconfiguration-mark_hu48d3a334ca8ddf92af29ea7ef3f4bfed_65625_480x0_resize_box_3.png" alt="autoconfiguration mark hu48d3a334ca8ddf92af29ea7ef3f4bfed 65625 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/php-application-server-config/06-maxclients-value-before_hu8cbc196fb2d5f2643c0a1ad559eb1090_38428_480x0_resize_box_3.png" alt="maxclients value before hu8cbc196fb2d5f2643c0a1ad559eb1090 38428 480x0 resize box 3" loading="lazy"></div><p>Die Anzahl der Arbeiter für die Verarbeitung von PHP-Anfragen wird in einem Apache-Server automatisch erhöht, je nach der angegebenen Cloudlet-Menge. Um dies zu überprüfen, suche und merke dich den MaxClients-Wert in der httpd.conf-Datei.</p><p> PHP-Anfragen werden automatisch erhöht, je nachdem, wie viele Cloudlets für sie festgelegt wurden, in einem Apache-Server. Um dies zu überprüfen, finden Sie und merken Sie sich den Wert von MaxClients in der httpd.conf-Datei. Danach ändern Sie die Umgebung durch Veränderung des Cloudlet-Limit für Ihren Server. Kehren Sie zur httpd.conf-Datei zurück - der Wert von MaxClients hat sich erhöht/vermindert. Hinweis: Diese Funktionalität wird deaktiviert, wenn Sie die # Jelastic-Konfigurationszeichenfolge am Anfang der httpd.conf-Datei entfernen.</p><p>NGINX<br>Für die Durchführung notwendiger Konfigurationen für einen NGINX-PHP-Server wird die nginx.conf-Datei, die sich im Ordner conf befindet, verwendet. Verwenden Sie sie, um die folgenden Konfigurationen einzurichten:
+<ul>
+<li>Mehrere Domänen einrichten</li>
+</ul><ul>
+<li>WebDav-Modul einrichten</li>
+</ul><ul>
+<li>Notwendige Sicherheitskonfigurationen durchführen</li>
+</ul></p><div class="doc-image"><img src="/images/docs/php-application-server-config/07-maxclients-value-after_hu66dcb6b12b5e9920d37c37bbb9ad4ed1_31658_480x0_resize_box_3.png" alt="maxclients value after hu66dcb6b12b5e9920d37c37bbb9ad4ed1 31658 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/php-application-server-config/08-nginx-configuration-file.png" alt="nginx configuration file" loading="lazy"></div><p>Zurück zur Liste</p><p>CONF.D<br>Der conf.d-Ordner wird verwendet, um Subkonfigurationen zu speichern und zu verwalten.</p><p>Zurück zur Liste</p><div class="doc-image"><img src="/images/docs/php-application-server-config/09-confd-folder-for-configs.png" alt="confd folder for configs" loading="lazy"></div><div class="doc-image"><img src="/images/docs/php-application-server-config/10-webroot-folder-for-applications.png" alt="webroot folder for applications" loading="lazy"></div><p>WEBROOT<br>Der webroot-Ordner wird verwendet, um die auf die Umgebung bereitgestellte Anwendung zu speichern.</p><p>Zurück zur Liste</p><p>CRON<br>App-Server enthalten einen Ordner cron mit der Konfigurationsdatei, in der Cronjobs konfiguriert werden können. Weitere Informationen zur Konfiguration von Cronjobs finden Sie im Dokument "Setting Up a Cronjob".</p><div class="doc-image"><img src="/images/docs/php-application-server-config/11-cron-folder-for-cronjobs.png" alt="cron folder for cronjobs" loading="lazy"></div><div class="doc-image"><img src="/images/docs/php-application-server-config/12-keys-folder-for-ssh-keys.png" alt="keys folder for ssh keys" loading="lazy"></div><p>Zurück zur Liste</p><p>KEYS<br>Der keys-Ordner dient als Speicherort für die hochladen Sieben von Ihrer Anwendung benötigte private Schlüssel. Generieren Sie den Schlüssel, speichern Sie ihn als einfaches Datei und hochladen Sie ihn in den keys-Ordner.</p><p>Jetzt können Sie ihn für verschiedene Fälle einfach durch Angabe des Pfads zu Ihrer Schlüssel verwenden: /var/lib/jelastic/keys/{key_file_name}</p><div class="doc-image"><img src="/images/docs/php-application-server-config/13-modules-folder-for-php-modules.png" alt="modules folder for php modules" loading="lazy"></div><p>Zurück zur Liste</p><p>MODULES<br>Der modules-Ordner enthält die standardmäßig im Plattform bereitgestellten php-Module. Sie können auch Ihre eigenen php-Module in diesen Ordner hochladen, um sie zu aktivieren. Weitere Informationen finden Sie im Dokument "PHP Modules".</p><p>Zurück zur Liste</p><p>Was kommt jetzt?<br>Apache PHP<br>NGINX PHP<br>Mehrere Domänen für PHP</p>
+</main>
+</body>
+</html>

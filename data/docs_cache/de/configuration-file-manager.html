@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Configuration File Manager</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Configuration File Manager</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Konfigurationsdateien-Manager<br>Der Konfigurationsdateien-Manager ist ein mächtiges Werkzeug, das es ermöglicht, die Kontrolle über alle Dateien innerhalb des spezifischen Containers zu erlangen. Dadurch können Sie leicht und schnell allgemeine Konfigurationen auf Ihren Knoten über die bequeme Benutzeroberfläche direkt im Browser anwenden, ohne dass eine SSH-Verbindung hergestellt werden muss, die für komplexe Operationen erforderlich sein kann. Um den Konfigurationsmanager zu öffnen, bewegen Sie den Mauszeiger über den erforderlichen Knoten und klicken Sie auf den Config-Button (der mit einem Wrench-Icon versehen ist). In der Mitte des Dashboards wird die entsprechende Konfigurationsseite geöffnet. Hier sind folgende Abschnitte verfügbar: Wurzel (Dateimanager) - bietet Zugriff auf den lokalen Dateisystem des Containers, wo Sie verschiedene Einstellungen innerhalb der Konfigurationsdateien Ihrer App verwalten können Mount Points - Liste von Verzeichnissen, die physisch auf dem entfernten Knoten gespeichert sind, aber auf dem aktuellen Knoten verwendet werden können (Hier erfahren Sie, wie Sie Daten auf der Plattform montieren können) Exports - Liste von Verzeichnissen, die mit anderen Knoten geteilt werden, also lokal gespeichert sind, aber auch auf den entfernten Instanzen verfügbar sind (Weitere Informationen finden Sie auf der speziellen Dokumentationsseite für Speicherexports) Favorites - Dateien und Verzeichnisse, die Sie als bevorzugt markiert haben, damit Sie schnell und einfach auf sie zugreifen können</p><p>Weiter unten in diesem Leitfaden werden die Grundlagen des Konfigurationsmanager-Einsatzes betrachtet, die für jeden Plattformcontainer anwendbar sind.</p><p> Um Ihnen schnell und einfach Zugriff auf sie zu haben, werden wir im weiteren Verlauf dieses Leitfadens die Grundlagen der Verwendung des Konfigurationsmanagers betrachten, die für jede Plattform-Container-Umgebung gültig sind. Wenn Sie jedoch die Konfigurationsspezifika für einen bestimmten Knotentyp ermitteln müssen, wählen Sie bitte einen der folgenden Dokumente aus:
+<ul>
+<li>Container-Konfiguration</li>
+</ul><ul>
+<li>Java-Anwendungsserver-Konfiguration</li>
+</ul><ul>
+<li>PHP-Anwendungsserver-Konfiguration</li>
+</ul><ul>
+<li>Ruby-Anwendungsserver-Konfiguration</li>
+</ul><ul>
+<li>Datenbank-Konfiguration</li>
+</ul><ul>
+<li>NGINX-Loadbalancer-Konfiguration</li>
+</ul><ul>
+<li>Memcached-Konfiguration</li>
+</ul><ul>
+<li>Maven-Konfiguration</li>
+</ul><ul>
+<li>Arbeit mit dem Dateimanager</li>
+</ul></p><div class="doc-image"><img src="/images/docs/configuration-file-manager/1_hua023b573c4719d2f682548825e2c108a_29870_480x0_resize_box_3.png" alt="1 hua023b573c4719d2f682548825e2c108a 29870 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/configuration-file-manager/2_hue9efee7c56b7f6149afbaeed23370cde_81467_480x0_resize_box_3.png" alt="2 hue9efee7c56b7f6149afbaeed23370cde 81467 480x0 resize box 3" loading="lazy"></div><p>Der in das System integrierte Dateimanager bietet ein einfaches und praktikables Zugriff auf Ihre Container-Dateien und ermöglicht die Durchführung der meisten häufig vorkommenden Operationen direkt über das Dashboard. Tip: Sie können auch über SSH auf einen Container zugreifen, um weitere Möglichkeiten für die Verwaltung zu erhalten.
+<ol>
+<li>Wenn Sie zum Abschnitt Root des Konfigurationsmanagers wechseln, sehen Sie im rechten Bereich den Dateisystembaum mit dem Pfadzeichen und der erweiterbaren Aktionsliste für den aktuellen Verzeichnis im Werkzeugsfenster oben. Diese Optionen bieten die folgende Funktionalität: Sie können leicht zwischen Verzeichnissen innerhalb des Pfades wechseln, indem Sie auf jedes der intermediären Verzeichnisse klicken.</li>
+</ol></p><p> options bieten folgende Funktionalität: Sie ermöglichen es, leicht zwischen Verzeichnissen innerhalb des Pfads zu wechseln, indem Sie auf jedes der Zwischenverzeichnisse klicken. Außerdem können Sie den Zielort manuell angeben, indem Sie ihn in das entsprechende Eingabefeld eingeben, das beim Klicken auf den leeren Raum in der Pfadleben erstellt wird, wo die Aktionsliste eine Anzahl von Funktionen für die ausgewählte Verzeichnisverwaltung enthält, wie z. B. Inhalt aktualisieren, Neues Element erstellen, Hinzufügen des ausgewählten Elements zu den Favoriten, dessen Löschung oder das Montieren eines entfernten Verzeichnisses 2. Unter dem Werkzeugleiste können Sie den Dateibaum sehen, der für eine einfache Navigation zwischen ihnen und die Anzeige zusätzlicher Informationen zu den enthaltenen Dateien gedacht ist. In seinen Spalten werden folgende Daten angezeigt: Name - Dateiname, der durch Klicken auf das Bleistifticon (das beim Hüpfen über dem angezeigt wird) bearbeitet werden kann; außerdem können Sie die ausgewählte Datei verwalten, indem Sie die zusätzliche Liste verwenden. Größe - von der Datei aufgenommene Speicherplatz Größe - Datum der Dateierstellung oder des letzten Änderungsdatums Typ - Kategorie, die eine Datei zugeordnet ist (wo die verfügbaren Typen Regularfile, Verzeichnis, benannte Röhre, Socket, Zeichengerät und Blockgerät sind) Anmerkung: Nur der Regularfile-Typ kann über den Konfigurationsmanager bearbeitet werden. 3. Jede geöffnete Datei (klicken Sie doppelt auf sie oder wählen Sie die entsprechende Öffnen-Aktion für sie aus) wird in einer separaten Unter-Registerkarte angezeigt, sodass Sie zwischen ihnen wechseln können, ohne das vorherige zu schließen, was es Ihnen bei der Erkundung des Dateisystems leichter macht.</p><p> Für dieses) wird in einem separaten Unter-Tab angezeigt, sodass Sie zwischen ihnen wechseln können, ohne den vorherigen zu schließen, was es Ihnen bei der Erkundung des Dateisystems leichter macht. Zusätzlich, um die Verwaltung und Bearbeitung von Dateien zu vereinfachen, kann die passende Suche option genutzt werden, die über den gleichennamigen Knopf an der oberen Leiste verfügbar ist. Geben Sie einfach den erforderlichen Text ein, um alle Treffer in Ihrer Datei zu finden und hervorzuheben. Verwenden Sie die zusätzlichen Optionen, um die Suchergebnisse noch weiter zu verengen: Match Case - ermöglicht eine case-sensitive Suche Regex - ermöglicht die Verwendung von regulären Ausdrücken für die Festlegung der Suchbedingungen 4. Nachdem Sie mit den Bearbeitungen an den Dateien fertig sind, vergessen Sie nicht, Änderungen zu speichern, indem Sie den entsprechenden Knopf an der oberen Leiste verwenden. Wenn Sie mit einer Schicht aus mehreren Knoten arbeiten, werden Sie zusätzlich aufgefordert, ob es erforderlich ist, die geänderten Daten nur für die aktuelle Instanz oder für alle Instanzen zu speichern. Tip: Wenn Sie Änderungen an irgendeiner Konfigurationsdatei speichern, wird ein Bestätigungsfenster auftauchen. Wenn Sie sich sicher fühlen und dieses Fenster in Zukunft überspringen möchten, ticken Sie die Option "Dieses Dialogfeld nicht mehr anzeigen". Dadurch werden alle weiteren Änderungen sofort gespeichert, ohne erneut nach Bestätigung zu fragen. Diese Einstellung wird für alle Arten von Konfigurationsdateien in allen Ihren Umgebungen angewendet. 5. Um Änderungen an einem anderen Knoten innerhalb der gleichen Schicht vorzunehmen, können Sie die automatisch geladenen Dropdown-Liste an der oberen Links-Teile des Managers verwenden.</p><div class="doc-image"><img src="/images/docs/configuration-file-manager/3_hua0f2bf5fe55288fe624e9fe4d3640aec_24597_480x0_resize_box_3.png" alt="3 hua0f2bf5fe55288fe624e9fe4d3640aec 24597 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/configuration-file-manager/4_hu409c9a99d4181fe3172c66a03ade4964_45568_480x0_resize_box_3.png" alt="4 hu409c9a99d4181fe3172c66a03ade4964 45568 480x0 resize box 3" loading="lazy"></div><p>Hinweis: Die bereits geöffneten Dateien werden automatisch für die entsprechenden Knoten neu geladen, wenn Sie wechseln. Das ist alles von den Hauptfunktionen des Dateimanagers, die es Ihnen wahrscheinlich bei der Arbeit mit unserer Plattform sehr helfen sollen. Was kommt nach? Mount Points Exporting Data for Sharing SSH Access</p><div class="doc-image"><img src="/images/docs/configuration-file-manager/5_hu1f7b8cf5a7f1dc463720b6bc70788d02_50736_480x0_resize_box_3.png" alt="5 hu1f7b8cf5a7f1dc463720b6bc70788d02 50736 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/configuration-file-manager/6_hu05812163f7b00b44119b209dded07c0d_66388_480x0_resize_box_3.png" alt="6 hu05812163f7b00b44119b209dded07c0d 66388 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/configuration-file-manager/7_hubc429f83b2f0e34cfe6f4d6f39fa132e_31242_480x0_resize_box_3.png" alt="7 hubc429f83b2f0e34cfe6f4d6f39fa132e 31242 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/configuration-file-manager/8.png" alt="8" loading="lazy"></div>
+</main>
+</body>
+</html>

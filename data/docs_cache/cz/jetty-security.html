@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Security Configs for Jetty Applications</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Security Configs for Jetty Applications</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Bezpečnostní konfigurace aplikací Jetty Tento dokument vám pomůže konfigurovat bezpečnostní domény pro vaši server aplikace Jetty, aby zlepšil ochranu vaší aplikace. Správně nakonfigurované domény poskytují možnost nastavit ověřování a kontrolu přístupu pro vaši webovou aplikaci Jetty. Doména je služba ověřování, která je k dispozici všem webovým aplikacím na serveru, pokud je definována v souboru konfigurace Jetty. Každá doména obsahuje rozsah uživatelů a má své unikátní jméno. Každý uvedený uživatel má informace o ověřování a sadu rolí spojených s ním. Můžete nakonfigurovat jednu nebo více různých domén podle potřeby. Níže naleznete příklad, jak nakonfigurovat kontrolu přístupu pro vaši aplikaci Jetty v Managementu aplikací Virtuozzo: ověřování pro vaši aplikaci brána firewall omezení přístupu podle adresy klienta IP Autentizace Chcete-li nakonfigurovat požadavek na ověřování před vaším serverem aplikace Jetty, následujte následující kroky: 1. Klikněte na tlačítko Konfigurace vedle vašeho serveru aplikace Jetty v panelu nástrojů platformy. 2. Přejděte do adresáře /opt/jetty/etc a vytvořte soubor realm.properties tam. 3. Tento soubor poskytuje informace o uživatelích a jejich rolích, které budou použity pro ověřování. Uveďte uživatele a jejich role ve následujícím formátu: 1 2 # {uživatel}:{heslo},{role1},{role2},{role3} test: heslo, admin V příkladu výše vytvořili jsme uživatele test s rolí admin.</p><p> Uveďte uživatele a jejich role ve následujícím formátu: 1 2 # {uživatel}:{hesló},{role1},{role2},{role3} test: heslo, admin V příkladu výše vytvořili jsme uživatele test s rolí admin. Můžete vytvořit libovolné počet uživatelů, ale nezapomeňte na uložení souboru po úpravách.<ol>
+<li>Následující krokem je vytvoření souboru jetty-realm.xml ve stejném adresáři /opt/jetty/etc. Tento soubor obsahuje informace o doméně.</li>
+</ol><br>1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20<br>&lt;?xml version="1.0"?&gt;<br>&lt;!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "http://jetty.org/configure_10_0.dtd"&gt;<br>&lt;Configure id="Server" class="org.eclipse.jetty.server.Server"&gt;<br> &lt;Call id="ResourceFactory" class="org.eclipse.jetty.util.resource.ResourceFactory" name="of"&gt;<br> &lt;Arg&gt;&lt;Ref refid="Server" /&gt;&lt;/Arg&gt;<br> &lt;Call id="realmResource" name="newResource"&gt;<br> &lt;Arg&gt;&lt;Property name="jetty.demo.realm" default="etc/realm.properties" /&gt;&lt;/Arg&gt;<br> &lt;/Call&gt;<br> &lt;/Call&gt;<br> &lt;Call name="addBean"&gt;<br> &lt;Arg&gt;<br> &lt;New class="org.eclipse.jetty.security.HashLoginService"&gt;<br> &lt;Set name="name"&gt;MyRealm&lt;/Set&gt;<br> &lt;Set name="config"&gt;&lt;Ref refid="realmResource"/&gt;&lt;/Set&gt;<br> &lt;/New&gt;<br> &lt;/Arg&gt;<br> &lt;/Call&gt;<br>&lt;/Configure&gt;<ol>
+<li>Uložte změny a najdete si soubor webdefault-ee10.xml také ve stejném adresáři. Tento soubor obsahuje výchozí nastavení zabezpečení pro vaši Jetty server.</li>
+</ol></p><p> Nalezni soubor webdefault-ee10.xml také ve stejném adresáři. Tento soubor obsahuje výchozí nastavení zabezpečení pro vaši Jetty server. Musíte přidat následující řádky na konci souboru, jen před uzavíracím &lt;/web-app&gt; značkou:<br>1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
+<pre><code class="lang-xml">&amp;lt;security-constraint&amp;gt;<br>  &amp;lt;web-resource-collection&amp;gt;<br>    &amp;lt;web-resource-name&amp;gt;Ochranná oblast&amp;lt;/web-resource-name&amp;gt;<br>    &amp;lt;url-pattern&amp;gt;/*&amp;lt;/url-pattern&amp;gt;<br>  &amp;lt;/web-resource-collection&amp;gt;<br>  &amp;lt;auth-constraint&amp;gt;<br>    &amp;lt;role-name&amp;gt;admin&amp;lt;/role-name&amp;gt;<br>  &amp;lt;/auth-constraint&amp;gt;<br>&amp;lt;/security-constraint&amp;gt;<br>&amp;lt;login-config&amp;gt;<br>  &amp;lt;auth-method&amp;gt;BASIC&amp;lt;/auth-method&amp;gt;<br>  &amp;lt;realm-name&amp;gt;MůjRealm&amp;lt;/realm-name&amp;gt;<br>&amp;lt;/login-config&amp;gt;<br>&amp;lt;security-role&amp;gt;<br>  &amp;lt;role-name&amp;gt;admin&amp;lt;/role-name&amp;gt;<br>&amp;lt;/security-role&amp;gt;</code></pre><ol>
+<li>Klikněte na Uložit a přejděte do adresáře /opt/jetty/modules. Zde potřebujete najít soubor server.mod a přidat zde uvedenou konfiguraci zabezpečení do sekce [xml].</li>
+</ol><ol>
+<li>Nezapomeňte na Uložení souboru a kliknutí na tlačítko Restart pro vaši Jetty server, aby se změny aplikovaly.</li>
+</ol><ol>
+<li>Chcete-li ověřit, že vše funguje správně, otevřete svou aplikaci (tlačítko Otevřít v prohlížeči vedle vašeho Jetty prostředí). Byste měli vidět okno požadavku na autentizaci: Ochrana proti propadání zpráv Další možností zabezpečit vaši Jetty aplikaci je řídit přístup k ní podle IP adresy klienta. Toho lze provést konfigurací pravidel brány firewall pro vaši Jetty server.</li>
+</ol></p><div class="doc-image"><img src="/images/docs/jetty-security/01-jetty-config_hu4c5028d3a4efc0dc9a9dda6111c65262_33053_480x0_resize_box_3.png" alt="jetty config hu4c5028d3a4efc0dc9a9dda6111c65262 33053 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/jetty-security/02-create-new-file_hufd8bbee9285a0de03d0ad56b4f7e4a84_64082_480x0_resize_box_3.png" alt="create new file hufd8bbee9285a0de03d0ad56b4f7e4a84 64082 480x0 resize box 3" loading="lazy"></div><p> Chcete-li zajistit bezpečnost vaší aplikace Jetty, je nutné řídit přístup k ní podle IP adres klienta. Toto lze provést konfigurací pravidel brány firewall pro vaši Jetty server. Správce aplikací Virtuozzo nabízí vbudovanou bránu firewall, která umožňuje provedení všech potřebných nastavení k flexibilnímu řízení přístupu k vaší aplikaci. Poznámka: Musíte přidat veřejnou IP adresu do vašeho Jetty serveru, aby se na něj aplikovala brána firewall. Například, pokud chcete odmítnout přístup k aplikaci Jetty pro určitou IP adresu, postupujte následovně: 1. Klikněte na tlačítko Konfigurace vedle vašeho prostředí Jetty a přejděte do sekce Firewall. 2. Přepněte se na kartu Pravidla příchozích zpráv a klikněte na tlačítko Přidat, aby vytvořili nové pravidlo. Chcete-li odmítnout připojení z určité IP, vyplňte pole následovně: Uzly - vyberte Jetty server Název - zadejte libovolné požadované jméno pravidla Protokol - vyberte TCP požadovaný protokol Portový rozsah - odmítněte přístup k všem portům, zanechte toto pole prázdné Zdroj - vyberte možnost Vlastní IP adresy a zadejte potřebnou IP v poli IP adresa rozsah Zásada - nastavte vhodnou prioritu pro tuto pravidlo (například 900, aby se před prioritami výchozími) Akce - vyberte možnost Odmítnout Klikněte na Přidat, aby uložili a automaticky aplikovali vaše pravidlo. 3. Pokud se pokusíte přístup k aplikaci Jetty z odmítnuté IP adresy, zobrazí se chybová zpráva, která říká, že webová stránka není dosažitelná. Co dále?
+<ol>
+<li>Pokud se pokusíte přístup k aplikaci Jetty z odmítnuté IP adresy, zobrazí se chybová zpráva, která říká, že webová stránka není dosažitelná. Co dále? Konfigurace Java Serveru Eclipse Jetty NGINX-Balancer Security</li>
+</ol></p><div class="doc-image"><img src="/images/docs/jetty-security/03-realm-properties-config_hue6ab19b54032927f8128ba0b4872da97_21058_480x0_resize_box_3.png" alt="realm properties config hue6ab19b54032927f8128ba0b4872da97 21058 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/jetty-security/04-jetty-realm-xml-config_hu7372425645c27f638ad5e42cb0f6a1c8_74318_480x0_resize_box_3.png" alt="jetty realm xml config hu7372425645c27f638ad5e42cb0f6a1c8 74318 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/jetty-security/05-webdefault-xml-config_hu27b1a79b552474d801d85590130b0057_87406_480x0_resize_box_3.png" alt="webdefault xml config hu27b1a79b552474d801d85590130b0057 87406 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/jetty-security/06-server-mod-config_hu0a3a0755cf24dd34724134e600272e14_37496_480x0_resize_box_3.png" alt="server mod config hu0a3a0755cf24dd34724134e600272e14 37496 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/jetty-security/07-restart-jetty-server_hu2e97ec0c8e1013c0f8a7bfd38b85ec87_34109_480x0_resize_box_3.png" alt="restart jetty server hu2e97ec0c8e1013c0f8a7bfd38b85ec87 34109 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/jetty-security/08-jetty-authentication.png" alt="jetty authentication" loading="lazy"></div><div class="doc-image"><img src="/images/docs/jetty-security/09-firewall-config_hua2787747dbc3b071225402f7b5ac1d38_160250_480x0_resize_box_3.png" alt="firewall config hua2787747dbc3b071225402f7b5ac1d38 160250 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/jetty-security/10-deny-ip-rule_hu574e12cce47b8cc413916daaf26dc57b_45819_480x0_resize_box_3.png" alt="deny ip rule hu574e12cce47b8cc413916daaf26dc57b 45819 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/jetty-security/11-access-denied_huc16cc099a8dcb1d8a18ec7be10a8bef7_35341_480x0_resize_box_3.png" alt="access denied huc16cc099a8dcb1d8a18ec7be10a8bef7 35341 480x0 resize box 3" loading="lazy"></div>
+</main>
+</body>
+</html>

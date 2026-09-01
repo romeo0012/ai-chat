@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PHP Developer’s Center</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>PHP Developer’s Center</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> PHP-Entwickler-Zentrum<br>PHP gilt als eines der leichtesten zu nutzen Server-Seitenscripting-Sprachen. Seine Verwendung für Websites (Top 10 Million nach Alexa-Rangliste) wächst kontinuierlich und hat aktuell 78,9% erreicht. Die Beliebtheit des PHP-Engines wird auch durch die Plattformkunden bestätigt, da fast jedes zweite Server auf PHP läuft, wie unsere internen Statistiken zeigen. Nun nehmen wir uns einen Blick auf die PHP-Cloud-Hosting innerhalb der Plattform, ihre Hauptmerkmale, ihre Erfolgsfaktoren und die reichen Möglichkeiten, die für die effiziente Ausführung von Anwendungen bereitgestellt werden. Verwenden Sie den Inhaltsverzeichnis unten, um die erforderliche Information innerhalb der Anleitung schneller zu finden:
+<ul>
+<li>PHP-Versionen</li>
+</ul><ul>
+<li>PHP-Anwendungsserver</li>
+</ul><ul>
+<li>PHP-Anwendungsbereitstellung</li>
+</ul><ul>
+<li>Domänenmanagement</li>
+</ul><ul>
+<li>Automatisches vertikales Skalieren</li>
+</ul><ul>
+<li>Manuelles horizontales Skalieren</li>
+</ul><ul>
+<li>Automatisches horizontales Skalieren</li>
+</ul><ul>
+<li>PHP-Clustering</li>
+</ul><ul>
+<li>Datenbankverbindung zu PHP-Anwendung</li>
+</ul><ul>
+<li>Modulen und Beschleunigern für PHP</li>
+</ul><ul>
+<li>PHP-Sicherheit</li>
+</ul><ul>
+<li>PHP-Versionen</li>
+</ul></p><p>Während der Technologieevolution bleibt die Plattform der neuesten PHP-Engineversionen (zum Zeitpunkt der Veröffentlichung dieser Schrift) unterstützt:<br>8.1.33<br>8.2.31<br>8.3.31<br>8.4.22<br>8.5.7</p><p>Die aktuelle Liste der Veröffentlichungen, die auf der Plattform verfügbar sind, wird über den speziell für diesen Zweck erstellten und wöchentlich aktualisierten Software Stack Versions Dokument bereitgestellt. Sie können die benötigte Engine-Version während der Umgebungskonfiguration auswählen und zwischen ihnen später leicht über die intuitiven Plattform-UI wechseln.
+<ul>
+<li>PHP-Anwendungsserver</li>
+</ul></p><div class="doc-image"><img src="/images/docs/php-center/01-php-cloud-hosting_hu71f1ddf9a4b70e017316a8f5ace9a3b4_211964_480x0_resize_box_3.png" alt="php cloud hosting hu71f1ddf9a4b70e017316a8f5ace9a3b4 211964 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/php-center/02-php-environment-creation_huca4e77ec380f3438d589d7e6da2f10e4_94996_480x0_resize_box_3.png" alt="php environment creation huca4e77ec380f3438d589d7e6da2f10e4 94996 480x0 resize box 3" loading="lazy"></div><p>Zwei PHP-Anwendungsserver werden standardmäßig bereitgestellt und von der Plattform unterstützt (z.B.):</p><p>PHP-Anwendungsbereitstellung
+<ul>
+<li>PHP-Deployment</li>
+</ul>
+<ul>
+<li>Domänenmanagement</li>
+</ul><ul>
+<li>Automatisches vertikales Skalieren</li>
+</ul><ul>
+<li>Manuelles horizontales Skalieren</li>
+</ul><ul>
+<li>Automatisches horizontales Skalieren</li>
+</ul><ul>
+<li>PHP-Clustering</li>
+</ul><ul>
+<li>Datenbankverbindung zu PHP-Anwendung</li>
+</ul><ul>
+<li>Modulen und Beschleunigern für PHP</li>
+</ul><ul>
+<li>PHP-Sicherheit</li>
+</ul></p><p>Weitere Informationen finden Sie im Abschnitt "PHP-Anwendungsbereitstellung" der Anleitung.</p><div class="doc-image"><img src="/images/docs/php-center/03-php-file-manager_hub92ee7eed2d249e70811c5e195d2b44f_56222_480x0_resize_box_3.png" alt="php file manager hub92ee7eed2d249e70811c5e195d2b44f 56222 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/php-center/04-php-application-deployment.png" alt="php application deployment" loading="lazy"></div><p> intuitiver Plattform-UI. PHP Anwendungsserver Zwei PHP Anwendungsserver werden standardmäßig bereitgestellt und von der Plattform unterstützt (z.B. Version upgrades oder Sicherheitspatches werden von der PaaS-Team in die Vorlagen integriert): Apache NGINX Um die Konfiguration dieser Server in detail zu sehen und die Liste der bearbeitbaren Konfigurationsdateien für jeden von ihnen zu erfahren, beziehe dich auf die Dokumentation PHP App Server Configuration. PHP Anwendung Bereitstellung Bietet eine zero-downtime-Bereitstellung, die es ermöglicht, beliebige cloud-native oder legacy Anwendungen auszuführen. Um Ihre PHP-Projekte in die von der Plattform erstellte Umgebung zu übertragen, können Sie eine der verfügbaren Bereitstellungsmethoden wählen: über Archiv/URL, GIT/SVN, Bitbucket-Projekt, usw. Darüber hinaus können Sie eine automatische periodische Wiederbereitstellung aus dem Repository konfigurieren (wird nur durchgeführt, wenn neue Codeänderungen auftreten). Außerdem werden alle von der Plattform zertifizierten PHP-Knoten mit dem vorgeinstallierten Composer-Abhängigkeitsmanager bereitgestellt, um schnell alle erforderlichen Pakete für das bereitgestellte Projekt zu installieren und sie auf dem neuesten Stand zu halten. Domänenverwaltung Für Produktionszwecke können Sie eine externe Domänenname Ihrer Anwendung zuordnen, anstatt der standardmäßigen Umgebungsdomäne. Folge den passenden Anweisungen für benutzerdefinierte Domänen, um zu erfahren, wie es funktioniert. Mit Hilfe der Domänen-Swapping-Funktion erleiden die Endnutzer Ihrer Anwendung keinen Ausfall, wenn Sie beispielsweise eine neue Anwendungsversion bereitstellen.</p><p> Wie es durchgeführt werden kann. Mit Hilfe der Funktion des Tauschs von Domänen ermöglicht Ihnen die Anwendung Ihrer Endbenutzer keinen Ausfallzeitraum, wenn z.B. eine neue Anwendungsversion bereitgestellt wird. Sie können Ihre neue Anwendungsversion in einer Testumgebung positionieren und anschließend die URLs mit einer Produktionsumgebung einfach durch Klicken tauschen. Durch die Verwendung mehrerer Domänen auf einem einzigen PHP-Server erhöht sich die Anwendbarkeit, Effizienz und Skalierbarkeit der Anwendung gleichzeitig, während gleichzeitig die Kosten für die Notwendigkeit, separate Instanzen aufzubauen, gespart werden. Automatische Vertikale Skalierung Die automatische vertikale Skalierung ist durch die Fähigkeit der Plattform möglich, dynamisch die Anzahl der zugeordneten Ressourcen (RAM und CPU) für einen Server nach den aktuellen Anforderungen zu ändern, ohne dass eine manuelle Eingriff erforderlich ist. Diese Funktion garantiert Ihnen, dass Sie nie für ungenutzte Ressourcen überbezahlen und Ihre Zeit durch die Eliminierung der Notwendigkeit, Lastenverteilungsanpassungen oder architektonische Änderungen zu sparen. Um automatische Ressourcenverbrauch durch Ihren PHP-Server einzurichten, öffnen Sie den Umgebungstopologie-Assistenten und geben Sie mit dem oben angezeigten Schieberegler die maximale Skalierungsgrenze von Cloudlets (jeder Cloudlet entspricht 128 MiB und 400 MHz) an: Ihre Anwendung arbeitet innerhalb dieser Grenzen und reduziert den Ressourcenverbrauch, wenn die Last abnimmt oder sie erhöht, wenn die Last steigt. Dadurch zahlen Sie nur für die Ressourcen, die tatsächlich verbraucht werden. Weitere Informationen finden Sie in der Dokumentation zur automatischen vertikalen Skalierung.</p><p> Erhöhen Sie sie, wenn die Last hoch ist. Dadurch zahlen Sie nur für die Ressourcen, die tatsächlich verbraucht werden. Weitere Informationen finden Sie bitte in der Dokumentation zur automatischen vertikalen Skalierung. Manuelle Horizontale Skalierung Um zusätzliche PHP-Server manuell hinzuzufügen, klicken Sie einfach auf Ändern Umgebung Topologie. Anschließend drücken Sie im Assistenten den „+“-Button und fügen Sie die erforderliche Anzahl von Instanzen hinzu. Die maximale Anzahl der gleichen-Typ-Server innerhalb einer einzelnen Umgebungsschicht hängt von den Einstellungen des jeweiligen Hostinganbieters ab (normalerweise steht diese Grenze für 16 Knoten und kann durch einen Support-Antrag angepasst werden). Außerdem ist zu beachten, dass beim Hinzufügen zusätzlicher Server die Lastverteilung automatisch aktiviert wird. Bitte finden Sie mehr Details zur manuellen horizontalen Skalierung in der Dokumentation. Automatische Horizontale Skalierung Die automatische horizontale Skalierung kann über anpassbare Trigger umgesetzt werden, die die Änderungen der Last im Anwendungsbereich überwachen und die Anzahl der Knoten entsprechend erhöhen oder verringern. Um einen Trigger für die automatische horizontale Skalierung zu konfigurieren, öffnen Sie Einstellungen &gt; Überwachung &gt; Auto Horizontale Skalierung-Abschnitt und drücken Sie den Add-Button. Dadurch können Sie die Trigger für spezifische Stacks und Ressourcen (CPU, RAM, Netzwerk, Speicher) in Ihrer Umgebung separat konfigurieren. Bitte, finden Sie mehr Details zur automatischen horizontalen Skalierung in der entsprechenden Dokumentation.</p><div class="doc-image"><img src="/images/docs/php-center/05-php-domains-management_hu490badefe2fc0ee2f7f61e7dd47e392c_56577_480x0_resize_box_3.png" alt="php domains management hu490badefe2fc0ee2f7f61e7dd47e392c 56577 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/php-center/06-php-vertical-scaling_hu850820b2d3713f1e286b0ad6443f3748_30751_480x0_resize_box_3.png" alt="php vertical scaling hu850820b2d3713f1e286b0ad6443f3748 30751 480x0 resize box 3" loading="lazy"></div><p> Anweisungen zur Skalierungsspezifikation und Änderungen anwenden. Bitte finden Sie mehr Informationen über die automatische horizontale Skalierung in dem entsprechenden Dokument. Die Implementierung von PHP-Clustering für Ihre Anwendung kann ihre Verfügbarkeit und Fehlertoleranz erheblich steigern, indem Sie die Sticky Sessions verwenden, die auf mehreren App-Server-Knoten ausgeführt werden. Dieses Mechanismus wird durch ein Memcached-Knoten sichergestellt, der in Ihrer Umgebung hinzugefügt und als Speicher für die zurückgehaltenen Sessions verwendet werden soll. Während Sie die PHP-Server-Skalierung mit Ihrer bereitgestellten Anwendung ausführen, erhalten Sie eine genaue Kopie mit allen denselben Konfigurationen und Dateien, da es ein integriertes Daten-Synchronisations-Feature gibt. Zusätzlich bietet die Plattform bereits vorinstallierte automatisch skalbare WordPress-Cluster und Magento-Cluster für eine ein-klick-Installation an, um Ihre Dienstbetriebsfähigkeit sicherzustellen. Weiterhin können Sie Ihre PHP-Anwendung so paketieren, um ihre klangeteilte Installation automatisiert zu machen.</p><p>Verbindung zur PHP-Anwendung Die Plattform bietet eine Menge skalierbarer und vollständig verwaltbarer Datenbankserver, die Sie leicht installieren und betreiben können, innerhalb der PHP-Umgebung. Um die Verbindung herzustellen, müssen Sie Ihre Anwendung anpassen, indem Sie die Anweisungen nach der Anforderung des verwendeten Datenbanksystems befolgen: MySQL/MariaDB-Verbindung PostgreSQL-Verbindung Modules und Accelerators Während Sie mit der Plattform arbeiten, können Sie die Funktionalität der Umgebung durch die Festlegung verschiedener PHP-Erweiterungen an den passenden Anwendungsservern erweitern.</p><p> Die Plattform ermöglicht es Ihnen, die Funktionalität der Umgebung durch die Festlegung verschiedener PHP Erweiterungen an den passenden Anwendungsservern auszudehnen. Sie können entweder eine der voreingestellten Erweiterungen auswählen und aktivieren, oder Ihre eigene benutzerdefinierte Erweiterung hochladen - beide diese Operationen werden in der PHP Modules Anleitung beschrieben. Als eigenständige Art von PHP Erweiterung können PHP-Beschleuniger bestimmt werden. Sie werden verwendet, um die Effizienz Ihrer Anwendung zu erhöhen, indem sie die bereits kompilierten Teile des PHP-Codes zwischenspeichern, die bei einem Benutzersuchanfrage schnell ausgeführt werden können. Apache PHP und NGINX Server enthalten eine bestimmte Menge an inbauten Modulen. Darüber hinaus gibt es einige separate Anleitungen zur Konfiguration der verschiedenen Modulen:
+<ul>
+<li>Adding Custom Apache Modules</li>
+</ul><ul>
+<li>Apache WebDav Module</li>
+</ul><ul>
+<li>Apache Statistics Module</li>
+</ul><ul>
+<li>NGINX WebDav Module</li>
+</ul><ul>
+<li>New Relic Monitoring</li>
+</ul></p><div class="doc-image"><img src="/images/docs/php-center/07-php-horizontal-scaling_hueb37731647e13bb962a575f8334971a2_53494_480x0_resize_box_3.png" alt="php horizontal scaling hueb37731647e13bb962a575f8334971a2 53494 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/php-center/08-php-auto-horizontal-scaling_hue35d144849c6d7354fc70c39efc66c48_186970_480x0_resize_box_3.png" alt="php auto horizontal scaling hue35d144849c6d7354fc70c39efc66c48 186970 480x0 resize box 3" loading="lazy"></div><p>PHP-Sicherheit SSL / TLS (Secure Sockets Layer / Transport Layer Security) ist die Industriestandard-Sicherheitstechnologie für die Einrichtung eines verschlüsselten Verbindungs zwischen einem Webserver und einem Browser. Diese Technologie wird von der Plattform unterstützt und sichert sicherstellt, dass alle übertragenen Daten privat und vertraulich bleiben, d.h., sie können nicht von einem Dritten aufgefangen werden. Neben den üblichen Schutzmethoden kann die Sicherheit Ihrer Anwendung erhöht werden, indem Sie die Haupt-PHP-Konfigurationsdatei, die php.ini genannt wird, anpassen. Sie können eine Reihe von Standardeinstellungen, die sie enthält, bearbeiten oder eigene hinzufügen, in Anlehnung an die Anforderungen Ihrer Anwendung.</p><p>PHP-Sicherheit SSL / TLS (Secure Sockets Layer / Transport Layer Security) ist die Industriestandard-Sicherheitstechnologie für die Einrichtung eines verschlüsselten Verbindungs zwischen einem Webserver und einem Browser. Diese Technologie wird von der Plattform unterstützt und sichert sicherstellt, dass alle übertragenen Daten privat und vertraulich bleiben, d.h., sie können nicht von einem Dritten aufgefangen werden. Neben den üblichen Schutzmethoden kann die Sicherheit Ihrer Anwendung erhöht werden, indem Sie die Haupt-PHP-Konfigurationsdatei, die php.ini genannt wird, anpassen. Sie können eine Reihe von Standardeinstellungen, die sie enthält, bearbeiten oder eigene hinzufügen, in Anlehnung an die Anforderungen Ihrer Anwendung.</p><p> Anpassen der Hauptkonfigurationsdatei von PHP, die php.ini heißt. Sie können eine Reihe von Standardeinstellungen, die sie enthält, bearbeiten oder eigene hinzufügen, um den Anforderungen Ihrer Anwendung entsprechend zu passen. Weitere Konfigurationshilfe für bestimmte Anwendungsserver ist verfügbar: Apache Sicherheitskonfigurationen NGINX Sicherheitskonfigurationen Ein weiterer Weg, die Anwendungssicherheit sicherzustellen, ist die Verwendung einer Container-Feuerwehr-Funktion. Sie ermöglicht es Ihnen, die Verfügbarkeit der Knoten sowohl innerhalb als auch außerhalb der Plattform zu kontrollieren. Erforsche unbegrenzte PHP-Möglichkeiten mit der Plattform. Was kommt nachher? Einrichten der Umgebungstafel-Leitfaden Bereitstellungsführung SSH-Zugriff PHP-Tutorials</p><div class="doc-image"><img src="/images/docs/php-center/09-php-clustering-scheme_hu41cd461c0d1920d61bf7ca3bb1709103_23169_480x0_resize_box_3.png" alt="php clustering scheme hu41cd461c0d1920d61bf7ca3bb1709103 23169 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/php-center/10-php-container-firewall_huf37c08f6721ead63bf343471ef9d622a_83866_480x0_resize_box_3.png" alt="php container firewall huf37c08f6721ead63bf343471ef9d622a 83866 480x0 resize box 3" loading="lazy"></div><p>Zusätzliche Informationen finden Sie unter:<ul>
+<li>Apache Sicherheitskonfigurationen: [Apache Security Configurations](URL)</li>
+</ul><ul>
+<li>NGINX Sicherheitskonfigurationen: [NGINX Security Configurations](URL)</li>
+</ul><ul>
+<li>Umgebungstafel-Leitfaden: [Setting Up Environment Dashboard Guide](URL)</li>
+</ul><ul>
+<li>Bereitstellungsführung: [Deployment Guide](URL)</li>
+</ul><ul>
+<li>SSH-Zugriff: [SSH Access](URL)</li>
+</ul><br>- PHP-Tutorials: [PHP Tutorials](URL)</p>
+</main>
+</body>
+</html>

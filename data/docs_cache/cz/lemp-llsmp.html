@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LEMP (LLSMP) Application Server</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>LEMP (LLSMP) Application Server</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Aplikace server LEMP (od verze 1.16.1) &amp; LLSMP je připravena na podporu HTTP/3, což je umožněno výchozí podporou funkcí. Pro práci přímo s serverem přes HTTP/3 je však požadována veřejná IP adresa, aby se obešla Shared Load Balancer. LEMP je řešení software bundle, které se opírá o operační systém Linux, webový server NGINX HTTP, databázi MariaDB a programovací jazyk PHP. Tento model je oblíbený mezi vývojáři, protože je dostatečný k hostování širokého spektra projektů v jednom kontejneru. Pokud platforma poskytuje podporu LiteSpeed, může být k dispozici podobná LLSMP (Linux, LiteSpeed, MariaDB, PHP) stack. Pro další informace o LiteSpeed Web Server můžete nalézt na odkazu výše. Struktura topologie v LEMP a LLSMP kontejneřech je následující: PHP-obsluhovaný NGINX nebo LiteSpeed aplikační server s vbudovanou databázovou serverem MariaDB, která slouží k ukládání vašich projektů dat. Výchozí je také spuštění Memcached serveru jako řešení pro objektovou cache. Další specifické vlastnosti stacků mohou být zobrazeny v příslušné části níže. Prozatím si projdeme požadované kroky instalace.
+<ol>
+<li>Přihlaste se k panelu správy platformy (pokud ještě nemáte účet, zaregistrujte se) a klikněte na tlačítko New Environment na vrcholu stránky.</li>
+</ol><ol>
+<li>Přepněte se na kartu PHP v automaticky otevřeném topologickém vizualizátoru. Vyberte LEMP (LLSMP) jako svůj aplikační server. Nastavte ostatní parametry podle potřeby (např.</li>
+</ol></p><p> 1. Přejít na stránku. 2. Přepnout na kartu PHP v automaticky otevřeném wizárdu topologie. Vyberte LEMP (LLSMP) jako vaši server aplikace. Nastavte ostatní parametry podle potřeby (např., limit skalování, veřejné IP adresy, oblasti) a klikněte na Vytvořit, aby se proces pokračoval.<ol>
+<li>Počkejte několik minut, než platforma nastaví vaši prostředí. Po vytvoření můžete kliknutím na Otevřít v prohlížeči zobrazit výchozí data phpinfo() na vašem serveru. Nyní můžete pokračovat v nasazování své aplikace. Peculiarity LEMP &amp; LLSMP</li>
+</ol><br>Při práci s LLSMP software stackem se všechny specifity LiteSpeed Web Serveru aplikují na tento uzel (včetně poplatku za licenci). Ostatní specifity jsou stejné pro oba servery.<ol>
+<li>Vnitřní databázové servery mohou být připojeny následujícím způsobem: PhpMyAdmin administration tool pro MariaDB můžete připojit přes port 8443. Výchozí odkaz a přihlašovací údaje mohou být nalezeny v e-mailu po vytvoření. Pokud je nutné, můžete heslo obnovit přes dashboard, přesouváním kurzoru nad aplikačním serverem a vybráním další &gt; Admin Panel &gt; Reset Password. Memcached server je dostupný bez hesla, ale pouze zvnitř kontaineru (tedy localhost). Tip: V kontaineru LEMP/LLSMP můžete zřídit klientskou spojení s databází prostřednictvím obou SOCKET (localhost) a TCP (127.0.0.1) protokolů. Otevřete odkaz k návodu, abyste se dozvěděli více o PHP spojení s MariaDB.</li>
+</ol><ol>
+<li>Můžete vytvořit klientskou spojení s databází prostřednictvím obou protokolů SOCKET (localhost) a TCP (127.0.0.1). Pro další informace o připojení PHP k MariaDB přečtěte si průvodce, který je zde odkazován.</li>
+</ol>
+<ol>
+<li>Mohou být použity několik prostředí proměnných k řízení vašeho kontejneru LEMP/LLSMP:</li>
+</ol><br>   - ADMINPANEL_ENABLED - umožňuje (hodnota true, výchozí hodnota) nebo zakazuje (hodnota false) přístup k konzoli phpMyAdmin pro integrální MariaDB databázový server<br>   - CACHE_ENABLED - umožňuje (hodnota true, výchozí hodnota) nebo zakazuje (hodnota false) objektní uložení s Memcached<br>   - CP_MEM_LIMIT - definuje část RAM, která má být rezervována pro aplikační server (NGINX/LiteSpeed), 50% celkové RAM kontejneru výchozí hodnotou<br>   - CACHE_MEM_LIMIT - definuje část RAM, která má být rezervována pro Memcached uložiště, 10% celkové RAM kontejneru výchozí hodnotou<br>   - DB_MEM_LIMIT - definuje část RAM, která má být rezervována pro MariaDB databázový server, 40% celkové RAM kontejneru výchozí hodnotou</p><p>Poznámka: Tyto RAM limity mohou být určeny v megabajtech (m|mb|M|MB), gigabajtech (g|gb|G|GB), nebo procentech (%). Pokud jednotky jsou omítnuty, hodnoty jsou považovány za procenta. Aby se změny těchto parametrů aplikovaly, je nutné obnovit spuštění kontejneru. Poznámka: LLSMP má další proměnné (např., WAF, WP_PROTECT, WP_PROTECT_LIMIT) specifické pro LiteSpeed stack, které popisují věnovaný dokument.
+<ol>
+<li>Zřejmě, všechny výhody běžných platformových kontejnerů jsou k dispozici pro LEMP a LLSMP stacky také.</li>
+</ol></p><div class="doc-image"><img src="/images/docs/lemp-llsmp/01-lemp-llsmp-structure_hu3a0682e11633b55833e9e8bc47d2eb34_53734_480x0_resize_box_3.png" alt="lemp llsmp structure hu3a0682e11633b55833e9e8bc47d2eb34 53734 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/lemp-llsmp/02-create-new-environment-button_hu08753fb831e531293fa12c6b94ab4cf4_9171_480x0_resize_box_3.png" alt="create new environment button hu08753fb831e531293fa12c6b94ab4cf4 9171 480x0 resize box 3" loading="lazy"></div><p>Výhody běžných platformových kontejnerů jsou k dispozici také pro LEMP a LLSMP stacky. Například: automatické vertikální škálování, cenování podle použití, přístup SSH, kontejnerový ohničkař, statistiky kontroleru, automatizace nasazení a mnoho dalších věcí, které popisují v dokumentaci Platformy. Co dále? PHP Dev Center LiteSpeed Web Server PHP Extensions PHP Accelerators PHP Auto Configurations</p><div class="doc-image"><img src="/images/docs/lemp-llsmp/03-lemp-environment-topology-wizard_hu9138d832e9474b806dd933d7b6985935_123237_480x0_resize_box_3.png" alt="lemp environment topology wizard hu9138d832e9474b806dd933d7b6985935 123237 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/lemp-llsmp/04-lemp-environment-created_hu426a013da75b435a2f08a11da5b6e23a_26622_480x0_resize_box_3.png" alt="lemp environment created hu426a013da75b435a2f08a11da5b6e23a 26622 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/lemp-llsmp/05-lemp-admin-panel-access_huaff3ceae821252a7290c834b986ea111_37199_480x0_resize_box_3.png" alt="lemp admin panel access huaff3ceae821252a7290c834b986ea111 37199 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/lemp-llsmp/06-lemp-environment-variables_huc48a7ebccc80594ff944cfaa7b2cb08c_46802_480x0_resize_box_3.png" alt="lemp environment variables huc48a7ebccc80594ff944cfaa7b2cb08c 46802 480x0 resize box 3" loading="lazy"></div>
+</main>
+</body>
+</html>

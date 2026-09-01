@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Kubernetes Cluster: Exposing Services</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent)}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:monospace;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style></head><body>
+<header><h1>Kubernetes Cluster: Exposing Services</h1><a class="home-btn" href="/">← Chat</a></header>
+<main><p> Kubernetes Klaster: Vystavování služeb</p><p>Složky vaší aplikace mohou se mezi sebou komunikovat pomocí názvů služeb pomocí vnitřní sítě, pro vnější připojení je ale nutné další konfigurace. Kubernetes podporuje tři typy služeb k zřízení vnitřní a vnější komunikace s aplikací: ClusterIP, NodePort, LoadBalancer</p><p>ClusterIP služba je výchozí služba K8s. Umožňuje aplikaci být dostupná ostatním aplikacím v K8s klastru. Pro vnější přístup není poskytován. Příklad jednoduché služby ClusterIP:<ol>
+<li>2. 3. 4. 5. 6. 7. 8. 9. 10. 11.</li>
+</ol><br>kind: Service<br>apiVersion: v1<br>metadata:<br>  name: nginx1<br>  namespace: test<br>spec:<br>  type: ClusterIP<br>  selector:<br>    app: nginx<br>  ports:<br>    - port: 80<br>NodePort</p><div class="doc-image"><img src="/images/docs/kubernetes-exposing-services/01-endpoint-to-expose-kubernetes-service_huca3767dafbefdbdf25b15561e0497cee_112207_480x0_resize_box_3.png" alt="endpoint to expose kubernetes service huca3767dafbefdbdf25b15561e0497cee 112207 480x0 resize box 3" loading="lazy"></div><p>Nejjednodušší způsob, jak zřídit vnější připojení k službě, je její vystavení pomocí NodePort přímo. Jako název naznačuje, tento typ služby otevře specifický port na uzlech, každý provoz odeslaný na tento port je směrován k vaší službě. Výchozí port pro vaši službu je vybrán náhodně z rozsahu 30000-32767. Poznámka: Tento způsob má několik nevýhod, které by měly být brány v úvahu při konfiguraci Kubernetes Klastru (jedna služba na port, omezený rozsah portů, atd.). Výsledkem je, že typ služby NodePort může být použit pro demonstrace nebo jiné dočasné aplikace. Však pro produkční řešení je obvykle nutné složitější konfiguraci pomocí ingressů a možností LoadBalancer služby.</p><p> Příklad konfigurace služby typu NodePort:<ol>
+<li>2. 3. 4. 5. 6. 7. 8. 9. 10. 11. 12. 13. 14</li>
+</ol>
+<pre><code class="lang-yaml">kind: Service<br>apiVersion: v1<br>metadata:<br>  name: nginx1<br>  namespace: test<br>  labels:<br>    run: nginx<br>spec:<br>  type: NodePort<br>  selector:<br>    run: nginx<br>  ports:<br>  - port: 80<br>    targetPort: 80</code></pre><br>Pokud je potřeba, může být určen konkrétní port nodePort pro vaši službu. Například následující kód může být použit k nastavení přesměrování z portu 30984:<ol>
+<li>2. 3. 4.</li>
+</ol>
+<pre><code class="lang-yaml">ports:<br>  - port: 80<br>    targetPort: 80<br>    nodePort: 30984</code></pre><br>Upozornění: Manuálně zadaný hodnota nodePort by měla být z rozsahu povolených hodnot (30000-32767) a jedinečná (k vytvoření kolize s ostatními službami). Pokud je ve vašem prostředí Kubernetes připojená veřejná IP adresa k pracovním uzlům, nejsou k dispozici žádné další kroky. V opačném případě by měla být získaná hodnota portu vystavena z strany platformy. Navigujte do nastavení prostředí Kubernetes &gt; Koncezorce a klikněte na Přidat. V otevřeném okně zadejte následující data:<ul>
+<li>Node - zvolte libovolný pracovní uzel z seznamu</li>
+</ul><ul>
+<li>Name - zadejte libovolné preferované jméno koncezorce</li>
+</ul><ul>
+<li>Private Port - zadejte hodnotu portu z předchozího kroku</li>
+</ul><ul>
+<li>Protocol - zvolte TCP<br>Kliknutím na Přidat potvrďte.</li>
+</ul></p><p> Z části Seznam jméno - nastavte libovolné jméno předvoleného koncového bodu Privátní port - zadejte nodePort z předchozího kroku Protokol - vyberte možnost TCP a poté klikněte na tlačítko Add, aby se potvrdilo. Po několika minutách bude platforma exponovat port a přesměrovat požadavky na službu NodePort. Balancer služby Balancer je obvyklým způsobem, jak nabízet službu na Internetu. Tento typ služby vyžaduje veřejný IP adresář připojený k libovolnému pracovnímu uzlu. Upozorněte si, že s typem Balancer všechny požadavky jsou přesměrovány přímo na službu bez filtrování, routování atd. Parametr port je vcházející port na Internet, který služba mapuje na cíl port na straně aplikace. Například:</p><p><pre><code class="lang-">1 2 3 4 5 6 7 8 9 10 11 12<br>kind: Service<br>apiVersion: v1<br>metadata:<br>  name: nginx1<br>  namespace: test<br>spec:<br>  type: LoadBalancer<br>  selector:<br>    app: nginx<br>  ports:<br>  - port: 80<br>    targetPort: 8080</code></pre></p><p>Co dále? K8s Helm Integrace, K8s YAML nasazení, K8s Vnitřní sítě, K8s Vytváření vstupů</p><p>Další krok: Integrace K8s Helm, Nasazování K8s YAML, Vnitřní sítě K8s, Vytváření vstupů K8s</p></main></body></html>

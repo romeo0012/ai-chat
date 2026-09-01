@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PHP Extensions</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>PHP Extensions</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> PHP Rozšíření Na platformě se dodávají PHP aplikační servery (Apache, NGINX a LiteSpeed) s počtem vložených modulů, což umožňuje nastavit různé PHP rozšíření. Mezi těmito rozšířeními se nacházejí ty následující obvykle požadované (tedy nahrány a spouštěné s PHP výchozími nastaveními): Modul Modul Modul Modul ctype date dom ereg filter hash libxml mhash pcre Reflection session SLPxml sockets</p><p>Poznámka: Seznam rozšíření může kolísat v závislosti na verzi PHP a typu aplikačního serveru. Ostatní poskytnutá rozšíření jsou dynamická. Jsou zahrnuta do vhodných staveb serveru (umístěna v dedikovaném modulovém adresáři serveru) a mohou být povolena v případě nutnosti: Apache PHP (/usr/lib64/php/modules)</p><p>Modul Modul Modul Modul apcu.so apfd.so ast.so bcmath.so bitset.so brotli.so bsdiff.so bz2.so calendar.so ctype.so curl.so dba.so dio.so dl_test.so dom.so ds.so eio.so enchant.so exif.so excimer.so ffi.so fileinfo.so filter.so ftp.so gd.so gearman.so geoip.so http.so ice.so iconv.so igbinary.so imagick.so inotify.so intl.so json_post.so jsonpath.so mailparse.so mbstring.so mcrypt.so md4c.so memcache.so memcached.so mongodb.so msgpack.so mustache.so mustache.so oauth.so odbc.so openssl.so openswoole.so opcache.so opentelemetry.so operator.so parle.so parle.so pcntl.so pcov.so pcsc.so pdo.so pdo_dblib.so pdo_firebird.so pdo_mysql.so pdo_odbc.so pdo_pgsql.so pdo_sqlite.so pgsql.so pgsql.so phalcon.so phar.so phpy.so pinpoint_php.so pkcs11.</p><div class="doc-image"><img src="/images/docs/php-extensions/config_hubc854dc8949ddfeff239213d7fcad67a_24192_480x0_resize_box_3.png" alt="config hubc854dc8949ddfeff239213d7fcad67a 24192 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/php-extensions/phpini_hu1a21b73c568a339041e5ad30cbd5a883_83745_480x0_resize_box_3.png" alt="phpini hu1a21b73c568a339041e5ad30cbd5a883 83745 480x0 resize box 3" loading="lazy"></div><p>Poznámka: Seznam rozšíření může kolísat v závislosti na verzi PHP a typu aplikačního serveru.</p><p> Operátor.so hovoří.so Parle.so hovoří.so Parle.so pcntl.so pcov.so pcsc.so pdo.so pdo_dblib.so pdo_firebird.so pdo_mysql.so pdo_odbc.so pdo_pgsql.so pdo_sqlite.so pgsql.so pgsql.so Phalcon.so phar.so phpy.so Pinpoint_php.so pkcs11.so posix.so protobuf.so psr.so pspell.so quickhash.so raphf.so raphf.so readline.so redis.so rpminfo.so scoutapm.so seaslog.so SeasSnowflake.so scrypt.so selinux.so session.so shmop.so simplexml.so simdjson.so snmp.so soap.so sockets.so sodium.so solr.so solr2.so sqlite3.so stomp.so svm.so swoole.so sync.so sysvmsg.so sysvsem.so sysvshm.so tidy.so timezonedb.so tokenizer.so translit.so uploadprogress.so uuid.so var_representation.so vld.so xattr.so xdebug.so xhprof.so xlswriter.so xml.so xmldiff.so xmlreader.so xmlwriter.so xpass.so xsl.so yaf.so yaconf.so yaml.so yar.so zephir_parser.so zip.so zlib.so zookeeper.so zstd.so NGINX PHP (/usr/lib64/php/modules)Modul Modul Modul Modul apcu.so apfd.so ast.so bcmath.so bitset.so brotli.so bsdiff.so bz2.so calendar.so crypto.so csv.so ctype.so curl.so dba.so dio.so dl_test.so dom.so ds.so eio.so enchant.so event.so ev.so exif.so excimer.so ffi.so fileinfo.so filter.so ftp.so gd.so gearman.so gettext.so gmp.so http.so ice.so iconv.so igbinary.so imagick.so inotify.so intl.so json_post.so jsonpath.so lzf.so ldap.so mailparse.so mbstring.so mcrypt.so md4c.so memcache.so memcached.so mongodb.so msgpack.so msqli.so msgpack.so mssql.so mustache.so mysqlnd.so mysqli.so oauth.so odbc.so openssl.so openswoole.so opcache.so</p><p> LDAP.so Mailparse.so MBstring.so Mcrypt.so Md4c.so Memcache.so Memcached.so MongoDB.so Msgpack.so Msqli.so Msgpack.so Mssql.so Mustache.so MySQLND.so MySQLi.so Oauth.so ODBC.so OpenSSL.so OpenSwoole.so Opcache.so Opentelemetry.so Operator.so Parallel.so Parle.so Pcntl.so Pcov.so Pcsc.so Pdo.so Pdo_dblib.so Pdo_firebird.so Pdo_mysql.so Pdo_odbc.so Pdo_pgsql.so Pdo_sqlite.so Pdo_sqlsrv.so Pgsql.so Phalcon.so Phar.so Phpy.so Pinpoint_php.so Pkcs11.so Posix.so Protobuf.so Psr.so Pspell.so Quickhash.so Raphf.so Readline.so Redis.so Rpminfo.so Scoutapm.so Seaslog.so SeasSnowflake.so Scrypt.so Selinux.so Session.so Shmop.so Simplexml.so Simdjson.so Snmp.so Soap.so Sockets.so Sodium.so Solr.so Solr2.so Sqlsrv.so Stomp.so Svm.so Swoole.so Sync.so Sysvmsg.so Sysvsem.so Sysvshm.so Tidy.so Timezonedb.so Tokenizer.so Translit.so Uploadprogress.so Uuid.so Var_representation.so Vld.so Xattr.so Xdebug.so Xhprof.so Xlswriter.so Xml.so Xmldiff.so Xmlreader.so Xmlwriter.so Xpass.so Xsl.so Yaf.so Yaconf.so Yaml.so Yar.so Zephir_parser.so Zip.so Zlib.so Zookeeper.so Zstd.so LiteSpeed PHP (/usr/local/lsws/lsphp/lib64/php/modules)</p><div class="doc-image"><img src="/images/docs/php-extensions/soapso_hueb84441bc0c9337c2f0ddf4a866e6ab1_91305_480x0_resize_box_3.png" alt="soapso hueb84441bc0c9337c2f0ddf4a866e6ab1 91305 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/php-extensions/restart_hu71b6cb2e625e384947fe4acaf5a8a7f3_25223_480x0_resize_box_3.png" alt="restart hu71b6cb2e625e384947fe4acaf5a8a7f3 25223 480x0 resize box 3" loading="lazy"></div><p>Modul Modul Modul Modul apcu.so bcmath.so bz2.so calendar.so ctype.so curl.so dba.so dom.so enchant.so exif.so fileinfo.so ftp.so gd.so gettext.so gmp.so iconv.so igbinary.so imagick.so imap.so ioncube.so ioncube_loader.so ioncube_ts.so intl.so ldap.so mbstring.so memcached.so mongodb.so msgpack.so mysqli.so mysqlnd.so oauth.so odbc.so opcache.so pdo.so pdo_mysql.so pdo_dblib.so pdo_firebird.so pdo_mysql.so pdo_odbc.so pdo_pgsql.so pdo_sqlite.so pdo_sqlsrv.so pgsql.so phalcon.so phar.so phpy.so pinpoint_php.so pkcs11.so posix.so protobuf.so psr.so pspell.so quickhash.so raphf.so readline.so redis.so rpminfo.so scoutapm.so seaslog.so seasnowflake.so scrypt.so selinux.so session.so shmop.so simplexml.so simdjson.so snmp.so soap.so sockets.so sodium.so solr.so solr2.so sqlsrv.so stomp.so svm.so swoole.so sync.so sysvmsg.so sysvsem.so sysvshm.so tidy.so timezonedb.so tokenizer.so translit.so uploadprogress.so uuid.so var_representation.so vld.so xattr.so xdebug.so xhprof.so xlswriter.so xml.so xmldiff.so xmlreader.so xmlwriter.so xpass.so xsl.so yaf.so yaconf.so yaml.so yar.so zephir_parser.so zip.so zlib.so zookeeper.so zstd.so</p><p> V přeložení z angličtiny do češtiny:</p><p>TEXT:<br>iconv.so igbinary.so imagick.so imap.so ioncube.so ioncube_loader.so ioncube_ts.so intl.so ldap.so mbstring.so memcached.so mongodb.so msgpack.so mysqli.so mysqlnd.so oauth.so odbc.so opcache.so pdo.so pdo_mysql.so pdo_odbc.so pdo_pgsql.so pdo_sqlite.so pgsql.so phar.so posix.so redis.so shmop.so simplexml.so snmp.so soap.so sockets.so sodium.so sqlite3.so sysvmsg.so sysvsem.so sysvshm.so tidy.so tokenizer.so xsl.so xml.so xmlreader.so xmlrpc.so xmlwriter.so yaml.so zip.so zstd.so</p><div class="doc-image"><img src="/images/docs/php-extensions/upload_hub87826a2098a8a5c4e36e11aee3f32aa_31633_480x0_resize_box_3.png" alt="upload hub87826a2098a8a5c4e36e11aee3f32aa 31633 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/php-extensions/custom-module_hu20bd2e06af294810570479c7f324f729_71722_480x0_resize_box_3.png" alt="custom module hu20bd2e06af294810570479c7f324f729 71722 480x0 resize box 3" loading="lazy"></div><p>Níže naleznete, jak:
+<ul>
+<li>aktivovat rozšíření</li>
+</ul><ul>
+<li>konfigurovat rozšíření</li>
+</ul><ul>
+<li>přidat vlastní rozšíření</li>
+</ul></p><p>Aktivovat Rozšíření<br>Chcete-li dostupným PHP modulu (tj. motoru) umožnit použití dynamického rozšíření, musí být toto rozšíření povoleno v odpovídajícím konfiguračním souboru. Poznámka: Vbudovaná rozšíření se nemají ručně nahrávat, protože jsou vždy spouštěna všechny PHP servery v platformě výchozími nastaveními. Níže naleznete, jak to může být provedeno:
+<ol>
+<li>Klikněte na tlačítko Konfigurace pro vaši server aplikace.</li>
+</ol><ol>
+<li>V otevřené kartě konfigurace přesuňte se do souboru etc &gt; php.ini a posuňte se dolů do sekce Extenze poskytované PaaS. Zde můžete každé dynamické rozšíření povolit a konfigurovat.</li>
+</ol><ol>
+<li>Nyní najděte požadovanou sekci (jsou seřazeny abecedně) a odkomentujte direktivu extension={module_name}.so v ní (tj. např. extension=iconv.so).</li>
+</ol></p><p>Pokud máte další dotazy, neváhejte se obrátit na nás.</p><p> 3. Nyní najděte požadovanou sekci (jsou seznamována v abecedním pořadí) a odkomentujte příkaz extension={module_name}.so v něm (tj. odstraněte semikolonky v příslušném řádku) k jeho povolení. Další možností je upravit rozšíření pomocí uvedených parametrů konfigurace (nebo zadat vlastní).<ol>
+<li>Po provedení všech potřebných změn nezapomeňte Uložit je a Restartovat uzel, aby se nová konfigurace aplikovala. Konfigurace Rozšíření Všechny potřebné nastavení PHP modulů jsou řešena prostřednictvím souboru php.ini. Většina poskytovaných dynamických rozšíření je určena sadou možných parametrů konfigurace společně. Například pro dynamickou rozšíření OPcache - PHP akcelerátor, založená na uložení a optimizaci opcode:</li>
+</ol><br>opcache.enable=1 - povolit/zakázat rozšíření OPcache<br>opcache.memory_consumption=64 - nastavit množství paměti k použití<br>opcache.interned_strings_buffer=8 - nastavit množství paměti pro uložení vnitřních řetězců (např., názvů tříd)<br>opcache.max_accelerated_files=4000 - maximální počet souborů k uložení v paměti<br>opcache.revalidate_freq=60 - frekvence kontrolování časových známek souborů pro úpravu alokace paměti pro úložiště sdílené paměti<br>opcache.fast_shutdown=1 - povolit/zakázat rychlou sekvenci zastavení pro kód, který je zrychlený</p><p> Pro změně alokace paměti pro sdílenou úložiště:
+<pre><code class="lang-bash">opcache.fast_shutdown=1</code></pre><br>Tímto nastavením umožníte/zakážete rychlou sérii ukončování pro rychlejší kód.</p><p><pre><code class="lang-bash">opcache.enable_cli=1</code></pre><br>Tímto nastavením umožníte/zakážete OPcache pro verzi CLI PHP.</p><p>Přidání vlastní rozšíření:<br>Kromě všech modulů, které jsou k dispozici na platformě zásadním způsobem, můžete integrovat vlastní PHP rozšíření na server, pokud je to nutné. Pro to následujte následující kroky:<ol>
+<li>Sestavte rozšíření samotné.</li>
+</ol><ol>
+<li>Přejděte na dashboard platformy a klikněte na tlačítko Konfigurace pro vaši aplikaci serveru PHP.</li>
+</ol><ol>
+<li>Otevřete nyní otevřený manažer a nahrávejte své vlastní rozšíření do složky modulů.</li>
+</ol><ol>
+<li>Přesuňte se do souboru php.ini, najděte sekci Dynamic Extensions a přidejte následující příkazovou direktivu:</li>
+</ol>
+<pre><code class="lang-bash">1 extension={module_name}.so</code></pre><br>Tip: Můžete definovat všechny potřebné nastavení pro vaše rozšíření ve stejné sekci, pokud je to nutné.<ol>
+<li>Uložte změny a restartujte node. To je vše! Nyní je aktivováno vaše vlastní rozšíření. Co dále?</li>
+</ol></p><p>PHP Akcelerátory<br>PHP Auto Konfigurace<br>Konfigurace PHP App Server<br>Apache &amp; NGINX Moduly</p>
+</main>
+</body>
+</html>

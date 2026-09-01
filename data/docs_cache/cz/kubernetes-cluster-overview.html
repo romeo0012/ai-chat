@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kubernetes Cluster Overview</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Kubernetes Cluster Overview</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Přehled clusteru Kubernetes</p><p>Kubernetes (K8s) je otevřený zdrojový systém navržený k automatizaci nasazení, škálování a správě mikroslužeb a aplikací umístěných v kontejnerech. Pod, která je klíčovým prvkem v modelu K8s, je soubor Linuxových kontejnerů s sdílenou sítí a úložištěm. Pluginy sítě a kontroléry vstupu podporují vnitřní a vnější zatížovací balancery, zatímco pluggable back-endy úložiště automatizují uchovávání dat. Kubernetes kubelet řídí pody a zajišťuje, aby cluster byl vždy v požadovaném zdravém stavu. Instalace clusteru Kubernetes, stejně jako konfigurace sítě a úložiště, je zdlouhavá a riziková. Platforma automatizuje instalaci, konfiguraci, aktualizace a poskytuje více dalších služeb Kubernetes a komponent clusteru: Weave CNI plugin k povolení vnitřní sítě, CoreDNS jako vnitřní DNS a Traefik ingress controller s předkonfigurovaným TLS pro vnější přístup k službám (s možnostmi NGINX a HAProxy dostupnými od verze 1.15).</p><p>Pokud máte otázky nebo potřebujete pomoc s instalací nebo správou clusteru Kubernetes, neváhejte nás kontaktovat. Náš tým odborníků je zde, aby vám pomohl.</p><p> Přejítel ingresového kontroléru Traefik s předkonfigurovaným TLS pro externí přístup k službám (s možnostmi NGINX a HAProxy dostupnými od verze 1.15.5) Poskytovatel NFS pro automatické vytváření K8s objemů (volitelné) Kubernetes Dashboard pro správu a řízení clusteru prostřednictvím moderního a intuitivního webového klienta Helm a Tiller pro jednoklikovou instalaci stovky populárních aplikací K9s, kubectx, popeye, a stern utilitářů příkazového řádku pro efektivní správu clusteru Metrics server, Prometheus, a Grafana pro monitorování zdravotního stavu clusteru a aplikací (volitelné) Jaeger pro monitorování a řešení problémů s mikroslužbami na bázi rozptýlených systémů (volitelné, dostupné od verze 1.15.5) Kromě K8s specifických funkcí jsou k dispozici i tradiční funkce platformy, například vertikální a horizontální škálování. Tip: Pro další informace zobrazte článek Kubernetes Cluster Overview na našem blogu. Co dále? Typy kontejnerů K8s Požadavky na systém K8s Instalace K8s clusteru Verze K8s clusteru</p><p>Další informace:</p><p>* [Kubernetes Cluster Overview](URL_kubernetes_cluster_overview)</p>
+</main>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WordPress Cluster Package</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>WordPress Cluster Package</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> WordPress-Cluster-Paket</p><p>Das WordPress-Cluster-Paket ist eine automatisierte Lösung für die hohen Verfügbarkeit von WordPress-Installationen innerhalb eines Clusters leichter Container. Das Paket führt alle erforderlichen Konfigurationsschritte durch, um einen WordPress-Cluster einzurichten, einschließlich der Installation eines Webservers, einer Datenbank, eines Load Balancers und eines shared storage. Es konfiguriert auch die automatische horizontale Skalierung basierend auf der Belastung und verbindet alle Komponenten, um sie als ein System zu funktionieren. Dadurch können Sie großskalige Projekte mit hoher Verkehrsrate ausführen und sicherstellen, dass Ihre WordPress-Website auch während der Spitzenlast verfügbar bleibt. Es bietet Unternehmens-Grade Leistung und Zuverlässigkeit ohne die Notwendigkeit umfangreicher DevOps-Kenntnisse. Um vom WordPress-Cluster die meisten Vorteile zu nutzen, können die folgenden Vorteile konfiguriert werden:
+<ul>
+<li>Installation eines WordPress-Clusters, der von LightSpeed angetrieben wird und eine hochverfügbare MariaDB Galera-Cluster-Installation</li>
+</ul><ul>
+<li>Ein fehlerverträgliches Shared Storage-Cluster, basierend auf GlusterFS-Software</li>
+</ul><ul>
+<li>Ein kostenloses Let’s Encrypt SSL-Zertifikat mit automatischer Aktualisierung</li>
+</ul><ul>
+<li>Bindung eines benutzerdefinierten Domains und Aktualisierung des Zertifikats</li>
+</ul><ul>
+<li>Skalieren dynamisch basierend auf der Belastung</li>
+</ul></p><p>WordPress-Cluster-Installation</p><div class="doc-image"><img src="/images/docs/wp-packages-cluster/01-wordpress-cluster-schema_hu6a6f9edf02f33c666cb5b8f5fe2a413e_38364_480x0_resize_box_3.png" alt="wordpress cluster schema hu6a6f9edf02f33c666cb5b8f5fe2a413e 38364 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/wp-packages-cluster/02-marketplace-button_hu0a90f42be406071ca807c43afbee15a5_9926_480x0_resize_box_3.png" alt="marketplace button hu0a90f42be406071ca807c43afbee15a5 9926 480x0 resize box 3" loading="lazy"></div><p>Um das WordPress-Cluster-Paket zu installieren, folgen Sie den folgenden Schritten:
+<ol>
+<li>Klicken Sie auf den Marketplace-Button auf der oberen Leiste der Virtuozzo-Anwendungsverwaltungskonsole.</li>
+</ol><ol>
+<li>Verwenden Sie den Suchfeld, um das Paket WordPress Cluster Kit zu finden und klicken Sie auf *Install.</li>
+</ol></p><p> 1. Klicken Sie auf den Marktplatz-Button auf der oberen Virtuozzo-Anwendungsverwaltungstafel.<ol>
+<li>Verwenden Sie das Suchfeld, um das Paket WordPress Cluster Kit zu finden, und klicken Sie darauf *Install.</li>
+</ol><ol>
+<li>Im geöffneten Installationsfenster können Sie die Skalierungsstrategie nach Ihren Erwartungen auswählen. Auf Grund unserer Erfahrungen bieten wir drei häufige Skalierungsszenarien für WordPress an, um Überlastungen zu vermeiden (die Einstellungen können nach der Installation angepasst werden):</li>
+</ol><br>   - Leichte Belastung: Fügt 1 Anwendungsserver-Knoten hinzu (bis zu 16), wenn die Belastung höher als 70% ist und entfernt 1 Anwendungsserver-Knoten (ab 2), wenn die Belastung unter 20% fällt.<br>   - Mittlere Belastung: Fügt 1 Anwendungsserver-Knoten hinzu (bis zu 16), wenn die Belastung höher als 50% ist und entfernt 1 Anwendungsserver-Knoten (ab 2), wenn die Belastung unter 20% fällt.<br>   - Hohe Belastung: Fügt 2 Anwendungsserver-Knoten hinzu (bis zu 16), wenn die Belastung höher als 30% ist und entfernt 1 Anwendungsserver-Knoten (ab 2), wenn die Belastung unter 10% fällt.</p><p> Lade 2 Anwendungsserver-Knoten (bis zu 16) bei einer Arbeitslast von mehr als 30% ein, entferne 1 Anwendungsserver-Knoten (ab 2) bei einer Arbeitslast von unter 10%.
+<ol>
+<li>Anschließend passst du deine WordPress-Cluster-Anwendung an, indem du die notwendigen fortgeschrittenen Funktionen auswählst: wähle LiteSpeed High-Performance Web Server anstelle des Standard-NGINX Web Servers aus, aktiviere die Brute Force Attack Protection und Web Application Firewall Funktionen für LiteSpeed, wähle MariaDB Galera Cluster anstelle des Standard-Primary-Primary Datenbankclusters aus, installiere Let’s Encrypt SSL mit Auto-Renewal Add-on, um kostenlose SSL-Zertifikate automatisch auszustellen, wähle GlusterFS Cluster anstelle des Standard-Shared Storage aus und konfiguriere WordPress Multisite Network install WooCommerce Add-on für WordPress. Schließlich wähle Umgebung und Anzeigename aus, wähle ggf. Verfügbarkeitsregion aus und klicke auf Installieren.</li>
+</ol>
+<ol>
+<li>Der WordPress-Cluster-Umgebung wird in wenigen Minuten automatisch nach den ausgewählten Optionen erstellt und konfiguriert. Das ist es! Du kannst jetzt deinen WordPress-Cluster-Umgebung zugreifen und deine Website bauen. Die Plattform wird automatisch die Skalierung und Verwaltung deines WordPress-Clusters übernehmen, sodass du dich auf dein Inhalt und Geschäftswachstum konzentrieren kannst. Was kommt Nächstes? WordPress-Pakete-Übersicht WordPress Standalone-Paket WordPress Multi-Region-Pakete WordPress-Paket-Funktionen</li>
+</ol></p><div class="doc-image"><img src="/images/docs/wp-packages-cluster/03-wordpress-packages_hu4c6a779f9e6b61a087d8f278615e30fd_73548_480x0_resize_box_3.png" alt="wordpress packages hu4c6a779f9e6b61a087d8f278615e30fd 73548 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/wp-packages-cluster/04-cluster-scaling-strategy_hu7bbc7cd226a3be8e6e0336cd1f983975_125440_480x0_resize_box_3.png" alt="cluster scaling strategy hu7bbc7cd226a3be8e6e0336cd1f983975 125440 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/wp-packages-cluster/05-install-wordpress-cluster_hu31af06a9baf9588be6e3230b081a98bd_134580_480x0_resize_box_3.png" alt="install wordpress cluster hu31af06a9baf9588be6e3230b081a98bd 134580 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/wp-packages-cluster/06-wordpress-cluster-environment_hud30058d9420efd5b8d29d689d8651394_51492_480x0_resize_box_3.png" alt="wordpress cluster environment hud30058d9420efd5b8d29d689d8651394 51492 480x0 resize box 3" loading="lazy"></div>
+</main>
+</body>
+</html>

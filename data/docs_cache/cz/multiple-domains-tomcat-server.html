@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Multiple Domain Names on Tomcat Server</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Multiple Domain Names on Tomcat Server</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Nastavení více domén na Tomcat Serveru</p><p>Nastavte více domén na Tomcat serveru k zvýšení použitelnosti, efektivity a škálovatelnosti vaší aplikace, a také k ušetření nákladů bez nutnosti konfigurace samostatných instancí. Pro toto provedete několik malých úprav v konfiguračních souborech Tomcatu, jak je popisováno níže.
+<ol>
+<li>Přihlaste se k panelu správy a klikněte na tlačítko Nový prostředí:</li>
+</ol><ol>
+<li>V dialogu Topologie prostředí vyberte svůj server aplikace (např. Tomcat 9), a zadejte jméno prostředí, například multibinding. Za minutu bude prostředí úspěšně vytvořeno.</li>
+</ol><ol>
+<li>Místo výchozích domén můžete koupit a nakonfigurovat vlastní domény pomocí záznamu CNAME nebo nastavením záznamů A. Další informace najdete v dokumentu Přípojka vlastního externího doménového jména.</li>
+</ol><ol>
+<li>Vrátíte se zpět na panel správy, klikněte na tlačítko Nastavení pro prostředí a připevněte své domény. V našem příkladu použijeme tomcatfirst.tk pro první doménu a tomcatsecond.tk pro druhou.</li>
+</ol><ol>
+<li>Nyní musíte nasadit projekty. Vložte soubor aplikace do Správce nasazování a stiskněte tlačítko Nasadit. V našem příkladu použijeme Hello World, které je k dispozici v Správci nasazování výchozím způsobem. Když se zobrazí formulář Nasadit, vyberte své prostředí a přiřaďte kontext (tomcatfirst, v našem případě). Poté stiskněte tlačítko Nasadit. Vložte druhý archiv aplikace. Budeme používat upravenou verzi Hello World (slova "Vyhráli!").</li>
+</ol></p><p>Poznámka: Tento text je určený k překladu prozatímcových textů a není určen k použití v produkčním prostředí. Pro úspěšné nasazení aplikace je nutné provést další kroky a nakonfigurovat Tomcat podle vašich potřeb.</p><div class="doc-image"><img src="/images/docs/multiple-domains-tomcat-server/01-paas-main-buttons_hu08753fb831e531293fa12c6b94ab4cf4_9171_480x0_resize_box_3.png" alt="paas main buttons hu08753fb831e531293fa12c6b94ab4cf4 9171 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/multiple-domains-tomcat-server/02-topology-wizard_hu61acc4998203e5387af5a9573326dce7_115588_480x0_resize_box_3.png" alt="topology wizard hu61acc4998203e5387af5a9573326dce7 115588 480x0 resize box 3" loading="lazy"></div><p> Přeložte následující text z angličtiny do češtiny. Přeložte pouze prozaickou část. Zachovejte technická slova, kódy, příkazy, cesty k souborům, adresy URL a strukturu odstavců.</p><p>TEXT:<br>Nastavte své prostředí a přiřaďte kontext (tomcatfirst, v našem případě). Poté stiskněte tlačítko Deploy. Nahrávejte druhý aplikační archiv. Budeme používat upravenou verzi Hello World (kde slova "Vy to udělali!" jsou zbarvena červeně) jen pro zobrazení rozdílů ve závěrečných krocích. Poté nasadíme tuto aplikaci do stejného prostředí, ale s jiným kontextem (např., tomcatsecond). Když bude nasazování hotovo, máte dvě aplikace nasazené ve vašem prostředí. 6. Nyní klikněte na tlačítko Konfigurace pro Tomcat a navigujte se k souboru server.xml (cesta /opt/tomcat/conf). Přidejte Host tagy pro každou doménu, kterou chcete vázat: 1 2 3 4 &lt;Host name="external.domain.tld" appBase="webapps/context_name" autoDeploy="true"&gt; &lt;Alias&gt;external.domain.tld&lt;/Alias&gt; &lt;Context path="" docBase="${catalina.base}/webapps/context_name"/&gt; &lt;/Host&gt; V našem příkladu přidáme následující kód do souboru server.xml: 1 2 3 4 5 6 7 8 &lt;Host name="tomcatfirst.tk" appBase="webapps/tomcatfirst" autoDeploy="true"&gt; &lt;Alias&gt;tomcatfirst.tk&lt;/Alias&gt; &lt;Context path="" docBase="${catalina.base}/webapps/tomcatfirst"/&gt; &lt;/Host&gt; &lt;Host name="tomcatsecond.tk" appBase="webapps/tomcatsecond" autoDeploy="true"&gt; &lt;Alias&gt;tomcatsecond.tk&lt;/Alias&gt; &lt;Context path="" docBase="${catalina.base}/webapps/tomcatsecond"/&gt; &lt;/Host&gt; 7. Uložte změny a restartujte Tomcat. 8. Nyní můžete kontrolovat výsledky. Obě vaše aplikace budou dostupné prostřednictvím zadaných doménních názvů běžících na jednom Tomcat serveru.</p><p>Poznámka: Pokud chcete znovu nasadit aplikaci do Tomcatu s již konfigurovaným server.xml, musíte komentovat &lt; Host &gt; blok před znovunasazením a poté ho opět odkomentovat. Co dál? Změna Domén Záložky Domén pro GlassFish Záložky Domén s veřejným IP.</p><div class="doc-image"><img src="/images/docs/multiple-domains-tomcat-server/03-new-tomcat-environment_hu9bfce7000da8f7cdd83b5ed01225b8f5_10632_480x0_resize_box_3.png" alt="new tomcat environment hu9bfce7000da8f7cdd83b5ed01225b8f5 10632 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/multiple-domains-tomcat-server/04-environment-settings-button_hu9a97429517665e94f40748de6dcd18ec_16505_480x0_resize_box_3.png" alt="environment settings button hu9a97429517665e94f40748de6dcd18ec 16505 480x0 resize box 3" loading="lazy"></div><p>Změny uložte a restartujte Tomcat. 8. Nyní můžete kontrolovat výsledky. Obě vaše aplikace budou dostupné prostřednictvím zadaných doménních názvů běžících na jednom Tomcat serveru. Poznámka: Pokud chcete znovu nasadit aplikaci do Tomcatu s již konfigurovaným server.xml, musíte komentovat &lt; Host &gt; blok před znovunasazením a poté ho opět odkomentovat. Co dál? Změna Domén Záložky Domén pro GlassFish Záložky Domén s veřejným IP.</p><div class="doc-image"><img src="/images/docs/multiple-domains-tomcat-server/05-bind-custom-domain_huc913b512668665923cd40667692ae7c3_30051_480x0_resize_box_3.png" alt="bind custom domain huc913b512668665923cd40667692ae7c3 30051 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/multiple-domains-tomcat-server/06-application-deployment_hu9cdf11363e9ef68a8ccfd830da247b44_21534_480x0_resize_box_3.png" alt="application deployment hu9cdf11363e9ef68a8ccfd830da247b44 21534 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/multiple-domains-tomcat-server/07-deploy-dialog.png" alt="deploy dialog" loading="lazy"></div><div class="doc-image"><img src="/images/docs/multiple-domains-tomcat-server/08-deploy-second-app_hu0d92c1152898d49db941128451bcbd39_47319_480x0_resize_box_3.png" alt="deploy second app hu0d92c1152898d49db941128451bcbd39 47319 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/multiple-domains-tomcat-server/09-environment-with-two-apps-deployed_hu2a731b36f80f65c6c052821e2e7cbafc_24644_480x0_resize_box_3.png" alt="environment with two apps deployed hu2a731b36f80f65c6c052821e2e7cbafc 24644 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/multiple-domains-tomcat-server/10-server-xml-config-file_hu6e38cce05dbf276935c7ba42e08d96e2_49115_480x0_resize_box_3.png" alt="server xml config file hu6e38cce05dbf276935c7ba42e08d96e2 49115 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/multiple-domains-tomcat-server/11-adjust-tomcat-settings_hu4ba79f8f7d5919a36e190279bcdfce39_37656_480x0_resize_box_3.png" alt="adjust tomcat settings hu4ba79f8f7d5919a36e190279bcdfce39 37656 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/multiple-domains-tomcat-server/12-restart-nodes-button_hu49f4df406b17e25350c335036438dd4d_75341_480x0_resize_box_3.png" alt="restart nodes button hu49f4df406b17e25350c335036438dd4d 75341 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/multiple-domains-tomcat-server/13-first-application-custom-domain_hu749045f2a7f353f5e7fa1133235eec95_47118_480x0_resize_box_3.png" alt="first application custom domain hu749045f2a7f353f5e7fa1133235eec95 47118 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/multiple-domains-tomcat-server/14-second-application-custom-domain_hub42855474d1722dd3f589921a7731b52_47612_480x0_resize_box_3.png" alt="second application custom domain hub42855474d1722dd3f589921a7731b52 47612 480x0 resize box 3" loading="lazy"></div>
+</main>
+</body>
+</html>

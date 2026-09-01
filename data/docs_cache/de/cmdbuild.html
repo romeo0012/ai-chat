@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Install CMDBuild</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>How to Install CMDBuild</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Um CMDBuild (wobei CMDB für „Configuration and Management Data Base“ steht) zu installieren, ist es ein configurbarer Web-Anwendung, um eine Datenbank mit Assets zu modellieren und die dazugehörigen Workflow-Operationen zu steuern. CMDBuild bietet Operatoren eine vollständige Kontrolle über die verwendeten Assets, sowie genau zu wissen, was ihre Zusammensetzung, Position, Funktionsbeziehungen und Geschichte ist. Es bietet auch solche Möglichkeiten wie automatische Inventarisierung, Dokumentenmanagement, Textverarbeitung, Direktorieservices, E-Mails, Monitoringsysteme, Intranet-Portale und andere Informationssysteme. Also hier ist eine Schritt-für-Schritt-Anleitung, wie Sie die CMDBuild-Anwendung auf der Plattform hosten.</p><p>Erstellen einer Umgebung<ol>
+<li>Melden Sie sich bei der Plattform an und klicken Sie auf den Schaltflächen „Create environment“ in der oberen linken Ecke des Dashboards.</li>
+</ol><ol>
+<li>In dem offenen Dialogfenster sichern Sie sich, dass Sie auf der Seite für Java-Programmiersprachen sind und wählen Sie Tomcat als Ihren Anwendungsserver und PostgreSQL als Ihre Datenbank. Anschließend legen Sie die benötigten Ressourcen fest mit Hilfe der cloudlets-Schalter, geben Sie Ihren Umgebungsnamen (z.B. cmdbuild) ein und klicken Sie auf den Schaltflächen „Create“.</li>
+</ol><ol>
+<li>Warte nur eine Minute, bis Ihre Umgebung erstellt wird. Laden und Bereitstellen der Anwendung</li>
+</ol><ol>
+<li>Navigieren Sie zur CMDBuild-Website und klicken Sie auf den Schaltflächen „Download“ in der zentralen Anzeige.</li>
+</ol><ol>
+<li>Entpacken Sie den heruntergeladenen Archiv.</li>
+</ol><ol>
+<li>Navigieren Sie zu Ihrer Plattform-Dashboard und klicken Sie auf den Schaltflächen „Upload“ in der Registerkarte „Deployment Manager“. In dem offenen Fenster wählen Sie cmdbuild-x.x.x aus und klicken Sie auf den Schaltflächen „Upload“.</li>
+</ol></p><p>Quelle: [https://www.cm-db.org/](https://www.cm-db.org/)</p><div class="doc-image"><img src="/images/docs/cmdbuild/01-create-environment.png" alt="create environment" loading="lazy"></div><div class="doc-image"><img src="/images/docs/cmdbuild/02-environment-wizard_hu71e3f3ac5fa5ccf736a47068c12a51b8_109742_480x0_resize_box_3.png" alt="environment wizard hu71e3f3ac5fa5ccf736a47068c12a51b8 109742 480x0 resize box 3" loading="lazy"></div><p> Im zentralen Bereich. 2. Entpacken Sie den heruntergeladenen Archiv. 3. Navigieren Sie zu Ihrer Plattform-Dashboard und klicken Sie auf das Upload-Symbol an der Registerkarte Deployment Manager. In dem offenen Rahmen wählen Sie den Datei cmdbuild-x.x.x.war im Wurzelverzeichnis der extrahierten Archivdatei aus. 4. Um Ihre CMDBuild-Anwendung richtig zu funktionieren, müssen Sie die Bibliothek postgresql-9.1-901.jdbc4.jar auf Ihren Tomcat-Anwendungsserver hochladen. Dazu klicken Sie auf den Button Config neben ihm. 5. Danach suchen Sie die Ordnerstruktur lib in der aufgelisteten Ansicht und drücken Sie den Button Upload neben ihm. 6. Lokalisieren Sie den oben genannten Datei postgresql-9.1-901.jdbc4.jar im Verzeichnis cmdbuild-x.x.x\extras\tomcat-libs\6.0 der extrahierten Archivdatei und wählen Sie sie für den Upload aus. Überprüfen Sie den Erfolg. 7. Starten Sie den Tomcat-Server erneut, um die Änderungen anzuwenden. 8. Klicken Sie danach auf das Symbol Deploy zu neben der CMDBuild .war-Datei auf Ihrem Dashboard, wählen Sie die vorher erstellte Umgebung aus und klicken Sie auf Deploy im offenen Fenster. Installieren Sie Anwendung 1. Sobald die Installation erfolgreich abgeschlossen ist, starten Sie die Anwendung durch Drücken des Buttons Open in browser neben Ihrer Umgebung. 2. In der offenen Browser-Tabs wählen Sie die gewünschte Sprache in der entsprechenden Dropdown-Liste aus und drücken Sie Next. 3. Füllen Sie die erforderlichen Felder aus: CMDBuild-Datenbanktyp - wählen Sie Empty in der Dropdown-Liste CMDBuild-Datenbankname - geben Sie den Datenbanknamen ein (z.B. mydb).</p><p> Zutreffende Dropdown-Liste auswählen und drücken Sie Next. 3. Füllen Sie die erforderlichen Felder aus: CMDBuild Datenbanktyp - wählen Sie leer in einer Dropdown-Liste CMDBuild Datenbankname - geben Sie Datenbankname ein (z.B., cmdb) stellen Sie eine Kachel neben der Schaltfläche "Shark Schema erstellen" Checkbox. Für den nächsten Abschnitt verwenden Sie die Datenbankinformationen, die Sie per E-Mail erhalten haben: Host - fügen Sie den Zugriff URL Ihrer Datenbank ohne https://-Teil ein. Port - geben Sie den Hafen 5432-Nummer ein. Superuser - geben Sie den Login aus der E-Mail an (webadmin ist die Standardmöglichkeit) Passwort - fügen Sie das Passwort aus der E-Mail ein. Lassen Sie die letzte Sektion unverändert und drücken Sie den Next-Button. 4. In dem geöffneten Rahmenframe geben Sie die bevorzugten Administratoranmeldeinformationen ein, indem Sie den Benutzernamen (z.B., admin) und das Passwort eingeben. Bestätigen Sie Ihr Passwort und drücken Sie den Finish-Button. 5. Warten Sie, bis die Installation fertig ist, und drücken Sie Ok in dem geöffneten Fenster. 6. Schließlich melden Sie sich mit den vorher festgelegten Anmeldeinformationen an und genießen Sie Ihre Anwendung! Was kommt nachher? Tutorials nach Kategorie Java Tutorials Umgebung einrichten Java Tutorials</p><p>(Dieser Abschnitt enthält kein technisches Text, daher wird er nicht übersetzt.)</p><div class="doc-image"><img src="/images/docs/cmdbuild/03-cmdbuild-download.png" alt="cmdbuild download" loading="lazy"></div><div class="doc-image"><img src="/images/docs/cmdbuild/04-upload-cmdbuild-archive.png" alt="upload cmdbuild archive" loading="lazy"></div><div class="doc-image"><img src="/images/docs/cmdbuild/05-tomcat-config_hua1654e53ce46579417d34085f5abba49_15904_480x0_resize_box_3.png" alt="tomcat config hua1654e53ce46579417d34085f5abba49 15904 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/cmdbuild/06-upload-libraries.png" alt="upload libraries" loading="lazy"></div><div class="doc-image"><img src="/images/docs/cmdbuild/07-cmdbuild-libraries.png" alt="cmdbuild libraries" loading="lazy"></div><div class="doc-image"><img src="/images/docs/cmdbuild/08-tomcat-restart_hu12670d7ad6c0b9beee9ddb74bb866b6d_16428_480x0_resize_box_3.png" alt="tomcat restart hu12670d7ad6c0b9beee9ddb74bb866b6d 16428 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/cmdbuild/09-deploy-cmdbuild_hu398e2c815cd6addc918be18738e92df9_9721_480x0_resize_box_3.png" alt="deploy cmdbuild hu398e2c815cd6addc918be18738e92df9 9721 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/cmdbuild/10-open-in-browser_hu0826a5f99eb5364eb06b495a48284aba_15930_480x0_resize_box_3.png" alt="open in browser hu0826a5f99eb5364eb06b495a48284aba 15930 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/cmdbuild/11-cmdbuild-language.png" alt="cmdbuild language" loading="lazy"></div><div class="doc-image"><img src="/images/docs/cmdbuild/12-cmdbuild-database.png" alt="cmdbuild database" loading="lazy"></div><div class="doc-image"><img src="/images/docs/cmdbuild/13-cmdbuild-admin-credentials.png" alt="cmdbuild admin credentials" loading="lazy"></div><div class="doc-image"><img src="/images/docs/cmdbuild/14-cmdbuild-setup-success_hu1cbb9358bfe0a0c27433a87fdc17b9df_5352_480x0_resize_box_3.png" alt="cmdbuild setup success hu1cbb9358bfe0a0c27433a87fdc17b9df 5352 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/cmdbuild/15-cmdbuild_hu75068efdedeebae91cedaca2c21fcd72_59606_480x0_resize_box_3.png" alt="cmdbuild hu75068efdedeebae91cedaca2c21fcd72 59606 480x0 resize box 3" loading="lazy"></div>
+</main>
+</body>
+</html>

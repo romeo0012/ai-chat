@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Platform Welcome Tutorial</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Platform Welcome Tutorial</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Vítáte si Platformu Vítání Naučného Programu V prvním přihlášení do panelu správy je platforma automaticky spuštěna rychlý vítání program. Tento program obsahuje informace o hlavních funkcionalitách a funkcích, které jsou pro vás dostupné, a pomáhá v nasazení své první aplikace. Celý proces trvá jen několik minut a je vynikající základem pro začátek práce s platformou. Pokud je potřeba, můžete tento program ručně spustit prostřednictvím Nápověda &gt; Naučný program v libovolném čase: Nechte nás projít všemi kroky programu. 1. Program začíná s představením. První rámec se jmenuje Výhody PaaS, který poskytuje seznam hlavních funkcí platformy. Přesuňte myší nad určitou položku v seznamu, aby se zobrazila vysvětlující ilustrace. Klikněte na ni, aby se otevřela věnovaná dokumentace stránka s dalšími podrobnostmi. Přesunutím myší nad jakoukoli položku se zobrazí odpovídající ilustrace, zatímco kliknutím na ni se přesměruje na věnovanou dokumentace stránku. 2. Druhý rámec s názvem Vytvoření Topologie Vaší aplikace ukazuje, jak vytvořit topologii aplikace pomocí komponent platformy. Odkazujte se na Dokumentaci pojmů a terminologií pro další informace. 3. Následující rámec s názvem Nastavení Spotřeby Zdrojů ukazuje, jak poskytnout zdroje pro instancie a jak je automaticky vyčíslena odhadovaná cena.</p><p> Váš rámec Spotřeby zdrojů ukazuje, jak poskytnout zdroje pro instancie a jak se automaticky vypočítá odhad ceny. Platforma automaticky poskytuje Odhadovanou cenu pro aktuálně konfigurovanou topologii na základě hodinové, denní a měsíční úrovně (použijte vypnutí nabídky v okolí obrázku výše uvedeného). Poznámka: Maximální cena použití je v praxi téměř ne dosažitelná (100% zatížení všech uzlů všech dob). Další informace naleznete v dalším kroku.
+<ol>
+<li>Poslední slide Svéte cenové výhody vysvětluje efektivitu použití platformy cenově na základě spotřeby srovnává se modely cenovými cloudovými poskytovateli.</li>
+</ol>
+<ol>
+<li>Následně se prezentace zavírá a automaticky se otevírá vizualizátor topologie. Tip: Můžete skrýt současnou tip nebo úplně opustit kurz pomocí vhodných ikon (kříž a kruh s přesušenou částí respektive). Pokud je potřeba, můžete nastavit nové prostředí pomocí všech dostupných parametrů prostřednictvím vizualizátoru topologie. Nicméně pro tuto ukázku nejsou potřebné žádné konkrétní konfigurace, takže doporučujeme následovat tip a kliknout na Tvořit okamžitě.</li>
+</ol>
+<ol>
+<li>Počkejte minutu na vytvoření prostředí. Během tohoto času můžete stav procesu sledovat v panelu Úkoly.</li>
+</ol>
+<ol>
+<li>Jakmile je operace dokončena, kurz automaticky vás vede do sekce správy nasazení. Zde bude vysvětlen tlačítko k nasazení výchozí aplikace Hello World. Klikněte na něj, aby se pokračovalo.</li>
+</ol>
+<ol>
+<li>Vizualizátor topologie ukazuje, jak poskytnout zdroje pro instancie a jak se automaticky vypočítá odhad ceny. Platforma automaticky poskytuje Odhadovanou cenu pro aktuálně konfigurovanou topologii na základě hodinové, denní a měsíční úrovně (použijte vypnutí nabídky v okolí obrázku výše uvedeného). Poznámka: Maximální cena použití je v praxi téměř ne dosažitelná (100% zatížení všech uzlů všech dob). Další informace naleznete v dalším kroku.</li>
+</ol>
+<ol>
+<li>Poslední slide Svéte cenové výhody vysvětluje efektivitu použití platformy cenově na základě spotřeby srovnává se modely cenovými cloudovými poskytovateli.</li>
+</ol>
+<ol>
+<li>Následně se prezentace zavírá a automaticky se otevírá vizualizátor topologie. Tip: Můžete skrýt současnou tip nebo úplně opustit kurz pomocí vhodných ikon (kříž a kruh s přesušenou částí respektive). Pokud je potřeba, můžete nastavit nové prostředí pomocí všech dostupných parametrů prostřednictvím vizualizátoru topologie. Nicméně pro tuto ukázku nejsou potřebné žádné konkrétní konfigurace, takže doporučujeme následovat tip a kliknout na Tvořit okamžitě.</li>
+</ol>
+<ol>
+<li>Počkejte minutu na vytvoření prostředí. Během tohoto času můžete stav procesu sledovat v panelu Úkoly.</li>
+</ol>
+<ol>
+<li>Jakmile je operace dokončena, kurz automaticky vás vede do sekce správy nasazení. Zde bude vysvětlen tlačítko k nasazení výchozí aplikace Hello World. Klikněte na něj, aby se pokračovalo.</li>
+</ol>
+<ol>
+<li>Vizualizátor topologie ukazuje, jak poskytnout zdroje pro instancie a jak se automaticky vypočítá odhad ceny. Platforma automaticky poskytuje Odhadovanou cenu pro aktuálně konfigurovanou topologii na základě hodinové, denní a měsíční úrovně (použijte vypnutí nabídky v okolí obrázku výše uvedeného). Poznámka: Maximální cena použití je v praxi téměř ne dosažitelná (100% zatížení všech uzlů všech dob). Další informace naleznete v dalším kroku.</li>
+</ol>
+<ol>
+<li>Poslední slide Svéte cenové výhody vysvětluje efektivitu použití platformy cenově na základě spotřeby srovnává se modely cenovými cloudovými poskytovateli.</li>
+</ol>
+<ol>
+<li>Následně se prezentace zavírá a automaticky se otevírá vizualizátor topologie. Tip: Můžete skrýt současnou tip nebo úplně opustit kurz pomocí vhodných ikon (kříž a kruh s přesušenou částí respektive). Pokud je potřeba, můžete nastavit nové prostředí pomocí všech dostupných parametrů prostřednictvím vizualizátoru topologie. Nicméně pro tuto ukázku nejsou potřebné žádné konkrétní konfigurace, takže doporučujeme následovat tip a kliknout na Tvořit okamžitě.</li>
+</ol>
+<ol>
+<li>Počkejte minutu na vytvoření prostředí. Během tohoto času můžete stav procesu sledovat v panelu Úkoly.</li>
+</ol>
+<ol>
+<li>Jakmile je operace dokončena, kurz automaticky vás vede do sekce správy nasazení. Zde bude vysvětlen tlačítko k nasazení výchozí aplikace Hello World. Klikněte na něj, aby se pokračovalo.</li>
+</ol>
+<ol>
+<li>Vizualizátor topologie ukazuje, jak poskytnout zdroje pro instancie a jak se automaticky vypočítá odhad ceny. Platforma automaticky poskytuje Odhadovanou cenu pro aktuálně konfigurovanou topologii na základě hodinové, denní a měsíční úrovně (použijte vypnutí nabídky v okolí obrázku výše uvedeného). Poznámka: Maximální cena použití je v praxi téměř ne dosažitelná (100% zatížení všech uzlů všech dob). Další informace naleznete v dalším kroku.</li>
+</ol>
+<ol>
+<li>Poslední slide Svéte cenové výhody vysvětluje efektivitu použití platformy cenově na základě spotřeby srovnává se modely cenovými cloudovými poskytovateli.</li>
+</ol>
+<ol>
+<li>Následně se prezentace zavírá a automaticky se otevírá vizualizátor topologie. Tip: Můžete skrýt současnou tip nebo úplně opustit kurz pomocí vhodných ikon (kříž a kruh s přesušenou částí respektive). Pokud je potřeba, můžete nastavit nové prostředí pomocí všech dostupných parametrů prostřednictvím vizualizátoru topologie. Nicméně pro tuto ukázku nejsou potřebné žádné konkrétní konfigurace, takže doporučujeme následovat tip a kliknout na Tvořit okamžitě.</li>
+</ol>
+<ol>
+<li>Počkejte minutu na vytvoření prostředí. Během tohoto času můžete stav procesu sledovat v panelu Úkoly.</li>
+</ol>
+<ol>
+<li>Jakmile je operace dokončena, kurz automaticky vás vede do sekce správy nasazení. Zde bude vysvětlen tlačítko k nasazení výchozí aplikace Hello World. Klikněte na něj, aby se pokračovalo.</li>
+</ol>
+<ol>
+<li>Vizualizátor topologie ukazuje, jak poskytnout zdroje pro instancie a jak se automaticky vypočítá odhad ceny. Platforma automaticky poskytuje Odhadovanou cenu pro aktuálně konfigurovanou topologii na základě hodinové, denní a měsíční úrovně (použijte vypnutí nabídky v okolí obrázku výše uvedeného). Poznámka: Maximální cena použití je v praxi téměř ne dosažitelná (100% zatížení všech uzlů všech dob). Další informace naleznete v dalším kroku.</li>
+</ol>
+<ol>
+<li>Poslední slide Svéte cenové výhody vysvětluje efektivitu použití platformy cenově na základě spotřeby srovnává se modely cenovými cloudovými poskytovateli.</li>
+</ol>
+<ol>
+<li>Následně se prezentace zavírá a automaticky se otevírá vizualizátor topologie. Tip: Můžete skrýt současnou tip nebo úplně opustit kurz pomocí vhodných ikon (kříž a kruh s přesušenou částí respektive). Pokud je potřeba, můžete nastavit nové prostředí pomocí všech dostupných parametrů prostřednictvím vizualizátoru topologie. Nicméně pro tuto ukázku nejsou potřebné žádné konkrétní konfigurace, takže doporučujeme následovat tip a kliknout na Tvořit okamžitě.</li>
+</ol>
+<ol>
+<li>Počkejte minutu na vytvoření prostředí. Během tohoto času můžete stav procesu sledovat v panelu Úkoly.</li>
+</ol>
+<ol>
+<li>Jakmile je operace dokončena, kurz automaticky vás vede do sekce správy nasazení. Zde bude vysvětlen tlačítko k nasazení výchozí aplikace Hello World. Klikněte na něj, aby se pokračovalo.</li>
+</ol>
+<ol>
+<li>Vizualizátor topologie ukazuje, jak poskytnout zdroje pro instancie a jak se automaticky vypočítá odhad ceny. Platforma automaticky poskytuje Odhadovanou cenu pro aktuálně konfigurovanou topologii na základě hodinové, denní a měsíční úrovně (použijte vypnutí nabídky v okolí obrázku výše uvedeného). Poznámka: Maximální cena použití je v praxi téměř ne dosažitelná (100% zatížení všech uzlů všech dob). Další informace naleznete v dalším kroku.</li>
+</ol>
+<ol>
+<li>Poslední slide Svéte cenové výhody vysvětluje efektivitu použití platformy cenově na základě spotřeby srovnává se modely cenovými cloudovými poskytovateli.</li>
+</ol>
+<ol>
+<li>Následně se prezentace zavírá a automaticky se otevírá vizualizátor topologie. Tip: Můžete skrýt současnou tip nebo úplně opustit kurz pomocí vhodných ikon (kříž a kruh s přesušenou částí respektive). Pokud je potřeba, můžete nastavit nové prostředí pomocí všech dostupných parametrů prostřednictvím vizualizátoru topologie. Nicméně pro tuto ukázku nejsou potřebné žádné konkrétní konfigurace, takže doporučujeme následovat tip a kliknout na Tvořit okamžitě.</li>
+</ol>
+<ol>
+<li>Počkejte minutu na vytvoření prostředí. Během tohoto času můžete stav procesu sledovat v panelu Úkoly.</li>
+</ol>
+<ol>
+<li>Jakmile je operace dokončena, kurz automaticky vás vede do sekce správy nasazení. Zde bude vysvětlen tlačítko k nasazení výchozí aplikace Hello World. Klikněte na něj, aby se pokračovalo.</li>
+</ol>
+<ol>
+<li>Vizualizátor topologie ukazuje, jak poskytnout zdroje pro instancie a jak se automaticky vypočítá odhad ceny. Platforma automaticky poskytuje Odhadovanou cenu pro aktuálně konfigurovanou topologii na základě hodinové, denní a měsíční úrovně (použijte vypnutí nabídky v okolí obrázku výše uvedeného). Poznámka: Maximální cena použití je v praxi téměř ne dosažitelná (100% zatížení všech uzlů všech dob). Další informace naleznete v dalším kroku.</li>
+</ol>
+<ol>
+<li>Poslední slide Svéte cenové výhody vysvětluje efektivitu použití platformy cenově na základě spotřeby srovnává se modely cenovými cloudovými poskytovateli.</li>
+</ol>
+<ol>
+<li>Následně se prezentace zavírá a automaticky se otevírá vizualizátor topologie. Tip: Můžete skrýt současnou tip nebo úplně opustit kurz pomocí vhodných ikon (kříž a kruh s přesušenou částí respektive). Pokud je potřeba, můžete nastavit nové prostředí pomocí všech dostupných parametrů prostřednictvím vizualizátoru topologie. Nicméně pro tuto ukázku nejsou potřebné žádné konkrétní konfigurace, takže doporučujeme následovat tip a kliknout na Tvořit okamžitě.</li>
+</ol>
+<ol>
+<li>Počkejte minutu na vytvoření prostředí. Během tohoto času můžete stav procesu sledovat v panelu Úkoly.</li>
+</ol>
+<ol>
+<li>Jakmile je operace dokončena, kurz automaticky vás vede do sekce správy</li>
+</ol></p><p> Oddělení managera. Zde bude vynesena tlačítko na nasazení výchozí aplikace Hello World. Klikněte na něj, abyste pokračovali. 8. Po otevření rámce nasazení vyberte v příslušném výběrovém poli vytvořenou Vaší prostředí a klikněte na tlačítko Nasazit. 9. Počkejte chvíli, než bude aplikace nasazena. 10. Vynikající! Vaše první aplikace je připravena k práci, klikněte na vynesené tlačítko Open in Browser, abyste ji mohli zobrazit v odděleném kartě prohlížeče. Celá návodná cesta trvá asi dvě minuty, ale poskytuje informace o hlavních principech hostování s platformou. Co dále? Zahájení Průvodce &amp; Terminologie Dashboard Guide Nastavení prostředí Nasazovací návod</p><div class="doc-image"><img src="/images/docs/welcome-tutorial/01-start-paas-welcome-tutorial.png" alt="start paas welcome tutorial" loading="lazy"></div><div class="doc-image"><img src="/images/docs/welcome-tutorial/02-tutorial-paas-benefits_hu68b64b5f642b2e9f5cf0ef41d5dea028_112555_480x0_resize_box_3.png" alt="tutorial paas benefits hu68b64b5f642b2e9f5cf0ef41d5dea028 112555 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/welcome-tutorial/03-tutorial-build-application-topology_hu0d220b2ecb179d77a30af73dc134f6c8_53048_480x0_resize_box_3.png" alt="tutorial build application topology hu0d220b2ecb179d77a30af73dc134f6c8 53048 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/welcome-tutorial/04-tutorial-tune-resource-consumption_hu01becbda3680f88ad3dd4af7276ccf4c_90628_480x0_resize_box_3.png" alt="tutorial tune resource consumption hu01becbda3680f88ad3dd4af7276ccf4c 90628 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/welcome-tutorial/05-tutorial-paas-pricing-advantages_hue4f16346dab8d3b494b2ed940f3257bf_70635_480x0_resize_box_3.png" alt="tutorial paas pricing advantages hue4f16346dab8d3b494b2ed940f3257bf 70635 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/welcome-tutorial/06-tutorial-create-environment_hue32e1307132294d2401082ded1f4bc56_143278_480x0_resize_box_3.png" alt="tutorial create environment hue32e1307132294d2401082ded1f4bc56 143278 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/welcome-tutorial/07-close-and-stop-tutorial.png" alt="close and stop tutorial" loading="lazy"></div><div class="doc-image"><img src="/images/docs/welcome-tutorial/08-tutorial-tasks-panel_hu8c6519889a8620ab9f074a1e1e6acab0_35921_480x0_resize_box_3.png" alt="tutorial tasks panel hu8c6519889a8620ab9f074a1e1e6acab0 35921 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/welcome-tutorial/09-tutorial-deploy-default-application_hu2367005aa75d516e9dfda2d3d6aca08e_41619_480x0_resize_box_3.png" alt="tutorial deploy default application hu2367005aa75d516e9dfda2d3d6aca08e 41619 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/welcome-tutorial/10-tutorial-confirm-application-deployment.png" alt="tutorial confirm application deployment" loading="lazy"></div><div class="doc-image"><img src="/images/docs/welcome-tutorial/11-tutorial-wait-for-deployment_huc0d1670aa1c68922e1a82296509ca3c1_40961_480x0_resize_box_3.png" alt="tutorial wait for deployment huc0d1670aa1c68922e1a82296509ca3c1 40961 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/welcome-tutorial/12-tutorial-open-application-in-browser_hu772e9c287936a75834e4ff2c2f07462a_39073_480x0_resize_box_3.png" alt="tutorial open application in browser hu772e9c287936a75834e4ff2c2f07462a 39073 480x0 resize box 3" loading="lazy"></div>
+</main>
+</body>
+</html>

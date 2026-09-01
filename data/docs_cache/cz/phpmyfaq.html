@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Deploy phpMyFAQ</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>How to Deploy phpMyFAQ</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Jak nasadit phpMyFAQ</p><p>phpMyFAQ je multijazyčný databázově řízený systém otázek a odpovědí. Podporuje různé databáze a PHP 5.3 (nebo vyšší). phpMyFAQ nabízí: multijazyčný systém správy obsahu (CMS) s WYSIWYG editorem a Image Managerem; HTML Editor; flexibilní podporu více uživatelů s oprávněními na úrovni uživatelů a skupin, šablony; podporu PDF; podporu Facebooku a Twitteru; podporu LDAP a Microsoft Active Directory; snadno použitelný skript instalace. Je snadné tento aplikaci nainstalovat do vašeho platformy. Projděte si následující kroky. Vytvořte prostředí
+<ol>
+<li>Pokud nemáte účet, registrujte se podle popisu v dokumentu Zahájení.</li>
+</ol><ol>
+<li>Přihlaste se do panelu správy platformy a klikněte na tlačítko Vytvořit prostředí v horní levém rohu panelu.</li>
+</ol><ol>
+<li>Vyberte kartu PHP. Vyberte Apache jako svůj server aplikace a MySQL jako databázi. Uveďte název svého prostředí nebo použijte výchozí název. Uveďte limit cloudletů pro každý přidáný uzl. Klikněte na tlačítko Vytvořit. Vaše nové prostředí bude vytvořeno za sekundy. Dostali jste také dva e-maily: první s potvrzením úspěšného vytvoření prostředí a druhý - s detaily pro autorizaci MySQL. Nastavte databázi</li>
+</ol>
+<ol>
+<li>Otevřete e-mail s názvem MySQL node successfully added v poštovní schránce. Zde najdete svůj Access URL, Login a Heslo.</li>
+</ol><ol>
+<li>Otevřete panel phpMyAdmin kliknutím na Access URL. Zadejte své uživatelské jméno a heslo (nebo je kopírujte z e-mailu).</li>
+</ol><ol>
+<li>Vytvořte databázi pro phpMyFAQ. Vytvořte databázi pomocí následujících kroků:</li>
+</ol></p><p>a. V panelu phpMyAdmin klikněte na tlačítko Nová databáze.</p><div class="doc-image"><img src="/images/docs/phpmyfaq/01-create-environment-button.png" alt="create environment button" loading="lazy"></div><div class="doc-image"><img src="/images/docs/phpmyfaq/02-phpmyfaq-environment-topology_huf7a5e66e03afdd207c594ab79f489842_118717_480x0_resize_box_3.png" alt="phpmyfaq environment topology huf7a5e66e03afdd207c594ab79f489842 118717 480x0 resize box 3" loading="lazy"></div><p>b. Zadejte název databáze a klikněte na tlačítko Vytvořit.</p><p>c. Po vytvoření databáze přejděte do ní kliknutím na její název.</p><p>d. Vytvořte uživatele pro databázi pomocí následujících kroků:</p><div class="doc-image"><img src="/images/docs/phpmyfaq/03-mysql-database-log-in_hu555629f42e45f10cbf2af156f92049d0_22690_480x0_resize_box_3.png" alt="mysql database log in hu555629f42e45f10cbf2af156f92049d0 22690 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/phpmyfaq/04-database-add-user_hud30d4ad1886cc1984dd121d7c67a1134_78615_480x0_resize_box_3.png" alt="database add user hud30d4ad1886cc1984dd121d7c67a1134 78615 480x0 resize box 3" loading="lazy"></div><p>i. Klikněte na tlačítko Uživatelé.</p><p>ii. Klikněte na tlačítko Nový uživatel.</p><p>iii. Zadejte uživatelské jméno a heslo pro nového uživatele.</p><div class="doc-image"><img src="/images/docs/phpmyfaq/05-create-dedicated-database_hu5251de6fc4c2683efa8764ff7f93a30a_33213_480x0_resize_box_3.png" alt="create dedicated database hu5251de6fc4c2683efa8764ff7f93a30a 33213 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/phpmyfaq/06-download-phpmyfaq_hub9fc71daccba2fdfa981b0d857599ecf_61914_480x0_resize_box_3.png" alt="download phpmyfaq hub9fc71daccba2fdfa981b0d857599ecf 61914 480x0 resize box 3" loading="lazy"></div><p>iv. Vyberte oprávnění pro nového uživatele.</p><p>v. Klikněte na tlačítko Uložit.</p><p>e. Nastavte práva pro databázi pomocí následujících kroků:</p><div class="doc-image"><img src="/images/docs/phpmyfaq/07-upload-phpmyfaq-package.png" alt="upload phpmyfaq package" loading="lazy"></div><div class="doc-image"><img src="/images/docs/phpmyfaq/08-apache-config-button_hu6f291199a3966ce400e26bfe790a55bc_28724_480x0_resize_box_3.png" alt="apache config button hu6f291199a3966ce400e26bfe790a55bc 28724 480x0 resize box 3" loading="lazy"></div><p>i. Klikněte na tlačítko Práva.</p><p>ii. Vyberte uživatele, který jste vytvořili dříve.</p><p>iii. Vyberte oprávnění pro tento uživatele.</p><div class="doc-image"><img src="/images/docs/phpmyfaq/09-create-folders-for-phpmyfaq_hu6e6cb87f4055c3003224fece289737a4_41854_480x0_resize_box_3.png" alt="create folders for phpmyfaq hu6e6cb87f4055c3003224fece289737a4 41854 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/phpmyfaq/10-open-apache-in-browser_hu5d6470651ba3bb07012d9efee5a60c04_29258_480x0_resize_box_3.png" alt="open apache in browser hu5d6470651ba3bb07012d9efee5a60c04 29258 480x0 resize box 3" loading="lazy"></div><p>iv. Klikněte na tlačítko Uložit.</p><p>f. Nastavte databázi pro phpMyFAQ pomocí následujících kroků:</p><p>i. Klikněte na tlačítko Nový.</p><div class="doc-image"><img src="/images/docs/phpmyfaq/11-phpmyfaq-configuration_huc837b2e887d435c348e2da28127f7a17_74317_480x0_resize_box_3.png" alt="phpmyfaq configuration huc837b2e887d435c348e2da28127f7a17 74317 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/phpmyfaq/12-phpmyfaq-survey_hu8cf184f5c74be6200ab50653b0eeea1f_61630_480x0_resize_box_3.png" alt="phpmyfaq survey hu8cf184f5c74be6200ab50653b0eeea1f 61630 480x0 resize box 3" loading="lazy"></div><p>ii. Vyberte tabulku phpMyFAQ.</p><p>iii. Klikněte na tlačítko Uložit.</p><p>g. Nastavte databázi pro phpMyFAQ pomocí následujících kroků:</p><div class="doc-image"><img src="/images/docs/phpmyfaq/13-phpmyfaq-successfully-installed_hub3ddaab882fb9bece3245fd399fc36f4_38162_480x0_resize_box_3.png" alt="phpmyfaq successfully installed hub3ddaab882fb9bece3245fd399fc36f4 38162 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/phpmyfaq/14-delete-updatephp-file_hu3063638f2dedf17f81f3686af43288ea_52593_480x0_resize_box_3.png" alt="delete updatephp file hu3063638f2dedf17f81f3686af43288ea 52593 480x0 resize box 3" loading="lazy"></div><p>i. Klikněte na tlačítko Nový.</p><p>ii. Vyberte tabulku phpMyFAQ_config.</p><p>iii. Klikněte na tlačítko Uložit.</p><p>h. Nastavte databázi pro phpMyFAQ pomocí následujících kroků:</p><p>i. Klikněte na tlačítko Nový.</p><p>ii. Vyberte tabulku phpMyFAQ_faq.</p><p>iii. Klikněte na tlačítko Uložit.</p><p>i. Nastavte databázi pro phpMyFAQ pomocí následujících kroků:</p><p>i. Klikněte na tlačítko Nový.</p><p>ii. Vyberte tabulku phpMyFAQ_faq_categories.</p><p>iii. Klikněte na tlačítko Uložit.</p><p>j. Nastavte databázi pro phpMyFAQ pomocí následujících kroků:</p><p>i. Klikněte na tlačítko Nový.</p><p>ii. Vyberte tabulku phpMyFAQ_faq_questions.</p><p>iii. Klikněte na tlačítko Uložit.</p><p>k. Nastavte databázi pro phpMyFAQ pomocí následujících kroků:</p><p>i. Klikněte na tlačítko Nový.</p><p>ii. Vyberte tabulku phpMyFAQ_faq_replies.</p><p>iii. Klikněte na tlačítko Uložit.</p><p>l. Nastavte databázi pro phpMyFAQ pomocí následujících kroků:</p><p>i. Klikněte na tlačítko Nový.</p><p>ii. Vyberte tabulku phpMyFAQ_faq_stats.</p><p>iii. Klikněte na tlačítko Uložit.</p><p>m. Nastavte databázi pro phpMyFAQ pomocí následujících kroků:</p><p>i. Klikněte na tlačítko Nový.</p><p>ii. Vyberte tabulku phpMyFAQ_faq_templates.</p><p>iii. Klikněte na tlačítko Uložit.</p><p>n. Nastavte databázi pro phpMyFAQ pomocí následujících kroků:</p><p>i. Klikněte na tlačítko Nový.</p><p>ii. Vyberte tabulku phpMyFAQ_faq_templates_categories.</p><p>iii. Klikněte na tlačítko Uložit.</p><p>o. Nastavte databázi pro phpMyFAQ pomocí následujících kroků:</p><p>i. Klikněte na tlačítko Nový.</p><p>ii. Vyberte tabulku phpMyFAQ_faq_templates_questions.</p><p>iii. Klikněte na tlačítko Uložit.</p><p>p. Nastavte databázi pro phpMyFAQ pomocí následujících kroků:</p><p>i. Klikněte na tlačítko Nový.</p><p>ii. Vyberte tabulku phpMyFAQ_faq_templates_replies.</p><p>iii. Klikněte na tlačítko Uložit.</p><p>q. Nastavte databázi pro phpMyFAQ pomocí následujících kroků:</p><p>i. Klikněte na tlačítko Nový.</p><p>ii. Vyberte tabulku phpMyFAQ_faq_templates_stats.</p><p>iii. Klikněte na tlačítko Uložit.</p><p>r. Nastavte databázi pro phpMyFAQ pomocí následujících kroků:</p><p>i. Klikněte na tlačítko Nový.</p><p>ii. Vyberte tabulku phpMyFAQ_faq_templates_templates.</p><p>iii. Klikněte na tlačítko Uložit.</p><p>s. Nastavte databázi pro phpMyFAQ pomocí následujících kroků:</p><p>i. Klikněte na tlačítko Nový.</p><p>ii. Vyberte tabulku phpMyFAQ_faq_templates_variables.</p><p>iii. Klikněte na tlačítko Uložit.</p><p>t. Nastavte databázi pro phpMyFAQ pomocí následujících kroků:</p><p>i. Klikněte na tlačítko Nový.</p><p>ii. Vyberte tabulku phpMyFAQ_faq_templates_variables_categories.</p><p>iii. Klikněte na tlačítko Uložit.</p><p>u. Nastavte databázi pro phpMyFAQ pomocí následujících kroků:</p><p>i. Klikněte na tlačítko Nový.</p><p>ii. Vyberte tabulku phpMyFAQ_faq_templates_variables_values.</p><p>iii. Klikněte na tlačítko Uložit.</p><p>v. Nastavte databázi pro phpMyFAQ pomocí následujících kroků:</p><p>i. Klikněte na tlačítko Nový.</p><p>ii. Vyberte tabulku phpMyFAQ_faq_templates_variables_values_categories.</p><p>iii. Klikněte na tlačítko Uložit.</p><p>w. Nastavte databázi pro phpMyFAQ pomocí následujících kroků:</p><p>i. Klikněte na tlačítko Nový.</p><p>ii. Vyberte tabulku phpMyFAQ_faq_templates_variables_values_templates.</p><p>iii. Klikněte na tlačítko Uložit.</p><p>x. Nastavte databázi pro phpMyFAQ pomocí následujících kroků:</p><p>i. Klikněte na tlačítko Nový.</p><p>ii. Vyberte tabulku phpMyFAQ_faq_templates_variables_values_templates_categories.</p><p>iii. Klikněte na tlačítko Uložit.</p><p>y. Nastavte databázi pro phpMyFAQ pomocí následujících kroků:</p><p>i. Klikněte na tlačítko Nový.</p><p>ii. Vyberte tabulku phpMyFAQ_faq_templates_variables_values_templates_variables.</p><p>iii. Klikněte na tlačítko Uložit.</p><p>z. Nastavte databázi pro phpMyFAQ pomocí následujících kroků:</p><p>i. Klikněte na tlačítko Nový.</p><p>ii. Vyberte tabulku phpMyFAQ_faq_templates_variables_values_templates_variables_categories.</p><p>iii. Klikněte na tlačítko Uložit.</p><p>aa. Nastavte databázi pro phpMyFAQ pomocí následujících kroků:</p><p>i. Klikněte na tlačítko Nový.</p><p>ii. Vyberte tabulku phpMyFAQ_faq_templates_variables_values_templates_variables_values.</p><p>iii. Klikněte na tlačítko Uložit.</p><p>bb. Nastavte databázi pro phpMyFAQ pomocí následujících kroků:</p><p>i. Klikněte na tlačítko Nový.</p><p>ii. Vyberte tabulku phpMyFAQ_faq_templates_variables_values_templates_variables_values_categories.</p><p>iii. Klikněte na tlačítko Uložit.</p><p>cc. Nastavte databázi pro phpMyFAQ pomocí následujících kroků:</p><p>i. Klikněte na tlačítko Nový.</p><p>ii. Vyberte tabulku phpMyFAQ_faq_templates_variables_values_templates_variables_values_templates.</p><p>iii. Klikněte na tlačítko Uložit.</p><p>dd. Nastavte databázi pro phpMyFAQ pomocí následujících kroků:</p><p>i. Klikněte na tlačítko Nový.</p><p>ii. Vyberte tabulku phpMyFAQ_faq_templates_variables_values_templates_variables_values_templates_categories.</p><p>iii. Klikněte na tlačítko Uložit.</p><p>ee. Nastavte databázi pro phpMyFAQ pomocí následujících kroků:</p><p>i. Klikněte na tlačítko Nový.</p><p>ii. Vyberte tabulku phpMyFAQ_faq_templates_variables_values_templates_variables_values_templates_variables.</p><p>iii. Klikněte na tlačítko Uložit.</p><p>ff. Nastavte databázi pro phpMyFAQ pomocí následujících kroků:</p><p>i. Klikněte na tlačítko Nový.</p><p>ii. Vyberte tabulku phpMyFAQ_faq_templates_variables_values_templates_variables_values_templates_variables_categories.</p><p>iii. Klikněte na tlačítko Uložit.</p><p>gg. Nastavte databázi pro phpMyFAQ pomocí následujících kroků:</p><p>i. Klikněte na tlačítko Nový.</p><p>ii. Vyberte tabulku phpMyFAQ_faq_templates_variables_values_templates_variables_values_templates_variables_values.</p><p>iii. Klikněte na tlačítko Uložit.</p><p>hh. Nastavte databázi pro phpMyFAQ pomocí následujících kroků:</p><p>i. Klikněte na tlačítko Nový.</p><p>ii. Vyberte tabulku phpMyFAQ_faq_templates_variables_values_templates_variables_values_templates_variables_values_categories.</p><p>iii. Klikněte na tlačítko Uložit.</p><p>ii. Nainstalujte phpMyFAQ pomocí následujících kroků:
+<ol>
+<li>Stáhněte si nejnovější verzi phpMyFAQ z [tady](https://sourceforge.net/projects/phpmyfaq/files/).</li>
+</ol><ol>
+<li>Extrahujte si stáhnutý soubor.</li>
+</ol><ol>
+<li>Přejděte do adresáře extrahovaného souboru.</li>
+</ol><ol>
+<li>Vytvořte databázi pro phpMyFAQ, jak je popsáno výše.</li>
+</ol><ol>
+<li>Upravte soubor config.inc.php v adresáři extrahovaného souboru. Nastavte následující hodnoty:</li>
+</ol></p><p>a. $db_type = 'mysqli';</p><p>b. $db_host = 'your_database_host';</p><p>c. $db_name = 'your_database_name';</p><p>d. $db_user = 'your_database_user';</p><p>e. $db_pass = 'your_database_password';</p><p>f. $db_prefix = '';</p><p>g. $db_charset = 'utf8';</p><p>h. $db_collation = 'utf8_general_ci';</p><p>i. $db_port = '';</p><p>j. $db_socket = '';</p><p>k. $db_persistent = false;</p><p>l. $db_cache_type = 'array';</p><p>m. $db_cache_size = 1000;</p><p>n. $db_cache_lif</p><p> Váš Access URL, přihlašovací jméno a heslo. 2. Přejděte do panelu phpMyAdmin kliknutím na Access URL. Zadejte své uživatelské jméno a heslo (nebo je kopírujte z e-mailu). 3. Přejděte do karty Uživatelé a vytvořte nového uživatele (např., phpmy) s možností Vytvořit databázi s tímž názvem a všechny oprávnění zaškrtnuté.</p><p>Nahrání a Instalace Aplikace<ol>
+<li>Navštivte oficiální stránku phpMyFAQ a stáhněte si nejnovější verzi jako .zip archiv.</li>
+</ol><ol>
+<li>Přejděte na svůj panel správy platformy a klikněte na Upload v okně Deployment Manager. Vyberte svůj místní archivní soubor a stiskněte tlačítko Upload.</li>
+</ol><ol>
+<li>Poté klikněte na tlačítko Config pro Apache server v vašem prostředí.</li>
+</ol><ol>
+<li>Můžete vidět manažer konfigurace pod tímto tlačítkem. Navigujte se do složky ROOT (/webroot/ROOT) a vytvořte nové složky pro připojení, data a obrázky (bez velkých písmen).</li>
+</ol><ol>
+<li>Otevřete svou aplikaci kliknutím na tlačítko Open in Browser.</li>
+</ol><ol>
+<li>Dostali jste se na stránku Setup phpMyFAQ. Zadejte všechny potřebné pole zde: Hostitel databáze (bez http://); Uživatel databáze (ten, který jste vytvořili během konfigurace databáze); Heslo databáze (vytvořené během konfigurace databáze); Vaše e-mailová adresa. A vyberte ještě tři další parametry pro administrátora: Jméno, Přihlašovací jméno, Heslo. Stiskněte tlačítko Click to install phpMyFAQ.</li>
+</ol><ol>
+<li>Budete přesměrováni na stránku Anketa. Můžete se na ní zabavit a stisknutím odkazu Click here to submit the data and finish the installation process dokončíte instalaci.</li>
+</ol><ol>
+<li>Zde můžete vidět vaši verzi phpMyFAQ a přihlásit se do své administrátorské sekce.</li>
+</ol><ol>
+<li>Vrátěte se zpět na svůj panel správy platformy a otevřete manažer konfigurace Apache. Navigujte se do složky /webroot/ROOT/install. Naleznete zde soubor update.php a smažte ho. Vaše aplikace je nyní nainstalována do vaší platformy. Máte šťastný den! Co dále? Tutorials by Category PHP Tutorials Setting Up Environment</li>
+</ol></p>
+</main>
+</body>
+</html>

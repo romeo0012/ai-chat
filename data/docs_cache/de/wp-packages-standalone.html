@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WordPress Standalone Package</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>WordPress Standalone Package</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> WordPress-Einzelanwendungspaket</p><p>Das WordPress-Einzelanwendungspaket ist eine automatisierte Lösung für die kostengünstige Installation von WordPress in einem leichten Container, der für die Ausführung von kleinen und mittleren Projekten verwendet werden kann. Das Paket führt alle notwendigen Konfigurationen durch, sodass Sie sich auf Ihr Projekt konzentrieren können, anstatt Zeit mit der Serververwaltung zu verbringen. Basierend auf Ihren Vorlieben können Sie zwischen den LLSMP (Linux + LiteSpeed + MariaDB + PHP) oder LEMP (Linux + NGINX + MariaDB + PHP) Vorlagen wählen. Ihre WordPress-Einzelanwendungskontainer wird automatisch die folgenden Komponenten ausführen: ein PHP-basiertes Anwendungsserver (entweder LiteSpeed oder NGINX) ein MariaDB-Datenbankserver ein Redis-hochleistungs-RAM-zuweisender Datenstrukturspeicher Zusätzliche Funktionen können über die fortgeschrittenen Einstellungen aktiviert werden.</p><p>WordPress-Einzelanwendungseinrichtung</p><div class="doc-image"><img src="/images/docs/wp-packages-standalone/01-wordpress-standalone-schema.png" alt="wordpress standalone schema" loading="lazy"></div><div class="doc-image"><img src="/images/docs/wp-packages-standalone/02-marketplace-button_hu0a90f42be406071ca807c43afbee15a5_9926_480x0_resize_box_3.png" alt="marketplace button hu0a90f42be406071ca807c43afbee15a5 9926 480x0 resize box 3" loading="lazy"></div><p>Um das WordPress-Einzelanwendungspaket zu installieren, folgen Sie den folgenden Schritten:<ol>
+<li>Klicken Sie auf den Marktplatz-Button auf dem Virtuozzo-Anwendungsverwaltungsdashboard.</li>
+</ol><ol>
+<li>Verwenden Sie den Suchfeld, um das Paket WordPress Standalone Kit zu finden und klicken Sie auf Installieren.</li>
+</ol><ol>
+<li>1. Klicken Sie auf den Marktplatz-Button auf der oberen Virtuozzo Application Management Dashboard. 2. Verwenden Sie das Suchfeld, um das Paket WordPress Standalone Kit zu finden, und klicken Sie auf Installieren. 3. Im aufgerufenen Installationsfenster können Sie Ihre WordPress-Standalone-Anwendung individuell anpassen, indem Sie die notwendigen Optionen auswählen: wählen Sie die PHP-Version, wählen Sie stattdessen LiteSpeed High-Performance Web Server anstelle des Standard-Webservers NGINX, aktivieren Sie Brute Force Attack Protection und Web Application Firewall-Funktionen für LiteSpeed, installieren Sie Let’s Encrypt SSL mit Auto-Renewal-Add-on, um eine kostenlose SSL-Zertifikat automatisch auszustellen, konfigurieren Sie WordPress Multisite Network und installieren Sie den WooCommerce-Add-on für WordPress zuletzt. Geben Sie schließlich den Umgebungsnamen und den Anzeigenamen an, wählen Sie (wenn verfügbar) die Verfügbarkeitsregion aus und klicken Sie auf Installieren. 4. In wenigen Minuten wird der WordPress-Standalone-Umgebung automatisch erstellt und konfiguriert, wie Sie die ausgewählten Optionen vorgesehen haben. Alles klar! Sie können jetzt Ihre WordPress-Website über den bereitgestellten URL-Adresse aufrufen und nach Ihren Bedürfnissen anpassen. Was kommt Nächstes? WordPress-Pakete-Übersicht WordPress-Cluster-Paket WordPress Multi-Region-Pakete WordPress-Paket-Funktionen</li>
+</ol></p><div class="doc-image"><img src="/images/docs/wp-packages-standalone/03-wordpress-packages_hu4c6a779f9e6b61a087d8f278615e30fd_73548_480x0_resize_box_3.png" alt="wordpress packages hu4c6a779f9e6b61a087d8f278615e30fd 73548 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/wp-packages-standalone/04-install-wordpress-standalone_hub5ba5f4d7c42ee945909333cee620364_131423_480x0_resize_box_3.png" alt="install wordpress standalone hub5ba5f4d7c42ee945909333cee620364 131423 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/wp-packages-standalone/05-wordpress-standalone-environment_hub8870d0eb859e241ae067c499b28e2cf_29331_480x0_resize_box_3.png" alt="wordpress standalone environment hub8870d0eb859e241ae067c499b28e2cf 29331 480x0 resize box 3" loading="lazy"></div>
+</main>
+</body>
+</html>

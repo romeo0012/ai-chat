@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Deploy Grails</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>How to Deploy Grails</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Jak nasadit Grails<br>Grails je inovativní, vysokoproductivní rámec, který se řídí principem "Convention over Configuration", což mu vyneslo velkou popularitu. Poskytuje samostatný vývojový prostředí, zatímco udržuje jednoduchost, která umožňuje vývojáři se soustředit na to, co skutečně důležité: vytvářet kvalitní, snadno použitelné aplikace, které uživatelé milují. Grails zjednodušuje vývoj Java aplikací, protože je postavený na Springu a založeném na Groovy. Získáte všechny výhody Grails s PaaS! Vytvořte aplikaci<ol>
+<li>Přejděte na grails.org a stáhněte si nejnovější verzi Grails.</li>
+</ol><ol>
+<li>Rozbalte si stáhnutý balíček.</li>
+</ol><ol>
+<li>Přidejte proměnné prostředí (krok je opcí):</li>
+</ol><br>   - GRAILS\_HOME (C:\grails-2.0.0) určuje cestu k místu, kde jste rozbalili archiv;<br>   - PATH (C:\grails-2.0.0\bin) obsahuje cestu k adresáři bin.<ol>
+<li>Vytvořte aplikaci pomocí příkazového řádku. S proměnnými prostředí (C:\grails na Windows, ~/grails na Linux):</li>
+</ol><br>   1 ...\grails-1.3.7 grails create-app {app_name}<br>   Bez proměnných prostředí:<br>   1 ...\grails-1.3.7\bin\grails create-app {app_name}<br>   Poznámka: Aplikace bude vytvořena v adresáři C:\grails-1.3.7\bin\5.<ol>
+<li>Vytvořte .war archiv jediným příkazem:</li>
+</ol><br>   S proměnnými prostředí (C:\grails na Windows, ~/grails na Linux):<br>   1 ...\grails-1.3.7\{app_name} grails war {app_name}.war<br>   Bez proměnných prostředí (C:\grails na Windows, ~/grails na Linux):<br>   1 2 ...\grails-1.3.7\bin\{app_name} ...\grails-1.3.7\bin\war\{app_name}.war</p><p> Na Linuxu): 1 ...\grails-1.3.7\{app_name} grails war {app_name}.war Bez prostředníkových proměnných (C:\grails na Windows, ~/grails na Linuxu): 1 2 ...\grails-1.3.7\bin\{app_name} ...\grails-1.3.7\bin\grails war {app_name}.war Archiv WAR bude uložen v C:\grails-1.3.7\bin\{app_name}\. Vytvořte prostředí:<ol>
+<li>Přihlaste se na dashboard platformy.</li>
+</ol><ol>
+<li>Vytvořte nové prostředí.</li>
+</ol><ol>
+<li>V dialogu Topologie prostředí vyberte svůj aplikační server (např., Tomcat) a zadejte jméno svého prostředí, například grails, poté klikněte na tlačítko Vytvořit. Váš prostředí bude vytvořeno za minutu. Nahrávejte Java Balíček:</li>
+</ol><ol>
+<li>Nahrávejte svůj WAR soubor do Manažera nasazení.</li>
+</ol><ol>
+<li>Po nahrání balíčku na platformu ho nasaďte do svého prostředí. To je vše. Spusťte aplikaci a ujistěte se, že se jí líbí! Co dále? Naučení se podle kategorií Java Naučení se: Nastavení prostředí</li>
+</ol></p><p>Přihlašte se na dashboard platformy.<br>Vytvořte nové prostředí.<br>V dialogu Topologie prostředí vyberte svůj aplikační server (např., Tomcat) a zadejte jméno svého prostředí, například grails, poté klikněte na tlačítko Vytvořit. Váš prostředí bude vytvořeno za minutu. Nahrávejte Java Balíček:<ol>
+<li>Nahrávejte svůj WAR soubor do Manažera nasazení.</li>
+</ol><ol>
+<li>Po nahrání balíčku na platformu ho nasaďte do svého prostředí. To je vše. Spusťte aplikaci a ujistěte se, že se jí líbí! Co dále? Naučení se podle kategorií Java</li>
+</ol></p><div class="doc-image"><img src="/images/docs/grails-deploy/01-download-grails_huf3a5a1e37e3c27a12df87bb93e180639_562109_480x0_resize_box_3.png" alt="download grails huf3a5a1e37e3c27a12df87bb93e180639 562109 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/grails-deploy/02-grails-package_hue3c38dd38b1ecb51bd55e50241b1e39f_353365_480x0_resize_box_3.png" alt="grails package hue3c38dd38b1ecb51bd55e50241b1e39f 353365 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/grails-deploy/03-create-environment.png" alt="create environment" loading="lazy"></div><div class="doc-image"><img src="/images/docs/grails-deploy/04-environment-wizard_hue1d187ed1a7db5bf6d01fffd5f5264a0_102721_480x0_resize_box_3.png" alt="environment wizard hue1d187ed1a7db5bf6d01fffd5f5264a0 102721 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/grails-deploy/05-environment-for-grails-created_hu70d86956dd2c8784c309e8349b940e8c_43643_480x0_resize_box_3.png" alt="environment for grails created hu70d86956dd2c8784c309e8349b940e8c 43643 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/grails-deploy/06-upload-grails.png" alt="upload grails" loading="lazy"></div><div class="doc-image"><img src="/images/docs/grails-deploy/07-deploy-grails.png" alt="deploy grails" loading="lazy"></div><div class="doc-image"><img src="/images/docs/grails-deploy/08-grails_hue380987de50f781f22f167b3cb3114ca_131342_480x0_resize_box_3.png" alt="grails hue380987de50f781f22f167b3cb3114ca 131342 480x0 resize box 3" loading="lazy"></div>
+</main>
+</body>
+</html>

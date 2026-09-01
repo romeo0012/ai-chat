@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WordPress DNS Load Balancing</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>WordPress DNS Load Balancing</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> WordPress-DNS-Load-Balancing<br>Standardmäßig verwendet Sie beim Erstellen eines benutzerdefinierten Domains für Ihre WordPress-Website die DNS-Round-Robin-Algorithmus, um den Domainnamen aufzulösen. Das bedeutet, dass jedes Mal, wenn der Domainname aufgelöst wird, alle IP-Adressen registriert werden, auch die unerreichbaren. Das kann zu Leistungsproblemen und Ausfällen führen, wenn ein Endpunkt nicht erreichbar ist. Es ist jedoch möglich, DNS-Load Balancing einzurichten, um sicherzustellen, dass der Verkehr nur an die gesunden Endpunkte geleitet wird. Dies kann besonders nützlich sein für mehrere Regionen WordPress-Installationen, wo die Website in mehreren Regionen oder Datenzentren gehostet wird. Die DNS-Load Balancing kann mehrere Vorteile bieten, darunter:
+<ul>
+<li>Endpunkt-Gesundheitsprüfungen</li>
+</ul><ul>
+<li>Intelligente Routing basierend auf dem geografischen Standort des Clients</li>
+</ul><ul>
+<li>Latenzbewertung zum Endpunkt</li>
+</ul></p><p>Unterhalb werden wir einen Schritt-für-Schritt-Leitfaden bereitstellen, wie Sie DNS-Load Balancing für Ihre WordPress-Website auf der Virtuozzo Application Management einrichten können, auf dem Beispiel der CloudFlare DNS-Dienst. Die gleichen Prinzipien können auf andere DNS-Anbieter angewendet werden, aber die spezifischen Schritte können variieren.
+<ol>
+<li>Gehen Sie im Cloudflare-Dashboard zu Verkehr &gt; Load Balancing &gt; Erstellen Load Balancer. Geben Sie den benutzerdefinierten Domainnamen ein, den Sie A-Einträge erstellt haben. Stellen Sie sicher, dass der Verkehrsproxying deaktiviert ist (geht nicht durch Cloudflare), da wir nur DNS-Anfragen balancieren wollen.</li>
+</ol><ol>
+<li>Der nächste Schritt ist die Erstellung von Ursprungspools.</li>
+</ol></p><p> 1. Stellen Sie sicher, dass die Verkehrsproxying deaktiviert ist (geht nicht über Cloudflare), da wir nur DNS-Anfragen ausgleichen werden.<ol>
+<li>Der nächste Schritt ist die Erstellung von Ursprungspools. In unserem Beispiel verfügen wir über einen WordPress-Cluster mit zwei Load Balancern und zwei entsprechenden A-Einträgen, sodass wir zwei Pool erstellt werden, indem wir in jedem Pool einen Load Balancer als Ursprung spezifizieren. Sie können sich an den Cloudflare-Dokumentationen orientieren oder beliebige Werte für Pool Name und Ursprung Name verwenden. Verwenden Sie die öffentliche IP-Adresse eines der Load Balancer als Ursprung-Adresse, und da die Load Balancer gleich sind, legen Sie das Gewicht auf 1 fest. Scrollen Sie nach unten und geben Sie die E-Mail-Adresse an, an die Sie die Gesundheitsprüfungsbenachrichtigungen bevorzugt erhalten möchten. Drücken Sie die Speichern-Schaltfläche. Wiederholen Sie dies für den zweiten Load Balancer.</li>
+</ol><ol>
+<li>Anschließend müssen Sie eine Überwachung angeben, um die Gesundheitsprüfungen für jeden Ursprung durchzuführen. Klicken Sie auf Attach monitor &gt; Create a Monitor button.</li>
+</ol><ol>
+<li>Die neue Überwachung erfordert es, Parameter anzugeben, die für die Gesundheitsprüfungen verwendet werden sollen. Wenn Sie jedoch beachten sollten, dass einige davon von Ihrer Abonnement abhängen und zusätzliche Kosten verursachen können. Folgen Sie der Cloudflare-Überwachungstutorial für ausführliche Anweisungen, oder legen Sie die Parameter wie folgt fest:</li>
+</ol><ol>
+<li>Speichern Sie die Änderungen und fügen Sie die Überwachung dem Ursprungspool zu. Hier können Sie auch die E-Mail-Adresse für die Benachrichtigungen angeben. Fügen Sie die gleiche Überwachung dem zweiten Ursprung zu. Stellen Sie sicher, dass beide Ursprünge gesund sind, bevor Sie zum nächsten Schritt fortfahren.</li>
+</ol><ol>
+<li>Hier können Sie auch die Benachrichtigungsemail-Adresse angeben. Fügen Sie den gleichen Monitor dem zweiten Ursprung an. Stellen Sie sicher, dass beide Ursprünge gesund sind, bevor Sie zum nächsten Schritt weitergehen. 6. Der nächste Schritt ist, die Traffic Steering Option auszuwählen, um die Lastverteilungsalgorithmus zu definieren. Verfügbare Optionen können sich auf Ihr Abonnementplan beziehen: Off (standard Failover-Algorithmus) - leitet den Verkehr von der ungesunden Pool zu dem nächsten gesunden. Zufällig - leitet den Verkehr zufällig zu einem gesunden Pool. Dynamic steering - leitet den Verkehr zu dem schnellsten Pool, basierend auf der Latenz, die während der Gesundheitsprüfungsergebnisse gemessen wird. Geo steering - leitet den Verkehr zu den Pools, basierend auf der Region des Clients oder dem Standort. Sie können die Pools angeben, zu denen der Lastverteiler den Verkehr für eine gegebene Geolocation oder Standort richten soll. Mehrere Pools können auf die gleiche Region konfiguriert werden, und der Lastverteiler wird sie in Fallback-Reihenfolge verwenden. In unserem Beispiel haben wir zwei Lastverteiler in der gleichen Region (kein multi-region Cluster), also verwenden wir die Off-Option. 7. Zum Schluss überprüfen Sie die Einstellungen und klicken Sie auf Speichern und Bereitstellen. Herzlichen Glückwunsch! Jetzt wird Ihre Website über eine DNS-Lastverteiler betreut. DNS-Lastverteilungstestung</li>
+</ol><br>Lassen wir uns überprüfen, ob die DNS-Lastverteilung korrekt funktioniert. Dazu simulieren wir einen Serverausfall und sehen, ob der Verkehr zum gesunden Endpunkt geleitet wird. Sie können die Schritte unterhalb direkt von der Virtuozzo-Anwendungsverwaltungsdashboard ausführen, indem Sie sich auf einen der Lastverteilerknoten über Web SSH verbinden.</p><div class="doc-image"><img src="/images/docs/wp-dns-load-balancing/01-traffic-load-balancer_hu377b7bed4146c84968992900fa574067_127967_480x0_resize_box_3.png" alt="traffic load balancer hu377b7bed4146c84968992900fa574067 127967 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/wp-dns-load-balancing/02-create-origin-pool_hu65b585baed6ad75812ca4c6777629891_63229_480x0_resize_box_3.png" alt="create origin pool hu65b585baed6ad75812ca4c6777629891 63229 480x0 resize box 3" loading="lazy"></div><p> Routed zur gesunden Endpunkt. Sie können die unten angegebenen Schritte direkt von der Virtuozzo Anwendungsverwaltungskonsole ausführen, indem Sie sich auf einem der Load Balancer-Knoten über Web SSH verbinden.
+<ol>
+<li>Prüfen Sie, ob alle Endpunkte, die in der vorherigen Sektion konfiguriert wurden, bei der Auflösung des benutzerdefinierten Domänennamens zurückgegeben werden. Verwenden Sie den folgenden Befehl, um die DNS-Einträge zu überprüfen:</li>
+</ol><br>1 dig wordpress-enterprise.jele.website +short<ol>
+<li>Um den Load Balancer-Dienst in einem der Containers zu stoppen, um eine Server-Fehlersimulation zu erzeugen, verwenden Sie den folgenden Befehl:</li>
+</ol><br>1 sudo jem service stop<ol>
+<li>Warten Sie 60 Sekunden, um sicherzustellen, dass der Gesundheitsprüfungszeitraum abgelaufen ist, und überprüfen Sie dann Folgendes: überprüfen Sie die Funktionsfähigkeit der Anwendung in einem Webbrowser versuchen Sie erneut die benutzerdefinierte Domänenbezeichnung aufzulösen - der gesunde Endpunkt sollte zurückgegeben werden überprüfen Sie Ihren Domain-Registrar, um zu sehen, ob die DNS-Einträge aktualisiert wurden, wenn Sie E-Mail-Benachrichtigungen eingerichtet haben, überprüfen Sie Ihre Postfach, um den passenden Alert zu finden</li>
+</ol><ol>
+<li>Erinnern Sie sich daran, den Load Balancer-Dienst nach der Testung wieder zu aktivieren:</li>
+</ol><br>1 sudo jem service start<ol>
+<li>Warten Sie erneut 60 Sekunden und überprüfen Sie den Gesundheitszustand der Ursprungsebene in derselben Weise, wie oben beschrieben. Der gesunde Endpunkt sollte wieder aufgelöst und erreichbar sein.</li>
+</ol><ol>
+<li>Falls erforderlich, können Sie nach der Testung Load Balancer-Funktionen anpassen: Ursprungsebene - Anzahl der Ursprungsebenen schnelle Prüfungen - Gesundheitsprüfungszeitraum Überprüfen Sie von - Anzahl der Regionen, in denen die Gesundheitsprüfungen durchgeführt werden können Verkehrslenkung - Verkehrslenkungsalgorithmen</li>
+</ol></p><p>Herzlichen Glückwunsch!</p><p>Anzahl der Ursprungsebenen schnelle Prüfungen - Gesundheitsprüfungszeitraum Überprüfen Sie von - Anzahl der Regionen, in denen die Gesundheitsprüfungen durchgeführt werden können Verkehrslenkung - Verkehrslenkungsalgorithmen</p><div class="doc-image"><img src="/images/docs/wp-dns-load-balancing/03-create-monitor-button_hu7ef1f3e72dc0c4b9c65ff9163315243b_25872_480x0_resize_box_3.png" alt="create monitor button hu7ef1f3e72dc0c4b9c65ff9163315243b 25872 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/wp-dns-load-balancing/04-create-monitor_hufb682b1286697c0f2eddcf9bffb0d1e7_69077_480x0_resize_box_3.png" alt="create monitor hufb682b1286697c0f2eddcf9bffb0d1e7 69077 480x0 resize box 3" loading="lazy"></div><p>Herzlichen Glückwunsch! Sie haben erfolgreich DNS-Lastenausgleich für Ihre WordPress-Website bei der Virtuozzo Anwendungsverwaltung eingerichtet. Nun ist Ihre Website resilient gegenüber Server-Fehlern und kann effizienter mit dem Verkehr umgehen. Was kommt jetzt? WordPress All-in-One Guide WordPress Backup Guide WordPress Troubleshooting Guide WordPress Custom Domain Binding WordPress Bind CDN</p><div class="doc-image"><img src="/images/docs/wp-dns-load-balancing/05-attach-monitor_hub63a6e8bc9a4ab3c5ab51920363db892_72787_480x0_resize_box_3.png" alt="attach monitor hub63a6e8bc9a4ab3c5ab51920363db892 72787 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/wp-dns-load-balancing/06-attach-second-monitor_hua61d3d53536476a9a7bd32f21b5ac457_69074_480x0_resize_box_3.png" alt="attach second monitor hua61d3d53536476a9a7bd32f21b5ac457 69074 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/wp-dns-load-balancing/07-traffic-steering_hu240bdcd9312ca408cb193505403452ca_78073_480x0_resize_box_3.png" alt="traffic steering hu240bdcd9312ca408cb193505403452ca 78073 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/wp-dns-load-balancing/08-review-and-deploy_hu5634b10ff642a2c5fdacb41b3ad8dea1_62374_480x0_resize_box_3.png" alt="review and deploy hu5634b10ff642a2c5fdacb41b3ad8dea1 62374 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/wp-dns-load-balancing/09-failover-resolve-ip_hubcda62ea74b52a5e8730101ec0cf9c6e_93699_480x0_resize_box_3.png" alt="failover resolve ip hubcda62ea74b52a5e8730101ec0cf9c6e 93699 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/wp-dns-load-balancing/10-failover-dns-records_huc0ca5c4a5a2595c57a086687f7b66766_57509_480x0_resize_box_3.png" alt="failover dns records huc0ca5c4a5a2595c57a086687f7b66766 57509 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/wp-dns-load-balancing/11-failover-email-alert_hu49567d6f3ad19c4242ace8548d2939dc_34168_480x0_resize_box_3.png" alt="failover email alert hu49567d6f3ad19c4242ace8548d2939dc 34168 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/wp-dns-load-balancing/12-healthy-endpoints_hub2d7ef0f4d3c5ee7502f90e29884f42c_55179_480x0_resize_box_3.png" alt="healthy endpoints hub2d7ef0f4d3c5ee7502f90e29884f42c 55179 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/wp-dns-load-balancing/13-adjust-load-balancer-features_hu2fc0b11db9b295e0248f5e77cceee516_64560_480x0_resize_box_3.png" alt="adjust load balancer features hu2fc0b11db9b295e0248f5e77cceee516 64560 480x0 resize box 3" loading="lazy"></div>
+</main>
+</body>
+</html>

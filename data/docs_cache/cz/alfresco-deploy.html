@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Deploy Alfresco</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>How to Deploy Alfresco</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Jak nasadit Alfresco Můžete mít instance Alfresco spuštěnou za minutky pomocí možnosti jednoklikové instalace. Proces je jednoduchý - stačí kliknout na Get it hosted now, zadat svůj email a nainstalovat Alfresco za minutu, přeskočíc kroky manuální instalace. Návod k manuální instalaci Alfresca<br>Toto je krok po kroku návod na nasazení Alfresca, systému správy obsahu podnikového, do platformy, abyste mohli používat ho jako levnou vypočetáčovou CMS. Platforma může nativně běhat jakoukoli aplikaci Java bez nutnosti změnit kód, takže následující postup je přijatelný pro většinu aplikací Java. Vytvoření prostředí<ol>
+<li>Přihlaste se k panelu správy platformy.</li>
+</ol><ol>
+<li>Klikněte na Create environment, abyste nastavili nové prostředí.</li>
+</ol><ol>
+<li>V okně Environment topology vyberte Tomcat jako vaši aplikační server, MySQL jako databázi, kterou chcete použít, a zadejte název svého prostředí, například Alfresco, a klikněte na Create. Za minutu bude vytvořeno prostředí s oběma Tomcatem a MySQLem a bude se zobrazit v seznamu prostředí. Nahrání Java balíčku</li>
+</ol><ol>
+<li>Přejděte na web Alfresco a klikněte na Build na našem otevřeném platformě.</li>
+</ol><ol>
+<li>V otevřeném okně klikněte na Download Community Edition v části On premise.</li>
+</ol><ol>
+<li>Klikněte na Custom Installs a optional modules.</li>
+</ol><ol>
+<li>Stáhněte si nejnovější verzi ZIP archivu Alfresco community edition.</li>
+</ol><ol>
+<li>Extrahujte soubory z tohoto archivu a navigujte k alfresco.war souboru v \alfresco-community-4.2.c\web-server\webapps.</li>
+</ol><ol>
+<li>Nahrávejte svůj alfresco.war soubor.</li>
+</ol></p><p> Alfresco komunitní edice. 5. Extrahujte soubory z tohoto archivu a navigujte se k souboru alfresco.war v adresáři \alfresco-community-4.2.c\web-server\webapps. 6. Nahrávejte svůj balíček alfresco.war do Deployment manažera. 7. Po dokončení nahrávání ho nasazte do prostředí, které jste vytvořili dříve. Konfigurace databáze 1. Klikněte na tlačítko Konfigurace pro vaši Tomcat server. 2. Nahrávejte MySQL connector do složky lib a restartujte Tomcat. 3. Klikněte na tlačítko Otevřít v prohlížeči pro MySQL. 4. Po vytvoření prostředí vám platforma odesílá e-mail s přihlašovacími údaji k databázi. Vytvořte účet a databázi s aplikací pomocí těchto přihlašovacích údajů. Konfigurace Alfresco 1. Po dokončení nasazení, klikněte na tlačítko Konfigurace pro Tomcat. 2. Navigujte se do webapps/ROOT/WEB-INF/classes/ a vytvořte nový soubor s názvem alfresco-global.properties. 3. Zkopírujte obsah alfresco-global.properties.sample do alfresco-global.properties. 4. Upravte tento soubor tak, jak je znázorněno níže: Odkomentujte část souboru, která nastavuje databáze přihlašovací údaje. Zadejte název databáze a heslo, které jste použili při vytváření databáze. Nastavte databázi řadič a URL tak, aby ukazovaly na váš databáze server. Zadejte: 1 db.url=jdbc:mysql://localhost/your_database_name?useUnicode=yes&amp;characterEncoding=UTF-8 Note: Chcete-li získat svůj IP adresu (kterou byste měli zadat místo “localhost” ve druhé řádku) klikněte na tlačítko Info vedle MySQL uzlu. 5. Uložte změny. Spusťte Alfresco 1. Klikněte na tlačítko Restart node vedle Tomcat uzlu. 2. Nakonec, klikněte na tlačítko Otevřít v prohlížeči pro Tomcat v vašem prostředí. Nyní máte vlastní Alfresco na platformě! A zde je videová verze stejného postupu: Naděje, že se tato instrukce vám bude hodit. Co dále? Kurzy podle kategorie Java Kurzy Nastavení prostředí</p><div class="doc-image"><img src="/images/docs/alfresco-deploy/01-create-environment.png" alt="create environment" loading="lazy"></div><div class="doc-image"><img src="/images/docs/alfresco-deploy/02-environment-wizard_huc628552a2fd1a290c7fe46efcd6f07bd_210107_0x0_q75_h2_.webp" alt="environment wizard huc628552a2fd1a290c7fe46efcd6f07bd 210107 0x0 q75 h2 " loading="lazy"></div><div class="doc-image"><img src="/images/docs/alfresco-deploy/03-alfresco-web-site_hu5459e82c76963b284c65f8b0ad98f4b8_195920_0x0_q75_h2_.webp" alt="alfresco web site hu5459e82c76963b284c65f8b0ad98f4b8 195920 0x0 q75 h2 " loading="lazy"></div><div class="doc-image"><img src="/images/docs/alfresco-deploy/04-download-alfresco_hu6d067eec324ec35155caf4250503b097_111578_0x0_q75_h2_.webp" alt="download alfresco hu6d067eec324ec35155caf4250503b097 111578 0x0 q75 h2 " loading="lazy"></div><div class="doc-image"><img src="/images/docs/alfresco-deploy/05-alfresco-custom-installs_hu86b01809e2cfc1c1175ed28b693a0239_64510_0x0_q75_h2_.webp" alt="alfresco custom installs hu86b01809e2cfc1c1175ed28b693a0239 64510 0x0 q75 h2 " loading="lazy"></div><div class="doc-image"><img src="/images/docs/alfresco-deploy/06-alfresco-zip_hub57576262f1fd7f0711e78c65a38498e_47763_0x0_q75_h2_.webp" alt="alfresco zip hub57576262f1fd7f0711e78c65a38498e 47763 0x0 q75 h2 " loading="lazy"></div><div class="doc-image"><img src="/images/docs/alfresco-deploy/07-alfresco-download-now_hu227a9a3ed017d98403619ee7e2f1edc5_33390_0x0_q75_h2_.webp" alt="alfresco download now hu227a9a3ed017d98403619ee7e2f1edc5 33390 0x0 q75 h2 " loading="lazy"></div><div class="doc-image"><img src="/images/docs/alfresco-deploy/08-upload-alfresco_hub3a02c480aa65d04bb001ec511640935_25036_0x0_q75_h2_.webp" alt="upload alfresco hub3a02c480aa65d04bb001ec511640935 25036 0x0 q75 h2 " loading="lazy"></div><div class="doc-image"><img src="/images/docs/alfresco-deploy/09-deploy-alfresco_hu90788669145b87e1103534f5af77b052_22169_0x0_q75_h2_.webp" alt="deploy alfresco hu90788669145b87e1103534f5af77b052 22169 0x0 q75 h2 " loading="lazy"></div><div class="doc-image"><img src="/images/docs/alfresco-deploy/10-alfresco-context_huffd0a7cf74412e125a4aba896a34c2d8_30885_0x0_q75_h2_.webp" alt="alfresco context huffd0a7cf74412e125a4aba896a34c2d8 30885 0x0 q75 h2 " loading="lazy"></div><div class="doc-image"><img src="/images/docs/alfresco-deploy/11-tomcat-config_hu2c26e78f67d93dc9b5ac4c1b8b526752_96282_0x0_q75_h2_.webp" alt="tomcat config hu2c26e78f67d93dc9b5ac4c1b8b526752 96282 0x0 q75 h2 " loading="lazy"></div><div class="doc-image"><img src="/images/docs/alfresco-deploy/12-upload-mysql-connector_huda555d584e281271b9052c6e728969df_41592_0x0_q75_h2_.webp" alt="upload mysql connector huda555d584e281271b9052c6e728969df 41592 0x0 q75 h2 " loading="lazy"></div><div class="doc-image"><img src="/images/docs/alfresco-deploy/13-open-mysql-in-browser_huabe328180d60f8926d72215f0ab90cf1_102990_0x0_q75_h2_.webp" alt="open mysql in browser huabe328180d60f8926d72215f0ab90cf1 102990 0x0 q75 h2 " loading="lazy"></div><div class="doc-image"><img src="/images/docs/alfresco-deploy/14-database-log-in_hu73236c7eef16bb55eac8e438c09fee4c_33046_0x0_q75_h2_.webp" alt="database log in hu73236c7eef16bb55eac8e438c09fee4c 33046 0x0 q75 h2 " loading="lazy"></div><div class="doc-image"><img src="/images/docs/alfresco-deploy/15-database-add-user_hua1ef22b738346d0c36750e40460754f1_111202_0x0_q75_h2_.webp" alt="database add user hua1ef22b738346d0c36750e40460754f1 111202 0x0 q75 h2 " loading="lazy"></div><div class="doc-image"><img src="/images/docs/alfresco-deploy/16-create-dedicated-database_hufc0ce4426d5b449aaabaeaf21d1a1c03_82486_0x0_q75_h2_.webp" alt="create dedicated database hufc0ce4426d5b449aaabaeaf21d1a1c03 82486 0x0 q75 h2 " loading="lazy"></div><div class="doc-image"><img src="/images/docs/alfresco-deploy/17-tomcat-config_hu433501c90143cbc6f40fd37ed3e0a83f_69036_0x0_q75_h2_.webp" alt="tomcat config hu433501c90143cbc6f40fd37ed3e0a83f 69036 0x0 q75 h2 " loading="lazy"></div><div class="doc-image"><img src="/images/docs/alfresco-deploy/18-alfresco-global-properties_hub3f0207194c70e7289da0f74ea92a7da_102708_0x0_q75_h2_.webp" alt="alfresco global properties hub3f0207194c70e7289da0f74ea92a7da 102708 0x0 q75 h2 " loading="lazy"></div><div class="doc-image"><img src="/images/docs/alfresco-deploy/19-database-credentials_hu29f53fb629b4d8b9b3155964c1a736c6_261706_0x0_q75_h2_.webp" alt="database credentials hu29f53fb629b4d8b9b3155964c1a736c6 261706 0x0 q75 h2 " loading="lazy"></div><div class="doc-image"><img src="/images/docs/alfresco-deploy/20-database-driver_hu6ac25c26885401a7aedcd2756401c6ae_142264_0x0_q75_h2_.webp" alt="database driver hu6ac25c26885401a7aedcd2756401c6ae 142264 0x0 q75 h2 " loading="lazy"></div><div class="doc-image"><img src="/images/docs/alfresco-deploy/21-mysql-info_hu6e904caef2f367e4ddf8c9408a2fbd12_23974_480x0_resize_box_3.png" alt="mysql info hu6e904caef2f367e4ddf8c9408a2fbd12 23974 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/alfresco-deploy/22-mysql-ip_hu4aa9d7a4c7ed2cf31adf39ef1e9e67fc_197716_0x0_q75_h2_.webp" alt="mysql ip hu4aa9d7a4c7ed2cf31adf39ef1e9e67fc 197716 0x0 q75 h2 " loading="lazy"></div><div class="doc-image"><img src="/images/docs/alfresco-deploy/23-save-changes_hu643002945cf763a6824c30055d7fe8cf_26896_0x0_q75_h2_.webp" alt="save changes hu643002945cf763a6824c30055d7fe8cf 26896 0x0 q75 h2 " loading="lazy"></div><div class="doc-image"><img src="/images/docs/alfresco-deploy/24-tomcat-restart_hu97ce2ca60bf44eb9c97e82a4b7ac91bb_113474_0x0_q75_h2_.webp" alt="tomcat restart hu97ce2ca60bf44eb9c97e82a4b7ac91bb 113474 0x0 q75 h2 " loading="lazy"></div><div class="doc-image"><img src="/images/docs/alfresco-deploy/25-alfresco_hu5408a9db1e709d4fde3eabe09776acdb_177200_0x0_q75_h2_.webp" alt="alfresco hu5408a9db1e709d4fde3eabe09776acdb 177200 0x0 q75 h2 " loading="lazy"></div>
+</main>
+</body>
+</html>

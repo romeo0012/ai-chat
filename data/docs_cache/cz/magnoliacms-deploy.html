@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Deploy Magnolia CMS</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>How to Deploy Magnolia CMS</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Jak nasadit Magnolia CMS</p><p>Magnolia je otevřený zdrojový systém pro správu obsahu, poháněný Java, který používá JCR (Content Repository API pro Java) k uložení, zpracování a načtení dat. Jeho struktura bloků umožňuje balení jádra systému a všech souvisejících komponent (například editor stránek, cache, repozitář atd.) do samostatných modulů, což vede k vysoké flexibilitě. Dále je tento CMS jednoduchý dostatečně, aby se správa obsahu zajistila snadno i pro neznámé uživatele, zatímco zkušení vývojáři najdou v něm přizpůsobené pro pokročilý vývoj díky snadné integraci dalších nástrojů. Tímto způsobem Magnolia CMS poskytuje mnoho možností interakce pro různé typy uživatelů a může tak splnit jakékoliv potřeby správy, podniku a marketingu. Chcete-li okamžitě získat hotovou a připravenou k práci Magnolia CMS instanci, provozovanou pod licencí Community Edition, použijte následující věcné jednočervenec instalační widget: Prosim, klikněte na Get it hosted now! a zadejte svou e-mailovou adresu, aby se spustila Magnolia, přeskočila kroky ruční instalace (celý seznam podobných předbalených řešení pro rychlou nasazení lze nalézt na platform Marketplace). Pokud však preferujete být vědomi, jak běží instalace nebo potřebujete jinou verzi tohoto CMS, podívejte se na krátký videotutoriál níže, abyste získali pochopení pro nasazení Magnolia CMS na platformu.</p><p>Pokud chcete rychle získat hotovou a připravenou k práci Magnolia CMS instanci, provozovanou pod licencí Community Edition, použijte následující věcné jednočervenec instalační widget:</p><div class="doc-image"><img src="/images/docs/magnoliacms-deploy/3.png" alt="3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/magnoliacms-deploy/4_hu6aed3750f1213fec4f0b28bbece93b92_28810_480x0_resize_box_3.png" alt="4 hu6aed3750f1213fec4f0b28bbece93b92 28810 480x0 resize box 3" loading="lazy"></div><p>Prosim, klikněte na Get it hosted now! a zadejte svou e-mailovou adresu, aby se spustila Magnolia, přeskočila kroky ruční instalace (celý seznam podobných předbalených řešení pro rychlou nasazení lze nalézt na platform Marketplace).</p><p>Pokud chcete získat pochopení pro nasazení Magnolia CMS na platformu, podívejte se na následující videotutoriál:</p><p>&lt;https://www.youtube.com/watch?v=YQq-J36_6v4&gt;</p><div class="doc-image"><img src="/images/docs/magnoliacms-deploy/5.png" alt="5" loading="lazy"></div><div class="doc-image"><img src="/images/docs/magnoliacms-deploy/6_hu5ce443ebc0693237bf27ca6c1928bf92_16523_480x0_resize_box_3.png" alt="6 hu5ce443ebc0693237bf27ca6c1928bf92 16523 480x0 resize box 3" loading="lazy"></div><p> Jak spustit instalaci nebo potřebujete jinou verzi tohoto CMS, zkontrolujte krátký videotutoriál níže, abyste získali pochopení pro nasazení Magnolia CMS do platformy. Chcete-li získat další podrobnosti, přečtěte si následující průvodce, kde popisujeme, jak nasadit Magnolia CMS do platformy ručně pomocí následujících kroků: Vytvořit nové prostředí Nasadit balíček Magnolia CMS Vytvořit vlastní instance Magnolia CMS Vytvořit nové prostředí Prosím, přihlaste se k panelu správy platformy pomocí svých údajů (nebo, pokud ještě nemáte zkušenosti s naší Platformou, vyberte vhodného poskytovatele hostingu mezi našimi partnery a vytvořte si účet nejprve) a pokračujme dále. 1. V levém horním rohu panelu klikněte na Nové prostředí, přepněte se na kartu Java a vyberte Tomcat 7 nebo 8 jako vaši aplikační server. Poté přiřaďte požadované množství zdrojů pro tuto uzlu pomocí posuvníků limitů škálování, určete oblast a Název pro nové prostředí a klikněte na Vytvořit. Po několika minutách by mělo být viditelné na panelu; během této doby budeme pokračovat dále, abychom neztratili čas. Nasazení balíčku Magnolia CMS Během vytváření prostředí můžete stáhnout balíček Magnolia CMS. 1. Navigujte k stránce stahování Magnolia a klikněte na preferovanou verzi edice, abyste byli přesměrováni na odpovídající úložiště souborů zdrojů. 2. V otevřeném okně najděte sekci War soubory a Zkopírujte odkaz na adresu pro balíček magnolia-enterprise-standard-webapp.</p><p> Úloha: Přeložte následující text z angličtiny do češtiny. Přeložte pouze prozaickou část textu. Zachovejte technické termíny, kódové bloky, příkazy, cesty k souborům, adresy URL a strukturu odstavců.</p><p>TEXT:
+<ol>
+<li>Uložte si umístění souborů. 2. Na otevřené stránce najděte sekci War files a Zkopírujte odkaz na adresu pro balíček magnolia-enterprise-standard-webapp. Poznámka: Magnolia CMS je vlastní software, který vyžaduje nákup licence pro jeho použití. Však můžete získat 30denní licenci Enterprise Edition po jednoduché registraci nebo využít zdarma Community Edition. 3. Vrátíte se zpět na panel správy platformy (předpokládáme, že proces vytváření prostředí by měl být dokončen v tomto okamžiku) a klikněte na tlačítko Upload pod Deployment manager. V otevřeném dialogovém okně přepněte na kartu URL, vložte zkopírovaný odkaz a nahrávejte balíček. Za minutu bude váš WAR soubor přidán do seznamu dostupných balíčků. 4. Následně přejete kurzor nad právě nahráným projektem, klikněte na tlačítko Deploy to… vedle něj a vyberte prostředí, do kterého by měl být nasazen vaše aplikace (magnolia v našem případě). Můžete navíc zadat požadované jméno kontextu v otevřeném okně potvrzení (nebo nechat odpovídající pole prázdné pro výchozí umístění ROOT místo použití). Po úspěšném nasazení se můžete přesunout k další sekci. Instalace Magnolia CMS 1. Klikněte na tlačítko Open in browser, aby se spustila vaše instancie Magnolia CMS. 2.</li>
+</ol></p><div class="doc-image"><img src="/images/docs/magnoliacms-deploy/7_huf5866769249f64a8461bca759f420d23_26639_480x0_resize_box_3.png" alt="7 huf5866769249f64a8461bca759f420d23 26639 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/magnoliacms-deploy/8_hu36f2a49f0fd83b50f374dde12aa24898_29462_480x0_resize_box_3.png" alt="8 hu36f2a49f0fd83b50f374dde12aa24898 29462 480x0 resize box 3" loading="lazy"></div><p>Překlad:
+<ol>
+<li>Uložte si umístění souborů.</li>
+</ol><ol>
+<li>Na otevřené stránce najděte sekci War files a Zkopírujte odkaz na adresu pro balíček magnolia-enterprise-standard-webapp. Poznámka: Magnolia CMS je vlastní software, který vyžaduje nákup licence pro jeho použití. Však můžete získat 30denní licenci Enterprise Edition po jednoduché registraci nebo využít zdarma Community Edition.</li>
+</ol><ol>
+<li>Vrátíte se zpět na panel správy platformy (předpokládáme, že proces vytváření prostředí by měl být dokončen v tomto okamžiku) a klikněte na tlačítko Upload pod Deployment manager. V otevřeném dialogovém okně přepněte na kartu URL, vložte zkopírovaný odkaz a nahrávejte balíček. Za minutu bude váš WAR soubor přidán do seznamu dostupných balíčků.</li>
+</ol><ol>
+<li>Následně přejete kurzor nad právě nahráným projektem, klikněte na tlačítko Deploy to… vedle něj a vyberte prostředí, do kterého by měl být nasazen vaše aplikace (magnolia v našem případě). Můžete navíc zadat požadované jméno kontextu v otevřeném okně potvrzení (nebo nechat odpovídající pole prázdné pro výchozí umístění ROOT místo použití). Po úspěšném nasazení se můžete přesunout k další sekci. Instalace Magnolia CMS</li>
+</ol><ol>
+<li>Klikněte na tlačítko Open in browser, aby se spustila vaše instancie Magnolia CMS.</li>
+</ol><ol>
+<li>(nebylo přeloženo)</li>
+</ol></p><p> 1. Klikněte na tlačítko Open in browser, aby se spustila vaše instancie Magnolia CMS.<ol>
+<li>V otevřené stránce instalace Magnolia CMS můžete prohlédnout seznam modulů, které budou instalovány. Když budete připraveni, vyberte Start Installation a počkejte několik minut, než bude tato operace hotova.</li>
+</ol><ol>
+<li>Po dokončení všech potřebných operací zobrazíte se odpovídající upozornění. Nyní klikněte na tlačítko Start Up Magnolia, aby bylo možné přesměrováno na stránku registrace licence Magnolia CMS, kde můžete registrovat svou kopii Magnolia CMS.</li>
+</ol><ol>
+<li>V otevřené stránce zkontrolujte odkaz v prvním kroku, aby získali 30denní zkušební licenci a zadejte ji do druhé sekce spolu se svou e-mailovou adresou (nebo vyplňte odpovídající pole, pokud ji již máte). Po dokončení vyberte Use License.</li>
+</ol><ol>
+<li>Hej, vše je připraveno - nyní můžete se přihlásit do vlastní administrátorské panely Magnolia CMS pomocí výchozích přihlašovacích údajů (specifikovaných jako obě vaše přihlašovací jméno a heslo). Klikněte na Login, aby bylo možné projít ověřování a zobrazit Magnolia CMS shell. To je vše! Vaše Magnolia content management system je nyní spuštěna v rámci platformy! Nyní můžete začít organizovat a spravovat požadované obsah podle doporučení z oficiální stránky dokumentace Magnolia. Co dále?</li>
+</ol></p><p>Můžete začít organizovat a spravovat požadovaný obsah podle doporučení z oficiální stránky dokumentace Magnolia. Co dále? Kategorie: Java Tutorials Nastavení prostředí</p><div class="doc-image"><img src="/images/docs/magnoliacms-deploy/9_hua638be82498121bd3d9a8916d9ea14ea_37289_480x0_resize_box_3.png" alt="9 hua638be82498121bd3d9a8916d9ea14ea 37289 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/magnoliacms-deploy/10_hu3c9f65b82602a4d9f7dc13cb391f6195_69851_480x0_resize_box_3.png" alt="10 hu3c9f65b82602a4d9f7dc13cb391f6195 69851 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/magnoliacms-deploy/11.png" alt="11" loading="lazy"></div><div class="doc-image"><img src="/images/docs/magnoliacms-deploy/12_hu3f80dd9bc5d0b3a72ced2ab3fcfe58e5_43052_480x0_resize_box_3.png" alt="12 hu3f80dd9bc5d0b3a72ced2ab3fcfe58e5 43052 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/magnoliacms-deploy/2-magnolia-cms-new-environment_hu7c2a53fd75093830ce7bb43e8f1a9ec7_141913_480x0_resize_box_3.png" alt="magnolia cms new environment hu7c2a53fd75093830ce7bb43e8f1a9ec7 141913 480x0 resize box 3" loading="lazy"></div>
+</main>
+</body>
+</html>

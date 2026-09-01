@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Websockets Support for Apache & NGINX PHP</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Websockets Support for Apache & NGINX PHP</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> WebSockets-Unterstützung für Apache &amp; NGINX</p><p>PHP-WebSockets ist eine weit verbreitete client-server-Technologie, die Ihnen die Möglichkeit gibt, innerhalb Ihrer Anwendung das Austauschen von Echtzeit-Nachrichten zu implementieren. Dies wird durch die Errichtung eines stetigen, voll-duplex-TCP-basierten Verbindungsaufbaus zwischen Server und dem Browser des Clients erreicht. Die Verwendung solcher Kommunikationskanäle führt zu einer sehr niedrigen Verbindungsverzögerung und schneller Interaktion, zugleich sichert sie den Streaming durch Proxys und Firewalls, sowohl aufwärts als auch abwärts gleichzeitig. Die Plattform bietet Ihnen eine fortgeschrittene und ergänzte WebSockets-Unterstützung durch die Integration dieser Technologie in den Shared Load Balancer und den NGINX-balancer-Knoten, sodass Sie sie auch ohne externen IP-Adressen auf Ihrem Server nutzen können. Dies wird dadurch erreicht, dass verschiedene Hafen, die von Ihren WebSockets-Apps verwendet werden, auf einen einzigen zugeschaltet werden - 80 für HTTP und 443 für HTTPS. Die einfachste Möglichkeit, die WebSockets-Unterstützung für Ihre Anwendung zu konfigurieren, ist es, einen NGINX-Balancer vor ihr zu platzieren (die detaillierten Anweisungen finden Sie in dem entsprechenden Dokument). Trotzdem kann es gelegentlich vorkommen, dass diese Methode Ihren Anforderungen widerspricht, während die Anwendung dennoch diese Technologie benötigt. Für solche Fälle sichert die Plattform die vollständige WebSockets-Unterstützung innerhalb der verfügbaren Anwendungsserver, einschließlich beider Apache (für die Bereitstellung von PHP, Ruby und Python-Apps) und NGINX (für PHP und Ruby-Apps).</p><p> Die Plattform sichert die vollständige Unterstützung von WebSockets innerhalb der verfügbaren Anwendungsserver, einschließlich Apache (für die Bereitstellung von PHP, Ruby und Python-Apps) und NGINX (für PHP und Ruby-Apps). Der Prozess der WebSocket-Integration kann von Anwendung zu Anwendung variieren, aber im Hinblick auf die Server-Seite-Einstellungen bietet die Plattform Ihnen eine Konfigurationsbeispiel für jede der oben genannten Knoten, sodass Sie nur den Kommentar entfernen und einige geringfügige Bearbeitungen durchführen müssen, um Ihrer App entsprechend (z.B. Hörer-Portnummer). Daher zeigen wir Ihnen in den folgenden Schritten ein Beispiel für solche Konfigurationen für ein einfaches PHP-Chat-Projekt, das innerhalb der Umgebung ohne den Loadbalancer-Server und die WebSockets-Technologie bereitgestellt wird. Lass uns von vorn anfangen. Erstelle Umgebung und Bereitstellungs-App Mit der Plattform können Sie die erforderliche Umgebung in wenigen Klicks erstellen - einfach sich in Ihrer PaaS-Konto anmelden und die Schritte unten folgen:
+<ol>
+<li>Klicken Sie auf den Schaltflächen "Neue Umgebung" in der oberen linken Ecke des Dashboard-Bereichs.</li>
+</ol><ol>
+<li>Im erscheinenden Umgebung-Assistenten-Fenster wechseln Sie auf die entsprechende Programmiersprache-Registerkarte und wählen Sie den gewünschten Anwendungsserver (wir werden den Apache-Server für die Bereitstellung unserer PHP-Anwendung verwenden). Anschließend regeln Sie die zugeordneten Ressourcen für ihn mittels Cloudlet-Schalter, geben Sie einen Namen für Ihre Umgebung (apache-websockets in unserem Fall) und klicken Sie auf "Erstellen".</li>
+</ol><ol>
+<li>In wenigen Minuten erscheint Ihre neue Umgebung im Dashboard.</li>
+</ol><ol>
+<li>In den folgenden Schritten zeigen wir Ihnen einen Beispiel für die Konfiguration von WebSockets für ein einfaches PHP-Chat-Projekt, das innerhalb der Umgebung ohne den Loadbalancer-Server und die WebSockets-Technologie bereitgestellt wird.</li>
+</ol></p><div class="doc-image"><img src="/images/docs/websockets-php/01-new-environment.png" alt="new environment" loading="lazy"></div><div class="doc-image"><img src="/images/docs/websockets-php/02-environment-wizard_hu26122a064c9de2c0443741d0ec664b5b_114511_480x0_resize_box_3.png" alt="environment wizard hu26122a064c9de2c0443741d0ec664b5b 114511 480x0 resize box 3" loading="lazy"></div><p>Erstelle Umgebung und Bereitstellungs-App<br>Mit der Plattform können Sie die erforderliche Umgebung in wenigen Klicks erstellen - einfach sich in Ihrer PaaS-Konto anmelden und die Schritte unten folgen:
+<ol>
+<li>Klicken Sie auf den Schaltflächen "Neue Umgebung" in der oberen linken Ecke des Dashboard-Bereichs.</li>
+</ol><ol>
+<li>Im erscheinenden Umgebung-Assistenten-Fenster wechseln Sie auf die entsprechende Programmiersprache-Registerkarte und wählen Sie den gewünschten Anwendungsserver (wir werden den Apache-Server für die Bereitstellung unserer PHP-Anwendung verwenden). Anschließend regeln Sie die zugeordneten Ressourcen für ihn mittels Cloudlet-Schalter, geben Sie einen Namen für Ihre Umgebung (apache-websockets in unserem Fall) und klicken Sie auf "Erstellen".</li>
+</ol><ol>
+<li>In wenigen Minuten erscheint Ihre neue Umgebung im Dashboard.</li>
+</ol><ol>
+<li>In den folgenden Schritten zeigen wir Ihnen einen Beispiel für die Konfiguration von WebSockets für ein einfaches PHP-Chat-Projekt, das innerhalb der Umgebung ohne den Loadbalancer-Server und die WebSockets-Technologie bereitgestellt wird.</li>
+</ol></p><p>Erstelle Umgebung und Bereitstellungs-App<br>Mit der Plattform können Sie die erforderliche Umgebung in wenigen Klicks erstellen - einfach sich in Ihrer PaaS-Konto anmelden und die Schritte unten folgen:
+<ol>
+<li>Klicken Sie auf den Schaltflächen "Neue Umgebung" in der oberen linken Ecke des Dashboard-Bereichs.</li>
+</ol><ol>
+<li>Im erscheinenden Umgebung-Assistenten-Fenster wechseln Sie auf die entsprechende Programmiersprache-Registerkarte und wählen Sie den gewünschten Anwendungsserver (wir werden den Apache-Server für die Bereitstellung unserer PHP-Anwendung verwenden). Anschließend regeln Sie die zugeordneten Ressourcen für ihn mittels Cloudlet-Schalter, geben Sie einen Namen für Ihre Umgebung (apache-websockets in unserem Fall) und klicken Sie auf "Erstellen".</li>
+</ol><ol>
+<li>In wenigen Minuten erscheint Ihre neue Umgebung im Dashboard.</li>
+</ol><ol>
+<li>In den folgenden Schritten zeigen wir Ihnen einen Beispiel für die Konfiguration von WebSockets für ein einfaches PHP-Chat-Projekt, das innerhalb der Umgebung ohne den Loadbalancer-Server und die WebSockets-Technologie bereitgestellt wird.</li>
+</ol></p><p>Erstelle Umgebung und Bereitstellungs-App<br>Mit der Plattform können Sie die erforderliche Umgebung in wenigen Klicks erstellen - einfach sich in Ihrer PaaS-Konto anmelden und die Schritte unten folgen:
+<ol>
+<li>Klicken Sie auf den Schaltflächen "Neue Umgebung" in der oberen linken Ecke des Dashboard-Bereichs.</li>
+</ol><ol>
+<li>Im erscheinenden Umgebung-Assistenten-Fenster wechseln Sie auf die entsprechende Programmiersprache-Registerkarte und wählen Sie den gewünschten Anwendungsserver (wir werden den Apache-Server für die Bereitstellung unserer PHP-Anwendung verwenden). Anschließend regeln Sie die zugeordneten Ressourcen für ihn mittels Cloudlet-Schalter, geben Sie einen Namen für Ihre Umgebung (apache-websockets in unserem Fall) und klicken Sie auf "Erstellen".</li>
+</ol><ol>
+<li>In wenigen Minuten erscheint Ihre neue Umgebung im Dashboard.</li>
+</ol><ol>
+<li>In den folgenden Schritten zeigen wir Ihnen einen Beispiel für die Konfiguration von WebSockets für ein einfaches PHP-Chat-Projekt, das innerhalb der Umgebung ohne den Loadbalancer-Server und die WebSockets-Technologie bereitgestellt wird.</li>
+</ol></p><div class="doc-image"><img src="/images/docs/websockets-php/03-environment-for-websockets-created_hua0e2e70a50277e500218d38f77d4aee4_15242_480x0_resize_box_3.png" alt="environment for websockets created hua0e2e70a50277e500218d38f77d4aee4 15242 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/websockets-php/04-websockets-application-deployed_hu95592dccae4963b75bd2cfdc2bf477b2_24291_480x0_resize_box_3.png" alt="websockets application deployed hu95592dccae4963b75bd2cfdc2bf477b2 24291 480x0 resize box 3" loading="lazy"></div><p>Erstelle Umgebung und Bereitstellungs-App<br>Mit der Plattform können Sie die erforderliche Umgebung in wenigen Klicks erstellen - einfach sich in Ihrer PaaS-Konto anmelden und die Schritte unten folgen:
+<ol>
+<li>Klicken Sie auf den Schaltflächen "Neue Umgebung" in der oberen linken Ecke des Dashboard-Bereichs.</li>
+</ol><ol>
+<li>Im erscheinenden Umgebung-Assistenten-Fenster wechseln Sie auf die entsprechende Programmiersprache-Registerkarte und wählen Sie den gewünschten Anwendungsserver (wir werden den Apache-Server für die Bereitstellung unserer PHP-Anwendung verwenden). Anschließend regeln Sie die zugeordneten Ressourcen für ihn mittels Cloudlet-Schalter, geben Sie einen Namen für Ihre Umgebung (apache-websockets in unserem Fall) und klicken Sie auf "Erstellen".</li>
+</ol><ol>
+<li>In wenigen Minuten erscheint Ihre neue Umgebung im Dashboard.</li>
+</ol><ol>
+<li>In den folgenden Schritten zeigen wir Ihnen einen Beispiel für die Konfiguration von WebSockets für ein einfaches PHP-Chat-Projekt, das innerhalb der Umgebung ohne den Loadbalancer-Server und die WebSockets-Technologie bereitgestellt wird.</li>
+</ol></p><p>Erstelle Umgebung und Bereitstellungs-App<br>Mit der Plattform können Sie die erforderliche Umgebung in wenigen Klicks erstellen - einfach sich in Ihrer PaaS-Konto anmelden und die Schritte unten folgen:
+<ol>
+<li>Klicken Sie auf den Schaltflächen "Neue Umgebung" in der oberen linken Ecke des Dashboard-Bereichs.</li>
+</ol><ol>
+<li>Im erscheinenden Umgebung-Assistenten-Fenster wechseln Sie auf die entsprechende Programmiersprache-Registerkarte und wählen Sie den gewünschten Anwendungsserver (wir werden den Apache-Server für die Bereitstellung unserer PHP-Anwendung verwenden). Anschließend regeln Sie die zugeordneten Ressourcen für ihn mittels Cloudlet-Schalter, geben Sie einen Namen für Ihre Umgebung (apache-websockets in unserem Fall) und klicken Sie auf "Erstellen".</li>
+</ol><ol>
+<li>In wenigen Minuten erscheint Ihre neue Umgebung im Dashboard.</li>
+</ol><ol>
+<li>In den folgenden Schritten zeigen wir Ihnen einen Beispiel für die Konfiguration von WebSockets für ein einfaches PHP-Chat-Projekt, das innerhalb der Umgebung ohne den Loadbalancer-Server und die WebSockets-Technologie bereitgestellt wird.</li>
+</ol></p><p>Erstelle Umgebung und Bereitstellungs-App<br>Mit der Plattform können Sie die erforderliche Umgebung in wenigen Klicks erstellen - einfach sich in Ihrer PaaS-Konto anmelden und die Schritte unten folgen:
+<ol>
+<li>Klicken Sie auf den Schaltflächen "Neue Umgebung" in der oberen linken Ecke des Dashboard-Bereichs.</li>
+</ol><ol>
+<li>Im erscheinenden Umgebung-Assistenten-Fenster wechseln Sie auf die entsprechende Programmiersprache-Registerkarte und wählen Sie den gewünschten Anwendungsserver (wir werden den Apache-Server für die Bereitstellung unserer PHP-Anwendung verwenden). Anschließend regeln Sie die zugeordneten Ressourcen für ihn mittels Cloudlet-Schalter, geben Sie einen Namen für Ihre Umgebung (apache-websockets in unserem Fall) und klicken Sie auf "Erstellen".</li>
+</ol><ol>
+<li>In wenigen Minuten erscheint Ihre neue Umgebung im Dashboard.</li>
+</ol><ol>
+<li>In den folgenden Schritten zeigen wir Ihnen einen Beispiel für die Konfiguration von WebSockets für ein einfaches PHP-Chat-Projekt, das innerhalb der Umgebung ohne den Loadbalancer-Server und die WebSockets-Technologie bereitgestellt wird.</li>
+</ol></p><div class="doc-image"><img src="/images/docs/websockets-php/05-apache-config_hub86724f87e9f4d519c10622b242a3818_26750_480x0_resize_box_3.png" alt="apache config hub86724f87e9f4d519c10622b242a3818 26750 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/websockets-php/06-apache-httpd-conf_hu0ba74b3b77b8a0b749363aa2862cf8e7_83438_480x0_resize_box_3.png" alt="apache httpd conf hu0ba74b3b77b8a0b749363aa2862cf8e7 83438 480x0 resize box 3" loading="lazy"></div><p>Erstelle Umgebung und Bereitstellungs-App<br>Mit der Plattform können Sie die erforderliche Umgebung in wenigen Klicks erstellen - einfach sich in Ihrer PaaS-Konto anmelden und die Schritte unten folgen:
+<ol>
+<li>Klicken Sie auf den Schaltflächen "Neue Umgebung" in der oberen linken Ecke des Dashboard-Bereichs.</li>
+</ol><ol>
+<li>Im erscheinenden Umgebung-Assistenten-Fenster wechseln Sie auf die entsprechende Programmiersprache-Registerkarte und wählen Sie den gewünschten Anwendungsserver (wir werden den Apache-Server für die Bereitstellung unserer PHP-Anwendung verwenden). Anschließend regeln Sie die zugeordneten Ressourcen für ihn mittels Cloudlet-Schalter, geben Sie einen Namen für Ihre Umgebung (apache-websockets in unserem Fall) und klicken Sie auf "Erstellen".</li>
+</ol><ol>
+<li>In wenigen Minuten erscheint Ihre neue Umgebung im Dashboard.</li>
+</ol><ol>
+<li>In den folgenden Schritten zeigen wir Ihnen einen Beispiel für die Konfiguration von WebSockets für ein einfaches PHP-Chat-Projekt, das innerhalb der Umgebung ohne den Loadbalancer-Server und die WebSockets-Technologie bereitgestellt wird.</li>
+</ol></p><p>Erstelle Umgebung und Bereitstellungs-App<br>Mit der Plattform können Sie die erforderliche Umgebung in wenigen Klicks erstellen - einfach sich in Ihrer PaaS-Konto anmelden und die Schritte unten folgen:
+<ol>
+<li>Klicken Sie auf den Schaltflächen "Neue Umgebung" in der oberen linken Ecke des Dashboard-Bereichs.</li>
+</ol><ol>
+<li>Im erscheinenden Umgebung-Assistenten-Fenster wechseln Sie auf die entsprechende Programmiersprache-Registerkarte und wählen Sie den gewünschten Anwendungsserver (wir werden den Apache-Server für die Bereitstellung unserer PHP-Anwendung verwenden). Anschließend regeln Sie die zugeordneten Ressourcen für ihn mittels Cloudlet-Schalter, geben Sie einen Namen für Ihre Umgebung (apache-websockets in unserem Fall) und klicken Sie auf "Erstellen".</li>
+</ol><ol>
+<li>In wenigen Minuten erscheint Ihre neue Umgebung im Dashboard.</li>
+</ol><ol>
+<li>In den folgenden Schritten zeigen wir Ihnen einen Beispiel für die Konfiguration von WebSockets für ein einfaches PHP-Chat-Projekt, das innerhalb der Umgebung ohne den Loadbalancer-Server und die WebSockets-Technologie bereitgestellt wird.</li>
+</ol></p><p>Erstelle Umgebung und Bereitstellungs-App<br>Mit der Plattform können Sie die erforderliche Umgebung in wenigen Klicks erstellen - einfach sich in Ihrer PaaS-Konto anmelden und die Schritte unten folgen:
+<ol>
+<li>Klicken Sie auf den Schaltflächen "Neue Umgebung" in der oberen linken Ecke des Dashboard-Bereichs.</li>
+</ol><ol>
+<li>Im erscheinenden Umgebung-Assistenten-Fenster wechseln Sie auf die entsprechende Programmiersprache-Registerkarte und wählen Sie den gewünschten Anwendungsserver (wir werden den Apache-Server für die Bereitstellung unserer PHP-Anwendung verwenden). Anschließend regeln Sie die zugeordneten Ressourcen für ihn mittels Cloudlet-Schalter, geben Sie einen Namen für Ihre Umgebung (apache-websockets in unserem Fall) und klicken Sie auf "Erstellen".</li>
+</ol><ol>
+<li>In wenigen Minuten erscheint Ihre neue Umgebung im Dashboard.</li>
+</ol><ol>
+<li>In den folgenden Schritten zeigen wir Ihnen einen Beispiel für die Konfiguration von WebSockets für ein einfaches PHP-Chat-Projekt, das innerhalb der Umgebung ohne den Loadbalancer-Server und die WebSockets-Technologie bereitgestellt wird.</li>
+</ol></p><div class="doc-image"><img src="/images/docs/websockets-php/07-nginx-websockerts-configs_hu12d1a96f8bfe6b3bcca89f6eaff58178_69621_480x0_resize_box_3.png" alt="nginx websockerts configs hu12d1a96f8bfe6b3bcca89f6eaff58178 69621 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/websockets-php/08-application-websockets-path_hu5ec5b34b65d0f5c85974672580748464_97960_480x0_resize_box_3.png" alt="application websockets path hu5ec5b34b65d0f5c85974672580748464 97960 480x0 resize box 3" loading="lazy"></div><p>Erstelle Umgebung und Bereitstellungs-App<br>Mit der Plattform können Sie die erforderliche Umgebung in wenigen Klicks erstellen - einfach sich in Ihrer PaaS-Konto anmelden und die Schritte unten folgen:
+<ol>
+<li>Klicken Sie auf den Schaltflächen "Neue Umgebung" in der oberen linken Ecke des Dashboard-Bereichs.</li>
+</ol><ol>
+<li>Im erscheinenden Umgebung-Assistenten-Fenster wechseln Sie auf die entsprechende Programmiersprache-Registerkarte und wählen Sie den gewünschten Anwendungsserver (wir werden den Apache-Server für die Bereitstellung unserer PHP-Anwendung verwenden). Anschließend regeln Sie die zugeordneten Ressourcen für ihn mittels Cloudlet-Schalter, geben Sie einen Namen für Ihre Umgebung (apache-websockets in unserem Fall) und klicken Sie auf "Erstellen".</li>
+</ol><ol>
+<li>In wenigen Minuten erscheint Ihre neue Umgebung im Dashboard.</li>
+</ol><ol>
+<li>In den folgenden Schritten zeigen wir Ihnen einen Beispiel für die Konfiguration von WebSockets für ein einfaches PHP-Chat-Projekt, das innerhalb der Umgebung ohne den Loadbalancer-Server und die WebSockets-Technologie bereitgestellt wird.</li>
+</ol></p><p>Erstelle Umgebung und Bereitstellungs-App<br>Mit der Plattform können Sie die erforderliche Umgebung in wenigen Klicks erstellen - einfach sich in Ihrer PaaS-Konto anmelden und die Schritte unten folgen:
+<ol>
+<li>Klicken Sie auf den Schaltflächen "Neue Umgebung" in der ober</li>
+</ol></p><p> mit Hilfe der Cloudlet-Schalter, geben Sie einen Namen für Ihre Umgebung (z.B. apache-websockets in unserem Fall) und klicken Sie auf Create. 3. Innerhalb weniger Minuten erscheint Ihre neue Umgebung auf dem Dashboard. 4. Laden Sie und bereitstellen Sie Ihre Anwendung mithilfe des Deployment Managers oder über den entfernten GIT/SVN-Repository (die erforderlichen Anweisungen, gemäß dem gewählten Engine, finden Sie in unserer Deployment Guide). Dadurch wird Ihre bereitgestellte Projektliste innerhalb der entsprechenden Abschnitt auf dem Umgebungs-Panel angezeigt. Server- und Anwendungskonfigurationen</p><div class="doc-image"><img src="/images/docs/websockets-php/09-apache-restart_hud9091859c467e020945f9900133c13ff_27263_480x0_resize_box_3.png" alt="apache restart hud9091859c467e020945f9900133c13ff 27263 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/websockets-php/10-open-in-browser_hu9de76cbef5112074cd3331c7a90a7fce_27059_480x0_resize_box_3.png" alt="open in browser hu9de76cbef5112074cd3331c7a90a7fce 27059 480x0 resize box 3" loading="lazy"></div><p>Die WebSockets-Unterstützung innerhalb des Apache-Servers wird durch die proxy_wstunnel_module-Module bereitgestellt, die zum Standard-Server-Build hinzugefügt wurden. Bei der NGINX-Anwendungsserver hingegen nutzt er die eingebaute Fähigkeit, WebSockets-Verbindungen wie der NGINX-Balancer ähnlich zu proxen. Es ist daher Zeit, Ihre Anwendungsserver zu konfigurieren.
+<ol>
+<li>Klicken Sie auf den Config-Button neben Ihrem App-Server-Knoten:</li>
+</ol><ol>
+<li>In der geöffneten Configuration Manager-Registerkarte führen Sie die Schritte innerhalb einer der folgenden Anweisungsabschnitte, gemäß dem gewählten Server, durch:</li>
+</ol><br>   Für den Apache-App-Server suchen Sie die httpd.conf-Datei innerhalb des conf-Verzeichnisses und entfernen Sie die nächsten Zeilen am Ende von ihr (etwa auf der 962. Zeile).<br>   1 2 3 4<br>   &lt;Location /ws&gt;<br>   ProxyPass ws://127.0.0.1:&lt;PORT&gt;<br>   ProxyPassReverse ws://127.0.0.1:&lt;PORT&gt;<br>   &lt;/Location&gt;<br>   Jetzt ändern Sie beide &lt;PORT&gt;-Parameter auf den Hörer-Portnummer, der von Ihrer WebSockets-Anwendung gelistened wird (z.B. nutzen wir den 9000).</p><p> Folgende beiden &lt;PORT&gt;-Parameter sollen auf den Portnummern gesetzt werden, an dem Ihre WebSockets-Anwendung (z.B. unsere nutzt den 9000) hört. Stellen Sie sicher, dass sie sich wie auf dem untenstehenden Bild befinden. Führen Sie die vorgenommenen Änderungen mit dem oben im Editor befindlichen gleichennamigen Button speichern.</p><p>Für den NGINX-App-Server suchen Sie den #Websocket-Unterstützungsteil innerhalb der nginx.conf-Datei (sie befindet sich innerhalb des conf-Verzeichnisses) und entfernen Sie den Kommentar von den folgenden Zeilen:</p><div class="doc-image"><img src="/images/docs/websockets-php/11-websockerts-chat-application_hu4c98af4c0e80941f4318b063d06ae537_19742_480x0_resize_box_3.png" alt="websockerts chat application hu4c98af4c0e80941f4318b063d06ae537 19742 480x0 resize box 3" loading="lazy"></div><p>1 2 3 4 5 6 7 8 9 10
+<pre><code class="lang-">upstream websocket {<br>    server 127.0.0.1:&amp;lt;PORT&amp;gt;;<br>}</code></pre><br>...<br>location /ws {<br>    proxy_pass http://websocket;<br>    proxy_http_version 1.1;<br>    proxy_set_header Upgrade $http_upgrade;<br>    proxy_set_header Connection "Upgrade";<br>}</p><p>Ersetzen Sie anschließend den &lt;PORT&gt;-Wert durch den entsprechenden Portnummer (d.h. den, an den Ihre WebSockets-Anwendung hört) und speichern Sie die vorgenommenen Änderungen.
+<ol>
+<li>Das sind alle Server-Konfigurationen, die Sie tun müssen, also bleibt es nur, Ihre bereitgestellte Anwendung zu konfigurieren. Dazu navigieren Sie zu Ihrer Anwendungskonfigurationsdatei, die für WebSockets-Einstellungen verantwortlich ist, und passen Sie den ws-Pfad, den sie enthält, entsprechend dem folgenden Format an: ws://{env_domain}{path_to_ws_file}</li>
+</ol></p><p>Wobei {env_domain} durch Ihren Umgebungsdomain (der unter dem Umgebungsnamen im Dashboard, apache-websockets.jelastic.com in unserem Fall zu sehen ist) ersetzt werden muss<br>{path_to_ws_file} soll entsprechend dem Pfad zum Datei geändert werden, die beim Aufbau der WebSockets-Verbindung zugreifen soll. Sie sollte sich ähnlich wie das untenstehende Bild darstellen:
+<ol>
+<li>{path_zu_ws_datei} muss entsprechend dem Pfad zur Datei geändert werden, die bei der Herstellung der WebSockets-Verbindung zugreifen soll. Er sollte sich ähnlich wie das Bild unten darstellen: 4. Speichere die Änderungen und Starten Sie Ihren Anwendungsserver mit dem entsprechenden Knopf neu. 5. Super, jetzt ist alles fertig! Klicken Sie auf Open in Browser, um Ihre Anwendung in einem neuen Browser-Fenster auszuführen. 6. Wie Sie sehen können, funktioniert unser Beispiel-Chat-App wie ein Traum. Auch bei der Ausführung eines so einfachen Chat-Applikations erleben Sie die Vorteile der schnellstmöglichen Übertragung von Nachrichten, die durch die Verwendung des WebSockets-Protokolls möglich sind. Genießen Sie! Was kommt jetzt? WebSockets-Unterstützung WebSockets-Unterstützung für Java Apache PHP Server NGINX PHP Server</li>
+</ol></p>
+</main>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kubernetes Cluster Access</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Kubernetes Cluster Access</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Kubernetes-Cluster-Zugriff Nach erfolgreicher Installation eines Clusters stehen mehrere Möglichkeiten zur Verfügung, um ihn zu verwalten: Kubernetes-Dashboard, kubectl-Client, Kubernetes-Dashboard
+<ol>
+<li>Die nach der Installation erscheinende Popup bietet alle notwendigen Daten, um mit dem Kubernetes-Dashboard verbunden zu werden - Link und Zugriffstoken. Dieselben Informationen werden auch über die passende E-Mail-Benachrichtigung bereitgestellt.</li>
+</ol><ol>
+<li>Folge dem Link, wähle die Option Token und füge den erforderlichen Wert ein. Tip: Es ist auch möglich, mithilfe des kubeconfig-Datei zu loggen, jedoch benötigen Sie die Installation von kubectl und die richtige Kontext-Einstellung (siehe untenstehende Abschnitt).</li>
+</ol><ol>
+<li>Wenn Sie eine E-Mail mit dem Zugangstoken zum Kubernetes-Cluster verloren haben, können Sie diesen durch Ausführen der folgenden Befehl auf dem Master-Knoten (z.B. über Web SSH) anzeigen:</li>
+</ol><br>   1. kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep fulladmin | awk '{print $1}') | grep 'token:' | sed -e's/token:\| //g'</p><p>Jetzt können Sie das Kubernetes-Dashboard erneut zugreifen.</p><p>kubectl-Client<br>kubectl ist ein Befehlszeilentool, um einen Kubernetes-Cluster zu steuern. Die Plattform installiert es automatisch auf allen Master-Knoten während der Umgebungskreation. Sie können sofort mit Ihrem Cluster arbeiten, indem Sie sich über SSH auf den erforderlichen Knoten verbinden.
+<ol>
+<li>Folgen Sie den Installationsschritten, um ein lokales kubectl zu verwenden.</li>
+</ol></p><div class="doc-image"><img src="/images/docs/kubernetes-cluster-access/01-kubernetes-installation-success-frame.png" alt="kubernetes installation success frame" loading="lazy"></div><div class="doc-image"><img src="/images/docs/kubernetes-cluster-access/02-kubernetes-dashboard-token-access_hu68d071009593f87788102a74e269c280_39022_480x0_resize_box_3.png" alt="kubernetes dashboard token access hu68d071009593f87788102a74e269c280 39022 480x0 resize box 3" loading="lazy"></div><p> Sie können Ihre Arbeit mit Ihrem Cluster sofort mit kubectl beginnen, indem Sie sich über SSH auf den erforderlichen Knoten verbinden.
+<ol>
+<li>Folgen Sie den Installationsschritten, um lokal kubectl zu verwenden. Anschließend führen Sie den folgenden Befehl aus, um eine remote Verbindung herzustellen:</li>
+</ol><br>1 2 3 4 5
+<pre><code class="lang-">kubectl config set-cluster jelastic --server={api-endpoint} &amp;amp;&amp;amp; \<br>kubectl config set-context jelastic --cluster=jelastic &amp;amp;&amp;amp; \<br>kubectl config set-credentials user --token={token} &amp;amp;&amp;amp; \<br>kubectl config set-context jelastic --user=user &amp;amp;&amp;amp; \<br>kubectl config use-context jelastic</code></pre><br>Ersetzen Sie die Platzhalter {api-endpoint} und {token} durch die Remote-API-URL und den Zugriffstoken entsprechend. Tip: Wenn Sie den Remote-API nicht während der Installation aktiviert haben, kann er über den in-built Add-on aktiviert werden, der für die Master-Knoten im Plattform-Dashboard verfügbar ist.
+<ol>
+<li>Sie können über den folgenden Befehl überprüfen, ob kubectl auf die Clusterzugriff hat:</li>
+</ol><br>1
+<pre><code class="lang-">kubectl get pods</code></pre><br>Sie sollten Informationen über Pods im standard Namespace sehen. Was kommt nachher? Kubernetes-Übersicht K8s-Zugriffskontrolle K8s-Cluster-Troubleshooting K8s-Cluster-Aktualisierung K8s-Cluster-Aufwärtskompatibilität</p><div class="doc-image"><img src="/images/docs/kubernetes-cluster-access/03-view-kubernetes-access-token_hu1f00063cacb1e223aa14f5b3da863554_119222_480x0_resize_box_3.png" alt="view kubernetes access token hu1f00063cacb1e223aa14f5b3da863554 119222 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/kubernetes-cluster-access/04-install-remote-api-for-kubernetes-cluster_hu70fe7bf5bd2979c3350b59abdfb6771b_69896_480x0_resize_box_3.png" alt="install remote api for kubernetes cluster hu70fe7bf5bd2979c3350b59abdfb6771b 69896 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/kubernetes-cluster-access/05-kubectl-access-to-kubernetes-cluster_hu63423cd3a83bfa65892a617623aa3ce9_39173_480x0_resize_box_3.png" alt="kubectl access to kubernetes cluster hu63423cd3a83bfa65892a617623aa3ce9 39173 480x0 resize box 3" loading="lazy"></div>
+</main>
+</body>
+</html>

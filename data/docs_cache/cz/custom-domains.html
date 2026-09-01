@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Custom Domain Name</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Custom Domain Name</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Přístup k vlastní doméně S platformou můžete nastavit vnější adresu domény pro vaši stránku místo výchozí adresy prostředí (tj., {env_name}.doména_poskytovatele). Vlastní doména vám umožňuje propagovat svou unikátní značku a zlepšit uznání vaší webové aplikace na Internetu. Než se však začnete, ujistěte se, že se seznáme s některými základními pojmy pro lepší pochopení: Doména je jméno, které zadáte do prohlížeče, abyste mohli přístup k webu. Část jména na pravé straně (například .com nebo .org) se nazývá doména kořenová (TLD), a část před ní - druhá úroveň domény (SLD). Poddoména je volitelná část, která se umisťuje před SLD a je oddělena tečkou. Viz obrázek níže jako příklad. Kořenová doména je kombinace druhé a kořenové domény bez poddomény. Takovýto adresář zastupuje celou webovou stránku místo konkrétní stránky webu. Každá stránka má unikátní kořenovou doménu, která je zahrnutá do všech jejích stránek a poddomén. DNS je systém, který převádí textové jména domén do číselných IP adres, které jsou potřebné k lokalizaci a identifikaci webových služeb. Například, když zadáte www.mymydomain.com do adresáře prohlížeče, hledá skutečnou IP adresu serveru, který hostuje tuto stránku, například 209.50.246.12. Pokud zadáte https://209.50.246.12/, dostanete se na stejnou stránku.</p><p>Poznámka: V tomto textu byly zachovány technické termíny, kódy, příkazy, cesty souborů a adresy URL v původní anglické podobě.</p><p> Adresář, hledá skutečnou IP adresu serveru, který tento web hostuje, například 209.50.246.12. Pokud zadejete https://209.50.246.12/, dostanete se na stejnou stránku. Tip: Platforma také podporuje plnou podporu gTLD + IDN Doménowých jmen, aby mohli být používány jak mezinárodizované, tak generické vrcholné jména pro vaše vnější domény. Chcete-li připojit vlastní doménu, musíte následovat tyto kroky:
+<ol>
+<li>Získat vlastní doménu</li>
+</ol><ol>
+<li>Konfigurace záznamu DNS</li>
+</ol><ol>
+<li>V případě potřeby vázání doménového jména (pokud je to nutné)</li>
+</ol></p><div class="doc-image"><img src="/images/docs/custom-domains/02-domain-name-components-scheme.png" alt="domain name components scheme" loading="lazy"></div><div class="doc-image"><img src="/images/docs/custom-domains/03-log-into-domain-registrar_hu0dcf1360c4741118295f697f39083a7b_50833_480x0_resize_box_3.png" alt="log into domain registrar hu0dcf1360c4741118295f697f39083a7b 50833 480x0 resize box 3" loading="lazy"></div><p>Jak získat doménu? Kroky se liší v závislosti na vašem konkrétním registráři domén. Jako příklad použijeme GoDaddy.
+<ol>
+<li>Přihlaste se do svého účtu nebo vytvořte nový. Rozbalte možnost Přihlásit se v horní části a klikněte na stejnojmenný tlačítko.</li>
+</ol><ol>
+<li>Přejděte na stránku správy svého účtu kliknutím na tlačítko Přejít na moje účet.</li>
+</ol><ol>
+<li>Pokud ještě nemáte žádnou doménu, klikněte na odkaz Získat ji nyní a následujte poskytnuté kroky k výběru a zakoupení domény.</li>
+</ol></p><p>Jak konfigurovat záznam DNS? Po získání vlastní domény je toto přidání nového záznamu DNS jednoduché (příklad GoDaddy):</p><p>Jsou různé typy záznamů DNS, které mohou být použity k ukotvení vašeho prostředí:
+<ul>
+<li>CNAME - mapuje vaši vlastní doménu na doménu prostředí (vyžaduje další vazbu domény prostřednictvím panelu správy platformy)</li>
+</ul><ul>
+<li>ANAME (pokud je podporován vaším serverem DNS) - mapuje celý kořenový doménový název (například example.com)</li>
+</ul></p><div class="doc-image"><img src="/images/docs/custom-domains/04-manage-dns-account_huc36b885af8ccdadf6221d9c01d041787_54659_480x0_resize_box_3.png" alt="manage dns account huc36b885af8ccdadf6221d9c01d041787 54659 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/custom-domains/05-get-custom-domain-name_hub39356272737c54d0f66172bb3e6f61a_25178_480x0_resize_box_3.png" alt="get custom domain name hub39356272737c54d0f66172bb3e6f61a 25178 480x0 resize box 3" loading="lazy"></div><p>Pokud máte další otázky, neváhejte nám kontaktovat.</p><p> - mapuje vaši vlastní doménu k doméně prostředí (požaduje se další vazba domény prostřednictvím panelu správy platformy) ANAME (pokud je podporováno vaším serverem DNS) - mapuje celou kořenovou doménu (např., example.com) na vaši doménu prostředí nebo jinou kořenovou doménu Záznam A Record - mapuje vaši vlastní doménu na veřejnou IP adresu (požaduje se vnější IP adresa připojená k prostředí) Poznámka: Záznamy CNAME/ANAME DNS mohou být použity s Podíleným zatížitelem (tj., bez veřejné IP). Však pro produkční prostředí je doporučeno připojit veřejnou IP a nakonfigurovat záznam A. V případě nastavení soukromého cloudu, když majitel platformy ovládá všechny prostředí, mohou být omezení podíleného zatížitele zrušena, což způsobí, že použití záznamu CNAME je možné v produkčním prostředí. Dolů následují kroky k nakonfigurování záznamu pro vaši doménu.<ol>
+<li>Naleznete požadovanou doménu v vašem registrátoru domén a klikněte na Spravovat DNS.</li>
+</ol><ol>
+<li>V dolní části sekce Záznamy klikněte na tlačítko Přidat.</li>
+</ol><ol>
+<li>V rámci zobrazeného rámečku Přidat záznam Zóny zvolte požadovanou možnost z seznamu Typ (např., Záznam A).</li>
+</ol><ol>
+<li>Udělete dokončení přidání záznamu. V našem případě pro záznam A: Host - zadejte hostname, na který je záznam A připojen - v našem případě zadejte @, aby se záznam přesměroval přímo na vaši doménu Name - zadejte vnější IP adresu vašeho prostředí vstupního boduTip: Chcete-li získat tuto IP, rozbalte svůj server aplikace (balancer) node, abyste viděli vaši veřejnou IP adresu.</li>
+</ol></p><p> Body:</p><div class="doc-image"><img src="/images/docs/custom-domains/06-manage-domain-name_hufc0c867848b36a5f43b10fd454010e2e_26105_480x0_resize_box_3.png" alt="manage domain name hufc0c867848b36a5f43b10fd454010e2e 26105 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/custom-domains/07-add-dns-record-to-domain-name_hu58beb12c4338cd9ae0fca15e8d0a5a0b_43462_480x0_resize_box_3.png" alt="add dns record to domain name hu58beb12c4338cd9ae0fca15e8d0a5a0b 43462 480x0 resize box 3" loading="lazy"></div><p>Upozornění: Zadejte vnější IP adresu vašeho prostředí vstupního bodu<br>Tip: Chcete-li získat tuto IP adresu, rozbalte aplikační server (balancér zatížení) pro zobrazení veřejné IP adresy. TTL - vyberte, jak dlouho by měl server DNS vaši záznam A uložit v mezipaměti (tj. zpoždění před aplikací nových nastavení v případě jejich další změny) Klikněte na Uložit. Poznámka: Každé změny DNS, které provedete, mohou trvat až 48 hodin, než se odrazí po celém internetu. Jaký záznam DNS použít? Zkontrolujte následující obecné pravidla a příklady:</p><p>Použijte záznam A, pokud je vaše prostředí spuštěno přes veřejnou IP adresu jméno1.mymain.cz &gt; 111.111.111.111<br>jméno2.mymain.cz &gt; 111.111.111.112</p><p>Použijte záznam CNAME, pokud chcete aliasovat vlastní doménu k prostředí (požaduje vazbu domény)<br>jméno1.mymain.cz &gt; env1.providerdomain.cz<br>jméno2.mymain.cz &gt; env2.providerdomain.cz</p><div class="doc-image"><img src="/images/docs/custom-domains/08-select-dns-record-type_hue1257575f4973736778bfa6b34bb70db_121103_480x0_resize_box_3.png" alt="select dns record type hue1257575f4973736778bfa6b34bb70db 121103 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/custom-domains/09-configure-dns-a-record_huc9d2997b250c4b539d25cec17cc372db_10848_480x0_resize_box_3.png" alt="configure dns a record huc9d2997b250c4b539d25cec17cc372db 10848 480x0 resize box 3" loading="lazy"></div><p>Použijte záznam ANAME, pokud potřebujete přesměrovat jeden DNS zónu (kořenovou doménu) na jinou s tím, že všechny její poddomény budou rozlišovány stejnými poddoménami<br>mymain.cz &gt; providerdomain.cz<br>Výsledkem je, že každá poddoména na vaší doméně bude směrovaná na vhodnou na službě poskytovatele: {poddoména}.mymain.cz &gt; {poddoména}.providerdomain.cz.<br>mynováfirma.cz &gt; mystaráfirma.cz<br>Výsledkem je, že můžete směrovat všechny zásobníky z vaší staré domény na novou, zachováním všech poddomén: {poddoména}.mynováfirma.cz &gt; {poddoména}.mystaráfirma.cz.<br>mymain.cz &gt; env1.providerdomain.cz</p><p>Poznámka: Zachování formátování a kódu v původním textu.</p><p> Z starého dominu k novému si udržet všechny poddomény stejné: {subdomain}.mynovacompany.com &gt; {subdomain}.mystarýcompany.com. mydomain.com &gt; env1.hosterdomain.com (požaduje vazbu domény) Výsledkem je, že poddomény vašeho vlastního domény budou ukazovat na správné v rámci cílového prostředí: {subdomain}.mydomain.com &gt; {subdomain}.env1.hosterdomain.com. Jak vazbu domény k prostředí vázat? Při práci bez veřejných IP adres připojených (tj., DNS záznam ukazuje na název prostředí prostřednictvím CNAME nebo ANAME) je nutné vázat příslušný název domény. Je nutné pro Shared Load Balancers správně směrovat provoz k cílovému prostředí. Poznámka: Vazba vlastního domény prostřednictvím panelu správy platformy není nutná, pokud je pro prostředí povolené veřejné IP, protože proudující provoz obchází SLB.
+<ol>
+<li>V panelu správy platformy klikněte na tlačítko Nastavení (ikona klíče) pro prostředí, kterému chcete vázat název domény.</li>
+</ol><ol>
+<li>V automaticky vybraném podokně Přidat vlastní domény použijte sekci Vazba domény k určení svého názvu domény (např., www.mymyslnýdomain.com nebo mymyslnýdomain.com) a vázat jej pomocí odpovídajícího tlačítka. Poznámka: Může trvat až několik minut, než nové nastavení URL vstoupí v platnost. Vítejte! Vaše prostředí je nyní dostupné pod svým unikátním názvem domény. Co dál? Shared Load Balancer Výměna veřejných IP adres Domény Bezpečné sockety SSL</li>
+</ol></p><div class="doc-image"><img src="/images/docs/custom-domains/10-copy-public-ip-address_huf538fd0511289666ec36e204759fb97c_23536_480x0_resize_box_3.png" alt="copy public ip address huf538fd0511289666ec36e204759fb97c 23536 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/custom-domains/11-environment-settings_hu0c716835a6e343762d3f46e76979b71e_13381_480x0_resize_box_3.png" alt="environment settings hu0c716835a6e343762d3f46e76979b71e 13381 480x0 resize box 3" loading="lazy"></div><p>Pokud máte další otázky, neváhejte se mně ptát!</p><div class="doc-image"><img src="/images/docs/custom-domains/12-bind-custom-domain-to-environment_hu219bbc4b17e8c1bdd960d9ebceb06d9d_74057_480x0_resize_box_3.png" alt="bind custom domain to environment hu219bbc4b17e8c1bdd960d9ebceb06d9d 74057 480x0 resize box 3" loading="lazy"></div>
+</main>
+</body>
+</html>

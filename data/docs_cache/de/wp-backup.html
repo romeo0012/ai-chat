@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WordPress Backup Guide</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>WordPress Backup Guide</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> WordPress-Backup-Anleitung<br>Es ist wichtig sicherzustellen, dass Ihre WordPress-Daten gesichert und im Falle von Problemen wiederhergestellt werden können. Wenn Sie WordPress auf der Virtuozzo Anwendungsverwaltung hosten, können Sie leicht Backups der WordPress-Umgebung erstellen und wiederherstellen, indem Sie den dedizierten WordPress Backup/Restore-Add-on verwenden. Er ist mit allen vorab installierten WordPress-Installationen auf der Virtuozzo Anwendungsverwaltung kompatibel und bietet die folgenden Vorteile:<br>Standalone und Cluster-Kompatibilität: Der Add-on funktioniert sowohl mit Standalone- als auch Cluster-WordPress-Umgebungen, sodass Sie Ihre Anwendung unabhängig von der Bereitstellungstypus sichern können.<br>Automatisierte Backups: Der Add-on erlaubt es, automatische Backups der WordPress-Umgebung zu erstellen, sodass Ihre Daten regelmäßig gespeichert werden ohne manuelle Eingriffe.<br>Flexible Zeitplanung: Sie können sich von vorgegebenen Backup-Intervallen (stündlich, täglich, wöchentlich, monatlich) oder einem individuellen Zeitplan basierend auf Ihren Anforderungen bedienen, einschließlich spezifischer Zeitzonen.<br>Manuelle Backups: Zusätzlich zu den geplanten Backups können Sie auch manuelle Backups jederzeit erstellen, was Flexibilität für dringende Daten-Schutz-Bedürfnisse bietet.<br>Einfache Wiederherstellung: Im Falle von Datenverlust oder Korruption können Sie Ihre WordPress-Umgebung schnell aus einer Backup-Kopie wiederherstellen, was die Ausfallzeit minimiert und den Betrieb fortsetzt.<br>Datenbank und Datei-Backup: Der Add-on backt die WordPress-Datenbank und Dateien auf, sodass alle Ihre Inhalte, Themen, Plugins und Einstellungen erhalten bleiben.</p><p> Ergänzung stellt eine Backup-Funktion für die WordPress-Datenbank und Dateien bereit, um sicherzustellen, dass alle Ihre Inhalte, Themen, Plugins und Einstellungen erhalten bleiben. Integration mit Backup-Speicher: Der Ergänzung funktioniert schlüssig mit dem Backup-Speicher, um automatisch Backups auf einem externen Speicher zu erstellen und zu speichern, was zusätzliche Sicherheit und Zuverlässigkeit bietet. Hinweis: Bei der Arbeit mit dem MariaDB Galera Cluster beachten Sie die bekannten Einschränkungen. Die erforderlichen zusätzlichen Schritte sind bereits bei der Verwendung des Backup/Wiederherstellungs-Ergänzungssets berücksichtigt. Es wird jedoch empfohlen, sich bei der manuellen Wiederherstellung des Datenbank-Dumps mit dem verlinkten Leitfaden zu befassen. Installation des Ergänzungssets Vor der Installation des Ergänzungssets müssen Sie eine dedizierte Speicherinstanz erstellen, um alle Backup-Daten zu speichern. 1. Wenn Sie keine haben, können Sie sie in wenigen Minuten über das dedizierte Backup-Speicher-Paket im Marktplatz der Plattform erstellen. Wenn Sie bereits solche Speicherinstanz haben, können Sie auf den vierten Schritt überspringen. 2. Im Installationsfenster können Sie zwischen den Optionen Standalone und Cluster-Speicher wählen. Anschließend müssen Sie die bevorzugte Anzahl von Knoten (für die Cluster-Option) und Speichergröße angeben. Schlussendlich müssen Sie die Standarddaten bereitstellen: Umgebung – Umgebungs-Domänennamen Anzeigename – Umgebungsausschlagwort Region – Umgebungsregion (wenn mehrere verfügbar sind) 3. Klicken Sie auf den Install-Button und warten Sie einige Minuten, bis das Speicher erstellt wird. Es wird automatisch der "Backup-Speicherknoten"-Gruppe hinzugefügt.</p><p> 1. Es gibt mehrere Optionen verfügbar) 3. Klicken Sie auf den Install-Button und warten Sie mehrere Minuten, bis das Speicherverzeichnis erstellt wird. Es wird automatisch der "Backup-Speicherknoten"-Gruppe hinzugefügt. Tip: Ein Speicher kann mit beliebig vielen verschiedenen Umgebungen verwendet werden. 4. Sobald das Speicherverzeichnis bereit ist, können Sie den Backup-Anhang installieren. Hoveren Sie über Ihr WordPress-Anwendungsserver oder Datenbank und klicken Sie auf den Add-Ons-Icon. Tip: Als Alternative können Sie den Backup-Anhang-Datei (backup.jps) aus dem GitHub-Repository importieren. Suchen Sie den erforderlichen WordPress Backup/Wiederherstellungs-Add-on und klicken Sie auf Install.
+<ol>
+<li>Geben Sie die folgenden Daten an:</li>
+</ol><br>   - Auswahl der Ablaufoption:<br>     - Vordefiniert – wählen Sie aus einer Liste von standardmäßigen Backup-Intervallen (stündlich, täglich, wöchentlich, monatlich)<br>     - Benutzerdefiniert – wählen Sie die genauen Uhrzeit, benötigte Tage der Woche und Zeitzone<br>     - Manuell (crontab) - geben Sie eine einfache cron-basierte Ausdruckszeichenfolge (im UTC-Zeitzone) an, um Backups zu planen<br>     - Backup-Speicher – wählen Sie aus der Liste der installierten Backup-Speicher auf dem Konto<br>     - Anzahl der Backups – legen Sie die Anzahl der neuesten Backups fest, die gespeichert werden sollen<br>     - immer entmontieren – aktivieren Sie, um immer das Backup-Speicherverzeichnis nach dem Backup-Prozess zu entmontieren</p><div class="doc-image"><img src="/images/docs/wp-backup/01-marketplace-backup-storage_hua45167696f8b23700793d1c6153b9e82_29354_480x0_resize_box_3.png" alt="marketplace backup storage hua45167696f8b23700793d1c6153b9e82 29354 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/wp-backup/02-backup-storage-installation_hud52e34dfdac31c9061c29de05e52d6b0_110971_480x0_resize_box_3.png" alt="backup storage installation hud52e34dfdac31c9061c29de05e52d6b0 110971 480x0 resize box 3" loading="lazy"></div><p>Klicken Sie auf Install, und der Add-on wird in einer Minute dem ausgewählten Knoten hinzugefügt. Jetzt können Sie einfach warten, bis die Backups angelegt sind. Wenn Sie manuell einen Backup erstellen möchten oder Änderungen an den Add-on-Einstellungen vornehmen möchten, können Sie dies über die Add-on-Benutzeroberfläche tun.</p><p> Zeit für Backups zu erstellt. Wenn Sie manuell ein Backup erstellen möchten oder Änderungen an den Erweiterungseinstellungen vornehmen wollen, können Sie dies über die Benutzeroberfläche der Erweiterung tun. Verwalte Erweiterung Nach der Installation wird die Erweiterung im Abschnitt Erweiterungen der Anwendungsserver-Anwendung verfügbar sein. Sie bietet die folgenden Aktionen:
+<ul>
+<li>Backup jetzt – erstellt ein sofortiges Backup</li>
+</ul><ul>
+<li>Konfigurieren – stellt Parameter ein, die während der Erstellung festgelegt wurden (Aufgabenschema, Speicherknoten, Anzahl der Backups)</li>
+</ul><ul>
+<li>Wiederherstellen – wird aus dem Backup wiederhergestellt</li>
+</ul><ul>
+<li>Entfernen – entfernt die Backup-Erweiterung</li>
+</ul></p><p>Backup WordPress<br>Die Backup-Aktion für WordPress kann automatisch nach der vorgegebenen Zeitskala gestartet oder manuell über die Benutzeroberfläche der Erweiterung gestartet werden. Sobald die Backup-Aktion gestartet wurde, werden die folgenden Schritte durchgeführt:
+<ul>
+<li>Die Backup-Speicherung wird über NFS4 auf den Anwendungsserver-Knoten montiert.</li>
+</ul><ul>
+<li>Ein Dump der Datenbank wird in eine flache Datei erstellt.</li>
+</ul><ul>
+<li>Der Backup-Snapshot wird erstellt. Der Backup-Snapshot besteht aus dem Dump-Dateiblatt und dem Web-Anwendungsverzeichnis (/var/www/webroot/ROOT/).</li>
+</ul></p><div class="doc-image"><img src="/images/docs/wp-backup/03-backup-storage-environment_hudff4a5aefedbfa2aefbf6babfd3243f9_32879_480x0_resize_box_3.png" alt="backup storage environment hudff4a5aefedbfa2aefbf6babfd3243f9 32879 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/wp-backup/04-backup-restore-addon_huf3fa3c6cc60c248c87beeac2b94c768b_110859_480x0_resize_box_3.png" alt="backup restore addon huf3fa3c6cc60c248c87beeac2b94c768b 110859 480x0 resize box 3" loading="lazy"></div><p>Wiederherstellen WordPress aus Backup<br>Die Wiederherstellung von WordPress aus dem Backup überschreibt alle vorhandenen Daten. Jegliche neueren Änderungen, die seit der Backup-Erstellung vorgenommen wurden, werden dauerhaft verloren gehen. Um Ihre WordPress-Anwendung aus einem Backup wiederherzustellen, müssen Sie die Option Wiederherstellen für die Erweiterung auswählen.</p><p> Um Ihre WordPress-Anwendung aus einer Backup-Kopie wiederherzustellen, müssen Sie die Option "Wiederherstellen" für den Add-on auswählen. Dann wird ein Dialogfenster mit den folgenden Optionen geöffnet:
+<ul>
+<li>Wiederherstellen von – wählen Sie das Zielumgebung (mehrere Optionen können verfügbar sein, wenn der Backup-Add-on auf mehreren Umgebungen verwendet wird)</li>
+</ul><ul>
+<li>Backup – wählen Sie aus einer Liste der Backups für das ausgewählte Umgebung (Name enthalten Timestamps für schnelle Identifizierung)</li>
+</ul><ul>
+<li>Klicken Sie auf "Wiederherstellen" und bestätigen Sie dies via Pop-up. Sobald die Aktion gestartet ist, kann sie nicht abgebrochen oder rückgängig gemacht werden. Sie sehen die Erfolgsbenachrichtigung im Dashboard nach Abschluss des Prozesses.</li>
+</ul></p><p>Was kommt Nächstes? WordPress Hosting WordPress Migration Guide WordPress All-in-One Guide WordPress Update Guide WordPress Pakete</p><div class="doc-image"><img src="/images/docs/wp-backup/05-custom-backup-schedule_hu070ae9841e25fa6a1eab72fe97a0d81a_19048_480x0_resize_box_3.png" alt="custom backup schedule hu070ae9841e25fa6a1eab72fe97a0d81a 19048 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/wp-backup/06-crontab-backup-schedule_hu06f8d12d74689ee38563b8d66749ab8f_12012_480x0_resize_box_3.png" alt="crontab backup schedule hu06f8d12d74689ee38563b8d66749ab8f 12012 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/wp-backup/07-backup-restore-addon-installation_huec9105d6f6544f1e32dd91ee01eefc04_111184_480x0_resize_box_3.png" alt="backup restore addon installation huec9105d6f6544f1e32dd91ee01eefc04 111184 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/wp-backup/08-managing-addon_huf0e8607bdb17b6dddb40eab10b9a219d_75986_480x0_resize_box_3.png" alt="managing addon huf0e8607bdb17b6dddb40eab10b9a219d 75986 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/wp-backup/09-restore-from-backup_hu0447b5ef0f02bc69ab8e0b05714d0194_34830_480x0_resize_box_3.png" alt="restore from backup hu0447b5ef0f02bc69ab8e0b05714d0194 34830 480x0 resize box 3" loading="lazy"></div>
+</main>
+</body>
+</html>

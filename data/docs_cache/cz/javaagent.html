@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Java Agent Integration</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Java Agent Integration</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Java Agent Integrace<br>Java agent je průvodce v přední části aplikace hlavní metody. Obvykle jde o .jar balíček, který je staticky nahrán v metodě PreMain-Class, která implementuje mechanismus přepsání obsahu spouštěných tříd. Platforma umožňuje automaticky spouštět takový applet při spuštění (po inicializaci JVM). Tip: Všechny platformně certifikované Java stacks spouští jelastic-gc-agent.jar Java agenta jako součást standardní optimizace. Vykonává periodické volání Full GC, aby snížil spotřebu paměti a vrátil nevyužitou RAM zpět do OS. Díky přispění platformy k vývoji Java, je podobná funkcionalita nativně implementována od verze 12 JDK. Zkontrolujte Memory Agent add-on, abyste se dozvěděli více o platformní automatické optimizaci spravovaných Java stacks nebo abyste mohli použít k optimizaci libovolného vlastního Java kontejneru. Následující kroky vám pomůžou přidat vlastní Java agent do kontejneru:<ol>
+<li>Přihlaste se k panelu správy platformy pomocí svých údajů a klikněte na tlačítko Konfigurace pro aplikační server v vašem Java prostředí:</li>
+</ol><ol>
+<li>V otevřeném správci konfiguračních souborů můžete nahrát svůj Java agent .jar soubor do libovolného volného umístění. Použijte seznam akcí v horní panelu (pro současný adresář) nebo kontextové menu při přehledu konkrétního adresáře. Poskytněte odkaz na požadovaný soubor nebo ho naleznete na místním počítači k nahrání.</li>
+</ol><ol>
+<li>Následně přečtete si proměnné.</li>
+</ol></p><p> Kontextové menu při přehledu určitého adresáře. Poskytněte odkaz na požadovaný soubor nebo ho naleznete na místní počítači k nahrání. 3. Následně přečtete se na soubor variables.conf (exaktní umístění se liší v závislosti na určitém software stacku) k poskytnutí vlastních proměnných a JVM možností. Zde můžete určit parametr javaagent cestou k požadovanému souboru jar. Například: javaagent:/opt/tomcat/temp/můj-java-agent.jar Nezapomeňte Uložit změny tlačítkem "Uložit" nahoře v editoru. 4. Chcete-li aplikovat nově přidáné nastavení, musíte Restartovat uzly aplikačního serveru pomocí stejnojmenného možnosti. To je vše! Nyní je vaše vlastní Java agentka spuštěna. Co dále? Proměnné prostředí Vlastní proměnné prostředí Konfigurace Java App Server Nahrávání souborů JAR Agent pro sběr odpadků Garbage Collector</p><p>Překlad:</p><div class="doc-image"><img src="/images/docs/javaagent/00--java-memory-agent-addon_hu790242eba4df27b68abef0898cc79b92_55371_480x0_resize_box_3.png" alt=" java memory agent addon hu790242eba4df27b68abef0898cc79b92 55371 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/javaagent/01-environment-config-button_hub24ffddc28b91acdb07b98d26a6cd83b_27421_480x0_resize_box_3.png" alt="environment config button hub24ffddc28b91acdb07b98d26a6cd83b 27421 480x0 resize box 3" loading="lazy"></div><p>Kontextové menu při přehledu určitého adresáře. Poskytněte odkaz na požadovaný soubor nebo ho naleznete na místní počítači k nahrání.
+<ol>
+<li>Následně přečtete se na soubor variables.conf (exaktní umístění se liší v závislosti na určitém software stacku) k poskytnutí vlastních proměnných a JVM možností. Zde můžete určit parametr javaagent cestou k požadovanému souboru jar. Například: javaagent:/opt/tomcat/temp/můj-java-agent.jar</li>
+</ol></p><p>Nezapomeňte Uložit změny tlačítkem "Uložit" nahoře v editoru.
+<ol>
+<li>Chcete-li aplikovat nově přidáné nastavení, musíte Restartovat uzly aplikačního serveru pomocí stejnojmenného možnosti. To je vše! Nyní je vaše vlastní Java agentka spuštěna. Co dále?</li>
+</ol></p><p>Proměnné prostředí Vlastní proměnné prostředí Konfigurace Java App Server Nahrávání souborů JAR Agent pro sběr odpadků Garbage Collector</p><div class="doc-image"><img src="/images/docs/javaagent/02-upload-file-to-container_huc05e2fbee56e630deeb8cae1584e693c_73647_480x0_resize_box_3.png" alt="upload file to container huc05e2fbee56e630deeb8cae1584e693c 73647 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/javaagent/03-variables-conf-file_huf74d4e1197dc3ded402f4fdca78bfd63_78977_480x0_resize_box_3.png" alt="variables conf file huf74d4e1197dc3ded402f4fdca78bfd63 78977 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/javaagent/04--restart-nodes-button_huc57b243dcc3e9ded8d974fdd586ca710_28484_480x0_resize_box_3.png" alt=" restart nodes button huc57b243dcc3e9ded8d974fdd586ca710 28484 480x0 resize box 3" loading="lazy"></div>
+</main>
+</body>
+</html>

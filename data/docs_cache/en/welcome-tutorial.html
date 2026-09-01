@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Platform Welcome Tutorial</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Platform Welcome Tutorial</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p>Platform Welcome Tutorial On the very first login into the dashboard, the platform automatically starts a quick introduction guide. The tutorial includes information on the main functionality and features available for you and helps to deploy your first application. The whole process requires just a few minutes to complete and is an excellent basis to start working with the platform. If needed, this tutorial can be manually run via the Help &gt; Tutorial menu at any time: Let’s walk through all of the tutorial steps. 1. Guide starts with an introductory presentation. The first frame is named The Benefits of PaaS, which provides a list of the central features of the platform. Hover over a particular point within the list to view an explanatory illustration. Click it to open the dedicated documentation page for even more details. Hovering over any point reveals the corresponding illustration, while clicking on it redirects to the dedicated documentation page. 2. The second Build Your Application Topology slide shows how to build your application topology using the platform components. Refer to the Concept &amp; Terminology document for additional details. 3. The next Tune Your Resource Consumption frame demonstrates how to provide resources for the instances and how the estimated price is automatically calculated.</p><p>Your Resource Consumption frame demonstrates how to provide resources for the instances and how the estimated price is automatically calculated. The platform automatically provides Estimated cost for the currently configured topology based on the hourly, daily, and monthly basis (use the drop-down menu circled in the image above). Note: The maximal usage pricing is almost unreachable in practice (100% load on all nodes at all times), see the next step for more details. 4. The last Enjoy Pricing Advantages slide helps to explain the efficiency of the platform usage-based pricing comparing to other cloud vendors’ models. 5. Next, the presentation is closed and the topology wizard is automatically opened. Tip: You can hide the current hint or completely abandon the tutorial with the appropriate icons (cross and crossed out circle respectively). If needed, you can set up your new environment using all of the parameters available via topology wizard. However, you don’t need any specific configurations for this tutorial, so we recommend to follow the hint and click Create straightaway. 6. Wait a minute for your environment to be created. Meanwhile, you can track the process state in the Tasks panel. 7. Once the operation is completed, tutorial automatically navigates you to the deployment manager section. Here, a button to deploy the default Hello World application will be highlighted. Click it to proceed. 8.</p><p>manager section. Here, a button to deploy the default Hello World application will be highlighted. Click it to proceed. 8. Within the opened deploy frame, select your just created Environment in the appropriate drop-down menu and click the Deploy button. 9. Wait a moment for the application to be deployed. 10. Great! Your first application is ready to work, click the highlighted Open in Browser button to view it in a separate browser tab. The whole tour requires a couple of minutes but provides information on the main principles of hosting with the platform. What’s next? Getting Started Concept &amp; Terminology Dashboard Guide Setting Up Environment Deployment Guide</p><div class="doc-image"><img src="/images/docs/welcome-tutorial/01-start-paas-welcome-tutorial.png" alt="start paas welcome tutorial" loading="lazy"></div><div class="doc-image"><img src="/images/docs/welcome-tutorial/02-tutorial-paas-benefits_hu68b64b5f642b2e9f5cf0ef41d5dea028_112555_480x0_resize_box_3.png" alt="tutorial paas benefits hu68b64b5f642b2e9f5cf0ef41d5dea028 112555 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/welcome-tutorial/03-tutorial-build-application-topology_hu0d220b2ecb179d77a30af73dc134f6c8_53048_480x0_resize_box_3.png" alt="tutorial build application topology hu0d220b2ecb179d77a30af73dc134f6c8 53048 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/welcome-tutorial/04-tutorial-tune-resource-consumption_hu01becbda3680f88ad3dd4af7276ccf4c_90628_480x0_resize_box_3.png" alt="tutorial tune resource consumption hu01becbda3680f88ad3dd4af7276ccf4c 90628 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/welcome-tutorial/05-tutorial-paas-pricing-advantages_hue4f16346dab8d3b494b2ed940f3257bf_70635_480x0_resize_box_3.png" alt="tutorial paas pricing advantages hue4f16346dab8d3b494b2ed940f3257bf 70635 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/welcome-tutorial/06-tutorial-create-environment_hue32e1307132294d2401082ded1f4bc56_143278_480x0_resize_box_3.png" alt="tutorial create environment hue32e1307132294d2401082ded1f4bc56 143278 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/welcome-tutorial/07-close-and-stop-tutorial.png" alt="close and stop tutorial" loading="lazy"></div><div class="doc-image"><img src="/images/docs/welcome-tutorial/08-tutorial-tasks-panel_hu8c6519889a8620ab9f074a1e1e6acab0_35921_480x0_resize_box_3.png" alt="tutorial tasks panel hu8c6519889a8620ab9f074a1e1e6acab0 35921 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/welcome-tutorial/09-tutorial-deploy-default-application_hu2367005aa75d516e9dfda2d3d6aca08e_41619_480x0_resize_box_3.png" alt="tutorial deploy default application hu2367005aa75d516e9dfda2d3d6aca08e 41619 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/welcome-tutorial/10-tutorial-confirm-application-deployment.png" alt="tutorial confirm application deployment" loading="lazy"></div><div class="doc-image"><img src="/images/docs/welcome-tutorial/11-tutorial-wait-for-deployment_huc0d1670aa1c68922e1a82296509ca3c1_40961_480x0_resize_box_3.png" alt="tutorial wait for deployment huc0d1670aa1c68922e1a82296509ca3c1 40961 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/welcome-tutorial/12-tutorial-open-application-in-browser_hu772e9c287936a75834e4ff2c2f07462a_39073_480x0_resize_box_3.png" alt="tutorial open application in browser hu772e9c287936a75834e4ff2c2f07462a 39073 480x0 resize box 3" loading="lazy"></div>
+</main>
+</body>
+</html>

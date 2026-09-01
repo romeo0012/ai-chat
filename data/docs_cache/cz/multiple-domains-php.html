@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Running Multiple Domain Names on PHP Server</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.10)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Running Multiple Domain Names on PHP Server</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Řízení více domén na PHP Serveru</p><p>Použití více domén poskytuje možnost zvětšit praktickou hodnotu, efektivitu a škálovatelnost vašeho PHP aplikace a zřejmě také ušetříte peníze bez nutnosti nastavit samostatné instance. Proč se tedy nezajímáte, jak spustit více domén na serveru PHP aplikace, aby se vaše PHP aplikace stala ještě více škálovatelnou a efektivní?
+<ol>
+<li>Přihlaste se k účtu PaaS.</li>
+</ol><ol>
+<li>Klikněte na tlačítko Create environment v horní levém rohu panelu.</li>
+</ol><ol>
+<li>V otevřeném asistentu se přesuňte na kartu PHP, vyberte aplikační server a určete počet prostředků, které vaše aplikace potřebuje. Poté zadejte název pro prostředí a klikněte na tlačítko Create. Za několik sekund se prostředí zobrazí na panelu platformy.</li>
+</ol><ol>
+<li>Musíte mít názvy v DNS, které odpovídají vaší IP adrese. Proto nakoupte domény pro své prostředí. Můžete to udělat dvěma způsoby: přidáním záznamu CNAME nebo nastavením záznamů A. Další informace najdete zde.</li>
+</ol><ol>
+<li>Po tomto kroku klikněte na tlačítko Settings pro své prostředí a vázete domény. Například použijeme následující URLy: mydomain.com a myseconddomain.com. Poznámka: V tomto případě jsme vložili záznamy do našich souborů hosts pro lokální testování a funguje pouze z počítače s těmito záznamy hosts.</li>
+</ol><ol>
+<li>Nyní můžete nahrát zip balíčky s vaší aplikací do Správce nasazení a nasadit je do prostředí, které jste dříve vytvořili.</li>
+</ol><ol>
+<li>Po úspěšném nasazení aplikací musíte určit konfigurace virtuálního hosta.</li>
+</ol></p><p>Pokud máte další otázky, neváhejte nám kontaktovat.</p><div class="doc-image"><img src="/images/docs/multiple-domains-php/01-environment-wizard_hu39d22e50b669268b2f33d56c868daf6d_110058_480x0_resize_box_3.png" alt="environment wizard hu39d22e50b669268b2f33d56c868daf6d 110058 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/multiple-domains-php/02-php-environment-for-multi-domains_hu52b4f733f145f8e01525f44a6d6115b2_14437_480x0_resize_box_3.png" alt="php environment for multi domains hu52b4f733f145f8e01525f44a6d6115b2 14437 480x0 resize box 3" loading="lazy"></div><p> Váš předchozí prostředí. 7. Po úspěšném nasazení aplikací potřebujete konfigurace virtuálního hosta určit. Pro Apache klikněte na tlačítko Config vedle Apache serveru a otevřete soubor httpd.conf v adresáři conf. Nastavte parametry VirtualHost pro dvě doménové názvy odděleně, upravit cesty k nasazeným kontextům a názvy domén:</p><p>1 2 3 4 5 6 7 8 9 10 11<br>Listen 80<br>&lt;VirtualHost *:80&gt;<br>DocumentRoot /var/www/webroot/firstapp<br>ServerName mydomain.com<br>...<br>&lt;/VirtualHost&gt;<br>&lt;VirtualHost *:80&gt;<br>DocumentRoot /var/www/webroot/secondapp<br>ServerName myseconddomain.com<br>...<br>&lt;/VirtualHost&gt;</p><p>Pro NGINX klikněte na tlačítko Config vedle NGINX serveru a otevřete soubor nginx.conf v adresáři conf. Nastavte své nastavení v bloku server server_name (vaše doména) ROOT (kontext, který jste uvedli při nasazování)</p><div class="doc-image"><img src="/images/docs/multiple-domains-php/03-bind-domain_hu72e1f25801bebbd276a185a6888559ff_67679_480x0_resize_box_3.png" alt="bind domain hu72e1f25801bebbd276a185a6888559ff 67679 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/multiple-domains-php/04-upload-first-application.png" alt="upload first application" loading="lazy"></div><p>Poznámka: Potřebujete mít oddělený blok server s vlastními nastaveními pro každou doménu, kterou vázáte.</p><p>1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38<br>server {<br>listen 80;<br>server_name localhost;<br>include /etc/nginx/aliases.conf;<br>location / {<br>root /var/www/webroot/ROOT;<br>index index.html index.htm index.php;<br>location ~ \.php$ {<br>location ~ /\. {<br>deny all;<br>access_log off;<br>log_not_found off;<br>}<br>include /etc/nginx/fastcgi_params;<br>fastcgi_pass 127.0.0.1;<br>}<br>}</p><p> V našem případě budou nastavení následující:
+<ol>
+<li><code>index.php</code></li>
+</ol><ol>
+<li><code>location ~ \.php$</code></li>
+</ol><ol>
+<li><code>{</code></li>
+</ol><ol>
+<li><code>location ~ /\. {</code></li>
+</ol><ol>
+<li><code>deny all;</code></li>
+</ol><ol>
+<li><code>access_log off;</code></li>
+</ol><ol>
+<li><code>log_not_found off;</code></li>
+</ol><ol>
+<li><code>}</code></li>
+</ol><ol>
+<li><code>include /etc/nginx/fastcgi_params;</code></li>
+</ol><ol>
+<li><code>fastcgi_pass 127.0.0.1:9000;</code></li>
+</ol><ol>
+<li><code>fastcgi_param SCRIPT_FILENAME /var/www/webroot/ROOT$fastcgi_script_name;</code></li>
+</ol><ol>
+<li><code>fastcgi_param PATH_INFO $fastcgi_script_name;</code></li>
+</ol><ol>
+<li><code>fastcgi_param DOCUMENT_ROOT /var/www/webroot/ROOT;</code></li>
+</ol><ol>
+<li><code>}</code></li>
+</ol><ol>
+<li><code>}</code></li>
+</ol><ol>
+<li><code>index index.php index.html index.htm;</code></li>
+</ol><ol>
+<li><code>error_page 500 502 503 504 /50x.html;</code></li>
+</ol><ol>
+<li><code>location = /50x.html {</code></li>
+</ol><ol>
+<li><code>root html;</code></li>
+</ol><ol>
+<li><code>}</code></li>
+</ol><ol>
+<li><code>location ~ /\. {</code></li>
+</ol><ol>
+<li><code>deny all;</code></li>
+</ol><ol>
+<li><code>access_log off;</code></li>
+</ol><ol>
+<li><code>log_not_found off;</code></li>
+</ol><ol>
+<li><code>}</code></li>
+</ol><ol>
+<li><code>location ~ \.php$ {</code></li>
+</ol><ol>
+<li><code>location ~ /\. {</code></li>
+</ol><ol>
+<li><code>deny all;</code></li>
+</ol><ol>
+<li><code>access_log off;</code></li>
+</ol><ol>
+<li><code>log_not_found off;</code></li>
+</ol><ol>
+<li><code>}</code></li>
+</ol><ol>
+<li><code>include /etc/nginx/fastcgi_params;</code></li>
+</ol><ol>
+<li><code>fastcgi_pass 127.0.0.1:9000;</code></li>
+</ol><ol>
+<li><code>fastcgi_param SCRIPT_FILENAME /var/www/webroot$fastcgi_script_name;</code></li>
+</ol><ol>
+<li><code>fastcgi_param PATH_INFO $fastcgi_script_name;</code></li>
+</ol><ol>
+<li><code>fastcgi_param DOCUMENT_ROOT /var/www/webroot;</code></li>
+</ol><ol>
+<li><code>}</code></li>
+</ol><ol>
+<li><code>}</code></li>
+</ol></p><div class="doc-image"><img src="/images/docs/multiple-domains-php/05-upload-second-application.png" alt="upload second application" loading="lazy"></div><div class="doc-image"><img src="/images/docs/multiple-domains-php/06-apache-httpd-conf_hua440502747b31099b7cb3c836df5542a_82369_480x0_resize_box_3.png" alt="apache httpd conf hua440502747b31099b7cb3c836df5542a 82369 480x0 resize box 3" loading="lazy"></div><p>V našem případě budou nastavení následující server:
+<ol>
+<li><code>server {</code></li>
+</ol><ol>
+<li><code>listen 80;</code></li>
+</ol><ol>
+<li><code>server_name mydomain.com;</code></li>
+</ol><ol>
+<li><code>include /etc/nginx/aliases.conf;</code></li>
+</ol><ol>
+<li><code>location / {</code></li>
+</ol><ol>
+<li><code>root /var/www/webroot/firstapp;</code></li>
+</ol><ol>
+<li><code>index index.html index.htm index.php;</code></li>
+</ol><ol>
+<li><code>location ~ \.php$ {</code></li>
+</ol><ol>
+<li><code>location ~ /\. {</code></li>
+</ol><ol>
+<li><code>deny all;</code></li>
+</ol><ol>
+<li><code>access_log off;</code></li>
+</ol><ol>
+<li><code>log_not_found off;</code></li>
+</ol><ol>
+<li><code>}</code></li>
+</ol><ol>
+<li><code>include /etc/nginx/fastcgi_params;</code></li>
+</ol><ol>
+<li><code>fastcgi_pass 127.0.0.1:9000;</code></li>
+</ol><ol>
+<li><code>fastcgi_param SCRIPT_FILENAME /var/www/webroot$fastcgi_script_name;</code></li>
+</ol><ol>
+<li><code>fastcgi_param PATH_INFO $fastcgi_script_name;</code></li>
+</ol><ol>
+<li><code>fastcgi_param DOCUMENT_ROOT /var/www/webroot;</code></li>
+</ol><ol>
+<li><code>}</code></li>
+</ol><ol>
+<li><code>}</code></li>
+</ol></p><p> Text v anglickém originále:</p><p><pre><code class="lang-">index.php;<br>location ~ \.php$ {<br>    location ~ /\. {<br>        deny all;<br>        access_log off;<br>        log_not_found off;<br>    }<br>    include /etc/nginx/fastcgi_params;<br>    fastcgi_pass 127.0.0.1:9000;<br>    fastcgi_param SCRIPT_FILENAME /var/www/webroot/firstapp$fastcgi_script_name;<br>    fastcgi_param PATH_INFO $fastcgi_script_name;<br>    fastcgi_param DOCUMENT_ROOT /var/www/webroot/firstapp;<br>}<br>}<br>index index.php index.html index.htm;<br>error_page 500 502 503 504 /50x.html;<br>location = /50x.html {<br>    root html;<br>}<br>location ~ /\. {<br>    deny all;<br>    access_log off;<br>    log_not_found off;<br>}<br>location ~ \.php$ {<br>    location ~ /\. {<br>        deny all;<br>        access_log off;<br>        log_not_found off;<br>    }<br>    include /etc/nginx/fastcgi_params;<br>    fastcgi_pass 127.0.0.1:9000;<br>    fastcgi_param SCRIPT_FILENAME /var/www/webroot$fastcgi_script_name;<br>    fastcgi_param PATH_INFO $fastcgi_script_name;<br>    fastcgi_param DOCUMENT_ROOT /var/www/webroot;<br>}<br>}<br>server {<br>    listen 80;<br>    server_name myseconddomain.com;<br>    include /etc/nginx/aliases.conf;<br>    location / {<br>        root /var/www/webroot/secondapp;<br>        index index.html index.htm index.php;<br>        location ~ \.php$ {<br>            location ~ /\. {<br>                deny all;<br>                access_log off;<br>                log_not_found off;<br>            }<br>            include /etc/nginx/fastcgi_params;<br>            fastcgi_pass 127.0.0.1:9000;<br>            fastcgi_param SCRIPT_FILENAME /var/www/webroot/secondapp$fastcgi_script_name;<br>            fastcgi_param PATH_INFO $fastcgi_script_name;<br>            fastcgi_param DOCUMENT_ROOT /var/www/webroot/secondapp;<br>        }<br>    }<br>}<br>index index.php index.html index.htm;<br>error_page 500 502 503 504 /50x.html;<br>location = /50x.html {<br>    root html;<br>}<br>location ~ /\. {<br>    deny all;<br>    access_log off;<br>    log_not_found off;<br>}</code></pre></p><div class="doc-image"><img src="/images/docs/multiple-domains-php/07-nginx-conf_hud7dad8186248375eb83adfea70dc3f85_82810_480x0_resize_box_3.png" alt="nginx conf hud7dad8186248375eb83adfea70dc3f85 82810 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/multiple-domains-php/08-restart-apache_hu5d2750f540a725a3ef5090aca9ea9527_32263_480x0_resize_box_3.png" alt="restart apache hu5d2750f540a725a3ef5090aca9ea9527 32263 480x0 resize box 3" loading="lazy"></div><p>Text v češtině:</p><p><pre><code class="lang-">index.php;<br>location ~ \.php$ {<br>    location ~ /\. {<br>        odmítnutí všeho;<br>        log_protokolu off;<br>        log_nefound off;<br>    }<br>    zahrnout /etc/nginx/fastcgi_params;<br>    fastcgi_pas 127.0.0.1:9000;<br>    fastcgi_param SCRIPT_FILENAME /var/www/webroot/firstapp$fastcgi_script_name;<br>    fastcgi_param PATH_INFO $fastcgi_script_name;<br>    fastcgi_param DOCUMENT_ROOT /var/www/webroot/firstapp;<br>}<br>}<br>index index.php index.html index.htm;<br>error_page 500 502 503 504 /50x.html;<br>location = /50x.html {<br>    root html;<br>}<br>location ~ /\. {<br>    odmítnutí všeho;<br>    log_protokolu off;<br>    log_nefound off;<br>}<br>location ~ \.php$ {<br>    location ~ /\. {<br>        odmítnutí všeho;<br>        log_protokolu off;<br>        log_nefound off;<br>    }<br>    zahrnout /etc/nginx/fastcgi_params;<br>    fastcgi_pas 127.0.0.1:9000;<br>    fastcgi_param SCRIPT_FILENAME /var/www/webroot$fastcgi_script_name;<br>    fastcgi_param PATH_INFO $fastcgi_script_name;<br>    fastcgi_param DOCUMENT_ROOT /var/www/webroot;<br>}<br>}<br>server {<br>    posluchat 80;<br>    server_name myseconddomain.com;<br>    zahrnout /etc/nginx/aliases.conf;<br>    location / {<br>        root /var/www/webroot/secondapp;<br>        index index.html index.htm index.php;<br>        location ~ \.php$ {<br>            location ~ /\. {<br>                odmítnutí všeho;<br>                log_protokolu off;<br>                log_nefound off;<br>            }<br>            zahrnout /etc/nginx/fastcgi_params;<br>            fastcgi_pas 127.0.0.1:9000;<br>            fastcgi_param SCRIPT_FILENAME /var/www/webroot/secondapp$fastcgi_script_name;<br>            fastcgi_param PATH_INFO $fastcgi_script_name;<br>            fastcgi_param DOCUMENT_ROOT /var/www/webroot/secondapp;<br>        }<br>    }<br>}<br>index index.php index.html index.htm;<br>error_page 500 502 503 504 /50x.html;<br>location = /50x.html {<br>    root html;<br>}<br>location ~ /\. {<br>    odmítnutí všeho;<br>    log_protokolu off;<br>    log_nefound off;<br>}</code></pre></p><p>Tento text popisuje konfiguraci serveru Nginx pro službu PHP. Některé části konfigurace jsou opakované pro dvě různé adresáře (<code>/var/www/webroot/firstapp</code> a <code>/var/www/webroot/secondapp</code>). Každá část konfigurace obsahuje nastavení pro zpracování požadavků na konkrétní adresář nebo soubor. Například <code>location ~ \.php$ { ... }</code> určuje, jak zpracovat požadavky na soubory s příponou <code>.php</code>.</p><p> Text v angličtině:
+<ol>
+<li>Nastavte následující příkazy do souboru nginx.conf:</li>
+</ol></p><p><pre><code class="lang-">index index.php index.html index.htm;<br>error_page 500 502 503 504 /50x.html;<br>location = /50x.html {<br>    root html;<br>}<br>location ~ /\. {<br>    deny all;<br>    access_log off;<br>    log_not_found off;<br>}<br>location ~ \.php$ {<br>    location ~ /\. {<br>        deny all;<br>        access_log off;<br>        log_not_found off;<br>    }<br>    include /etc/nginx/fastcgi_params;<br>    fastcgi_pass 127.0.0.1:9000;<br>    fastcgi_param SCRIPT_FILENAME /var/www/webroot$fastcgi_script_name;<br>    fastcgi_param PATH_INFO $fastcgi_script_name;<br>    fastcgi_param DOCUMENT_ROOT /var/www/webroot;<br>}</code></pre>
+<ol>
+<li>Nezapomeňte Uložit změny a Restartovat aplikační server, aby se nové nastavení aplikovalo.</li>
+</ol><ol>
+<li>Nyní můžete kontrolovat výsledky, aby se vše správně provádělo. Nadějímám, že se tato instrukce vám bude hodit. Doménové jména jsou velmi důležité kusy vašeho online identity, takže nezapomeňte je chránit. S PaaS to trvá jen několik minut. Máte lekce! Co je další? PHP Sessions Clustering Multiple Domains with Public IP Swap Domains</li>
+</ol></p><p>Překlad do češtiny:
+<ol>
+<li>Nastavte následující příkazy do souboru nginx.conf:</li>
+</ol></p><p><pre><code class="lang-">index index.php index.html index.htm;<br>error_page 500 502 503 504 /50x.html;<br>location = /50x.html {<br>    root html;<br>}<br>location ~ /\. {<br>    deny all;<br>    access_log off;<br>    log_not_found off;<br>}<br>location ~ \.php$ {<br>    location ~ /\. {<br>        deny all;<br>        access_log off;<br>        log_not_found off;<br>    }<br>    include /etc/nginx/fastcgi_params;<br>    fastcgi_pass 127.0.0.1:9000;<br>    fastcgi_param SCRIPT_FILENAME /var/www/webroot$fastcgi_script_name;<br>    fastcgi_param PATH_INFO $fastcgi_script_name;<br>    fastcgi_param DOCUMENT_ROOT /var/www/webroot;<br>}</code></pre>
+<ol>
+<li>Nezapomeňte Uložit změny a Restartovat aplikační server, aby se nové nastavení aplikovalo.</li>
+</ol><ol>
+<li>Nyní můžete kontrolovat výsledky, aby se vše správně provádělo. Nadějímám, že se tato instrukce vám bude hodit. Doménové jména jsou velmi důležité kusy vašeho online identity, takže nezapomeňte je chránit. S PaaS to trvá jen několik minut. Máte lekce! Co je další? PHP Sessions Clustering Multiple Domains with Public IP Swap Domains</li>
+</ol></p>
+</main>
+</body>
+</html>
