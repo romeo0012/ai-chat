@@ -540,7 +540,9 @@ const llm = new LLMClient()
 // overflows the endpoint. Override with LLM_CONTEXT_TOKENS if the model differs.
 const LLM_CONTEXT_TOKENS = parseInt(process.env.LLM_CONTEXT_TOKENS || process.env.LLM_MAX_CONTEXT || '8192')
 const LLM_OUTPUT_TOKENS = parseInt(process.env.LLM_OUTPUT_TOKENS || llm.maxTokens)
-const CTX_TOKENS_PER_CHAR = 4 // ~4 chars per token (Czech/English text, coarse estimate)
+const CTX_TOKENS_PER_CHAR = 2.5 // measured ~2.5 chars/token for these docs (CZ/EN + URLs)
+const CTX_SAFETY_TOKENS = 1000 // reserved under the window to absorb tokenizer variance
+const CTX_FLOOR_CHARS = 1200 // always include at least this much context
 
 // Trim conversation history for the LLM: the system prompt + RAG context already
 // consume most of the LLM window, so send only recent, short messages.
@@ -755,16 +757,16 @@ io.on('connection', (socket) => {
         const fixedRagPrompt = LANG_INSTRUCTION[lang].length + systemPromptBase.length +
           ragFormatBlock.replace('{}SOURCE_HEADERS{}', sourceHeaderList).length
         // Budget the RAG context against the model window so we never overflow the
-        // endpoint (vLLM/TGI reject with HTTP 400). Reserve the fixed prompt overhead,
-        // the conversation history, the output tokens and a safety margin, then give
-        // the remainder to the RAG context. Approx 4 chars/token (CZ/EN).
+        // endpoint (vLLM/TGI reject with HTTP 400 "maximum context length"). Reserve
+        // the fixed prompt overhead, the conversation history, the output tokens and
+        // a safety margin, then give the remainder to the RAG context.
         const historyBudget = Math.min(
           trimHistoryForLlm(history, 5000, 6).reduce((n, m) => n + String(m.content || '').length, 0),
           5000
         )
         const overheadTokens = Math.ceil((fixedRagPrompt + historyBudget) / CTX_TOKENS_PER_CHAR) +
-          LLM_OUTPUT_TOKENS + 600
-        const contextTokens = Math.max(LLM_CONTEXT_TOKENS - overheadTokens, 500)
+          LLM_OUTPUT_TOKENS + CTX_SAFETY_TOKENS
+        const contextTokens = Math.max(LLM_CONTEXT_TOKENS - overheadTokens, Math.ceil(CTX_FLOOR_CHARS / CTX_TOKENS_PER_CHAR))
         const maxChars = Math.floor(contextTokens * CTX_TOKENS_PER_CHAR)
         contextStr = rag.formatSourceContext(sourceGroups, { charsPerDoc: 2400, maxChars, windowChars: 1100 })
       } else {
