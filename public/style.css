@@ -44,6 +44,10 @@ header {
 header .logo {
   height: 28px;
   width: auto;
+  background: #333;
+  border-radius: 4px;
+  padding: 3px 6px;
+  box-sizing: content-box;
 }
 
 header h1 {
