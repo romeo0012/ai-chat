@@ -534,8 +534,16 @@ app.get(BASE_PATH + '/p/:lang([a-z]{2})/:product/:path(*)', async (req, res) => 
 
 const llm = new LLMClient()
 
+// Token budget for the served model (vLLM/TGI OpenAI-compatible endpoints reject
+// requests longer than the model window with HTTP 400). We reserve the window for
+// system prompt + RAG context + conversation + output, so the RAG context never
+// overflows the endpoint. Override with LLM_CONTEXT_TOKENS if the model differs.
+const LLM_CONTEXT_TOKENS = parseInt(process.env.LLM_CONTEXT_TOKENS || process.env.LLM_MAX_CONTEXT || '8192')
+const LLM_OUTPUT_TOKENS = parseInt(process.env.LLM_OUTPUT_TOKENS || llm.maxTokens)
+const CTX_TOKENS_PER_CHAR = 4 // ~4 chars per token (Czech/English text, coarse estimate)
+
 // Trim conversation history for the LLM: the system prompt + RAG context already
-// consume most of the 8192-token window, so send only recent, short messages.
+// consume most of the LLM window, so send only recent, short messages.
 function trimHistoryForLlm(history, maxTotalChars = 5000, maxMessages = 6) {
   const trimmed = history.slice(-maxMessages)
   const out = []
@@ -582,6 +590,10 @@ PRAVIDLA:
 if (HELP_URL) {
   systemPromptBase += `\n\nYour knowledge source is: ${HELP_URL}`
 }
+
+// Fixed RAG instruction block appended to the system prompt whenever docs are used.
+// Kept as a const so its size is measurable for the context-token budget.
+const ragFormatBlock = `\n\n=== DOKUMENTACE Z NÁPOVĚDY (podle zdrojů) ===\nNásledující text je z oficiální dokumentace, rozdělený do sekcí podle jednotlivých zdrojů. Každá sekce začíná nadpisem zdroje a obsahuje číslované dokumenty [N] s názvem, URL a textem. POUŽIJ HO pro odpověď.\n\nSEZNAM ZDROJŮ V POVINNÉM POŘADÍ (odpověď projde postupně přes všechny):\n{}SOURCE_HEADERS{}\n\nPOVINNÝ FORMÁT ODPOVĚDI (přesně takto):\n- Každý zdroj = jedna sekce. Začni přesným nadpisem zdroje (např. "Dokumentace virtuozzo.com (Virtuozzo docs):"), pod ním odpověď na dotaz POUZE z dokumentů TOHO zdroje s odkazy [název stránky](url), pak oddělovač "---".\n- Pokračuj dalším nadpisem ze seznamu, pak odpověď, pak "---". Takto projdi VŠECHNY zdroje ze seznamu v jejich pořadí.\n- Pokud zdroj k dotazu nic neobsahuje, napiš pod jeho nadpis jen: "V tomto zdroji nejsou žádné relevantní informace." a pokračuj dál.\n- ZAKÁZÁNO: nepoužívej HTML tagy <a>, neopisuj doslova řádky kontextu ("[1] ...", "URL: ..."), nepoužívej číslované reference [1], nevymýšlej URL.\n- ODPOVĚĎ PIŠ VLASTNÍMI SLOVY: z dokumentu vezmi informace a srozumitelně je NAPIŠ SVÝMI SLOVY – nezačínej odpověď číslem dokumentu ani "URL:", nekopíruj celý text dokumentu.\n- JAK NA TO (dotaz na postup/škálování/nasazení/konfiguraci/monitorování/odstraňování apod.): vypiš KONKRÉTNÍ KROKY z textu dokumentu jako číslovaný seznam (1. 2. 3. …), např. "1. Otevři topology wizard. 2. Vyber uzel a klikni na +/− pro horizontální škálování…". To, že se postup "v dokumentu píše", NENÍ odpověď – napiš, co přesně a v jakém pořadí dělat.\n- BUĎ STRUČNÝ: u informačních dotazů věnuj každému zdroji max 2 věty a max 2 odkazy; u postupových dotazů jsou kroky důležitější než stručnost.\nPŘÍKLAD (jen ukázka tvaru, text si vymysli vlastní):\nDokumentace virtuozzo.com (Virtuozzo docs):\nVirtuozzo nabízí statistické monitorování spotřeby zdrojů. [Statistics Monitoring](https://url/)\n---\ndocs.cloudsigma.com (CloudSigma):\nV tomto zdroji nejsou žádné relevantní informace.\n---\nhttpd.apache.org (Apache):\nStručná odpověď podle apache dokumentů.\n\n{}`
 
 rag.loadIndex(path.join(dataDir, 'index.json'))
 
@@ -739,7 +751,22 @@ io.on('connection', (socket) => {
         hasContext = techTerms.some(t => topResults.includes(t))
       }
       if (hasContext) {
-        contextStr = rag.formatSourceContext(sourceGroups, { charsPerDoc: 2400, maxChars: 14000 })
+        const sourceHeaderList = rag.SOURCES.map(s => s.header).join('\n')
+        const fixedRagPrompt = LANG_INSTRUCTION[lang].length + systemPromptBase.length +
+          ragFormatBlock.replace('{}SOURCE_HEADERS{}', sourceHeaderList).length
+        // Budget the RAG context against the model window so we never overflow the
+        // endpoint (vLLM/TGI reject with HTTP 400). Reserve the fixed prompt overhead,
+        // the conversation history, the output tokens and a safety margin, then give
+        // the remainder to the RAG context. Approx 4 chars/token (CZ/EN).
+        const historyBudget = Math.min(
+          trimHistoryForLlm(history, 5000, 6).reduce((n, m) => n + String(m.content || '').length, 0),
+          5000
+        )
+        const overheadTokens = Math.ceil((fixedRagPrompt + historyBudget) / CTX_TOKENS_PER_CHAR) +
+          LLM_OUTPUT_TOKENS + 600
+        const contextTokens = Math.max(LLM_CONTEXT_TOKENS - overheadTokens, 500)
+        const maxChars = Math.floor(contextTokens * CTX_TOKENS_PER_CHAR)
+        contextStr = rag.formatSourceContext(sourceGroups, { charsPerDoc: 2400, maxChars, windowChars: 1100 })
       } else {
         searchResults.length = 0
       }
@@ -750,7 +777,9 @@ io.on('connection', (socket) => {
       console.log(`[RAG] ${clientIp} ${searchResults.length} výsledků: "${userMsg.slice(0, 50)}"`)
       searchResults.forEach(r => console.log(`[RAG] score=${r.score.toFixed(4)} ${r.url}`))
       const sourceHeaderList = rag.SOURCES.map(s => s.header).join('\n')
-      systemPrompt += `\n\n=== DOKUMENTACE Z NÁPOVĚDY (podle zdrojů) ===\nNásledující text je z oficiální dokumentace, rozdělený do sekcí podle jednotlivých zdrojů. Každá sekce začíná nadpisem zdroje a obsahuje číslované dokumenty [N] s názvem, URL a textem. POUŽIJ HO pro odpověď.\n\nSEZNAM ZDROJŮ V POVINNÉM POŘADÍ (odpověď projde postupně přes všechny):\n${sourceHeaderList}\n\nPOVINNÝ FORMÁT ODPOVĚDI (přesně takto):\n- Každý zdroj = jedna sekce. Začni přesným nadpisem zdroje (např. "Dokumentace virtuozzo.com (Virtuozzo docs):"), pod ním odpověď na dotaz POUZE z dokumentů TOHO zdroje s odkazy [název stránky](url), pak oddělovač "---".\n- Pokračuj dalším nadpisem ze seznamu, pak odpověď, pak "---". Takto projdi VŠECHNY zdroje ze seznamu v jejich pořadí.\n- Pokud zdroj k dotazu nic neobsahuje, napiš pod jeho nadpis jen: "V tomto zdroji nejsou žádné relevantní informace." a pokračuj dál.\n- ZAKÁZÁNO: nepoužívej HTML tAquy <a>, neopisuj doslova řádky kontextu ("[1] ...", "URL: ..."), nepoužívej číslované reference [1], nevymýšlej URL.\n- ODPOVĚĎ PIŠ VLASTNÍMI SLOVY: z dokumentu vezmi informace a srozumitelně je NAPIŠ SVÝMI SLOVY – nezačínej odpověď číslem dokumentu ani "URL:", nekopíruj celý text dokumentu.\n- JAK NA TO (dotaz na postup/škálování/nasazení/konfiguraci/monitorování/odstraňování apod.): vypiš KONKRÉTNÍ KROKY z textu dokumentu jako číslovaný seznam (1. 2. 3. …), např. "1. Otevři topology wizard. 2. Vyber uzel a klikni na +/− pro horizontální škálování…". To, že se postup "v dokumentu píše", NENÍ odpověď – napiš, co přesně a v jakém pořadí dělat.\n- BUĎ STRUČNÝ: u informačních dotazů věnuj každému zdroji max 2 věty a max 2 odkazy; u postupových dotazů jsou kroky důležitější než stručnost.\nPŘÍKLAD (jen ukázka tvaru, text si vymysli vlastní):\nDokumentace virtuozzo.com (Virtuozzo docs):\nVirtuozzo nabízí statistické monitorování spotřeby zdrojů. [Statistics Monitoring](https://url/)\n---\ndocs.cloudsigma.com (CloudSigma):\nV tomto zdroji nejsou žádné relevantní informace.\n---\nhttpd.apache.org (Apache):\nStručná odpověď podle apache dokumentů.\n\n${contextStr}`
+      systemPrompt += ragFormatBlock
+        .replace('{}SOURCE_HEADERS{}', sourceHeaderList)
+        .replace(/\n\n\{\}$/, '\n\n' + contextStr)
     } else {
       const noDocsMsg = {
         cz: 'V dokumentaci k tomuto tématu nic není.',
