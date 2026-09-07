@@ -60,7 +60,7 @@ The assistant **PaaS Assistant** answers queries about the Virtuozzo Application
 
 **Answer format (with RAG context):**
 - The answer is divided into **per-source sections** (each source gets its own section with a header).
-- Sections follow a fixed order of the 19 indexed sources (Virtuozzo → CloudSigma → Apache → … → Varnish).
+- Sections follow a fixed order of the indexed sources: `www.virtuozzo.com` (Virtuozzo) → `docs.cloudsigma.com` (CloudSigma) → `httpd.apache.org` (Apache) → `nginx.org` (Nginx) → `kubernetes.io` → `argo-cd.readthedocs.io` (Argo CD) → `docs.nginx.com` (Nginx ingress/admin) → `docs.docker.com` → `docs.haproxy.org` (HAProxy) → `www.keycloak.org` → `www.elastic.co` (Elasticsearch) → `docs.gitlab.com` → `developer.hashicorp.com` (Vault) → `doc.traefik.io` (Traefik) → `help.sonatype.com` (Nexus) → `kafka.apache.org` → `goharbor.io` (Harbor) → `docs.litespeedtech.com` → `varnish-cache.org`.
 - Sources with no relevant information are **entirely omitted** from the answer (no placeholder "nothing here" sections).
 - Each section contains an answer **in the assistant's own words** derived from that source's documentation, with inline links.
 - Sections are separated by `---`.
@@ -115,7 +115,7 @@ The assistant **PaaS Assistant** answers queries about the Virtuozzo Application
 - `data/docs_cache/` — translated documentation pages (committed, seeded into the writable cache).
 - `data/page-images.json` — page-image map (regenerable, gitignored).
 
-**Domains in the index:** virtualoozzo.com (526), docs.cloudsigma.com (575), httpd.apache.org (423), nginx.org (398), kubernetes.io (156), argo-cd.readthedocs.io (122), docs.nginx.com (93), docs.docker.com (87), docs.haproxy.org (74), www.keycloak.org (60), www.elastic.co (58), docs.gitlab.com (41), developer.hashicorp.com (38), doc.traefik.io (36), help.sonatype.com (35), kafka.apache.org (22), docs.litespeedtech.com (22), goharbor.io (20), varnish-cache.org (14).
+**Domains in the index:** www.virtuozzo.com (526), docs.cloudsigma.com (575), httpd.apache.org (423), nginx.org (398), kubernetes.io (156), argo-cd.readthedocs.io (122), docs.nginx.com (93), docs.docker.com (87), docs.haproxy.org (74), www.keycloak.org (60), www.elastic.co (58), docs.gitlab.com (41), developer.hashicorp.com (38), doc.traefik.io (36), help.sonatype.com (35), kafka.apache.org (22), docs.litespeedtech.com (22), goharbor.io (20), varnish-cache.org (14).
 
 ### REST / Socket.IO interface
 

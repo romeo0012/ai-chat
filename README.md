@@ -60,7 +60,7 @@ Asistent **PaaS Assistant** odpovídá na dotazy týkající se Virtuozzo Applic
 
 **Formát odpovědi (s RAG kontextem):**
 - Odpověď se dělí na **sekce podle zdrojů** (každý zdroj = svá sekce s nadpisem).
-- Sekce jsou seřazeny podle předem daného pořadí 19 zdrojů (Virtuozzo → CloudSigma → Apache → … → Varnish).
+- Sekce jsou seřazeny podle předem daného pořadí zdrojů: `www.virtuozzo.com` (Virtuozzo) → `docs.cloudsigma.com` (CloudSigma) → `httpd.apache.org` (Apache) → `nginx.org` (Nginx) → `kubernetes.io` → `argo-cd.readthedocs.io` (Argo CD) → `docs.nginx.com` (Nginx ingress/admin) → `docs.docker.com` → `docs.haproxy.org` (HAProxy) → `www.keycloak.org` → `www.elastic.co` (Elasticsearch) → `docs.gitlab.com` → `developer.hashicorp.com` (Vault) → `doc.traefik.io` (Traefik) → `help.sonatype.com` (Nexus) → `kafka.apache.org` → `goharbor.io` (Harbor) → `docs.litespeedtech.com` → `varnish-cache.org`.
 - Zdroje, které nemají relevantní informace, se z odpovědi **zcela vynechají** (žádné placeholder sekce „v tomto zdroji nic není").
 - Každá sekce obsahuje odpověď **vlastními slovy** z dokumentace toho zdroje, s inline odkazy.
 - Oddělovač mezi sekcemi: `---`.
@@ -115,7 +115,7 @@ Asistent **PaaS Assistant** odpovídá na dotazy týkající se Virtuozzo Applic
 - `data/docs_cache/` — přeložené stránky dokumentace (commitované, seedují se do writable cache).
 - `data/page-images.json` — mapa obrázků stránek (regenerovatelná, gitignored).
 
-**Domény v indexu:** virtualoozzo.com (526), docs.cloudsigma.com (575), httpd.apache.org (423), nginx.org (398), kubernetes.io (156), argo-cd.readthedocs.io (122), docs.nginx.com (93), docs.docker.com (87), docs.haproxy.org (74), www.keycloak.org (60), www.elastic.co (58), docs.gitlab.com (41), developer.hashicorp.com (38), doc.traefik.io (36), help.sonatype.com (35), kafka.apache.org (22), docs.litespeedtech.com (22), goharbor.io (20), varnish-cache.org (14).
+**Domény v indexu:** www.virtuozzo.com (526), docs.cloudsigma.com (575), httpd.apache.org (423), nginx.org (398), kubernetes.io (156), argo-cd.readthedocs.io (122), docs.nginx.com (93), docs.docker.com (87), docs.haproxy.org (74), www.keycloak.org (60), www.elastic.co (58), docs.gitlab.com (41), developer.hashicorp.com (38), doc.traefik.io (36), help.sonatype.com (35), kafka.apache.org (22), docs.litespeedtech.com (22), goharbor.io (20), varnish-cache.org (14).
 
 ### REST / Socket.IO rozhraní
 
