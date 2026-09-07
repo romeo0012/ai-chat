@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module ngx_http_v2_module</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Module ngx_http_v2_module</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p>Join us for the first quarterly NGINX Community Call on July 22nd to connect and discuss NGINX development. Module ngx_http_v2_module Known Issues Example Configuration Directives http2 http2_body_preread_size http2_chunk_size http2_idle_timeout http2_max_concurrent_pushes http2_max_concurrent_streams http2_max_field_size http2_max_header_size http2_max_requests http2_push http2_push_preload http2_recv_buffer_size http2_recv_timeout Embedded Variables The ngx_http_v2_module module (1.9.5) provides support for HTTP/2. This module is not built by default, it should be enabled with the --with-http_v2_module configuration parameter. Known Issues Before version 1.9.14, buffering of a client request body could not be disabled regardless of proxy_request_buffering, fastcgi_request_buffering, uwsgi_request_buffering, and scgi_request_buffering directive values. Before version 1.19.1, the lingering_close mechanism was not used to control closing HTTP/2 connections. Example Configuration server { listen 443 ssl; http2 on; ssl_certificate server.crt; ssl_certificate_key server.key; } Note that accepting HTTP/2 connections over TLS requires the “Application-Layer Protocol Negotiation” (ALPN) TLS extension support, which is available since OpenSSL version 1.0.2. Also note that if the ssl_prefer_server_ciphers directive is set to the value “on”, the ciphers should be configured to comply with RFC 9113, Appendix A black list and supported by clients.</p><p>note that if the ssl_prefer_server_ciphers directive is set to the value “on”, the ciphers should be configured to comply with RFC 9113, Appendix A black list and supported by clients. Directives Syntax: http2 on | off; Default: http2 off; Context: http, server This directive appeared in version 1.25.1. Enables the HTTP/2 protocol. Syntax: http2_body_preread_size size; Default: http2_body_preread_size 64k; Context: http, server This directive appeared in version 1.11.0. Sets the size of the buffer per each request in which the request body may be saved before it is started to be processed. Syntax: http2_chunk_size size; Default: http2_chunk_size 8k; Context: http, server, location Sets the maximum size of chunks into which the response body is sliced. A too low value results in higher overhead. A too high value impairs prioritization due to HOL blocking. Syntax: http2_idle_timeout time; Default: http2_idle_timeout 3m; Context: http, server This directive is obsolete since version 1.19.7. The keepalive_timeout directive should be used instead. Sets the timeout of inactivity after which the connection is closed. Syntax: http2_max_concurrent_pushes number; Default: http2_max_concurrent_pushes 10; Context: http, server This directive appeared in version 1.13.9. This directive is obsolete since version 1.25.1. Limits the maximum number of concurrent push requests in a connection.</p><p>version 1.13.9. This directive is obsolete since version 1.25.1. Limits the maximum number of concurrent push requests in a connection. Syntax: http2_max_concurrent_streams number; Default: http2_max_concurrent_streams 128; Context: http, server Sets the maximum number of concurrent HTTP/2 streams in a connection. Syntax: http2_max_field_size size; Default: http2_max_field_size 4k; Context: http, server This directive is obsolete since version 1.19.7. The large_client_header_buffers directive should be used instead. Limits the maximum size of an HPACK-compressed request header field. The limit applies equally to both name and value. Note that if Huffman encoding is applied, the actual size of decompressed name and value strings may be larger. For most requests, the default limit should be enough. Syntax: http2_max_header_size size; Default: http2_max_header_size 16k; Context: http, server This directive is obsolete since version 1.19.7. The large_client_header_buffers directive should be used instead. Limits the maximum size of the entire request header list after HPACK decompression. For most requests, the default limit should be enough. Syntax: http2_max_requests number; Default: http2_max_requests 1000; Context: http, server This directive appeared in version 1.11.6. This directive is obsolete since version 1.19.7. The keepalive_requests directive should be used instead.</p><p>This directive appeared in version 1.11.6. This directive is obsolete since version 1.19.7. The keepalive_requests directive should be used instead. Sets the maximum number of requests (including push requests) that can be served through one HTTP/2 connection, after which the next client request will lead to connection closing and the need of establishing a new connection. Closing connections periodically is necessary to free per-connection memory allocations. Therefore, using too high maximum number of requests could result in excessive memory usage and not recommended. Syntax: http2_push uri | off; Default: http2_push off; Context: http, server, location This directive appeared in version 1.13.9. This directive is obsolete since version 1.25.1. The early_hints directive can be used instead. Pre-emptively sends (pushes) a request to the specified uri along with the response to the original request. Only relative URIs with absolute path will be processed, for example: http2_push /static/css/main.css; The uri value can contain variables. Several http2_push directives can be specified on the same configuration level. The off parameter cancels the effect of the http2_push directives inherited from the previous configuration level. Syntax: http2_push_preload on | off; Default: http2_push_preload off; Context: http, server, location This directive appeared in version 1.13.9. This directive is obsolete since version 1.25.1.</p><p>Default: http2_push_preload off; Context: http, server, location This directive appeared in version 1.13.9. This directive is obsolete since version 1.25.1. Enables automatic conversion of preload links specified in the “Link” response header fields into push requests. Syntax: http2_recv_buffer_size size; Default: http2_recv_buffer_size 256k; Context: http Sets the size of the per worker input buffer. Syntax: http2_recv_timeout time; Default: http2_recv_timeout 30s; Context: http, server This directive is obsolete since version 1.19.7. The client_header_timeout directive should be used instead. Sets the timeout for expecting more data from the client, after which the connection is closed. Embedded Variables The ngx_http_v2_module module supports the following embedded variables: $http2 negotiated protocol identifier: “h2” for HTTP/2 over TLS, “h2c” for HTTP/2 over cleartext TCP, or an empty string otherwise.</p>
+</main>
+</body>
+</html>

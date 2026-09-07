@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Filters</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Filters</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p>Filters Available Languages: en | es | fr | ja | ko | pt-br | tr This document describes the use of filters in Apache. Filtering in Apache 2 Smart Filtering Exposing Filters as an HTTP Service Using Filters Filtering in Apache 2 ¶ Related ModulesRelated Directivesmod_filtermod_deflatemod_ext_filtermod_includemod_charset_litemod_reflectormod_buffermod_datamod_ratelimitmod_reqtimeoutmod_requestmod_sedmod_substitutemod_xml2encmod_proxy_htmlFilterChainFilterDeclareFilterProtocolFilterProviderAddInputFilterAddOutputFilterRemoveInputFilterRemoveOutputFilterReflectorHeaderExtFilterDefineExtFilterOptionsSetInputFilterSetOutputFilter The Filter Chain is available in Apache 2.0 and higher, and enables applications to process incoming and outgoing data in a highly flexible and configurable manner, regardless of where the data comes from. We can pre-process incoming data, and post-process outgoing data, at will. This is basically independent of the traditional request processing phases. Some examples of filtering in the standard Apache distribution are: mod_include, implements server-side includes. mod_ssl, implements SSL encryption (https). mod_deflate, implements compression/decompression on the fly. mod_charset_lite, transcodes between different character sets. mod_ext_filter, runs an external program as a filter. Apache also uses a number of filters internally to perform functions like chunking and byte-range handling.</p><p>program as a filter. Apache also uses a number of filters internally to perform functions like chunking and byte-range handling. A wider range of applications are implemented by third-party filter modules. A few of these are: HTML and XML processing and rewriting XSLT transforms and XIncludes XML Namespace support File Upload handling and decoding of HTML Forms Image processing Protection of vulnerable applications such as PHP scripts Text search-and-replace editing Smart Filtering ¶ mod_filter, included in Apache 2.1 and later, enables the filter chain to be configured dynamically at run time. So for example you can set up a proxy to rewrite HTML with an HTML filter and JPEG images with a completely separate filter, despite the proxy having no prior information about what the origin server will send. This works by using a filter harness, that dispatches to different providers according to the actual contents at runtime. Any filter may be either inserted directly in the chain and run unconditionally, or used as a provider and inserted dynamically.</p><p>filter may be either inserted directly in the chain and run unconditionally, or used as a provider and inserted dynamically. For example, an HTML processing filter will only run if the content is text/html or application/xhtml+xml A compression filter will only run if the input is a compressible type and not already compressed A charset conversion filter will be inserted if a text document is not already in the desired charset Exposing Filters as an HTTP Service ¶ Filters can be used to process content originating from the client in addition to processing content originating on the server using the mod_reflector module. mod_reflector accepts POST requests from clients, and reflects the content request body received within the POST request back in the response, passing through the output filter stack on the way back to the client. This technique can be used as an alternative to a web service running within an application server stack, where an output filter provides the transformation required on the request body. For example, the mod_deflate module might be used to provide a general compression service, or an image transformation filter might be turned into an image transformation service. Using Filters ¶ There are two ways to use filtering: Simple and Dynamic. In general, you should use one or the other; mixing them can have unexpected consequences (although simple Input filtering can be mixed freely with either simple or dynamic Output filtering).</p><p>them can have unexpected consequences (although simple Input filtering can be mixed freely with either simple or dynamic Output filtering). The Simple Way is the only way to configure input filters, and is sufficient for output filters where you need a static filter chain. Relevant directives are SetInputFilter, SetOutputFilter, AddInputFilter, AddOutputFilter, RemoveInputFilter, and RemoveOutputFilter. The Dynamic Way enables both static and flexible, dynamic configuration of output filters, as discussed in the mod_filter page. Relevant directives are FilterChain, FilterDeclare, and FilterProvider. One further directive AddOutputFilterByType is still supported, but deprecated. Use dynamic configuration instead.</p>
+</main>
+</body>
+</html>

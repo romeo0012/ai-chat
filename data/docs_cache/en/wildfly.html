@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WildFly Application Server</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>WildFly Application Server</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p>WildFly Application Server WildFly is a modern, flexible, lightweight and managed application runtime, which is written in Java and implements the latest standards and technology of the Java Platform Enterprise Edition (Java EE) specification. WildFly is entirely free and open source, available to be run on multiple platforms. Among the main features of this application server: customizable runtime based on the pluggable subsystems, which can be integrated or removed on demand Java EE8 support to implement the latest enterprise Java standards in easy to consume framework modular approach with an ability to start each service in isolation fast, lightweight and optimized for ultimate performance To create a WildFly application server for Java project hosting within the platform, follow the simple steps below. Note: This template utilizes a modern systemd initialization daemon. Creating WildFly Server 1. Log in to your PaaS account and click the New Environment button in the upper left corner of the dashboard. 2. In the opened environment topology wizard, navigate to the Java tab and select WildFly (the 10-16 versions are supported) from the list of available application servers. Then, specify the allocated resources limit using cloudlet sliders, choose a region (if several ones are available) and edit the name of your environment.</p><p>the list of available application servers. Then, specify the allocated resources limit using cloudlet sliders, choose a region (if several ones are available) and edit the name of your environment. Notes: WildFly is not compatible with Java 6 and 7; therefore these versions are not available due to the minimal WildFly resources requirements, it is strongly recommended to allocate more than 1 cloudlet for this node. Otherwise, you can experience low server performance and even its failure WildFly can be launched in the Standalone mode using the configuration file defined in the STANDALONE_MODE_CONFIG environment variable the platform provides out-of-box support of the WildFly servers Auto-Clustering in the Managed Domain mode via the appropriate switcher in topology wizard Click the Create button when ready. 3. Wait for a couple of minutes for your environment to be created and click the Open in Browser button next to it. 4. The WildFly default welcome page lists some useful links to help you get started. In order to access the WildFly Administration Console, click the appropriate link (circled in the image above) or get URL from the email (received after server creation) alongside with other access credentials. Also, you can establish an SSH connection to your WildFly server and use the WildFly CLI inbuilt utility for managing.</p><p>email (received after server creation) alongside with other access credentials. Also, you can establish an SSH connection to your WildFly server and use the WildFly CLI inbuilt utility for managing. Standalone Mode The WildFly application server is run in the “standalone” mode by default so that each instance is an independent process based on the configuration file defined via the STANDALONE_MODE_CONFIG environment variable. There are four certified profiles for standalone mode: standalone.xml (default) - configurations for Java Enterprise Edition 8 Web with the required technologies standalone-full.xml - configurations for Java Enterprise Edition 8 Full with all the EE 8 technologies standalone-ha.xml - configurations for Java Enterprise Edition 8 Web with high availability standalone-full-ha.xml - configurations for Java Enterprise Edition 8 Full with high availability In case of using the HA configs (the last two options), the jgroups protocol is used for messaging between nodes. It is configured to use the authorization with the MD5 token and asymmetrical encryption by default. Such an implementation prevents non-authorized nodes from being able to join a cluster and non-members from communicating with cluster members. Note: It is highly recommended to change the default auth_value parameter within your standalone HA configuration file on the production environments. This concludes our tutorial on the WildFly server installation!</p><div class="doc-image"><img src="/images/docs/wildfly/02-create-new-environment-button_hu08753fb831e531293fa12c6b94ab4cf4_9171_480x0_resize_box_3.png" alt="create new environment button hu08753fb831e531293fa12c6b94ab4cf4 9171 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/wildfly/03-wildfly-server-topology-wizard_huee7e7b6b70f902b3138a537f6a573beb_153568_480x0_resize_box_3.png" alt="wildfly server topology wizard huee7e7b6b70f902b3138a537f6a573beb 153568 480x0 resize box 3" loading="lazy"></div><p>parameter within your standalone HA configuration file on the production environments. This concludes our tutorial on the WildFly server installation! Now, you can configure it in a way you need and proceed to the application deployment. What’s next? Setting Up Environment Deployment Guide Environment Variables Configuration File Manager</p><div class="doc-image"><img src="/images/docs/wildfly/04-wildfly-open-in-browser_hu0fe1dcf37b96ac085ea329204901b00a_27058_480x0_resize_box_3.png" alt="wildfly open in browser hu0fe1dcf37b96ac085ea329204901b00a 27058 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/wildfly/05-wildfly-home-page_huaf1f95eecbff358ea4ca11dea9ea68d6_90980_480x0_resize_box_3.png" alt="wildfly home page huaf1f95eecbff358ea4ca11dea9ea68d6 90980 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/wildfly/06-wildfly-standalone-config-variable_hu50c5598b7853263733c71238c3c35190_53006_480x0_resize_box_3.png" alt="wildfly standalone config variable hu50c5598b7853263733c71238c3c35190 53006 480x0 resize box 3" loading="lazy"></div>
+</main>
+</body>
+</html>

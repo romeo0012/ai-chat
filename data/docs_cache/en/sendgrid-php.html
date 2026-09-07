@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Using SendGrid</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Using SendGrid</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p>Using SendGrid SendGrid is a reliable and scalable cloud-based email infrastructure with flexible APIs that allows you to easily integrate it to your app. The platform and SendGrid interconnection gives you an opportunity to send the emails directly from your PHP application without the necessity to support the custom email system. In the following instruction we will examine a simple example of SendGrid integration with PHP application hosted with PaaS. Sign Up for SendGrid The first thing you should do is to create a new account at SendGrid. For the first try of the platform and SendGrid integration you can choose a free pricing plan, that allows you to send mailings with a limitation in 200 emails per day. Note that some time is needed for the account to be verified. Remember your username and password after registration, you’ll need them for configuring application example below. Create Environment 1. Login to PaaS account and press Create Environment button. Then select PHP language wizard tab and specify environment name, sendgrid-php in our case. 2. Click Upload button in Deployment Manager. Sample SendGrid application, bundled with SendGrid PHP library, is hosted at GitHub, therefore you can use the direct link for archive uploading: https://github.com/sendgrid/sendgrid-php-sample-app/archive/master.zip 3. After the archive is uploaded, it will be listed in the packages panel. Press Deploy to.. button next to master.</p><p>After the archive is uploaded, it will be listed in the packages panel. Press Deploy to.. button next to master.zip archive and select environment you’ve created in the previous steps. 4. Type context in the opened window (in case you need it) and press Deploy. Sample Application Configuring After sample application is deployed, you can configure it and specify your SendGrid login and password. 1. Press Config button alongside the Apache server. 2. You’ll see the list of folders and configuration files. Navigate to the webroot &gt; {context_name} folder and open index.php file. Edit the circled below strings to specify your SendGrid account username, password, and email you want to send mailings from. Don’t forget to press Save button. Checking Results . Find your SendGrid environment at the dashboard and open it (Open in browser button near the application context). 2. You’ll see the simple basic form for emails sending. State the recipient in the To: field, subject and mailing text in the Subject: and Content: fields respectively. Click Send. 3. Just in a few minutes the sent email will appear in the inbox of recipient. That’s all! For now you are able to send up to 200 emails per day via your PHP application hosted with the platform. More info about plenty of additional features you can find in the complete SendGrid documentation. Enjoy! What’s next? Tutorials by Category PHP Tutorials Setting Up Environment</p><div class="doc-image"><img src="/images/docs/sendgrid-php/create-environment_huba985530353332be1709450dca4053e2_41949_480x0_resize_box_3.png" alt="create environment huba985530353332be1709450dca4053e2 41949 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/sendgrid-php/upload-sendgrid.png" alt="upload sendgrid" loading="lazy"></div><div class="doc-image"><img src="/images/docs/sendgrid-php/deploy-sendgrid_hu381d8b9dc72db14130e061516f44f5cf_21243_480x0_resize_box_3.png" alt="deploy sendgrid hu381d8b9dc72db14130e061516f44f5cf 21243 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/sendgrid-php/apache-configuration_hue12e0ad44405ffcbf75462b05315a584_22159_480x0_resize_box_3.png" alt="apache configuration hue12e0ad44405ffcbf75462b05315a584 22159 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/sendgrid-php/sendgrid-settings_huac4145f828971bae4416c932097fe3ea_159256_480x0_resize_box_3.png" alt="sendgrid settings huac4145f828971bae4416c932097fe3ea 159256 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/sendgrid-php/open-sendgrid_hucad9d7ec1fb21a3850859912bf45973c_15923_480x0_resize_box_3.png" alt="open sendgrid hucad9d7ec1fb21a3850859912bf45973c 15923 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/sendgrid-php/sending-form_hu927084d118116fbbd0851881eaf2218d_27328_480x0_resize_box_3.png" alt="sending form hu927084d118116fbbd0851881eaf2218d 27328 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/sendgrid-php/sendgrid-email_hu945b264b983433f5955aa58a19b2b268_27101_480x0_resize_box_3.png" alt="sendgrid email hu945b264b983433f5955aa58a19b2b268 27101 480x0 resize box 3" loading="lazy"></div>
+</main>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contributing new content</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Contributing new content</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p>Contributing new content This section contains information you should know before contributing new content. There are also dedicated pages about submitting case studies and blog articles. New content task flow flowchart LR subgraph second[Before you begin] direction TB S[ ] -.- A[Sign the CNCF CLA] --&gt; B[Choose Git branch] B --&gt; C[One language per PR] C --&gt; F[Check out contributor tools] end subgraph first[Contributing Basics] direction TB T[ ] -.- D[Write docs in markdown and build site with Hugo] --- E[source in GitHub] E --- G['/content/../docs' folder contains docs for multiple languages] G --- H[Review Hugo page content types and shortcodes] end first ----&gt; second classDef grey fill:#dddddd,stroke:#ffffff,stroke-width:px,color:#000000, font-size:15px; classDef white fill:#ffffff,stroke:#000,stroke-width:px,color:#000,font-weight:bold classDef spacewhite fill:#ffffff,stroke:#fff,stroke-width:0px,color:#000 class A,B,C,D,E,F,G,H grey class S,T spacewhite class first,second white Figure - Contributing new content preparation The figure above depicts the information you should know prior to submitting new content. The information details follow. Contributing basics Write Kubernetes documentation in Markdown and build the Kubernetes site using Hugo. Kubernetes documentation uses CommonMark as its flavor of Markdown. The source is in GitHub. You can find Kubernetes documentation at /content/en/docs/.</p>
+</main>
+</body>
+</html>

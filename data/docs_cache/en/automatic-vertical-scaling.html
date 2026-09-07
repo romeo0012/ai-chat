@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Automatic Vertical Scaling</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Automatic Vertical Scaling</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p>Automatic Vertical Scaling The platform is the only Cloud PaaS which can automatically scale any application, both vertically and horizontally, making hosting of your applications truly flexible. Automatic vertical scaling is made possible by the platform’s ability to dynamically change the amount of allocated to server resources (RAM and CPU) according to its current demands, with no manual intervention required. This feature guarantees you never overpay for unused resources and saves your time due to eliminating the necessity of handling the load-related adjustments or architectural changes. You simply decide the maximum limit you are ready to consume and the platform automatically defines the optimal amount of resources required for your app, tracking the incoming load in real time. How It Works So, the key idea of automatic scaling is fairly simple - as soon as an application’s load grows, the platform simply makes additional resources available to it; and when the load goes down again, the resources get reduced by the platform automatically. Herewith, the resources are allocated immediately without delays or negative impact on your application, which can be seen within the next video: Tip: The vertical scaling feature is applicable for any type of instance in environment (i.e., application server, database, load balancer, Docker container, Elastic VPS, cache instance and build node).</p><p>type of instance in environment (i.e., application server, database, load balancer, Docker container, Elastic VPS, cache instance and build node). As you could observe within the video above, the platform measures resources in special units called cloudlets, which provide you with a superior granularity while scaling. A cloudlet is roughly equivalent to 128 MiB RAM and 400Mhz CPU core. There are two types of cloudlets available: reserved and dynamic. The Reserved ones are used to define the amount of resources you expect your application will certainly consume and you pay for them irrespective of actual usage. However, they are charged with lower price compared with dynamic ones. Dynamic cloudlets defines the amount of resources your application can access, based on necessity. You pay for them only in the case of real consumption. Automatic vertical scaling is performed within the confines of the stated dynamic cloudlets number. You are able to choose your scalability limits with the appropriate settings and, in such a way, effectively put caps on the budget you are ready to spend, preventing unexpected or high bills. You can combine the usage of both cloudlet types in different ways, following the most suitable for you pricing model. Adjusting Resource Limits A newly created environment receives a certain amount of cloudlets. Resource consumption depends on the type and quantity of your software stacks.</p><p>created environment receives a certain amount of cloudlets. Resource consumption depends on the type and quantity of your software stacks. Upon being added to the environment, each stack receives the default number of allocated cloudlets according to the optimal resource amount, required for its proper workability. Click to see default cloudlet values for some popular stacks.Node Name Reserved Scaling Limit Tomcat, Jetty 1 6 TomEE 1 8 GlassFish 6 16 Apache, NGINX 1 4 NGINX-Balancer 1 4 Nginx-Ruby 1 6 Apache-Ruby 1 8 Apache-Python 1 8 NodeJS 4 8 Node Name Reserved Scaling Limit MySQL, MariaDB 1 6 PostgreSQL 1 6 Node Name Reserved Scaling Limit Memcached 1 4 VPS 1 16 Maven 1 16 If you would like to change these values and scale your environment, the maximum number of available resources (cloudlets) can be increased/decreased manually through the Environment topology wizard. For that, use the cloudlet sliders in the Vertical Scaling section of its central pane. Note: If changing the scaling limit (i.e., the number of the dynamic cloudlets) for the existing application server, database or cache nodes, the corresponding layer will be restarted. Herewith, the appropriate warning will be displayed directly in the topology wizard: You can use the automatically gathered statistics to check the consumption level for the last month and set the amount of resources according to it.</p><div class="doc-image"><img src="/images/docs/automatic-vertical-scaling/01-pay-per-use-pricing_hu954e3eb8d5ff754453212b90cfde7766_89098_480x0_resize_box_3.png" alt="pay per use pricing hu954e3eb8d5ff754453212b90cfde7766 89098 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/automatic-vertical-scaling/02-cloudlet-resources.png" alt="cloudlet resources" loading="lazy"></div><p>directly in the topology wizard: You can use the automatically gathered statistics to check the consumption level for the last month and set the amount of resources according to it. And in the case your application becomes highly popular and a single server’s capacity is not enough, feel free to scale it horizontally by means of increasing the number of nodes manually or configure a set of triggers for automatic horizontal scaling of your application server. What’s next? Automatic Horizontal Scaling Horizontal Scaling Isolated Containers</p><div class="doc-image"><img src="/images/docs/automatic-vertical-scaling/03-automatic-vertical-scaling_hu0b8206624697bb85f10d0bb9c26c9509_74760_480x0_resize_box_3.png" alt="automatic vertical scaling hu0b8206624697bb85f10d0bb9c26c9509 74760 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/automatic-vertical-scaling/04-environment-wizard_huc9717bd774bb6ce44c73b20af3bff46e_115073_480x0_resize_box_3.png" alt="environment wizard huc9717bd774bb6ce44c73b20af3bff46e 115073 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/automatic-vertical-scaling/05-adjust-cloudlets-restart-warning_hu4ebdd34788f916ad816b8afe170af3d3_64061_480x0_resize_box_3.png" alt="adjust cloudlets restart warning hu4ebdd34788f916ad816b8afe170af3d3 64061 480x0 resize box 3" loading="lazy"></div>
+</main>
+</body>
+</html>

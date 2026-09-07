@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What is Traefik?¶</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>What is Traefik?¶</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p>Initializing search GitHub What is Traefik?¶ Traefik is an open-source Application Proxy and the core of the Traefik Hub Runtime Platform. If you start with Traefik for service discovery and routing, you can seamlessly add API management, API gateway, AI gateway, and API mocking capabilities as needed. For a detailed comparison of all Traefik products and their capabilities, see our Product Features Comparison. With 3.3 billion downloads and over 55k stars on GitHub, Traefik is used globally across hybrid cloud, multi-cloud, on prem, and bare metal environments running Kubernetes, Docker Swarm, AWS, the list goes on. Here’s how it works—Traefik receives requests on behalf of your system, identifies which components are responsible for handling them, and routes them securely. It automatically discovers the right configuration for your services by inspecting your infrastructure to identify relevant information and which service serves which request. Because everything happens automatically, in real time (no restarts, no connection interruptions), you can focus on developing and deploying new features to your system, instead of configuring and maintaining its working state. From the Traefik Maintainer Team When developing Traefik, our main goal is to make it easy to use, and we're sure you'll enjoy it. Personas¶ Traefik supports different needs depending on your background.</p><p>Maintainer Team When developing Traefik, our main goal is to make it easy to use, and we're sure you'll enjoy it. Personas¶ Traefik supports different needs depending on your background. We keep three user personas in mind as we build and organize these docs: Beginners: You are new to Traefik or new to reverse proxies. You want simple, guided steps to set things up without diving too deep into advanced topics. DevOps Engineers: You manage infrastructure or clusters (Docker, Kubernetes, or other orchestrators). You integrate Traefik into your environment and value reliability, performance, and streamlined deployments. Developers: You create and deploy applications or APIs. You focus on how to expose your services through Traefik, apply routing rules, and integrate it with your development workflow. Core Concepts¶ Traefik’s main concepts help you understand how requests flow to your services: Entrypoints are the network entry points into Traefik. They define the port that will receive the packets and whether to listen for TCP or UDP. Routers are in charge of connecting incoming requests to the services that can handle them. In the process, routers may use pieces of middleware to update the request or act before forwarding the request to the service. Services are responsible for configuring how to reach the actual services that will eventually handle the incoming requests.</p><p>update the request or act before forwarding the request to the service. Services are responsible for configuring how to reach the actual services that will eventually handle the incoming requests. Providers are infrastructure components, whether orchestrators, container engines, cloud providers, or key-value stores. The idea is that Traefik queries the provider APIs in order to find relevant information about routing, and when Traefik detects a change, it dynamically updates the routes. These concepts work together to manage your traffic from the moment a request arrives until it reaches your application. How to Use the Documentation¶ Navigation: Each main section focuses on a specific stage of working with Traefik - installing, exposing services, observing, extending &amp; migrating. Use the sidebar to navigate to the section that is most appropriate for your needs. Practical Examples: You will see code snippets and configuration examples for different environments (YAML/TOML, Labels, &amp; Tags). Reference: When you need to look up technical details, our reference section provides a deep dive into configuration options and key terms. Info Have a question? Join our Community Forum to discuss, learn, and connect with the Traefik community. Using Traefik OSS in production? Consider upgrading to our API gateway (watch demo video) for better security, control, and 24/7 support. Just need support? Explore our 24/7/365 support for Traefik OSS.</p>
+</main>
+</body>
+</html>

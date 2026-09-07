@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Managing Access to PHPMyAdmin</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Managing Access to PHPMyAdmin</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p>Managing Access to PHPMyAdmin The platform allows to flexibly manage access to the phpMyAdmin panel for the MySQL, MariaDB and PerconaDB database servers. By default, all connections to phpMyAdmin are allowed and, if you want to change such a behavior, adjust the /etc/httpd/conf.d/phpMyAdmin-jel.conf file. Just, locate the &lt;Directory /usr/share/phpMyAdmin/&gt; section, where the possible configs are described via comments: 1 2 3 4 5 6 7 8 9 10 11 12 &lt;Directory /usr/share/phpMyAdmin/&gt; ##REMOVE THE "Require all granted" STRING BELOW TO RESTRICT THE ACCESS FROM ANY IP EXCEPT SPECIFIED IN THE SECTION BELOW Require all granted ###UNCOMMENT THE FOLLOWING LINES TO ALLOW ACCESS FROM THE SPECIFIED IP ###REPLACE THE xxx.xxx.xxx.xxx WITH THE IP ADDRESS FROM WHICH THE ACCESS IS ALLOWED #SetEnvIf X-Forwarded-For ^xxx\.xxx\.xxx\.xxx env_allow_1 #Require env env_allow_1 #Require ip xxx.xxx.xxx.xxx #Require all denied &lt;/Directory&gt; Let’s move through it step-by-step: 1. To change the default behavior, which allows all connections, you need to comment/remove the appropriate line, as it is shown in the image below (e.g., using the file configuration manager or via Web SSH): 2.</p><p>which allows all connections, you need to comment/remove the appropriate line, as it is shown in the image below (e.g., using the file configuration manager or via Web SSH): 2. Next, list the allowed IPs, which should be specified in the following format (you can uncomment the provided templates and specify the correct IP address): if your database node has public IP 1 Require ip {ipAddress} if your database node has internal IP only 1 2 SetEnvIf X-Forwarded-For {ipAddress} {varName} Require env {varName} Note: In this case you should specify the {ipAddress} in the ^xxx.xxx.xxx.xxx format to be properly processed by Apache. Also, you can use any prefered {varName} variable name, for example env_allow_1. If needed, you can specify multiple addresses as it is shown in the images above. 3. Uncomment the last line within the section, to deny access from any IP other than specified one(s): 4. Save the changes and Restart Nodes of your database server. That’s it! Any connection to the phpMyAdmin panel from the IP address, which is not in the allowed list, will lead to the page similar to the following one: Now, you can be sure that your database admin panel is protected from the unallowed connections. What’s next? Configuration File Manager Create DB Server Database Configuration Public IP</p><div class="doc-image"><img src="/images/docs/phpmyadmin-access/01-phpmyadmin-configuration-file_hu185ed2ec8608d6e28b8585c7ac96fbe9_66258_480x0_resize_box_3.png" alt="phpmyadmin configuration file hu185ed2ec8608d6e28b8585c7ac96fbe9 66258 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/phpmyadmin-access/02-configure-access-for-db-with-public-ip_hu8d49c373921c45a264b3e5491b636deb_45098_480x0_resize_box_3.png" alt="configure access for db with public ip hu8d49c373921c45a264b3e5491b636deb 45098 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/phpmyadmin-access/03-configure-access-for-db-with-internal-ip-only_huda8cefd2f6ce76e1ffdefc618c117a43_46932_480x0_resize_box_3.png" alt="configure access for db with internal ip only huda8cefd2f6ce76e1ffdefc618c117a43 46932 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/phpmyadmin-access/04-deny-access-to-admin-from-not-listed-addresses_huf516393534da953f5410a473a6b928c2_46886_480x0_resize_box_3.png" alt="deny access to admin from not listed addresses huf516393534da953f5410a473a6b928c2 46886 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/phpmyadmin-access/05-restart-database-nodes_hu096ab7058c9c7c092b9683be46c9f277_27629_480x0_resize_box_3.png" alt="restart database nodes hu096ab7058c9c7c092b9683be46c9f277 27629 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/phpmyadmin-access/06-403-forbidden-page-example_huacee9184853772ce51906ee6ee072322_14324_480x0_resize_box_3.png" alt="403 forbidden page example huacee9184853772ce51906ee6ee072322 14324 480x0 resize box 3" loading="lazy"></div>
+</main>
+</body>
+</html>

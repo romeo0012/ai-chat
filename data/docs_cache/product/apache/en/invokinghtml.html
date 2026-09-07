@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Starting Apache</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Starting Apache</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p>Starting Apache Available Languages: de | en | es | fr | ja | ko | pt-br | tr On Windows, Apache is normally run as a service. For details, see Running Apache as a Service. On Unix, the httpd program is run as a daemon that executes continuously in the background to handle requests. This document describes how to invoke httpd. How Apache Starts Errors During Start-up Starting at Boot-Time Additional Information See alsoStopping and Restartinghttpdapachectl How Apache Starts ¶ If the Listen specified in the configuration file is default of 80 (or any other port below 1024), then it is necessary to have root privileges in order to start apache, so that it can bind to this privileged port. Once the server has started and performed a few preliminary activities such as opening its log files, it will launch several child processes which do the work of listening for and answering requests from clients. The main httpd process continues to run as the root user, but the child processes run as a less privileged user. This is controlled by the selected Multi-Processing Module. The recommended method of invoking the httpd executable is to use the apachectl control script. This script sets certain environment variables that are necessary for httpd to function correctly under some operating systems, and then invokes the httpd binary. apachectl will pass through any command line arguments, so any httpd options may also be used with apachectl.</p><p>httpd binary. apachectl will pass through any command line arguments, so any httpd options may also be used with apachectl. You may also directly edit the apachectl script by changing the HTTPD variable near the top to specify the correct location of the httpd binary and any command-line arguments that you wish to be always present. The first thing that httpd does when it is invoked is to locate and read the configuration file httpd.conf. The location of this file is set at compile-time, but it is possible to specify its location at run time using the -f command-line option as in /usr/local/apache2/bin/apachectl -f /usr/local/apache2/conf/httpd.conf If all goes well during startup, the server will detach from the terminal and the command prompt will return almost immediately. This indicates that the server is up and running. You can then use your browser to connect to the server and view the test page in the DocumentRoot directory. Errors During Start-up ¶ If Apache suffers a fatal problem during startup, it will write a message describing the problem either to the console or to the ErrorLog before exiting. One of the most common error messages is "Unable to bind to Port ...". This message is usually caused by either: Trying to start the server on a privileged port when not logged in as the root user; or Trying to start the server when there is another instance of Apache or some other web server already bound to the same Port.</p><p>the server when there is another instance of Apache or some other web server already bound to the same Port. For further trouble-shooting instructions, consult the Apache FAQ. Starting at Boot-Time ¶ If you want your server to continue running after a system reboot, you should add a call to apachectl to your system startup files (typically rc.local or a file in an rc.N directory). This will start Apache as root. Before doing this ensure that your server is properly configured for security and access restrictions. The apachectl script is designed to act like a standard SysV init script; it can take the arguments start, restart, and stop and translate them into the appropriate signals to httpd. So you can often simply link apachectl into the appropriate init directory. But be sure to check the exact requirements of your system. Additional Information ¶ Additional information about the command-line options of httpd and apachectl as well as other support programs included with the server is available on the Server and Supporting Programs page. There is also documentation on all the modules included with the Apache distribution and the directives that they provide.</p>
+</main>
+</body>
+</html>

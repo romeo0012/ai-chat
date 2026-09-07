@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module ngx_http_map_module</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Module ngx_http_map_module</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p>Module ngx_http_map_moduleExample ConfigurationDirectives map map_hash_bucket_size map_hash_max_size The ngx_http_map_module module creates variables whose values depend on values of other variables. Example Configuration map $http_host $name { hostnames; default 0; example.com 1; *.example.com 1; example.org 2; *.example.org 2; .example.net 3; wap.* 4; } map $http_user_agent $mobile { default 0; "~Opera Mini" 1; } Directives Syntax: map string $variable { ... } Default: — Context: http Creates a new variable whose value depends on values of one or more of the source variables specified in the first parameter. Before version 0.9.0 only a single variable could be specified in the first parameter. Since variables are evaluated only when they are used, the mere declaration even of a large number of “map” variables does not add any extra costs to request processing. Parameters inside the map block specify a mapping between source and resulting values. Source values are specified as strings or regular expressions (0.9.6). Strings are matched ignoring the case. A regular expression should either start from the “~” symbol for a case-sensitive matching, or from the “~*” symbols (1.0.4) for case-insensitive matching. A regular expression can contain named and positional captures that can later be used in other directives along with the resulting variable. If a source value matches one of the names of special parameters described below, it should be prefixed with the “\” symbol.</p><p>source value matches one of the names of special parameters described below, it should be prefixed with the “\” symbol. The resulting value can contain text, variable (0.9.0), and their combination (1.11.0). The following special parameters are also supported: default value sets the resulting value if the source value matches none of the specified variants. When default is not specified, the default resulting value will be an empty string. hostnames indicates that source values can be hostnames with a prefix or suffix mask: *.example.com 1; example.* 1; The following two records example.com 1; *.example.com 1; can be combined: .example.com 1; This parameter should be specified before the list of values. include file includes a file with values. There can be several inclusions. volatile indicates that the variable is not cacheable (1.11.7). The search is performed in the following order of priority and terminates on the first matching variant: the string value without a mask the longest string value with a prefix mask, e.g. “*.example.com” the longest string value with a suffix mask, e.g. “mail.*” the first matching regular expression (in order of appearance in the configuration file) the default value Syntax: map_hash_bucket_size size; Default: map_hash_bucket_size 32|64|128; Context: http Sets the bucket size for the map variables hash tables. Default value depends on the processor’s cache line size. The details of setting up hash tables are provided in a separate document.</p><p>depends on the processor’s cache line size. The details of setting up hash tables are provided in a separate document. Syntax: map_hash_max_size size; Default: map_hash_max_size 2048; Context: http Sets the maximum size of the map variables hash tables. The details of setting up hash tables are provided in a separate document.</p>
+</main>
+</body>
+</html>

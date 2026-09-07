@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What is Auto-Clustering</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>What is Auto-Clustering</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p>What is Auto-Clustering In the modern world, the importance of data availability cannot be underestimated. Herewith, you want to maintain immediate access to any required information at a moment’s notice. Thus, for any production solution of any meaningful size, it is highly recommended to configure a cluster. Software clustering is the technique of using at least two instances for a service. Such redundancy not only provides reliability (the system can withstand a failure of at least one instance) but also helps to handle high load. Based on the experience, the configuration of a cluster can be a challenging process that requires quite a lot of time investment. In order to help you out, the platform automates some of the most popular clusterization solutions and can perform them for you on-demand directly from topology wizard. Such automation immensely simplifies and speeds up the creation of a reliable production-ready cluster for your project. Enabling Auto-Clustering Currently, the following templates support the Auto-Clustering feature via the topology wizard: application servers - Tomcat/TomEE, GlassFish, Payara, Jenkins, WildFly SQL databases - MySQL, MariaDB, Percona, PostgreSQL NoSQL database - Couchbase, Redis, OpenSearch storage server - Shared Storage Container Tip: In addition to the Auto-Clustering option in topology wizard, a number of prepackaged clusterization solutions can be found under the Clusters category of the platform Marketplace. 1.</p><p>topology wizard, a number of prepackaged clusterization solutions can be found under the Clusters category of the platform Marketplace. 1. Select one of the listed stacks in the topology wizard. The appropriate Auto-Clustering switcher will be available in the central part of the frame. 2. You can hover over the hint icon for additional information on this particular stack auto-clustering implementation. Within the description, you can find the Learn More link to documentation with a more extensive overview. 3. Also, after enabling Auto-Clustering, some additional configs can appear for further customization of the cluster.</p><p>you can find the Learn More link to documentation with a more extensive overview. 3. Also, after enabling Auto-Clustering, some additional configs can appear for further customization of the cluster. For example, MariaDB auto-cluster allows to choose replication Scheme and add dedicated ProxySQL load balancer exclusively for this database cluster: Additional Materials on Auto-Clustering The platform provides extensive documentation, multiple blog posts, and dedicated GitHub pages on the Auto-Clustering topic: Auto-Clustering of Instances via Topology Wizard - lists stacks that support the feature, explains basic management via wizard and Cloud Scripting MariaDB/MySQL Auto-Сlustering with Load Balancing and Replication - automatic clustering and replication for MariaDB and MySQL databases for high availability and performance PostgreSQL Auto-Clustering with Asynchronous Master-Slave Replication - get multiple copies of essential data within automatic master-slave replication for PostgreSQL database Out-of-Box GlassFish &amp; Payara Clustering: Running Java EE Highly-Available Applications in the Cloud - shows how to set up a highly-available cluster with GlassFish and Payara Micro for running Java EE applications Jenkins Cluster Hosting for Continuous Integration and Delivery (CI/CD) - automate continuous integration and delivery of your Java applications using pre-configured master-slave Jenkins cluster WildFly Managed Domain in Containers: Automatic Micro Clustering and Scaling - explains how to extend your WildFly from a standalone server to cluster in managed domain mode for running cloud-native microservices Shared Storage Container Auto-Clustering - configures a reliable storage cluster with AutoFS, NFSv4, and GlusterFS support Solutions Collection on GitHub - stores the platform automation solutions, including Auto-Clustering (e.</p><div class="doc-image"><img src="/images/docs/what-is-auto-clustering/01-clusters-in-marketplace_hu4652f90fcf2f0f94010fa1a9bc7a7135_114160_480x0_resize_box_3.png" alt="clusters in marketplace hu4652f90fcf2f0f94010fa1a9bc7a7135 114160 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/what-is-auto-clustering/02-stack-auto-clustering-in-topology-wizard_hu64c2cee12f1ca3ebcbaa3043e2420835_96992_480x0_resize_box_3.png" alt="stack auto clustering in topology wizard hu64c2cee12f1ca3ebcbaa3043e2420835 96992 480x0 resize box 3" loading="lazy"></div><p>cluster with AutoFS, NFSv4, and GlusterFS support Solutions Collection on GitHub - stores the platform automation solutions, including Auto-Clustering (e.g., db-clustering, wildfly, glassfish, and other repositories) What’s next? Cluster in the Cloud Horizontal Scaling Automatic Horizontal Scaling Topology Wizard Marketplace Software Stack Versions</p><div class="doc-image"><img src="/images/docs/what-is-auto-clustering/03-auto-cluster-description_hu364b84bba3f571ef3e7adf87e2503c91_93103_480x0_resize_box_3.png" alt="auto cluster description hu364b84bba3f571ef3e7adf87e2503c91 93103 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/what-is-auto-clustering/04-auto-cluster-additional-configs_hud470a6870a2f9d29b6156182f3860294_98150_480x0_resize_box_3.png" alt="auto cluster additional configs hud470a6870a2f9d29b6156182f3860294 98150 480x0 resize box 3" loading="lazy"></div>
+</main>
+</body>
+</html>

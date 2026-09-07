@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apache IP-based Virtual Host Support</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Apache IP-based Virtual Host Support</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p>Apache IP-based Virtual Host Support Available Languages: en | fr | ja | ko | tr What is IP-based virtual hosting System requirements How to set up Apache Setting up multiple daemons Setting up a single daemon with virtual hosts See also Name-based Virtual Hosts Support What is IP-based virtual hosting ¶ IP-based virtual hosting is a method to apply different directives based on the IP address and port a request is received on. Most commonly, this is used to serve different websites on different ports or interfaces. In many cases, name-based virtual hosts are more convenient, because they allow many virtual hosts to share a single address/port. See Name-based vs. IP-based Virtual Hosts to help you decide. System requirements ¶ As the term IP-based indicates, the server must have a different IP address/port combination for each IP-based virtual host. This can be achieved by the machine having several physical network connections, or by use of virtual interfaces which are supported by most modern operating systems (see system documentation for details, these are frequently called "ip aliases", and the "ifconfig" command is most commonly used to set them up), and/or using multiple port numbers. In the terminology of Apache HTTP Server, using a single IP address but multiple TCP ports, is also IP-based virtual hosting. How to set up Apache ¶ There are two ways of configuring apache to support multiple hosts.</p><p>IP-based virtual hosting. How to set up Apache ¶ There are two ways of configuring apache to support multiple hosts. Either by running a separate httpd daemon for each hostname, or by running a single daemon which supports all the virtual hosts. Use multiple daemons when: There are security partitioning issues, such as company1 does not want anyone at company2 to be able to read their data except via the web. In this case you would need two daemons, each running with different User, Group, Listen, and ServerRoot settings. You can afford the memory and file descriptor requirements of listening to every IP alias on the machine. It's only possible to Listen to the "wildcard" address, or to specific addresses. So if you have a need to listen to a specific address for whatever reason, then you will need to listen to all specific addresses. (Although one httpd could listen to N-1 of the addresses, and another could listen to the remaining address.) Use a single daemon when: Sharing of the httpd configuration between virtual hosts is acceptable. The machine services a large number of requests, and so the performance loss in running separate daemons may be significant. Setting up multiple daemons ¶ Create a separate httpd installation for each virtual host. For each installation, use the Listen directive in the configuration file to select which IP address (or virtual host) that daemon services. e.g. Listen 192.0.2.</p><p>Listen directive in the configuration file to select which IP address (or virtual host) that daemon services. e.g. Listen 192.0.2.100:80 It is recommended that you use an IP address instead of a hostname (see DNS caveats). Setting up a single daemon with virtual hosts ¶ For this case, a single httpd will service requests for the main server and all the virtual hosts. The VirtualHost directive in the configuration file is used to set the values of ServerAdmin, ServerName, DocumentRoot, ErrorLog and TransferLog or CustomLog configuration directives to different values for each virtual host. e.g. &lt;VirtualHost 172.20.30.40:80&gt; ServerAdmin webmaster@www1.example.com DocumentRoot "/www/vhosts/www1" ServerName www1.example.com ErrorLog "/www/logs/www1/error_log" CustomLog "/www/logs/www1/access_log" combined &lt;/VirtualHost&gt; &lt;VirtualHost 172.20.30.50:80&gt; ServerAdmin webmaster@www2.example.org DocumentRoot "/www/vhosts/www2" ServerName www2.example.org ErrorLog "/www/logs/www2/error_log" CustomLog "/www/logs/www2/access_log" combined &lt;/VirtualHost&gt; It is recommended that you use an IP address instead of a hostname in the &lt;VirtualHost&gt; directive (see DNS caveats). Specific IP addresses or ports have precedence over their wildcard equivalents, and any virtual host that matches has precedence over the servers base configuration.</p><p>ports have precedence over their wildcard equivalents, and any virtual host that matches has precedence over the servers base configuration. Almost any configuration directive can be put in the VirtualHost directive, with the exception of directives that control process creation and a few other directives. To find out if a directive can be used in the VirtualHost directive, check the Context using the directive index. SuexecUserGroup may be used inside a VirtualHost directive if the suEXEC wrapper is used. SECURITY: When specifying where to write log files, be aware of some security risks which are present if anyone other than the user that starts Apache has write access to the directory where they are written. See the security tips document for details.</p>
+</main>
+</body>
+</html>

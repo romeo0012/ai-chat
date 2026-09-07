@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Varnish Users Guide</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>The Varnish Users Guide</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p>The Varnish Users GuideThe Varnish documentation consists of three main documents:The Varnish Tutorial explains the basics and gets you started with Varnish.The Varnish Users Guide (this document), explains how Varnish works and how you can use it to improve your website.The Varnish Reference Manual contains hard facts and is useful for looking up specific questions.After The Big Varnish Picture, this Users Guide is organized in sections following the major interfaces to Varnish as a service:Starting and running Varnish is about getting Varnish configured, with respect to storage, sockets, security and how you can control and communicate with Varnish once it is running.VCL - Varnish Configuration Language is about getting Varnish to handle the HTTP requests the way you want, what to cache, how to cache it, modifying HTTP headers etc. etc.Reporting and statistics explains how you can monitor what Varnish does, from a transactional level to aggregating statistics.Varnish and Website Performance is about tuning your website with Varnish.Troubleshooting Varnish is for locating and fixing common issues with Varnish.</p><p>and Website Performance is about tuning your website with Varnish.Troubleshooting Varnish is for locating and fixing common issues with Varnish.The Big Varnish PictureStarting and running VarnishSecurity firstRequired command line argumentsCLI - bossing Varnish aroundStorage backendsTransient StorageParametersSizing your cacheVCL - Varnish Configuration LanguageVCL SyntaxBuilt-in VCLRequest and response VCL objectsBackend serversThe “none” backendMultiple backendsBackends and virtual hosts in VarnishConnecting Through a ProxyDirectorsHealth checksLayeringDirector ResolutionConnection PoolingHashingGrace mode and keepSeparate VCL filesUsing inline C to extend VarnishVCL ExamplesDevice detectionReporting and statisticsLogging in VarnishStatisticsVarnish and Website PerformanceAchieving a high hitrateThe role of HTTP HeadersHTTP VaryCache missesUncacheable contentPurging and banningCompressionContent composition with Edge Side IncludesExample: esi:includeExample: esi:remove and &lt;!–esi … –&gt;What happens when it fails ?Can an ESI fragment also use ESI-includes ?Doing ESI on JSON and other non-XML’ish contentIgnoring BOM in ESI objectsESI on invalid XMLESI includes with HTTPS protocolESI on partial responses (206)ESI and return(vcl(…))ESI and gzip compressionTroubleshooting VarnishWhen Varnish won’t startVarnish is crashing - panicsVarnish is crashing - stack overflowsVarnish is crashing - segfaultsVarnish gives me Guru meditationVarnish doesn’t cache</p>
+</main>
+</body>
+</html>

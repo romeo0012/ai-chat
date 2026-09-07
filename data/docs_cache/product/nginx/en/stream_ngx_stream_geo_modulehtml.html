@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module ngx_stream_geo_module</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Module ngx_stream_geo_module</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p>Module ngx_stream_geo_moduleExample ConfigurationDirectives geo The ngx_stream_geo_module module (1.11.3) creates variables with values depending on the client IP address. Example Configuration geo $geo { default 0; 127.0.0.1 2; 192.168.1.0/24 1; 10.1.0.0/16 1; ::1 2; 2001:0db8::/32 1; } Directives Syntax: geo [$address] $variable { ... } Default: — Context: stream Describes the dependency of values of the specified variable on the client IP address. By default, the address is taken from the $remote_addr variable, but it can also be taken from another variable, for example: geo $arg_remote_addr $geo { ...; } Since variables are evaluated only when used, the mere existence of even a large number of declared “geo” variables does not cause any extra costs for connection processing. If the value of a variable does not represent a valid IP address then the “255.255.255.255” address is used. Addresses are specified either as prefixes in CIDR notation (including individual addresses) or as ranges. The following special parameters are also supported: delete deletes the specified network. default a value set to the variable if the client address does not match any of the specified addresses. When addresses are specified in CIDR notation, “0.0.0.0/0” and “::/0” can be used instead of default. When default is not specified, the default value will be an empty string. include includes a file with addresses and values. There can be several inclusions.</p><p>default value will be an empty string. include includes a file with addresses and values. There can be several inclusions. ranges indicates that addresses are specified as ranges. This parameter should be the first. To speed up loading of a geo base, addresses should be put in ascending order. volatile indicates that the variable is not cacheable (1.29.3). Example: geo $country { default ZZ; include conf/geo.conf; delete 127.0.0.0/16; 127.0.0.0/24 US; 127.0.0.1/32 RU; 10.1.0.0/16 RU; 192.168.1.0/24 UK; } The conf/geo.conf file could contain the following lines: 10.2.0.0/16 RU; 192.168.2.0/24 RU; A value of the most specific match is used. For example, for the 127.0.0.1 address the value “RU” will be chosen, not “US”. Example with ranges: geo $country { ranges; default ZZ; 127.0.0.0-127.0.0.0 US; 127.0.0.1-127.0.0.1 RU; 127.0.0.1-127.0.0.255 US; 10.1.0.0-10.1.255.255 RU; 192.168.1.0-192.168.1.255 UK; }</p>
+</main>
+</body>
+</html>

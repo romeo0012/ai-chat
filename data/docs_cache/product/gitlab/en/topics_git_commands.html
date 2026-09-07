@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Common Git commands</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Common Git commands</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p>Common Git commands Git commands save you time throughout your development workflow. This reference page contains frequently used commands for common tasks such as code changes, branch management, and history review. Each command section provides the exact syntax, practical examples, and links to additional documentation. git add Use git add to files to the staging area. git add &lt;file_path&gt; You can recursively stage changes from the current working directory with git add ., or stage all changes in the Git repository with git add --all. For more information, see add files to your branch. git blame Use git blame to report which users changed which parts of a file. git blame &lt;file_name&gt; You can use git blame -L &lt;line_start&gt;,&lt;line_end&gt; to check a specific range of lines. For more information, see Git file blame. Example To check which user most recently modified line five of example.txt: $ git blame -L 5,5 example.txt 123abc (Zhang Wei 2021-07-04 12:23:04 +0000 5) git bisect Use git bisectto use binary search to find the commit that introduced a bug. Start by identifying a commit that is “bad” (contains the bug) and a commit that is “good” (doesn’t contain the bug). git bisect start git bisect bad # Current version is bad git bisect good v2.6.13-rc2 # v2.6.13-rc2 is known to be good git bisect then picks a commit in between the two points and asks you identify if the commit is “good” or “bad” with git bisect goodor git bisect bad. Repeat the process until the commit is found.</p><p>between the two points and asks you identify if the commit is “good” or “bad” with git bisect goodor git bisect bad. Repeat the process until the commit is found. git checkout Use git checkout to switch to a specific branch. git checkout &lt;branch_name&gt; To create a new branch and switch to it, use git checkout -b &lt;branch_name&gt;. For more information, see create a Git branch for your changes. git clone Use git clone to copy an existing Git repository. git clone &lt;repository&gt; For more information, see clone a Git repository to your local computer. git commit Use git commit to commits staged changes to the repository. git commit -m "&lt;commit_message&gt;" If the commit message contains a blank line, the first line becomes the commit subject while the remainder becomes the commit body. Use the subject to briefly summarize a change, and the commit body to provide additional details. For more information, see stage, commit, and push changes. git commit --amend Use git commit --amend to modify the most recent commit. git commit --amend git diff Use git diff to view the differences between your local unstaged changes and the latest version that you cloned or pulled. git diff You can display the difference (or diff) between your local changes and the most recent version of a branch. View a diff to understand your local changes before you commit them to the branch.</p><p>difference (or diff) between your local changes and the most recent version of a branch. View a diff to understand your local changes before you commit them to the branch. To compare your changes against a specific branch, run: git diff &lt;branch&gt; In the output: Lines with additions begin with a plus (+) and are displayed in green. Lines with removals or changes begin with a minus (-) and are displayed in red. git init Use git init to initialize a directory so Git tracks it as a repository. git init A .git file with configuration and log files is added to the directory. You shouldn’t edit the .git file directly. The default branch is set to main. You can change the name of the default branch with git branch -m &lt;branch_name&gt;, or initialize with git init -b &lt;branch_name&gt;. git pull Use git pull to get all the changes made by users after the last time you cloned or pulled the project. git pull &lt;optional_remote&gt; &lt;branch_name&gt; git push Use git push to update remote refs. git push For more information, see stage, commit, and push changes. git reflog Use git reflog to display a list of changes to the Git reference logs. git reflog By default, git reflog shows a list of changes to HEAD. For more information, see undo changes. git remote add Use git remote add to tell Git which remote repository in GitLab is linked to a local directory. git remote add &lt;remote_name&gt; &lt;repository_url&gt; When you clone a repository, by default the source repository is associated with the remote name origin.</p><p>in GitLab is linked to a local directory. git remote add &lt;remote_name&gt; &lt;repository_url&gt; When you clone a repository, by default the source repository is associated with the remote name origin. For more information about configuring additional remotes, see forks. git log Use git log to display a list of commits in chronological order. git log git show Use git show to show information about an object in Git. Example To see what commit HEAD points to: $ git show HEAD commit ab123c (HEAD -&gt; main, origin/main, origin/HEAD) git merge Use git merge to combine the changes from one branch with another. For more information about an alternative to git merge, see rebase to address merge conflicts. Example To apply the changes in feature_branch to the target_branch: git checkout target_branch git merge feature_branch git rebase Use git rebase to rewrite the commit history of a branch. git rebase &lt;branch_name&gt; You can use git rebase to resolve merge conflicts. In most cases, you want to rebase against the default branch. git reset Use git reset to undo a commit and rewind the commit history and continue on from an earlier commit. git reset For more information, see undo changes. git status Use git status to show the status of the working directory and staged files. git status When you add, change, or delete files, Git can show you the changes.</p>
+</main>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module ngx_http_secure_link_module</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Module ngx_http_secure_link_module</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p>Module ngx_http_secure_link_moduleDirectives secure_link secure_link_md5 secure_link_secretEmbedded Variables The ngx_http_secure_link_module module (0.7.18) is used to check authenticity of requested links, protect resources from unauthorized access, and limit link lifetime. The authenticity of a requested link is verified by comparing the checksum value passed in a request with the value computed for the request. If a link has a limited lifetime and the time has expired, the link is considered outdated. The status of these checks is made available in the $secure_link variable. The module provides two alternative operation modes. The first mode is enabled by the secure_link_secret directive and is used to check authenticity of requested links as well as protect resources from unauthorized access. The second mode (0.8.50) is enabled by the secure_link and secure_link_md5 directives and is also used to limit lifetime of links. This module is not built by default, it should be enabled with the --with-http_secure_link_module configuration parameter. Directives Syntax: secure_link expression; Default: — Context: http, server, location Defines a string with variables from which the checksum value and lifetime of a link will be extracted. Variables used in an expression are usually associated with a request; see example below. The checksum value extracted from the string is compared with the MD5 hash value of the expression defined by the secure_link_md5 directive.</p><p>value extracted from the string is compared with the MD5 hash value of the expression defined by the secure_link_md5 directive. If the checksums are different, the $secure_link variable is set to an empty string. If the checksums are the same, the link lifetime is checked. If the link has a limited lifetime and the time has expired, the $secure_link variable is set to “0”. Otherwise, it is set to “1”. The MD5 hash value passed in a request is encoded in base64url. If a link has a limited lifetime, the expiration time is set in seconds since Epoch (Thu, 01 Jan 1970 00:00:00 GMT). The value is specified in the expression after the MD5 hash, and is separated by a comma. The expiration time passed in a request is available through the $secure_link_expires variable for a use in the secure_link_md5 directive. If the expiration time is not specified, a link has the unlimited lifetime. Syntax: secure_link_md5 expression; Default: — Context: http, server, location Defines an expression for which the MD5 hash value will be computed and compared with the value passed in a request. The expression should contain the secured part of a link (resource) and a secret ingredient. If the link has a limited lifetime, the expression should also contain $secure_link_expires. To prevent unauthorized access, the expression may contain some information about the client, such as its address and browser version.</p><p>To prevent unauthorized access, the expression may contain some information about the client, such as its address and browser version. Example: location /s/ { secure_link $arg_md5,$arg_expires; secure_link_md5 "$secure_link_expires$uri$remote_addr secret"; if ($secure_link = "") { return 403; } if ($secure_link = "0") { return 410; } ... } The “/s/link?md5=_e4Nc3iduzkWRm01TBBNYw&amp;expires=2147483647” link restricts access to “/s/link” for the client with the IP address 127.0.0.1. The link also has the limited lifetime until January 19, 2038 (GMT). On UNIX, the md5 request argument value can be obtained as: echo -n '2147483647/s/link127.0.0.1 secret' | \ openssl md5 -binary | openssl base64 | tr +/ -_ | tr -d = Syntax: secure_link_secret word; Default: — Context: location Defines a secret word used to check authenticity of requested links. The full URI of a requested link looks as follows: /prefix/hash/link where hash is a hexadecimal representation of the MD5 hash computed for the concatenation of the link and secret word, and prefix is an arbitrary string without slashes. If the requested link passes the authenticity check, the $secure_link variable is set to the link extracted from the request URI. Otherwise, the $secure_link variable is set to an empty string.</p><p>is set to the link extracted from the request URI. Otherwise, the $secure_link variable is set to an empty string. Example: location /p/ { secure_link_secret secret; if ($secure_link = "") { return 403; } rewrite ^ /secure/$secure_link; } location /secure/ { internal; } A request of “/p/5e814704a28d9bc1914ff19fa0c4a00a/link” will be internally redirected to “/secure/link”. On UNIX, the hash value for this example can be obtained as: echo -n 'linksecret' | openssl md5 -hex Embedded Variables $secure_link The status of a link check. The specific value depends on the selected operation mode. $secure_link_expires The lifetime of a link passed in a request; intended to be used only in the secure_link_md5 directive.</p>
+</main>
+</body>
+</html>

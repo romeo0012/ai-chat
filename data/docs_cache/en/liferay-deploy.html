@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Deploy Liferay</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>How to Deploy Liferay</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p>How to Deploy Liferay Liferay Portal is a popular enterprise Java-based web platform for building business solutions, equipped with the features, that are commonly required for the development of websites and portals. It includes a built-in web CMS with an assembly of themes, pages, portlets, and gadgets available. Automatic Installation You can have a Liferay instance up and running within minutes using Virtuozzo Application Management pre-packaged solutions. Just follow the instructions below to deploy your Liferay Portal to the cloud. If you already have a Virtuozzo Application Management account, you can deploy the Liferay Portal with a dedicated database cluster in one click using integrated Marketplace. Note: If you don’t have an account yet, you can go to the package page on GitHub and click the Deploy to Cloud button. Follow the steps on the opened page to automatically create an account and deploy the Liferay Portal solution. 1. Log in to the PaaS dashboard and click the Marketplace button at the top of the page. 2. Find the Liferay application in the list of available solutions and click Install. 3. In the opened dialog, specify the environment and display name for your Liferay instance. If available, you can also select the region. Click Install. 4. Wait a few minutes for the installation process to complete. Then, click Open in Browser to access your Liferay Portal. On the first launch, Liferay will install the needed dependencies, which can take up to 5 minutes.</p><p>process to complete. Then, click Open in Browser to access your Liferay Portal. On the first launch, Liferay will install the needed dependencies, which can take up to 5 minutes. After that, you need to perform the initial configurations and create your account. Finish configuration to start using your Liferay Portal! In case you would like to configure and run your Liferay instance manually, just follow the step-by-step instructions below. Manual Installation You can manually install the Docker-based Liferay Portal solution to the Virtuozzo Application Management. 1. Login to the platform dashboard using your credentials and click the New Environment button. 2. In the topology wizard, go to the Custom tab and click the Select Image button. Search for the liferay/portal image and add it to the environment. Set the required amount of resources (at least 32 cloudlets are recommended) and click Create. 3. Once the environment is created, open the container’s configuration file manager and create a new file named portal-ext.properties in the /opt/liferay directory. 4. Add the following parameter to the file: 1 web.server.host={hostname} Here, the {hostname} placeholder must be replaced with the actual hostname of your environment. You can find it under the environment name in the dashboard (see in the image). 5. Save the changes and Restart the Liferay container. 6. After the container is restarted, click the Open in Browser button to start using your Liferay Portal.</p><p>in the image). 5. Save the changes and Restart the Liferay container. 6. After the container is restarted, click the Open in Browser button to start using your Liferay Portal. Sign in to Liferay using the “test@liferay.com” email address and the password “test” (you’ll need to change it on the first log in). Now you can start using all the provided capabilities of the Liferay Portal application! What’s next? Tutorials by Category Java Tutorials Setting Up Environment</p><div class="doc-image"><img src="/images/docs/liferay-deploy/01-liferay-marketplace_huce997f0f789868124723ffc8906e8dac_38038_480x0_resize_box_3.png" alt="liferay marketplace huce997f0f789868124723ffc8906e8dac 38038 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/liferay-deploy/02-install-liferay_hu9230a11eff3420f878f79dfe60e163dd_71159_480x0_resize_box_3.png" alt="install liferay hu9230a11eff3420f878f79dfe60e163dd 71159 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/liferay-deploy/04-liferay-portal-docker_hu882826558909afbf97deaa4b97cacf12_70413_480x0_resize_box_3.png" alt="liferay portal docker hu882826558909afbf97deaa4b97cacf12 70413 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/liferay-deploy/05-create-portal-ext-properties_hu9135fe4faeacbb950531fdc983ac9793_57129_480x0_resize_box_3.png" alt="create portal ext properties hu9135fe4faeacbb950531fdc983ac9793 57129 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/liferay-deploy/06-webserver-hostname_hu74ae36769f0cf81d3a313ff29517ee1c_59366_480x0_resize_box_3.png" alt="webserver hostname hu74ae36769f0cf81d3a313ff29517ee1c 59366 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/liferay-deploy/07-restart-container_huba22e886782613cc598e905458fc858f_28709_480x0_resize_box_3.png" alt="restart container huba22e886782613cc598e905458fc858f 28709 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/liferay-deploy/08-welcome-to-liferay_hubbc209eaf040059fbd5627dd730613d4_176309_480x0_resize_box_3.png" alt="welcome to liferay hubbc209eaf040059fbd5627dd730613d4 176309 480x0 resize box 3" loading="lazy"></div>
+</main>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module ngx_http_charset_module</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Module ngx_http_charset_module</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p>Module ngx_http_charset_moduleExample ConfigurationDirectives charset charset_map charset_types override_charset source_charset The ngx_http_charset_module module adds the specified charset to the “Content-Type” response header field. In addition, the module can convert data from one charset to another, with some limitations: conversion is performed one way — from server to client, only single-byte charsets can be converted or single-byte charsets to/from UTF-8. Example Configuration include conf/koi-win; charset windows-1251; source_charset koi8-r; Directives Syntax: charset charset | off; Default: charset off; Context: http, server, location, if in location Adds the specified charset to the “Content-Type” response header field. If this charset is different from the charset specified in the source_charset directive, a conversion is performed. The parameter off cancels the addition of charset to the “Content-Type” response header field. A charset can be defined with a variable: charset $charset; In such a case, all possible values of a variable need to be present in the configuration at least once in the form of the charset_map, charset, or source_charset directives. For utf-8, windows-1251, and koi8-r charsets, it is sufficient to include the files conf/koi-win, conf/koi-utf, and conf/win-utf into configuration.</p><p>directives. For utf-8, windows-1251, and koi8-r charsets, it is sufficient to include the files conf/koi-win, conf/koi-utf, and conf/win-utf into configuration. For other charsets, simply making a fictitious conversion table works, for example: charset_map iso-8859-5 _ { } In addition, a charset can be set in the “X-Accel-Charset” response header field. This capability can be disabled using the proxy_ignore_headers, fastcgi_ignore_headers, uwsgi_ignore_headers, scgi_ignore_headers, and grpc_ignore_headers directives. Syntax: charset_map charset1 charset2 { ... } Default: — Context: http Describes the conversion table from one charset to another. A reverse conversion table is built using the same data. Character codes are given in hexadecimal. Missing characters in the range 80-FF are replaced with “?”. When converting from UTF-8, characters missing in a one-byte charset are replaced with “&amp;#XXXX;”. Example: charset_map koi8-r windows-1251 { C0 FE ; # small yu C1 E0 ; # small a C2 E1 ; # small b C3 F6 ; # small ts ... } When describing a conversion table to UTF-8, codes for the UTF-8 charset should be given in the second column, for example: charset_map koi8-r utf-8 { C0 D18E ; # small yu C1 D0B0 ; # small a C2 D0B1 ; # small b C3 D186 ; # small ts ... } Full conversion tables from koi8-r to windows-1251, and from koi8-r and windows-1251 to utf-8 are provided in the distribution files conf/koi-win, conf/koi-utf, and conf/win-utf. Syntax: charset_types mime-type ...</p><p>from koi8-r and windows-1251 to utf-8 are provided in the distribution files conf/koi-win, conf/koi-utf, and conf/win-utf. Syntax: charset_types mime-type ...; Default: charset_types text/html text/xml text/plain text/vnd.wap.wml application/javascript application/rss+xml; Context: http, server, location This directive appeared in version 0.7.9. Enables module processing in responses with the specified MIME types in addition to “text/html”. The special value “*” matches any MIME type (0.8.29). Until version 1.5.4, “application/x-javascript” was used as the default MIME type instead of “application/javascript”. Syntax: override_charset on | off; Default: override_charset off; Context: http, server, location, if in location Determines whether a conversion should be performed for answers received from a proxied or a FastCGI/uwsgi/SCGI/gRPC server when the answers already carry a charset in the “Content-Type” response header field. If conversion is enabled, a charset specified in the received response is used as a source charset. It should be noted that if a response is received in a subrequest then the conversion from the response charset to the main request charset is always performed, regardless of the override_charset directive setting. Syntax: source_charset charset; Default: — Context: http, server, location, if in location Defines the source charset of a response. If this charset is different from the charset specified in the charset directive, a conversion is performed.</p>
+</main>
+</body>
+</html>

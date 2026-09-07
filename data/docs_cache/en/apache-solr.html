@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Deploy Apache Solr</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>How to Deploy Apache Solr</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p>How to Deploy Apache Solr Apache Solr is an open source enterprise level search platform with high scalability and such significant features as faceted search, full-text search, database integration, handling most of the widely spread documents extensions and so on. So, let’s find out how to deploy the Solr Java engine to the platform. Create the Environment 1. Log in to the platform dashboard. 2. Click Create environment button at the top left corner of the dashboard in order to set up a new environment. 3. In the opened Environment topology wizard navigate to the Java language tab. Then choose Jetty as your application server, set the resource limits using cloudlet slider and type the environment name (e.g., solr451). In just a few moments your environment will appear in the dashboard. Upload Solr Package 1. Go to the Solr web-site in order to download its latest version package (we use v.4.5.1 in this instruction). Extract the archive you’ve got. 2. Open the dist folder of the extracted archive and find solr-4.5.1.war file in it. 3. Paste the libs from the example &gt; lib &gt; ext folder (shown below) into the WEB-INF/lib directory of the war package and repack it. The already repacked .war file for Solr 4.5.1 version you can download here. 4. Use the Deployment manager to upload the repacked .war package to the platform dashboard. Configure Solr 1. Expand the list with your environment nodes and open the Config manager for Jetty application server. 2.</p><p>to upload the repacked .war package to the platform dashboard. Configure Solr 1. Expand the list with your environment nodes and open the Config manager for Jetty application server. 2. In the opened tab navigate to the home folder and create a new one there, named solr. 3. In this example we work with a simple multicore configuration using two core folders (core0 and core1). Each core folder contains conf directory with two config files - solrconfig.xml and schema.xml. These files can bу found in the example&gt;multicore&gt;core*&gt;conf folders of the extracted Solr archive. So, create the appropriate directory structure and upload the necessary files, obtaining the directory layout shown below. 4. After that upload the solr.xml file from example &gt; multicore archive folder to the solr appliccation server’s folder. 5. After that you should specify the solr.home environment variable to point the path to the Solr configuration files. Open the server &gt; variables.conf file and add the following line there: 1 -Dsolr.solr.home=/opt/jetty/home/solr Don’t forget to save the changes you’ve made. Solr Deployment 1. Now all the necessary configurations are performed, therefore you can navigate back to the Deployment Manager with your repacked Solr archive uploaded and deploy it to the appropriate environment. 2. Specify the context if you need it or just live this field empty, and press Deploy. Congratulations! Now you have your own instance with Solr search platform hosted. What’s next?</p><p>Specify the context if you need it or just live this field empty, and press Deploy. Congratulations! Now you have your own instance with Solr search platform hosted. What’s next? Tutorials by Category Java Tutorials Setting Up Environment</p><div class="doc-image"><img src="/images/docs/apache-solr/01-create-environemnt.png" alt="create environemnt" loading="lazy"></div><div class="doc-image"><img src="/images/docs/apache-solr/02-environment-topology-wizard_huf318a376e270b8d716aa23a2dc73294d_80885_480x0_resize_box_3.png" alt="environment topology wizard huf318a376e270b8d716aa23a2dc73294d 80885 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/apache-solr/03-solr-libraries_hue0f0f0f5d94a88d59e1e3f099b2e4dc0_15094_480x0_resize_box_3.png" alt="solr libraries hue0f0f0f5d94a88d59e1e3f099b2e4dc0 15094 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/apache-solr/04-upload-solr.png" alt="upload solr" loading="lazy"></div><div class="doc-image"><img src="/images/docs/apache-solr/05-jetty-config_hu68c241e30a903baedb32650e18717aea_15478_480x0_resize_box_3.png" alt="jetty config hu68c241e30a903baedb32650e18717aea 15478 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/apache-solr/06-solr-directory-layout.png" alt="solr directory layout" loading="lazy"></div><div class="doc-image"><img src="/images/docs/apache-solr/07-solr-xml-config.png" alt="solr xml config" loading="lazy"></div><div class="doc-image"><img src="/images/docs/apache-solr/08-solr-variables_hu301c8edf46e01f3b7e766cba82baaf2b_76009_480x0_resize_box_3.png" alt="solr variables hu301c8edf46e01f3b7e766cba82baaf2b 76009 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/apache-solr/09-deploy-solr-package.png" alt="deploy solr package" loading="lazy"></div><div class="doc-image"><img src="/images/docs/apache-solr/10-solr-deployment.png" alt="solr deployment" loading="lazy"></div><div class="doc-image"><img src="/images/docs/apache-solr/11-solr-hosted_hu5b38323c5bc650432a2fbe5808f57ef6_17106_480x0_resize_box_3.png" alt="solr hosted hu5b38323c5bc650432a2fbe5808f57ef6 17106 480x0 resize box 3" loading="lazy"></div><div class="doc-image"><img src="/images/docs/apache-solr/12-solr-admin-page_huc5903467f083e2a7c015572123f985a7_23918_480x0_resize_box_3.png" alt="solr admin page huc5903467f083e2a7c015572123f985a7 23918 480x0 resize box 3" loading="lazy"></div>
+</main>
+</body>
+</html>

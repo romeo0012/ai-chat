@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module ngx_http_xslt_module</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Module ngx_http_xslt_module</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p>Module ngx_http_xslt_moduleExample ConfigurationDirectives xml_entities xslt_last_modified xslt_param xslt_string_param xslt_stylesheet xslt_types The ngx_http_xslt_module (0.7.8+) is a filter that transforms XML responses using one or more XSLT stylesheets. This module is not built by default, it should be enabled with the --with-http_xslt_module configuration parameter. This module requires the libxml2 and libxslt libraries. Example Configuration location / { xml_entities /site/dtd/entities.dtd; xslt_stylesheet /site/xslt/one.xslt param=value; xslt_stylesheet /site/xslt/two.xslt; } Directives Syntax: xml_entities path; Default: — Context: http, server, location Specifies the DTD file that declares character entities. This file is compiled at the configuration stage. For technical reasons, the module is unable to use the external subset declared in the processed XML, so it is ignored and a specially defined file is used instead. This file should not describe the XML structure. It is enough to declare just the required character entities, for example: &lt;!ENTITY nbsp "&amp;#xa0;"&gt; Syntax: xslt_last_modified on | off; Default: xslt_last_modified off; Context: http, server, location This directive appeared in version 1.5.1. Allows preserving the “Last-Modified” header field from the original response during XSLT transformations to facilitate response caching.</p><p>in version 1.5.1. Allows preserving the “Last-Modified” header field from the original response during XSLT transformations to facilitate response caching. By default, the header field is removed as contents of the response are modified during transformations and may contain dynamically generated elements or parts that are changed independently of the original response. Syntax: xslt_param parameter value; Default: — Context: http, server, location This directive appeared in version 1.1.18. Defines the parameters for XSLT stylesheets. The value is treated as an XPath expression. The value can contain variables. To pass a string value to a stylesheet, the xslt_string_param directive can be used. There could be several xslt_param directives. These directives are inherited from the previous configuration level if and only if there are no xslt_param and xslt_string_param directives defined on the current level. Syntax: xslt_string_param parameter value; Default: — Context: http, server, location This directive appeared in version 1.1.18. Defines the string parameters for XSLT stylesheets. XPath expressions in the value are not interpreted. The value can contain variables. There could be several xslt_string_param directives. These directives are inherited from the previous configuration level if and only if there are no xslt_param and xslt_string_param directives defined on the current level. Syntax: xslt_stylesheet stylesheet [parameter=value ...</p><p>and only if there are no xslt_param and xslt_string_param directives defined on the current level. Syntax: xslt_stylesheet stylesheet [parameter=value ...]; Default: — Context: location Defines the XSLT stylesheet and its optional parameters. A stylesheet is compiled at the configuration stage. Parameters can either be specified separately, or grouped in a single line using the “:” delimiter. If a parameter includes the “:” character, it should be escaped as “%3A”. Also, libxslt requires to enclose parameters that contain non-alphanumeric characters into single or double quotes, for example: param1='http%3A//www.example.com':param2=value2 The parameters description can contain variables, for example, the whole line of parameters can be taken from a single variable: location / { xslt_stylesheet /site/xslt/one.xslt $arg_xslt_params param1='$value1':param2=value2 param3=value3; } It is possible to specify several stylesheets. They will be applied sequentially in the specified order. Syntax: xslt_types mime-type ...; Default: xslt_types text/xml; Context: http, server, location Enables transformations in responses with the specified MIME types in addition to “text/xml”. The special value “*” matches any MIME type (0.8.29). If the transformation result is an HTML response, its MIME type is changed to “text/html”.</p>
+</main>
+</body>
+</html>

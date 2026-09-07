@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kubernetes Cluster: Internal Networking</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Kubernetes Cluster: Internal Networking</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p>Kubernetes Cluster: Internal Networking Internal networking configuration within the Kubernetes Cluster is an entirely automated process, which is based on the K8s Services. The CNI plugin creates and configures an overlay network, which allows providing all pods with the IP addresses. Also, Kubernetes supports direct access to services by their names, so there is no need for any service discovery mechanism. For example, your application server can connect to the database using its DNS name, which will be resolved as a required internal IP. Herewith, you only need to create a service object with the correct selector. The Kubernetes Cluster is provided with the Hello World deployment, service, and ingress by default (unless custom deployment option was selected during the installation). You can examine this default application to understand the concept of the Kubernetes service better. Platform DNS Name Resolution inside PODs Kubernetes cluster uses CoreDNS to resolve internal Kubernetes DNS names. It is automatically defined in the /etc/resolv.conf file of each pod. Also, CoreDNS utilizes the platform nameservers, which allows establishing direct access between the K8s Cluster and other containers inside the platform. For example, if you have an environment with a database in the platform and want to connect to it from your Kubernetes pod, you need to use the “${nodeId}-${envName}.</p><p>platform. For example, if you have an environment with a database in the platform and want to connect to it from your Kubernetes pod, you need to use the “${nodeId}-${envName}.${platformDomain}” hostname and default port for your database (3306 for MySQL, 5432 for Postgres, etc.). However, you need to create an endpoint to connect to such a database from outside of the platform. What’s next? K8s Helm Integration K8s YAML Deployments K8s Exposing Services K8s Creating Ingresses</p>
+</main>
+</body>
+</html>

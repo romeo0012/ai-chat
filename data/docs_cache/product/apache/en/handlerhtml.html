@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apache's Handler Use</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Apache's Handler Use</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p>Apache's Handler Use Available Languages: en | es | fr | ja | ko | tr | zh-cn This document describes the use of Apache's Handlers. What is a Handler Examples Programmer's Note What is a Handler ¶ Related ModulesRelated Directivesmod_actionsmod_asismod_cgimod_imagemapmod_infomod_mimemod_negotiationmod_statusActionAddHandlerRemoveHandlerSetHandler A "handler" is an internal Apache representation of the action to be performed when a file is called. Generally, files have implicit handlers, based on the file type. Normally, all files are simply served by the server, but certain file types are "handled" separately. Handlers may also be configured explicitly, based on either filename extensions or on location, without relation to file type. This is advantageous both because it is a more elegant solution, and because it also allows for both a type and a handler to be associated with a file. (See also Files with Multiple Extensions.) Handlers can either be built into the server or included in a module, or they can be added with the Action directive. The built-in handlers in the standard distribution are as follows: default-handler: Send the file using the default_handler(), which is the handler used by default to handle static content. (core) send-as-is: Send file with HTTP headers as is. (mod_asis) cgi-script: Treat the file as a CGI script. (mod_cgi) imap-file: Parse as an imagemap rule file. (mod_imagemap) server-info: Get the server's configuration information.</p><p>file as a CGI script. (mod_cgi) imap-file: Parse as an imagemap rule file. (mod_imagemap) server-info: Get the server's configuration information. (mod_info) server-status: Get the server's status report. (mod_status) type-map: Parse as a type map file for content negotiation. (mod_negotiation) Examples ¶ Modifying static content using a CGI script The following directives will cause requests for files with the html extension to trigger the launch of the footer.pl CGI script. Action add-footer /cgi-bin/footer.pl AddHandler add-footer .html Then the CGI script is responsible for sending the originally requested document (pointed to by the PATH_TRANSLATED environment variable) and making whatever modifications or additions are desired. Files with HTTP headers The following directives will enable the send-as-is handler, which is used for files which contain their own HTTP headers. All files in the /web/htdocs/asis/ directory will be processed by the send-as-is handler, regardless of their filename extensions. &lt;Directory "/web/htdocs/asis"&gt; SetHandler send-as-is &lt;/Directory&gt; Programmer's Note ¶ In order to implement the handler features, an addition has been made to the Apache API that you may wish to make use of. Specifically, a new record has been added to the request_rec structure: char *handler If you wish to have your module engage a handler, you need only to set r-&gt;handler to the name of the handler at any time prior to the invoke_handler stage of the request.</p><p>to set r-&gt;handler to the name of the handler at any time prior to the invoke_handler stage of the request. Handlers are implemented as they were before, albeit using the handler name instead of a content type. While it is not necessary, the naming convention for handlers is to use a dash-separated word, with no slashes, so as to not invade the media type name-space.</p>
+</main>
+</body>
+</html>

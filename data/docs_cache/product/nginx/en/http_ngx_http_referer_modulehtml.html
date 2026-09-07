@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module ngx_http_referer_module</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Module ngx_http_referer_module</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p>Module ngx_http_referer_moduleExample ConfigurationDirectives referer_hash_bucket_size referer_hash_max_size valid_referersEmbedded Variables The ngx_http_referer_module module is used to block access to a site for requests with invalid values in the “Referer” header field. It should be kept in mind that fabricating a request with an appropriate “Referer” field value is quite easy, and so the intended purpose of this module is not to block such requests thoroughly but to block the mass flow of requests sent by regular browsers. It should also be taken into consideration that regular browsers may not send the “Referer” field even for valid requests. Example Configuration valid_referers none blocked server_names *.example.com example.* www.example.org/galleries/ ~\.google\.; if ($invalid_referer) { return 403; } Directives Syntax: referer_hash_bucket_size size; Default: referer_hash_bucket_size 64; Context: server, location This directive appeared in version 1.0.5. Sets the bucket size for the valid referers hash tables. The details of setting up hash tables are provided in a separate document. Syntax: referer_hash_max_size size; Default: referer_hash_max_size 2048; Context: server, location This directive appeared in version 1.0.5. Sets the maximum size of the valid referers hash tables. The details of setting up hash tables are provided in a separate document. Syntax: valid_referers none | blocked | server_names | string ...</p><p>setting up hash tables are provided in a separate document. Syntax: valid_referers none | blocked | server_names | string ...; Default: — Context: server, location Specifies the “Referer” request header field values that will cause the embedded $invalid_referer variable to be set to an empty string. Otherwise, the variable will be set to “1”. Search for a match is case-insensitive. Parameters can be as follows: none the “Referer” field is missing in the request header; blocked the “Referer” field is present in the request header, but its value has been deleted by a firewall or proxy server; such values are strings that do not start with “http://” or “https://”; server_names the “Referer” request header field contains one of the server names; arbitrary string defines a server name and an optional URI prefix. A server name can have an “*” at the beginning or end. During the checking, the server’s port in the “Referer” field is ignored; regular expression the first symbol should be a “~”. It should be noted that an expression will be matched against the text starting after the “http://” or “https://”. Example: valid_referers none blocked server_names *.example.com example.* www.example.org/galleries/ ~\.google\.; Embedded Variables $invalid_referer Empty string, if the “Referer” request header field value is considered valid, otherwise “1”.</p>
+</main>
+</body>
+</html>

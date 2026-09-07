@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create NGINX Plus and NGINX Configuration Files</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Create NGINX Plus and NGINX Configuration Files</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p>Create NGINX Plus and NGINX Configuration Files NGINX and NGINX Plus use a text‑based configuration file, by default named nginx.conf. NGINX Plus: default location is /etc/nginx for Linux or /usr/local/etc/nginx for FreeBSD. NGINX Open Source: location depends on the package system used to install NGINX and the operating system. It is typically one of /usr/local/nginx/conf, /etc/nginx, or /usr/local/etc/nginx. You can verify the exact configuration file path with the --conf-path= parameter in the output of the nginx -V command: Copy nginx -V 2&gt;&amp;1 | awk -F: '/configure arguments/ {print $2}' | xargs -n1 Sample output: Copy --prefix=/etc/nginx --sbin-path=/usr/sbin/nginx --modules-path=/usr/lib64/nginx/modules --conf-path=/etc/nginx/nginx.conf # The path to your config file --error-log-path=/var/log/nginx/error.log --http-log-path=/var/log/nginx/access.log --pid-path=/var/run/nginx.pid --...&lt;more parameters&gt; Directives The configuration file consists of directives and their parameters. Simple (single‑line) directives end with a semicolon ( ; ). Other directives act as “containers” which group together related directives. Containers are enclosed in curly braces ( {} ) and are often referred to as blocks. Here are some examples of simple directives. nginx Copy user nobody; error_log logs/error.</p><p>and are often referred to as blocks. Here are some examples of simple directives. nginx Copy user nobody; error_log logs/error.log notice; worker_processes 1; Feature-specific configuration files To make the configuration easier to maintain, it is possible to split it into a set of feature‑specific files stored in the /etc/nginx/conf.d directory and use the include directive in the main nginx.conf file to reference the contents of the feature‑specific files. nginx Copy include conf.d/http; include conf.d/stream; include conf.d/exchange-enhanced; Contexts A few top‑level directives, referred to as contexts, group together the directives that apply to different traffic types: events – General connection processing http – HTTP traffic mail – Mail traffic stream – TCP and UDP traffic Directives placed outside of these contexts are said to be in the main context. Virtual servers In each of the traffic‑handling contexts, you include one or more server blocks to define virtual servers that control the processing of requests. The directives you can include within a server context vary depending on the traffic type. For HTTP traffic (the http context), each server directive controls the processing of requests for resources at particular domains or IP addresses. One or more location contexts within a server context define how to process specific sets of URIs.</p><p>or IP addresses. One or more location contexts within a server context define how to process specific sets of URIs. For mail and TCP/UDP traffic (the mail and stream contexts) the server directives each control the processing of traffic arriving at a particular TCP port or UNIX socket. Sample configuration file with multiple contexts The following configuration illustrates the use of contexts. nginx Copy user nobody; # a directive in the 'main' context events { # configuration of connection processing } http { # Configuration specific to HTTP and affecting all virtual servers server { # configuration of HTTP virtual server 1 location /one { # configuration for processing URIs starting with '/one' } location /two { # configuration for processing URIs starting with '/two' } } server { # configuration of HTTP virtual server 2 } } stream { # Configuration specific to TCP/UDP and affecting all virtual servers server { # configuration of TCP virtual server 1 } } Inheritance In general, a child context – a context contained within another context (its parent) – inherits the settings of directives included at the parent level. Some directives can appear in multiple contexts, in which case you can override the setting inherited from the parent by including the directive in the child context. For an example, see the proxy_set_header directive. Reload configuration file For changes to the configuration file to take effect, it must be reloaded.</p><p>see the proxy_set_header directive. Reload configuration file For changes to the configuration file to take effect, it must be reloaded. You can either restart the nginx process or send the reload signal to upgrade the configuration without interrupting the processing of current requests. For details, see Control NGINX Processes at Runtime. With NGINX Plus, you can dynamically reconfigure load balancing across the servers in an upstream group without reloading the configuration. You can also use the NGINX Plus API and key‑value store to dynamically control access, for example based on client IP address. View source View as Markdown Edit this page Create a new issue</p>
+</main>
+</body>
+</html>

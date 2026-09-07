@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PHP.INI Security Settings</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>PHP.INI Security Settings</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p>PHP.INI Security Settings There are several PHP functions, which are recommended to be properly configured in order to protect your server from a harm. Of course, overall protection of your system can be rather complex and require a number of specific tools, but in this tutorial we will examine how to start with some basics, which don’t require additional spends. So, let’s see how to perform some initial configurations to increase the security of your PHP application, hosted with the platform. The main PHP configuration file, named php.ini, contains a number of default settings, which you can customize, or even add your own depending on the needs of your application. It is located in the etc directory of your Apache or NGINX-PHP application server. This file is fully editable for you as a platform customer, so let’s consider which settings you can apply in order to ensure you server security. Note that values described below are just recommendations. Before applying, please, make sure your application requirements will meet this configurations to not decrease its performance. Press Config button for your Apache or NGINX server. In the appeared tab navigate to the etc directory and open php.ini file. Follow the next instructions to apply the necessary configurations: 1.</p><p>button for your Apache or NGINX server. In the appeared tab navigate to the etc directory and open php.ini file. Follow the next instructions to apply the necessary configurations: 1. Add the following string in order to disable the insecure functions: disable_functions = phpinfo, system, mail, exec An additional security can be obtained by disabling the following functions: disable_functions = exec,passthru,shell_exec,system,proc_open,popen,curl_exec,curl_multi_exec,parse_ini_file,show_source 2. Scope the allowed resources amount, if it is acceptable for your application: Maximum script execution time (in seconds) max_execution_time = 30 Maximum time for request data parsing by each script max_input_time = 60 Maximum size of uploaded file upload_max_filesize = 2M Maximum script memory amount (8MB) memory_limit = 8M (the default value is 128M, but it is acceptable to set the lower one if it won’t decrease your application performance) Maximum POST data size, acceptable for PHP post_max_size = 8M 3.</p><p>value is 128M, but it is acceptable to set the lower one if it won’t decrease your application performance) Maximum POST data size, acceptable for PHP post_max_size = 8M 3. The following list of functions can be restricted in the case they aren’t necessary for your application: Disallow HTTP file uploads file_uploads = Off Disallow displaying the PHP error messages for the end-users display_errors = Off Limit the external access to your PHP environment safe_mode_allowed_env_vars = PHP_ Restrict the sending back of PHP information expose_php = Off Turn off the globals registration for input data register_globals = Off Restrict remote files opening allow_url_fopen = Off 4. In order to get more information about the security state, enable the following functions: Ensure appropriateness of PHP redirecting cgi.force_redirect = 0 Enable all possible errors logging log_errors = On 5. Switch on available safe modes: Enable safe mode safe_mode = On Enable SQL safe mode sql.safe_mode = On Note: While specifying the abovementioned settings you should consider the requirements of your application, in some cases it can be unavailable. What’s next? PHP Application Server Configuration</p><div class="doc-image"><img src="/images/docs/php-security-settings/php.ini-config.png" alt="php.ini config" loading="lazy"></div><div class="doc-image"><img src="/images/docs/php-security-settings/insecure-php-functions_hubb6846be36c4182d9d897960750daa27_38737_480x0_resize_box_3.png" alt="insecure php functions hubb6846be36c4182d9d897960750daa27 38737 480x0 resize box 3" loading="lazy"></div>
+</main>
+</body>
+</html>
