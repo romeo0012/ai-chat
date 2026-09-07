@@ -102,17 +102,18 @@ function docsUrl(lang, path) {
 }
 
 function localUrl(lang, url) {
+  const clean = url.split('#')[0]
   const vUrl = 'https://www.virtuozzo.com/application-management-docs/'
-  if (url.startsWith(vUrl)) {
-    const docPath = url.replace(vUrl, '').replace(/\/$/, '')
+  if (clean === 'https://www.virtuozzo.com/application-management-docs' || clean.startsWith(vUrl)) {
+    const docPath = clean.slice(vUrl.length).replace(/\/$/, '')
     return docsUrl(lang, docPath)
   }
   for (const [pname, bases] of Object.entries(PRODUCT_BASE_URLS)) {
     const list = Array.isArray(bases) ? bases : [bases]
     for (const base of list) {
       const b = base.replace(/\/$/, '')
-      if (url.startsWith(b)) {
-        const docPath = url.slice(b.length).replace(/^\//, '')
+      if (clean === b || clean.startsWith(b + '/')) {
+        const docPath = clean.slice(b.length).replace(/^\//, '').replace(/\/$/, '')
         return `${BASE_PATH}/p/${lang}/${pname}/${docPath}`
       }
     }
@@ -124,7 +125,17 @@ const PRODUCT_BASE_URLS = {
   kubernetes: 'https://kubernetes.io/docs/',
   elasticsearch: 'https://www.elastic.co/guide/en/elasticsearch/reference/current/',
   kafka: 'https://kafka.apache.org/43/',
-  keycloak: 'https://www.keycloak.org/documentation',
+  keycloak: [
+    'https://www.keycloak.org/documentation',
+    'https://www.keycloak.org/docs/',
+    'https://www.keycloak.org/server/',
+    'https://www.keycloak.org/guides',
+    'https://www.keycloak.org/getting-started/',
+    'https://www.keycloak.org/securing-apps/',
+    'https://www.keycloak.org/high-availability/',
+    'https://www.keycloak.org/operator/',
+    'https://www.keycloak.org/app',
+  ],
   vault: 'https://developer.hashicorp.com/vault/docs',
   docker: 'https://docs.docker.com/',
   gitlab: 'https://docs.gitlab.com/',
@@ -348,7 +359,7 @@ async function getTranslatedDoc(lang, docPath) {
   // Reconstruct page from RAG index
   const pageUrl = `https://www.virtuozzo.com/application-management-docs/${docPath}`.replace(/\/+$/, '')
   const pageChunks = rag.chunks.filter(c => {
-    const cu = c.url.replace(/\/$/, '')
+    const cu = c.url.replace(/\/$/, '').split('#')[0]
     return cu === pageUrl
   })
   if (pageChunks.length === 0) {
@@ -405,10 +416,21 @@ async function getProductTranslatedDoc(lang, product, docPath) {
     return fs.readFileSync(cacheFile, 'utf-8')
   }
 
-  const baseUrl = PRODUCT_BASE_URLS[product].replace(/\/$/, '')
-  const pageUrl = `${baseUrl}/${docPath}`.replace(/\/+$/, '')
+  const bases = Array.isArray(PRODUCT_BASE_URLS[product]) ? PRODUCT_BASE_URLS[product] : [PRODUCT_BASE_URLS[product]]
+  // Resolve which base the docPath belongs to (multi-base products like nginx/keycloak):
+  // pick the base whose composed URL exists in the RAG index; fall back to the first.
+  const candidates = bases.map(b => {
+    const bb = b.replace(/\/$/, '')
+    const pageUrl = docPath ? `${bb}/${docPath}`.replace(/\/+$/, '') : bb
+    return { b, pageUrl }
+  })
+  const match = candidates.find(c => rag.chunks.some(ch => {
+    const cu = ch.url.replace(/\/$/, '').split('#')[0]
+    return cu === c.pageUrl
+  }))
+  const pageUrl = match ? match.pageUrl : candidates[0].pageUrl
   const pageChunks = rag.chunks.filter(c => {
-    const cu = c.url.replace(/\/$/, '')
+    const cu = c.url.replace(/\/$/, '').split('#')[0]
     return cu === pageUrl
   })
   if (pageChunks.length === 0) {
