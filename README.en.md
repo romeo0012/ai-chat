@@ -115,7 +115,27 @@ The assistant **PaaS Assistant** answers queries about the Virtuozzo Application
 - `data/docs_cache/` — translated documentation pages (committed, seeded into the writable cache).
 - `data/page-images.json` — page-image map (regenerable, gitignored).
 
-**Domains in the index:** www.virtuozzo.com (526), docs.cloudsigma.com (575), httpd.apache.org (423), nginx.org (398), kubernetes.io (156), argo-cd.readthedocs.io (122), docs.nginx.com (93), docs.docker.com (87), docs.haproxy.org (74), www.keycloak.org (60), www.elastic.co (58), docs.gitlab.com (41), developer.hashicorp.com (38), doc.traefik.io (36), help.sonatype.com (35), kafka.apache.org (22), docs.litespeedtech.com (22), goharbor.io (20), varnish-cache.org (14).
+**Domains in the index (in the source order of `lib/rag.js`; chunk count):**
+
+1. `www.virtuozzo.com` — Virtuozzo docs — 526
+2. `docs.cloudsigma.com` — CloudSigma — 575
+3. `httpd.apache.org` — Apache — 423
+4. `nginx.org` — Nginx — 398
+5. `kubernetes.io` — Kubernetes — 156
+6. `argo-cd.readthedocs.io` — Argo CD — 122
+7. `docs.nginx.com` — Nginx ingress/admin — 93
+8. `docs.docker.com` — Docker — 87
+9. `docs.haproxy.org` — HAProxy — 74
+10. `www.keycloak.org` — Keycloak — 60
+11. `www.elastic.co` — Elasticsearch — 58
+12. `docs.gitlab.com` — GitLab — 41
+13. `developer.hashicorp.com` — Vault — 38
+14. `doc.traefik.io` — Traefik — 36
+15. `help.sonatype.com` — Nexus — 35
+16. `kafka.apache.org` — Kafka — 22
+17. `docs.litespeedtech.com` — LiteSpeed — 22
+18. `goharbor.io` — Harbor — 20
+19. `varnish-cache.org` — Varnish Cache — 14
 
 ### REST / Socket.IO interface
 
