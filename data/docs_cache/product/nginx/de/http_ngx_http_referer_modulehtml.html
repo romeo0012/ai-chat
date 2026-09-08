@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module ngx_http_referer_module</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Module ngx_http_referer_module</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Modul ngx_http_referer_module<br>Beispielkonfiguration<br>Directives<br>referer_hash_bucket_size<br>referer_hash_max_size<br>valid_referers<br>Embedded Variablen</p><p>Das Modul ngx_http_referer_module dient dazu, Zugriff auf eine Seite für Anfragen mit ungültigen Werten in dem "Referer"-Headerfeld zu verweigern. Es sollte beachtet werden, dass die Fälschung einer Anfrage mit einem passenden "Referer"-Feldwert recht einfach ist, und so dient dieses Modul nicht dazu, solche Anfragen vollständig zu blockieren, sondern den Massenfluss von Anfragen, die von regulären Browsern gesendet werden. Es sollte auch beachtet werden, dass reguläre Browser möglicherweise den "Referer"-Feld nicht für gültige Anfragen senden.</p><p>Beispielkonfiguration
+<pre><code class="lang-">valid_referers none;<br>blocked;<br>server_names *.beispiel.com beispiel.*;<br>www.beispiel.org/galleries/ ~\.google\.;<br>if ($invalid_referer) {<br>    return 403;<br>}</code></pre><br>Directives Syntax:<br>referer_hash_bucket_size size;<br>Default: referer_hash_bucket_size 64;<br>Context: server, location<br>Diese Direktive ist ab Version 1.0.5 verfügbar. Setzt die Größe der Buckets für die gültigen Referer-Hash-Tabellen. Die Details zur Einrichtung von Hash-Tabellen werden in einer separaten Dokumentation bereitgestellt.</p><p>Syntax:<br>referer_hash_max_size size;<br>Default: referer_hash_max_size 2048;<br>Context: server, location<br>Diese Direktive ist ab Version 1.0.5 verfügbar. Setzt die maximale Größe der gültigen Referer-Hash-Tabellen. Die Details zur Einrichtung von Hash-Tabellen werden in einer separaten Dokumentation bereitgestellt.</p><p> Einstellung von Hash-Tabellen werden in einem separaten Dokument beschrieben. Syntax: valid_referers none | blocked | server_names | string ...; Standard: — Kontext: server, location</p><p>Diese Direktive legt die Werte des "Referer" Anforderungskopf-Feldes fest, die das eingebettete $invalid_referer-Variable auf leere Zeichenfolge setzen. Andernfalls wird die Variable auf "1" gesetzt. Die Suche nach einem Treffer ist unabhängig von der Groß-/Kleinschreibung. Die Parameter können wie folgt aussehen:</p><p>none: Das "Referer"-Feld fehlt im Anforderungskopf<br>blocked: Das "Referer"-Feld ist im Anforderungskopf vorhanden, aber sein Wert wurde von einem Firewall oder Proxy-Server gelöscht; solche Werte sind Zeichenfolgen, die nicht mit "http://" oder "https://" beginnen;<br>server_names: Das "Referer"-Anforderungskopf-Feld enthält einen der Servernamen;<br>arbitrary string definiert einen Servernamen und einen optionalen URI-Präfix. Ein Servername kann ein "*" am Anfang oder Ende haben. Während der Überprüfung wird der Port des Servers im "Referer"-Feld ignoriert;<br>regular expression: Der erste Symbol soll ein "~" sein. Es sollte beachtet werden, dass eine Ausdrucksübereinstimmung gegen den Text nach dem "http://" oder "https://" verglichen wird. Beispiel:</p><p>valid_referers none blocked server_names *.example.com example.* www.example.org/galleries/ ~\.google\.</p><p>Eingebettete Variablen:<br>$invalid_referer: Leere Zeichenfolge, wenn das "Referer"-Anforderungskopf-Feldwert als gültig angesehen wird, andernfalls "1".</p>
+</main>
+</body>
+</html>

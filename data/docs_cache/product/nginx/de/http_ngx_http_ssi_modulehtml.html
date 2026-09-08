@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module ngx_http_ssi_module</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Module ngx_http_ssi_module</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Modul ngx_http_ssi_module<br>Beispiel-Konfigurationsdirektiven<br>ssi, ssi_last_modified, ssi_min_file_chunk, ssi_silent_errors, ssi_types, ssi_value_length<br>SSI-Befehle<br>Verarbeitete Variablen</p><p>Der Modul ngx_http_ssi_module ist ein Filter, der SSI (Server Seite Einschließen) Befehle in durchlaufenden Antworten verarbeitet. Aktuell ist die Liste der unterstützten SSI Befehle unvollständig.</p><p>Beispiel-Konfiguration
+<hr></p><p>location / {<br>ssi on;<br>...<br>}</p><p>Direktiven
+<hr></p><p>Syntax: ssi on | off;<br>Standard: ssi off;<br>Kontext: http, server, location, if in location</p><p>Aktiviert oder deaktiviert die Verarbeitung von SSI Befehlen in Antworten.</p><p>Syntax: ssi_last_modified on | off;<br>Standard: ssi_last_modified off;<br>Kontext: http, server, location</p><p>Diese Direktive wurde in Version 1.5.1 eingeführt. Erlaubt es, den "Last-Modified" Headerfeld der originalen Antwort während der SSI Verarbeitung zu erhalten, um Antwortspeicherung zu erleichtern. Standardmäßig wird das Headerfeld entfernt, da Inhalte der Antwort während der Verarbeitung modifiziert werden können und dynamisch generierte Elemente oder Teile enthalten, die unabhängig von der originalen Antwort geändert werden können.</p><p>Syntax: ssi_min_file_chunk Größe;<br>Standard: ssi_min_file_chunk 1k;<br>Kontext: http, server, location</p><p>Setzt die Mindestgröße für Teile einer Antwort, die auf Disk gespeichert werden, ab der es sinnvoll ist, sie mit sendfile zu senden.</p><p> Größe für Teile einer Antwort, die auf dem Disketten Speicher gespeichert sind, ab welcher Stelle es sinnvoll ist, sie mit sendfile zu senden. Syntax: ssi_silent_errors on | off; Standard: ssi_silent_errors off; Kontext: http, server, location<br>Wenn aktiviert, unterdrückt es die Ausgabe der Zeichenfolge “[ein Fehler ist beim Verarbeiten des Direktivs aufgetreten]”, wenn ein Fehler während der SSI-Verarbeitung auftritt. Syntax: ssi_types mime-type ...; Standard: ssi_types text/html; Kontext: http, server, location<br>Erlaubt die Verarbeitung von SSI-Befehlen in Antworten mit den angegebenen MIME-Typen zusätzlich zu “text/html”. Der Sonderwert “*” passt sich jedem MIME-Typ an (0.8.29). Syntax: ssi_value_length length; Standard: ssi_value_length 256; Kontext: http, server, location<br>Setzt die maximale Länge von Parameterwerten in SSI-Befehlen. SSI-Befehle haben folgenden allgemeinen Format: &lt;!--# command parameter1=value1 parameter2=value2 ... --&gt;<br>Unterstützte Befehle:<br>block<br>Definiert einen Block, der als Stub im include-Befehl verwendet werden kann. Der Block kann andere SSI-Befehle enthalten. Der Befehl hat folgenden Parameter: name block name. Beispiel: &lt;!--# block name="one" --&gt; stub &lt;!--# endblock --&gt;<br>config<br>Setzt einige Parameter, die während der SSI-Verarbeitung verwendet werden, nämlich:<br>errmsg<br>Eine Zeichenfolge, die ausgegeben wird, wenn ein Fehler während der SSI-Verarbeitung auftritt. Standardmäßig wird die folgende Zeichenfolge ausgegeben: [ein Fehler ist beim Verarbeiten des Direktivs aufgetreten]<br>timefmt<br>Eine Formatzeichenfolge, die an die strftime()-Funktion übergeben wird, um die Ausgabe von Datum und Uhrzeit zu ermöglichen.</p><p> Vorkommen während der Verarbeitung der Direktive] timefmt ist ein Formatzeichenstreng, das dem strftime()-Funktion übergeben wird, um Datum und Uhrzeit auszugeben. Als Standard wird folgendes Format verwendet: "%A, %d-%b-%Y %H:%M:%S %Z" Das Format "%s" ist geeignet, um die Zeit in Sekunden auszugeben. echo gibt den Wert einer Variablen aus. Der Befehl hat die folgenden Parameter:
+<ul>
+<li>var: Variablenname</li>
+</ul><ul>
+<li>encoding: die Kodierungsart</li>
+</ul><ul>
+<li>Mögliche Werte sind none, url, und entity. Als Standard wird entity verwendet.</li>
+</ul><ul>
+<li>default: ein nicht standardmäßiger Parameter, der eine Zeichenkette setzt, die auszugeben ist, wenn eine Variable undefiniert ist. Als Standard wird "(none)" ausgegeben. Der Befehl &lt;!--# echo var="name" default="no" --&gt; ersetzt die folgende Folge von Befehlen: &lt;!--# if expr="$name" --&gt; &lt;!--# echo var="name" --&gt; &lt;!--# else --&gt;no&lt;!--# endif --&gt;</li>
+</ul></p><p>wenn Performs a conditional inclusion. Die folgenden Befehle werden unterstützt:
+<ul>
+<li>&lt;!--# if expr="..." --&gt; ...</li>
+</ul><ul>
+<li>&lt;!--# elif expr="..." --&gt; ...</li>
+</ul><ul>
+<li>&lt;!--# else --&gt; ...</li>
+</ul><ul>
+<li>&lt;!--# endif --&gt;</li>
+</ul></p><p>Nur eine Ebene der Nestung ist derzeit unterstützt. Der Befehl hat folgenden Parameter: expr: Ausdruck. Ein Ausdruck kann sein:
+<ul>
+<li>Variablenexistenzprüfung: &lt;!--# if expr="$name" --&gt;</li>
+</ul><ul>
+<li>Vergleich einer Variablen mit einem Text: &lt;!--# if expr="$name = text" --&gt;</li>
+</ul><ul>
+<li>&lt;!--# if expr="$name != text" --&gt;</li>
+</ul><ul>
+<li>Vergleich einer Variablen mit einem regulären Ausdruck: &lt;!--# if expr="$name = /text/" --&gt;</li>
+</ul><ul>
+<li>&lt;!--# if expr="$name != /text/" --&gt;</li>
+</ul></p><p>Wenn ein Text Variablen enthält, werden ihre Werte substituiert.</p><p> <pre><code class="lang-bash">if expr="$name = /text/" --&amp;gt; &amp;lt;!--# if expr="$name != /text/" --&amp;gt; Wenn ein Text Variablen enthält, werden deren Werte substituiert. Eine reguläre Ausdruckszeichenfolge kann Positions- und benannte Kapitüren enthalten, die später über Variablen verwendet werden können, z.B.: &amp;lt;!--# if expr="$name = /(.+)@(?P&amp;lt;domain&amp;gt;.+)/" --&amp;gt; &amp;lt;!--# echo var="1" --&amp;gt; &amp;lt;!--# echo var="domain" --&amp;gt; &amp;lt;!--# endif --&amp;gt; include Inkludiert das Ergebnis einer anderen Anfrage in eine Antwort. Der Befehl hat folgende Parameter: file spezifiziert einen eingebundenen Datei, z.B.: &amp;lt;!--# include file="footer.html" --&amp;gt; virtual spezifiziert eine eingebundene Anfrage, z.B.: &amp;lt;!--# include virtual="/remote/body.php?argument=value" --&amp;gt; Mehrere Anfragen, die auf einer Seite angegeben sind und von proxied oder FastCGI/uwsgi/SCGI/gRPC-Servern parallel ausgeführt werden, laufen. Wenn sequentielles Verarbeiten gewünscht wird, sollte der wait-Parameter verwendet werden. stub ein nicht-standarder Parameter, der den Blocknamen angibt, dessen Inhalt ausgelesen wird, wenn die eingebundene Anfrage leere Körper hat oder bei einem Fehler während der Anfrageverarbeitung auftritt, z.B.: &amp;lt;!--# block name="one" --&amp;gt;&amp;amp;nbsp;&amp;lt;!--# endblock --&amp;gt; &amp;lt;!--# include virtual="/remote/body.php?argument=value" stub="one" --&amp;gt; Der Inhalt des Ersetzungsblocks wird im Kontext der eingebundenen Anfrage verarbeitet. wait ein nicht-standarder Parameter, der anweist, auf eine Anfrage zu warten, bis sie vollständig abgeschlossen ist, bevor mit der SSI-Verarbeitung fortgeführt wird, z.B.: &amp;lt;!--# include virtual="/remote/body.php?argument=value" wait="true" --&amp;gt;</code></pre></p><p>Please note that the <code>&lt;!--# ... --&gt;</code> tags are used in SSI (Server Side Includes) and are not actual code blocks. They are used to indicate that the text within them should be processed by the server and not sent to the client as-is.</p><p>Also, the <code>wait</code> parameter is not a standard SSI parameter, it is a custom parameter that may be used in some server configurations. The same applies to the <code>stub</code> parameter.</p><p> Dieses instructiert, zu warten, bis eine Anforderung vollständig abgeschlossen ist, bevor mit der SSI-Verarbeitung fortgefahren wird, beispielhaft:</p><p><pre><code class="lang-">&amp;lt;!--# include virtual="/remote/body.php?argument=value" wait="yes" --&amp;gt;</code></pre></p><p>setzt einen nicht-standard-Parameter, der anweist, den Erfolg der Anforderungsverarbeitung in die angegebene Variable zu schreiben, beispielhaft:</p><p><pre><code class="lang-">&amp;lt;!--# include virtual="/remote/body.php?argument=value" set="one" --&amp;gt;</code></pre></p><p>Der Maximale Größe der Antwort wird durch die subrequest_output_buffer_size-Direktive (1.13.10) festgelegt:</p><p><pre><code class="lang-">location /remote/ {<br>    subrequest_output_buffer_size 64k;<br>    ...<br>}</code></pre></p><p>Vor Version 1.13.10 konnten nur die Ergebnisse von Antworten, die mit den Modulen ngx_http_proxy_module, ngx_http_memcached_module, ngx_http_fastcgi_module (1.5.6), ngx_http_uwsgi_module (1.5.6), und ngx_http_scgi_module (1.5.6) erhalten wurden, in Variablen geschrieben werden. Der Maximale Größe der Antwort wurde mit den Direktiven proxy_buffer_size, memcached_buffer_size, fastcgi_buffer_size, uwsgi_buffer_size, und scgi_buffer_size festgelegt.</p><p><code>set</code> setzt den Wert einer Variablen. Der Befehl hat die folgenden Parameter:
+<ul>
+<li><code>var</code> der Variablenname.</li>
+</ul><ul>
+<li><code>value</code> der Variablenwert. Wenn einem zugewiesenen Wert Variablen enthalten sind, werden ihre Werte substituiert.</li>
+</ul></p><p>Embedded Variables</p><p>Der ngx_http_ssi_module-Modul unterstützt zwei embedded Variablen:
+<ul>
+<li>$date_local aktuelle Zeit in der lokalen Zeitzone. Der Format ist durch die config-Befehl mit dem timefmt-Parameter festgelegt.</li>
+</ul><br>* $date_gmt aktuelle Zeit in GMT. Der Format ist durch die config-Befehl mit dem timefmt-Parameter festgelegt.</p>
+</main>
+</body>
+</html>

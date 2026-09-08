@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module ngx_http_headers_module</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Module ngx_http_headers_module</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Modul ngx_http_headers_module<br>Beispiel-Konfigurationsdirektiven add_header, add_header_erben, add_Trailer, add_Trailer_erben</p><p>Der Modul ngx_http_headers_module ermöglicht es, den "Expires" und "Cache-Control" Header-Feldern sowie beliebigen Feldern zu einer Antwort-Header-Zeile hinzuzufügen.</p><p>Beispiel-Konfiguration
+<pre><code class="lang-">expires 24h;<br>expires modified +24h;<br>expires @24h;<br>expires 0;<br>expires -1;<br>expires epoch;<br>expires $expires;<br>add_header Cache-Control private;</code></pre><br>Direktiven-Syntax: add_header name value [always];<br>Standard: —<br>Kontext: http, server, location, if in location<br>Fügt das angegebene Feld einer Antwort-Header-Zeile hinzu, sofern der Antwortstatuscode 200, 201 (1.3.10), 204, 206, 301, 302, 303, 304, 307 (1.1.16, 1.0.13), oder 308 (1.13.0) ist. Der Wert kann Variablen enthalten. Es können mehrere add_header-Direktiven vorhanden sein. Diese Direktiven werden von der vorherigen Konfigurationsstufe geerbt, sofern keine add_header-Direktiven auf der aktuellen Stufe definiert sind. Die Erbschaftsregeln können mit dem add_header_erben-Direktiv (1.29.3) neu definiert werden. Wenn das always-Parameter angegeben wird (1.7.5), wird der Header-Feld hinzugefügt, unabhängig vom Antwortstatuscode.</p><p>Syntax: add_header_erben on | off | merge;<br>Standard: add_header_erben on;<br>Kontext: http, server, location, if in location<br>Diese Direktive erschien in Version 1.29.3. Erlaubt es, die Erbschaftsregeln für die Werte, die in den add_header-Direktiven angegeben sind, zu ändern. Standardmäßig wird das Standard-Erbschaftsmodell verwendet.</p><p> Erlaubt die Änderung der Erbschaftsregeln für die Werte, die in den add_header-Direktiven angegeben sind. Voreingenommen wird die Standard-Erbschaftsmodell. Das merge-Parameter ermöglicht den Anhängen von Werten aus der vorherigen Ebene an die Werte, die auf der aktuellen Ebene definiert sind. Das off-Parameter storniert die Erbschaft der Werte aus der vorherigen Konfigurationsstufe. Die Erbschaftsregeln selbst werden standardmäßig geerbt. Beispiel: add_header_inherit merge; angegeben an der obersten Ebene wird in allen untergeordneten Ebenen rekursiv geerbt, bis sie später neu definiert wird. Syntax: add_header_inherit merge; Kontext: http, server, location, if in location Dieser Direktivträger erschien in der Version 1.13.2. Fügt den angegebenen Feld zur Antwort am Ende hinzu, sofern der Antwortcode 200, 201, 206, 301, 302, 303, 307 oder 308 entspricht. Der Wert kann Variablen enthalten. Es können mehrere add_trailer-Direktiven vorhanden sein. Diese Direktiven werden nur von der vorherigen Konfigurationsstufe geerbt, wenn keine add_trailer-Direktiven auf der aktuellen Ebene definiert sind. Die Erbschaftsregeln können mit dem add_trailer_inherit-Direktiv (1.29.3) neu definiert werden. Wenn das always-Parameter angegeben ist, wird das angegebene Feld unabhängig vom Antwortcode hinzugefügt. Syntax: add_trailer_inherit on | off | merge; Kontext: http, server, location, if in location Dieser Direktivträger erschien in der Version 1.29.3.</p><p> | aus | merge; Standard: add_trailer_inherit an: on; Kontext: http, server, location, wenn in location Dieses Direktiv erschien in Version 1.29.3. Erlaubt die Änderung der Erbschaftsregeln für die Werte, die in den add_trailer-Direktiven angegeben sind. Standardmäßig wird das Standard-Erbschaftsmodell verwendet. Das merge-Parameter ermöglicht das Anhängen von Werten aus der vorherigen Ebene an die Werte, die an der aktuellen Ebene definiert sind. Das off-Parameter storniert die Erbschaft der Werte aus der vorherigen Konfigurationsebene. Die Erbschaftsregeln selbst werden standardmäßig geerbt. Beispiel: add_trailer_inherit merge; angegeben auf der obersten Ebene wird in allen untergeordneten Ebenen rekursiv geerbt, bis sie später überschrieben wird. Syntax: expires [modified] time;expires epoch | max | off; Standard: expires off; Kontext: http, server, location, wenn in location Erlaubt die Aktivierung oder Deaktivierung der Hinzufügung oder Bearbeitung der “Expires” und “Cache-Control” Antwortheaderfelder, sofern der Antwortcode 200, 201 (1.3.10), 204, 206, 301, 302, 303, 304, 307 (1.1.16, 1.0.13), oder 308 (1.13.0) beträgt. Der Parameter kann eine positive oder negative Zeit sein. Die Zeit im “Expires”-Feld wird als Summe der aktuellen Zeit und der Zeit, die im Direktiv angegeben ist, berechnet. Wenn das modified-Parameter verwendet wird (0.7.0, 0.6.32), wird die Zeit als Summe der Dateiänderungszeit und der Zeit, die im Direktiv angegeben ist, berechnet. Zusätzlich ist es möglich, eine Uhrzeit zu spezifizieren, indem das “@”-Präfix verwendet wird (0.7.9, 0.6). |</p><p>Please note that the code blocks, commands, file paths, and URLs are kept exactly as they are in the original text. The prose text has been translated accurately.</p><p> in der Direktive. Zusätzlich kann man eine Uhrzeit durch das "@"-Präfix angeben (0.7.9, 0.6.34): expires @15h30m; Der Inhalt des "Cache-Control"-Feldes hängt von der angegebenen Zeit ab: die Zeit ist negativ — "Cache-Control: no-cache". Die Zeit ist positiv oder null — "Cache-Control: max-age=t", wobei t die in der Direktive angegebene Zeit in Sekunden ist. Das epoch-Parameter setzt "Expires" auf den Wert "Don, 01 Jan 1970 00:00:01 GMT", und "Cache-Control" auf "no-cache". Das max-Parameter setzt "Expires" auf den Wert "Don, 31 Dez 2037 23:55:55 GMT", und "Cache-Control" auf 10 Jahre. Das off-Parameter deaktiviert das Hinzufügen oder Ändern der "Expires" und "Cache-Control" Antwort-Header-Felder. Der letzte Parameterwert kann Variablen enthalten (1.7.9): map $sent_http_content_type $expires { default off; application/pdf 42d; ~image/ max; } expires $expires;</p>
+</main>
+</body>
+</html>

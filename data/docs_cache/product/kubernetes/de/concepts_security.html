@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Security</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Security</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> SicherheitsKonzepte für das Sicherhalten Ihrer cloud-native Workload. Dieser Abschnitt der Kubernetes-Dokumentation soll Ihnen helfen, zu lernen, Workloads sicherer zu betreiben, und über die wesentlichen Aspekte der Sicherheit eines Kubernetes-Clusters informiert zu werden. Kubernetes basiert auf einer cloud-native Architektur, und zieht sich von den Ratschlägen des CNCF über gute Praxis für cloud native Information Sicherheit. Lesen Sie sich Cloud Native Security und Kubernetes durch, um den breiteren Kontext über die Sicherheit Ihres Clusters und die Anwendungen zu erhalten, die auf ihm ausgeführt werden.</p><p>Sicherheitsmechanismen von Kubernetes<br>Kubernetes bietet mehrere APIs und Sicherheitskontrollen, sowie Möglichkeiten, Richtlinien zu definieren, die Teil Ihrer Information Sicherheit Management sein können.</p><p>Control plane Schutz<br>Ein wichtiger Sicherheitsmechanismus für jeden Kubernetes-Cluster ist es, den Zugriff auf die Kubernetes-API zu kontrollieren.<br>Kubernetes erwartet, dass Sie TLS konfigurieren und verwenden, um Datenverschlüsselung während des Datenverkehrs innerhalb des Control planes und zwischen dem Control plane und seinen Clients zu gewährleisten. Sie können auch die Verschlüsselung bei Ruhe für die in Kubernetes Control plane gespeicherten Daten aktivieren; dies ist getrennt von der Verwendung von Verschlüsselung bei Ruhe für Ihre eigenen Workloads-Daten, was auch eine gute Idee sein könnte.</p><p>Geheimnisse<br>Die Secret API bietet Grundschutz für Konfigurationswerte, die Vertraulichkeit erfordern.</p><p>Workload Schutz<br>Stellen Sie Pod-Sicherheitsstandards ein, um sicherzustellen, dass Pods und ihre Containers isoliert sind. Sie können auch RuntimeClasses verwenden, um benutzerdefinierte Isolierung zu definieren, wenn Sie dies benötigen.</p><p> Pods und ihre Container werden angemessen isoliert. Sie können auch RuntimeClasses verwenden, um eine benutzerdefinierte Isolierung zu definieren, falls Sie dies benötigen. Netzwerkpolitiken ermöglichen es Ihnen, den Netzverkehr zwischen Pods oder zwischen Pods und dem Netzwerk außerhalb Ihrer Cluster zu steuern.</p><p>Sie können Sicherheitsmaßnahmen aus der breiteren Ecosystem-Umgebung verwenden, um Präventiv- oder Detektivmaßnahmen um Pods, ihre Containers und die Images anzuwenden, die in ihnen ausgeführt werden.</p><p>Admission control<br>Admission Controllern sind Plugins, die Kubernetes-API-Anfragen abfangen und diese basierend auf bestimmten Feldern in der Anfrage validieren oder verändern können. Den Kontrollern sorgfältig zu gestalten hilft, unbeabsichtigte Störungen zu vermeiden, während Kubernetes-APIs während der Version-Updates ändern. Für Entwurfsaspekte siehe Admission Webhook Best Practices.</p><p>Auditing<br>Kubernetes Audit-Protokollierung bietet eine sicherheitsrelevante, zeitliche Reihenfolge von Aufzeichnungen, die die Reihenfolge der Aktionen in einer Cluster dokumentieren. Die Cluster überwachen die Aktivitäten, die von Benutzern, von Anwendungen, die die Kubernetes-API verwenden, und von der Steuerungsebene selbst generiert werden.</p><p>Cloud-Anbieter-Sicherheit<br>Hinweis: Die auf dieser Seite verwiesenen Elemente beziehen sich auf Dritte, die außerhalb von Kubernetes stehen. Die Autoren des Kubernetes-Projekts sind nicht für diese von Dritten produzierten Produkte oder Projekte verantwortlich. Um einen Hersteller, ein Produkt oder ein Projekt dieser Liste hinzuzufügen, lesen Sie bitte die Inhaltsleitfaden vor der Änderung ein. Weitere Informationen.</p><p>Wenn Sie eine Kubernetes-Cluster auf Ihrem eigenen Hardware oder einem anderen Cloud-Anbieter betreiben, konsultieren Sie Ihre Dokumentation für die Sicherheitsbestpraxis.</p><p> Betreiben Sie einen Kubernetes-Cluster auf Ihrem eigenen Hardware- oder einem anderen Cloud-Anbieter, beachten Sie Ihre Dokumentation für Sicherheitsbestpraxis. Hier sind Links zu einigen der beliebtesten Cloud-Anbieter-Sicherheitsdokumentationen:</p><p>Cloud-Anbieter-Sicherheit:<br>IaaS-Anbieter | Link<br>Alibaba Cloud | &lt;https://www.alibabacloud.com/trust-center&gt;<br>Amazon Web Services | &lt;https://aws.amazon.com/security&gt;<br>Google Cloud Platform | &lt;https://cloud.google.com/security&gt;<br>Huawei Cloud | &lt;https://www.huaweicloud.com/intl/en-us/securecenter/overallsafety&gt;<br>IBM Cloud | &lt;https://www.ibm.com/cloud/security&gt;<br>Microsoft Azure | &lt;https://docs.microsoft.com/en-us/azure/security/azure-security&gt;<br>Oracle Cloud Infrastructure | &lt;https://www.oracle.com/security&gt;<br>Tencent Cloud | &lt;https://www.tencentcloud.com/solutions/data-security-and-information-protection&gt;<br>VMware vSphere | &lt;https://www.vmware.com/solutions/security/hardening-guides&gt;</p><p>Policies<br>Sie können Sicherheitsrichtlinien mithilfe von Kubernetes-native Mechanismen definieren, wie z.B. NetworkPolicy (deklarative Kontrolle über Netzwerk-Paket-Filterung) oder ValidatingAdmissionPolicy (deklarative Einschränkungen für die Änderungen, die jemand mit der Kubernetes-API machen kann).</p><p>Sie können jedoch auch auf Richtlinienimplementierungen aus dem breiteren Ökosystem um Kubernetes vertrauen. Kubernetes bietet Erweiterungsmöglichkeiten, um solche Ökosystem-Projekte zu ermöglichen, ihre eigenen Richtlinienkontrollen auf Quellcode-Überprüfung, Container-Bild-Zulassung, API-Zugriffskontrollen, Netzwerk und mehr zu implementieren.</p><p>Weitere Informationen zu Richtlinienmechanismen und Kubernetes finden Sie unter Policies.</p><p> code review, Container-Bild-Genehmigung, API-Zugriffssteuerung, Netzwerk und mehr. Weitere Informationen zu Politikmechanismen und Kubernetes finden Sie hier: Policies.</p><p>Was kommt Nächstes?<br>Lerne sich mit Kubernetes sicherer Klustern zu beschäftigen:<ul>
+<li>Sicheres Kluster</li>
+</ul><ul>
+<li>Bekannte Sicherheitslücken in Kubernetes (und Links zu weiteren Informationen)</li>
+</ul><ul>
+<li>Datenverschlüsselung im Verkehr für die Steuerungsebene</li>
+</ul><ul>
+<li>Datenverschlüsselung im Ruhezustand</li>
+</ul><ul>
+<li>Zugriffskontrolle auf die Kubernetes-APIs</li>
+</ul><ul>
+<li>Netzwerkpolitiken für Pods</li>
+</ul><ul>
+<li>Secrets in Kubernetes</li>
+</ul><ul>
+<li>Pod-Sicherheitsstandards</li>
+</ul><ul>
+<li>RuntimeClasses</li>
+</ul></p><p>Lerne den Kontext: Cloud Native Security und Kubernetes</p><p>Bewerben Sie sich:<ul>
+<li>Zertifizierter Kubernetes-Sicherheits-Spezialist-Zertifikat und offizielle Ausbildungskurs</li>
+</ul></p><p>Lesen Sie mehr in dieser Sektion:<ul>
+<li>Pod-Sicherheitsstandards</li>
+</ul><ul>
+<li>Pod-Sicherheitszulassung</li>
+</ul><ul>
+<li>Service Accounts</li>
+</ul><ul>
+<li>Pod-Sicherheitspolitiken</li>
+</ul><ul>
+<li>Sicherheit für Linux-Knoten</li>
+</ul><ul>
+<li>Sicherheit für Windows-Knoten</li>
+</ul><ul>
+<li>Zugriffskontrolle auf die Kubernetes-API</li>
+</ul><ul>
+<li>Rollenbasierte Zugriffskontrolle gute Praxis</li>
+</ul><ul>
+<li>gute Praxis für Kubernetes-Secrets</li>
+</ul><ul>
+<li>Mehrtenanzigkeit</li>
+</ul><ul>
+<li>Härtungsführer - Authentifizierungsmechanismen</li>
+</ul><ul>
+<li>Härtungsführer - dynamische Ressourcenzuweisung</li>
+</ul><ul>
+<li>Härtungsführer - Scheduler-Konfiguration</li>
+</ul><ul>
+<li>Risiken für Bypass des Kubernetes-API-Servers</li>
+</ul><ul>
+<li>Linux-Kernel-Sicherheitskonstrukte für Pods und Containers</li>
+</ul><ul>
+<li>Sicherheitscheckliste</li>
+</ul><ul>
+<li>Anwendungssicherheitscheckliste</li>
+</ul></p><p>Feedback<br>Hat diese Seite Ihnen helfen können? Ja Ne<br>Vielen Dank für das Feedback. Wenn Sie eine spezifische, beantwortbare Frage zum Umgang mit Kubernetes haben, fragen Sie sie auf Stack Overflow. Öffnen Sie ein Issue in dem GitHub-Repository, wenn Sie ein Problem melden oder eine Verbesserung vorschlagen wollen.</p><p> Frage, die sich auf die Nutzung von Kubernetes bezieht, stelle sie bitte auf Stack Overflow. Falls du ein Problem melden oder eine Verbesserung vorschlagen möchtest, öffne bitte ein Issue in dem GitHub-Repository. Letztes Mal geändert am 03.02.2025 um 17:28 Uhr PST: Hinzufügen einer neuen Seite zu empfehlenswerten Praxen für mutating Webhooks. (bf971d28d3)</p><p>Auf dieser Seite werden Elemente erwähnt, die sich auf dritte Parteiprodukte oder Projekte beziehen, die Funktionalität für Kubernetes bereitstellen. Die Autoren des Kubernetes-Projekts übernehmen keine Verantwortung für diese dritte Parteiprodukte oder Projekte. Weitere Details findest du auf der CNCF-Website.</p><p>Bitte lese den Inhaltsleitfaden vor, bevor du eine Änderung vorschlägest, die einen zusätzlichen dritte Parteilink hinzufügt.</p>
+</main>
+</body>
+</html>

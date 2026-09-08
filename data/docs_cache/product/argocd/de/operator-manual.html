@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Overview¶</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Overview¶</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Übersicht ¶ Dieser Leitfaden ist für Administratoren und Operatoren, die Argo CD für andere Entwickler installieren und konfigurieren möchten. Bitte beachten Sie, dass Sie die Einführungsvorschrift abgeschlossen haben sollten.</p><p>Bitte beachten Sie, dass nur die Prosa-Textteile übersetzt werden. Technische Begriffe, Codeblöcke, Befehle, Dateipfade und URLs bleiben unverändert. Die Paragraphenstruktur wird beibehalten.</p><p>Text:</p><p>Prerequisites¶
+<ul>
+<li>Kubernetes cluster with RBAC enabled</li>
+</ul><ul>
+<li>Helm 3 installed</li>
+</ul><ul>
+<li>kubectl configured to access the cluster</li>
+</ul></p><p>Installation¶
+<ol>
+<li>Install Argo CD using Helm:</li>
+</ol></p><p>   <pre><code class="lang-">   helm repo add argoproj-helm https://argoproj.github.io/helm-charts<br>   helm install argocd argoproj-helm/argocd<br>   </code></pre>
+<ol>
+<li>Access the Argo CD web UI:</li>
+</ol></p><p>   <pre><code class="lang-">   kubectl port-forward svc/argocd-server 8080:443<br>   open http://localhost:8080<br>   </code></pre>
+<ol>
+<li>Create a new application:</li>
+</ol></p><p>   - Go to the Argo CD web UI and log in.<br>   - Click on "New Application" and select the application type.<br>   - Configure the application settings according to your needs.<br>   - Click on "Create" to create the application.</p><p>Configuration¶
+<ul>
+<li>Configure Argo CD to use a Git repository as the source of truth.</li>
+</ul><ul>
+<li>Configure Argo CD to sync specific applications or namespaces.</li>
+</ul><ul>
+<li>Configure Argo CD to use custom resource synchronization strategies.</li>
+</ul></p><p>Troubleshooting¶
+<ul>
+<li>If you encounter issues during installation or configuration, refer to the Argo CD documentation.</li>
+</ul><ul>
+<li>If you need further assistance, join the Argo CD community on Slack or Gitter.</li>
+</ul></p><p>Security¶
+<ul>
+<li>Ensure that your Kubernetes cluster is secure and follows best practices for security.</li>
+</ul><ul>
+<li>Use RBAC to control access to Argo CD and its resources.</li>
+</ul><ul>
+<li>Use a secure connection (HTTPS) when accessing Argo CD.</li>
+</ul></p><p>Best Practices¶
+<ul>
+<li>Regularly backup your Argo CD configuration and data.</li>
+</ul><ul>
+<li>Keep Argo CD and its dependencies up-to-date.</li>
+</ul><ul>
+<li>Use namespaces to isolate applications and resources.</li>
+</ul><ul>
+<li>Use Git branches or tags to manage different environments (e.g., development, staging, production).</li>
+</ul><br>* Use custom resource synchronization strategies to optimize syncing for your specific use case.</p>
+</main>
+</body>
+</html>

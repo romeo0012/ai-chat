@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harbor docs | Download the Harbor Installer</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Harbor docs | Download the Harbor Installer</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Stáhněte si instalační program Harbor<br>Můžete stáhnout instalační programy Harbor z stránky oficiálních vydání. Stáhněte si buď online instalační program nebo offline instalační program. Online instalační program: Online instalační program stahuje obrázky Harbor z Docker hub. Proto je instalační program velmi malý. Offline instalační program: Použijte offline instalační program, pokud host, na který nasazujete Harbor, nemá připojení k internetu. Offline instalační program obsahuje předem sestavené obrázky, takže je větší než online instalační program. Instalace probíhají velmi podobně pro online a offline instalační program. Stáhněte a rozbalte instalační program<br>Pojďte na stránku vydání Harbor. Stáhněte si online nebo offline instalační program pro verzi, kterou chcete nainstalovat. Volitelně stáhněte si odpovídající soubor *.asc, abyste mohli ověřit, že balíček je pravý. Soubor *.asc je soubor OpenPGP klíče. Provedete následující kroky k ověření, zda stažený balíček je pravý. Získáte veřejný klíč pro soubor *.asc.<br>gpg --keyserver hkps://keyserver.ubuntu.com --receive-keys 644FF454C0B4115C<br>Byli byste měli vidět zprávu "veřejný klíč 'Harbor-sign (Klíč pro podepisování staveb Harbor) &lt;jiangd@vmware.com&gt;' importován". Ověřte, zda balíček je pravý tím, že spustíte jednu z následujících příkazů. Online instalační program: gpg -v --keyserver hkps://keyserver.ubuntu.com --verify harbor-online-installer-version.tgz.asc Offline instalační program: gpg -v --keyserver hkps://keyserver.ubuntu.com --verify harbor-offline-installer-version.tgz.</p><p> Přeložení následujících příkazů. Instalační program online: gpg -v --keyserver hkps://keyserver.ubuntu.com --verify harbor-online-installer-version.tgz.asc<br>Offline instalační program: gpg -v --keyserver hkps://keyserver.ubuntu.com --verify harbor-offline-installer-version.tgz.asc<br>Příkaz gpg ověří, že podpis balíčku odpovídá *.asc souboru klíče. Byste měli vidět potvrzení, že podpis je správný.<br>gpg: hlavička armory: Verze: GnuPG v1<br>gpg: předpokládá podepsané data v 'harbor-online-installer-v2.0.2.tgz'<br>gpg: Signatura vytvořena Tue Jul 28 09:49:20 2020 UTC<br>gpg: používá RSA klíč 644FF454C0B4115C<br>gpg: používá pgp model důvěryhodnosti klíče<br>gpg: Dobrá podpis od "Harbor-sign (Klíč pro podepisování Harbor build) &lt;jiangd@vmware.com&gt;" [neznámý]<br>gpg: VAROVÁNÍ: Tento klíč není certifikován důvěryhodnou podpisí!<br>gpg: Žádná indikace, že podpis patří majiteli. Hlavní klíčový prstěnek: 7722 D168 DAEC 4578 06C9 6FF9 644F F454 C0B4 115C<br>gpg: binární podpis, algoritmus digestu SHA1, algoritmus klíče rsa4096<br>Použijte tar, aby se extrahoval instalační balíček:<br>Online instalační program: bash $ tar xzvf harbor-online-installer-version.tgz<br>Offline instalační program: bash $ tar xzvf harbor-offline-installer-version.tgz<br>Další kroky<br>Chcete-li zajistit bezpečnost připojení k Harboru, přečtěte si Nastavení přístupu HTTPS k Harboru.<br>Chcete-li nastavit svou instalaci Harboru, přečtěte si Nastavení souboru YML Harboru.<br>Poznámky k adresáři Instalační program<br>Můžete extrahovat instalační program Harboru do libovolného umístění.</p><p> Nastavte přístup k HTTPS k Harboru. Chcete-li konfigurovat své instalaci Harboru, přečtěte si Nastavení souboru YML Harboru. Poznámky k adresáři Instalátoru Můžete extrahovat instalační balíček Harboru do libovolného umístění. Uživatel, který spouští skript instalace, musí mít oprávnění k spouštění příkazů Docker (obvykle jako člen skupiny docker). Tento adresář se používá pouze pro instalaci a konfiguraci. Neobsahuje se zde trvalé data Harboru. Všechny služby Harboru běží v kontejnerech Dockeru a jejich data se ukládají do Dockerových objemů. Udržujte si tento adresář, abyste mohli později spravovat svůj instance Harboru (např. pro aktualizace nebo změny konfigurace).</p><p>Poznámka: Všechny technické termíny, kódy, příkazy, cesty k souborům, URL a formátování zůstávají v původním anglickém jazyce.</p>
+</main>
+</body>
+</html>

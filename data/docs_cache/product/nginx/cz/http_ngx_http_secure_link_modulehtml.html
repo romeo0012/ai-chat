@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module ngx_http_secure_link_module</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Module ngx_http_secure_link_module</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Modul ngx_http_secure_link_module (0.7.18) slouží k ověřování autenticity požadovaných odkazů, k ochraně zdrojů před neautorizovaným přístupem a k omezení trvání odkazů. Autenticity požadovaného odkazu se ověří porovnáním hodnoty kontrolní součtu, která je přijata v požadavku, s hodnotou počítanou pro požadavek. Pokud má odkaz omezenou dobu trvání a uplynula doba, považuje se odkaz za zastaralý. Stav těchto kontrol je dostupný v proměnné $secure_link. Modul poskytuje dvě alternativní režimy provozu. První režim je povolený pomocí příkazu secure_link_secret a slouží k ověřování autenticity požadovaných odkazů i k ochraně zdrojů před neautorizovaným přístupem. Druhý režim (0.8.50) je povolený pomocí příkazů secure_link a secure_link_md5 a slouží také k omezení trvání odkazů. Tento modul není vytvářen všude výchozími nastaveními, musí být povolen pomocí konfiguračního parametru --with-http_secure_link_module.</p><p>Syntaxe příkazů:<br>secure_link expression;<br>Výchozí: —<br>Kontext: http, server, location<br>Definuje řetězec s proměnnými, z nichž se extrahuje hodnota kontrolního součtu a trvání odkazu. Proměnné použité v výrazu jsou obvykle spojeny s požadavkem; viz níže uvedený příklad. Extrahovaná hodnota kontrolního součtu z řetězce se porovná s MD5 hash hodnotou výrazu definovaným příkazem secure_link_md5.</p><p>Příklad:<br>location /secure_link {<br>secure_link $secure_link_secret;<br>}</p><p>Příkazy nejsou vytvářeny všude výchozími nastaveními, musí být povoleny pomocí konfiguračního parametru --with-http_secure_link_module.</p><p> Hodnota vystřihnutá z řetězce se porovnává s hodnotou MD5 hashu výrazu definovaným příkazem secure_link_md5 direktivy. Pokud kontrolní součty neodpovídají, proměnná $secure_link se nastaví na prázdnou řetězcovou hodnotu. Pokud kontrolní součty odpovídají, kontroluje se platnost odkazu. Pokud má odkaz omezenou platnost a uplynula doba, proměnná $secure_link se nastaví na "0". V opačném případě se nastaví na "1". Hodnota MD5 hashu přijatá v požadavku je kódována v base64url. Pokud má odkaz omezenou platnost, doba vypršení je nastavena v sekundách od Epoch (Thu, 01 Jan 1970 00:00:00 GMT). Hodnota je zadána v výrazu po MD5 hashu a je oddělena čárkou. Do požadavku je doba vypršení dostupná prostřednictvím proměnné $secure_link_expires pro použití v příkazu secure_link_md5. Pokud doba vypršení není zadána, má odkaz neomezenou platnost. Syntaxe: secure_link_md5 výraz; Výchozí hodnota: — Kontext: http, server, location Definuje výraz, pro který se počítá MD5 hash hodnota a porovná se hodnotou přijatou v požadavku. Výraz by měl obsahovat zabezpečenou část odkazu (zdroj) a tajnou složku. Pokud má odkaz omezenou platnost, výraz by měl obsahovat také $secure_link_expires. K zabránění neautorizovaného přístupu může obsahovat nějakou informaci o klientovi, například jeho adresu a verzi prohlížeče.</p><p>Syntax:
+<pre><code class="lang-">secure_link_md5 expression;</code></pre><br>Výchozí hodnota:
+<pre><code class="lang-">—</code></pre><br>Kontext:
+<pre><code class="lang-">http, server, location</code></pre><br>Definuje výraz, pro který se počítá MD5 hash hodnota a porovná se hodnotou přijatou v požadavku. Tento výraz by měl obsahovat zabezpečenou část odkazu (zdroj) a tajnou složku. Pokud má odkaz omezenou platnost, výraz by měl obsahovat také $secure_link_expires. K zabránění neautorizovaného přístupu může obsahovat nějakou informaci o klientovi, například jeho adresu a verzi prohlížeče.</p><p> Chcete-li zabránit neautorizovanému přístupu, může výraz obsahovat nějakou informaci o klientovi, například jeho adresu a verzi prohlížeče. Příklad: location /s/ { secure_link $arg_md5,$arg_expires; secure_link_md5 "$secure_link_expires$uri$remote_addr secret"; if ($secure_link = "") { return 403; } if ($secure_link = "0") { return 410; } ... } Tento odkaz "/s/link?md5=_e4Nc3iduzkWRm01TBBNYw&amp;expires=2147483647" omezuje přístup k "/s/link" pro klienta s IP adresou 127.0.0.1. Odkaz také má omezenou platnost do 19. ledna 2038 (GMT). Na UNIXu hodnotu argumentu md5 požadavku můžete získat následovně: echo -n '2147483647/s/link127.0.0.1 secret' | \ openssl md5 -binary | openssl base64 | tr +/ -_ | tr -d = Syntax: secure_link_secret slovo; Výchozí: — Kontext: location Definuje tajné slovo používané k ověření autenticity požadovaných odkazů. Celá URI požadovaného odkazu vypadá následovně: /prefix/hash/link, kde hash je šestnáctkový zástup MD5 hash počítaný pro konkatenaci odkazu a tajného slova, a prefix je libovolná řetězová hodnota bez lomítek. Pokud prochází požadovaný odkaz ověření autenticity, proměnná $secure_link je nastavena na odkaz extrahovaný z požadavku URI. V opačném případě je proměnná $secure_link nastavena na prázdnou řetězec.</p><p> Text v anglickém jazyce:</p><p><pre><code class="lang-">Přijatá hodnota pro proměnnou $secure_link je nastavena na odkaz vytáhnutý z URI požadavku. V opačném případě je proměnná $secure_link nastavena na prázdnou řetězcovou hodnotu. Příklad:</p><p>location /p/ {<br>    secure_link_secret secret;<br>    if ($secure_link = "") {<br>        return 403;<br>    }<br>    rewrite ^ /secure/$secure_link;<br>}</p><p>location /secure/ {<br>    internal;<br>}</p><p>Požadavek na "/p/5e814704a28d9bc1914ff19fa0c4a00a/link" bude vnitřně přesměrován na "/secure/link". Na systému UNIX může být pro tento příklad hash hodnota získána pomocí:</p><p>echo -n 'linksecret' | openssl md5 -hex</p><p>Vložené proměnné<br>$secure_link - Hodnota odkazu<br>$secure_link_status - Stav kontroly odkazu. Konkrétní hodnota závisí na zvoleném režimu.<br>$secure_link_expires - Doba trvání odkazu zahrnutého v požadavku; určena pouze pro příkaz secure_link_md5.</code></pre></p><p>Poznámka: Tento text je určen pro použití v souboru konfigurace Nginxu.</p>
+</main>
+</body>
+</html>

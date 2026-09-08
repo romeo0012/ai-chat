@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Install Git</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Install Git</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Um an GitLab-Projekten beizusteuern, müssen Sie den Git-Client auf Ihrem lokalen Rechner herunterladen, installieren und konfigurieren. GitLab nutzt das SSH-Protokoll, um sicher mit Git zu kommunizieren. Mit SSH können Sie sich auf den GitLab-Remoten-Server authentifizieren, ohne Ihren Benutzernamen und Passwort jedes Mal einzugeben. Nachdem Sie Git installiert und konfiguriert haben, generieren und fügen Sie ein SSH-Schlüsselpaar Ihrem GitLab-Konto hinzu.</p><p>Installieren und Aktualisieren Git auf macOS</p><p>Obwohl eine Version von Git von macOS geliefert wird, sollten Sie die neueste Version von Git installieren. Eine gängige Methode zum Installieren von Git ist Homebrew. Um die neueste Version von Git auf macOS mit Homebrew zu installieren:</p><p>Wenn Sie Homebrew noch nie installiert haben, folgen Sie den Homebrew-Installationsanweisungen. In einer Terminal-Sitzung installieren Sie Git, indem Sie den Befehl <code>brew install git</code> ausführen. Überprüfen Sie, ob Git auf Ihrem lokalen Rechner funktioniert: <code>git --version</code></p><p>Aktualisieren Sie Git regelmäßig, indem Sie das folgende Kommando ausführen: <code>brew update &amp;&amp; brew upgrade git</code></p><p>Ubuntu Linux</p><p>Obwohl eine Version von Git von Ubuntu geliefert wird, sollten Sie die neueste Version von Git installieren. Die neueste Version ist über eine Personal Package Archive (PPA) verfügbar.</p><p> git Ubuntu Linux<br>Though a version of Git is supplied by Ubuntu, you should install the latest version of Git. The latest version is available using a Personal Package Archive (PPA). To install the latest version of Git on Ubuntu Linux with a PPA: In a terminal, configure the required PPA, update the list of Ubuntu packages, and install git:</p><p><pre><code class="lang-">sudo apt-add-repository ppa:git-core/ppa<br>sudo apt-get update<br>sudo apt-get install git</code></pre></p><p>Verify that Git works on your local machine:</p><p><pre><code class="lang-">git --version</code></pre></p><p>Keep Git up to date by periodically running the following command:</p><p><pre><code class="lang-">sudo apt-get update &amp;amp;&amp;amp; sudo apt-get install git</code></pre></p><p>For other operating systems<br>For information on downloading and installing Git on other operating systems, see the official Git website.</p><p>Configure Git<br>To start using Git from your local machine, you must enter your credentials to identify yourself as the author of your work. You can configure your Git identity locally or globally:</p><p>Locally: Use for the current project only.<br>Globally: Use for all current and future projects.</p><p>Local setup<br>Configure your Git identity locally to use it for the current project only. The full name and email address should match the ones you use in GitLab. In your terminal, add your full name. For example:</p><p><pre><code class="lang-">git config --local user.name "Alex Smith"</code></pre></p><p>Add your email address. For example:</p><p><pre><code class="lang-">git config --local user.email "your_email_address@example.com"</code></pre></p><p> name. Beispiel: <code>git config --local user.name "Alex Smith"</code> Füge deine E-Mail-Adresse hinzu. Beispiel: <code>git config --local user.email "your_email_address@example.com"</code> Um die Konfiguration zu überprüfen, führe folgenden Befehl aus: <code>git config --local --list</code></p><p>Global setup<br>Konfiguriere deine Git-Identität global, um sie für alle aktuellen und zukünftigen Projekte auf deinem Rechner zu verwenden. Der Vollname und die E-Mail-Adresse sollten mit denjenigen übereinstimmen, die du in GitLab verwendest. In deinem Terminal füge deinen Vollnamen hinzu. Beispiel: <code>git config --global user.name "Sidney Jones"</code> Füge deine E-Mail-Adresse hinzu. Beispiel: <code>git config --global user.email "your_email_address@example.com"</code> Um die Konfiguration zu überprüfen, führe folgenden Befehl aus: <code>git config --global --list</code></p><p>Überprüfung der Git-Konfiguration<br>Um deine Git-Konfiguration zu überprüfen, führe folgenden Befehl aus: <code>git config user.name &amp;&amp; git config user.email</code></p><p>Themen, die verwandt sind<br>Git-Konfiguration Dokumentation<br>Verwende SSH-Schlüssel, um mit GitLab zu kommunizieren</p><p>Related topics<br>Git-Konfiguration Dokumentation<br>Verwende SSH-Schlüssel, um mit GitLab zu kommunizieren</p>
+</main>
+</body>
+</html>

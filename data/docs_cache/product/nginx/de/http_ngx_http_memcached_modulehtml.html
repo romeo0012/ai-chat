@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module ngx_http_memcached_module</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Module ngx_http_memcached_module</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Modul ngx_http_memcached_module<br>===============================</p><p>Dieser Modul wird verwendet, um Antworten von einem Memcached-Server zu erhalten. Der Schlüssel wird in der Variable $memcached_key gesetzt. Eine Antwort soll vorher in Memcached gespeichert werden, was über nginx extern geschehen muss.</p><p>Beispielkonfiguration
+<hr></p><p><pre><code class="lang-nginx">server {<br>    location / {<br>        set $memcached_key "$uri?$args";<br>        memcached_pass host:11211;<br>        error_page 404 502 504 = @fallback;<br>    }<br>    location @fallback {<br>        proxy_pass http://backend;<br>    }<br>}</code></pre></p><p>Direktiven
+<hr></p><p>Syntax: memcached_allow_upstream string ...;<br>Default: —<br>Kontext: http, server, location</p><p>Diese Direktive ist ab Version 1.29.3 verfügbar. Definiert die Bedingungen, unter denen der Zugriff auf einen Memcached-Server erlaubt oder verweigert wird. Wenn alle Zeichenfolgenparameter nicht leer und nicht mit "0" gleich sind, wird der Zugriff erlaubt. Die Bedingungen werden jedes Mal vor einer Verbindung zu einem Memcached-Server geprüft. Die Parameterwerte können Variablen enthalten:</p><p><pre><code class="lang-nginx">server {<br>    listen 127.0.0.1:8080;<br>    location / {<br>        memcached_pass host:11211;<br>        memcached_allow_upstream $allow;<br>        ...<br>    }<br>}</p><p>geo $upstream_last_addr $allow {<br>    volatile;<br>    10.10.0.0/24 1;<br>}</code></pre></p><p>Diese Direktive ist Teil unseres kommerziellen Abonnements.</p><p> Ort / { memcached_pass host:11211; memcached_allow_upstream $allow; ... } } Dieses Direktiv ist Teil unserer kommerziellen Abonnement-Pakete. Syntax: memcached_bind address [transparent ] | off; Standard: — Kontext: http, server, location Dieses Direktiv ist ab Version 0.8.22 verfügbar. Es verbindet ausgehende Verbindungen mit einem Memcached-Server mit der angegebenen lokalen IP-Adresse und einem optionalen Port (1.11.2). Der Wert des Parameters kann Variablen enthalten (1.3.12). Der Sonderwert off (1.3.12) storniert den Effekt des memcached_bind-Direktivs, das von der vorherigen Konfigurationsstufe geerbt wurde, was dem System erlaubt, die lokale IP-Adresse und den Port automatisch zuzuweisen. Der transparent-Parameter (1.11.0) erlaubt ausgehende Verbindungen zu einem Memcached-Server von einer nicht-lokalen IP-Adresse aus, z.B. von der realen IP-Adresse eines Clients: memcached_bind $remote_addr transparent; Um diesen Parameter funktionieren zu lassen, ist es üblich, dass die Nginx-Worker-Prozesse mit den Superuser-Rechten ausgeführt werden. Auf Linux ist dies nicht erforderlich (1.13.8), da wenn der transparent-Parameter angegeben wird, die Worker-Prozesse die CAP_NET_RAW-Berechtigung vom Master-Prozess erben. Es ist auch erforderlich, die Kernel-Routing-Tabelle für das Netzwerkverkehr des Memcached-Servers zu konfigurieren.</p><p>Syntax: memcached_bind_dynamic on | off; Standard: memcached_bind_dynamic off; Kontext: http, server, location Dieses Direktiv ist ab Version 1.29.3 verfügbar. Wenn aktiviert, führt es die Bind-Operation bei jedem Versuch einer Verbindung durch.</p><p> Kontext: http, server, location<br>Diese Direktive ist ab der Version 1.29.3 verfügbar. Aktiviert macht sie die Bind-Operation bei jedem Verbindungsversuch. Diese Direktive ist Teil unseres kommerziellen Abonnements. Syntax: memcached_buffer_size size; Default: memcached_buffer_size 4k|8k;</p><p>Kontext: http, server, location<br>Stellt die Größe des Buffers fest, der für die Lesung der Antwort vom Memcached-Server verwendet wird. Die Antwort wird dem Client synchron übergeben, sobald sie empfangen wurde. Syntax: memcached_connect_timeout time; Default: memcached_connect_timeout 60s;</p><p>Kontext: http, server, location<br>Definiert einen Timeout für die Herstellung einer Verbindung mit einem Memcached-Server. Es sollte beachtet werden, dass dieser Timeout normalerweise nicht mehr als 75 Sekunden betragen kann. Syntax: memcached_gzip_flag flag; Default: —</p><p>Kontext: http, server, location<br>Ab der Version 1.3.6 verfügbar. Aktiviert die Testung des Flags in der Antwort des Memcached-Servers und setzt den "Content-Encoding"-Antwortheaderfeld auf "gzip" ein, wenn das Flag gesetzt ist. Syntax: memcached_next_upstream error | timeout | denied | invalid_response | not_found | off ...</p><p> "gzip" falls in Kraft, wenn die Flagge gesetzt ist. Syntax: memcached_next_upstream Fehler | Zeitout | verweigert | ungültige_Antwort | nicht_gefunden | ...; Standard: memcached_next_upstream Fehler Zeitout; Kontext: http, server, location</p><p>Diese Direktive bestimmt in welchen Fällen eine Anfrage an den nächsten Server weitergeleitet werden soll:
+<ul>
+<li>Fehler: Ein Fehler ist aufgetreten, während die Verbindung mit dem Server hergestellt, die Anfrage an ihn gesendet oder das Antwort-Header-Feld gelesen wurde.</li>
+</ul><ul>
+<li>Zeitout: Ein Zeitout ist aufgetreten, während die Verbindung mit dem Server hergestellt, die Anfrage an ihn gesendet oder das Antwort-Header-Feld gelesen wurde.</li>
+</ul><ul>
+<li>verweigert: Der Server hat die Verbindung abgelehnt (1.29.3)</li>
+</ul><ul>
+<li>ungültige_Antwort: Der Server hat eine leere oder ungültige Antwort zurückgegeben.</li>
+</ul><ul>
+<li>nicht_gefunden: Eine Antwort wurde auf dem Server nicht gefunden.</li>
+</ul><ul>
+<li>off: Die Weiterleitung der Anfrage an den nächsten Server wird deaktiviert. Man sollte daran denken, dass die Weiterleitung der Anfrage an den nächsten Server nur möglich ist, wenn nichts bereits an einen Client gesendet wurde. Das heißt, wenn ein Fehler oder Zeitout im Verlauf der Antwortübertragung auftritt, kann dies nicht korrigiert werden. Die Direktive definiert auch, was als unerfolgreiche Kommunikation mit einem Server betrachtet wird. Die Fälle von Fehler, Zeitout, verweigert und ungültige_Antwort werden immer als unerfolgreiche Kommunikation betrachtet, selbst wenn sie nicht in der Direktive spezifiziert sind. Der Fall von nicht_gefunden wird nie als unerfolgreiche Kommunikation betrachtet. Die Weiterleitung der Anfrage an den nächsten Server kann durch die Anzahl der Versuche und die Zeit begrenzt werden.</li>
+</ul></p><p> unerfolgreiche Versuchsversuche. Eine Anfrage an den nächsten Server können durch die Anzahl der Versuche und die Zeit begrenzt werden. Syntax: memcached_next_upstream_timeout time; Standard: memcached_next_upstream_timeout 0; Kontext: http, server, location Dieser Direktiv erschien in der Version 1.7.5. Begrenzt die Zeit, während die Anfrage an den nächsten Server übertragen werden kann. Der Wert 0 deaktiviert diese Begrenzung. Syntax: memcached_next_upstream_tries number; Standard: memcached_next_upstream_tries 0; Kontext: http, server, location Dieser Direktiv erschien in der Version 1.7.5. Begrenzt die Anzahl möglicher Versuche, um eine Anfrage an den nächsten Server zu übertragen. Der Wert 0 deaktiviert diese Begrenzung. Syntax: memcached_pass address; Standard: — Kontext: location, wenn in location Setzt den memcached-Server-Adressen. Die Adresse kann als Domainname oder IP-Adresse angegeben werden, und ein Port: memcached_pass localhost:11211; oder als UNIX-Domänen-Sockettpfad: memcached_pass unix:/tmp/memcached.socket; Wenn ein Domainname mehrere Adressen aufweist, werden sie im round-robin-Verfahren verwendet. Zusätzlich kann eine Adresse als Servergruppe angegeben werden. Syntax: memcached_read_timeout time; Standard: memcached_read_timeout 60s; Kontext: http, server, location Definiert einen Zeitraum für die Lesung einer Antwort vom memcached-Server. Der Zeitraum wird nur zwischen zwei erfolgreichen Lesevorgängen gesetzt, nicht für die Übertragung der gesamten Antwort. Wenn der memcached-Server innerhalb dieser Zeit keine Antwort übermittelt, wird die Verbindung geschlossen.</p><p> Übertragung der gesamten Antwort. Wenn der Memcached-Server innerhalb dieser Zeit nichts überträgt, wird die Verbindung geschlossen. Syntax: memcached_send_timeout time; Standard: memcached_send_timeout 60s; Kontext: http, server, location Setzt einen Zeitlimit für die Übertragung einer Anfrage an den Memcached-Server. Der Zeitlimit wird nur zwischen zwei erfolgreichen Schreibvorgängen, nicht für die Übertragung der gesamten Anfrage, gesetzt. Wenn der Memcached-Server innerhalb dieser Zeit nichts erhält, wird die Verbindung geschlossen. Syntax: memcached_socket_keepalive on | off; Standard: memcached_socket_keepalive off; Kontext: http, server, location Diese Direktive ist ab Version 1.15.6 verfügbar. Konfiguriert das Verhalten von "TCP keepalive" für ausgehende Verbindungen zu einem Memcached-Server. Standardmäßig sind die Einstellungen des Betriebssystems für den Socket in Kraft. Wenn der Wert der Direktive auf den Wert "on" gesetzt wird, wird für den Socket die SO_KEEPALIVE-Option aktiviert. Embedded Variables $memcached_key Definiert einen Schlüssel für das Abrufen der Antwort von einem Memcached-Server.</p>
+</main>
+</body>
+</html>

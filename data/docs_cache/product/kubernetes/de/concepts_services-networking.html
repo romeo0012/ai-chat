@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services, Load Balancing, and Networking</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Services, Load Balancing, and Networking</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Dienste, Last-Balance-Lösungen und Netzwerk</p><p>Konzepte und Ressourcen hinter dem Netzwerk in Kubernetes.</p><p>Das Kubernetes-Netzwerk-Modell</p><p>Das Kubernetes-Netzwerk-Modell besteht aus mehreren Teilen:<br>Jede Pod in einem Cluster erhält eine einzigartige, clusterweite IP-Adresse.<br>Eine Pod hat ihr eigenes privates Netzwerk-Namespace, das von allen Containern innerhalb der Pod geteilt wird. Prozesse, die in verschiedenen Containern in der gleichen Pod laufen, können sich miteinander über localhost kommunizieren.<br>Das Pod-Netzwerk (auch als Cluster-Netzwerk bezeichnet) regelt die Kommunikation zwischen Pods. Es sichert ab, dass (außer bei bewusstem Netzwerksegmentierung):<br>Alle Pods miteinander kommunizieren können, unabhängig davon, ob sie auf demselben Knoten oder auf verschiedenen Knoten laufen. Pods können miteinander kommunizieren, ohne die Verwendung von Proxys oder Adressübersetzung (NAT) zu benutzen.<br>Auf Windows gilt diese Regel nicht für host-network-Pods.<br>Agenten auf einem Knoten (z.B. Systemdämonen oder kubelet) können sich mit allen Pods auf diesem Knoten kommunizieren.<br>Das Service-API ermöglicht es Ihnen, eine stabil (langlebige) IP-Adresse oder Hostname für einen Dienst bereitzustellen, der von einem oder mehreren Backend-Pods implementiert wird, wobei die einzelnen Pods, die den Dienst ausmachen, sich über die Zeit ändern können.<br>Kubernetes verwaltet automatisch EndpointSlice-Objekte, um Informationen über die Pods zu bereitstellen, die derzeit den Service unterstützen.</p><p> Der Dienst kann im Laufe der Zeit verändert werden. Kubernetes verwaltet automatisch EndpointSlice-Objekte, um Informationen über die aktuell hinter einem Dienst stehenden Pods bereitzustellen. Eine Implementierung des Dienst-Proxy-Moduls überwacht den Satz von Service- und EndpointSlice-Objekten und programmiert die Datenebene, um Dienstverkehr an seine Backends zu leiten, indem es mit Hilfe von Betriebssystem- oder Cloud-Anbieter-APIs Pakete abfangt oder umschreibt. Die Gateway-API (oder ihr Vorgänger, Ingress) ermöglicht es Ihnen, Services für Clients außerhalb des Clusters zugänglich zu machen. Ein einfacherer, aber weniger konfigurierbarer Mechanismus für Cluster-Eingang ist über die Service-API-Typ: LoadBalancer verfügbar, wenn ein unterstützter Cloud-Anbieter verwendet wird. NetworkPolicy ist eine integrierte Kubernetes-API, die Ihnen die Kontrolle über den Verkehr zwischen Pods oder zwischen Pods und der Außenwelt ermöglicht. In älteren Container-Systemen gab es kein automatisches Verbinden von Containern auf verschiedenen Hosts, und es war daher oft notwendig, explizit Links zwischen Containern zu erstellen, oder Container-Ports auf Host-Ports zu mappen, um sie von Containern auf anderen Hosts erreichbar zu machen. Dies ist in Kubernetes nicht notwendig; Kubernetes' Modell ist, dass Pods viel wie VMs oder physische Hosts von der Perspektive der Portzuweisung, Namensgebung, Dienstentdeckung, Lastverteilung, Anwendungskonfiguration und Migration behandelt werden können. Nur einige Teile dieses Modells werden von Kubernetes selbst implementiert.</p><p> Übersetzung:</p><p>Bei diesem Modell handelt es sich um die Themen Namensgebung, Dienstentdeckung, Lastenausgleich, Anwendungskonfiguration und Migration. Nur einige Teile dieses Modells werden von Kubernetes selbst implementiert. Für die anderen Teile definiert Kubernetes die APIs, aber die entsprechende Funktionalität wird von externen Komponenten bereitgestellt, von denen einige optional sind: Die Einrichtung des Pod-Netzwerk-Namespace wird von Systemsoftware auf Systemebene durchgeführt, die den Container Runtime Interface (CRI) implementiert.</p><p>Das Pod-Netzwerk selbst wird von einer Pod-Netzwerk-Implementierung verwaltet. Auf Linux wird die meiste Container-Runtime mit dem Container Networking Interface (CNI) interagieren, um mit der Pod-Netzwerk-Implementierung zu kommunizieren, sodass diese Implementierungen oft als CNI-Plugins bezeichnet werden.</p><p>Kubernetes bietet eine Standardimplementierung der Service-Proxying, die kube-proxy heißt, aber einige Pod-Netzwerk-Implementierungen verwenden stattdessen ihren eigenen Service-Proxy, der enger mit dem Rest der Implementierung integriert ist.</p><p>Netzwerkpolitik wird in der Regel von der Pod-Netzwerk-Implementierung implementiert. (Einfache Pod-Netzwerk-Implementierungen implementieren Netzwerkpolitik nicht, oder ein Administrator kann die Pod-Netzwerk-Konfiguration ohne Netzwerkpolitik-Unterstützung konfigurieren. In diesen Fällen ist die API weiterhin vorhanden, hat aber keinen Einfluss.)</p><p>Es gibt viele Implementierungen der Gateway-API, von denen einige spezifisch für bestimmte Cloud-Umgebungen sind, andere mehr auf "bare metal"-Umgebungen ausgerichtet sind, und andere allgemeiner sind.</p><p> Einige von diesen sind spezifisch für bestimmte Cloud-Umgebungen, andere sind mehr auf "bare metal"-Umgebungen ausgerichtet und andere sind generischer. Nächste Schritte</p><p>Das Tutorial Connecting Applications with Services ermöglicht Ihnen, über einen praktischen Beispiel über Services und Kubernetes-Netzwerke zu lernen.Cluster-Netzwerke erklären, wie Sie das Netzwerk für Ihren Cluster einrichten und bieten auch eine Übersicht über die beteiligten Technologien.</p><p>Um spezifische Netzwerkkonzepte zu erlernen, sehen Sie sich folgendes an:
+<ul>
+<li>Service - eine Anwendung hinter einem einzigen auswärtigen Endpunkt exponieren</li>
+</ul><ul>
+<li>Ingress - protocol-aware HTTP/HTTPS-Routing über URIs, Hostnamen und Pfade</li>
+</ul><ul>
+<li>Gateway API - dynamische Infrastruktur bereitstellung und fortgeschrittenes Verkehrsleitungsrouting</li>
+</ul><ul>
+<li>Network Policies - den Verkehrsfluss an der IP-Adresse oder Port-Ebene (OSI-Schicht 3 oder 4) steuern</li>
+</ul><ul>
+<li>DNS für Services und Pods - Dienste innerhalb Ihres Clusters über DNS entdecken</li>
+</ul><ul>
+<li>Feedback: War diese Seite hilfreich? Ja Nein</li>
+</ul></p><p>Danke für die Rückmeldung. Wenn Sie eine spezifische, beantwortbare Frage zum Umgang mit Kubernetes haben, fragen Sie sie auf Stack Overflow. Öffnen Sie ein Issue in dem GitHub-Repository, wenn Sie ein Problem melden oder eine Verbesserung vorschlagen möchten.</p><p>Letzte Änderung am 24. März 2026 um 8:03 PM PST: fix what's next content (0606d4546e)</p>
+</main>
+</body>
+</html>

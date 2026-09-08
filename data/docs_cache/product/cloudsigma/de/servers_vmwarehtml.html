@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VMWare Servers</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>VMWare Servers</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> VMWare Server-Notizen 📝<br>VMMware spezifische Hinweise 📝<br>Die VMWare-Server-Integration in der CloudSigma-API befindet sich noch in der BETA-Phase. Nur eine Teilfunktionalität wird freigegeben und die API-Definition und -Funktionalität sind weiterhin dem Änderungsprozess unterworfen. Erlaubte HTTP-Methoden 📝<br>Methode Beschreibung<br>GET get / listen Objekte/n<br>Hinweis Sie RFC 2616#section-9 für weitere Details zu den Semantiken von HTTP-Methoden.<br>Listen 📝<br>GET /vmware_servers/<br>Holte die Liste der Server, zu denen der authentifizierte Benutzer Zugriff hat. Statuscodes: 200 OK – kein Fehler<br>Beispielanfrage: GET /api/2.0/vmware_servers/?limit=0 HTTP/1.1<br>Content-Type: application/json<br>Authorization: Basic SWYgeW91IGZvdW5kIHRoaXMsIGhhdmUgYSBjb29raWUsIHlvdSBkZXNlcnZlIGl0IDop<br>Language: http<br>Beispielantwort: HTTP/1.1 200 OK<br>Content-Type: application/json; charset=utf-8<br>{<br> "meta": {<br> "limit": 0,<br> "offset": 0,<br> "total_count": 1<br> },<br> "objects": [<br> {<br> "cores_per_socket": 4,<br> "cpus": 4,<br> "deployed": true,<br> "description": "Test description",<br> "disk": [<br> {<br> 'diskElementName': 'Hard disk 1',<br> 'diskVirtualQuantityInBytes': 17179869184<br> }<br>],<br> "enabled": true,<br> "media": [<br> {<br> 'mediaCdElementName': 'CD/DVD Drive 1',<br> 'mediaCdHostResource': 'test.iso'<br> }<br>],<br> "memory": 4096,<br> "name": "testVLAN10",<br> "nics": [<br> {<br> "adapter_type": "VMXNET3",<br> "connected": "true",<br> "index": "0",<br> "ip_address": "127.0.0.1",<br> "ip_address_mode": "MANUAL",<br> "mac_address": "00:50:56:01:00:12",<br> "network": "VLAN0 Network",<br> "primary": "True"<br> },<br> {<br> "adapter_type": "VMXNET3",<br> "connected": "true",<br> "index": "1",<br> "ip_address": "10.10.11."</p><p> "127.0.0.1", "ip_address_mode": "MANUELL", "mac_address": "00:50:56:01:00:12", "network": "VLAN0-Netzwerk", "primary": "True" }, { "adapter_type": "VMXNET3", "connected": "true", "index": "1", "ip_address": "10.10.11.1", "ip_address_mode": "MANUELL", "mac_address": "00:50:56:01:00:14", "network": "VLAN57 - Privat zu Cloud", "primary": "True" }], "organisation": "5ce13c06-a1a4-4bf8-8ab0-64d23f455dda", "powered": true, "resource_uri": "/api/2.0/vmware_servers/d1f1bd39-124c-45c0-952c-2844a22f842e/", "uuid": "d1f1bd39-124c-45c0-952c-2844a22f842e" }] }</p><p>Schema<br>HTTP/1<br>(Dieser Absatz ist nur in Englisch und soll nicht übersetzt werden)</p><p> Private zu cloud", "primary": "True" },<br>"organisation": "5ce13c06-a1a4-4bf8-8ab0-64d23f455dda",<br>"powered": true,<br>"resource_uri": "/api/2.0/vmware_servers/d1f1bd39-124c-45c0-952c-2844a22f842e/",<br>"uuid": "d1f1bd39-124c-45c0-952c-2844a22f842e"<br>}]</p><p>Schema<br>HTTP/1.1 200 OK<br>Content-Type: application/json; charset=utf-8</p><p>{<br>"allowed_detail_http_methods": [<br>"get"<br>],<br>"allowed_list_http_methods": [<br>"get"<br>],<br>"default_format": "application/json",<br>"default_limit": 20,<br>"fields": {<br>"name": {<br>"default": null,<br>"help_text": "Name des VMWare-Servers",<br>"readonly": false,<br>"required": false,<br>"type": "string"<br>},<br>"powered": {<br>"default": false,<br>"help_text": "Gibt an, ob der Server eingeschaltet ist",<br>"readonly": false,<br>"required": true,<br>"type": "boolean"<br>},<br>"deployed": {<br>"default": false,<br>"help_text": "Gibt an, ob der Server bereitgestellt wurde",<br>"readonly": false,<br>"required": true,<br>"type": "boolean"<br>},<br>"description": {<br>"default": null,<br>"help_text": "Beschreibung des Servers",<br>"readonly": false,<br>"required": true,<br>"type": "string"<br>},<br>"cpus": {<br>"default": null,<br>"help_text": "Die Anzahl der CPUs, die dem Server zugewiesen wurden",<br>"readonly": false,<br>"required": true,<br>"type": "integer"<br>},<br>"cores_per_socket": {<br>"default": null,<br>"help_text": "Die Anzahl der Kern pro CPU-Sockel",<br>"readonly": false,<br>"required": true,<br>"type": "integer"<br>},<br>"memory": {<br>"default": null,<br>"help_text": "Die Menge an Speicher in MB",<br>"readonly": false,<br>"required": true,<br>"type": "integer"<br>},<br>"enabled": {<br>"default": false,<br>"help_text": "Gibt an, ob der Server aktiviert wurde",<br>"readonly": false,<br>"required": true,<br>"type": "boolean"<br>},<br>"organisation": {<br>"default": null,<br>"help_text": "UUID des Elternorganisations-Servers",<br>"readonly": false,<br>"required": true,<br>"type": "string"<br>},<br>"nics": {<br>"default": null,<br>"fields": {<br>"index": {<br>"default": null,<br>"help_text": "Index des Netzwerkadapters",<br>"readonly": false,<br>"required": false,<br>"type": "string"<br>},<br>"connected": {<br>"default": null,<br>"help_text": "Anzeiger, ob das Netzwerkadapter verbunden ist",<br>"readonly": false,<br>"required": false,<br>"type": "boolean"<br>}<br>}<br>}<br>}<br>}</p>
+</main>
+</body>
+</html>

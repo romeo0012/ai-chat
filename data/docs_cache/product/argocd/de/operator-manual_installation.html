@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Installation¶</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Installation¶</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Installation¶<br>Argo CD bietet zwei Arten der Installation: multi-tenant und core. Multi-Tenant¶<br>Die multi-tenant Installation ist die häufigste Art, Argo CD zu installieren. Diese Art der Installation wird typischerweise verwendet, um mehreren Anwendungsentwicklerteams in der Organisation zu dienen und von einer Plattformmannschaft betreut zu werden. Die Endbenutzer können Argo CD über den API-Server mithilfe der Web-UI oder argocd CLI verwenden. Das argocd CLI muss mit dem Befehl argocd login &lt;server-host&gt; konfiguriert werden. Zwei Arten von Installationsmanifesten werden bereitgestellt:</p><p>Keine Hochverfügbarkeit:¶<br>Nicht empfohlen für die Produktion. Diese Art der Installation wird typischerweise während einer Bewertungsperiode für Demonstrationen und Tests verwendet. install.yaml - Standard Argo CD Installation mit cluster-admin Zugriff. Verwenden Sie dieses Manifestset, wenn Sie Argo CD verwenden möchten, um Anwendungen in dem Cluster zu bereitstellen, in dem Argo CD läuft (also kubernetes.svc.default). Es wird auch in externen Clustern mit eingegebenen Credentials bereitstellen können. Hinweis Das ClusterRoleBinding im Installationsmanifest ist an einen ServiceAccount im argocd Namespace gebunden. Sei vorsichtig, wenn Sie das Namespace ändern, denn eine Änderung kann zu Fehlern mit Zugriffsrechten führen, es sei denn, das ClusterRoleBinding wird korrekt angepasst, um die neue Namespace zu reflektieren.</p><p>namespace-install.yaml - Installation von Argo CD, die nur Namespace-Ebenen-Berechtigungen erfordert (keine Clusterrollen benötigt).</p><p> Zugriffsfehler werden auftreten, wenn die ClusterRoleBinding nicht korrekt angepasst wird, um die neue Namespace zu reflektieren.</p><p>namespace-install.yaml - Die Installation von Argo CD erfordert nur Namespace-Ebenen-Berechtigungen (keine Clusterrollen benötigt). Verwenden Sie dieses Manifest-Set, wenn Sie Argo CD nicht dazu verwenden möchten, Anwendungen in dem Cluster zu deployen, in dem Argo CD läuft, und stattdessen nur auf eingegebene Cluster-Kredentialen angewiesen sind. Ein Beispiel für die Verwendung dieses Manifest-Sets ist, wenn Sie mehrere Argo CD-Instanzen für verschiedene Teams betreiben, wobei jede Instanz Anwendungen in externen Clustern deployen wird. Es wird jedoch noch möglich sein, auf das gleiche Cluster (kubernetes.svc.default) zu deployen, indem Sie die bereitgestellten Kredentiale verwenden (z.B. argocd cluster add &lt;KONTEXT&gt; --in-cluster --namespace &lt;IHR NAMESPACE&gt;). Mit den standardmäßig eingeschlossenen Rollen können Sie nur Argo CD-Ressourcen (Anwendungen, ApplicationSets und AppProjects) in demselben Cluster deployen, da es nur den GitOps-Modus unterstützt, bei dem echte Bereitstellungen in externen Clustern durchgeführt werden. Sie können das durch Definieren neuer Rollen und deren Bindung an das argocd-application-controller-Service-Account ändern.</p><p>Bitte beachten Sie, dass Argo CD CRDs nicht in namespace-install.yaml enthalten sind und separat installiert werden müssen. Die CRD-Manifests befinden sich in dem Verzeichnis manifests/crds. Verwenden Sie den folgenden Befehl, um sie zu installieren:</p><p><pre><code class="lang-">kubectl apply --server-side --force-conflicts -k https://github.com/argoproj/argo-cd/manifests/crds\?</code></pre></p><p> In das Namespace-Installationsdatei <code>namespace-install.yaml</code>. Diese müssen getrennt installiert werden. Die CRD-Manifests befinden sich in dem Verzeichnis <code>manifests/crds</code>. Verwenden Sie den folgenden Befehl, um sie zu installieren:</p><p><pre><code class="lang-">kubectl apply --server-side --force-conflicts -k https://github.com/argoproj/argo-cd/manifests/crds\?ref\=stable</code></pre></p><p>High Availability:¶ Für die Produktionsnutzung wird die High Availability Installation empfohlen. Dieses Paket enthält die gleichen Komponenten, aber sie sind für hohe Verfügbarkeit und Widerstandsfähigkeit optimiert. <code>ha/install.yaml</code> - das gleiche wie <code>install.yaml</code>, aber mit mehreren Repliken für unterstützte Komponenten. <code>ha/namespace-install.yaml</code> - das gleiche wie <code>namespace-install.yaml</code>, aber mit mehreren Repliken für unterstützte Komponenten. Core¶ Die Argo CD Core Installation wird hauptsächlich verwendet, um Argo CD in headless Mode zu deployen. Diese Art der Installation ist am besten für Clusteradministratoren geeignet, die Argo CD eigenständig verwenden und keine Mehrtenanzentumsfunktionen benötigen. Diese Installation umfasst weniger Komponenten und ist einfacher zu setzen. Das Paket enthält keinen API Server oder Benutzeroberfläche und installiert die leichtgewichtige (nicht-HA) Version jeder Komponente. Die Installationsmanifest ist unter <code>core-install.yaml</code> verfügbar. Weitere Informationen zu Argo CD Core finden Sie in der offiziellen Dokumentation. Kustomize¶ Die Argo CD Manifests können auch mithilfe von Kustomize installiert werden. Es wird empfohlen, den Manifest als remotes Ressource einzubeziehen und zusätzliche Anpassungen mithilfe von Kustomize Patches durchzuführen.</p><p><pre><code class="lang-">apiVersion: kustomize.config.k8s.</code></pre></p><p> Die Argo CD-Manifests können auch mithilfe von Kustomize installiert werden. Es wird empfohlen, das Manifest als remotes Ressource einzubeziehen und zusätzliche Anpassungen mithilfe von Kustomize-Patches durchzuführen.<br>apiVersion: kustomize.config.k8s.io/v1beta1<br>kind: Kustomization<br>namespace: argocd<br>resources:<ul>
+<li>https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml</li>
+</ul></p><p>Für ein Beispiel hierzu siehe das kustomization.yaml, das zur Bereitstellung der Argoproj CI/CD-Infrastruktur verwendet wurde.</p><p>Installation von Argo CD in einem benutzerdefinierten Namespace¶<br>Wenn Sie Argo CD in einem Namespace installieren möchten, der nicht der Standard-argocd ist, können Sie Kustomize verwenden, um ein Patch anzuwenden, das die ClusterRoleBinding aktualisiert, um auf den richtigen Namespace für den ServiceAccount zu verweisen. Dadurch werden die notwendigen Berechtigungen richtig in Ihrem benutzerdefinierten Namespace gesetzt. Hier ist ein Beispiel für die Konfiguration Ihres kustomization.yaml zur Installation von Argo CD in einem benutzerdefinierten Namespace:<br>apiVersion: kustomize.config.k8s.io/v1beta1<br>kind: Kustomization<br>namespace: &lt;Ihr-benutzerdefinierter-Namespace&gt;<br>resources:<ul>
+<li>https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml<br>patches:</li>
+</ul><ul>
+<li>patch: |-<br>  - op: replace path: /subjects/0/namespace value: &lt;Ihr-benutzerdefinierter-Namespace&gt;<br>  target: kind: ClusterRoleBinding</li>
+</ul></p><p>Dieses Patch sichert sicher, dass die ClusterRoleBinding auf den ServiceAccount in Ihrem benutzerdefinierten Namespace korrekt verweist, was bei der Bereitstellung zu keinen Berechtigungsproblemen führt.</p><p>Helm¶<br>Argo CD kann auch mithilfe von Helm installiert werden.</p><p> patch sicherstellt, dass die ClusterRoleBinding korrekt auf den ServiceAccount in Ihrem benutzerdefinierten Namespace zugeordnet wird, um jegliche Berechtigungsprobleme während der Bereitstellung zu verhindern. Helm¶ Das Argo CD kann mithilfe von Helm installiert werden. Der Helm-Chart wird zurzeit von der Community gepflegt und ist unter argo-helm/charts/argo-cd verfügbar. Unterstützte Versionen¶ Für ausführliche Informationen zur Versionenunterstützungspolitik des Argo CDs bitte auf die Dokumentation zur Release Prozess und Kadenz verweisen. Getestete Versionen¶ Die folgende Tabelle zeigt die Versionen von Kubernetes, die mit jeder Version des Argo CD getestet wurden. Argo CD-Version Kubernetes-Versionen 3.4 v1.35, v1.34, v1.33, v1.32 3.3 v1.35, v1.34, v1.33, v1.32 3.2 v1.34, v1.33, v1.32, v1.31</p>
+</main>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apache Virtual Host documentation</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Apache Virtual Host documentation</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Apache Virtual Host dokumentace Dostupné jazyky: de | en | fr | ja | ko | tr | zh-cn<br>Termín Virtual Host odkazuje na praxi provozování více než jednoho webu (např. company1.příklad.cz a company2.příklad.cz) na jednom počítači. Virtual hosts mohou být "IP-závislé", což znamená, že máte různou IP adresu pro každý web, nebo "jméno-závislé", což znamená, že můžete mít více názvů na každé IP adrese. Tím, že jsou v provozu na stejném fyzickém serveru, není to pro uživatele patrné. Apache byl jedním z prvních serverů, které podporovaly IP-závislé virtual hosts zásadně z boxu. Verze 1.1 a pozdější verze Apache podporují obě IP-závislé a jméno-závislé virtual hosts (vhosts). Tato varianta virtual hostů je někdy také nazývána host-závislá nebo ne-IP virtual hosts.</p><p> Text v Češtině:</p><p>A virtuální hosty (vhosty) podle názvu domény (name-based virtual hosts). Druhá varianta virtuálních hostů se někdy také nazývá host-based nebo non-IP virtual hosts. Níže je seznam dokumentačních stránek, které vysvětlují všech detaily podpory virtuálních hostů v Apache HTTP Server:
+<ul>
+<li>[Virtual Host Support Configuration directives](https://httpd.apache.org/docs/current/vhosts/)</li>
+</ul><ul>
+<li>[mod_vhost_alias](https://httpd.apache.org/docs/current/mod/mod_vhost_alias.html)</li>
+</ul><ul>
+<li>[Name-based virtual hosts](https://httpd.apache.org/docs/current/vhosts/name-based.html)</li>
+</ul><ul>
+<li>[IP-based virtual hosts](https://httpd.apache.org/docs/current/vhosts/ip-based.html)</li>
+</ul><ul>
+<li>[Virtual host examples](https://httpd.apache.org/docs/current/vhosts/examples.html)</li>
+</ul><ul>
+<li>[Limitace počtu file descriptorů](https://httpd.apache.org/docs/current/misc/file_descriptors.html) (nebo, [Několik přílišných logovacích souborů](https://httpd.apache.org/docs/current/misc/file_descriptors.html#limit))</li>
+</ul><ul>
+<li>[Dynamicky konfigurovaná masová virtualizace](https://httpd.apache.org/docs/current/vhosts/mass_virtuality.html)</li>
+</ul><ul>
+<li>[Podrobné diskuse o odpovídání virtuálních hostů](https://httpd.apache.org/docs/current/vhosts/selecting_vhost.html)</li>
+</ul><ul>
+<li>[Configuration directives](https://httpd.apache.org/docs/current/mod/mod_vhost.html)</li>
+</ul></p><p>¶ Virtuální hosty podle názvu domény (více než jeden webový server na jeden IP adresu)</p><p>IP-závislé virtuální hosty (každý webový server má vlastní IP adresu)</p><p>Příklady virtuálních hostů pro běžné nastavení</p><p>Limitace počtu file descriptorů (nebo, [Několik přílišných logovacích souborů](https://httpd.apache.org/docs/current/misc/file_descriptors.html#limit))</p><p>Dynamicky konfigurovaná masová virtualizace</p><p>Podrobné diskuse o odpovídání virtuálních hostů</p><p>Configuration directives</p><p>¶ Pokud se pokoušíte ladit konfiguraci virtuálních hostů, můžete nalézt příkazovou řádku -S užitečným. Níže jsou příklady pro Unix a Windows:
+<ul>
+<li>Unix: <code>apachectl -S</code></li>
+</ul><ul>
+<li>Windows: <code>httpd.exe -S</code></li>
+</ul></p><p>Tento příkaz vypíše popis, jak Apache zpracovával konfigurační soubor. Přesné zkoumání IP adres a názvů serverů může pomoci odhalit chyby v konfiguraci. (Viz dokumentace pro program httpd pro další možnosti příkazové řádky)</p>
+</main>
+</body>
+</html>

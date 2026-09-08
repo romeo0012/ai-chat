@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module ngx_http_geo_module</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Module ngx_http_geo_module</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Modul ngx_http_geo_modulePříklad KonfiguraceDirectivy geo Modul ngx_http_geo_module vytváří proměnné se hodnotami, které závisí na adrese klienta. Příklad Konfigurace geo
+<pre><code class="lang-bash">geo $geo {<br>    default 0;<br>    127.0.0.1 2;<br>    192.168.1.0/24 1;<br>    10.1.0.0/16 1;<br>    ::1 2;<br>    2001:0db8::/32 1;<br>}</code></pre><br>Syntax: geo [$address] $variable { ... } Výchozí: — Kontext: http Popisuje závislost hodnot zadané proměnné na adrese klienta. Výchozí adresa je brána z proměnné $remote_addr, ale může být brána také z jiné proměnné (0.7.27), například: geo $arg_remote_addr $geo { ...; } Protože proměnné se vyhodnocují pouze tehdy, když jsou použity, není žádný extra náklad na zpracování požadavku způsoben ani velkým počtem deklarovaných "geo" proměnných. Pokud hodnota proměnné nezastupuje platnou adresu IP, použije se adresa "255.255.255.255". Adresy se zadávají buď jako předpony v CIDR notaci (včetně jednotlivých adres) nebo jako rozsahy (0.7.23). Podpora IPv6 předpon je k dispozici od verzí 1.3.10 a 1.2.7. Následující speciální parametry jsou také podporovány:
+<ul>
+<li>delete odstraní zadanou sít (0.7.23).</li>
+</ul><ul>
+<li>default nastaví hodnotu proměnné, pokud adresa klienta neodpovídá žádné z uvedených adres. Pokud jsou adresy zadány v CIDR notaci, mohou být použity "0.0.0.0/0" a "::/0" místo default. Pokud není default zadán, výchozí hodnotou bude prázdná řetězcová hodnota.</li>
+</ul></p><p> "::/0" může být použito místo výchozího. Pokud není uvedeno výchozí hodnota, bude hodnota prázdná řetězec. include zahrnuje soubor s adresami a hodnotami. Může se jednat o několik zahrnutí. proxy definuje důvěryhodné adresy (0.8.7, 0.7.63). Pokud požadavek pochází z důvěryhodné adresy, bude adresa z pole "X-Forwarded-For" požadavku hlavičky použita místo toho. V opakovaném porovnání se adresami důvěryhodných adres se kontrolují postupně. Podpora důvěryhodných adres IPv6 začíná od verzí 1.3.0 a 1.2.1. proxy_recursive povoluje rekurzivní hledání adres (1.3.0, 1.2.1). Pokud je rekurzivní hledání zakázáno, pak místo původní adresy klienta, která odpovídá jedné z důvěryhodných adres, bude použita poslední adresa z pole "X-Forwarded-For". Pokud je rekurzivní hledání povoláno, pak místo původní adresy klienta, která odpovídá jedné z důvěryhodných adres, bude použita poslední nevěrná adresa z pole "X-Forwarded-For". ranges ukazuje, že adresy jsou určeny jako rozsahy (0.7.23). Tento parametr by měl být první. Chcete-li zrychlit načítání geo základny, adresy by měly být umístěny v rostoucí řadě. volatile ukazuje, že proměnná není uložitelná (1.29.3). Příklad: geo $country { default ZZ; include conf/geo.conf; delete 127.0.0.0/16; proxy 192.168.100.0/24; proxy 2001:0db8::/32; 127.0.0.0/24 US; 127.0.0.1/32 RU; 10.1.0.0/16 RU; 192.168.1.0/24 UK; } Soubor conf/geo.conf může obsahovat následující řádky: 10.2.0.0/16 RU; 192.168.2.0/24 RU; Hodnota nejvýraznějšího shoda se používá. Například pro adresu 127.0.0.1 bude volena hodnota "RU", nikoli "US". Příklad s rozsahy: geo $country { ranges; default ZZ; 127.0.0.0-127.0.0.0 US; 127.0.0.1-127.0.0.1 RU; 127.0.0.1-127.0.0.255 US; 10.1.0.0-10.1.255.255 RU; 192.168.1.0-192.168.1.255 UK; }</p>
+</main>
+</body>
+</html>

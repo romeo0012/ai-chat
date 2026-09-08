@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Repository</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Repository</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Repozitářová úroveň: Bezplatná, Premium, Ultimátní Nabídka: GitLab.com, GitLab Samostatně Spravovaný, GitLab Věnován Váš repozitář je součástí vašeho projektu GitLab. Ukládáte do něj své kód, a sledujete změny v něm s kontrolou verzí. Každý repozitář je součástí projektu GitLab, a nemůže existovat bez projektu GitLab. Vaše projekt poskytuje konfigurační možnosti pro vaši repozitář. Vytvořit repozitář<br>Chcete-li vytvořit repozitář: Vytvořte projekt nebo Vytvořte kopii existujícího projektu. Přidat soubory do repozitáře<br>Můžete přidat soubory do repozitáře:<br>Když vytvoříte projekt, nebo<br>Po vytvoření projektu, pomocí následujících možností:<br>Webový editor. Uživatelské rozhraní (UI). Rozhraní příkazového řádku. Přidat soubor z UI<br>Chcete-li přidat nebo nahrát soubor z GitLab UI: V horní liště zvolte Hledat nebo přejděte na a najděte svůj projekt. Přejděte do adresáře, do kterého chcete nahrát soubor. Vpravo od názvu adresáře, zvolte ikonu plus ( + ) &gt; Nahrát soubor. Vložte nebo nahráte svůj soubor. Zadejte zprávu o commitu. Volitelné. Chcete-li vytvořit žádost o sloučení s vašimi změnami, v cílové větvě zadejte název větve, který není výchozí větví vašeho repozitáře. Vyberte Nahrát soubor. Zkompilovat změny do repozitáře<br>Můžete zkompilovat své změny do větve v repozitáři. Když používáte rozhraní příkazového řádku, použijte příkaz git commit. Další informace o tom, jak používat commits k zlepšení komunikace a spolupráce, aktivovat nebo zrušit kanály, a zpětnou vazbu změn, naleznete v commitech.</p><p> Při použití příkazového řádku použijte příkaz git commit. Informace o použití commitů k zlepšení komunikace a spolupráce, spouštění nebo přeskočení pipelineů a zpětné vazby změn, naleznete v [těchto informacích](commits). Klonovat repozitář Můžete klonovat repozitář pomocí následujících možností:</p><p>Příkazový řádek:<ul>
+<li>Klonovat pomocí SSH: <code>git clone git@gitlab.com:username/repo.git</code></li>
+</ul><ul>
+<li>Klonovat pomocí HTTPS: <code>git clone https://gitlab.com/username/repo.git</code></li>
+</ul></p><p>GitLab UI:<ul>
+<li>Klonovat a otevřít v Apple Xcode: Klikněte na tlačítko Klon a pak na tlačítko Otevřít v Apple Xcode</li>
+</ul><ul>
+<li>Klonovat a otevřít v Visual Studio Code: Klikněte na tlačítko Klon a pak na tlačítko Otevřít v Visual Studio Code</li>
+</ul><ul>
+<li>Klonovat a otevřít v IntelliJ IDEA: Klikněte na tlačítko Klon a pak na tlačítko Otevřít v IntelliJ IDEA</li>
+</ul></p><p>Stáhnout zdrojový kód repozitáře Chcete-li stáhnout zdrojový kód repozitáře jako komprimovaný soubor:<br>V horní části obrazovky, vyberte Hledat nebo přejděte na a najděte svůj projekt. Nad seznamem souborů, vyberte Kód. Z výběru souborů, vyberte ty, které chcete stáhnout:<ul>
+<li>Zdrojový kód: Stáhněte si zdrojový kód z aktuální větvě, kterou zobrazíte. Dostupné formáty: zip, tar, tar.gz, a tar.bz2.</li>
+</ul><ul>
+<li>Adresář: Stáhněte si určitý adresář. Dostupné formáty: zip, tar, tar.gz, a tar.bz2. Tato možnost je viditelná pouze tehdy, když zobrazíte podadresář.</li>
+</ul><ul>
+<li>Artikuly: Stáhněte si artikuly z posledního CI/CD jobu. Kontrolní součty generovaných archivů mohou být změněny i tehdy, když samotný repozitář nezměnil. To může nastat, například pokud Git nebo třetí strana, kterou GitLab používá, změní.</li>
+</ul></p><p>Zobrazit repozitář podle Git revize Chcete-li zobrazit všechny soubory a složky repozitáře v určitém Git revizí, například SHA commitu, názvu větve nebo tagu:<br>V horní části obrazovky, vyberte Hledat nebo přejděte na a najděte svůj projekt. V horní části, vyberte kartu Git revize, aby se zobrazila seznam Git revizí. Vyberte nebo vyhledejte určitou Git revizi.</p><p> Horní lišta, vyberte Hledat nebo přejděte k a nalezte své projekt. V horní části vyberte, aby se otevřela seznam k dispozici pro výběr Git revize. Vyberte nebo vyhledejte Git revizi. Můžete také prohlížet a procházet soubory v určité Git revizi z stránky Commitů. Repozitářové jazyky, která detekuje GitLab, jsou použité v hlavní větvě. Tato informace je zobrazena na stránce Přehled projektu. Když se přidají nové soubory, může to trvat až pět minut, než se aktualizuje. Přidat repozitářové jazyky Ne všechny soubory jsou detekovány a zobrazeny na stránce Přehled projektu. Dokumentace, kód dodavatele a většina značkovacích jazyků jsou vyloučeny. Chcete-li zobrazit seznam podporovaných souborů a jazyků, přečtěte si podporované typy dat. Chcete-li změnit chování a zahrnout další typy souborů do nastavení výchozích: V kořenovém adresáři vašeho repozitáře vytvořte soubor s názvem .gitattributes. Přidejte řádek, který říká GitLab, aby zahrnul určitý typ souboru. Například, aby umožnilo .proto soubory, přidejte následující: *.proto linguist-detectable=true Tato funkce může využívat excesivní množství CPU. Pokud zaznamenáte problém, přečtěte si oddíl Troubleshooting pro přetížení CPU. Analytika přispěvatelů repozitáře Můžete zobrazit grafickou čáru s počtem commitů k vybrané větvi projektu v průběhu času, a grafické čáry s počtem commitů každým členem projektu. Další informace naleznete v článku Analytika přispěvatelů. Graf historie repozitáře Graf historie repozitáře zobrazuje vizuální historii sítě repozitáře, včetně větví a sloučení.</p><p>Poznámka: Všechny technické termíny, kódy, příkazy, cesty k souborům a adresy URL zůstávají v původním anglickém jazyce.</p><p> Analýza přispěvatelů. Historie repozitáře (graf)<br>Repozitářový graf zobrazuje historii vizuální sítě repozitáře, včetně větví a sloučení. Tento graf vám umožní vidět proud změn v repozitáři. Chcete-li zobrazit historii repozitáře (graf), přejděte do Vašeho projektu &gt; Repozitářový graf. Změna cesty k repozitáři<br>Pokud se změní cesta k repozitáři, GitLab řeší přechod z staré lokace na novou pomocí přesměrování. Pokud přejmenujete uživatele, změníte cestu skupiny nebo přejmenujete repozitář: URL pro prostor názvů a vše, co pod ním leží, jako jsou projekty, jsou přesměrovány na nové URL. Gitové URL pro projekty pod prostorem názvů jsou přesměrovány na nové URL remota. Když provedete push nebo pull do repozitáře, který se přesunul, zobrazí se varovný zpráva k aktualizaci vašeho remota. Skripty automatizace nebo klienti Git pokračují po přejmenování. Přesměrování jsou k dispozici, dokud původní cesta není zabrána jiným uživatelem, skupinou nebo projektem. API přesměrování mohou potřebovat být následována explicitně. Po změně cesty musíte aktualizovat existující URL v následujících zdrojích: Zahrnutí výjimek, kromě zahrnutí:component, jinak selhávají pipelines s syntaxovou chybou. Zahrnutí složek CI/CD mohou následovat přesměrování. Volání API se naznačenou cestou místo kódovaného ID prostoru názvů a ID projektu. Odkazy na obrázky Docker. Proměnné, které určují projekt nebo prostor názvů. Soubor CODEOWNERS.</p><p>Poznámka: Tento text obsahuje technické termíny, kódy, příkazy, cesty k souborům a URL, které by měly být zachovány v překladu.</p><p> Místo nečíselných oborů názvů a projektů ID. Odkazy na obrázky Docker. Proměnné, které určují projekt nebo obor názvů. Soubor CODEOWNERS. Související témata GitLab pro rozšíření VS Code. Zámek souborů a zabránit konfliktům změn. API repozitáře Soubory Složky Větev Vytvořit adresář Nalezení historie souboru Identifikace změn podle řádku (Git blame) Řešení potíží Hledání řadby pushů do repozitáře Pokud se zdá, že commit se ztratil, hledejte řadbu pushů do repozitáře. Tento thread Stack Overflow popisuje, jak se dostat do tohoto stavu bez force push. Další příčinou může být nesprávně nakonfigurovaný serverový hook, který změní odkaz HEAD v operaci git reset. Pokud se podíváte na výstup z ukázkového kódu níže pro cílovou větev, vidíte přerušení v řadě z od/k commitů, jak se prochází výstupem. Komit_from každého nového pushu by měl být roven komit_to posledního pushu. Přerušení této řady ukazuje, že jeden nebo více commitů byly ztraceny z historie repozitáře. Pomocí konzole rails následující příklad kontroluje posledních 100 pushů a tiskne vstupy komit_from a komit_to:</p><p>p = Project.find_by_full_path('project/path')<br>p.events.pushed_action.last(100).each do |e|<br>printf "%-20.20s %8s...%8s (%s)", e.push_event_payload[:ref], e.push_event_payload[:commit_from], e.push_event_payload[:commit_to], e.author.try(:username)<br>end ; nil</p><p>Výstup ukazující přerušení řady na řádku 4:<br>master f21b07713251e04575908149bdc8ac1f105aabc3...</p><p>Příklad výstupu ukazující přerušení řady na řádku 4:<br>master f21b07713251e04575908149bdc8ac1f105aabc3...</p><p> TEXT v Češtině:<br>%8s...%8s (%s)", e.push_událost_zatížení[:ref], e.push_událost_zatížení[:commit_od], e.push_událost_zatížení[:commit_do], e.autor.try(:uživatelské_jméno) end ; nil Příklad výstupu ukazující přerušení sekvence na řádku 4: master f21b07713251e04575908149bdc8ac1f105aabc3...6bc56c1f46244792222f6c85b11606933af171de root master 6bc56c1f46244792222f6c85b11606933af171de...132da6064f5d3453d445fd7cb452b148705bdc1b root master 132da6064f5d3453d445fd7cb452b148705bdc1b...a62e1e693150a2e46ace0ce696cd4a52856dfa65 root master 58b07b719a4b0039fec810efa52f479ba1b84756...f05321a5b5728bd8a89b7bf530aa44043c951dce root master f05321a5b5728bd8a89b7bf530aa44043c951dce...7d02e575fd790e76a3284ee435368279a5eb3773 root Chyba: Xcode selhává při klonování repozitáře GitLab poskytuje možnost omezit seznam povolených klíčů SSH. Pokud je vaši SSH klíč na seznamu povolených klíčů, můžete se setkat s chybou jako The repository rejected the provided credentials. K řešení tohoto problému vytvořte novou pár klíčů SSH, který odpovídá pravidlům pro podporované typy SSH klíčů. Po vytvoření podporovaného SSH klíče, zkuste opět klonovat repozitář.</p><p>Poznámka: Zachováno je původní kód, příkazy, cesty souborů, adresy URL a formátování.</p>
+</main>
+</body>
+</html>

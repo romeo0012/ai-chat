@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harbor docs | Harbor Compatibility List</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Harbor docs | Harbor Compatibility List</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Harbor-Kompatibilitätsliste<br>Dieses Dokument bietet Kompatibilitätsinformationen für alle Harbor-Komponenten.</p><p>Replication Adapters<br>Registries<br>Pull Mode<br>Push Mode<br>Proxy Cache<br>Eingeführt in Release<br>Automatisierte Pipeline<br>Covered Harbor V1.8 distribution<br>V1.8 docker hub<br>V1.8 Huawei SWR<br>V1.8 GCR<br>V1.9 ECR<br>V1.9 ACR<br>V1.9 AliCR<br>V1.9 Artifact Hub<br>V2.2 Artifactory<br>V1.10 Quay<br>V1.10 GitLab Registry<br>Pull mode replicates artifacts from the specified source registries into Harbor.<br>Push mode replicates artifacts from Harbor to the specified target registries.<br>Proxy Cache means the replication adapter can be used as a proxy cache registry.</p><p>OIDC Adapters<br>OIDC Providers<br>Offiziell Verifiziert<br>Endbenutzer Verifiziert<br>Verifiziert in Release<br>Google Identity V1.9<br>Dex V1.9<br>Ping Identity V1.9<br>Keycloak V1.10<br>Auth0 V1.10</p><p>Scanner Adapters<br>Scanners<br>Prüfungsfähig<br>Standardmäßig eingebunden in Release<br>Clair CentOS (entfernt als Standard in v2.2)<br>v1.10<br>Anchore<br>Anchore v1.10<br>Trivy<br>Aqua v1.10<br>CSP Aqua v1.10<br>DoSec<br>DoSec v1.10<br>Sysdig Secure<br>Sysdig v2.1.0<br>TensorSecurity<br>TensorSecurity v2.2.0<br>ArksecScanner<br>Arksec v2.4.0<br>Cyberwatch<br>Cyberwatch v2.8.0</p><p>Prüfungsfähig bedeutet, dass die Scanner-Implementierung offiziell getestet und verifiziert wurde.<br>Standardmäßig bedeutet, dass der Scanner als Standardoption bereitgestellt und zusammen mit den Hauptkomponenten von Harbor installiert werden kann, indem man zusätzliche Optionen während der Installation bereitstellt. Andere Scanner müssen manuell installiert werden.</p>
+</main>
+</body>
+</html>

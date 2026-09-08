@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apache's Handler Use</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Apache's Handler Use</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Apache's Obracovač Používá Dostupné Jazyky: en | es | fr | ja | ko | tr | zh-cn Tento dokument popisuje použití Apacheových Obracovačů. Co je Obracovač Příklady Programátorovy Poznámka Co je Obracovač ¶ Související ModulySouvisející Direktivymod_actionsmod_asismod_cgimod_imagemapmod_infomod_mimemod_negotiationmod_statusActionAddHandlerRemoveHandlerSetHandler Obracovač je vnitřní zastoupení Apache serveru akce, která se má provést, když je soubor volán. Obvykle mají soubory implicitní obracovače, na základě typu souboru. Normálně slouží všechny soubory serverem, ale určité typy souborů jsou "obracovány" odděleně. Obracovače mohou být také explicitně konfigurovány, buď na základě přípon souboru nebo na základě umístění, bez vztahu k typu souboru. To je výhodné jak z hlediska elegantnějšího řešení, tak z hlediska toho, že umožňuje také asociovat typ a obracovač s souborem. (Viz také Soubory s Několika Příponami.) Obracovače mohou být buď vbudované do serveru nebo součástí modulu, nebo mohou být přidány pomocí Action direktivy. Výchozí obracovače v standardní distribuci jsou následující:</p><p>default-handler: Odeslat soubor pomocí default_handler(), který je výchozím obracovačem používaným k obracování statického obsahu. (core)<br>send-as-is: Odeslat soubor s HTTP hlavičkami jako je. (mod_asis)<br>cgi-script: Tento soubor se zpracovává jako skript CGI. (mod_cgi)<br>imap-file: Zpracovávat jako soubor pravidel imagemap. (mod_imagemap)<br>server-info: Získat informace o konfiguraci serveru.</p><p> text:<br>soubor jako CGI skript. (mod_cgi) imap-soubor: Parser jako pravidlo souboru imagemap. (mod_imagemap) informace_serveru: Získat informace o konfiguraci serveru. (mod_info) zprava_serveru: Získat zprávu o stavu serveru. (mod_status) mapa_typů: Parser jako mapa typů souboru pro negotiační jednání. (mod_negotiation) Příklady ¶ Změna statického obsahu pomocí CGI skriptu Následující direktivy způsobí, že žádosti o soubory s rozšířením html spustí skript footer.pl CGI.</p><p>Action add-footer /cgi-bin/footer.pl<br>AddHandler add-footer .html</p><p>Poté je skript odpovědný za odeslání původně požadovaného dokumentu (ukazovaného proměnou prostředí PATH_TRANSLATED) a provedení libovolných uprav nebo přidání. Soubory s HTTP hlavičkami</p><p>Následující direktivy povolí zpracování zásobníku send-as-is, který se používá pro soubory, které obsahují vlastní HTTP hlavičky. Všechny soubory v adresáři /web/htdocs/asis/ budou zpracovány zásobníkem send-as-is, bez ohledu na jejich přípony souborů.</p><p>&lt;Directory "/web/htdocs/asis"&gt;<br>SetHandler send-as-is<br>&lt;/Directory&gt;</p><p>Programátorská poznámka ¶ K implementaci funkcí zpracovatele bylo provedeno rozšíření Apache API, které můžete mít za účel. Konkrétně byl přidán nový záznam do struktury request_rec: char *handler</p><p>Pokud chcete, aby vaše modul zasáhl do zpracovatele, stačí nastavit r-&gt;handler na jméno zpracovatele v jakékoli fázi požadavku před fází invoke_handler požadavku.</p><p>Zpracovatele jsou implementovány stejně, jako dříve, pouze se používá název zpracovatele místo obsahu typu. Zatímco to není nutné, konvence pro názvy zpracovatelů je použít oddělené podtržítko, bez lomených závorek, aby nezasahovaly do prostoru názvů médií.</p>
+</main>
+</body>
+</html>

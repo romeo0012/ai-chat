@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Server-Wide Configuration</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Server-Wide Configuration</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Server-weit verfügbare Konfigurationssprachen: en | fr | ja | ko | tr<br>Dieses Dokument erklärt einige der Direktiven, die von der Server-Kernkomponente bereitgestellt werden, um die Grundfunktionen des Servers zu konfigurieren.</p><p>Server-Identifizierung
+<hr></p><p><h3>Verwandte Module</h3>
+<ul>
+<li>Related Directives: ServerName, ServerAdmin, ServerSignature, ServerTokens, UseCanonicalName, UseCanonicalPhysicalPort</li>
+</ul></p><p>Die ServerAdmin und ServerTokens-Direktiven steuern, welche Informationen über den Server in servergenerierten Dokumenten wie z.B. Fehlermeldungen angezeigt werden. Die ServerTokens-Direktive setzt den Wert des Server HTTP Antwortkopf-Felds. Die ServerName, UseCanonicalName und UseCanonicalPhysicalPort-Direktiven werden vom Server verwendet, um sich selbstreferenzierende URLs zu konstruieren. Beispielhaft wird dies bei der Anforderung eines Verzeichnisses sinnvoll, wenn der Client den Trailing Slash im Verzeichnisnamen nicht enthält. In diesem Fall muss httpd den Client auf den vollständigen Namen mit dem Trailing Slash umleiten, damit der Client relative Verweise in dem Dokument richtig auflöst.</p><p>Datei-Orte
+<hr></p><p><h3>Verwandte Module</h3>
+<ul>
+<li>Related Directives: CoreDumpDirectory, DocumentRoot, ErrorLog, Mutex, PidFile, ScoreBoardFile, ServerRoot</li>
+</ul></p><p>Die Direktiven steuern die Orte der verschiedenen Dateien, die httpd für die richtige Funktion benötigt. Wenn der Pfadname nicht mit einem Schrägstrich (/) beginnt, werden die Dateien in den ServerRoot-Verzeichnis gelegt.</p><p> Operation: Wenn der verwendete Pfadname nicht mit einem Schrägstrich (/) beginnt, werden die Dateien in Verbindung mit dem ServerRoot gesucht. Sei aufs Äußerste vorsichtig bei der Lokalisierung von Dateien in Pfaden, die von Nicht-Root-Benutzern geschrieben werden können. Weitere Details finden Sie in der Sicherheits-Tipps-Dokumentation. Begrenzung der Ressourcennutzung ¶ Verwandte ModuleVerwandte DirektivenLimitRequestBodyLimitRequestFieldsLimitRequestFieldsizeLimitRequestLineRLimitCPURLimitMEMRLimitNPROCThreadStackSize Die LimitRequest*-Direktiven werden verwendet, um die Menge der Ressourcen zu beschränken, die httpd bei der Lesung von Anfragen von Clients verwendet. Durch die Begrenzung dieser Werte können bestimmte Arten von Dienstleistungsverweigerung angegriffen werden. Die RLimit*-Direktiven werden verwendet, um die Menge der Ressourcen zu beschränken, die von Prozessen verwendet werden, die von den httpd-Kindprozessen abgeforkt werden. Insbesondere wird damit die Ressourcennutzung von CGI-Skripts und SSI exec-Befehlen kontrolliert. Die ThreadStackSize-Direktive wird mit bestimmten Plattformen verwendet, um die Stackgröße zu kontrollieren. Implementierungswahl ¶ Verwandte ModuleVerwandte DirektivenMutex Die Mutex-Direktive kann verwendet werden, um die unterliegende Implementierung für Mutexes zu ändern, um Funktions- oder Leistungsprobleme mit der Standardauswahl von APR zu lindern.</p><p>Please note that all technical terms, code blocks, commands, file paths, and URLs remain unchanged in the German translation.</p>
+</main>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AK 4.3.X</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>AK 4.3.X</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> AK 4.3.X Dokumentation für AK 4.3.X Einsteiger-Anleitung<br>Dieser Abschnitt bietet einen Überblick über, was Kafka ist, warum es nützlich ist, und wie man es verwenden kann. API Konfiguration Entwurf Implementierung Betriebsbereitschaft Sicherheit Kafka Connect Kafka Streams Letzte Änderung am 22. Mai 2026: MINOR: 4.3 Dokumente und Javadoc (#853) (dde051e342)</p><p>Dieser Abschnitt bietet einen Überblick über Kafka und erklärt, warum es nützlich ist und wie man es verwenden kann.</p><p>Kafka ist ein Open-Source-Streaming-Plattform, die es ermöglicht, große Mengen von Daten in Echtzeit zu verarbeiten und zu verteilen. Es ist für die Verarbeitung von großen Datenmengen in Echtzeit, die in einer hohen Geschwindigkeit generiert werden, wie z.B. bei der Verarbeitung von Social-Media-Daten, geeignet.</p><p>Es ist nützlich, weil es eine hohe Skalierbarkeit und eine hohe Verfügbarkeit bietet, was bedeutet, dass es sich gut für große Datenmengen und hohe Lasten eignet. Es ist auch nützlich, weil es eine hohe Verarbeitungsgeschwindigkeit bietet, was bedeutet, dass es Daten schnell verarbeiten kann.</p><p>Um mit Kafka zu beginnen, muss man zunächst die API konfigurieren. Dies kann durch die Konfiguration von Eigenschaften wie dem Bootstrap-Server und der Sicherheitskonfiguration erfolgen.</p><p>Nach der Konfiguration der API kann man mit der Implementierung von Kafka beginnen. Dies kann durch die Entwicklung von Kafka-Producern und Kafka-Consumern erfolgen.</p><p>Nach der Implementierung von Kafka kann man mit der Betriebsbereitschaft von Kafka beginnen. Dies kann durch die Überwachung von Metriken und die Behebung von Fehlern erfolgen.</p><p>Sicherheit ist eine wichtige Aspekt von Kafka. Um Sicherheit zu gewährleisten, kann man die Authentifizierung und die Verschlüsselung von Daten verwenden.</p><p>Kafka Connect ist ein Tool, das es ermöglicht, Daten zwischen Kafka und anderen Systemen zu synchronisieren.</p><p>Kafka Streams ist ein Tool, das es ermöglicht, Daten in Echtzeit zu verarbeiten und zu transformieren.</p><p>Diese Dokumentation wurde am 22. Mai 2026 letztmals aktualisiert. Die Änderungen umfassten die Hinzufügung von 4.3 Dokumenten und Javadoc (#853) (dde051e342).</p>
+</main>
+</body>
+</html>

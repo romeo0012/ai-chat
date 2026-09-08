@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What’s new in Varnish?</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>What’s new in Varnish?</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Was ist Neues bei Varnish? Diese Sektion beschreibt die Änderungen und Verbesserungen zwischen den verschiedenen Versionen von Varnish, und was die Upgrade zwischen den verschiedenen Versionen bedeutet.</p><p>Varnish 9.0<br>Änderungen in Varnish Cache 9.0<br>varnishd<br>Änderungen an VCL<br>VMODs<br>varnishlog<br>varnishstat<br>Änderungen für Entwickler und VMOD-Autoren<br>Upgrading to Varnish Cache 9.0<br>varnishd<br>Upgrade-Notizen für VMOD-Entwickler</p><p>Varnish 8.0<br>Änderungen in Varnish-Cache 8.0<br>varnishd<br>Änderungen an VCL<br>VMODs<br>VUTs<br>varnishlog<br>varnishadm<br>varnishstat<br>varnishtest<br>varnishncsa<br>Änderungen für Entwickler und VMOD-Autoren<br>Upgrading to Varnish-Cache 8.0<br>varnishd<br>Bansvmod_std-Änderungen<br>vmod_cookie-Änderungen<br>Upgrade-Notizen für VMOD-Entwickler</p><p>Varnish 7.7<br>Änderungen in Varnish-Cache 7.7<br>Sicherheit<br>varnishd<br>Änderungen an VCL<br>varnishadm<br>Generische Logging (VSL)<br>Interaktiver Modus in varnishstat, varnishtop und varnishhist<br>varnishncsa<br>varnishstat<br>varnishtest<br>Änderungen für Entwickler und VMOD-Autoren<br>Upgrading to Varnish-Cache 7.7<br>Upgrade-Notizen für VMOD-Entwickler</p><p>Varnish 7.6<br>Änderungen in Varnish 7.6<br>Änderungen, die sich auf die meisten varnish-cache-Programme beziehen<br>varnishd<br>Änderungen an VCL<br>varnishlog<br>varnishstat<br>varnishtest<br>Änderungen für Entwickler und VMOD-Autoren<br>Upgrading to Varnish 7.6<br>Auffällige Änderungen für containerbasierte Workloads<br>Auffällige Änderungen bei der Upgrade von varnishd<br>Upgrading VCL<br>Änderungen für Entwickler und VMOD-Autoren</p><p>Varnish 7.5<br>Änderungen in Varnish 7.5<br>Sicherheit<br>varnishd<br>Änderungen an VCL<br>VMODs<br>varnishlog<br>varnishncsa<br>varnishstat<br>varnishtest<br>Änderungen für Entwickler und VMOD-Autoren<br>Upgrading to Varnish 7.5<br>Logs<br>Timeouts</p><p>Varnish 7.4<br>Änderungen in Varnish 7.4<br>Änderungen, die sich auf die meisten varnish-cache-Programme beziehen<br>varnishd<br>Änderungen an VCL<br>varnishlog<br>varnishstat<br>varnishtest<br>Änderungen für Entwickler und VMOD-Autoren<br>Upgrading to Varnish 7.4<br>Logs</p><p> Text:<br>VMOD AutorenVarnish 7.5Änderungen in Varnish 7.5SicherheitvarnishdÄnderungen an VCLVMODsvarnishlogvarnishncsavarnishstatvarnishtestÄnderungen für Entwickler und VMOD AutorenUpgrading to Varnish 7.5LogsTimeoutsVarnish 7.4Änderungen in Varnish 7.4varnishdÄnderungen an VCLvarnishlogvarnishadmvarnishstatvarnishtestÄnderungen für Entwickler und VMOD AutorenUpgrading to Varnish 7.4Wichtige VCL ÄnderungenParameter ÄnderungenVarnish 7.3Änderungen in Varnish 7.3varnishdÄnderungen an VCLvarnishlogvarnishadmvarnishtestÄnderungen für Entwickler und VMOD AutorenUpgrading to Varnish 7.3Neuer VSL FormatFür Entwickler und VMOD Autoren: C-Schnittstelleänderungen, die Anpassungen erfordernVarnish 7.2Änderungen in Varnish 7.2varnishdÄnderungen an VCLBundled VMODsvarnishlogvarnishstatvarnishtestÄnderungen für Entwickler und VMOD AutorenUpgrading to Varnish 7.2varnishdVCLVMODsvarnishlogvarnishstatÄnderungen für Entwickler und VMOD AutorenVarnish 7.1Änderungen in Varnish 7.1varnishdÄnderungen an VCLVMODsvarnishlogvarnishncsavarnishadmvarnishtestÄnderungen für Entwickler und VMOD AutorenPlatform SupportUpgrading to Varnish 7.1varnishdvarnishtestÄnderungen für Entwickler und VMOD AutorenPlatform SupportVarnish 7.0Änderungen in Varnish 7.0PCRE2RFC8941 - Strukturierte FeldervarnishdÄnderungen an VCLVMODsvarnishlogvarnishncsavarnishadmvarnishtestÄnderungen für Entwickler und VMOD AutorenUpgrading to Varnish 7.0PCRE2Structured Fields numbersMemory footprintRange requestsACLÄnderungen für EntwicklerVarnish 6.6Änderungen in Varnish 6.6</p><p> Für Entwickler und VMOD-Autoren<br>Aktualisierung auf Varnish 7.0<br>PCRE2<br>Feldstruktur<br>Nummern<br>Speicherauslastung<br>Range-Anfragen<br>ACL-Änderungen</p><p>Für Entwickler<br>Varnish 6.6<br>Änderungen in Varnish 6.6<br>varnishd<br>Änderungen an VCL und VMODs<br>varnishlog<br>varnishncsa<br>varnishadm<br>varnishstat<br>varnishtest<br>Andere Änderungen an Varnish-Utilitäten</p><p>Entwickler: Änderungen für VMOD-Autoren<br>Entwickler: Änderungen für Autoren von Varnish-Utilitäten<br>Aktualisierung auf Varnish 6.6<br>Header-Validierung<br>BAN-Änderungen<br>Rechnungsführungswandel<br>VSL-Änderungen<br>VMOD-Cookie-Funktionen<br>Andere VCL-Änderungen</p><p>Änderungen an VMODs<br>Varnish 6.5<br>Änderungen in Varnish 6.5.0<br>varnishd<br>Änderungen an VCL und VMODs<br>varnishlog<br>varnishadm<br>varnishstat<br>varnishtest<br>Änderungen für Entwickler und VMOD-Autoren<br>Aktualisierung auf Varnish 6.5.0<br>varnishstat<br>VSL-Änderungen</p><p>Entwickler und Autoren von Varnish-Utilitäten<br>Änderungen für VMOD-Autoren und API-Clients<br>Varnish 6.4<br>Änderungen in Varnish 6.4.0<br>varnishd<br>Änderungen an VCL und VMODs<br>varnishlog<br>varnishadm<br>varnishstat<br>varnishtest<br>Änderungen für Entwickler und VMOD-Autoren<br>Aktualisierung auf Varnish 6.4.0<br>varnishd-Statistiken<br>vsl/logs</p><p>Varnish 6.3<br>Änderungen in Varnish 6.3<br>varnishd<br>Änderungen an VCL und vsl-query(7)<br>varnishlog(1), varnishncsa(1) und andere<br>varnishstat<br>varnishtest<br>Änderungen für Entwickler und VMOD-Autoren<br>Aktualisierung auf Varnish 6.3<br>Für Nutzer von vielen und/oder benannten VCLs<br>Für Entwickler und Autoren von VMODs und API-Clients</p><p>Varnish 6.2<br>Änderungen in Varnish 6.2<br>Andere Änderungen an Varnish-Utilitäten</p><p>Für Nutzer von vielen und/oder benannten VCLs<br>Für Entwickler und Autoren von VMODs und API-Clients</p><p>Offizielle Pakete-Änderungen<br>Varnish 6.4<br>Änderungen in Varnish 6.4.0</p><p>Für Nutzer von vielen und/oder benannten VCLs<br>Für Entwickler und Autoren von VMODs und API-Clients</p><p> Varnish 6.3<br>Für Nutzer von vielen und/oder benannten VCLs<br>Für Entwickler und Autoren von VMODs und API-Clients</p><p>Varnish 6.2<br>Änderungen in Varnish 6.2<br>varnishd<br>Änderungen an VCL<br>VMODs<br>varnishlog(1), varnishncsa(1) und vsl(7)<br>varnishadm(1) und varnish-cli(7)<br>varnishstat(1) und varnish-counters(7)<br>varnishtest<br>Änderungen für Entwickler und VMOD-Autoren</p><p>Aufwerten auf Varnish 6.2<br>VCL-Laufzeitparameter<br>Typumwandlungsfunktionen in VMOD stdvarnishadm und der CLI<br>Für Entwickler und Autoren von VMODs und API-Clients</p><p>Varnish 6.1<br>Änderungen in Varnish 6.1<br>Nichts zu sehen hier wirklich<br>Aufwerten auf Varnish 6.1<br>varnishd-Parameter<br>Änderungen an VCL<br>VMODs<br>Andere Änderungen</p><p>Varnish 6.0<br>Änderungen in Varnish 6.0<br>Unter der Haut (hauptsächlich für Entwickler)<br>Das nur wir interessiert sind<br>Aufwerten auf Varnish 6.0<br>Unix-Domain-Sockets als Zuhör-Adressen<br>Unix-Domain-Sockets als Backend-Adressen<br>varnishd-Parameter<br>Änderungen an VCL<br>Verpackungsänderungen<br>Andere Änderungen</p><p>Varnish 5.2<br>Änderungen in Varnish 5.2<br>Neue VMODs in der Standardverteilung<br>News für Autoren von VMODs und Varnish API-Client-Anwendungen<br>Aufwerten auf Varnish 5.2<br>Varnish-Statistiken und Protokollierung<br>varnishd-Parameter<br>Änderungen an VCL<br>Andere Änderungen</p><p>Varnish 5.1<br>Änderungen in Varnish 5.1<br>Startup-CLI-Befehl<br>Universaler VCL return(fail)<br>Fortschritt bei der Unterstützung von HTTP/2<br>Hit-For-Pass hat zurückgegeben 304 Not Modified-Antworten nach einem Pass<br>VXID in VSL-Abfragen<br>Projektwerkzeugverbesserungen<br>News für Autoren von VMODs und Varnish API-Client-Anwendungen<br>Aufwerten auf Varnish 5.1<br>varnishd-Befehlslinienoptionen<br>varnishd-Parameter<br>Änderungen an VCL<br>Andere Änderungen</p><p>Varnish 5.0<br>Änderungen in Varnish 5.0<br>(Hauptsächlich für Entwickler)<br>Das nur wir interessiert sind<br>Aufwerten auf Varnish 5.0<br>Unix-Domain-Sockets als Zuhör-Adressen<br>Unix-Domain-Sockets als Backend-Adressen<br>varnishd-Parameter<br>Änderungen an VCL<br>Verpackungsänderungen<br>Andere Änderungen</p><p> Verbesserungen und Neuigkeiten für Autoren von VMODs und Varnish API-Client-Anwendungen<br>Upgraden auf Varnish 5.1<br>varnishd-Befehlszeilenoptionen<br>varnishd-Parameter<br>Änderungen an VCLO<br>Andere Änderungen<br>Varnish 5.0<br>Varnish 5.0 Release Note<br>Wie bekommen Sie Varnish 5.0<br>Gründe für den Upgrade auf Varnish 5.0<br>Gründe, warum Sie nicht auf Varnish 5.0 upgraden sollten<br>Nächste Veröffentlichung<br>Die verpflichtende Dankesrede<br>Wir brauchen mehr Geld<br>Wir brauchen auch mehr Personal<br>Änderungen in Varnish 5.0<br>Trennung von VCL-Dateien und VCL-Labels<br>Sehr experimentelle HTTP/2-Unterstützung<br>Der Shard Director<br>Hit-For-Pass ist jetzt tatsächlich Hit-For-Miss<br>Verbesserungen für Ban Lurker<br>Anforderungskörper gesendet immer / “cacheable POST”<br>ESI und Backend-Anfrage-Koaleszenz (“waitinglist”) Verbesserung<br>Backend PROXY-Protokollanfragen<br>Standard-VCL-Suchepfad devicedetect.vcl<br>News für VMOD-Autoren<br>Upgraden auf Varnish 5.0<br>Änderungen an der VCL-Verwaltungs-Schnittstelle<br>Änderungen an Parametern<br>Andere Änderungen<br>Varnish 4.1<br>Änderungen in Varnish 4.1<br>Vorbeugende Sicherheitsmerkmale<br>Warm und kalt VCL-Konfigurationen<br>PROXY-Protokollunterstützung<br>VMOD-Backends<br>Backend-Verbindungstimeout<br>Protokollunterstützung<br>Mehr Module verfügbar<br>Übertragung von Daten zwischen ESI-Anfragen<br>Andere bemerkenswerte kleine Änderungen<br>Upgraden auf Varnish 4.1<br>Änderungen an der VCL-Verwaltungs-Schnittstelle<br>Laufzeitbenutzer und Gruppen<br>Änderungen an Parametern<br>Varnish 4.0<br>Upgraden auf Varnish 4.0<br>Änderungen an der VCL<br>Änderungen an bestehenden Parametern<br>Neue Parameter seit 3.0<br>Andere Änderungen<br>Änderungen in Varnish 4.1<br>#Änderungen in Varnish 4.1<br>Änderungen in Varnish 5.0<br>#Änderungen in Varnish 5.0<br>Änderungen in Varnish 5.1<br>#Änderungen in Varnish 5.1</p><p> In Varnish 4.1
+<hr><br>Änderungen in Varnish 5.0
+<hr></p><p>Änderungen in Varnish 5.1
+<hr></p><p>Änderungen in Varnish 5.2
+<hr></p><p>Änderungen in Varnish 6.0
+<hr></p><p>Änderungen in Varnish 6.1
+<hr></p><p>Änderungen in Varnish 6.2
+<hr></p><p>Änderungen in Varnish 6.3
+<hr></p><p>Änderungen in Varnish 6.4.0
+<hr></p><p>Änderungen in Varnish 6.5.0
+<hr></p><p>Änderungen in Varnish 6.6
+<hr></p><p>Änderungen in Varnish 7.0
+<hr></p><p>Änderungen in Varnish 7.1
+<hr></p><p>Änderungen in Varnish 7.2
+<hr></p><p>Änderungen in Varnish 7.3
+<hr></p><p>Änderungen in Varnish 7.4
+<hr></p><p>Änderungen in Varnish 7.5
+<hr></p><p>Änderungen in Varnish 7.6
+<hr></p><p>Änderungen in Varnish Cache 9.0
+<hr></p><p>Änderungen in Varnish-Cache 7.7
+<hr></p><p>Änderungen in Varnish-Cache 8.0
+<hr></p><p>Upgrading to Varnish 4.0
+<hr></p><p>Upgrading to Varnish 4.1
+<hr></p><p>Upgrading to Varnish 5.0
+<hr></p><p>Upgrading to Varnish 5.1
+<hr></p><p>Upgrading to Varnish 5.2
+<hr></p><p>Upgrading to Varnish 6.0
+<hr></p><p>Upgrading to Varnish 6.1
+<hr></p><p>Upgrading to Varnish 6.2
+<hr></p><p>Upgrading to Varnish 6.3
+<hr></p><p>Upgrading to Varnish 6.4.0
+<hr></p><p> Varnish 6.2 #Upgrading to Varnish 6.2
+<hr></p><p>Varnish 6.3 #Upgrading to Varnish 6.3
+<hr></p><p>Varnish 6.4.0 #Upgrading to Varnish 6.4.0
+<hr></p><p>Varnish 6.5.0 #Upgrading to Varnish 6.5.0
+<hr></p><p>Varnish 6.6 #Upgrading to Varnish 6.6
+<hr></p><p>Varnish 7.0 #Upgrading to Varnish 7.0
+<hr></p><p>Varnish 7.1 #Upgrading to Varnish 7.1
+<hr></p><p>Varnish 7.2 #Upgrading to Varnish 7.2
+<hr></p><p>Varnish 7.3 #Upgrading to Varnish 7.3
+<hr></p><p>Varnish 7.4 #Upgrading to Varnish 7.4
+<hr></p><p>Varnish 7.5 #Upgrading to Varnish 7.5
+<hr></p><p>Varnish 7.6 #Upgrading to Varnish 7.6
+<hr></p><p>Varnish Cache 9.0 #Upgrading to Varnish Cache 9.0
+<hr></p><p>Varnish-Cache 7.7 #Upgrading to Varnish-Cache 7.7
+<hr></p><p>Varnish-Cache 8.0 #Upgrading to Varnish-Cache 8.0
+<hr></p><p>Varnish 5.0 Release Note #Varnish 5.0 Release Note</p>
+</main>
+</body>
+</html>

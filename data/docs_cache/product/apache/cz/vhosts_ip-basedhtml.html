@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apache IP-based Virtual Host Support</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Apache IP-based Virtual Host Support</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Přístup k podpoře virtuálních hostů na základě IP adresy Dostupné jazyky: en | fr | ja | ko | tr Co je IP-based virtual hosting Systémové požadavky Jak nakonfigurovat Apache Nastavení více daemonů Nastavení jednoho daemona s virtuálními hosty Viz také Name-based Virtual Hosts Support Co je IP-based virtual hosting ¶ IP-based virtual hosting je metoda, jak aplikovat různé direktivy na základě IP adresy a portu, na který je požadavek obdržen. Nejčastěji se to používá k poskytování různých webů na různých portech nebo rozhraních. V mnoha případech je name-based virtual hosting užitečnější, protože umožňuje mnoha virtuálním hostům sdílet stejnou adresu/port. Viz Name-based vs. IP-based Virtual Hosts, aby vám pomohl rozhodnout. Systémové požadavky ¶ Jak naznačuje název IP-based, musí mít server různou IP adresu/portovou kombinaci pro každý IP-based virtual host. Toto lze dosáhnout pomocí toho, že stroj má několik fyzických sítových připojení, nebo pomocí virtuálních rozhraní, která podporují většina moderních operačních systémů (viz dokumentaci systému pro podrobnosti, tyto jsou často nazývány "ip aliases", a "ifconfig" příkaz je nejčastěji použitý k jejich nastavení). Další možností je použití více portových čísel. V terminologii Apache HTTP Server, použití jedné IP adresy, ale více TCP portů, je také IP-based virtual hosting. Jak nakonfigurovat Apache ¶ Existují dvě možnosti konfigurace apache pro podporu více hostů.</p><p>V angličtině:</p><p>Apache IP-based Virtual Host Support Available Languages: en | fr | ja | ko | tr</p><p>What is IP-based virtual hosting
+<hr></p><p>IP-based virtual hosting is a method to apply different directives based on the IP address and port a request is received on. Most commonly, this is used to serve different websites on different ports or interfaces. In many cases, name-based virtual hosts are more convenient, because they allow many virtual hosts to share a single address/port. See [Name-based vs. IP-based Virtual Hosts](https://httpd.apache.org/docs/current/vhosts/name_based.html) to help you decide.</p><p>System requirements
+<hr></p><p>As the term IP-based indicates, the server must have a different IP address/port combination for each IP-based virtual host. This can be achieved by the machine having several physical network connections, or by use of virtual interfaces which are supported by most modern operating systems (see system documentation for details, these are frequently called "ip aliases", and the "ifconfig" command is most commonly used to set them up), and/or using multiple port numbers. In the terminology of Apache HTTP Server, using a single IP address but multiple TCP ports, is also IP-based virtual hosting.</p><p>How to set up Apache
+<hr></p><p>There are two ways of configuring apache to support multiple hosts.
+<ol>
+<li><strong>Including multiple configuration files:</strong> You can create a separate configuration file for each virtual host and include them in the main server configuration file using the <code>Include</code> directive. For example:</li>
+</ol></p><p><pre><code class="lang-"># Main server configuration file</p><p><h1>Include virtual host configurations</h1><br>Include /etc/httpd/conf.d/*.conf</code></pre></p><p>Each virtual host configuration file should start with a <code>&lt;VirtualHost&gt;</code> directive specifying the IP address and port number. For example:</p><p><pre><code class="lang-"># Virtual host configuration for example.com<br>&amp;lt;VirtualHost 192.168.1.100:80&amp;gt;<br>    ServerName example.com<br>    DocumentRoot /var/www/example.com<br>    ...<br>&amp;lt;/VirtualHost&amp;gt;</code></pre>
+<ol>
+<li><strong>Using the <code>NameVirtualHost</code> and <code>&lt;VirtualHost&gt;</code> directives:</strong> You can also configure multiple virtual hosts directly in the main server configuration file using the <code>NameVirtualHost</code> and <code>&lt;VirtualHost&gt;</code> directives. The <code>NameVirtualHost</code> directive specifies the IP address and port number to listen on, and the <code>&lt;VirtualHost&gt;</code> directives specify the virtual hosts. For example:</li>
+</ol></p><p><pre><code class="lang-"># Main server configuration file</p><p><h1>Listen on IP address and port</h1><br>NameVirtualHost 192.168.1.100:80</p><p><h1>Virtual host configuration for example.com</h1><br>&amp;lt;VirtualHost 192.168.1.100:80&amp;gt;<br>    ServerName example.com<br>    DocumentRoot /var/www/example.com<br>    ...<br>&amp;lt;/VirtualHost&amp;gt;</p><p><h1>Virtual host configuration for anotherdomain.com</h1><br>&amp;lt;VirtualHost 192.168.1.100:80&amp;gt;<br>    ServerName anotherdomain.com<br>    DocumentRoot /var/www/anotherdomain.com<br>    ...<br>&amp;lt;/VirtualHost&amp;gt;</code></pre></p><p>Setting up multiple daemons
+<hr></p><p>Apache can run multiple daemons, each serving a different IP-based virtual host. To start multiple daemons, you can use the <code>apachectl</code> command with the <code>-f</code> option to specify the configuration file for each daemon. For example:</p><p><pre><code class="lang-"># Start the first daemon serving example.com<br>apachectl -f /etc/httpd/conf.d/example.com.conf start</p><p><h1>Start the second daemon serving anotherdomain.com</h1><br>apachectl -f /etc/httpd/conf.d/anotherdomain.com.conf start</code></pre></p><p>Setting up a single daemon with virtual hosts
+<hr></p><p>If you want to run a single Apache daemon and serve multiple virtual hosts, you can use the <code>NameVirtualHost</code> and <code>&lt;VirtualHost&gt;</code> directives as described above.</p><p>See also
+<hr>
+<ul>
+<li>[Name-based Virtual Hosts Support](https://httpd.apache.org/docs/current/vhosts/name_based.html)</li>
+</ul><ul>
+<li>[IP-based Virtual Hosts vs. Name-based Virtual Hosts](https://httpd.apache.org/docs/current/vhosts/examples.html#ipbased)</li>
+</ul></p><p> Virtuální hosting na základě IP adres. Jak nakonfigurovat Apache ¶<br>Existují dvě možnosti konfigurace Apache pro podporu více hostitelů. Buďte pomocí spuštění odděleného daemona httpd pro každý hostname, nebo pomocí spuštění jednoho daemona, který podporuje všechny virtuální hosty. Použijte více daemonů, pokud:
+<ul>
+<li>Je nutné řešit otázky zabezpečení oddělení, například společnost1 nechce, aby někdo z společnosti2 mohl číst její data kromě webu. V tomto případě budete potřebovat dva daemony, každý s různými nastaveními User, Group, Listen, a ServerRoot. Můžete se vzpomínat na požadavky paměti a počtu popisovačů souborů, aby mohl poslouchat každou IP alias na stroji. Je možné poslouchat pouze "wildcard" adresu nebo konkrétní adresy. Pokud potřebujete poslouchat konkrétní adresu pro jakoukoli důvod, musíte poslouchat všechny konkrétní adresy. (Ačkoli může jeden httpd poslouchat N-1 adres, zatímco druhý poslouchá zbývající adresu.)</li>
+</ul></p><p>Použijte jeden daemon, když:
+<ul>
+<li>Je přijatelné sdílet konfiguraci httpd mezi virtuální hosty.</li>
+</ul><ul>
+<li>Služba má obsloužit velký počet požadavků, a tak mohou být významné ztráty výkonu při spuštění oddělených daemonů.</li>
+</ul></p><p>Nastavení více daemonů ¶<br>Vytvořte oddělenou instalaci httpd pro každého virtuálního hostitele. Pro každou instalaci použijte příkaz Listen v konfiguračním souboru, aby vybral, která IP adresa (nebo virtuální host) slouží tento daemon. Například Listen 192.0.2.</p><p>Pokud máte další dotazy, nezastavte se na tomto místě a nezapomeňte si na další informace o Apache.</p><p>Doporučujeme si pro další informace o Apache navštivit oficiální web Apache Software Foundation: &lt;https://httpd.apache.org/&gt;.</p><p> Slyšet direktivu v konfiguračním souboru k vybrání které IP adresy (nebo virtuálního hostitele), které služby daemon. Například Listen 192.0.2.100:80 Je doporučeno použít IP adresu místo hostname (viz DNS závady). Nastavení jednoho daemona s virtuálními hostiteli ¶ V tomto případě jeden httpd služební požadavky pro hlavní server a pro všechny virtuální hostitele. Direktiva VirtualHost v konfiguračním souboru se používá k nastavení hodnot ServerAdmin, ServerName, DocumentRoot, ErrorLog a TransferLog nebo CustomLog konfiguračních direktiv na různé hodnoty pro každý virtuální host. Například:</p><p>&lt;VirtualHost 172.20.30.40:80&gt;<br>ServerAdmin webmaster@www1.example.com<br>DocumentRoot "/www/vhosts/www1"<br>ServerName www1.example.com<br>ErrorLog "/www/logs/www1/error_log"<br>CustomLog "/www/logs/www1/access_log" combined<br>&lt;/VirtualHost&gt;<br>&lt;VirtualHost 172.20.30.50:80&gt;<br>ServerAdmin webmaster@www2.example.org<br>DocumentRoot "/www/vhosts/www2"<br>ServerName www2.example.org<br>ErrorLog "/www/logs/www2/error_log"<br>CustomLog "/www/logs/www2/access_log" combined<br>&lt;/VirtualHost&gt;<br>Je doporučeno použít IP adresu místo hostname v direktivě &lt;VirtualHost&gt; (viz DNS závady). Konkrétní IP adresy nebo porty mají přednost před jejich wildcardovými ekvivalenty, a každý virtuální host, který odpovídá, má přednost před konfigurací základního serveru.</p><p> Text v češtině:</p><p>Porty mají přednost před jejich rovněžvýraznými ekvivalenty a každý virtuální host, který se shoduje, má přednost před konfigurací základní serveru. Většina příkazů konfigurace může být umístěna v příkazu VirtualHost, s výjimkou příkazů, které řídí vytváření procesů a několika dalších příkazů. Chcete-li zjistit, zda může být příkaz použit v příkazu VirtualHost, zkontrolujte kontext pomocí indexu příkazů. SuexecUserGroup může být použito uvnitř příkazu VirtualHost, pokud je použit obal suEXEC. ZÁPOROVÁ ÚVAHY: Při určování umístění pro soubory s logy se vědomíte některým rizikům zabezpečení, která jsou přítomna, pokud kromě uživatele, který spustí Apache, někdo jiný má přístup k adresáři, kde jsou tyto soubory uloženy. Další informace o zabezpečení naleznete v dokumentu se zásadami zabezpečení.</p><p>Pokud je nutné přeložit jen část textu, pak by to vypadalo takto:</p><p>ports have precedence over their wildcard equivalents, and any virtual host that matches has precedence over the servers base configuration. Almost any configuration directive can be put in the VirtualHost directive, with the exception of directives that control process creation and a few other directives. To find out if a directive can be used in the VirtualHost directive, check the Context using the directive index. SuexecUserGroup may be used inside a VirtualHost directive if the suEXEC wrapper is used.</p><p>SECURITY: When specifying where to write log files, be aware of some security risks which are present if anyone other than the user that starts Apache has write access to the directory where they are written. See the security tips document for details.</p>
+</main>
+</body>
+</html>

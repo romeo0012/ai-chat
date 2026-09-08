@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get started with Git</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Get started with Git</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Začněte s Gitem<br>Git je systém kontroly verzí, který používáte k sledování změn v vašem kódu a spolupráci s ostatními. GitLab je správce repozitářů Git na webu, který poskytuje CI/CD a další funkce, aby vám pomohl spravovat životní cyklus vývoje softwaru. Můžete použít webový rozhraní GitLab pro mnoho operací Git, ale pochopení příkazů Git poskytne další flexibilitu a kontrolu. Základy Gitu jsou součástí většího workflow: Vyberte si cestu k učení: Instalace Git Naučte se: Vytvořte svůj první Git commit Rozumějte Gitovým konceptům: Pokračujte v čtení Repozitáře Gitový repozitář je adresář, který obsahuje všechny soubory, složky a historii verzí vašeho projektu. Slouží jako centrální místo, kde Git spravuje a sleduje změny v vašem kódu. Když inicializujete Gitový repozitář nebo klonujete existující jeden, Git vytvoří skrytou adresářku .git v adresáři projektu. Adresář obsahuje všechny důležité metadata a objekty, které Git používá k spravování vašeho repozitáře, včetně kompletní historie všech změn provedených ve vašich souborech. Git sleduje změny na úrovni souborů, takže můžete zobrazit změny provedené v jednotlivých souborech v průběhu času. Další informace najdete v repozitářích. Pracovní adresáře Vaše pracovní adresář je místo, kde provádíte změny v kódu. Když klonujete Gitový repozitář, vytvoříte místní kopii repozitáře ve vaší pracovní adresáři. Můžete upravovat soubory, přidávat nové a testovat svůj kód.</p><p> překlad:</p><p>kód. Když klonujete Git repozitář, vytvoříte místní kopii repozitáře ve vašem pracovním adresáři. Můžete upravovat soubory, přidávat nové a testovat svůj kód. K spolupráci můžete: Commit: Po provedení změn ve vašem pracovním adresáři, komitujte tyto změny do vašeho místního repozitáře. Push: Pushujte své změny do vzdáleného Git repozitáře hostovaného na GitLab. Tím se vaše změny stávají dostupné pro ostatní členy týmu. Pull: Pullujte změny provedené ostatními z vzdáleného repozitáře, a ujistěte se, že je vaše místní repozitář aktualizován na nejnovější změny. Další informace naleznete v běžných Git příkazech. Větvě V Gitu můžete použít větve k práci na různých funkcionalitách, opravách chyb nebo experimentech současně bez narušování práce ostatních. Větvování umožňuje vytvořit izolované prostředí, ve kterém můžete provádět a testovat změny bez ovlivňování výchozí větev. V GitLabu je výchozí větev obvykle nazývána main. Splnit větev Po dokončení funkce nebo opravě chyby můžete větev sloučit do výchozí větev. Můžete to udělat v žádosti o sloučení. Sloučení je bezpečným způsobem přinášet změny z jedné větve do druhé zachováním historie změn. Pokud dochází k konfliktům mezi větvěmi, například pokud upravíte stejné řádky kódu v obou větvích, GitLab to označí jako konflikty mezi větvěmi. Tyto musí být řešeny ručně tím, že se prozkoumá a upraví kód.</p><p>Poznámka: V textu jsou technické termíny, kódy, příkazy, cesty souborů a URLs zachovány v původní anglické podobě.</p><p> Příklad: Pokud upravíte stejné řádky kódu v obou větvích, GitLab označí tyto jako konflikty sestavení. Tyto musí být řešeny ručně tím, že se prozkoumá a upraví kód. Smazat větev Po úspěšném sestavení můžete smazat větev, pokud ji už není potřeba. Smazání nepotřebných větví pomáhá udržovat vaši repozitář pořádaným a spravitelným. Chcete-li se ujistit, že žádná práce nebude ztracena, ověřte, že všechny změny byly zahrnuty do výchozí větve předtím, než smažete větev po posledním sestavení. Další informace naleznete v článku větví. Rozumějte si Gitový pracovní tok Můžete spravovat svůj kód, spolupracovat s ostatními a udržovat svůj projekt pořádaným pomocí Gitového pracovního toku. Standardní Gitový pracovní tok zahrnuje následující kroky: Klonovat repozitář: Vytvořte místní kopii repozitáře tím, že ho klonujete na své zařízení. Můžete pracovat na projektu bez toho, aby to ovlivnilo původní repozitář. Vytvořit novou větev: Před tím, než provedete žádné změny, je doporučeno vytvořit novou větev. Tím se zajistí, že vaše změny jsou izolovány a neznečišťují práci ostatních na výchozí větvi. Upravit soubory: Upravte soubory v pracovním adresáři. Můžete přidat nové funkce, opravit chyby nebo provést jiné změny. Zapojit změny: Po provedení změn v souborech zapojte změny, které chcete spustit. Zapojení říká Git, které změny by měly být zahrnuty do dalšího commitu. Spustit změny: Spusťte zapojené změny do svého místního repozitáře.</p><p>Poznámka: Všechny technické termíny, kódy, příkazy, cesty souborů a adresy URL zůstávají v původním jazyce.</p><p> soubory, uveďte změny, které chcete spustit. Uvedení změn informuje Git, které změny by měly být zahrnuty do dalšího commitu. Uložit změny: Uložte své zastavené změny do místního repozitáře. Uložení vytvoří snímek vaší práce a vytvoří historii změn vašich souborů. Vložit změny: Chcete-li sdílet své změny s ostatními, vložte je do vzdáleného repozitáře. Tím se stávají vaše změny dostupné pro ostatní spolupracovníky. Sloučit větev: Po provedení recenze a schválení vašich změn sloučte svou větev do výchozí větev. Například main. Tento krok včlení vašich změn do projektu. Forky<br>Některé organizace, zejména ty, které pracují s otevřenými projekty, mohou používat různé workflowy. Například forky. Fork je osobní kopie repozitáře, která existuje v prostoru vašeho účtu. Použijte tento workflow při přispívání k otevřeným projektům nebo pokud vaše tým používá centrální repozitář. Instalace Git<br>Chcete-li používat Git příkazy a přispívat do GitLab projektů, je nutné stáhnout a nainstalovat Git klienta na svém počítači. Instalace se liší podle operačního systému. Například Windows, MacOS nebo Linux. Další informace o instalaci Git naleznete v článku install Git. Git příkazy<br>Chcete-li interagovat s Git z příkazového řádku, můžete použít Git příkazy: git clone: Klonujte repozitář na své místní zařízení. git branch: Zobrazíte, vytvoříte nebo odstraníte větve v místním repozitáři. git checkout: Přepnete se mezi různými větvemi v místním repozitáři.</p><p> Klonování repozitáře: Klonujte repozitář do vašeho místního počítače. <code>git branch</code>: Seznamujte se, vytvořte nebo odstraňte větvě v místním repozitáři. <code>git checkout</code>: Přepněte mezi různými větvěmi v místním repozitáři. <code>git add</code>: Označte změny pro komit. <code>git commit</code>: Uložte označené změny do místního repozitáře. <code>git push</code>: Vložte místní komity do vzdáleného repozitáře. <code>git pull</code>: Získáte změny z vzdáleného repozitáře a sloučíte je do vaší místní větvě. Pro podrobnější informace a podrobné vysvětlení se přečtěte průvodce běžnými Gitovými příkazy. Použití SSH s Git<br>Při práci s vzdálenými repozitáři byste měli používat SSH pro bezpečnou komunikaci. GitLab používá protokol SSH k bezpečné komunikaci s Git. Při použití SSH klíčů k ověření sebe-sobě na vzdáleném serveru GitLab je není nutné zadávat své uživatelské jméno a heslo každýkrát. Chcete-li použít SSH s GitLab, musíte:<ol>
+<li>Vytvořit pár SSH klíčů na svém místním systému.</li>
+</ol><ol>
+<li>Přidat svůj SSH klíč do svého účtu GitLab.</li>
+</ol><ol>
+<li>Ověřit svou SSH spojení s GitLab.</li>
+</ol><br>Další informace najdete v článku použití SSH klíčů s GitLab.<br>Témata související:<br>Tutorialy: Učte se Git</p>
+</main>
+</body>
+</html>

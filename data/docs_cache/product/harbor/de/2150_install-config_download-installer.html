@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harbor docs | Download the Harbor Installer</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Harbor docs | Download the Harbor Installer</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Herunterladen des Harbor-Installs<br>Sie können die Harbor-Installer von der offiziellen Veröffentlichungen-Seite herunterladen. Wählen Sie entweder den Online-Installer oder den Offline-Installer. Online-Installer: Der Online-Installer läd die Harbor-Bilder von Docker Hub herunter. Daher ist der Installer sehr klein. Offline-Installer: Verwenden Sie den Offline-Installer, wenn der Host, auf den Sie Harbor deployen, keinen Internetzugang hat. Der Offline-Installer enthält vorab gebaute Bilder, weshalb er größer ist als der Online-Installer. Die Installationsprozesse sind fast identisch für den Online- und Offline-Installer. Herunterladen und Entpacken des Installers<br>Navigieren Sie zur Harbor-Veröffentlichungen-Seite. Laden Sie den Online- oder Offline-Installer für die Version herunter, die Sie installieren möchten. Optional laden Sie den entsprechenden *.asc-Datei herunter, um zu überprüfen, dass das Paket echt ist. Die *.asc-Datei ist ein OpenPGP-Schlüssel-Dateiformat. Führen Sie die folgenden Schritte aus, um zu überprüfen, dass das heruntergeladene Paket echt ist. Erhalten Sie das öffentliche Schlüsselpaar für die *.asc-Datei.</p><p><pre><code class="lang-">gpg --keyserver hkps://keyserver.ubuntu.com --receive-keys 644FF454C0B4115C</code></pre></p><p>Sie sollten die Nachricht "öffentlicher Schlüssel 'Harbor-sign (Der Schlüssel für die Signierung von Harbor-Builds) &lt;jiangd@vmware.com&gt;' importiert" sehen.</p><p>Verifizieren Sie das Paket, indem Sie entweder den folgenden Befehl für den Online-Installer oder den Offline-Installer ausführen.</p><p>Online-Installer:</p><p><pre><code class="lang-">gpg -v --keyserver hkps://keyserver.ubuntu.com --verify harbor-online-installer-version.tgz.asc</code></pre></p><p>Offline-Installer:</p><p><pre><code class="lang-">gpg -v --keyserver hkps://keyserver.ubuntu.com --verify harbor-offline-installer-version.tgz.asc</code></pre></p><p> Der folgenden Befehlen. Online-Installer: gpg -v --keyserver hkps://keyserver.ubuntu.com --verify harbor-online-installer-version.tgz.asc<br>Offline-Installer: gpg -v --keyserver hkps://keyserver.ubuntu.com --verify harbor-offline-installer-version.tgz.asc</p><p>Der gpg-Befehl überprüft, ob die Signatur des Bundles mit der *.asc-Schlüsseldatei übereinstimmt. Sie sollten eine Bestätigung erhalten, dass die Signatur korrekt ist.<br>gpg: Armor-Header: Version: GnuPG v1<br>gpg: es wird angenommen, dass signiertes Daten in 'harbor-online-installer-v2.0.2.tgz' vorliegen<br>gpg: Signatur erstellt Donnerstag, 28. Juli 2020 09:49:20 UTC<br>gpg: Verwendung von RSA-Schlüssel 644FF454C0B4115C<br>gpg: Verwendung von pgp-Vertrauensmodell<br>gpg: Gute Signatur von "Harbor-sign (Der Schlüssel für die Signierung von Harbor-Build) &lt;jiangd@vmware.com&gt;" [unbekannt]<br>gpg: WARNING: Diese Schlüssel ist nicht mit einer vertrauenswürdigen Signatur zertifiziert!<br>gpg: Es gibt keine Anzeichen, dass die Signatur dem Besitzer gehört.<br>Primärer Schlüsselfingerabdruck: 7722 D168 DAEC 4578 06C9 6FF9 644F F454 C0B4 115C<br>gpg: binäre Signatur, Hash-Algorithmus SHA1, Schlüsselalgorithmus rsa4096</p><p>Verwenden Sie tar, um das Installer-Paket auszupacken:<br>Online-Installer: bash $ tar xzvf harbor-online-installer-version.tgz<br>Offline-Installer: bash $ tar xzvf harbor-offline-installer-version.tgz</p><p>Nächste Schritte<br>Um die Verbindungen zu Harbor zu sichern, siehe Configure HTTPS Access to Harbor.<br>Um Ihre Harbor-Installation zu konfigurieren, siehe Configure the Harbor YML File.</p><p>Hinweise zum Installer-Verzeichnis<br>Sie können den Harbor-Installer in jedem Verzeichnis extrahieren.</p><p> Konfigurieren des Zugriffs auf HTTPS auf Harbor. Um Ihre Harbor-Installation zu konfigurieren, siehe Konfigurieren des Harbor YML-Datei. Hinweise zum Installationsverzeichnis Sie können den Harbor-Installer in jedem Verzeichnis extrahieren. Der Benutzer, der die Installationsskript ausführt, muss Berechtigungen haben, Docker-Befehle auszuführen (normalerweise durch Mitgliedschaft in der docker-Gruppe). Dieses Verzeichnis wird nur für die Installation und Konfiguration verwendet. Es ist nicht das Verzeichnis, in dem die dauerhafte Daten von Harbor gespeichert werden. Alle Harbor-Dienste laufen innerhalb von Docker-Containern und ihre Daten werden in Docker-Volumes gespeichert. Sie sollten dieses Verzeichnis beibehalten, um Ihre Harbor-Instanz später zu verwalten (z.B. für Upgrades oder Konfigurationsänderungen).</p><p>Beachten Sie, dass alle Harbor-Dienste innerhalb von Docker-Containern laufen und ihre Daten in Docker-Volumes gespeichert werden. Dieses Verzeichnis wird nur für die Installation und Konfiguration verwendet und ist nicht das Verzeichnis, in dem die dauerhafte Daten von Harbor gespeichert werden.</p><p>Um Ihre Harbor-Installation zu konfigurieren, müssen Sie die Harbor YML-Datei konfigurieren. Siehe hierzu Configure the Harbor YML File.</p><p>Notiz zum Installationsverzeichnis Sie können den Harbor-Installer in jedem Verzeichnis extrahieren. Der Benutzer, der die Installationsskript ausführt, muss Berechtigungen haben, Docker-Befehle auszuführen (normalerweise durch Mitgliedschaft in der docker-Gruppe). Dieses Verzeichnis wird nur für die Installation und Konfiguration verwendet. Es ist nicht das Verzeichnis, in dem die dauerhafte Daten von Harbor gespeichert werden. Alle Harbor-Dienste laufen innerhalb von Docker-Containern und ihre Daten werden in Docker-Volumes gespeichert. Sie sollten dieses Verzeichnis beibehalten, um Ihre Harbor-Instanz später zu verwalten (z.B. für Upgrades oder Konfigurationsänderungen).</p>
+</main>
+</body>
+</html>

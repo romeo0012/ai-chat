@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module ngx_stream_map_module</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Module ngx_stream_map_module</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Modul ngx_stream_map_module (1.11.2) vytváří proměnné, jejichž hodnoty závisí na hodnotách jiných proměnných. Příklad Konfigurace
+<pre><code class="lang-bash">map $remote_addr $limit {<br>  127.0.0.1 ""; default $binary_remote_addr;<br>}<br>limit_conn_zone $limit zone=addr:10m;<br>limit_conn addr 1;</code></pre><br>Directivy
+<pre><code class="lang-bash">syntax: map string $variable { ... }<br>Default: —<br>Context: stream</code></pre><br>Vytvoří novou proměnnou, jejíž hodnota závisí na hodnotách jedné nebo více zdrojových proměnných uvedených v prvním parametru. Proměnné se vyhodnocují pouze tehdy, když jsou použity, takže i při deklaraci velkého počtu "map" proměnných nepřidávají žádné extra náklady na zpracování spojení. Parametry v bloku mapy určují mapování mezi zdrojovými a výslednými hodnotami. Hodnoty zdroje jsou určeny jako řetězce nebo regulární výrazy. Řetězce se porovnávají bez ohledu na velká a malá písmena. Regulární výraz by měl začínat buď značkou "~" pro citlivé porovnávání, nebo značkami "~*" pro necitlivé porovnávání. Regulární výraz může obsahovat jména a pozice zajímavých částí, které mohou později být použity v jiných direktivách společně s výslednou proměnnou. Pokud hodnota zdroje odpovídá jednomu z názvů specializovaných parametrů popsaných níže, musí být předponována značkou "\\". Výsledná hodnota může obsahovat text, proměnnou a jejich kombinaci.</p><p>Pokud chcete přeložit kód nebo příkazy, musíte je zachovat v původní podobě.</p><p> Níže uvedené, by mělo být především připojeno k symbolu "\" . Výsledný výraz může obsahovat text, proměnnou nebo jejich kombinaci. Následující speciální parametry jsou také podporovány: hodnota výchozí nastaví výslednou hodnotu, pokud hodnota zdroje neodpovídá žádné z uvedených variant. Pokud není uvedena hodnota výchozí, výsledná hodnota bude prázdná řetězec. hostnames určuje, že hodnoty zdroje mohou být domény s předponou nebo složenou maskou: \*.example.com 1; example.* 1; Následující dvě záznamy mohou být kombinovány: example.com 1; \*.example.com 1; Tento parametr by měl být uveden před seznamem hodnot. include file zahrnuje soubor s hodnotami. Může se jednat o několik zahrnutí. volatile určuje, že proměnná není uložitelná do mezipaměti (1.11.7). Hledání probíhá v následující pořadí priorit a ukončí se na první shodném variantě: řetězec hodnota bez masky nejdelší řetězec hodnota s předponou maskou, např. “*.example.com” nejdelší řetězec hodnota s příponou masky, např. “mail.*” první shodnou regulární výraz (v pořadí vyskytnutí v konfiguračním souboru) hodnota výchozí Syntax: map_hash_bucket_size velikost; Výchozí hodnota: map_hash_bucket_size 32|64|128; Kontext: stream Nastaví velikost buňky pro tabulky hash pro proměnné map. Výchozí hodnota závisí na velikosti řádku cache procesoru. Detaily nastavení tabulek hash jsou poskytnuty v samostatném dokumentu.</p><p>Závisí na velikosti řádku cache procesoru. Detaily nastavení tabulek hash jsou poskytnuty v samostatném dokumentu. Syntax: map_hash_max_size velikost; Výchozí hodnota: map_hash_max_size 2048; Kontext: stream Nastaví maximální velikost tabulek hash pro proměnné map. Detaily nastavení tabulek hash jsou poskytnuty v samostatném dokumentu.</p>
+</main>
+</body>
+</html>

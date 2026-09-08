@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module ngx_http_perl_module</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Module ngx_http_perl_module</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Modul ngx_http_perl_module Významné problémyPříklad KonfiguraceDirectivy perl perl_modules perl_require perl_setVolatitelný Perl z SSIObjekt požadavku $ r Metody Modul ngx_http_perl_module slouží k implementaci obslužných rutin a volání Perlu do SSI. Tento modul se nevytváří všude výchozími parametry, musí být povolen pomocí konfiguračního parametru --with-http_perl_module. Tento modul vyžaduje verzi Perlu 5.6.1 nebo vyšší. Kompilátor C by měl být kompatibilní s tím, který byl použit k sestavení Perlu. Významné problémy Modul je experimentální, takže zákazník musí být varován. Chcete-li, aby Perl při přepracování upravených modulů během přepracování, by měl být sestaven s parametry -Dusemultiplicity=yes nebo -Dusethreads=yes. Dále, k tomu, aby Perl vypustila méně paměti během běhu, by měl být sestaven s parametrem -Dusemymalloc=no. Chcete-li zkontrolovat hodnoty těchto parametrů v již sestaveném Perlu (preferované hodnoty jsou uvedeny v příkladu), spusťte: $ perl -V:usemultiplicity -V:usemymalloc usemultiplicity='define'; usemymalloc='n'; Poznámka: Po přestavbě Perlu s novými parametry -Dusemultiplicity=yes nebo -Dusethreads=yes budou muset být přestavovány všechny binární Perl moduly také — budou jen zastavit fungovat s novou Perlou. Existuje možnost, že hlavní proces a pak procesy pracovníků budou rostit v rozměrech po každé přepracování.</p><p>Příklad Konfigurace</p><p><pre><code class="lang-nginx">location ~ \.pl$ {<br>    set $perl5 "$(which perl)";<br>    set $perl_args "-w";<br>    set $perl_code "print 'Hello World!';";<br>    set $perl_handler perl;<br>    include fastcgi_params;<br>    fastcgi_pass unix:/var/run/nginx-fcgi/perl.socket;<br>}</code></pre></p><p>Directivy
+<ul>
+<li>perl – povoluje Perl v rámci Nginxu</li>
+</ul><ul>
+<li>perl\_modules – seznam modulů Perlu, které budou povoleny</li>
+</ul><ul>
+<li>perl\_require – povinné moduly Perlu, které musí být nainstalovány</li>
+</ul><ul>
+<li>perl\_set – nastavuje proměnnou pro Perl</li>
+</ul><ul>
+<li>Calling Perl z SSI – umožňuje volat Perl z SSI</li>
+</ul></p><p>Poznámka: Tento modul je experimentální, takže může docházet k neočekávaným chybám a nefunkčnostem. Použijte ho s opatrností.</p><p> Perl. Je možné, že hlavní proces a poté procesy pracovníci se zvětšují po každé rekonfiguraci. Pokud se hlavní proces zvětšuje na neakceptovatelné velikosti, může se aplikovat postup živé aktualizace bez změny souboru s executablem. Během provádění Perl modulu dlouho běžící operace, jako je například rozpoznávání domény, připojování k jinému serveru nebo dotazování do databáze, nebudou zpracovávány žádné další požadavky přiřazené k aktuálnímu procesu pracovníka. Proto je tedy doporučeno provádět pouze takové operace, které mají předvídatelnou a krátkou dobu běhu, jako je například přístup k místnímu systému souborů. Příklad Konfigurace</p><p><pre><code class="lang-">http {<br>    perl_modules perl/lib;<br>    perl_require hello.pm;<br>    perl_set $msie6 ' sub { my $r = shift; my $ua = $r-&amp;gt;header_in("User-Agent"); return "" if $ua =~ /Opera/; return "1" if $ua =~ / MSIE [6-9]\.\d+/; return ""; } ';<br>    server {<br>        location / {<br>            perl hello::handler;<br>        }<br>    }<br>}</code></pre></p><p>Modul Perl/lib/hello.pm:</p><p><pre><code class="lang-">package hello;<br>use nginx;<br>sub handler {<br>    my $r = shift;<br>    $r-&amp;gt;send_http_header("text/html");<br>    return OK if $r-&amp;gt;header_only;<br>    $r-&amp;gt;print("hello!\n&amp;lt;br/&amp;gt;");<br>    if (-f $r-&amp;gt;filename or -d _) {<br>        $r-&amp;gt;print($r-&amp;gt;uri, " exists!\n");<br>    }<br>    return OK;<br>}<br>1;<br>__END__</code></pre></p><p>Syntax direktiv: perl module::funkce|'sub { ... }'; Výchozí: — Kontext: location, limit_except Nastaví Perl handler pro danou lokaci. Syntax: perl_modules cesta; Výchozí: — Kontext: http Nastaví další cestu pro Perl moduly.</p><p> Perl zpracovatel pro danou lokaci. Syntax: perl_modules cesta; Výchozí: — Kontext: http Nastaví další cestu pro Perl moduly. Syntax: perl_require modul; Výchozí: — Kontext: http Definuje jméno modulu, které bude na každé rekonfiguraci načteno. Mohou být přítomny více perl_require direktiv. Syntax: perl_set $proměnná modul::funkce|'sub { ... }'; Výchozí: — Kontext: http Nainstaluje Perl zpracovatel pro určenou proměnnou. Volání Perlu z SSI Má následující formát SSI příkazu volajícího Perl: &lt;!--# perl sub="modul::funkce" arg="parametr1" arg="parametr2" ... --&gt; Metody objektu $r Zážišťovací objekt Metody $r-&gt;args vrátí argumenty požadavku. $r-&gt;filename vrátí souborovou cestu odpovídající požadavku URI. $r-&gt;has_request_body(handler) vrátí 0, pokud žádost nemá tělo. Pokud má žádost tělo, je na žádost nastaven zadaný handler a 1 je vráceno. Po čtení požadavkového těla nginx volá zadaný handler. Poznámka: Funkce handler by měla být předána odkazem. Příklad:</p><p>package hello;<br>use nginx;<br>sub handler {<br>my $r = shift;<br>if ($r-&gt;request_method ne "POST") {<br>return DECLINED;<br>}<br>if ($r-&gt;has_request_body(&amp;post)) {<br>return OK;<br>}<br>return HTTP_BAD_REQUEST;<br>}<br>sub post {<br>my $r = shift;<br>$r-&gt;send_http_header;<br>$r-&gt;print("request_body: \"", $r-&gt;request_body, "\"&lt;br/&gt;");<br>$r-&gt;print("request_body_file: \"", $r-&gt;request_body_file, "\"&lt;br/&gt;\n");<br>return OK;<br>}<br>1;<br>__END__<br>$r-&gt;allow_ranges umožňuje použití byteových rozsahů při odesílání odpovědí.</p><p> "„&lt;br/&gt;“); $r-&gt;vytiskne("request_body_soubor: ", $r-&gt;request_body_soubor, "„&lt;br/&gt;\n“); return OK; } 1; __KONEC__</p><p>$r-&gt;umožní_použití_byte_rangeů povolí použití byte rangeů při odesílání odpovědí.<br>$r-&gt;odlož_požadavek_tělo instruuje nginx, aby odstranil požadavek tělo.<br>$r-&gt;header_in(pole) vrátí hodnotu zadaného pole klientského požadavku.<br>$r-&gt;header_pouze určuje, zda se celá odpověď nebo pouze její hlavička má odeslat klientovi.<br>$r-&gt;header_out(pole, hodnota) nastaví hodnotu pro zadané pole odpovědi.<br>$r-&gt;vnitřní_přesměrování(uri) provede vnitřní přesměrování na zadaný uri. Skutečné přesměrování se provede po dokončení výkonu Perl handleru. Od verze 1.17.2 přijímá metoda upravené URIs a podporuje přesměrování na označené umístění.<br>$r-&gt;zapis_chybu(errno, zpráva) zapíše zadanou zprávu do error_log. Pokud errno není nula, bude připojena chybová kód a jeho popis k zprávě.<br>$r-&gt;vytiskne(text, …) přenese data klientovi.<br>$r-&gt;požadavek_tělo vrátí klientský požadavek tělo, pokud ještě nebylo uloženo do dočasného souboru. Chcete-li se ujistit, že klientský požadavek tělo je ve paměti, jeho velikost by měla být omezena client_max_body_size a dostatečná velikost bufferu by měla být nastavena pomocí client_body_buffer_size.<br>$r-&gt;požadavek_tělo_soubor vrátí název souboru s klientským požadavkem tělo. Po zpracování by měl být soubor odstraněn. Chcete-li vždy ukládat požadavek tělo do souboru, musí být povoleno client_body_in_file_only.</p><p> Přetvoření, soubor by měl být odstraněn. Chcete-li vždy zapisovat požadavek těla do souboru, musí být povoleno client_body_in_file_only. $r-&gt;request_method vrátí metodu požadavku klienta HTTP. $r-&gt;remote_addr vrátí IP adresu klienta. $r-&gt;flush okamžitě odesílá data klientovi. $r-&gt;sendfile(jméno[, offset[, délka]]) odesílá obsah zadaného souboru klientovi. Volitelná parametr určuje počáteční offset a délku dat, která se mají přenést. Pravá data přenos se odehrá po dokončení Perl handleru. $r-&gt;send_http_header([type]) odesílá hlavičku odpovědi klientovi. Volitelný parametr typ nastavuje hodnotu pole "Content-Type" hlavičky odpovědi. Pokud je hodnota prázdná řetězec, pole "Content-Type" hlavičky nebude odesláno. $r-&gt;status(kód) nastaví kód odpovědi. $r-&gt;sleep(mili sekundy, handler) nastaví zadanou funkci a zastaví zpracování požadavku na určitou dobu. Během této doby nginx pokračuje v zpracování dalších požadavků. Po uplynutí určené doby nginx volá zaregistrovanou funkci. Poznámka: Funkce handler musí být předána odkazem. Chcete-li přenášet data mezi funkcemi, $r-&gt;variable() by mělo být použito.</p><p>Přenos dat mezi funkcemi by mělo být $r-&gt;variable() použito. Příklad: package hello; use nginx; sub handler { my $r = shift; $r-&gt;discard_request_body; $r-&gt;variable("var", "OK"); $r-&gt;sleep(1000, \&amp;next); return OK; } sub next { my $r = shift; $r-&gt;send_http_header; $r-&gt;print($r-&gt;variable("var")); return OK; } 1; __END__ $r-&gt;unescape(text) dekóduje text kódovaný ve formě "%XX". $r-&gt;uri vrátí požadavek URI. $r-&gt;variable(jméno[, hodnota]) vrátí nebo nastaví hodnotu zadané proměnné. Proměnné jsou lokální pro každý požadavek.</p>
+</main>
+</body>
+</html>

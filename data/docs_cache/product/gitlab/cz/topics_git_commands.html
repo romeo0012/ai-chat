@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Common Git commands</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Common Git commands</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Častěji používané Git příkazy Git příkazy vám ušetří čas během celého vývojového workflow. Tato stránka obsahuje častěji používané příkazy pro běžné úlohy, jako jsou změny kódu, správu větví a prohlídku historie. Každá část příkazu poskytuje přesný syntax, praktické příklady a odkazy na další dokumentaci.</p><p><code>git add</code> Použijte <code>git add</code> k přidání souborů do staging area. <code>git add &lt;file_path&gt;</code> Můžete rekurzivně stagingovat změny z aktuálního pracovního adresáře pomocí <code>git add .</code>, nebo stagingovat všechny změny v Git repozitáři pomocí <code>git add --all</code>. Další informace naleznete v části [Přidání souborů do větve].</p><p><code>git blame</code> Použijte <code>git blame</code> k zobrazení, které uživatele změnily jaké části souboru. <code>git blame &lt;file_name&gt;</code> Můžete použít <code>git blame -L &lt;line_start&gt;,&lt;line_end&gt;</code> k kontrole konkrétního rozsahu řádků. Další informace naleznete v části [Git file blame].</p><p>Příklad<br>Chcete-li zjistit, která uživatel posledně upravila pátou řádek example.txt:
+<pre><code class="lang-">$ git blame -L 5,5 example.txt<br>123abc (Zhang Wei 2021-07-04 12:23:04 +0000 5)</code></pre></p><p><code>git bisect</code> Použijte <code>git bisect</code> k využití binárního vyhledávání k nalezení commitu, který zavodil chybu. Začněte identifikací commitu, který je “zlé” (obsahuje chybu) a commitu, který je “dobré” (neobsahuje chybu).
+<pre><code class="lang-">git bisect start<br>git bisect bad # Current version is bad<br>git bisect good v2.6.13-rc2 # v2.6.13-rc2 je známý jako dobrý</code></pre><br>Poté <code>git bisect</code> vybere commit mezi těmito body a požaduje, abyste identifikovali, zda je commit “zlý” nebo “dobrý” pomocí <code>git bisect good</code> nebo <code>git bisect bad</code>. Opakujte tento proces, dokud nenaleznete commit.</p><p> Text v češtině:</p><p>Pomocí nástroje git bisect můžete mezi dvěma body a požadujete, abyste určili, zda je commit "dobrý" nebo "špatný" pomocí příkazů git bisect good nebo git bisect bad. Opakujte tento proces, až nebudete nalézt commit. Použijte příkaz git checkout, abyste se přesunuli na určitou větev. git checkout &lt;větev_jméno&gt; Chcete-li vytvořit novou větev a přesunout se na ni, použijte git checkout -b &lt;větev_jméno&gt;. Další informace naleznete v tématu Vytvoření Git větve pro své změny. Použijte příkaz git clone, abyste kopírovali existující Git repozitář. git clone &lt;repozitář&gt; Další informace naleznete v tématu Klonování Git repozitáře na vaši místní počítač. Použijte příkaz git commit, abyste spojili staged změny s repozitářem. git commit -m "&lt;commit_message&gt;" Pokud zpráva o commitu obsahuje prázdnou řádek, první řádek se stane názvem commitu, zatímco zbytek se stane tělem commitu. Použijte název commitu k krátkému shrnutí změny, a tělo commitu k poskytnutí dalších podrobností. Další informace naleznete v tématu Stage, commit, a push změny. Použijte příkaz git commit --amend, abyste upravili poslední commit. Použijte příkaz git diff, abyste zobrazili rozdíly mezi vašimi místními nezastavenými změnami a poslední verzí, kterou jste klonovali nebo stáhli. Můžete zobrazit rozdíl (nebo diff) mezi vašimi místními změnami a poslední verzí větve. Zobrazte rozdíl, abyste pochopili své místní změny před tím, než je spojíte s větve.</p><p> Rozdíl (nebo diff) mezi vašimi místními změnami a nejnovější verzí větvě. Zobrazte diff, abyste porozuměli svým místním změnám před tím, než je přiřadíte k větvě. Chcete-li porovnat své změny s konkrétní větví, spusťte: <code>git diff &lt;větev&gt;</code> Výstupu: Řádky s přidáním začínají plusem (+) a jsou zobrazeny v zelené. Řádky s odstraněním nebo změnami začínají minusem (-) a jsou zobrazeny v červené.</p><p><code>git init</code><br>Použijte <code>git init</code> k inicializaci adresáře, aby Git ho sledoval jako repozitář. <code>git init</code> Do adresáře je přidán soubor .git s konfiguračními a logovacími soubory. Neupravujte přímo soubor .git. Výchozí větev je nastavena na main. Můžete změnit název výchozí větvě pomocí <code>git branch -m &lt;větev_název&gt;</code>, nebo inicializovat pomocí <code>git init -b &lt;větev_název&gt;</code>.</p><p><code>git pull</code><br>Použijte <code>git pull</code> k získání všech změn provedených uživateli po poslední dobu, kdy jste klonovali nebo stahovali projekt. <code>git pull &lt;volitelný_zdroj&gt; &lt;větev_název&gt;</code></p><p><code>git push</code><br>Použijte <code>git push</code> k aktualizaci odkazů na vzdálené odkazy. Další informace najdete v tématu stage, commit, a push změny.</p><p><code>git reflog</code><br>Použijte <code>git reflog</code> k zobrazení seznamu změn v Git odkazových logech. Výchozí nastavení zobrazuje seznam změn k HEAD. Další informace najdete v tématu zpětná vazba.</p><p><code>git remote add</code><br>Použijte <code>git remote add</code> k tomu, aby Git věděl, která vzdálená repozitář v GitLab je propojena s místní adresářem. <code>git remote add &lt;remote_name&gt; &lt;repository_url&gt;</code></p><p>Při klonování repozitáře je výchozí zdrojová repozitář spojena s odkazem origin.</p><p> V GitLab je připojen k místní adresáři. Použijte následující příkaz k přidání nového remota: <code>git remote add &lt;remote_name&gt; &lt;repository_url&gt;</code><br>Při klonování repozitáře je výchozí repozitář spojen s názvem remota origin. Další informace o konfiguraci dalších remotů naleznete v článku [forks](forks). Použijte příkaz <code>git log</code> k zobrazení seznamu commitů v pořadí chronologickém. Použijte příkaz <code>git show</code> k zobrazení informací o objektu v Gitu. Následující příklad ukazuje, jak zobrazit informace o commitu, který ukazuje HEAD: <code>$ git show HEAD</code> commit ab123c (HEAD -&gt; main, origin/main, origin/HEAD)<br>Použijte příkaz <code>git merge</code> k spojení změn z jedné větvě s jinou. Další informace o alternativě k příkazu <code>git merge</code> naleznete v článku [rebase](rebase) k řešení konfliktů při spojování. Následující příklad ukazuje, jak aplikovat změny z větvě <code>feature_branch</code> do větvě <code>target_branch</code>: <code>git checkout target_branch</code> <code>git merge feature_branch</code><br>Použijte příkaz <code>git rebase</code> k přepsání historie commitů větvě. <code>git rebase &lt;branch_name&gt;</code> Můžete použít příkaz <code>git rebase</code> k řešení konfliktů při přepsání historie commitů. Většinou chcete rebase proti výchozí větvi. Použijte příkaz <code>git reset</code> k zrušení commitu a vrácení se do dřívějšího stavu. Další informace naleznete v článku [undo changes](undo changes). Použijte příkaz <code>git status</code> k zobrazení stavu pracovní složky a staging area. Při přidání, změně nebo smazání souborů Git může zobrazit změny.</p>
+</main>
+</body>
+</html>

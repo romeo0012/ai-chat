@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harbor docs | Harbor Installation Prerequisites</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Harbor docs | Harbor Installation Prerequisites</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Nastavení instalace Harbor<br>Harbor můžete nasadit na Docker host pomocí Docker Compose, nebo na Kubernetes cluster pomocí Helm.</p><p>Základní požadavky na zdroje<br>Níže uvedená tabulka ukazuje minimální a doporučené požadavky na zdroje pro nasazení Harbor.</p><p>| Zdroj | Minimální | Doporučené |<br>|-------|-----------|------------|<br>| CPU   | 2         | 4          |<br>| Mem   | 4 GB      | 8 GB       |<br>| Disk  | 40 GB     | 160 GB     |</p><p>Požadavky na software<br>Níže uvedená tabulka uvádí software, který musí být nainstalován na cílový host.</p><p>| Software | Verze | Popis |<br>|----------|-------|-------|<br>| Docker Engine | &gt; 20.10 | Nainstalovat Docker Engine |<br>| Docker Compose | docker compose &gt; 2.3 | Docker Compose je součástí Docker Engine |<br>| OpenSSL | Nejnovější (volitelné) | Používá se k generování certifikátů a klíčů pro Harbor |</p><p>Porty, které musí být otevřeny<br>Harbor vyžaduje, aby následující porty byly otevřeny na cílovém hostu.</p><p>| Port | Protokol | Popis |<br>|------|----------|-------|<br>| 443  | HTTPS    | Portal a jádro API přijímají požadavky HTTPS na tomto portu. Můžete změnit tento port v konfiguračním souboru. |<br>| 80   | HTTP     | Portal a jádro API přijímají požadavky HTTP na tomto portu. Můžete změnit tento port v konfiguračním souboru. |</p><p>Instalace Harboru na Kubernetes<br>Chcete-li nainstalovat Docker pomocí Helm, přečtěte si věnovaný repozitář github.com/goharbor/harbor-helm</p><p>Další kroky<br>Stáhněte si instalační balíček Harboru.</p>
+</main>
+</body>
+</html>

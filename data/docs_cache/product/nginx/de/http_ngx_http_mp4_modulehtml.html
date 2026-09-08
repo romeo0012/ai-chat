@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module ngx_http_mp4_module</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Module ngx_http_mp4_module</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Modul ngx_http_mp4_moduleBeispiel Konfigurationsdirektiven mp4 mp4_buffer_größe mp4_max_buffer_größe mp4_limit_Geschwindigkeit mp4_limit_Geschwindigkeit_nach mp4_start_Key_Bild The ngx_http_mp4_module Modul bietet serverseitige Unterstützung für MP4-Dateien im Pseudo-Streaming-Modus. solche Dateien haben meistens die Dateinamenserweiterungen .mp4, .m4v oder .m4a. Pseudo-Streaming funktioniert in Kooperation mit einem kompatiblen Medienplayer. Der Spieler sendet einen HTTP-Anforderung an den Server mit der Startzeit im Abfragezeichenfolgeargument (einfach start genannt und in Sekunden angegeben), und der Server antwortet mit dem Stream, sodass seine Startposition sich auf die angeforderte Zeit bezieht, z.B.: http://beispiel.com/elefanten_traum.mp4?start=238.88 Dies erlaubt es, beliebig zeitlich zu suchen, oder das Abspielen im Mittelpunkt der Zeitleinie zu starten. Um die Suche zu unterstützen, speichern H.264-basierte Formate Metadaten in einem sogenannten "moov Atom". Es handelt sich um einen Teil des Dateis, der die Indexinformation für das gesamte Datei enthält. Um das Abspielen zu starten, muss der Spieler zuerst Metadaten lesen. Dies wird durch den Senden einer speziellen Anforderung mit dem start=0 Argument erreicht. Viele Encoding-Software speichern die Metadaten am Ende des Dateis. Dies ist für Pseudo-Streaming nicht optimal, weil der Spieler das gesamte Datei herunterladen muss, bevor er abgespielt werden kann. Wenn die Metadaten am Anfang des Dateis liegen, reicht es für nginx, einfach den Dateiinhalt zurückzusenden.</p><p> Im Anfang des Files befindet sich die Angabe, sodass nginx nur den Dateiinhalt zurücksenden muss, um fortzufahren. Wenn die Metadaten am Ende des Files stehen, muss nginx das gesamte File lesen und eine neue Streamvorbereitung durchführen, damit die Metadaten vor dem Mediadaten stehen. Dies bedeutet ein CPU-, Speicher- und Disk-I/O-Overhead, sodass es sinnvoll ist, eine Originaldatei für das Pseudo-Streaming vorher zu bereiten, anstatt dass nginx dies bei jedem solchen Anforderung tut. Der Modul unterstützt auch den End-Argument des HTTP-Anforderungs-Version 1.5.13, das den Endpunkt der Wiedergabe festlegt. Das End-Argument kann mit dem Start-Argument oder separat angegeben werden: http://beispiel.com/elephants_dream.mp4?start=238.88&amp;end=555.55 Für eine entsprechende Anforderung mit einem nicht-null Start- oder End-Argument wird nginx die Metadaten aus dem File lesen, die Streamvorbereitung mit dem angeforderten Zeitraum vorbereiten und an den Client senden. Dies hat das gleiche Overhead wie oben beschrieben. Wenn der Start-Argument auf eine nicht-key Video-Frame zeigt, wird das Video am Anfang gebrochen. Um dieses Problem zu beheben, kann das Video vor dem Start-Punkt mit dem key-Frame und allen Zwischen-Frames zwischen ihnen vorangestellt werden. Diese Frames werden von der Wiedergabe durch eine Edit-Liste (1.21.4) versteckt. Wenn eine entsprechende Anforderung kein Start- und End-Argument enthält, gibt es kein Overhead, und die Datei wird einfach als statisches Ressource gesendet. Einige Spieler unterstützen auch Anforderungen nach Bytes, sodass dieses Modul nicht erforderlich ist.</p><p> Das folgende Text wird einfach als statisches Ressource gesendet. Einige Spieler unterstützen auch Byterang-Anfragen und benötigen daher nicht diesen Modul. Dieser Modul ist nicht standardmäßig erstellt, sondern muss mit dem --with-http_mp4_module Konfigurationsparameter aktiviert werden. Wenn zuvor ein Drittanbieter-mp4-Modul verwendet wurde, sollte es deaktiviert werden. Eine ähnliche Pseudo-Streaming-Unterstützung für FLV-Dateien bietet das ngx_http_flv_module-Modul. Beispiel-Konfiguration</p><p><pre><code class="lang-">location /video/ {<br>    mp4;<br>    mp4_buffer_size 1m;<br>    mp4_max_buffer_size 5m;<br>    mp4_limit_rate on;<br>    mp4_limit_rate_after 30s;<br>}</code></pre></p><p>Syntax:
+<ul>
+<li>mp4; (Standard: —) Kontext: location Aktiviert die Modulverarbeitung in der umgebenden Location.</li>
+</ul><ul>
+<li>mp4_buffer_size size; (Standard: mp4_buffer_size 512K) Kontext: http, server, location Setzt die Größe des initialen Buffers, der für die Verarbeitung von MP4-Dateien verwendet wird.</li>
+</ul><ul>
+<li>mp4_max_buffer_size size; (Standard: mp4_max_buffer_size 10M) Kontext: http, server, location Während der Verarbeitung von Metadaten kann ein größerer Buffer erforderlich werden. Seine Größe darf nicht die angegebene Größe überschreiten, andernfalls wird nginx den 500 (Internal Server Error) Serverfehler zurückgeben und folgenden Nachrichten loggen: "/some/movie/file.mp4" mp4 moov Atom ist zu groß: 12583268, Sie möchten vielleicht mp4_max_buffer_size erhöhen.</li>
+</ul><ul>
+<li>mp4_limit_rate on | off | factor; (Standard: mp4_limit_rate off) Kontext: http, server, location Begrenzt die Übertragungsrate der Antwort an den Client. Die Übertragungsrate wird basierend auf dem Durchschnittsbitrate der von nginx gesendeten MP4-Datei begrenzt.</li>
+</ul></p><p> Antwortübertragung an einen Client. Die Übertragungsrate wird basierend auf dem Durchschnittsbitrate des MP4-Videos, das gesendet wird, begrenzt. Um die Rate zu berechnen, wird das Bitrate mit dem angegebenen Faktor multipliziert. Der spezielle Wert "on" entspricht dem Faktor 1,1. Der spezielle Wert "off" deaktiviert die Bitratebegrenzung. Die Begrenzung wird pro Anfrage festgelegt, sodass, wenn ein Client zwei Verbindungen gleichzeitig öffnet, die Gesamtübertragungsrate doppelt so hoch ist wie die angegebene Begrenzung. Diese Direktive ist Teil unseres kommerziellen Abonnements. Syntax: mp4_limit_rate_after time; Default: mp4_limit_rate_after 60s; Kontext: http, server, location Setzt die initiale Menge an Mediendaten (gemessen in Wiedergabezeit) nach der Weiterübertragung der Antwort an den Client wird rate limited. Diese Direktive ist Teil unseres kommerziellen Abonnements. Syntax: mp4_start_key_frame on | off; Default: mp4_start_key_frame off; Kontext: http, server, location Diese Direktive ist ab Version 1.21.4 verfügbar. Zwangsweise erzeugt die Ausgabe-Video immer einen Schlüssel-Video-Rahmen am Anfang. Wenn der Start-Argument nicht auf einen Schlüssel-Rahmen zeigt, werden die initialen Rahmen mithilfe eines mp4 Edit-Listen versteckt. Edit Listen werden von den Hauptspielern und Browsern wie Chrome, Safari, QuickTime und ffmpeg unterstützt. Firefox unterstützt sie teilweise.</p>
+</main>
+</body>
+</html>

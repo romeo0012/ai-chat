@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Multi-Processing Modules (MPMs)</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Multi-Processing Modules (MPMs)</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Následující text popisuje, co je Multi-Processing Module (MPM) a jak jsou používány Apache HTTP Serverem.</p><p>Úvod
+<hr></p><p>Apache HTTP Server je navržen jako silný a flexibilní webový server, který může fungovat na velmi širokém spektru platform a různých prostředí. Různé platformy a různé prostředí často vyžadují různé funkce nebo mohou mít různé způsoby implementace stejné funkce nejefektivněji. Apache httpd vždy podporoval širokou škálu prostředí díky své modulární koncepci. Tato koncepce dovoluje správci webu vybrat, které funkce budou součástí serveru, tím, že vybere, které moduly se budou načíst buď při kompilaci nebo běhu. Apache HTTP Server 2.0 rozšiřuje tuto modulární koncepci až na základní funkce webového serveru. Server dodává výběr Multi-Processing Modules (MPMs), které jsou odpovědné za vázání se na sítové porty na stroji, přijímání požadavků a vysílání dětí k zpracování požadavků. Rozšíření modulární koncepce na tuto úroveň serveru umožňuje dvě důležité výhody: Apache httpd může čistěji a efektivněji podporovat širokou škálu operačních systémů.</p><p>Základní nastavení MPM
+<hr></p><p><h3>Static Module</h3></p><p>Vytvoření MPM jako statického modulu</p><p><h3>DSO Module</h3></p><p>Vytvoření MPM jako DSO modulu</p><p>Úvod ¶
+<hr></p><p>Apache HTTP Server je navržen jako silný a flexibilní webový server, který může fungovat na velmi širokém spektru platform a různých prostředí. Různé platformy a různé prostředí často vyžadují různé funkce nebo mohou mít různé způsoby implementace stejné funkce nejefektivněji. Apache httpd vždy podporoval širokou škálu prostředí díky své modulární koncepci. Tato koncepce dovoluje správci webu vybrat, které funkce budou součástí serveru, tím, že vybere, které moduly se budou načíst buď při kompilaci nebo běhu. Apache HTTP Server 2.0 rozšiřuje tuto modulární koncepci až na základní funkce webového serveru. Server dodává výběr Multi-Processing Modules (MPMs), které jsou odpovědné za vázání se na sítové porty na stroji, přijímání požadavků a vysílání dětí k zpracování požadavků. Rozšíření modulární koncepce na tuto úroveň serveru umožňuje dvě důležité výhody: Apache httpd může čistěji a efektivněji podporovat širokou škálu operačních systémů.</p><p>Základní nastavení MPM
+<hr></p><p><h3>Static Module</h3></p><p>Vytvoření MPM jako statického modulu</p><p><h3>DSO Module</h3></p><p>Vytvoření MPM jako DSO modulu</p><p> Server umožňuje dvě důležité výhody: Apache httpd může více čistě a efektivně podporovat širokou škálu operačních systémů. Zvláště Windows verze serveru je nyní velmi efektivnější, protože mpm_winnt může použít nativní sítové funkce místo POSIX vrstvy používané v Apache httpd 1.3. Tato výhoda se týká i ostatních operačních systémů, které implementují specializované MPMs. Server lze lépe upravit podle potřeb konkrétního webu. Například webové stránky, které potřebují velkou škálovatelnost, mohou volit sekvenční MPM jako prefork, zatímco webové stránky, které požadují stabilitu nebo kompatibilitu s starším software, mohou použít prefork MPM. Na úrovni uživatele MPM vypadají jako jiné moduly Apache httpd. Hlavní rozdíl spočívá v tom, že do serveru musí být nahrána pouze jedna MPM v daný čas. Seznam dostupných MPM se objeví na stránce se seznamem modulů.</p><p>Výchozí MPM ¶ Následující tabulka uvádí výchozí MPM pro různé operační systémy. Tento MPM bude vybrán, pokud neuděláte jiný výběr při kompilaci.</p><p>Netwarempm_netware<br>os2mpmt_os2<br>Unixprefork, worker, nebo event, podle schopností platformy<br>Windowsmpm_winnt<br>Zde 'Unix' znamená operační systémy podobné Unixu, jako například Linux, BSD, Solaris, Mac OS X atd. V případě Unixu se rozhodne, která MPM bude nainstalována na základě dvou otázek:
+<ol>
+<li>Podporuje systém vlákna?</li>
+</ol><ol>
+<li>Rozhodnutí o instalaci daného MPM je založeno na dvou otázkách: 1. Podporuje systém vlákna? 2. Podporuje systém vlákna bezpečný polling (Zvláště funkce kqueue a epoll)? Pokud odpověď na obě otázky je 'ano', výchozím MPM bude event. Pokud odpověď na #1 je 'ano', ale na #2 je 'ne', výchozím bude worker. Pokud odpověď na obě otázky je 'ne', pak výchozím MPM bude prefork. V praxi to znamená, že výchozím bude většinou event, protože všechny moderní operační systémy podporují tyto dvě funkce. Výstavba MPM jako statický modul ¶ MPMs mohou být vytvořeny jako statické moduly na všech platformách. Vybraný MPM je zvolen při sestavování a spojený do serveru. Server musí být znovu sestaven, aby se změnil MPM. Chcete-li překonat výchozí volbu MPM, použijte opci --with-mpm=NAME skriptu configure. NAME je název požadovaného MPM. Po sestavení serveru je možné určit, který MPM byl zvolen, pomocí příkazu ./httpd -l. Tento příkaz vytiskne seznam každého modulu, který je sestaven do serveru, včetně MPM. Výstavba MPM jako DSO modul ¶ Na platformách Unix a podobných mohou být MPMs vytvořeny jako DSO moduly a dynamicky nahrány do serveru stejným způsobem jako jiné DSO moduly. Výstavba MPM jako DSO moduly umožňuje změnu MPM aktualizací direktivy LoadModule pro MPM místo znovusestavování serveru. LoadModule mpm_event_module modules/mod_mpm_event.</li>
+</ol></p><p> Chcite se změnit updatováním direktivy LoadModule pro MPM místo přestavováním serveru. LoadModule modul_mpm_event_module modules/mod_mpm_event.so Pokus o načtení více než jednoho MPM vede k selhání při spuštění s následujícím chybovým zprávou. AH00534: httpd: Chyba konfigurace: Načteno více než jeden MPM. Tato funkce je povolena pomocí možnosti --enable-mpms-shared skriptu konfigurace. S argumentem all budou na platformě instalovány všechny možné MPMs. Alternativně může seznam MPMs být zadán jako argument. Vybraný MPM, buď automaticky vybraný nebo zadaný pomocí možnosti --with-mpm skriptu konfigurace, bude načten v generovaném serverovém konfiguračním souboru. Upravte direktivu LoadModule, aby byl vybrán jiný MPM.</p><p>Poznámka: Tento text popisuje, jak změnit MPM Apache serveru pomocí updatování direktivy LoadModule namísto přestavování serveru. LoadModule mpm_event_module modules/mod_mpm_event.so je příklad direktivy, která načítá modul MPM_event. Pokus o načtení více než jednoho MPM vede k selhání při spuštění serveru. Tato chyba může být vyřešena upravou direktivy LoadModule, aby byla načtena jiná MPM. Tato funkce je povolena pomocí možnosti --enable-mpms-shared skriptu konfigurace. S argumentem all budou na platformě instalovány všechny možné MPMs. Alternativně může seznam MPMs být zadán jako argument. Vybraný MPM, buď automaticky vybraný nebo zadaný pomocí možnosti --with-mpm skriptu konfigurace, bude načten v generovaném serverovém konfiguračním souboru.</p>
+</main>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jobs</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Jobs</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Aufgaben<br>Aufgaben repräsentieren einmalige Aufgaben, die bis zum Abschluss ausgeführt und anschließend automatisch beendet werden. Eine Aufgabe erstellt eine oder mehrere Pods und versucht die Ausführung der Pods bis zu einer angegebenen Anzahl erfolgreich abgeschlossener Pods wiederholt. Während Pods erfolgreich abgeschlossen werden, überwacht die Aufgabe die erfolgreichen Abschlüsse. Wenn eine angegebene Anzahl erfolgreiche Abschlüsse erreicht ist, ist die Aufgabe (also die Task) abgeschlossen. Löschen einer Aufgabe führt zur Bereinigung der Pods, die sie erstellt hat. Unterbrechen einer Aufgabe führt zur Löschung der aktiven Pods, bis die Aufgabe wieder aufgenommen wird. Ein einfaches Beispiel ist die Erstellung einer einzigen Aufgabeobjekt, um sicherzustellen, dass eine Pod zu Ende ausgeführt wird. Das Aufgabeobjekt startet eine neue Pod, wenn die erste Pod fehlschlägt oder gelöscht wird (z.B. aufgrund eines Hardwarefehlers des Knoten oder eines Neustarts des Knotens). Man kann auch eine Aufgabe verwenden, um mehrere Pods parallel auszuführen. Wenn man eine Aufgabe (entweder eine einzelne Task oder mehrere parallel) auf einem Zeitplan ausführen möchte, siehe CronJob. Ausführung eines Beispiel-Jobs Hier ist ein Beispiel für eine Aufgabe-Konfiguration. Sie berechnet π bis zu 2000 Stellen und gibt es aus. Dies dauert ungefähr 10s.<br>controllers/job.yaml<br>apiVersion: batch/v1<br>kind: Job<br>metadata:<br> name: pi<br>spec:<br> template:<br> spec:<br> containers:<br> - name: pi<br> image: perl:5.34.0<br> command: ["perl", "-Mbignum=bpi", "-wle", "print bpi(2000)"]<br> restartPolicy: Never<br> backoffLimit: 4<br>Sie können das Beispiel mit folgendem Befehl ausführen:<br>kubectl apply -f https://kubernetes.io/examples/controllers/job.yaml<br>Das Ergebnis ist ähnlich wie folgt:<br>job.pi</p><p>Die Ausgabe ist ähnlich wie folgt:</p><p><pre><code class="lang-">name:         pi<br>namespace:    default<br>status:       Completed<br>succeeded:    1<br>failed:       0<br>startTime:    Wed, 01 Jan 2003 05:00:01 -0500<br>completionTime:    Wed, 01 Jan 2003 05:00:11 -0500</code></pre></p><p>Die Ausgabe des Pods ist ähnlich wie folgt:</p><p><pre><code class="lang-">3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679</code></pre></p>
+</main>
+</body>
+</html>

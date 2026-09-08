@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Name-based Virtual Host Support</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Name-based Virtual Host Support</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Podpora virtuálních hostů na základě názvů dostupná Jazyky: de | en | fr | ja | ko | tr Tento dokument popisuje, kdy a jak používat virtuální hosty na základě názvů domén.</p><p>Virtuální hosty na základě názvů vs. IP-adres<br>Jak server vybírá správný virtuální host na základě názvu<br>Použití virtuálních hostů na základě názvů</p><p>Viz také<br>Podpora virtuálních hostů na základě IP adres<br>Hluboký diskus o odpovídajících nastaveních virtuálních hostů<br>Virtuální hostování dynamicky konfigurované v masovém měřítku<br>Příklady virtuálních hostů pro běžné nastavení</p><p>Virtuální hostování na základě názvů vs. IP-adres ¶<br>Virtuální hostování na základě IP adres používá IP adresu spojení k určení správného virtuálního hosta k poskytnutí. Proto musíte mít pro každý host oddělenou IP adresu. S virtuálním hostováním na základě názvů se server opírá o to, aby klient poslal správný název hostitele jako součást HTTP hlaviček. Tímto způsobem mohou být na stejné IP adrese hostované mnoho různých hostitelů. Virtuální hostování na základě názvů je obvykle jednodušší, protože musíte konfigurovat svůj DNS server tak, aby mapoval každý název hostitele na správnou IP adresu a poté Apache HTTP Server, aby rozpoznával různé názvy hostitelů. Virtuální hostování na základě názvů také snižuje požadavek na nezbytné IP adresy. Proto byste měli používat virtuální hostování na základě názvů, pokud nevyžaduje vaše vybavení explicitně IP-adresové hostování. Historické důvody pro IP-adresové hostování založené na podpoře klienta jsou už neplatné pro obecný účel webového serveru.</p><p> Překlad:</p><p>V hostingu. Historické důvody pro virtuální hostování na základě IP adresy založené na podpoře klienta už neplatí pro obecný účel webového serveru. Virtuální hostování na základě názvu budí na vědomí, že se opírá o algoritmus virtuálního hostování na IP adrese, což znamená, že hledání správného serverového jména probíhá pouze mezi virtuálními hosty, které mají nejlepší IP adresu. Jak server vybere správnou názevovou virtuální hostu ¶ Důležité je poznat, že první krok v rozlišování názevových virtuálních hostů je IP-závislé rozlišování. Rozlišování názevových virtuálních hostů vybere až poté nejvhodnější názevovou virtuální hostu po omezení kandidátů na nejlepší IP-závislou shodu. Použití divoké karty (*) pro IP adresu ve všech VirtualHost direktivách znevýhodňuje IP-závislé mapování. Když přijde požadavek, server najde nejlepší (nejspecifický) odpovídající &lt;VirtualHost&gt; argument podle IP adresy a portu používaného požadavkem. Pokud je více než jeden virtuální host obsahující tuto nejlepší kombinaci adresy a portu, Apache bude další porovnávat direktivy ServerName a ServerAlias s názvem serveru přítomným v požadavku. Pokud jste ServerName direktivu zanechali z jakéhokoliv názevového virtuálního hosta, server bude výchozí název serveru nastavit na plně kvalifikovaný název domény (FQDN) odvozený z názvu systému hostitele. Tento implicitně nastavený název serveru může vést k neintuitivnímu shodování virtuálních hostů a je znepokojující.</p><p>Poznámka: V textu jsou zachovány technické termíny, kódy, příkazy, cesty souborů a adresy URL v původní anglické podobě.</p><p> Přeloženo z angličtiny do češtiny. Pouze přeložte prozaický text. Zachovejte technické termíny, bloky kódu, příkazy, cesty souborů, adresy URL a strukturu odstavců.</p><p>TEXT:<br>Odkazuje se na název systémového hostitele. Tento implicitně nastavený název serveru může vést k neintuitivnímu odpovídání virtuálním hostům a je odmítán. Výchozí název-závislý vhost pro kombinaci IP a portu, pokud žádný odpovídající ServerName nebo ServerAlias není nalezen mezi sadou virtuálních hostů obsahujících nejvýraznější odpovídající IP adresu a port, pak se použije první zaznamenaný virtuální host, který odpovídá. Použití název-závislých virtuálních hostů ¶ Související Moduly a DirektivyscoreDocumentRootServerAliasServerName&lt;VirtualHost&gt; Prvním krokem je vytvořit &lt;VirtualHost&gt; blok pro každý různý host, který byste chtěli poskytnout. V každém &lt;VirtualHost&gt; bloku budete potřebovat alespoň příkaz ServerName, aby bylo určeno, kterému hostiteli slouží a příkaz DocumentRoot, aby ukázal, kde v systému souborů se nachází obsah pro tento hostitel. Hlavní host se odstraňuje Každá žádost, která neodpovídá existujícímu &lt;VirtualHost&gt;, je řešena globální konfigurací serveru, bez ohledu na název hostitele nebo ServerName. Když přidáte název-závislý virtuální host do existujícího serveru a virtuální hostové argumenty odpovídají existujícím IP a portům, pak budou nyní žádosti řešeny explicitním virtuálním hostem. V tomto případě je obvykle vhodné vytvořit výchozí virtuální host s ServerName odpovídajícím názvu základního serveru. Nové domény na stejném rozhraní a portu, ale vyžadující samostatné konfigurace, mohou být pak přidány jako následující (nevýchozí) virtuální hosty.</p><p>Překlad technických termínů:<ul>
+<li>ServerName - název serveru</li>
+</ul><ul>
+<li>ServerAlias - alias názvu serveru</li>
+</ul><ul>
+<li>VirtualHost - virtuální host</li>
+</ul><ul>
+<li>DocumentRoot - kořenový adresář serveru</li>
+</ul><ul>
+<li>IP - internetová adresa</li>
+</ul><ul>
+<li>port - číslo portu</li>
+</ul><ul>
+<li>globální konfigurace serveru - globální nastavení serveru</li>
+</ul><ul>
+<li>název-závislý virtuální host - virtuální host, který se řídí názvem domény</li>
+</ul><ul>
+<li>výchozí virtuální host - virtuální host, který slouží jako základní konfigurace pro všechny ostatní virtuální hosty</li>
+</ul><ul>
+<li>následující (nevýchozí) virtuální hosty - další virtuální hosty, které následují výchozí virtuální host</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>sadu virtuálních hostů - skupinu virtuálních hostů</li>
+</ul><ul>
+<li>nejvýraznější odpovídající IP adresu a port - IP adresa a port, který odpovídá nejlépe žádanému virtuálnímu hostovi</li>
+</ul><ul>
+<li>zaznamenaný virtuální host - virtuální host, který je zaznamenán v konfiguraci serveru</li>
+</ul><ul>
+<li>explicitní virtuální host - virtuální host, který je explicitně definován v konfiguraci serveru</li>
+</ul><ul>
+<li>žádost - požadavek na server</li>
+</ul><ul>
+<li>rozhraní - síťové rozhraní, přes které je server připojen k internetu</li>
+</ul><ul>
+<li>portů - čísla portů, která slouží k přenosu dat mezi počítači</li>
+</ul><ul>
+<li>globální nastavení serveru - globální nastavení, která platí pro celý server</li>
+</ul><ul>
+<li>název domény - název webu nebo domény, která je zadána v adrese URL</li>
+</ul><ul>
+<li>samostatné konfigurace - konfigurace, která se liší od konfigurace ostatních virtuálních hostů</li>
+</ul><ul>
+<li>adresu URL - adresu webu, která je zadána v prohlížeči</li>
+</ul><ul>
+<li>blok - část konfigurace serveru, která obsahuje soubor konfiguračních příkazů</li>
+</ul><ul>
+<li>příkaz - jednotlivý příkaz v konfiguračním souboru serveru</li>
+</ul><ul>
+<li>kořenový adresář - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru - adresář, který obsahuje hlavní obsah serveru</li>
+</ul><ul>
+<li>kořenový adresář serveru -</li>
+</ul></p><p> Překlad textu z angličtiny na češtinu:</p><p>Domény na stejném rozhraní a portu, ale požadující samostatné konfigurace, mohou být pak přidány jako následující (nevýchozí) virtuální hosty. ServerName dědičnost<br>Nejlepší je vždycky explicitně zadat ServerName ve všech jménových virtuálních hostech. Pokud VirtualHost nezadá ServerName, bude serverové jméno děděno z bazového serverového konfiguračního souboru. Pokud žádné serverové jméno nebylo zadáno globálně, je detekováno při spuštění prostřednictvím reverzní DNS rozložení prvního posluchacího adresáře. V obou případech se tento děděný serverový název podílejí na rozlišování jménových virtuálních hostů, takže je nejlepší vždycky explicitně zadat ServerName ve všech jménových virtuálních hostech. Například, pokud sloužíte doménu www.example.com a chcete přidat virtuální host other.example.com, který ukazuje na stejný IP adresu, tak můžete to napsat do httpd.conf následovně:</p><p><pre><code class="lang-">&amp;lt;VirtualHost *:80&amp;gt;<br>  # Tento první uvedený virtuální host je také výchozí pro *:80<br>  ServerName www.example.com<br>  ServerAlias example.com<br>  DocumentRoot "/www/domain"<br>&amp;lt;/VirtualHost&amp;gt;<br>&amp;lt;VirtualHost *:80&amp;gt;<br>  ServerName other.example.com<br>  DocumentRoot "/www/otherdomain"<br>&amp;lt;/VirtualHost&amp;gt;</code></pre></p><p>Můžete-li alternativně zadat explicitní IP adresu místo * v &lt;VirtualHost&gt; příkazech. Například můžete to udělat, abyste některé jménové virtuální hosty spoušteli na jedné IP adrese, a buď IP-závislé, nebo jinou sadu jménových virtuálních hostů na jiné adrese. Mnoho serverů chce být dostupné pod více jmény.</p><p> Další sadu virtuálních hostů na další adrese. Mnoho serverů chtějí být přístupné pod více než jedním názvem. Toto je možné pomocí příkazu ServerAlias umístěného v sekcii &lt;VirtualHost&gt;. Například v prvním bloku &lt;VirtualHost&gt; výše uvedeném, příkaz ServerAlias ukazuje, že uvedené názvy jsou další názvy, které mohou lidé použít k zobrazení stejného webu: ServerAlias example.com \*.example.com Potom žádosti pro všechny hosty v doméně example.com budou slouženy virtuálním hostem www.example.com. Wildcardové znaky \* a ? mohou být použity k odpovídání názvům. Zřejmě nemůžete prostě vytvořit názvy a umístit je do ServerName nebo ServerAlias. Musíte nejprve mít svůj server DNS správně nakonfigurovaného, aby mapoval tyto názvy na IP adresu spojenou s vaším serverem. Virtuální hosty pro nejlepší odpovídající sadu &lt;virtualhost&gt;s se zpracovávají v pořadí, ve kterém se objevují v konfiguraci. První odpovídající ServerName nebo ServerAlias se používá, bez žádného jiného přednostního postavení pro wildcards (nebo pro ServerName vs. ServerAlias). Celý seznam názvů v příkazu VirtualHost se považuje za stejné, jako (ne-wildcard) ServerAlias. Nakonec můžete upravit konfiguraci virtuálních hostů umístěním dalších příkazů v kontaineru &lt;VirtualHost&gt;. Většina příkazů může být umístěna do těchto kontainerů a pak změní konfiguraci pouze relevantního virtuálního hosta.</p><p>Většina příkazů může být umístěna do těchto kontainerů a pak změní konfiguraci pouze relevantního virtuálního hosta. Chcete-li zjistit, zda je určitý příkaz povolený, zkontrolujte Kontext příkazu. Konfigurační příkazy nastavené v hlavním kontextu serveru (mimo jakékoliv &lt;VirtualHost&gt; kontainer) budou použity pouze tehdy, pokud nejsou překryty nastaveními virtuálního hosta.</p>
+</main>
+</body>
+</html>

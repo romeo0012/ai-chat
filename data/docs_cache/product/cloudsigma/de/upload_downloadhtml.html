@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Upload or Download Drive Images</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Upload or Download Drive Images</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Hochladen oder Herunterladen von Laufwerksbildern 📁<br>Hochladen eines Laufwerksbilders 📁<br>POST https://direct.{loc}.cloudsigma.com/api/2.0/drives/upload/ 🌐<br>Ein Laufwerksbild kann über eine POST-Anfrage mit dem Bild hochgeladen werden, indem Sie auf /drive/upload/ gesendet werden. Bemerkung: Es gibt eine andere Domain-Endpunkt für die Uploads (direct.{loc}.cloudsigma.com). Derzeit werden nur raw-Laufwerksbilder unterstützt. Die Anfrage sollte den rauen Byte-Stream des Laufwerksbilds enthalten und den richtigen Inhaltstyp (Content-Type: application/octet-stream) in den Anfrageköpfen angeben. Die Laufwerkshochlade-API unterstützt nur die Basis-HTTP-Authentifizierung. Es ist sehr wichtig, dass Content-Length die korrekte Größe der zu sendenden Daten enthält, denn sie bestimmt die Größe des zu erstellenden Laufwerks. Bemerkung: Wenn das hochgeladene Bild kleiner als der Mindestgröße des Laufwerks (Überprüfen der Fähigkeiten) ist, wird es automatisch beim Upload-Abschluss auf die Größe des Laufwerks angepasst. Es ist möglich, den Dateinamen in dem Pfad anzugeben, also das Bild an den Pfad /drive/upload/file_name hochzuladen, aber der Dateiname wird ignoriert. Dies macht es leichter, Tools wie curl zu verwenden, die normalerweise an einen Pfad mit dem Namen der Datei hochladen. Die zurückgegebene Antwort enthält die UUID des erstellten Laufwerks. Hier ist ein Beispiel, wie ein Laufwerksbild hochgeladen werden kann, indem Sie curl verwenden:</p><p><pre><code class="lang-">curl --request POST --user email@example.com:password \<br>--header 'Content-Type: application/octet-stream' \<br>--upload-file /path/to/file \<br>https://direct.zrh.cloudsigma.com/api/2.0/drives/upload/</code></pre></p><p> upload ein Drive-Bild mit curl:
+<pre><code class="lang-bash">curl --request POST --user email@example.com:password \<br>--header 'Content-Type: application/octet-stream' \<br>--upload-file /path/to/file \<br>https://direct.zrh.cloudsigma.com/api/2.0/drives/upload/</code></pre><br>Beachten Sie, dass die Angabe des Content-Type-Headers auch curl dazu veranlasst, den Inhalt der Anfrage nicht zu kodieren und sie als Octet-Stream zu lassen. Die Befehlsgabe gibt die UUID des hochgeladenen Bildes aus. Sie möchten möglicherweise die UUID in eine Datei schreiben, indem Sie am Ende des Befehls &gt; uploaded_drive_uuid anhängen. Standardmäßig zeigt curl keine Upload-Fortschrittsanzeige an. Sie können die –verbose (-v) Option hinzufügen, wenn Sie curl auf der Befehlszeile verwenden, um die Fortschritts- und Übertragungsgeschwindigkeit des Uploads zu drucken.</p><p>Um ein Drive-Bild herunterzuladen:<br>GET https://direct.{loc}.cloudsigma.com/api/2.0/drives/{uuid}/download/</p><p>Um ein Drive-Bild herunterzuladen, sollte ein GET-Anforderung an /drives/{uuid}/download/ gestellt werden. Beachten Sie, dass es für den Bilder-Download einen anderen Domain-Endpunkt gibt: direct.{loc}.cloudsigma.com. Der Download-Client sollte HTTP-Leitungen korrekt behandeln. Das Ergebnis ist ein Content-Type: application/octet-stream-Datei. Der Dateiname wird in der Content-Disposition-Header auf die UUID des Bildes festgelegt. Hier ist ein Beispiel, wie ein Drive-Bild mit curl heruntergeladen werden kann:
+<pre><code class="lang-bash">curl --location \<br>--remote-name --remote-header-name \<br>--user email@example.com:password \<br>https://direct.zrh.cloudsigma.com/api/2.0/drives/{uuid}/download/</code></pre></p><p> Beispiel, wie man eine Laufwerksbilddatei mithilfe von curl herunterladen kann:</p><p><pre><code class="lang-bash">curl --location \<br>--remote-name --remote-header-name \<br>--user email@beispiel.de:passwort \<br>https://direct.zrh.cloudsigma.com/api/2.0/drives/ad64ded1-be81-454a-aa14-d7809cca93eb/download/</code></pre></p><p>Die Option –location gibt curl an, um auf Umleitungen zu folgen. Der Client soll HTTP-Umleitungen folgen. Die obige Befehlslinie nutzt –remote-header-name, um die Bilddatei in eine Datei mit dem Namen wie in Content-Disposition zu speichern. Der Name in der Content-Disposition ist auf den Laufwerk-UUID festgelegt. Es ist möglich, mit der Option –output (-o) einen anderen Ausgabename/Pfad anzugeben. Achtung: –remote-header-name sollte immer mit –remote-name verwendet werden.</p>
+</main>
+</body>
+</html>

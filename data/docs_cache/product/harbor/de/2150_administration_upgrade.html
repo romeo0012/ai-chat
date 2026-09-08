@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harbor docs | Upgrade Harbor and Migrate Data</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Harbor docs | Upgrade Harbor and Migrate Data</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Dieser Leitfaden behandelt die Upgrade und Migration auf v2.15.0. Dieser Leitfaden befasst sich nur mit der Migration von v2.12.0 und späteren Versionen auf die aktuelle Version. Wenn Sie von einer älteren Version auf eine neue Version upgraden, befolgen Sie bitte die Migrationsanleitung für eine frühere Harbor-Version.</p><p>Upgrade zu Harbor v2.14.0<br>Upgrade zu Harbor v2.13.0<br>Upgrade zu Harbor v2.12.0<br>Upgrade zu Harbor v2.11.0<br>Upgrade zu Harbor v2.10.0<br>Upgrade zu Harbor v2.9.0<br>Upgrade zu Harbor v2.8.0<br>Upgrade zu Harbor v2.7.0<br>Upgrade zu Harbor v2.6.0<br>Upgrade zu Harbor v2.5.0<br>Upgrade zu Harbor v2.4.0<br>Upgrade zu Harbor v2.3.0</p><p>Wenn Sie eine Harbor-Instanz upgraden, die Sie mit Helm bereitgestellt haben, sehen Sie sich Upgrading Harbor Deployed with Helm an.</p><p>Beim Upgrade einer bestehenden Harbor-Instanz auf eine neue Version könnten Sie die Einstellungen in harbor.yml migrieren müssen. Da die Migration die Datenbankschema und die Einstellungen von harbor.yml verändern kann, sollten Sie immer Ihre Daten vor jeder Migration sichern.</p><p>Wichtige Upgrade-Hinweise</p><p>Bitte beachten Sie erneut, dass Sie Ihre Daten vor jeder Datenmigration sichern müssen.</p><p>In Harbor v2.9 verwenden Sie, wenn Sie eine externe Datenbank verwenden, sicherzustellen, dass die Version von PostgreSQL &gt;= 12 ist.</p><p>Anmelden Sie sich bei dem Harbor-Host an und, wenn er noch laufen sollte, stoppen und entfernen Sie die aktuelle Harbor-Instanz.</p><p><pre><code class="lang-">cd harbor<br>docker compose down</code></pre></p><p>Back up die aktuellen Dateien von Harbor, damit Sie, falls nötig, auf die aktuelle Version zurückrollen können.</p><p><pre><code class="lang-">mv harbor /my_backup_dir/harbor</code></pre></p><p>Back up die Datenbank, die standardmäßig im Verzeichnis /data/database liegt.</p><p> Um die aktuellen Harbor-Dateien zu sichern, damit Sie, falls nötig, auf die aktuelle Version zurückrollen können. mv harbor /my_Backup_Dir/harbor<br>Speichere die Datenbank ab, die standardmäßig in dem Verzeichnis /data/database liegt. cp -r /data/database /my_Backup_Dir/<br>Hol dir das aktuelle Harbor-Release-Paket von https://github.com/goharbor/harbor/releases und extrahiere es. Weitere Informationen findest du unter Download des Harbor-Installer. Bevor du Harbor aktualisierst, führt eine Migration durch. Das Migrationswerkzeug befindet sich in den harbor-prepare-Tools, die als Docker-Bild geliefert werden. Du kannst das Bild von docker hub ziehen. Im folgenden Befehl:</p><p>docker pull goharbor/prepare:[tag]</p><p>Alternativ kannst du, wenn du ein offline-Installationspaket verwendest, das Image-Tarball aus dem offline-Installationspaket laden. Ersetze [tag] mit der neuen Harbor-Version, z.B. v1.10.0, im folgenden Befehl:</p><p>tar zxf &lt;offline package&gt;<br>docker image load -i harbor/harbor.[version].tar.gz</p><p>Kopiere den /path/to/old/harbor.yml in harbor.yml und aktualisiere es.</p><p>docker run -it --rm -v /:/hostfs goharbor/prepare:[tag] migrate -i ${path to harbor.yml}</p><p>HINWEIS: Die Schema-Aktualisierung und die Datenmigration der Datenbank wird von core bei Start von Harbor durchgeführt. Wenn die Migration fehlschlägt, prüfe den core-Log, um zu debuggen. Im ./harbor-Verzeichnis startet das ./install.sh-Skript die neue Harbor-Instanz. Um Harbor mit Trivy zu installieren, siehe Run the Installer Script für weitere Informationen. Wenn Sie auf die vorherige Version von Harbor zurückrollen müssen, siehe Roll Back from an Upgrade.</p><p>installiere Harbor mit Trivy, siehe Run the Installer Script für weitere Informationen. Wenn Sie auf die vorherige Version von Harbor zurückrollen müssen, siehe Roll Back from an Upgrade.</p><p>Seite in diesem Abschnitt
+<hr></p><p>Upgrading Harbor Deployed with Helm<br>Roll Back from an Upgrade<br>Test Harbor Upgrade</p>
+</main>
+</body>
+</html>

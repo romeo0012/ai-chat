@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OmniFabric</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>OmniFabric</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> OmniFabric 📄 Was ist OmniFabric? 📄<br>OmniFabric ist ein robustes Cloud-Infrastruktur-Dienstleistungsangebot über CloudSigma, das skalierbare Rechenressourcen, Speicher, Netzwerk und Rechenleistung bereitstellt. Entwickelt wurde es, um die vielfältigen Bedürfnisse von Unternehmen zu erfüllen, unterstützt es flexibles Ressourcenskalierung, globale Verfügbarkeit, Unternehmens-Grade-Sicherheit und ein "nur für was du nutzt"-Modell. Nutzer profitieren von zuverlässiger Leistung, eigenständiger Unterstützung und einfacher Onboarding. CloudSigma &amp; OmniFabric Zusammenarbeit 📄<br>Die Zusammenarbeit zwischen CloudSigma und OmniFabric bietet Nutzer eine einheitliche, schnelle Erfahrung durch die direkte Integration von fortschrittlichen Datenverwaltungs- und -Speicherfähigkeiten in den CloudSigma-Dashboard. Diese Integration ermöglicht Nutzer, Daten und Analysen in einem Ort zu verwalten, ohne zwischen Plattformen zu wechseln. Nutzer profitieren auch von den effizienten Speicherlösungen von OmniFabric und der Unterstützung für große Datenmengen. Vorteile 📄<br>OmniFabric bietet eine hochwirksame, sichere und kostengünstige Infrastruktur-Modell. Durch sein "nur für was du nutzt"-Preismodell reduzieren Organisationen die vorausgehenden Infrastrukturkosten und zahlen nur für was sie verwenden—was die Ressourcenvergabe sehr wirtschaftlich macht.</p><p> Über die pay-as-you-go Preismodell reduzieren Organisationen die Kosten für vorausgehende Infrastruktur und zahlen nur für das genutzte Produkt – was die Ressourcenverteilung sehr wirtschaftlich macht. Die Plattform ist für Zuverlässigkeit konzipiert und bietet:
+<ul>
+<li>Hohe Verfügbarkeit</li>
+</ul><ul>
+<li>Tiefschwellige Netzwerkverbindungen</li>
+</ul><ul>
+<li>Hochleistungsberechnung, die die Anforderungen an die Unternehmensarbeitslasten erfüllt</li>
+</ul></p><p>Sicherheit ist auch ein Hauptanliegen, mit:
+<ul>
+<li>Verschlüsselung von Ruhend- und im Fluss-Daten</li>
+</ul><ul>
+<li>Einhaltung von Kompliance-Standards</li>
+</ul><ul>
+<li>Fortlaufende Systemaudits</li>
+</ul><ul>
+<li>Unterstützung, die zentralisiert problembehandelt und integrierte Überwachungswerkzeuge bereitstellt, bietet Ruhe und stabile tägliche Betriebsabläufe.</li>
+</ul></p><p>Anwendungsfälle 🔍<br>OmniFabric dient einer breiten Palette an Unternehmens- und technischen Anwendungsfällen:
+<ul>
+<li>Anwendungshosting: Ideal für die Hostung von Web- und mobilen Anwendungen, Backend-Diensten, APIs und Microservices – alle, die von der Plattform profitieren können, da ihre skalierbare und geographisch verteilte Infrastruktur vorteilhaft ist.</li>
+</ul><ul>
+<li>Entwicklungsumgebungen: Entwicklerteams können OmniFabric für Umgebungen wie Staging, QA und CI/CD nutzen, wobei die Einrichtungszeit minimal ist.</li>
+</ul></p><p> und verteilte Infrastruktur. Entwicklungsumgebungen<br>Entwicklungs-Teams können sich mit OmniFabric für Umgebungen zur Staging, QA und CI/CD leisten, wobei die Einrichtungszeit minimal ist. Datenbetrieb<br>Die Plattform verarbeitet großskalige Datenoperationen wie: Backups und Datenlagerung, Analytics-Pipelines, Maschinelles Lernen-Lasten und Hochleistungsrechnung.<br>Für Organisationen mit hohen Berechnungsanforderungen unterstützt OmniFabric:
+<ul>
+<li>wissenschaftliche Simulationen</li>
+</ul><ul>
+<li>AI-Modelltraining</li>
+</ul><ul>
+<li>Finanzanalyse mit robustem I/O-Durchsatz und Rechenleistung</li>
+</ul></p><p>Verträglichkeit<br>OmniFabric ist eine cloud-native Plattform, die auf MySQL basiert und Benutzern vertraute relationale Datenbank-Fähigkeiten in einem vollständig verwalteten Umfeld bietet. Als von CloudSigma direkt bereitgestellter Dienst verdeckt OmniFabric die Notwendigkeit, die Kompatibilität der Infrastruktur oder benutzerdefinierte Bereitstellungen zu verwalten. Benutzer interagieren über eine vereinfachte Schnittstelle ohne Bedarf für Containerisierung, Orchestration oder benutzerdefinierte Betriebssystem-Konfiguration – dadurch wird der Zugang vereinfacht und die Produktivität beschleunigt.</p><p>Migration<br>OmniFabric ist für glatte Übergänge von bestehenden relationalen Datenbank-Systemen in seine cloud-native Umgebung konzipiert. Unabhängig davon, ob Sie von MySQL, Oracle, SQL Server oder PostgreSQL migrieren, profitieren Sie von einem durchgeführten, sicheren Prozess. CloudSigma übernimmt die Planung der unterliegenden Ressourcen und die Konfiguration des Dienstes, was die Erfahrung für Benutzer vereinfacht.</p><p>Migration Support umfasst Werkzeuge und Dokumentation für den Konto-Einrichtungsprozess<ul>
+<li>sichere Datenübertragungskapazitäten</li>
+</ul><ul>
+<li>Rechteverwaltungshinweise</li>
+</ul><ul>
+<li>Post-Migration-Validierung</li>
+</ul></p><p>Der gesamte Prozess ist optimiert, um:
+<ul>
+<li>Datenintegrität zu gewährleisten</li>
+</ul><ul>
+<li>Ausfallzeiten zu minimieren</li>
+</ul><ul>
+<li>Kontinuität bei kritischen Geschäftssystemen sicherzustellen</li>
+</ul></p><p>📚 Bereit zum weiteren Erkunden? Tauchen Sie tiefer in die vollständige Dokumentation und technischen Details von OmniFabric ein: 🔗 Besuchen Sie OmniFabric Dokumentation</p>
+</main>
+</body>
+</html>

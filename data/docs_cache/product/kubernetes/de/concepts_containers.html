@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Containers</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Containers</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> ContainerTechnologie zur Verpackung einer Anwendung zusammen mit ihren Laufzeitabhängigkeiten. Auf dieser Seite wird diskutiert, was Containers und Container-Images sind, sowie ihre Verwendung in Operationen und Lösungsentwicklung.</p><p>Das Wort Container ist ein überladenes Wort. Jede Verwendung des Wortes prüfen, ob Ihre Zielgruppe dieselbe Definition verwendet.</p><p>Jeder Container, den Sie ausführen, ist wiederholbar; die Standardisierung durch die Einbeziehung von Abhängigkeiten bedeutet, dass Sie dasselbe Verhalten überall, wo Sie es ausführen, erhalten.</p><p>Containers koppeln Anwendungen von der unterliegenden Host-Infrastruktur ab. Dadurch wird die Bereitstellung leichter in verschiedenen Cloud- oder OS-Umgebungen.</p><p>Jeder Knoten in einem Kubernetes-Cluster führt die Containers aus, die die Pods auf diesem Knoten zugewiesen sind. Containers in einem Pod sind ko-lokalisiert und ko-geschaltet, um auf demselben Knoten zu laufen.</p><p>Container-Images<br>Ein Container-Image ist ein bereitgestelltes Softwarepaket, das alles enthält, was für die Ausführung einer Anwendung benötigt wird: das Code und jedes benötigte Laufzeitumfeld, Anwendungs- und Systembibliotheken, sowie Standardwerte für alle notwendigen Einstellungen.</p><p>Containers sollten stateless und unveränderlich sein: Sie sollten keine Änderungen an einem laufenden Container vornehmen, der bereits ausgeführt wird. Wenn Sie eine containerisierte Anwendung ändern möchten, ist das korrekte Verfahren, ein neues Bild zu erstellen, das die Änderung enthält, dann den Container neu zu erstellen, um von dem aktualisierten Bild auszufahren.</p><p>Container-Laufzeiten<br>Ein grundlegender Bestandteil, der Kubernetes dazu ermöglicht, Containers effektiv auszuführen.</p><p> Dann erstellt Sie erneut den Container, um von der aktualisierten Bildversion zu starten. Container-Laufzeiten<br>Ein grundlegender Bestandteil, der Kubernetes dazu ermöglicht, Containers effektiv zu betreiben. Es ist für die Verwaltung der Ausführung und des Lebenszyklus von Containern innerhalb des Kubernetes-Umfelds zuständig.</p><p>Kubernetes unterstützt Container-Laufzeiten wie containerd, CRI-O und jede andere Implementierung des Kubernetes-CRI (Container-Laufzeit-Schnittstelle).<br>Gewöhnlich können Sie Ihrem Cluster erlauben, den Standard-Container-Laufzeit-Typ für einen Pod auszuwählen. Wenn Sie mehr als einen Container-Laufzeit-Typ in Ihrem Cluster verwenden möchten, können Sie dem Pod den RuntimeClass zuweisen, um sicherzustellen, dass Kubernetes die Containers mit einem bestimmten Container-Laufzeit-Typ ausführt.</p><p>Sie können auch RuntimeClass verwenden, um verschiedene Pods mit demselben Container-Laufzeit-Typ, aber mit unterschiedlichen Einstellungen, auszuführen.<br>Container-Umgebung<br>Container-Lebenszyklus-Hooks<br>Container-Laufzeit-Schnittstelle (CRI)</p><p>Zurückmeldung<br>Hilfreich war diese Seite? Ja Nein<br>Vielen Dank für die Rückmeldung. Wenn Sie spezifische, beantwortbare Fragen zum Einsatz von Kubernetes haben, stellen Sie sie bitte auf Stack Overflow. Öffnen Sie ein Issue in dem GitHub-Repository, wenn Sie ein Problem melden oder eine Verbesserung vorschlagen möchten.<br>Letztes Mal geändert: 12. Oktober 2024 um 8:17 PM PST: Aktualisierung _index.md (91ad67cbfa)</p>
+</main>
+</body>
+</html>

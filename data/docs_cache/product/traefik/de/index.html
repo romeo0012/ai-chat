@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What is Traefik?¶</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>What is Traefik?¶</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Initialisierung der Suche auf GitHub Was ist Traefik?¶ Traefik ist eine open-source Anwendungs-Proxy und das Kernstück der Traefik Hub Runtime-Plattform. Wenn Sie mit Traefik für Dienstentdeckung und Routing beginnen, können Sie beliebig API-Management, API-Gateway, AI-Gateway und API-Mocking-Fähigkeiten hinzufügen, wenn Sie dies nötig haben. Für eine detaillierte Vergleich der aller Traefik-Produkte und ihrer Funktionen siehe unsere Produktmerkmale-Vergleichseite. Mit 3,3 Milliarden Downloads und über 55k Sterne auf GitHub wird Traefik weltweit in hybrid cloud, multi-cloud, lokal, und Bare-Metal-Umgebungen eingesetzt, die Kubernetes, Docker Swarm, AWS, usw. ausführen. Hier ist, wie es funktioniert—Traefik empfängt Anfragen auf Verlangen Ihres Systems, identifiziert die Komponenten, die für die Bearbeitung zuständig sind, und leitet sie sicher weiter. Es erkennt automatisch die richtige Konfiguration für Ihre Dienste durch Inspektion Ihrer Infrastruktur, um relevantes Information und den Dienst zu identifizieren, der die entsprechende Anfrage bearbeitet. Da alles automatisch erfolgt, ohne dass es zu Neustarts oder Verbindungsunterbrechungen kommt, können Sie sich auf die Entwicklung und Bereitstellung neuer Funktionen Ihres Systems konzentrieren, anstatt die Konfiguration und den Betriebszustand zu konfigurieren und zu warten. Von der Traefik Maintainer Team Wenn Sie Traefik entwickeln, ist unsere Hauptaufgabe, es einfach zu nutzen, und wir sind sicher, dass Sie es genießen werden. Personas¶ Traefik unterstützt verschiedene Anforderungen je nach Ihrem Hintergrund.</p><p> Maintainer Team<br>Bei der Entwicklung von Traefik ist unser Hauptziel, es leicht zu nutzen zu machen, und wir sind sicher, dass Sie es genießen werden. Personas¶<br>Traefik unterstützt unterschiedliche Anforderungen je nach Hintergrund. Wir halten drei Nutzerpersonen im Auge, während wir diese Dokumente erstellen und organisieren: Anfänger: Sie sind neu bei Traefik oder neu bei Umkehrproxys. Sie wollen einfache, geführte Schritte, um die Dinge aufzubauen, ohne sich zu tief in fortgeschrittene Themen einzulassen. DevOps-Ingenieure: Sie verwalten Infrastruktur oder Cluster (Docker, Kubernetes oder andere Orchestrierungssysteme). Sie integrieren Traefik in ihre Umgebung und schätzen Zuverlässigkeit, Leistung und streamline Deployments. Entwickler: Sie entwickeln und bereitstellen Anwendungen oder APIs. Sie konzentrieren sich auf die Frage, wie Sie Ihre Dienste über Traefik aussetzen, Routingregeln anwenden und sie mit Ihrem Entwicklungsworkflow integrieren. Kernkonzepte¶<br>Die Hauptkonzepte von Traefik helfen Ihnen, zu verstehen, wie Anfragen zu Ihren Diensten fließen: Eintrittspunkte sind die Netzwerk-Eintrittspunkte in Traefik. Sie definieren den Hafen, der die Pakete empfängt und ob auf TCP oder UDP zugehört wird. Router sind dafür verantwortlich, die einkommenden Anfragen an die Dienste zu verbinden, die sie verarbeiten können. Im Prozess können Router Teile von Middleware verwenden, um die Anfrage zu aktualisieren oder vor der Weiterleitung der Anfrage an den Dienst vorzunehmen. Dienste sind dafür verantwortlich, die Konfiguration zu definieren, wie man zu den tatsächlichen Diensten, die die einkommenden Anfragen schließlich verarbeiten, gelangen soll.</p><p> Aktualisieren Sie bitte die Anforderung oder führen Sie vor der Weiterleitung der Anforderung an den Dienst. Dienste sind dafür verantwortlich, festzulegen, wie man zu den tatsächlichen Diensten zugreifen soll, die die einkommenden Anforderungen letztendlich verarbeiten. Anbieter sind Infrastrukturkomponenten, unabhängig ob sie Orchestrierungssysteme, Container-Engines, Cloud-Anbieter, oder Schlüssel-Wert-Speicher sind. Das Konzept ist, dass Traefik die API-Schnittstellen der Anbieter abfragt, um Informationen über die Routing zu finden, und wenn Traefik eine Änderung erkennt, aktualisiert es die Routen dynamisch. Diese Konzepte arbeiten zusammen, um Ihren Verkehr von der Ankunft einer Anforderung bis zu Ihrer Anwendung zu verwalten.</p><p>Wie funktioniert die Dokumentation?¶<br>Navigationsleiste: Jede Hauptabschnitt konzentriert sich auf eine bestimmte Phase der Arbeit mit Traefik - Installation, Exposieren von Diensten, Beobachten, Erweitern &amp; Migrieren. Verwenden Sie die Seitenleiste, um zu der Abschnitt zu navigieren, der Ihren Bedürfnissen am besten entspricht.</p><p>Praktische Beispiele: Sie werden Code-Snippets und Konfigurationsbeispiele für verschiedene Umgebungen (YAML/TOML, Labels, &amp; Tags) sehen.</p><p>Referenz: Wenn Sie technische Details aufschauen müssen, bietet unsere Referenz-Abschnitt einen tiefen Einblick in Konfigurationsoptionen und Schlüsselbegriffe.</p><p>Info: Haben Sie eine Frage? Melden Sie sich bei unserem Community-Forum an, um zu diskutieren, zu lernen und mit der Traefik-Community zu verbinden.</p><p>Traefik OSS in der Produktion verwenden? Überlegen Sie es, sich auf unseren API-Gateway (Demo-Video ansehen) zu upgraden, um bessere Sicherheit, Kontrolle und 24/7-Unterstützung zu erhalten. Nur Unterstützung benötigen? Erkunden Sie unsere 24/7/365-Unterstützung für Traefik OSS.</p>
+</main>
+</body>
+</html>

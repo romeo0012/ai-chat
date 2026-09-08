@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Use Cases</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Use Cases</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Anwendungsfälle Hier finden Sie eine Beschreibung einiger beliebter Anwendungsfälle für Apache Kafka®. Für eine Übersicht über eine Reihe dieser Bereiche in Aktion, siehe diesen Blog-Beitrag. Messaging Kafka funktioniert gut als Ersatz für ein traditionelles Nachrichtenbroker. Nachrichtenbroker werden für eine Vielzahl von Gründen verwendet (zum Entkoppeln der Verarbeitung von Datenproduzenten, zum Buffern unverarbeiterter Nachrichten usw.). Im Vergleich zu den meisten Nachrichtensystemen bietet Kafka besseres Durchsatzvermögen, integrierte Partitionierung, Replikation und Fehlertoleranz, was es zu einem guten Lösungsmittel für großskalige Nachrichtenverarbeitungsanwendungen macht. In unserer Erfahrung werden messaging-Anwendungen oft vergleichsweise niedrige Durchsatzwerte aufweisen, aber möglicherweise eine niedrige End-to-End-Verzögerung erfordern und oft auf die starken Beständigkeitsgarantien von Kafka angewiesen sein. In diesem Bereich ist Kafka vergleichbar mit traditionellen Nachrichtensystemen wie ActiveMQ oder RabbitMQ. Website-Aktivitäts-Protokollierung Das ursprüngliche Anwendungsfall für Kafka war es, eine Benutzeraktivitäts-Protokollierungspipeline als eine Reihe von real-time-Publish-Subscribe-Feeds wiederzubauen. Das bedeutet, dass Website-Aktivitäten (Seitenaufrufe, Suchen oder andere Aktionen, die Benutzer ausführen können) in zentrale Themen veröffentlicht werden, wobei ein Thema pro Aktivitäts-Typ verwendet wird. Diese Feeds sind für die Abonnement für eine Reihe von Anwendungsfällen verfügbar, einschließlich real-time-Verarbeitung, real-time-Monitoring und Laden in Hadoop oder in offline Daten-Warehousing-Systeme für offline Verarbeitung und Berichterstattung. Aktivitäts-Protokollierung ist oft sehr hoher Volumen, da viele Aktivitäts-Nachrichten für jede Benutzer-Seitenaufforderung erstellt werden.</p><p> In den Hadoop oder offline Datenlager-Systeme für offline Verarbeitung und Berichterstattung. Die Aktivitätsnachverfolgung ist oft sehr hoher Volumen, da viele Aktivitätsnachrichten für jede Seitenansicht des Benutzers erstellt werden. Metriken Kafka wird oft für die operative Überwachungsdaten verwendet. Das betrifft die Aggregation von Statistiken aus verteilten Anwendungen, um zentralisierte Datenströme operativer Daten zu produzieren. Log Aggregation Viele Menschen verwenden Kafka als Ersatz für eine Lösung zur Log-Aggregation. Die Log-Aggregation sammelt meistens physische Log-Dateien von Servern und speichert sie in einem zentralen Ort (einem Dateiserver oder HDFS vielleicht) für die Verarbeitung. Kafka verbergt die Details der Dateien und bietet eine saubere Abstraktion von Log- oder Ereignisdaten als Strom von Nachrichten. Dadurch ist die Verarbeitung mit niedrigerer Verzögerung möglich und es wird leichter Unterstützung für mehrere Datenquellen und verteilte Datenverbrauch bieten. Im Vergleich zu log-zentrierten Systemen wie Scribe oder Flume bietet Kafka gleich gute Leistung, starke Bestandsgarantien durch die Replikation und viel niedrigeres End-to-End-Latency. Stream Processing Viele Nutzer von Kafka verarbeiten Daten in Verarbeitungspipelines, die aus mehreren Stufen bestehen, wo unbearbeitete Eingabedaten aus Kafka-Themen konsumiert und dann aggregiert, bereichert oder anders transformiert werden, um neue Themen für weitere Verarbeitung oder Nachverfolgung zu erstellen.</p><p> von Kafka-Themen aufgenommen und anschließend aggregiert, bereichert, oder anders transformiert in neue Themen für weitere Verbrauchung oder Nachbearbeitung. Als Beispiel könnte eine Verarbeitungspipeline für die Empfehlung von Nachrichtenartikeln RSS-Feeds abfragen und diese in einem "Artikel"-Thema veröffentlichen; weitere Verarbeitung könnte das Inhalt normalisieren oder doppelte Inhalte eliminieren und das gereinigte Artikelinhalt in ein neues Thema veröffentlichen; ein letztes Verarbeitungsstadium könnte versuchen, diesen Inhalt den Benutzern zu empfehlen. solche Verarbeitungspipelines erzeugen Graphen von Echtzeit-Datenströmen auf Basis der einzelnen Themen. Ab der Version 0.10.0.0 steht in Apache Kafka ein leichtgewichtiges, aber mächtiges Stream-Verarbeitungs-Library namens Kafka Streams zur Verfügung, um solche Datenverarbeitung wie oben beschrieben durchzuführen. Neben Kafka Streams stehen alternative offene Stream-Verarbeitungswerkzeuge wie Apache Storm und Apache Samza zur Verfügung. Event Sourcing Event Sourcing ist ein Stil der Anwendungsentwicklung, bei der Änderungen des Zustands als zeitlich geordnete Reihe von Aufzeichnungen geloggt werden. Kafkas Unterstützung für sehr große gespeicherte Logdaten macht es zu einem idealen Backend für eine Anwendung, die in diesem Stil erstellt wurde. Commit Log Kafka kann als Art von externem Commit-Log für ein verteiltes System dienen. Der Log hilft Daten zwischen Knoten zu replizieren und dient als Synchronisierungsmekanismus für gescheiterte Knoten, um ihre Daten wiederherzustellen. Die Log-Kompaktions-Funktion in Kafka unterstützt diese Nutzung. In dieser Nutzung ähnelt Kafka dem Apache BookKeeper-Projekt. Letzte Änderung am 22. Mai 2026: MINOR: Add 4.3 docs und javadoc (#853) (dde051e342)</p>
+</main>
+</body>
+</html>

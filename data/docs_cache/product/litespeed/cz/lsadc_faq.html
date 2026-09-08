@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Frequently Asked Questions¶</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Frequently Asked Questions¶</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Častěná otázka¶ Je to řešení, které funguje s kontrolním panelem?¶ Uživatelé cPanel mohou zkusit ZeroConf. Je možné nastavit přesměrování IP adres na ADC?¶ Ano, je to možné. Pro instrukce k nastavení naleznete si v High Availability. Má Web ADC podporu IP adres na různých rozhraních?¶ Nebylo by to problém s více sítovými rozhraními karetami (NIC), pokud to umožňuje Keepalived. Má Web ADC zodpovědnost za synchronizaci dat mezi zadavateli?¶ Ne. Synchronizace dat mezi zadavateli není zodpovědností ADC. Web ADC má zodpovědnost pouze za vlastní vnitřní stavy. Pro zadavatele budete potřebovat sdílenou úložiště pro soubory a replikaci databáze pro databáze. Pokud není požadována vysoká dostupnost databáze, můžete nastavit více webových uzlů, které se spojují s jednou databázovou serverovou. Má Web ADC schopnost rovnoměrně rozložit zatížení MySQL?¶ Ne. Web ADC je 7. vrstva rovnoměrného zatížení. Pro MySQL je používána 4. vrstva, takže Web ADC nemůže rozložit provoz na úrovni jednotlivých dotazů a nedokáže rozdělit čtení a zápis. Kde by měly být definovány pravidla pro uložení do mezipaměti: Web ADC, nebo podle webových serverů(s)?¶ LSCache je k dispozici pro použití na úrovni ADC, ale pro většinu základních nastavení nám doporučujeme povolit LSCache na úrovni zadavatele místo toho. Pokud si však vyberete povolit LSCache na úrovni ADC, musíte být opatrní, aby se nevytvořily žádné nesouhlasnosti s zadavatelem. Má Web ADC podporu pravidel mod_security?¶ Ano. ModSec engine v LiteSpeed Web ADC je podobný tomu, který máme v našem LiteSpeed Web Serveru.</p><p>WebADC podporuje načítání podadresáře na stránku z odlišného zdroje?¶ Ano. Musíte definovat kontext pro podadresář a pak mu přiřadit jiný cluster. Například example.com se rovnoměrně rozložuje mezi pěti servery. example.com/blog se načítá z odlišné IP adresy. Host headers budou potřeba zachovat, protože IP odpovídá pouze na požadavky pro example.com.</p>
+</main>
+</body>
+</html>

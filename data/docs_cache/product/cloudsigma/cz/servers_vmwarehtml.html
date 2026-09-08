@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VMWare Servers</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>VMWare Servers</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> VMWare Servery 📄 Poznámky k VMWare 📄 Integrace VMWare serveru do API CloudSigma je stále v etapu BETA. Jen částečná funkčnost je zveřejněna a definice a funkce API jsou předmětem změn. Povolené HTTP metody 📄<br>Metoda Popis Získat / seznam objektů/ů 📄 Viz RFC 2616#section-9 pro další podrobnosti o semantice HTTP metod. Seznamování 📄<br>GET /vmware_servers/ 📄 Získá seznam serverů, které má přístup ověřený uživatel. Kód stavu: 200 OK – žádný chybový stav Příklad požadavku: GET /api/2.0/vmware_servers/?limit=0 HTTP/1.1 Content-Type: application/json Authorization: Basic SWYgeW91IGZvdW5kIHRoaXMsIGhhdmUgYSBjb29raWUsIHlvdSBkZXNlcnZlIGl0IDop Jazyk: http Příklad odpovědi: HTTP/1.1 200 OK Content-Type: application/json; charset=utf-8 { "meta": { "limit": 0, "offset": 0, "total_count": 1 }, "objects": [ { "cores_per_socket": 4, "cpus": 4, "deployed": true, "description": "Test popis", "disk": [ { 'diskElementName': 'Těžké disk 1', 'diskVirtualQuantityInBytes': 17179869184 }], "enabled": true, "media": [ { 'mediaCdElementName': 'Otevřený nosič 1 CD/DVD', 'mediaCdHostResource': 'test.iso' }], "memory": 4096, "name": "testVLAN10", "nics": [ { "adapter_type": "VMXNET3", "connected": "true", "index": "0", "ip_address": "127.0.0.1", "ip_address_mode": "MANUAL", "mac_address": "00:50:56:01:00:12", "network": "Síť VLAN0", "primary": "True" }, { "adapter_type": "VMXNET3", "connected": "true", "index": "1", "ip_address": "10.10.11.", "ip_address_mode": "MANUAL", "mac_address": "00:50:56:01:00:13", "network": "Síť VLAN0", "primary": "False" }] }] }</p><p> "127.0.0.1", "ip_address_mode": "MANUÁL", "mac_address": "00:50:56:01:00:12", "network": "VLAN0 Síť", "primary": "True" }, { "adapter_type": "VMXNET3", "connected": "true", "index": "1", "ip_address": "10.10.11.1", "ip_address_mode": "MANUÁL", "mac_address": "00:50:56:01:00:14", "network": "VLAN57 - Privátní pro cloud", "primary": "True" }], "organisation": "5ce13c06-a1a4-4bf8-8ab0-64d23f455dda", "powered": true, "resource_uri": "/api/2.0/vmware_servers/d1f1bd39-124c-45c0-952c-2844a22f842e/", "uuid": "d1f1bd39-124c-45c0-952c-2844a22f842e" }] } Jazyk: javascript Schéma HTTP/1</p><p> Private na cloud", "primary": "True" }, "organisation": "5ce13c06-a1a4-4bf8-8ab0-64d23f455dda", "powered": true, "resource_uri": "/api/2.0/vmware_servers/d1f1bd39-124c-45c0-952c-2844a22f842e/", "uuid": "d1f1bd39-124c-45c0-952c-2844a22f842e" }]</p><p>Schema
+<hr></p><p>HTTP/1.1 200 OK<br>Content-Type: application/json; charset=utf-8</p><p>{<br>  "allowed_detail_http_methods": [<br>    "get"<br>  ],<br>  "allowed_list_http_methods": [<br>    "get"<br>  ],<br>  "default_format": "application/json",<br>  "default_limit": 20,<br>  "fields": {<br>    "name": {<br>      "default": null,<br>      "help_text": "Název VMWare serveru",<br>      "readonly": false,<br>      "required": false,<br>      "type": "string"<br>    },<br>    "powered": {<br>      "default": false,<br>      "help_text": "Ukazuje, zda je server zapnutý",<br>      "readonly": false,<br>      "required": true,<br>      "type": "boolean"<br>    },<br>    "deployed": {<br>      "default": false,<br>      "help_text": "Ukazuje, zda byl server nasazen",<br>      "readonly": false,<br>      "required": true,<br>      "type": "boolean"<br>    },<br>    "description": {<br>      "default": null,<br>      "help_text": "Popis serveru",<br>      "readonly": false,<br>      "required": true,<br>      "type": "string"<br>    },<br>    "cpus": {<br>      "default": null,<br>      "help_text": "Počet CPU přidělených serveru",<br>      "readonly": false,<br>      "required": true,<br>      "type": "integer"<br>    },<br>    "cores_per_socket": {<br>      "default": null,<br>      "help_text": "Počet jader na CPU socketu",<br>      "readonly": false,<br>      "required": true,<br>      "type": "integer"<br>    },<br>    "memory": {<br>      "default": null,<br>      "help_text": "Množství paměti v MB",<br>      "readonly": false,<br>      "required": true,<br>      "type": "integer"<br>    },<br>    "enabled": {<br>      "default": false,<br>      "help_text": "Ukazuje, zda je server povolen",<br>      "readonly": false,<br>      "required": true,<br>      "type": "boolean"<br>    },<br>    "organisation": {<br>      "default": null,<br>      "help_text": "UUID rodičovské organizace serveru",<br>      "readonly": false,<br>      "required": true,<br>      "type": "string"<br>    },<br>    "nics": {<br>      "default": null,<br>      "fields": {<br>        "index": {<br>          "default": null,<br>          "help_text": "Index sítové adaptéry",<br>          "readonly": false,<br>          "required": false,<br>          "type": "string"<br>        },<br>        "connected": {<br>          "default": null,<br>          "help_text": "Indikátor, zda je sítová adaptér připojen",<br>          "readonly": false,<br>          "required": false,<br>          "type": "boolean"<br>        }<br>      }<br>    }<br>  }<br>}</p>
+</main>
+</body>
+</html>

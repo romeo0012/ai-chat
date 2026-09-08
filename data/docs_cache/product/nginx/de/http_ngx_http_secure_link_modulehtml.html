@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module ngx_http_secure_link_module</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Module ngx_http_secure_link_module</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Modul ngx_http_secure_link_module (Version 0.7.18) dient zur Überprüfung der Authentizität von angeforderten Links, zur Sicherung von Ressourcen gegen unautorisierte Zugriffe und zur Begrenzung der Link-Lebensdauer. Die Authentizität eines angeforderten Links wird durch Vergleich des Checksum-Werts, der in einer Anfrage übermittelt wird, mit dem berechneten Wert für die Anfrage überprüft. Wenn ein Link eine begrenzte Lebensdauer hat und die Zeit abgelaufen ist, wird der Link als veraltet betrachtet. Der Status dieser Überprüfungen wird im Variablenwert $secure_link verfügbar gemacht. Das Modul bietet zwei alternative Betriebsmodi an. Der erste Modus wird durch die secure_link_secret Direktive aktiviert und dient zur Überprüfung der Authentizität von angeforderten Links sowie zur Sicherung von Ressourcen gegen unautorisierte Zugriffe. Der zweite Modus (Version 0.8.50) wird durch die secure_link und secure_link_md5 Direktiven aktiviert und dient auch zur Begrenzung der Lebensdauer von Links. Dieses Modul wird standardmäßig nicht gebaut, es muss mit dem --with-http_secure_link_module Konfigurationsparameter aktiviert werden.</p><p>Syntax der Direktiven:<br>secure_link expression;<br>Standard: —<br>Kontext: http, server, location</p><p>Definiert eine Zeichenkette aus der der Checksum-Wert und die Lebensdauer eines Links extrahiert werden. In einer Zeichenkette verwendete Variablen sind meist mit einer Anfrage verbunden; siehe Beispiel unten. Der extrahierte Checksum-Wert aus der Zeichenkette wird mit dem MD5-Hash-Wert der Zeichenkette definiert durch die secure_link_md5 Direktive verglichen.</p><p>Beispiel:<br>location /my_resource {<br>secure_link $secure_link_secret;<br>}</p><p>Diese Module ist nicht standardmäßig erstellt, es muss mit dem --with-http_secure_link_module Konfigurationsparameter aktiviert werden.</p><p> Wert, der aus der Zeichenkette extrahiert wird, wird mit dem MD5-Hashwert des Ausdrucks, wie von der Direktive secure_link_md5 definiert, verglichen. Wenn die Prüfsummen unterschiedlich sind, wird die Variable $secure_link auf leere Zeichenkette gesetzt. Wenn die Prüfsummen übereinstimmen, wird der Linkzeitraum überprüft. Wenn der Link ein begrenzter Zeitraum hat und die Zeit abgelaufen ist, wird die Variable $secure_link auf "0" gesetzt. Andernfalls wird sie auf "1" gesetzt. Der MD5-Hashwert, der in einer Anfrage übergeben wird, wird in base64url-Kodierung kodiert. Wenn der Link einen begrenzten Zeitraum hat, wird die Ablaufzeit in Sekunden seit Epoch (Thu, 01 Jan 1970 00:00:00 GMT) festgelegt. Der Wert wird in der Ausdrucksauswahl nach dem MD5-Hash angegeben und durch eine Komma getrennt. Der Ablaufzeitwert, der in einer Anfrage übergeben wird, ist über die Variable $secure_link_expires für die Verwendung in der secure_link_md5-Direktive verfügbar. Wenn die Ablaufzeit nicht angegeben ist, hat der Link unbegrenzten Zeitraum. Syntax: secure_link_md5 Ausdruck; Standard: — Kontext: http, server, location Definiert einen Ausdruck, für den der MD5-Hashwert berechnet und mit dem Wert aus einer Anfrage verglichen wird. Der Ausdruck soll den sicheren Teil eines Links (Ressource) und ein geheimes Zutat enthalten. Wenn der Link einen begrenzten Zeitraum hat, soll der Ausdruck auch die Variable $secure_link_expires enthalten. Um unautorisierten Zugriff zu verhindern, kann der Ausdruck Informationen über den Client enthalten, wie seine Adresse und Browserversion.</p><p>Syntax:
+<pre><code class="lang-">secure_link_md5 expression;</code></pre><br>Standard:
+<pre><code class="lang-">—</code></pre><br>Kontext:
+<pre><code class="lang-">http, server, location</code></pre><br>Definiert einen Ausdruck, für den der MD5-Hashwert berechnet und mit dem Wert aus einer Anfrage verglichen wird. Der Ausdruck soll den sicheren Teil eines Links (Ressource) und ein geheimes Zutat enthalten. Wenn der Link einen begrenzten Zeitraum hat, soll der Ausdruck auch die Variable $secure_link_expires enthalten. Um unautorisierten Zugriff zu verhindern, kann der Ausdruck Informationen über den Client enthalten, wie seine Adresse und Browserversion.</p><p> Um unautorisierten Zugriff zu verhindern, kann die Ausdrucksweise Informationen über den Client enthalten, wie seine Adresse und der Browser-Version. Beispiel: location /s/ { secure_link $arg_md5,$arg_expires; secure_link_md5 "$secure_link_expires$uri$remote_addr secret"; if ($secure_link = "") { return 403; } if ($secure_link = "0") { return 410; } ... } Die „/s/link?md5=_e4Nc3iduzkWRm01TBBNYw&amp;expires=2147483647“-Verknüpfung beschränkt den Zugriff auf „/s/link“ für den Client mit der IP-Adresse 127.0.0.1. Die Verknüpfung hat zudem einen begrenzten Lebenszeitraum bis zum 19. Januar 2038 (GMT). Auf UNIX kann der Wert des md5-Anfragearguments wie folgt abgerufen werden: echo -n '2147483647/s/link127.0.0.1 secret' | \ openssl md5 -binary | openssl base64 | tr +/ -_ | tr -d = Syntax: secure_link_secret word; Default: — Kontext: location Definiert ein geheimes Wort, das zur Überprüfung der Authentizität der angeforderten Verknüpfungen verwendet wird. Die vollständige URI einer angeforderten Verknüpfung sieht so aus: /prefix/hash/link, wobei hash ein hexadezimaler Wert ist, der aus der Konkatenation der Verknüpfung und des geheimen Wortes berechnet wurde, und prefix ein beliebiger Zeichenkette ohne Schrägstriche ist. Wenn die angeforderten Verknüpfung die Authentizität überprüft, wird die $secure_link-Variable auf die aus der Anfrage-URI extrahierte Verknüpfung festgelegt. Andernfalls wird die $secure_link-Variable auf einen leeren Zeichenstring festgelegt.</p><p>(Technische Terme, Codeblöcke, Befehle, Dateipfade und URLs wurden unverändert übernommen.)</p><p> Das folgende Element ist auf den aus der Anforderungs-URI extrahierten Link festgelegt. Andernfalls wird der Wert der Variable $secure_link auf eine leere Zeichenkette festgelegt. Beispiel:</p><p><pre><code class="lang-">location /p/ {<br>    secure_link_secret secret;<br>    if ($secure_link = "") {<br>        return 403;<br>    }<br>    rewrite ^ /secure/$secure_link;<br>}<br>location /secure/ {<br>    internal;<br>}</code></pre></p><p>Eine Anfrage von “/p/5e814704a28d9bc1914ff19fa0c4a00a/link” wird intern umgeleitet auf “/secure/link”. Auf UNIX kann der Hash-Wert für dieses Beispiel wie folgt berechnet werden:</p><p><pre><code class="lang-">echo -n 'linksecret' | openssl md5 -hex</code></pre></p><p>Embedded Variablen
+<hr></p><p>$secure_link<br>Der Wert einer Link-Überprüfung. Der genaue Wert hängt von der ausgewählten Betriebsmodus ab.</p><p>$secure_link_expires<br>Die Lebensdauer eines in einer Anfrage übermittelten Links; sollte nur im secure_link_md5-Directive verwendet werden.</p>
+</main>
+</body>
+</html>

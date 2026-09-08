@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Binding to Addresses and Ports</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Binding to Addresses and Ports</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Připojování k adresám a portům dostupným<br>Dostupné jazyky: de | en | fr | ja | ko | pt-br | tr<br>Konfigurace Apache HTTP Server k poslechu na určitých adresách a portech. Základní informace<br>Změna konfigurace Listen při restartu<br>Zvláštní věci s IPv6<br>Určení protokolu pomocí Listen<br>Jak to funguje s Virtual Hosts<br>Viz takéVirtual HostsDNS Problémy Základní informace ¶<br>Související ModulySouvisející Direktivy<br>scorempm_common&lt;VirtualHost&gt;Listen<br>Při spuštění httpd se vázne na určitý port a adresu na místním počítači a čeká na příchozí požadavky. Výchozí nastavení je, že poslouchá na všechny adresy na počítači. Však může být nutné mu říct, aby poslouchal na určité porty, nebo pouze na vybrané adresy, nebo kombinaci obou. Toto je často kombinováno s funkcí Virtual Host, která určuje, jak httpd odpovídá na různé IP adresy, hostnázvy a porty. Direktiva Listen říká serveru, aby přijímal pouze požadavky na určený port(y) nebo kombinace adres a portů. Pokud v direktivě Listen je zadán pouze číslo portu, server poslouchá daný port na všech interfasech. Pokud je zadána i IP adresa spolu s portem, server poslouchá daný port a rozhraní. Můžou být použity více direktiv Listen k určení několika adres a portů, které server má poslouchat. Server odpoví na požadavky z libovolných zadaných adres a portů.</p><p> Překlad:</p><p>Sluchátka a porty, na kterých server poslouchat. Server odpoví na žádosti z uvedených adres a portů. Například, aby server přijímal spojení na oba port 80 a port 8000, na všech rozhraních, použijte: Listen 80 Listen 8000 Chcete-li server přijímat spojení na port 80 pro jedno rozhraní, a port 8000 na jiném, použijte Listen 192.0.2.1:80 Listen 192.0.2.5:8000 Adresy IPv6 musí být obaleny do kruhových závorek, jako v následujícím příkladu: Listen [2001:db8::a00:20ff:fea7:ccea]:80 Překrývající se příkazy Listen vede k těžké chybě, která zabrání serveru spuštění. (48) Adresa již v užívání: make_sock: nelze se vázat na adresu [::]:80 Viz diskuzi v wiki pro další tipy pro řešení potíží. Změna konfigurace Listen při restartu ¶ Při restartování httpd je nutné udělat zvláštní pozornost pro změny v příkazech Listen. Během restartu httpd zachovává porty vázané (jako v původní konfiguraci) k tomu, aby se vygenerovaly chybové zprávy "Connection refused" pro každé nové pokusy o připojení k serveru. Pokud se provádí změna sadu příkazů Listen používaných, která se střetává s původní konfigurací, konfigurace selže a server ukončí. Například, změna z následující konfigurace: Listen 127.0.0.1:80 může selhat, protože vázání na port 80 na všech rozhraních konfliktuje s vázáním na port 80 pouze na 127.0.0.1.</p><p> Následující může selhat, protože vazba na port 80 přes všechny adresy konfliktuje s vazbou na port 80 pouze na 127.0.0.1. Poslouchat 80<br>Chcete-li takovéto konfigurační změny mít účinnost, je nutné zastavit a poté spustit server.<br>Zvláštní považování pro IPv6 ¶<br>Růstající počet platform se implementací IPv6 a APR podporuje IPv6 na většině těchto platform, což umožňuje httpd přiřadit IPv6 sockety a zpracovat požadavky odeslané přes IPv6. Jednou z komplikujících faktorů pro správce httpd je, zda IPv6 socket může zpracovávat IPv4 spojení a IPv6 spojení. Zpracování IPv4 spojení pomocí IPv6 socketu používá IPv4-mapované IPv6 adresy, které jsou povoleny výchozími nastaveními na většině platform, ale jsou zakázány výchozími nastaveními na FreeBSD, NetBSD a OpenBSD, aby se shodovaly se systémovou politikou těchto platform. Na systémech, kde je to zakázáno výchozími nastaveními, může speciální parametr konfigurace změnit chování httpd pro tyto platformy. Na druhé straně na některých platformách, jako je Linux a Tru64, je možné zpracovávat obě IPv6 a IPv4 pouze pomocí mapovaných adres. Pokud chcete, aby httpd zpracovával IPv4 a IPv6 spojení s minimálním počtem socketů, což vyžaduje použití IPv4-mapovaných IPv6 adres, zadejte možnost konfigurace --enable-v4-mapped. --enable-v4-mapped je výchozí nastavení na všech platformách kromě FreeBSD, NetBSD a OpenBSD, takže to je pravděpodobně, jak byl zbudován vaši httpd.</p><p>Poznámka: Tento text obsahuje technické termíny, kódy, příkazy, cesty souborů a adresy URL, které by měly být přesně zachovány.</p><p> Tento text je výchozí na všech platformách kromě FreeBSD, NetBSD a OpenBSD, takže to je pravděpodobně, jak byl sestaven vaši httpd. Pokud chcete, aby httpd přijímal pouze IPv4 spojení, bez ohledu na to, co podporuje vaše platforma a APR, určete IPv4 adresu na všech příkazech Listen, jako v následujících příkladech: Listen 0.0.0.0:80 Listen 192.0.2.1:80 Pokud podporuje vaše platforma to a chcete, aby httpd přijímal IPv4 a IPv6 spojení na oddělených socketech (tedy aby se vyloučily IPv4-mapované adresy), určete konfigurační možnost --disable-v4-mapped. --disable-v4-mapped je výchozí na FreeBSD, NetBSD a OpenBSD. Určení protokolu s Listen ¶ Volitelný druhý argument protokolu Listen není požadován pro většinu konfigurací. Pokud není určen, je výchozí https pro port 443 a http pro všechny ostatní porty. Protokol se používá k určení, která modula má zpracovat požadavek, a k aplikování optimizací protokolu specifických pro AcceptFilter direktivu. Potřebujete nastavit protokol pouze tehdy, pokud běžíte na nestandardních portech. Například běh https stránky na portu 8443: Listen 192.170.2.1:8443 https Jak to funguje s Virtual Hosts ¶ Direktiva Listen neimplementuje Virtual Hosts - slouží pouze k tomu, aby hlavní server věděl, na které adresy a porty poslouchat. Pokud nejsou použity žádné &lt;VirtualHost&gt; direktivy, chovat se bude server stejně k všem přijatým požadavkům.</p><p>poslouchat. Pokud nejsou použity žádné &lt;VirtualHost&gt; direktivy, chovat se bude server stejně k všem přijatým požadavkům. Však můžete použít &lt;VirtualHost&gt; k určení jiného chování pro jednu nebo více adres nebo portů. Chcete-li implementovat VirtualHost, musí se nejprve server informovat o adrese a portu, který má použít. Poté by měl být vytvořen &lt;VirtualHost&gt; oddíl pro určenou adresu a port, aby se nastavilo chování tohoto virtual hosta. Pozor, pokud je &lt;VirtualHost&gt; nastaven pro adresu a port, na který server neposlouchá, není dostupný.</p>
+</main>
+</body>
+</html>

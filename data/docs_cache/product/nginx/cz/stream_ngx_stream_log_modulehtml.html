@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module ngx_stream_log_module</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Module ngx_stream_log_module</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Modul ngx_stream_log_module (1.11.4) zapsí seznam záznamů relací v uvedeném formátu.</p><p>Konfigurace příkladu log_format basic '$remote_addr [$time_local] ' '$protocol $status $bytes_sent $bytes_received ' '$session_time'; access_log /spool/logs/nginx-access.log basic buffer=32k;</p><p>Syntax: access_log cesta formát [buffer=velikost] [gzip[=úroveň]] [flush=čas];access_log off; Výchozí: access_log off; Kontext: stream, server Nastaví cestu, formát a konfiguraci pro buffered log write. Mohou být na stejné úrovni konfigurace určeny více logů. Konfigurace záznamu do syslog lze nastavit zadáním prefixu "syslog:" v prvním parametru. Speciální hodnota off zruší všechny příkazy access_log na aktuální úrovni. Pokud je použit buď buffer nebo gzip parameter, pak se zapisování do logu provede buffered. Velikost bufferu nemá být větší než velikost atomického zápisu do souboru na disku. Pro FreeBSD je velikost neomezená. Když je povoleno buffering, data se zapíšou do souboru:
+<ul>
+<li>Pokud další řádek záznamu relace nevejde do bufferu</li>
+</ul><ul>
+<li>Pokud datová v bufferu je stará více než určené časem flush parameter</li>
+</ul><ul>
+<li>Když pracovní proces je při otevírání logovacích souborů nebo při zavírání</li>
+</ul></p><p>Pokud je použit gzip parameter, pak se datová v bufferu před zapisováním do souboru zkomprimuje. Úroveň komprese může být nastavena mezi 1 (nejrychlejší, nejméně komprese) a 9 (nejpomalejší, nejlepší komprese).</p><p> Písemné zapisování do souboru. Kompresní úroveň může být nastavena mezi 1 (nejrychlejší, nejméně komprese) a 9 (nejpomalejší, nejlepší komprese). Výchozí hodnota je bufferový rozsah 64K bajtů a kompresní úroveň je nastavena na 1. Protože data jsou komprimována v atomárních blocích, může se logový soubor zdekomprimovat nebo číst pomocí příkazu "zcat" v libovolném čase. Příklad: access_log /cesta/k/log.gz basic gzip flush=5m; Pro komprese gzip je nutné, aby nginx byl sestaven s knihovnou zlib. Cesta k souboru může obsahovat proměnné, ale takové logy mají některé omezení: uživatel, jehož přihlašovací údaje jsou používány procesy pracovníky, musí mít oprávnění vytvářet soubory v adresáři s takovými logy; bufferované zápisy nefungují; soubor je otevřen a zavřen pro každý zápis logu. Nicméně, protože dezkrétery často používaných souborů mohou být uloženy v cache, může se zápis do starého souboru pokračovat v čase určeném parametrem valid directivy open_log_file_cache.</p><p>Parametr if umožňuje kondiční záznam. Záznam se nezaznamená, pokud podmínka hodnotí "0" nebo prázdnou řetězcovou proměnnou. Syntax: log_format name [escape=default|json|none] string ...; Výchozí hodnota: — Kontext: stream Určuje formát logu, například: log_format proxy '$remote_addr [$time_local] ' '$protocol $status $bytes_sent $bytes_received ' '$session_time "$upstream_addr" ' '"$upstream_bytes_sent" "$upstream_bytes_received" "$upstream_connect_time"'; Parametr escape (1.11)</p><p> text_czech:<br>log_format proxy '$remote_addr [$time_local] ' '$protocol $status $bytes_sent $bytes_received ' '$session_time "$upstream_addr" ' '"$upstream_bytes_sent" "$upstream_bytes_received" "$upstream_connect_time"'; V parametru escape (1.11.8) lze nastavit zabezpečení json nebo výchozích znaků v proměnných, výchozí zabezpečení se používá. Parametr none (1.13.10) zakáže zabezpečení. Pro výchozí zabezpečení se znaky “", “\” a ostatními znaky s hodnotami menšími než 32 nebo většími než 126 zabezpečují jako “\xXX”. Pokud není hodnota proměnné nalezena, bude zaznamenán hyphen (“-”). Pro zabezpečení JSON, budou všechny znaky, které nejsou povoleny v řetězcích JSON, zabezpečeny: znaky “” a “\” budou zabezpečeny jako “\"” a “\\”, znaky s hodnotami menšími než 32 budou zabezpečeny jako “\n”, “\r”, “\t”, “\b”, “\f”, nebo “\u00XX”. Syntaxe: open_log_file_cache max=N [inactive=time] [min_uses=N] [valid=time];open_log_file_cache off; Výchozí: open_log_file_cache off; Kontext: stream, server Definuje kachu, která ukládá popisovače souborů často používaných logů, jejichž názvy obsahují proměnné.</p><p>off; Kontext: stream, server Definuje kachu, která ukládá popisovače souborů často používaných logů, jejichž názvy obsahují proměnné. Tato direktiva má následující parametry: max nastavuje maximální počet popisovačů v kachu; pokud se kacha naplní, nejméně často používané (LRU) popisovače budou zavřeny; inactive nastavuje čas po uplynutí kterého bude zavřen zachovaný popisovač, pokud se za tento čas nedostalo přístupu; výchozí hodnota je 10 sekund min_uses nastavuje minimální počet použití souboru během času definovaného parametrem inactive, aby se popisovač zůstal v kachu otevřen; výchozí hodnota je 1 valid nastavuje čas po uplynutí kterého by měl být kontrolován, zda soubor stále existuje s tímto jménem; výchozí hodnota je 60 sekund off zakáže kachování Příklad použití: open_log_file_cache max=1000 inactive=20s valid=1m min_uses=2;</p>
+</main>
+</body>
+</html>

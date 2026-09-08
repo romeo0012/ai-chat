@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Upgrading to 2.4 from 2.2</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Upgrading to 2.4 from 2.2</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Aufwerten auf 2.4 von 2.2 Verfügbare Sprachen: en | fr | pt-br</p><p>Um den Upgrade zu unterstützen, halten wir eine Dokumentation bei, die wichtige Informationen für bestehende Apache HTTP Server-Nutzer enthält. Diese sollten kurze Notizen sein, und Sie sollten mehr Informationen in entweder dem New Features Dokument oder im src/CHANGES-Datei finden. Anwendungs- und Modulentwickler können eine Zusammenfassung der API-Änderungen in der API-Updates-Übersicht finden. Diese Dokumentation beschreibt Änderungen im Verhalten des Servers, die dazu führen können, dass Sie Ihre Konfiguration oder die Nutzung des Servers ändern müssen, um 2.4 wie bisher mit 2.2 zu nutzen. Um die neuen Funktionen in 2.4 nutzen zu können, siehe das New Features Dokument. Diese Dokumentation beschreibt nur die Änderungen von 2.2 auf 2.4. Wenn Sie von Version 2.0 aufwerten, sollten Sie auch das Upgrading-Dokument von 2.0 auf 2.2 konsultieren.</p><p>Compile-Time Configuration Changes
+<hr></p><p>Der Build-Prozess ist sehr ähnlich dem, der in Version 2.2 verwendet wurde. Ihre alte configure-Befehlszeile (wie sie in build/config.nice in der installierten Server-Verzeichnis zu finden ist) kann in den meisten Fällen verwendet werden. Es gibt einige Änderungen in den Standardeinstellungen. Einige Details der Änderungen: Diese Module wurden entfernt: mod_authn_default, mod_authz_default, mod_mem_cache. Wenn Sie mod_mem_cache in 2.2 verwendet haben, sollten Sie diese Änderungen beachten.</p><p>Run-Time Configuration Changes
+<hr></p><p>Die Laufzeitkonfiguration hat sich in einigen Punkten geändert. Bitte beachten Sie die folgenden Punkte:
+<ul>
+<li>Die neue Option "ServerTokens Prod" ist standardmäßig aktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerSignature" ist standardmäßig deaktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerTokens OS" ist standardmäßig deaktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerSignature" ist standardmäßig deaktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerTokens ProductOnly" ist standardmäßig deaktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerTokens Full" ist standardmäßig deaktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerTokens Major" ist standardmäßig aktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerTokens Minor" ist standardmäßig deaktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerTokens OS Extended" ist standardmäßig deaktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerTokens ProductOnly Extended" ist standardmäßig deaktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerTokens Major Extended" ist standardmäßig deaktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerTokens Minor Extended" ist standardmäßig deaktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerTokens OS Short" ist standardmäßig deaktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerTokens ProductOnly Short" ist standardmäßig deaktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerTokens Major Short" ist standardmäßig deaktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerTokens Minor Short" ist standardmäßig deaktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerTokens OS Extended Short" ist standardmäßig deaktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerTokens ProductOnly Extended Short" ist standardmäßig deaktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerTokens Major Extended Short" ist standardmäßig deaktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerTokens Minor Extended Short" ist standardmäßig deaktiviert.</li>
+</ul></p><p>Misc Changes
+<hr>
+<ul>
+<li>Die neue Option "ServerTokens" ist standardmäßig deaktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerSignature" ist standardmäßig deaktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerTokens OS" ist standardmäßig deaktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerSignature" ist standardmäßig deaktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerTokens ProductOnly" ist standardmäßig deaktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerTokens Full" ist standardmäßig deaktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerTokens Major" ist standardmäßig aktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerTokens Minor" ist standardmäßig deaktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerTokens OS Extended" ist standardmäßig deaktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerTokens ProductOnly Extended" ist standardmäßig deaktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerTokens Major Extended" ist standardmäßig deaktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerTokens Minor Extended" ist standardmäßig deaktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerTokens OS Short" ist standardmäßig deaktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerTokens ProductOnly Short" ist standardmäßig deaktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerTokens Major Short" ist standardmäßig deaktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerTokens Minor Short" ist standardmäßig deaktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerTokens OS Extended Short" ist standardmäßig deaktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerTokens ProductOnly Extended Short" ist standardmäßig deaktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerTokens Major Extended Short" ist standardmäßig deaktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerTokens Minor Extended Short" ist standardmäßig deaktiviert.</li>
+</ul></p><p>Third Party Modules
+<hr>
+<ul>
+<li>Die Module mod\_authn\_default, mod\_authz\_default und mod\_mem\_cache wurden entfernt.</li>
+</ul></p><p>Common problems when upgrading
+<hr>
+<ul>
+<li>Die neue Option "ServerTokens" ist standardmäßig deaktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerSignature" ist standardmäßig deaktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerTokens OS" ist standardmäßig deaktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerSignature" ist standardmäßig deaktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerTokens ProductOnly" ist standardmäßig deaktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerTokens Full" ist standardmäßig deaktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerTokens Major" ist standardmäßig aktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerTokens Minor" ist standardmäßig deaktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerTokens OS Extended" ist standardmäßig deaktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerTokens ProductOnly Extended" ist standardmäßig deaktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerTokens Major Extended" ist standardmäßig deaktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerTokens Minor Extended" ist standardmäßig deaktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerTokens OS Short" ist standardmäßig deaktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerTokens ProductOnly Short" ist standardmäßig deaktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerTokens Major Short" ist standardmäßig deaktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerTokens Minor Short" ist standardmäßig deaktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerTokens OS Extended Short" ist standardmäßig deaktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerTokens ProductOnly Extended Short" ist standardmäßig deaktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerTokens Major Extended Short" ist standardmäßig deaktiviert.</li>
+</ul><ul>
+<li>Die neue Option "ServerTokens Minor Extended Short" ist standardmäßig deaktiviert.</li>
+</ul></p><p>Siehe auch
+<hr>
+<ul>
+<li>Überblick über neue Funktionen in Apache HTTP Server 2.4</li>
+</ul></p><p> Einstellungen. Einige Details der Änderungen: Diese Module wurden entfernt: mod_authn_default, mod_authz_default, mod_mem_cache. Wenn Sie mod_mem_cache in der Version 2.2 verwendeten, sehen Sie sich mod_cache_disk in der Version 2.4 an. Alle Lastverteilungskonzepte wurden in individuelle, selbstständige mod_proxy Untermodule verschoben, z.B. mod_lbmethod_bybusyness. Sie könnten möglicherweise die Erstellung und Laden von jedem dieser Modulen, die Ihre Konfiguration verwendet, durchführen. Die Unterstützung für Plattformen wurde entfernt für BeOS, TPF und auch ältere Plattformen wie A/UX, Next und Tandem. Diese wurden angenommen, dass sie defekt waren. configure: dynamische Module (DSO) werden standardmäßig erstellt configure: Standardmäßig werden nur ein Grundsatz-Satz von Modulen geladen. Die anderen LoadModule-Direktiven sind in der Konfigurationsdatei kommentiert. configure: der "meiste" Modul-Satz wird standardmäßig erstellt configure: der "reallyall" Modul-Satz fügt Entwickler-Module zum "all" Satz hinzu Run-Time-Konfigurationsänderungen ¶ Es wurden bedeutende Änderungen an der Autorisierungskonfiguration sowie weitere kleine Konfigurationsänderungen vorgenommen, die möglicherweise Änderungen an Ihren 2.2 Konfigurationsdateien vor der Verwendung für 2.4 erfordern. Autorisierung Jede Konfigurationsdatei, die Autorisierung verwendet, wird wahrscheinlich Änderungen benötigen. Sie sollten sich die Authentifizierung, Autorisierung und Zugriffskontrolle Howto ansehen, insbesondere den Abschnitt Jenseits von einfacher Autorisierung, der die neuen Mechanismen für die Steuerung der Anwendungsreihenfolge der Autorisierungsrichtlinien erklärt.</p><p> Abschnitt Jenseits der nur Autorisierung, die neue Mechanismen erklärt, wie die Reihenfolge der Autorisierungsrichtlinien geregelt wird. Richtlinien, die steuern, wie Autorisierungsmodule reagieren, wenn sie sich nicht mit dem authentifizierten Benutzer übereinstimmen, wurden entfernt: Das umfasst AuthzLDAPAuthoritative, AuthzDBDAuthoritative, AuthzDBMAuthoritative, AuthzGroupFileAuthoritative, AuthzUserAuthoritative und AuthzOwnerAuthoritative. Diese Richtlinien wurden durch die ausdrucksstärkeren RequireAny, RequireNone und RequireAll ersetzt. Wenn Sie mod_authz_dbm verwenden, müssen Sie Ihre Konfiguration anpassen, um Require dbm-group ... anstelle von Require group ... zu verwenden. Zugriffssteuerung In 2.2 wurde der Zugriffssteuerung aufgrund des Client-Hostnamens, der IP-Adresse und anderen Eigenschaften der Clientanfragen durch die Richtlinien Order, Allow, Deny und Satisfy vorgenommen. In 2.4 erfolgt die solche Zugriffssteuerung auf dieselbe Weise wie andere Autorisierungsprüfungen, indem das neue Modul mod_authz_host verwendet wird. Die alten Zugriffssteuerungs-Idiome sollten durch die neuen Autorisierungsmechanismen ersetzt werden, obwohl für Kompatibilität mit alten Konfigurationen das neue Modul mod_access_compat bereitgestellt wird. Mischung alter und neuer Richtlinien Mischen alter Richtlinien wie Order, Allow oder Deny mit neuen wie Require ist technisch möglich, aber nicht empfohlen. mod_access_compat wurde geschaffen, um Konfigurationen zu unterstützen, die nur alte Richtlinien enthalten, um die 2.4-Upgrade zu erleichtern. Bitte beachten Sie die Beispiele unten, um sich besser über die möglichen Probleme zu informieren.</p><p>Beispiel:</p><p><pre><code class="lang-">&amp;lt;Location /sensitive&amp;gt;<br>    Order Deny,Allow<br>    Deny from all<br>    Allow from 192.168.1.0/24<br>&amp;lt;/Location&amp;gt;</code></pre></p><p>In 2.4 muss dieses Beispiel wie folgt geändert werden:</p><p><pre><code class="lang-">&amp;lt;Location /sensitive&amp;gt;<br>    Require ip 192.168.1.0/24<br>&amp;lt;/Location&amp;gt;</code></pre></p><p>In 2.4 wird die Zugriffssteuerung wie andere Autorisierungsprüfungen durch das neue Modul mod_authz_host vorgenommen. Die alten Zugriffssteuerungs-Idiome sollten durch die neuen Autorisierungsmechanismen ersetzt werden, obwohl für Kompatibilität mit alten Konfigurationen das neue Modul mod_access_compat bereitgestellt wird. Mischen alter Richtlinien wie Order, Allow oder Deny mit neuen wie Require ist technisch möglich, aber nicht empfohlen. mod_access_compat wurde geschaffen, um Konfigurationen zu unterstützen, die nur alte Richtlinien enthalten, um die 2.4-Upgrade zu erleichtern. Bitte beachten Sie die Beispiele unten, um sich besser über die möglichen Probleme zu informieren.</p><p> Um die 2.4-Upgrade zu erleichtern. Bitte überprüfe die untenstehenden Beispiele, um sich ein besseres Bild von möglichen Problemen zu machen. Hier sind einige Beispiele für alte und neue Vorgehensweisen zur selben Zugriffskontrolle. In diesem Beispiel gibt es keine Authentifizierung und alle Anfragen werden abgelehnt.</p><p>2.2-Konfiguration:<br>Order deny,allow<br>Deny from all</p><p>2.4-Konfiguration:<br>Require all denied</p><p>In diesem Beispiel gibt es keine Authentifizierung und alle Anfragen werden zugelassen.</p><p>2.2-Konfiguration:<br>Order allow,deny<br>Allow from all</p><p>2.4-Konfiguration:<br>Require all granted</p><p>Im folgenden Beispiel gibt es keine Authentifizierung und alle Hosts im Beispiel.org-Domain sind zugelassen; alle anderen Hosts werden abgelehnt.</p><p>2.2-Konfiguration:<br>Order Deny,Allow<br>Deny from all<br>Allow from example.org</p><p>2.4-Konfiguration:<br>Require host example.org</p><p>Im folgenden Beispiel kommen alte und neue Direktiven zusammen, was zu erwartungsgemäßen Ergebnissen führt. Mischung alte und neue Direktiven: NICHT WIE ERWUNSCHT</p><p>DocumentRoot "/var/www/html"<br>&lt;Directory "/"&gt;<br> AllowOverride None<br> Order deny,allow<br> Deny from all<br>&lt;/Directory&gt;<br>&lt;Location "/server-status"&gt;<br> SetHandler server-status<br> Require local<br>&lt;/Location&gt;<br>access.log - GET /server-status 403 127.0.0.1<br>error.log - AH01797: client denied by server configuration: /var/www/html/server-status</p><p>Warum lehnt httpd den Zugriff auf server-status ab, obwohl die Konfiguration so aussieht, als ob er es zulassen würde? Weil die mod_access_compat-Direktiven im Rahmen dieser Konfigurationszusammenführungspunkt vorrangig sind gegenüber der mod_authz_host-Direktive.</p><p> Die Konfiguration scheint es zulassen? Da die mod_access_compat Direktiven Vorrang vor den mod_authz_host Direktiven in dieser Konfigurationszusammenführung haben, funktioniert dieses Beispiel umgekehrt wie erwartet: Mischung alter und neuer Direktiven: FUNKTIONIERT WIE ERWUNSCHT</p><p><pre><code class="lang-">DocumentRoot "/var/www/html"<br>&amp;lt;Directory "/"&amp;gt;<br> AllowOverride None<br> Require all denied<br>&amp;lt;/Directory&amp;gt;<br>&amp;lt;Location "/server-status"&amp;gt;<br> SetHandler server-status<br> Order deny,allow<br> Deny from all<br> Allow From 127.0.0.1<br>&amp;lt;/Location&amp;gt;<br>access.log - GET /server-status 200 127.0.0.1</code></pre></p><p>Auch wenn die Konfigurationsmischung noch möglich ist, bitte versuchen Sie es bei der Upgrade-Phase zu vermeiden: entweder halten Sie die alten Direktiven bei und migrieren Sie später auf die neuen oder migrieren Sie alles im Bulk. In vielen Konfigurationen mit Authentifizierung, wo der Wert von Satisfy der Standardwerte ALL entsprach, werden Abschnitte, die die hostbasierte Zugriffskontrolle einfach deaktiviert haben, überspielt:</p><p>2.2 Konfiguration:</p><p><pre><code class="lang-"># 2.2 Konfiguration, die die hostbasierte Zugriffskontrolle deaktiviert und nur Authentifizierung verwendet<br>Order Deny,Allow<br>Allow from all<br>AuthType Basic<br>AuthBasicProvider file<br>AuthUserFile /example.com/conf/users.passwd<br>AuthName secure<br>Require valid-user</code></pre></p><p>2.4 Konfiguration:</p><p><pre><code class="lang-"># Keine Ersetzung der deaktivierten hostbasierten Zugriffskontrolle notwendig<br>AuthType Basic<br>AuthBasicProvider file<br>AuthUserFile /example.com/conf/users.passwd<br>AuthName secure<br>Require valid-user</code></pre></p><p>In Konfigurationen, in denen Authentifizierung und Zugriffskontrolle bedeutend kombiniert wurden, sollten die Zugriffskontrolldirektiven migriert werden.</p><p> TEXT (German):</p><p>Fordere gültigen-Benutzer In Konfigurationen, in denen Authentifizierung und Zugriffssteuerung bedeutend kombiniert wurden, sollten die Zugriffssteuerungsdirektiven migriert werden. Dieses Beispiel erlaubt Anfragen, die beide Kriterien erfüllen:<br>2.2 Konfiguration:<br>Order allow,deny<br>Deny from all # Satisfy ALL ist das Standardverhalten<br>Satisfy ALL<br>Allow from 127.0.0.1<br>AuthType Basic<br>AuthBasicProvider file<br>AuthUserFile /example.com/conf/users.passwd<br>AuthName secure<br>Require valid-user<br>2.4 Konfiguration:<br>AuthType Basic<br>AuthBasicProvider file<br>AuthUserFile /example.com/conf/users.passwd<br>AuthName secure<br>&lt;RequireAll&gt;<br>Require valid-user<br>Require ip 127.0.0.1<br>&lt;/RequireAll&gt;<br>In Konfigurationen, in denen Authentifizierung und Zugriffssteuerung bedeutend kombiniert wurden, sollten die Zugriffssteuerungsdirectives migriert werden. Dieses Beispiel erlaubt Anfragen, die entweder Kriterien erfüllen:<br>2.2 Konfiguration:<br>Order allow,deny<br>Deny from all<br>Satisfy any<br>Allow from 127.0.0.1<br>AuthType Basic<br>AuthBasicProvider file<br>AuthUserFile /example.com/conf/users.passwd<br>AuthName secure<br>Require valid-user<br>2.4 Konfiguration:<br>AuthType Basic<br>AuthBasicProvider file<br>AuthUserFile /example.com/conf/users.passwd<br>AuthName secure
+<h1>implizit &lt;RequireAny&gt;</h1><br>Require valid-user<br>Require ip 127.0.0.1<br>Andere Konfigurationsänderungen<br>Könnten für bestimmte Konfigurationen notwendig sein, wie im folgenden beschrieben.<br>MaxRequestsPerChild wurde in MaxConnectionsPerChild umbenannt und beschreibt genauer, was es tut. Der alte Name ist noch unterstützt.</p><p> Im Folgenden wird erläutert, was sich bei den Änderungen in den Konfigurationseinstellungen der Apache-Webserver-Version 2.4 betrifft.</p><p>MaxRequestsPerChild wurde in MaxConnectionsPerChild umbenannt und beschreibt genauer, was es tatsächlich tut. Der alte Name wird weiterhin unterstützt. MaxClients wurde in MaxRequestWorkers umbenannt und beschreibt genauer, was es tatsächlich tut. Für asynchrone MPMs, wie event, ist die maximale Anzahl von Clients nicht gleich der Anzahl der Arbeiter-Threads. Der alte Name wird weiterhin unterstützt.</p><p>Der DefaultType-Direktiv hat keinen Einfluss mehr, außer dass er bei Verwendung mit jedem anderen Wert als "none" eine Warnung ausgibt. Um 2.4 zu ersetzen, müssen Sie andere Konfigurations-Einstellungen verwenden.</p><p>AllowOverride hat nun den Standardwert "None". EnableSendfile hat nun den Standardwert "Off". FileETag hat nun den Standardwert "MTime Size" (ohne INode).</p><p>mod_dav_fs: Der Format der DavLockDB-Datei hat sich für Systeme mit Inodes geändert. Die alte DavLockDB-Datei muss bei der Upgrade-Aktion gelöscht werden.</p><p>KeepAlive akzeptiert nur die Werte "On" oder "Off". Zuvor wurde jedes Wert, der nicht "Off" oder "0" war, als "On" behandelt.</p><p>Die Direktiven AcceptMutex, LockFile, RewriteLock, SSLMutex, SSLStaplingMutex, und WatchdogMutexPath wurden durch eine einzige Mutex-Direktiv ersetzt. Sie müssen Ihre Verwendung dieser entfernten Direktiven in Ihrer 2.2-Konfiguration überprüfen, um festzustellen, ob sie einfach gelöscht werden können oder durch Mutex ersetzt werden müssen.</p><p>mod_cache: CacheIgnoreURLSessionIdentifiers führt nun eine genauere Übereinstimmung gegen den Abfragezeichenstreng aus, anstatt eine teilweise Übereinstimmung. Wenn Ihre Konfiguration teilstrengen verwendet, z.B. sessionid, um zu match /someapplication/image. zu match, müssen Sie diese Änderung berücksichtigen.</p><p> Textübersetzung:</p><p>Anstelle eines Teil-Suchausdrückes sollte eine Vollstreckung verwendet werden. Wenn Ihre Konfiguration auf Teilzeichenfolgen basierte, z.B. mit sessionid zur Vergleichsweise /someapplication/image.gif;jsessionid=123456789, müssen Sie auf die vollständige Zeichenfolge jsessionid umstellen. mod_cache: Der zweite Parameter von CacheEnable passt nur Inhalte von Vorwärtsproxy-Inhalten an, wenn er mit dem richtigen Protokoll beginnt. In Version 2.2 und früher, entsprach ein Parameter von '/' allen Inhalten. mod_ldap: LDAPTrustedClientCert ist nun konsistent eine per-Verzeichnis-Einstellung. Wenn Sie diese Direktive verwenden, überprüfen Sie Ihre Konfiguration, um sicherzustellen, dass sie in allen notwendigen Verzeichniskontexten vorhanden ist. mod_filter: Die Syntax von FilterProvider hat sich geändert und verwendet nun ein boolesches Ausdruck, um festzustellen, ob ein Filter angewendet wird. mod_include: Das #if expr-Element verwendet nun den neuen Ausdrucks-Parser. Die alte Syntax kann mit dem neuen Direktiv SSILegacyExprParser wiederhergestellt werden. Ein SSI*-Konfig-Direktiv im Verzeichnis-Bereich führt nicht mehr dazu, dass alle anderen per-Verzeichnis-SSI*-Direktiven auf ihre Standardwerte zurückgesetzt werden. mod_charset_lite: Die Option DebugLevel wurde entfernt zugunsten der pro-Modul-Konfiguration von LogLevel. mod_ext_filter: Die Option DebugLevel wurde entfernt zugunsten der pro-Modul-Konfiguration von LogLevel. mod_proxy_scgi: Die Standard-Einstellung für PATH_INFO hat sich in httpd 2.2 geändert, und einige Web-Anwendungen funktionieren nicht mehr korrekt mit der neuen PATH_INFO-Einstellung. Die alte Einstellung kann wiederhergestellt werden, indem Sie die proxy-scgi-pathinfo-Variable konfigurieren.</p><p> Die folgende Textstelle funktioniert nicht mehr korrekt mit der neuen Einstellung PATH_INFO. Die alte Einstellung kann wiederhergestellt werden, indem die Variable proxy-scgi-pathinfo konfiguriert wird. mod_ssl: Die Überprüfung der CRL-basierten Revokation muss nun explizit über SSLCARevocationCheck konfiguriert werden. mod_substitute: Die maximale Zeilenlänge ist nun auf 1MB beschränkt. mod_reqtimeout: Wenn das Modul geladen wird, wird nun ein Standardzeitlimit gesetzt. mod_dumpio: DumpIOLogLevel wird nicht mehr unterstützt. Daten werden immer bei LogLevel trace7 protokolliert. Auf Unix-Plattformen wurden Logging-Befehle über Pipe, die mit ErrorLog oder CustomLog konfiguriert wurden, in 2.2 und früher mit /bin/sh -c aufgerufen. In 2.4 und später werden Logging-Befehle über Pipe direkt ausgeführt. Um das alte Verhalten wiederherzustellen, siehe die Dokumentation zu piped logging. Änderungen im Allgemeinen ¶ mod_autoindex: wird nun Titel und Beschreibungen für .xhtml-Dateien extrahieren und anzeigen, die bisher ignoriert wurden. mod_ssl: Die Standardformatierung der *_DN-Variablen hat sich geändert. Das alte Format kann noch mit der neuen Argument-LegacyDNStringFormat zu SSLOptions verwendet werden. Das SSLv2-Protokoll wird nicht mehr unterstützt. SSLProxyCheckPeerCN und SSLProxyCheckPeerExpire haben nun standardmäßig den Wert On, was bedeutet, dass Anfragen an HTTPS-Hosts mit fehlerhaften oder veralteten Zertifikaten mit einem 502-Statuscode (Schlechter Weg) fehlschlagen. htpasswd nutzt nun MD5-Hash standardmäßig auf allen Plattformen. Die Direktive NameVirtualHost hat keinen Einfluss mehr, außer die Warnung auszugeben.</p><p> hash ist standardmäßig auf allen Plattformen. Die Direktive NameVirtualHost hat keinen Effekt mehr, außer der Ausgabe einer Warnung. Jede Adresse/Port-Kombination, die in mehreren virtuellen Hosts vorkommt, wird implizit als namebasierter virtueller Host behandelt. mod_deflate skippt jetzt die Kompression, wenn es weiß, dass die Größenüberschuss, der durch die Kompression hinzugefügt wird, größer ist als die Daten, die komprimiert werden sollen. Mehrsprachige Fehlerdokumente aus 2.2.x funktionieren möglicherweise nicht, wenn sie nicht auf die neue Syntax von mod_include's #if expr= Element oder die Aktivierung des Directives SSILegacyExprParser für den Ordner mit den Fehlerdokumenten angepasst werden. Die Funktionalität, die von mod_authn_alias in früheren Versionen (d.h., das AuthnProviderAlias Directive) bereitgestellt wurde, ist in mod_authn_core verschoben. Die RewriteLog und RewriteLogLevel Directives wurden entfernt. Diese Funktionalität ist jetzt über die Konfiguration der entsprechenden Loglevel-Einstellung für den mod_rewrite-Modul mittels des LogLevel Directives bereitgestellt. Siehe auch die mod_rewrite Logging-Sektion. mod_include's &lt;set&gt; Tag führt nicht mehr die Entitätscodierung auf dem zu setzenden Wert durch. Dritte-Partei-Module ¶ Alle Module müssen neu kompiliert werden, bevor sie geladen werden können. Viele dritte-partei-Module, die für Version 2.2 entwickelt wurden, funktionieren unverändert mit dem Apache HTTP Server Version 2.4. Einige benötigen Änderungen; siehe die API-Update-Übersicht.</p><p> Andernfalls funktioniert die Anwendung unverändert mit der Apache HTTP Server Version 2.4. Einige benötigen Änderungen; siehe die API-Aktualisierung Übersicht.</p><p>Häufige Probleme beim Upgraden ¶</p><p>Startup-Fehler:<br>Ungültiger Befehl 'User', vielleicht falsch geschrieben oder durch ein Modul definiert, das nicht in der Serverkonfiguration enthalten ist - Lade Modul mod_unixd<br>Ungültiger Befehl 'Require', vielleicht falsch geschrieben oder durch ein Modul definiert, das nicht in der Serverkonfiguration enthalten ist, oder Ungültiger Befehl 'Order', vielleicht falsch geschrieben oder durch ein Modul definiert, das nicht in der Serverkonfiguration enthalten ist - Lade Modul mod_access_compat, oder aktualisiere die Konfiguration auf 2.4 Autorisierungsdirektiven. Ignoriere abgestempelte Verwendung von DefaultType in Zeile NN von /pfad/zu/httpd.conf - entferne DefaultType und ersetze sie mit anderen Konfigurationseinstellungen. Ungültiger Befehl 'AddOutputFilterByType', vielleicht falsch geschrieben oder durch ein Modul definiert, das nicht in der Serverkonfiguration enthalten ist - AddOutputFilterByType hat sich von der Kernfunktion in mod_filter verschoben, das muss geladen werden.</p><p>Fehler bei der Bearbeitung von Anfragen:<br>Konfigurationsfehler: konnte Benutzer nicht überprüfen: /pfad - Lade Modul mod_authn_core. .htaccess-Dateien werden nicht verarbeitet - Prüfe auf ein passendes AllowOverride-Directive; der Standard wurde auf None in 2.4 geändert.</p>
+</main>
+</body>
+</html>

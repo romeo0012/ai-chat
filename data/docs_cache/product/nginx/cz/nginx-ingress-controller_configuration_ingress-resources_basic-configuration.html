@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Basic configuration</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Basic configuration</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Základní konfigurace<br>Tento dokument ukazuje základní definici zdroje Ingress pro F5 NGINX Ingress Controller. Balancuje požadavky pro dvě služby jako součást jedné aplikace. yaml</p><p><pre><code class="lang-yaml">apiVersion: networking.k8s.io/v1<br>kind: Ingress<br>metadata:<br>  name: cafe-ingress<br>spec:<br>  ingressClassName: nginx<br>  tls:<br>  - hosts:<br>    - cafe.example.com<br>    secretName: tls-secret<br>  rules:<br>  - host: cafe.example.com<br>    http:<br>      paths:<br>      - path: /tea<br>        pathType: Prefix<br>        backend:<br>          service:<br>            name: tea-svc<br>            port:<br>              number: 80<br>      - path: /coffee<br>        pathType: Prefix<br>        backend:<br>          service:<br>            name: coffee-svc<br>            port:<br>              number: 80</code></pre></p><p>Toto je přehled, co znamená definice zdroje Ingress: Pole metadata.name definuje název zdroje cafe-ingress. Pole spec.tls nastavuje SSL/TLS terminační balancování: Pole hosts přiřazuje certifikát a klíč k doméně cafe.example.com. Pole secretName odkazuje na zdroj tajného klíče podle jeho názvu, cafe-secret. Tajný klíč musí patřit do stejného prostoru názvů jako Ingress a mít typ kubernetes.io/tls a obsahovat klíče tls.crt a tls.key, které obsahují certifikát a soukromý klíč, jak je popsáno zde. Pokud tajný klíč neexistuje nebo je neplatný, NGINX zabrání jakékoli snaze zřídit TLS spojení s doménami, kterým je tajný klíč přiřazen. Pole spec.rules definuje host s doménovým jménem cafe.example.com.</p><p> Přesunout se na hosty, na které se tajemství připlatí. Pole spec.rules definuje hosta s doménovým jménem cafe.example.com. Pole cesty definuje dvě pravidla na základě cest: Pravidlo s cestou /tea instruuje NGINX, aby rozdělilo žádosti s URI /tea mezi pody služby tea, která je nasazena s názvem tea-svc v clusteru. Pravidlo s cestou /coffee instruuje NGINX, aby rozdělilo žádosti s URI /coffee mezi pody služby coffee, která je nasazena s názvem coffee-svc v clusteru. Obě pravidla instruují NGINX, aby rozdělila žádosti na port 80 odpovídající služby (pole servicePort). Chcete-li se dočíst více o zdroji Ingress, přečtěte si dokumentaci Kubernetesu pro zdroje Ingress. Pro úplné instrukce k nasazení zdrojů Ingress a Secret v clusteru, přečtěte si úplný příklad v repozitáři GitHubu. Nové funkce k dispozici v Kubernetesu 1.18 Od verze Kubernetesu 1.18 můžete použít následující nové funkce: Pole host podporuje domény s wildcardem, například *.example.com. Pole cesty podporuje různé způsoby odpovídání s novým polem pathType, které přijímá následující hodnoty: Prefix pro přesnou odpovídání, Exact pro přesné odpovídání a ImplementationSpecific, které je výchozí typ a je stejné jako Prefix.</p><p> Pro prozatné shodu, Exact pro shodu přesného odpovídání a ImplementationSpecific, což je výchozí typ a je stejné jako Prefix. Například: yaml Copy - path: /čaj pathType: Prefix backend: serviceName: čaj-svc servicePort: 80 - path: /čaj/zelený pathType: Exact backend: service: name: čaj-svc port: číslo: 80 - path: /káva pathType: ImplementationSpecific backend: service: name: káva-svc port: číslo: 80</p><p>Pole ingressClassName je nyní podporováno: yaml Copy apiVersion: networking.k8s.io/v1 kind: Ingress metadata: name: kavárna-ingress spec: ingressClassName: nginx tls: - hosts: - kavárna.example.com secretName: kavárna-secret rules: - host: kavárna.example.com . . .</p><p>Použití tohoto pole vyžaduje vytvoření odpovídajícího zdroje IngressClass. Další informace naleznete v části Vytváření běžných zdrojů v tématu Instalace pomocí Manifestů. Omezení<br>NGINX Ingress Controller klade následující omezení na zdroje Ingress:
+<ul>
+<li>Pole host je požadováno vždy jako výchozí. Chcete-li umožnit zdrojům Ingress omítat pole host, použijte argument příkazového řádku -allow-empty-ingress-host. Když je -allow-empty-ingress-host povolen, není podporováno spec.tls na zdrojích Ingress bez hosta. Chcete-li konfigurovat TLS, použijte místo toho argument příkazového řádku -default-server-tls-secret.</li>
+</ul><ul>
+<li>Hodnota host musí být jedinečná mezi všemi zdroji Ingress a VirtualServer, pokud není zdroj Ingress minionem slučitelným.</li>
+</ul></p><p> Text v češtině:</p><p>Pole host musí být unikátní mezi všemi zdroji Ingress a VirtualServer, pokud není Ingress zdrojem sloučitelným minionem. Další informace naleznete v tématu Host a kolizí posluchačů. Pole cesta v spec.rules[].http.paths[] je požadováno pro typ cesty Exact a Prefix. Typ cesty ImplementationSpecific je považován za ekvivalentní typu cesty Prefix, s výjimkou toho, že když je tento typ konfigurován, pole cesta v spec.rules[].http.paths[] není povinné. cesta se nastaví na /, pokud nebude nastaveno, ale bude nastaven typ cesty ImplementationSpecific. Další konfigurace NGINX Ingress Controller generuje konfiguraci NGINX tím, že spustí šablonový soubor, který obsahuje možnosti konfigurace. Tyto možnosti jsou nastaveny pomocí zdroje Ingress a ConfigMap NGINX Ingress Controlleru. Zdroj Ingress umožňuje použít pouze základní funkce NGINX: routování podle hostitele a cesty a terminační SSL. Pro další konfiguraci máte dvě možnosti: Anotace mohou být použity k přepsání adres URL požadavků nebo k vložení dalších hlaviček odpovědi. Snippety mohou být použity k vložení ráwnější konfigurace NGINX, změnou generovaných souborů. Dále je možné upravit šablonový soubor, což je popsáno v tématu Custom templates. Zobrazit zdroj Zobrazit jako Markdown Upravit tuto stránku Vytvořit nový problém</p><p>Poznámka: Technické termíny, kódy, příkazy, cesty souborů, adresy URL a formátování zůstávají v původní anglické podobě.</p>
+</main>
+</body>
+</html>

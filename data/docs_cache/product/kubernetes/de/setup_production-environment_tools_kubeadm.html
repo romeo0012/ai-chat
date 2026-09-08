@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bootstrapping clusters with kubeadm</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Bootstrapping clusters with kubeadm</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Bootstrapping Cluster mit kubeadm
+<hr></p><p><h3>Installieren von kubeadm</h3></p><p>Um kubeadm zu installieren, führen Sie die folgenden Schritte aus:
+<ol>
+<li>Aktualisieren Sie Ihr System:</li>
+</ol></p><p><pre><code class="lang-">sudo apt-update<br>sudo apt-upgrade -y</code></pre>
+<ol>
+<li>Registrieren Sie das Kubernetes-Repository:</li>
+</ol></p><p><pre><code class="lang-">sudo apt-mark hold apt-transport-https ca-certificates curl<br>curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -<br>echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list</code></pre>
+<ol>
+<li>Installieren Sie kubeadm, kubelet und kubectl:</li>
+</ol></p><p><pre><code class="lang-">sudo apt-get update &amp;amp;&amp;amp; sudo apt-get install -y kubelet kubeadm kubectl</code></pre></p><p><h3>Probleme beheben mit kubeadm</h3></p><p>Wenn Sie Probleme beim Installieren oder Konfigurieren von kubeadm haben, können Sie die folgenden Schritte ausführen, um Fehler zu beheben:
+<ol>
+<li>Löschen Sie die vorhandenen kubeadm-Konfigurationen:</li>
+</ol></p><p><pre><code class="lang-">sudo kubeadm reset</code></pre>
+<ol>
+<li>Starten Sie kubeadm neu:</li>
+</ol></p><p><pre><code class="lang-">sudo systemctl restart kubelet</code></pre>
+<ol>
+<li>Überprüfen Sie die Statusmeldungen von kubeadm:</li>
+</ol></p><p><pre><code class="lang-">sudo kubeadm status</code></pre></p><p><h3>Erstellung eines Clusters mit kubeadm</h3></p><p>Um einen Cluster mit kubeadm zu erstellen, führen Sie die folgenden Schritte aus:
+<ol>
+<li>Starten Sie kubeadm auf einem Master-Knoten:</li>
+</ol></p><p><pre><code class="lang-">sudo kubeadm init --pod-network-cidr=10.244.0.0/16</code></pre>
+<ol>
+<li>Verwenden Sie die Token-Informationen, um sich als Admin anzumelden:</li>
+</ol></p><p><pre><code class="lang-">mkdir -p $HOME/.kube<br>sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config<br>sudo chown $(id -u):$(id -g) $HOME/.kube/config</code></pre>
+<ol>
+<li>Installieren Sie ein Pod-Netzwerk:</li>
+</ol></p><p><pre><code class="lang-">kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml</code></pre></p><p><h3>Anpassen von Komponenten mit der kubeadm API</h3></p><p>Mit der kubeadm API können Sie die Komponenten Ihres Clusters anpassen. Weitere Informationen finden Sie in der [Dokumentation](https://kubernetes.io/docs/reference/command-line-tools-reference/kubeadm/).</p><p><h3>Optionen für eine hochverfügbare Topologie</h3></p><p>Um einen hochverfügbaren Cluster mit kubeadm zu erstellen, können Sie die folgenden Optionen verwenden:
+<ol>
+<li>Verwenden Sie mehrere Master-Knoten:</li>
+</ol></p><p><pre><code class="lang-">kubeadm init --pod-network-cidr=10.244.0.0/16 --control-plane-endpoint=&amp;lt;IP-Master1&amp;gt;:6443 --control-plane-endpoint=&amp;lt;IP-Master2&amp;gt;:6443</code></pre>
+<ol>
+<li>Verwenden Sie ein hochverfügbares etcd-Cluster:</li>
+</ol></p><p>[Hier finden Sie Informationen zur Konfiguration eines hochverfügbaren etcd-Clusters mit kubeadm](#set-up-a-high-availability-etcd-cluster-with-kubeadm).</p><p><h3>Erstellung eines hochverfügbaren Clusters mit kubeadm</h3></p><p>Um einen hochverfügbaren Cluster mit kubeadm zu erstellen, können Sie die folgenden Schritte ausführen:
+<ol>
+<li>Starten Sie kubeadm auf mehreren Master-Knoten:</li>
+</ol></p><p><pre><code class="lang-">kubeadm init --pod-network-cidr=10.244.0.0/16 --control-plane-endpoint=&amp;lt;IP-Master1&amp;gt;:6443 --control-plane-endpoint=&amp;lt;IP-Master2&amp;gt;:6443</code></pre>
+<ol>
+<li>Verwenden Sie die Token-Informationen, um sich als Admin anzumelden:</li>
+</ol></p><p><pre><code class="lang-">mkdir -p $HOME/.kube<br>sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config<br>sudo chown $(id -u):$(id -g) $HOME/.kube/config</code></pre>
+<ol>
+<li>Installieren Sie ein Pod-Netzwerk:</li>
+</ol></p><p><pre><code class="lang-">kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml</code></pre>
+<ol>
+<li>Konfigurieren Sie jeden kubelet in Ihrem Cluster mithilfe von kubeadm:</li>
+</ol></p><p>[Hier finden Sie Informationen zur Konfiguration jedes kubelet in Ihrem Cluster mithilfe von kubeadm](#configuring-each-kubelet-in-your-cluster-using-kubeadm).</p><p><h3>Zwei-Stack-Unterstützung mit kubeadm</h3></p><p>Mit kubeadm können Sie auch Dual-Stack-Cluster erstellen, die sowohl IPv4 als auch IPv6 unterstützen. Weitere Informationen finden Sie in der [Dokumentation](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/create-dual-stack-cluster/).</p><p><h3>Feedback</h3></p><p>War diese Seite hilfreich?</p><p>Ja | Nein</p><p>Danke für Ihr Feedback. Wenn Sie spezifische, beantwortbare Fragen zum Einsatz von Kubernetes haben, können Sie sie auf Stack Overflow stellen. Falls Sie ein Problem oder eine Verbesserung melden möchten, können Sie ein Issue im GitHub-Repository öffnen.</p><p>Letzte Änderung: Juni 12, 2019 um 5:27 PM PST: Neuordnung der linken Navigationsleiste des Setup (#14826) (55ac801bc4)</p>
+</main>
+</body>
+</html>

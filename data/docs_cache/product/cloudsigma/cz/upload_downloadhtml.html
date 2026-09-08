@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Upload or Download Drive Images</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Upload or Download Drive Images</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Nahrání nebo Stahování Obrazů Disků 📁<br>Nahrání obrazu disku 📁<br>POST https://direct.{loc}.cloudsigma.com/api/2.0/drives/upload/ 📄<br>Lze nahrát obraz disku vydáním POST žádosti s obrazem na /drive/upload/. Upozornění: pro nahrávání existuje jiný doménový koncový bod pro uploady direct.{loc}.cloudsigma.com. V současné době se podporují pouze obrazy disků v raw formátu. Tělo žádosti by mělo obsahovat raw bytový proud obrazu disku a musí určit správný typ obsahu (Content-Type: application/octet-stream) v hlavičkách žádosti. API pro nahrávání disku podporuje pouze základní autentizaci HTTP. Významný je fakt, že Content-Length obsahuje správnou velikost dat ke stažení, protože určuje velikost disku, který bude vytvořen. Poznámka: pokud nahraný obraz je menší než minimální velikost disku (Viz možnosti), bude automaticky upraven na dokončení nahrávání. Je možné určit název souboru v cestě, tedy nahrát obraz do cesty /drive/upload/file_name, ale název souboru je ignorován. Tím se usnadňuje použití nástrojů, jako je curl, které obvykle nahrávají do cesty končící názvem souboru. Odpověď obsahuje UUID vytvořeného disku. Níže je příklad, jak nahrát obraz disku pomocí curl:</p><p><pre><code class="lang-">curl --request POST --user email@example.com:password \<br>--header 'Content-Type: application/octet-stream' \<br>--upload-file /path/to/file \<br>https://direct.zrh.cloudsigma.com/api/2.0/drives/upload/</code></pre></p><p> Přenesení snímku disku pomocí curl:
+<pre><code class="lang-bash">curl --request POST --user email@example.com:heslo \<br>--header 'Content-Type: application/octet-stream' \<br>--upload-file /cesta/k/souboru/ \<br>https://direct.zrh.cloudsigma.com/api/2.0/drives/upload/</code></pre><br>Vyznamuje se, že v příkazu určení hlavičky Content-Type také nastaví curl, aby nekódoval tělo požadavku a zanechal ho jako octet-stream. Tento příkaz vytiskne UUID nahrávaného snímku disku. Můžete ho uložit do souboru pomocí odchytávání výstupu přidáním &gt; uploaded_drive_uuid na konci příkazu. Výchozí nastavení curl nezobrazuje stav nahrávání. Můžete přidat –verbose (-v) opci, pokud používáte curl přímo v příkazovém řádku, aby zobrazil stav a rychlost nahrávání.</p><p>Stahování snímku disku:<br>GET https://direct.{loc}.cloudsigma.com/api/2.0/drives/{uuid}/download/</p><p>Chcete-li stáhnout snímek disku, vydáte GET požadavek na /drives/{uuid}/download/. Pozoruje se, že pro stahování obrázku je jiná doménová koncovka pro endpoint obrázku direct.{loc}.cloudsigma.com. Klient stahování by měl správně zpracovávat HTTP přesměrování. Výsledný odpověď obsahuje soubor s Content-Type: application/octet-stream. Název souboru je nastaven v Content-Disposition hlavičce na UUID obrázku. Níže je příklad, jak stáhnout snímek disku pomocí curl:
+<pre><code class="lang-bash">curl --location \<br>--remote-name --remote-header-name \<br>--user email@example.com:heslo \<br>https://direct.zrh.cloudsigma.com/api/2.0/drives/{uuid}/download/</code></pre></p><p> Příklad, jak stáhnout obraz disku pomocí curl:
+<pre><code class="lang-bash">curl --location --remote-name --remote-header-name \<br>--user email@example.com:heslo \<br>https://direct.zrh.cloudsigma.com/api/2.0/drives/ad64ded1-be81-454a-aa14-d7809cca93eb/download/</code></pre><br>Volající opci --location instruuje curl, aby následoval přesměrování. Klient je očekáván, aby následoval HTTP přesměrování. Tento příkaz používá --remote-header-name k uložení obrazu do souboru s názvem, který je určen Content-Disposition. Název v content disposition je nastaven UUID disku. Je možné určit jiný název/cestu výstupu pomocí opce --output (-o). Pozor, že --remote-header-name by měl být vždy použit společně s --remote-name.</p>
+</main>
+</body>
+</html>

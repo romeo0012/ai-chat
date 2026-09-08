@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Install Tools</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Install Tools</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Nastavte nástroje</p><p>Nastavte nástroje Kubernetes na vašem počítači.<br>Poznámka: Viz stránku s prostředím pro výuku, abyste nastavili prostředí pro cvičení.<br>kubectl<br>Kubernetes nabízí nástroj příkazového řádku kubectl, který umožňuje spouštět příkazy proti Kubernetes klastrům. Můžete kubectl použít k nasazování aplikací, pro kontrolu a správu zdrojů klastru a pro zobrazení záznamů. Další informace, včetně kompletní seznamu operací kubectl, naleznete v dokumentaci k kubectl referenční dokumentaci. Kubectl je instalovatelný na různých platformách Linux, macOS a Windows. Naleznete si svůj preferovaný operační systém níže.<br>Instalace kubectl na Linux<br>Instalace kubectl na macOS<br>Instalace kubectl na Windows<br>kind<br>Nástroj kind umožňuje spouštět Kubernetes na vašem počítači místně. Tento nástroj vyžaduje, abyste měli buď Docker nebo Podman nainstalované.<br>Stránka rychlého startu ukazuje, co musíte udělat, abyste se dostali do provozu s kind.<br>Zobrazit rychlý start<br>minikube<br>Stejně jako kind, minikube je nástroj, který umožňuje spouštět Kubernetes místně. Minikube spouští klastr Kubernetes v místním prostředí nebo v množině uzlů na vašem osobním počítači (včetně počítačů s Windows, macOS a Linuxem).<br>Můžete následovat oficiální průvodce, pokud je vaše priorita instalace nástroje.<br>Zobrazit průvodce minikube<br>Po instalaci minikube můžete s ním spouštět ukázkovou aplikaci.<br>kubeadm<br>Můžete použít nástroj kubeadm k vytváření a správě klastrů Kubernetes.</p><p> nástroj minikube nainstalován.Projděte si průvodce Minikube Začínáme!<br>Když máte minikube funkční, můžete ho použít k spuštění ukázkové aplikace.<br>kubeadm<br>Můžete použít nástroj kubeadm k vytváření a správě clusterů Kubernetes. Vykoná všechny potřebné akce k vytvoření minimálně funkčního a bezpečného clusteru v uživatelsky přívětivé formě.<br>Instalace kubeadm ukazuje, jak nainstalovat kubeadm. Po instalaci můžete použít k vytvoření clusteru.<br>Projděte si průvodce kubeadm Install<br>Zda byla stránka užitečná?Ano Ne<br>Děkuji za zpětnou vazbu. Pokud máte konkrétní, odpovídající otázku o použití Kubernetes, zadejte ji na Stack Overflow. Otevřete problém v GitHub Repository, pokud chcete oznámit problém nebo navrhnout úpravy.<br>Poslední úpravy 12. ledna 2026 v 23:29 PST: Přidali seznamovací poznámku pro uživatele, aby se dostali na stránku Vzdělávací prostředí pro nastavení výcviku (39536f1ccd)</p>
+</main>
+</body>
+</html>

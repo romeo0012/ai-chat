@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kubernetes Components</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Kubernetes Components</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Kubernetes-Komponenten<br>Eine Übersicht der wichtigsten Komponenten, die eine Kubernetes-Cluster ausmachen. Diese Seite bietet einen übergeordneten Überblick über die essentiellen Komponenten, die einen Kubernetes-Cluster ausmachen. Die Komponenten eines Kubernetes-Clusters</p><p>Core-Komponenten<br>Ein Kubernetes-Cluster besteht aus einem Control Plane und mindestens einem Arbeiterknoten. Hier eine kurze Übersicht über die Hauptkomponenten:</p><p>Control Plane-Komponenten<br>Verwalten die Gesamtzustand des Clusters:
+<ul>
+<li>kube-apiserver: Der Kernelement-Server, der den Kubernetes HTTP-API ausliefert.</li>
+</ul><ul>
+<li>etcd: Ein konsistentes und hochverfügbares Schlüssel-Wert-Speicher für alle API-Server-Daten.</li>
+</ul><ul>
+<li>kube-scheduler: Sucht nach Pods, die noch keinem Knoten zugeordnet sind, und ordnet jedem Pod einem geeigneten Knoten zu.</li>
+</ul><ul>
+<li>kube-controller-manager: Führt Controller aus, um das Kubernetes API-Verhalten zu implementieren.</li>
+</ul><ul>
+<li>cloud-controller-manager (optional): Integriert sich mit den unterliegenden Cloud-Anbieter(n).</li>
+</ul></p><p>Node-Komponenten<br>Laufen auf jedem Knoten, wahren die laufenden Pods und bieten den Kubernetes-Laufzeitumgebung:
+<ul>
+<li>kubelet: Sorgt dafür, dass Pods laufen, einschließlich ihrer Containern.</li>
+</ul><ul>
+<li>kube-proxy (optional): Wartet die Netzwerkregeln auf den Knoten, um Services zu implementieren.</li>
+</ul></p><p>Container-Runtime<br>Software, die für den Container-Betrieb verantwortlich ist. Weitere Informationen finden Sie unter Container Runtimes. 🛇 Dieser Link führt zu einem dritten Parteiprojekt oder Produkt, das nicht Teil von Kubernetes selbst ist. Weitere Informationen Ihrer Cluster könnte zusätzliche Software auf jedem Knoten erfordern; z.B. könnte auch systemd auf einem Linux-Knoten laufen, um lokale Komponenten zu überwachen.</p>
+</main>
+</body>
+</html>

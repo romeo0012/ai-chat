@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>minikube start</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>minikube start</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> minikube start</p><p>minikube ist lokales Kubernetes, das sich auf die Einfachheit des Lernens und Entwicklens für Kubernetes konzentriert. Alles, was Sie benötigen, ist Docker (oder eine ähnlich kompatible) Container- oder eine virtuelle Umgebung, und Kubernetes ist nur ein einziger Befehl entfernt: minikube start</p><p>Was Sie benötigen:
+<ul>
+<li>2 CPUs oder mehr</li>
+</ul><ul>
+<li>2GB freies Speicher</li>
+</ul><ul>
+<li>20GB freies Speicherplatz</li>
+</ul><ul>
+<li>Internetverbindung</li>
+</ul><ul>
+<li>Container- oder virtueller Maschinenmanager, wie z.B.: Docker, QEMU, Hyperkit, Hyper-V, KVM, Parallels, Podman, VirtualBox, oder VMware Fusion/Workstation</li>
+</ul></p><p>Installation</p><p>Klicken Sie auf die Schaltflächen, die Ihre Zielplattform beschreiben. Für andere Architekturen siehe die Release-Seite für eine vollständige Liste der minikube-Binaries.</p><p>Schaltflächen, die Ihre Zielplattform beschreiben. Für andere Architekturen siehe die Release-Seite für eine vollständige Liste der minikube-Binaries.</p><p>Betriebssystem:
+<ul>
+<li>Linux</li>
+</ul><ul>
+<li>macOS</li>
+</ul><ul>
+<li>Windows</li>
+</ul><ul>
+<li>Versuch in Browser</li>
+</ul><ul>
+<li>Provider: GitHub Codespaces</li>
+</ul><ul>
+<li>Architektur: x86-64</li>
+</ul><ul>
+<li>ARM64</li>
+</ul><ul>
+<li>ppc64</li>
+</ul><ul>
+<li>S390x</li>
+</ul><ul>
+<li>Release-Typ: Stable</li>
+</ul><ul>
+<li>Beta</li>
+</ul><ul>
+<li>Installer-Typ: Binary download</li>
+</ul><ul>
+<li>Debian-Paket</li>
+</ul><ul>
+<li>RPM-Paket</li>
+</ul></p><p>Release-Typ:
+<ul>
+<li>Stable</li>
+</ul><ul>
+<li>Beta</li>
+</ul><ul>
+<li>Installer-Typ: Binary download</li>
+</ul><ul>
+<li>Debian-Paket</li>
+</ul><ul>
+<li>RPM-Paket</li>
+</ul></p><p>Release-Typ:
+<ul>
+<li>Stable</li>
+</ul><ul>
+<li>Beta</li>
+</ul><ul>
+<li>Installer-Typ: Binary download</li>
+</ul><ul>
+<li>Debian-Paket</li>
+</ul><ul>
+<li>RPM-Paket</li>
+</ul></p><p>Release-Typ:
+<ul>
+<li>Stable</li>
+</ul><ul>
+<li>Beta</li>
+</ul><ul>
+<li>Installer-Typ: Binary download</li>
+</ul><ul>
+<li>Debian-Paket</li>
+</ul><ul>
+<li>RPM-Paket</li>
+</ul></p><p>Release-Typ:
+<ul>
+<li>Stable</li>
+</ul><ul>
+<li>Beta</li>
+</ul><ul>
+<li>Installer-Typ: Binary download</li>
+</ul><ul>
+<li>Debian-Paket</li>
+</ul><ul>
+<li>RPM-Paket</li>
+</ul></p><p>Architektur:
+<ul>
+<li>x86-64</li>
+</ul><ul>
+<li>ARM64</li>
+</ul></p><p>Release-Typ:
+<ul>
+<li>Stable</li>
+</ul><ul>
+<li>Beta</li>
+</ul><ul>
+<li>Installer-Typ: Binary download</li>
+</ul><ul>
+<li>Homebrew</li>
+</ul></p><p>Installer-Typ:
+<ul>
+<li>Binary download</li>
+</ul></p><p>Release-Typ:
+<ul>
+<li>Stable</li>
+</ul><ul>
+<li>Beta</li>
+</ul><ul>
+<li>Installer-Typ: Binary download</li>
+</ul><ul>
+<li>Homebrew</li>
+</ul></p><p>Architektur:
+<ul>
+<li>x86-64</li>
+</ul></p><p>Release-Typ:
+<ul>
+<li>Stable</li>
+</ul><ul>
+<li>Beta</li>
+</ul><ul>
+<li>Installer-Typ: .exe download</li>
+</ul><ul>
+<li>Windows Package Manager</li>
+</ul><ul>
+<li>Chocolatey</li>
+</ul></p><p>Installer-Typ:
+<ul>
+<li>.exe download</li>
+</ul></p><p>Um die neueste minikube-Stable-Veröffentlichung auf x86-64 Linux mit binärer Download zu installieren:</p><p><pre><code class="lang-">curl -LO https://github.com/kubernetes/minikube/releases/download/v1.26.0/minikube-linux-amd64</code></pre></p><p><pre><code class="lang-">chmod +x minikube-linux-amd64</code></pre></p><p><pre><code class="lang-">sudo mv minikube-linux-amd64 /usr/local/bin/minikube</code></pre></p><p> Installertyp .exe herunterladen<br>Um die aktuelle stabile Version von minikube auf x86-64 Linux über binäre Download zu installieren:
+<pre><code class="lang-bash">curl -LO https://github.com/kubernetes/minikube/releases/latest/download/minikube-linux-amd64<br>sudo install minikube-linux-amd64 /usr/local/bin/minikube &amp;amp;&amp;amp; rm minikube-linux-amd64</code></pre><br>Um die aktuelle beta-Version von minikube auf x86-64 Linux über binäre Download zu installieren:
+<pre><code class="lang-bash">r=https://api.github.com/repos/kubernetes/minikube/releases<br>curl -LO $(curl -s $r | grep -o 'http.*download/v.*beta.*/minikube-linux-amd64' | head -n1)<br>sudo install minikube-linux-amd64 /usr/local/bin/minikube &amp;amp;&amp;amp; rm minikube-linux-amd64</code></pre><br>Um die aktuelle stabile Version von minikube auf x86-64 Linux über Debian-Paket zu installieren:
+<pre><code class="lang-bash">curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube_latest_amd64.deb<br>sudo dpkg -i minikube_latest_amd64.deb</code></pre><br>Um die aktuelle beta-Version von minikube auf x86-64 Linux über Debian-Paket zu installieren:
+<pre><code class="lang-bash">r=https://api.github.com/repos/kubernetes/minikube/releases<br>u=$(curl -s $r | grep -o 'http.*download/v.*beta.*/minikube.*_amd64.deb' | head -n1)<br>curl -L $u &amp;gt; minikube_beta_amd64.deb<br>sudo dpkg -i minikube_beta_amd64.deb</code></pre><br>Um die aktuelle stabile Version von minikube auf x86-64 Linux über RPM-Paket zu installieren:
+<pre><code class="lang-bash">curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-latest.x86_64.rpm<br>sudo rpm -Uvh minikube-latest.x86_64.rpm</code></pre><br>Um die aktuelle beta-Version von minikube auf x86-64 Linux über RPM-Paket zu installieren:
+<pre><code class="lang-bash">r=https://api.github.com/repos/kubernetes/minikube/releases<br>u=$(curl -s $r | grep -o 'http.*download/v.*beta.*/minikube.*_x86_64.rpm' | head -n1)<br>curl -L $u &amp;gt; minikube_beta_x86_64.rpm<br>sudo rpm -Uvh minikube_beta_x86_64.rpm</code></pre></p><p> -LO https://storage.googleapis.com/minikube/releases/latest/minikube-latest.x86_64.rpm<br>Sudo rpm -Uvh minikube-latest.x86_64.rpm<br>Um die neueste minikube Beta-Version für x86-64 Linux über RPM-Paket zu installieren:<br>r=https://api.github.com/repos/kubernetes/minikube/releases<br>u=$(curl -s $r | grep -o 'http.*download/v.*beta.*/minikube-.*.x86_64.rpm' | head -n1)<br>curl -L $u &gt; minikube-beta.x86_64.rpm &amp;&amp; sudo rpm -Uvh minikube-beta.x86_64.rpm</p><p>Um die neueste minikube stabile Version für ARM64 Linux über binäre Download zu installieren:<br>curl -LO https://github.com/kubernetes/minikube/releases/latest/download/minikube-linux-arm64<br>Sudo install minikube-linux-arm64 /usr/local/bin/minikube &amp;&amp; rm minikube-linux-arm64</p><p>Um die neueste minikube Beta-Version für ARM64 Linux über binäre Download zu installieren:<br>r=https://api.github.com/repos/kubernetes/minikube/releases<br>curl -LO $(curl -s $r | grep -o 'http.*download/v.*beta.*/minikube-linux-arm64' | head -n1)<br>Sudo install minikube-linux-arm64 /usr/local/bin/minikube &amp;&amp; rm minikube-linux-arm64</p><p>Um die neueste minikube stabile Version für ARM64 Linux über Debian-Paket zu installieren:<br>curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube_latest_arm64.deb<br>Sudo dpkg -i minikube_latest_arm64.deb</p><p>Um die neueste minikube Beta-Version für ARM64 Linux über Debian-Paket zu installieren:<br>r=https://api.github.com/repos/kubernetes/minikube/releases<br>u=$(curl -s $r | grep -o 'http.*download/v.*beta.*/minikube_.*_arm64.deb' | head -n1)<br>curl -L $u &gt; minikube_beta_arm64.deb</p><p> Linux über Debian-Paket: r=https://api.github.com/repos/kubernetes/minikube/releases<br>u=$(curl -s $r | grep -o 'http.*download/v.*beta.*/minikube_.*_arm64.deb' | head -n1)<br>curl -L $u &gt; minikube_beta_arm64.deb &amp;&amp; sudo dpkg -i minikube_beta_arm64.deb</p><p>Um die aktuelle minikube Stabilversion für ARM64-Linux über RPM-Paket zu installieren:<br>curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-latest.aarch64.rpm<br>sudo rpm -Uvh minikube-latest.aarch64.rpm</p><p>Um die aktuelle minikube Betaversion für ARM64-Linux über RPM-Paket zu installieren:<br>r=https://api.github.com/repos/kubernetes/minikube/releases<br>u=$(curl -s $r | grep -o 'http.*download/v.*beta.*/minikube-.*.aarch64.rpm' | head -n1)<br>curl -L $u &gt; minikube-beta.aarch64.rpm &amp;&amp; sudo rpm -Uvh minikube-beta.aarch64.rpm</p><p>Um die aktuelle minikube Stabilversion für ppc64-Linux über Binärdownload zu installieren:<br>curl -LO https://github.com/kubernetes/minikube/releases/latest/download/minikube-linux-ppc64le<br>sudo install minikube-linux-ppc64le /usr/local/bin/minikube &amp;&amp; rm minikube-linux-ppc64le</p><p>Um die aktuelle minikube Betaversion für ppc64-Linux über Binärdownload zu installieren:<br>r=https://api.github.com/repos/kubernetes/minikube/releases<br>curl -LO $(curl -s $r | grep -o 'http.*download/v.*beta.*/minikube-linux-ppc64le' | head -n1)<br>sudo install minikube-linux-ppc64le /usr/local/bin/minikube &amp;&amp; rm minikube-linux-ppc64le</p><p>Um die aktuelle minikube Stabilversion für ppc64-Linux über Debian-Paket zu installieren:<br>curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube_ppc64le-&lt;VERSION&gt;.deb<br>sudo dpkg -i minikube_ppc64le-&lt;VERSION&gt;.deb</p><p> Um die neueste stabile Version von Minikube auf ppc64 Linux mit Debian-Paket zu installieren:</p><p><pre><code class="lang-bash">/usr/local/bin/minikube &amp;amp;&amp;amp; rm minikube-linux-ppc64le<br>curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube_latest_ppc64le.deb<br>sudo dpkg -i minikube_latest_ppc64le.deb</code></pre></p><p>Um die neueste beta-Version von Minikube auf ppc64 Linux mit Debian-Paket zu installieren:</p><p><pre><code class="lang-bash">r=https://api.github.com/repos/kubernetes/minikube/releases<br>u=$(curl -s $r | grep -o 'http.*download/v.*beta.*/minikube_.*_ppc64le.deb' | head -n1)<br>curl -L $u &amp;gt; minikube_beta_ppc64le.deb<br>sudo dpkg -i minikube_beta_ppc64le.deb</code></pre></p><p>Um die neueste stabile Version von Minikube auf ppc64 Linux mit RPM-Paket zu installieren:</p><p><pre><code class="lang-bash">curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-latest.ppc64el.rpm<br>sudo rpm -Uvh minikube-latest.ppc64el.rpm</code></pre></p><p>Um die neueste beta-Version von Minikube auf ppc64 Linux mit RPM-Paket zu installieren:</p><p><pre><code class="lang-bash">r=https://api.github.com/repos/kubernetes/minikube/releases<br>u=$(curl -s $r | grep -o 'http.*download/v.*beta.*/minikube-.*.ppc64el.rpm' | head -n1)<br>curl -L $u &amp;gt; minikube-beta.ppc64el.rpm<br>sudo rpm -Uvh minikube-beta.ppc64el.rpm</code></pre></p><p>Um die neueste stabile Version von Minikube auf S390x Linux mit binärer Download zu installieren:</p><p><pre><code class="lang-bash">curl -LO https://github.com/kubernetes/minikube/releases/latest/download/minikube-linux-s390x<br>sudo install minikube-linux-s390x /usr/local/bin/minikube &amp;amp;&amp;amp; rm minikube-linux-s390x</code></pre></p><p>Um die neueste beta-Version von Minikube auf S390x Linux mit binärer Download zu installieren:</p><p><pre><code class="lang-bash">r=https://api.github.com/repos/kubernetes/minikube/releases<br>u=$(curl -s $r | grep -o 'https.*minikube-linux-s390x' | head -n1)<br>curl -L $u &amp;gt; minikube-beta-s390x<br>sudo install minikube-beta-s390x /usr/local/bin/minikube &amp;amp;&amp;amp; rm minikube-beta-s390x</code></pre></p><p> Um den aktuellen Minikube Beta-Release auf S390x Linux über Binärdatei herunterzuladen und zu installieren, führen Sie folgende Schritte aus:</p><p><pre><code class="lang-bash">curl -LO https://api.github.com/repos/kubernetes/minikube/releases | grep -o 'http.*download/v.*beta.*/minikube-linux-s390x' | head -n1)<br>wget $RESPONSE -O minikube-linux-s390x<br>sudo mv minikube-linux-s390x /usr/local/bin/minikube<br>sudo rm minikube-linux-s390x</code></pre></p><p>Um den aktuellen Minikube Stable-Release auf S390x Linux über Debian-Paket herunterzuladen und zu installieren, führen Sie folgende Schritte aus:</p><p><pre><code class="lang-bash">curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube_latest_s390x.deb<br>sudo dpkg -i minikube_latest_s390x.deb</code></pre></p><p>Um den aktuellen Minikube Beta-Release auf S390x Linux über Debian-Paket herunterzuladen und zu installieren, führen Sie folgende Schritte aus:</p><p><pre><code class="lang-bash">r=https://api.github.com/repos/kubernetes/minikube/releases<br>u=$(curl -s $r | grep -o 'http.*download/v.*beta.*/minikube_.*_s390x.deb' | head -n1)<br>wget $u -O minikube_beta_s390x.deb<br>sudo dpkg -i minikube_beta_s390x.deb</code></pre></p><p>Um den aktuellen Minikube Stable-Release auf S390x Linux über RPM-Paket herunterzuladen und zu installieren, führen Sie folgende Schritte aus:</p><p><pre><code class="lang-bash">curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-latest.s390x.rpm<br>sudo rpm -Uvh minikube-latest.s390x.rpm</code></pre></p><p>Um den aktuellen Minikube Beta-Release auf S390x Linux über RPM-Paket herunterzuladen und zu installieren, führen Sie folgende Schritte aus:</p><p><pre><code class="lang-bash">r=https://api.github.com/repos/kubernetes/minikube/releases<br>u=$(curl -s $r | grep -o 'http.*download/v.*beta.*/minikube-.*.s390x.rpm' | head -n1)<br>wget $u -O minikube-beta.s390x.rpm<br>sudo rpm -Uvh minikube-beta.s390x.rpm</code></pre></p><p> Um die aktuelle minikube-Stabilversion auf x86-64 macOS über Homebrew zu installieren:<br>Falls das Homebrew-Paketmanager installiert ist:
+<pre><code class="lang-bash">brew install minikube</code></pre><br>Wenn <code>which minikube</code> nach der Installation über <code>brew</code> fehlschlägt, müssen möglicherweise die alten minikube-Links entfernt und das neu installierte Binary verlinkt werden:
+<pre><code class="lang-bash">brew unlink minikube<br>brew link minikube</code></pre><br>Um die aktuelle minikube-Stabilversion auf x86-64 macOS über binäre Download zu installieren:
+<pre><code class="lang-bash">curl -LO https://github.com/kubernetes/minikube/releases/latest/download/minikube-darwin-amd64<br>sudo install minikube-darwin-amd64 /usr/local/bin/minikube</code></pre><br>Um die aktuelle minikube-Beta-Version auf x86-64 macOS über binäre Download zu installieren:
+<pre><code class="lang-bash">r=https://api.github.com/repos/kubernetes/minikube/releases<br>curl -LO $(curl -s $r | grep -o 'http.*download/v.*beta.*/minikube-darwin-amd64' | head -n1)<br>sudo install minikube-darwin-amd64 /usr/local/bin/minikube</code></pre><br>Um die aktuelle minikube-Stabilversion auf ARM64 macOS über binäre Download zu installieren:
+<pre><code class="lang-bash">curl -LO https://github.com/kubernetes/minikube/releases/latest/download/minikube-darwin-arm64<br>sudo install minikube-darwin-arm64 /usr/local/bin/minikube</code></pre></p><p>Um die aktuelle minikube-Beta-Version auf ARM64 macOS über binäre Download zu installieren:
+<pre><code class="lang-bash">r=https://api.github.com/repos/kubernetes/minikube/releases<br>curl -LO $(curl -s $r | grep -o 'http.*download/v.*beta.*/minikube-darwin-arm64' | head -n1)<br>sudo install minikube-darwin-arm64 /usr/local/bin/minikube</code></pre></p><p>Um die aktuelle minikube-Beta-Version auf s390x Linux-Systemen über binäre Download zu installieren:
+<pre><code class="lang-bash">u=$(curl -s $r | grep -o 'http.*download/v.*beta.*/minikube-.*.s390x.rpm' | head -n1)<br>curl -L $u &amp;gt; minikube-beta.s390x.rpm &amp;amp;&amp;amp; sudo rpm -Uvh minikube-beta.s390x.rpm</code></pre></p><p>In diesem Beispiel wird <code>$r</code> als URL für die GitHub-API verwendet, um die aktuelle Release-URL für die minikube-Beta-Version abzurufen. Die URL wird dann mit <code>curl</code> heruntergeladen und mit <code>sudo rpm</code> installiert.</p><p> Um die aktuelle stabile Version von Minikube auf ARM64 macOS mithilfe von Binärdownload zu installieren:
+<pre><code class="lang-bash">curl -LO https://github.com/kubernetes/minikube/releases/latest/download/minikube-darwin-arm64<br>sudo install minikube-darwin-arm64 /usr/local/bin/minikube</code></pre><br>Um die aktuelle stabile Version von Minikube auf ARM64 macOS mithilfe von Homebrew zu installieren:<br>Wenn das Homebrew-Paketmanager installiert ist:
+<pre><code class="lang-bash">brew install minikube</code></pre><br>Wenn nach der Installation über brew die Befehl <code>which minikube</code> fehlschlägt, müssen möglicherweise die alten Minikube-Links entfernt und das neu installierte Binär verlinkt werden:
+<pre><code class="lang-bash">brew unlink minikube<br>brew link minikube</code></pre><br>Um die aktuelle beta-Version von Minikube auf ARM64 macOS mithilfe von Binärdownload zu installieren:
+<pre><code class="lang-bash">r="https://api.github.com/repos/kubernetes/minikube/releases"<br>curl -LO $(curl -s $r | grep -o 'http.*download/v.*beta.*/minikube-darwin-arm64' | head -n1)<br>sudo install minikube-darwin-arm64 /usr/local/bin/minikube</code></pre><br>Um die aktuelle stabile Version von Minikube auf x86-64 Windows mithilfe von Windows Package Manager zu installieren:<br>Wenn das Windows Package Manager installiert ist, verwenden Sie den folgenden Befehl, um Minikube zu installieren:
+<pre><code class="lang-bash">winget install Kubernetes.minikube</code></pre><br>Um die aktuelle stabile Version von Minikube auf x86-64 Windows mithilfe von Chocolatey zu installieren:<br>Wenn das Chocolatey Package Manager installiert ist, verwenden Sie den folgenden Befehl, um Minikube zu installieren:
+<pre><code class="lang-bash">choco install minikube</code></pre><br>Um die aktuelle stabile Version von Minikube auf x86-64 Windows mithilfe von .exe-Download zu installieren:<br>Laden Sie den Installer für die aktuelle Version herunter und führen Sie ihn aus.</p><p> Der aktuelle stabile Minikube-Release auf x86-64 Windows über .exe-Download: Lade und führe den Installer für die aktuelle Version herunter. Oder, wenn Sie PowerShell verwenden, verwenden Sie diesen Befehl:</p><p><pre><code class="lang-">New-Item -Path 'c:\' -Name 'minikube' -ItemType Directory -Force<br>$ProgressPreference = 'SilentlyContinue'<br>Invoke-WebRequest -OutFile 'c:\minikube\minikube.exe' -Uri 'https://github.com/kubernetes/minikube/releases/latest/download/minikube-windows-amd64.exe' -UseBasicParsing</code></pre></p><p>Fügen Sie den minikube.exe-Binary Ihrem PATH hinzu. Stellen Sie sicher, dass Sie PowerShell als Administrator ausführen.</p><p><pre><code class="lang-">$oldPath = [Environment]::GetEnvironmentVariable('Path', [EnvironmentVariableTarget]::Machine)<br>if ($oldPath.Split(';') -inotcontains 'C:\minikube'){<br>    [Environment]::SetEnvironmentVariable('Path', $('{0};C:\minikube' -f $oldPath), [EnvironmentVariableTarget]::Machine)<br>}</code></pre></p><p>Wenn Sie eine Terminalanwendung (z.B. PowerShell) für die Installation verwendet haben, bitte schließen Sie diese Terminalanwendung und öffnen Sie sie erneut, bevor Sie minikube ausführen.</p><p>Um die aktuelle Minikube-Beta-Version auf x86-64 Windows über .exe-Download zu installieren: Lade und führe den Installer für die aktuelle Beta-Version herunter. Oder, wenn Sie PowerShell verwenden, verwenden Sie diesen Befehl:</p><p><pre><code class="lang-">New-Item -Path 'c:\' -Name 'minikube' -ItemType Directory -Force<br>$response = Invoke-WebRequest -Uri 'https://api.github.com/repos/kubernetes/minikube/releases' -UseBasicParsing<br>$json = $response.Content | ConvertFrom-Json<br>$item = ($json | ?{ $_.prerelease -eq $true })[0].assets | ?{ $_.name -eq 'minikube-windows-amd64.exe' }<br>Invoke-WebRequest -Uri $item.Uri -OutFile 'c:\minikube\minikube.exe'</code></pre></p><p> Um das minikube.exe-Binär in Ihrer PATH zu fügen, muss PowerShell als Administrator ausgeführt werden. $oldPath = [Environment]::GetEnvironmentVariable('Path', [EnvironmentVariableTarget]::Machine)<br> Falls der Pfad 'C:\minikube' in $oldPath nicht enthalten ist, fügt Sie den Pfad hinzu:<br> [Environment]::SetEnvironmentVariable('Path', $('{0};C:\minikube' -f $oldPath), [EnvironmentVariableTarget]::Machine)</p><p> Wenn Sie eine CLI zum Installieren verwendet haben, müssen Sie diese CLI schließen und eine neue öffnen, bevor Sie fortfahren können.<br> Erleben Sie die neueste minikube-Version direkt in Ihrem Browser kostenlos!<br> Stellen Sie sicher, dass Sie sich bei GitHub angemeldet haben, und klicken Sie dann auf 'Start deinen Cluster'.</p><p> Von einem Terminal mit Administratorrechten (aber nicht als root eingeloggt) ausführen:<br> minikube start</p><p> Wenn minikube nicht startet, finden Sie auf der Seite der Treiber Hilfe, um eine kompatible Container- oder virtuelle Maschinenverwaltung einzurichten.</p><p>Um den Inhalt des JSON-Objekts $item in eine Variable umzuwandeln, verwenden Sie den Befehl ConvertFrom-Json:<br>ConvertFrom-Json $item = ($json | ?{ $_.prerelease -eq $true })[0].assets | ?{ $_.name -eq 'minikube-windows-amd64.exe' }</p><p>Danach verwenden Sie Invoke-WebRequest, um den Download-URL des Elements $item.browser_download_url zu nutzen und das Ergebnis in 'c:\minikube\minikube.exe' zu speichern:<br>Invoke-WebRequest -Uri $item.browser_download_url -OutFile 'c:\minikube\minikube.exe' -UseBasicParsing</p><p>Hier ist der komplette Code:</p><p>ConvertFrom-Json $item = ($json | ?{ $_.prerelease -eq $true })[0].assets | ?{ $_.name -eq 'minikube-windows-amd64.exe' }<br>Invoke-WebRequest -Uri $item.browser_download_url -OutFile 'c:\minikube\minikube.exe' -UseBasicParsing</p><p>Add the minikube.exe binary to your PATH. Make sure to run PowerShell as Administrator.<br>$oldPath = [Environment]::GetEnvironmentVariable('Path', [EnvironmentVariableTarget]::Machine)<br>if ($oldPath.Split(';') -inotcontains 'C:\minikube'){<br>[Environment]::SetEnvironmentVariable('Path', $('{0};C:\minikube' -f $oldPath), [EnvironmentVariableTarget]::Machine)<br>}</p><p>If you used a CLI to perform the installation, you will need to close that CLI and open a new one before proceeding.<br>Experience the latest minikube version directly in your browser for free!<br>Ensure you are logged into GitHub, then click 'Start your cluster'</p><p>From a terminal with administrator access (but not logged in as root), run:<br>minikube start</p><p>If minikube fails to start, see the drivers page for help setting up a compatible container or virtual-machine manager.</p><p> administrator-zugriff (aber nicht angemeldet als root), führen Sie folgendes aus: minikube start<br>Wenn minikube nicht starten kann, finden Sie hier Hilfe, um eine kompatible Container- oder virtuelle Maschinen-Manager-Umgebung einzurichten: https://minikube.sigs.k8s.io/docs/drivers/<br>3Interagieren Sie mit Ihrer Cluster<br>Wenn Sie bereits kubectl installiert haben (siehe Dokumentation), können Sie jetzt es verwenden, um Ihre glänzende neue Cluster zu erreichen: kubectl get po -A<br>Alternativ kann minikube die passende Version von kubectl herunterladen und Sie sollten es wie folgt verwenden können: minikube kubectl -- get po -A<br>Sie können auch Ihren Tag auf der Schale leichter machen, indem Sie das folgende zur Ihrer Shell-Konfig hinzufügen: (mehr Details finden Sie hier: kubectl) Alias kubectl="minikube kubectl --"<br>Zunächst können Sie Dienste wie z.B. der storage-provisioner, möglicherweise noch nicht in einem Laufenden Zustand sein. Dies ist eine normale Bedingung während der Cluster-Aufbringung und wird sich selbst in Kürze beheben. Für weitere Einblicke in den Zustand Ihrer Cluster, bündelt minikube den Kubernetes Dashboard, sodass Sie sich leicht in Ihrer neuen Umgebung zurechtfinden können: minikube dashboard<br>4Anwendungen bereitstellen<br>Erstellen Sie eine Beispiel-Bereitstellung und öffnen Sie sie auf Port 8080: kubectl create deployment hello-minikube --image=kicbase/echo-server:1.</p><p> Umgebung: minikube dashboard<br>Bereitstellung von Anwendungen<br>Erstelle eine Beispielbereitstellung und stelle sie auf Port 8080 bereit:<br>kubectl create deployment hello-minikube --image=kicbase/echo-server:1.0<br>kubectl expose deployment hello-minikube --type=NodePort --port=8080<br>Es kann einige Sekunden dauern, aber Ihre Bereitstellung wird bald aufgeführt werden, wenn Sie folgendes ausführen:<br>kubectl get services hello-minikube<br>Die einfachste Möglichkeit, diesen Dienst zu erreichen, ist es, minikube zu ermöglichen, Ihnen einen Webbrowser zu starten:<br>minikube service hello-minikube<br>Alternativ können Sie den Port mit kubectl umleiten:<br>kubectl port-forward service/hello-minikube 7080:8080<br>Tada! Ihre Anwendung ist jetzt auf http://localhost:7080/ verfügbar. Sie sollten in der Anwendungsausgabe die Anfragemetadata sehen können. Versuche den Pfad der Anfrage zu ändern und beobachte die Änderungen. Ähnlich können Sie eine POST-Anfrage ausführen und die Anfragekörperausgabe in der Ausgabe anzeigen. Um auf eine LoadBalancer-Bereitstellung zuzugreifen, verwenden Sie den Befehl "minikube tunnel". Hier ist ein Beispiel für eine Bereitstellung:<br>kubectl create deployment balanced --image=kicbase/echo-server:1.0</p><p> Um auf eine LoadBalancer-Bereitstellung zuzugreifen, verwenden Sie den Befehl "minikube tunnel". Hier ist ein Beispiel für eine Bereitstellung:</p><p><pre><code class="lang-">kubectl create deployment balanced --image=kicbase/echo-server:1.0<br>kubectl expose deployment balanced --type=LoadBalancer --port=8080</code></pre></p><p>In einer anderen Konsole starten Sie den Tunnel, um eine routable IP für die ‘balanced’-Bereitstellung zu erhalten:</p><p><pre><code class="lang-">minikube tunnel</code></pre></p><p>Um die routable IP zu finden, führen Sie diesen Befehl aus und betrachten Sie die EXTERNAL-IP-Spalte:</p><p><pre><code class="lang-">kubectl get services balanced</code></pre><br>Ihre Bereitstellung ist jetzt unter &lt;EXTERNAL-IP&gt;:8080 verfügbar.</p><p>Aktivieren Sie den ingress-Addon:</p><p><pre><code class="lang-">minikube addons enable ingress</code></pre></p><p>Hier ist ein Beispiel für einfache echo-server-Dienste und ein Ingress-Objekt, um diese Dienste zu routen.</p><p><pre><code class="lang-yaml">apiVersion: v1<br>kind: Pod<br>metadata:<br>  name: foo-app<br>  labels:<br>    app: foo<br>spec:<br>  containers:<br>  - name: foo-app<br>    image: 'kicbase/echo-server:1.0'
+<hr><br>apiVersion: v1<br>kind: Service<br>metadata:<br>  name: foo-service<br>spec:<br>  selector: app: foo<br>  ports:<br>  - port: 8080
+<hr><br>apiVersion: v1<br>kind: Pod<br>metadata:<br>  name: bar-app<br>  labels:<br>    app: bar<br>spec:<br>  containers:<br>  - name: bar-app<br>    image: 'kicbase/echo-server:1.0'
+<hr><br>apiVersion: networking.k8s.io/v1<br>kind: Ingress<br>metadata:<br>  name: example-ingress<br>spec:<br>  rules:<br>  - http:<br>      paths:<br>      - pathType: Prefix<br>        path: /foo<br>        backend:<br>          service:<br>            name: foo-service<br>            port:<br>              number: 8080<br>      - pathType: Prefix<br>        path: /bar<br>        backend:<br>          service:<br>            name: bar-service<br>            port:<br>              number: 8080</code></pre></p><p>Führen Sie die Inhalte aus:</p><p><pre><code class="lang-">kubectl apply -f &amp;lt;URL&amp;gt;</code></pre></p><p>Um die Inhalte aus einer Datei anzuwenden, ersetzen Sie &lt;URL&gt; durch den Pfad zur Datei.</p><p> - pathType: Präfixpfad: /bar<br>  backend: service:<br>    name: bar-service<br>    port:<br>      number: 8080</p><p><hr></p><p>Anwenden der Inhalte
+<pre><code class="lang-">kubectl apply -f https://storage.googleapis.com/minikube-site-examples/ingress-example.yaml</code></pre><br>Warte auf die Ingress-Adresse
+<pre><code class="lang-">kubectl get ingress<br>NAME CLASS HOSTS ADDRESSES PORTS ALTER<br>example-ingress nginx * &amp;lt;Ihre_IP_hier&amp;gt; 80 5m45s</code></pre><br>Hinweis für Nutzer von Docker Desktop: Um die Ingress-Funktion zu aktivieren, müssen Sie ein neues Terminalfenster öffnen und minikube tunnel ausführen und in den folgenden Schritt 127.0.0.1 anstelle von &lt;IP_oben&gt; verwenden. Jetzt überprüfen Sie, ob die Ingress-Funktion funktioniert
+<pre><code class="lang-">curl &amp;lt;IP_oben&amp;gt;/foo<br>Anfrage von foo-app ...</code></pre></p><p><pre><code class="lang-">curl &amp;lt;IP_oben&amp;gt;/bar<br>Anfrage von bar-app ...</code></pre></p><p>Verwalten Ihrer Cluster</p><p>Pause: Kubernetes ohne Auswirkung auf ausgeführte Anwendungen:
+<pre><code class="lang-">minikube pause</code></pre></p><p>Wiederaufnahme einer pausierter Instanz:
+<pre><code class="lang-">minikube unpause</code></pre></p><p>Halt:
+<pre><code class="lang-">minikube stop</code></pre></p><p>Ändern des Standard-Speicherlimits (erfordert einen Neustart):
+<pre><code class="lang-">minikube config set memory 9001</code></pre></p><p>Durchsuchen des Katalogs leicht installierbarer Kubernetes-Dienste:
+<pre><code class="lang-">minikube addons list</code></pre></p><p>Erstellen einer zweiten Cluster-Instanz mit einem älteren Kubernetes-Release:
+<pre><code class="lang-">minikube start -p aged --kubernetes-version=v1.34.0</code></pre></p><p>Löschen aller minikube-Cluster:
+<pre><code class="lang-">minikube delete --all</code></pre></p><p>Nächster Schritt</p><p>Die minikube-Handbuch Community-beitragende Tutorials<br>minikube Befehlshilfe<br>Beitragende-Leitfaden</p><p>Nimm unsere schnelle 5-Fragen-Befragung zur Teilnahme, um Ihre Meinung zu teilen 🙏</p><p>Feedback<br>War diese Seite hilfreich? Ja Nein<br>Glad to hear it! Bitte erzählen Sie uns, wie wir verbessern können.<br>Leider zu hören. Bitte erzählen Sie uns, wie wir verbessern können.</p><p>🙏 Feedback<br>War diese Seite hilfreich? Ja Nein<br>Glad to hear it! Bitte erzählen Sie uns, wie wir verbessern können.<br>Leider zu hören. Bitte erzählen Sie uns, wie wir verbessern können.</p><p>Letzte Änderung am 8. Januar 2026: Entfernen von veralteten 32-Bit-arm-Arch-Zielen (2d739a1fb)</p>
+</main>
+</body>
+</html>

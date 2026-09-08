@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harbor docs | Upgrade Harbor and Migrate Data</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Harbor docs | Upgrade Harbor and Migrate Data</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Tato průvodce se týká aktualizace a migrace na verzi 2.15.0. Tento průvodce obsahuje pouze migraci z verze 2.12.0 a novějších na aktuální verzi. Pokud jste aktualizovali z starší verze, odkazujte se na průvodce migrace pro starší verzi Harboru.</p><p>Aktualizace Harboru na verzi 2.14.0<br>Aktualizace Harboru na verzi 2.13.0<br>Aktualizace Harboru na verzi 2.12.0<br>Aktualizace Harboru na verzi 2.11.0<br>Aktualizace Harboru na verzi 2.10.0<br>Aktualizace Harboru na verzi 2.9.0<br>Aktualizace Harboru na verzi 2.8.0<br>Aktualizace Harboru na verzi 2.7.0<br>Aktualizace Harboru na verzi 2.6.0<br>Aktualizace Harboru na verzi 2.5.0<br>Aktualizace Harboru na verzi 2.4.0<br>Aktualizace Harboru na verzi 2.3.0</p><p>Pokud aktualizujete instance Harboru, kterou jste nasadili pomocí Helmu, přečtěte si Upgrading Harbor Deployed with Helm.</p><p>Při aktualizaci existující instance Harboru na novější verzi můžete potřebovat migraci nastavení v harbor.yml. Migrace může upravit databáze schéma a nastavení harbor.yml, takže vždycky před migrací zabejte zálohu svých dat.</p><p>Důležité poznámky k aktualizaci<br>Opakujeme, musíte zabezpečit zálohu svých dat před každou migrací.</p><p>V verzi Harboru 2.9, pokud používáte vnější databázi, ujistěte se, že verze PostgreSQL je &gt;= 12.</p><p>Aktualizace a migrace Harboru<br>Přihlaste se k hostiteli Harboru a, pokud je stále spuštěn, zastavte a odstraňte existující instance Harboru.</p><p>cd harbor<br>docker compose down</p><p>Zabejte zálohu souborů Harboru, abyste mohli vrátit se zpět na aktuální verzi, pokud bude to nutné.</p><p>mv harbor /my_backup_dir/harbor</p><p>Zabejte zálohu databáze, která se vztahem výchozí.</p><p>/data/database.</p><p> Přesuňte soubory Harbor tak, abyste mohli vrátil se zpět k aktuální verzi, pokud bude nutné.</p><p>    mv harbor /můj_zásobník_záznamů/harbor</p><p>Zálohujte databázi, která se vzorově nachází v adresáři /data/database.</p><p>    cp -r /data/database /můj_zásobník_záznamů/</p><p>Stáhněte si nejnovější balíček Harbor z https://github.com/goharbor/harbor/releases a rozbalte ho. Další informace naleznete v článku Stáhněte si instalační balíček Harbor. Než začnete s aktualizací Harbor, provedte migraci. Nástroj pro migraci je v harbor-prepare tools, který je dodáván jako obrázek Docker. Můžete ho stáhnout z Docker Hub. V následujícím příkazu:</p><p>    docker pull goharbor/prepare:[tag]</p><p>Alternativně, pokud používáte instalační balíček offline, můžete ho zahrnout do obrázku Docker z balíčku offline instalátoru. Nahraďte [tag] novou verzí Harbor, například v1.10.0, v následujícím příkazu:</p><p>    tar zxf &lt;balíček offline&gt; docker image load -i harbor/harbor.[verze].tar.gz</p><p>Kopírujte /cesta/k/starému/harbor.yml do harbor.yml a aktualizujte ho.</p><p>    docker run -it --rm -v /:/hostfs goharbor/prepare:[tag] migrate -i ${cesta k harbor.yml}</p><p>POZOROVÁNÍ: Schéma aktualizace a migrace databáze je prováděna jádrem při spuštění Harbor. Pokud se migrace nezdaří, zkontrolujte záznamy jádra k ladění. V adresáři ./harbor spusťte skript ./install.sh, aby instaloval nový instance Harbor. K instalaci Harbor s Trivy, naleznete další informace v článku Spustit instalační skript. Pokud potřebujete vrátil se zpět k předchozí verzi Harbor, naleznete další informace v článku Vrátil se zpět z aktualizace.</p><p>Instalace Harbor s Trivy, naleznete další informace v článku Spustit instalační skript. Pokud potřebujete vrátil se zpět k předchozí verzi Harbor, naleznete další informace v článku Vrátil se zpět z aktualizace.</p><p>Stránky v této sekci
+<hr></p><p>Aktualizace Harbor nasazeného pomocí Helm
+<hr></p><p>Vrátil se zpět z aktualizace
+<hr></p><p>Testování aktualizace Harbor
+<hr></p>
+</main>
+</body>
+</html>

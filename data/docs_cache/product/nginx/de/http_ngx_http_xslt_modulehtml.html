@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module ngx_http_xslt_module</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Module ngx_http_xslt_module</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Modul ngx_http_xslt_module (0.7.8+) ist ein Filter, der XML-Antworten mithilfe eines oder mehrerer XSLT-Stylesheets transformiert. Dieser Modul wird standardmäßig nicht gebaut und muss mit dem --with-http_xslt_module Konfigurationsparameter aktiviert werden. Dieser Modul benötigt die libxml2 und libxslt Bibliotheken.</p><p>Beispiel-Konfiguration:
+<pre><code class="lang-">location / {<br>    xml_entities /site/dtd/entities.dtd;<br>    xslt_stylesheet /site/xslt/one.xslt param=value;<br>    xslt_stylesheet /site/xslt/two.xslt;<br>}</code></pre></p><p>Syntax:
+<pre><code class="lang-">xml_entities path;</code></pre><br>Standard: —<br>Kontext: http, server, location</p><p>Diese Direktive gibt den Pfad der DTD-Datei an, die Zeichenentitäten definiert. Diese Datei wird während der Konfigurationsphase kompiliert. Technische Gründe verhindern, dass das Modul das extern definierte Subset in der verarbeiteten XML nutzen kann, es wird daher ignoriert und stattdessen eine speziell definierte Datei verwendet. Diese Datei sollte die XML-Struktur nicht beschreiben. Es reicht aus, nur die benötigten Zeichenentitäten zu definieren, z.B.:
+<pre><code class="lang-">&amp;lt;!ENTITY nbsp "&amp;amp;#xa0;"&amp;gt;</code></pre></p><p>Syntax:
+<pre><code class="lang-">xslt_last_modified on | off;</code></pre><br>Standard: xslt_last_modified off;<br>Kontext: http, server, location</p><p>Diese Direktive erschien in der Version 1.5.1. Erlaubt es, den "Last-Modified"-Headerfeld des Originalantworten während der XSLT-Transformations zu erhalten, um die Antwortspeicherung zu erleichtern.</p><p> In der Version 1.5.1 ermöglicht dies die Erhaltung des "Last-Modified"-Headerfelds aus der originalen Antwort während XSLT-Transformierungen, um Antwortspeicherung zu unterstützen. Standardmäßig wird das Headerfeld entfernt, da die Inhalte der Antwort während Transformationen verändert werden können und dynamisch generierte Elemente oder Teile enthalten können, die unabhängig von der originalen Antwort geändert werden. Syntax: xslt_param parameter value; Standard: — Kontext: http, server, location Dieses Direktiv erschien in der Version 1.1.18. Definiert die Parameter für XSLT-Stilblätter. Der Wert wird als XPath-Ausdruck behandelt. Der Wert kann Variablen enthalten. Um einer Stilblatt-Datei eine Zeichenkette als Wert zu übergeben, kann das xslt_string_param-Direktiv verwendet werden. Es können mehrere xslt_param-Direktive auftreten. Diese Direktiven werden vom vorherigen Konfigurationsniveau geerbt, wenn und nur wenn auf dem aktuellen Niveau keine xslt_param und xslt_string_param-Direktiven definiert sind. Syntax: xslt_string_param parameter value; Standard: — Kontext: http, server, location Dieses Direktiv erschien in der Version 1.1.18. Definiert die Zeichenkettendaten für XSLT-Stilblätter. XPath-Ausdrücke im Wert werden nicht interpretiert. Der Wert kann Variablen enthalten. Es können mehrere xslt_string_param-Direktive auftreten. Diese Direktiven werden vom vorherigen Konfigurationsniveau geerbt, wenn und nur wenn auf dem aktuellen Niveau keine xslt_param und xslt_string_param-Direktiven definiert sind. Syntax: xslt_stylesheet stylesheet [parameter=value ...]; Kontext: http, server, location Dieses Direktiv erschien in der Version 1.1.18. Definiert die XSLT-Stilblatt-Datei. Es können Parameter definiert werden. Syntax: xslt_include src [parameter=value ...]; Kontext: http, server, location Dieses Direktiv erschien in der Version 1.1.18. Inkludiert eine XSLT-Stilblatt-Datei. Es können Parameter definiert werden. Syntax: xslt_import namespace prefix [schemaLocation=URL]; Kontext: http, server, location Dieses Direktiv erschien in der Version 1.1.18. Importiert ein Namespace mit einem Prefix und gibt eine URL an, falls eine XSD-Datei verwendet werden soll.</p><p> Und nur, wenn auf der aktuellen Ebene keine xslt_param und xslt_string_param-Direktiven definiert sind. Syntax: xslt_stylesheet Stylesheet [Parameter=Wert ...]; Standard: — Kontext: location Definiert den XSLT-Stylesheet und seine optionalen Parameter. Ein Stylesheet wird während der Konfigurationsphase kompiliert. Parameter können entweder separat angegeben werden, oder in einer einzigen Zeile mithilfe des ":"-Trenners zusammengefasst werden. Wenn ein Parameter das ":"-Zeichen enthält, sollte es als "%3A" escape werden. Außerdem erfordert libxslt, dass Parameter, die nicht alphanumerische Zeichen enthalten, in einfache oder doppelte Anführungszeichen eingeschlossen werden, beispielsweise: param1='http%3A//www.beispiel.com':param2=wert2 Die Beschreibung der Parameter kann Variablen enthalten, beispielsweise kann die ganze Zeile der Parameter aus einer einzigen Variable genommen werden: location / { xslt_stylesheet /site/xslt/eins.xslt $arg_xslt_params param1='$wert1':param2=wert2 param3=wert3; } Es ist möglich, mehrere Stylesheets zu spezifizieren. Sie werden in der in der angegebenen Reihenfolge angewendet. Syntax: xslt_types MIME-Type ...; Standard: xslt_types text/xml; Kontext: http, server, location Erlaubt Transformationen in Antworten mit den in der Liste angegebenen MIME-Typen zusätzlich zu “text/xml”. Der spezielle Wert “*” passt sich beliebigen MIME-Typen an (0.8.29). Wenn das Transformationsergebnis eine HTML-Antwort ist, wird dessen MIME-Typ in “text/html” geändert.</p><p>Es ist möglich, mehrere Stylesheets zu spezifizieren. Sie werden in der angegebenen Reihenfolge angewendet. Syntax: xslt_import Stylesheet [Parameter=Wert ...]; Standard: — Kontext: location Importiert den angegebenen XSLT-Stylesheet und seine optionalen Parameter. Der importierte Stylesheet wird anschließend an den aktuellen Stylesheet angehängt.</p>
+</main>
+</body>
+</html>

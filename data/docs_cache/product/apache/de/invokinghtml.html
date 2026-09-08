@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Starting Apache</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a1a;--surface:#222;--surface2:#333;--accent:#e20074;--text:#eee;--text-dim:#999;--radius:12px;--max-w:800px}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;font-size:15px}
+body{display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(135deg,#1a1a1a,#222);border-bottom:2px solid #e20074;flex-shrink:0}
+header h1{font-size:16px;font-weight:600}
+header .home-btn{margin-left:auto;color:var(--accent);text-decoration:none;font-size:13px;padding:4px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .15s}
+header .home-btn:hover{background:rgba(226,0,116,.15)}
+main{flex:1;max-width:var(--max-w);width:100%;margin:0 auto;padding:24px 20px;overflow-y:auto}
+main::-webkit-scrollbar{width:6px}
+main::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+h1{font-size:24px;font-weight:700;margin-bottom:20px;color:#fff}
+h2{font-size:18px;font-weight:600;margin:24px 0 12px;color:var(--accent);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:#ddd}
+p{margin-bottom:12px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace}
+pre{background:rgba(0,0,0,.3);padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;font-family:'JetBrains Mono','Fira Code',monospace;line-height:1.5;border:1px solid rgba(255,255,255,.05)}
+pre code{background:none;padding:0;font-size:inherit}
+ul,ol{padding-left:24px;margin:8px 0 12px}
+li{margin-bottom:4px}
+hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:20px 0}
+strong{font-weight:600}
+.doc-image{margin:16px 0;text-align:center}
+.doc-image img{max-width:100%;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Starting Apache</h1>
+  <a class="home-btn" href="/">← Chat</a>
+</header>
+<main>
+<p> Anfahrendes Apache Verfügbare Sprachen: de | en | es | fr | ja | ko | pt-br | tr</p><p>Bei Windows wird Apache normalerweise als Dienst gestartet. Für Details siehe Running Apache as a Service. Bei Unix wird das httpd-Programm als Daemon gestartet, der kontinuierlich im Hintergrund ausgeführt wird, um Anfragen zu verarbeiten. Dieses Dokument beschreibt, wie Sie httpd aufrufen.</p><p>Wie Apache gestartet wird</p><p>Fehler bei Starten</p><p>Beim Starten beim Booten</p><p>Zusätzliche Informationen</p><p>Siehe auchStopping and Restartinghttpdapachectl</p><p>Wie Apache gestartet wird ¶</p><p>Wenn im Konfigurationsfile der Listen-Wert der Standardwert von 80 (oder irgendein anderer Port unter 1024) ist, ist es erforderlich, Root-Rechte zu haben, um Apache zu starten, damit er sich an diesem privilegierten Port binden kann. Nachdem der Server gestartet und einige vorläufige Aktivitäten wie das Öffnen seiner Log-Dateien durchgeführt hat, wird er mehrere Child-Prozesse starten, die die Arbeit ausführen, Anfragen von Clients zu hören und zu beantworten. Das Haupt-httpd-Prozess läuft weiterhin als root-Benutzer, aber die Child-Prozesse laufen als weniger privilegierter Benutzer. Dies wird durch die ausgewählte Multi-Processing Module kontrolliert. Die empfohlene Methode, das httpd-Executable aufzurufen, ist, das apachectl-Steuerscript zu verwenden. Dieses Script setzt bestimmte Umgebungsvariablen, die für httpd korrekt funktionieren müssen unter bestimmten Betriebssystemen, und dann ruft es das httpd-Binary auf. apachectl überträgt alle Befehlszeilenargumente, sodass auch httpd-Optionen mit apachectl verwendet werden können.</p><p> httpd-Binär. Mit apachectl werden beliebige Befehlszeilenargumente übergeben, sodass auch Apache-Optionen mit apachectl verwendet werden können. Sie können auch direkt das apachectl-Skript bearbeiten, indem Sie die HTTPD-Variable nahe oben ändern, um den richtigen Speicherort des httpd-Binärs und beliebige stets vorhandene Befehlszeilenargumente anzugeben. Das erste, was httpd tut, wenn es aufgerufen wird, ist, den Konfigurationsdatei httpd.conf zu lokalisieren und zu lesen. Der Speicherort dieser Datei wird bei der Kompilierung festgelegt, aber es ist möglich, seinen Speicherort während der Ausführung mit dem -f-Option der Befehlszeile anzugeben, wie z.B. /usr/local/apache2/bin/apachectl -f /usr/local/apache2/conf/httpd.conf Wenn alles gut geht während der Startphase, wird der Server sich von der Konsole lösen und der Befehlssatz kehrt fast sofort zurück. Dies zeigt an, dass der Server lauffähig ist. Sie können dann Ihren Browser verwenden, um auf den Server zu verbinden und die Testseite in dem DocumentRoot-Verzeichnis anzusehen. Fehler bei der Startphase ¶ Wenn Apache während der Startphase einen tödlichen Fehler erleidet, schreibt er eine Beschreibung des Problems entweder auf die Konsole oder in den ErrorLog vor dem Beenden. Eine der häufigsten Fehlermeldungen lautet "Unfähig, an Port ... zu binden ...". Diese Meldung wird normalerweise durch folgende Ursachen verursacht:
+<ul>
+<li>Versuchen, den Server auf einem privilegierten Port zu starten, wenn nicht als root-Benutzer angemeldet ist; oder</li>
+</ul><ul>
+<li>Versuchen, den Server zu starten, wenn bereits eine Instanz von Apache oder einer anderen Web-Server auf demselben Port gebunden ist.</li>
+</ul></p><p> Der Server, wenn es bereits eine weitere Instanz von Apache oder einem anderen Webserver gibt, der auf demselben Port gebunden ist. Für weitere Problembehebungshinweise konsultieren Sie bitte die Apache FAQ. Starten beim Booten ¶ Wenn Sie Ihren Server nach einem Systemneustart fortführen möchten, sollten Sie einen Aufruf von apachectl in Ihre Systemstartdateien (typischerweise rc.local oder eine Datei in einem rc.N-Verzeichnis) hinzufügen. Dadurch wird Apache als root gestartet. Bevor Sie dies tun, sollten Sie sicherstellen, dass Ihr Server für Sicherheit und Zugriffsbeschränkungen korrekt konfiguriert ist. Der apachectl-Skript ist so entworfen, dass es sich wie ein standardisierter SysV-Init-Skript verhält; es kann die Argumente start, restart und stop empfangen und sie in die entsprechenden Signale an httpd übersetzen. Somit können Sie oft einfach apachectl in das passende Init-Verzeichnis verlinken. Allerdings sollten Sie die genauen Anforderungen Ihres Systems überprüfen. Zusätzliche Informationen ¶ Zusätzliche Informationen zu den Befehlszeilenoptionen von httpd und apachectl sowie zu anderen Unterstützungswerkzeugen, die mit dem Server geliefert werden, finden Sie auf der Seite Server und Unterstützungsprogramme. Es gibt auch Dokumentation zu allen Modulen, die mit der Apache-Verteilung geliefert werden, und zu den Direktiven, die sie bereitstellen.</p>
+</main>
+</body>
+</html>
