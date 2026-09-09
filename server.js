@@ -1114,7 +1114,14 @@ io.on('connection', (socket) => {
             return leftover.length === 0 && lines.length > 0
           }
           const isNoInfo = !rawBody || cleanedBody.length === 0 || isEmptyAfterEcho(cleanedBody) || isEchoFiller(rawBody)
-          if (isNoInfo) return null
+          // A source that had no RAG hits must not carry any content — whatever the model
+          // wrote under it is content leaked from another source, so drop the whole section.
+          if (docs.length === 0) return null
+          if (isNoInfo) {
+            // Docs were retrieved but the model gave nothing usable for this source —
+            // emit just the reference list so the answer still links the docs.
+            return h + '\n\n' + refLabel + '\n' + refLinks.join('\n')
+          }
           let body = rawBody
           // Remove a single echoed title line that duplicates the previous link's text
           body = body.replace(/(\[([^\]]+)\]\([^)]+\))\n\s*\2(?=\s|$|\.)/g, '$1')
