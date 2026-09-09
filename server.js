@@ -1041,8 +1041,8 @@ io.on('connection', (socket) => {
         // including the "V tomto zdroji nejsou žádné..." phrasing seen in live output.
         const noInfoRe = new RegExp(
           '^("|\'|\\(\\s*)?(' +
-            'v tomto zdroji nejsou žádné relevantní informace|' +
-            'žádné relevantní informace|' +
+            'v tomto zdroji nejsou žádné (relevantní )?informace|' +
+            'žádné (relevantní )?informace|' +
             'žádné dokumenty pro tento dotaz|' +
             'no relevant information[s]?(\\s+in this source)?|' +
             'nothing relevant(\\s+was found)?|' +
@@ -1093,13 +1093,39 @@ io.on('connection', (socket) => {
           }
           // Attach references only when the source actually gave an answer. Empty,
           // "nothing here", or echo-filler sections are dropped entirely (no placeholder).
-          const isNoInfo = !rawBody || noInfoRe.test(rawBody.replace(/\s+/g, ' ').trim()) || isEchoFiller(rawBody)
+          // Multiple placeholder lines ("(žádné dokumenty pro tento dotaz)" several times)
+          // and echoed copy of the user's own questions must strip to empty too.
+          const normalizeNoInfo = (text) => text
+            .split('\n')
+            .map(line => line.trim())
+            .filter(line => !noInfoRe.test(line))
+            .join('\n')
+          const cleanedBody = normalizeNoInfo(rawBody)
+          // Drop a body that was only the user's previous questions echoed back
+          const userEchoPatterns = history
+            .filter(m => m.role === 'user')
+            .map(m => String(m.content || '').trim())
+            .filter(q => q.length > 5)
+          const isEmptyAfterEcho = (cleaned) => {
+            const lines = cleaned.split('\n').map(l => l.trim()).filter(Boolean)
+            if (lines.length === 0) return true
+            // Allow only question-echo lines (and nothing else) → treat as empty
+            const leftover = lines.filter(l => !userEchoPatterns.some(q => l.toLowerCase() === q.toLowerCase() || q.toLowerCase().includes(l.toLowerCase())))
+            return leftover.length === 0 && lines.length > 0
+          }
+          const isNoInfo = !rawBody || cleanedBody.length === 0 || isEmptyAfterEcho(cleanedBody) || isEchoFiller(rawBody)
           if (isNoInfo) return null
           let body = rawBody
           // Remove a single echoed title line that duplicates the previous link's text
           body = body.replace(/(\[([^\]]+)\]\([^)]+\))\n\s*\2(?=\s|$|\.)/g, '$1')
+          // Strip echoed copies of the user's own questions (model repeats them verbatim)
+          const echoPattern = new RegExp(
+            '^\\s*(?:' + userEchoPatterns.map(q => q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|') + ')\\s*$',
+            'im'
+          )
+          body = body.split('\n').filter(line => !echoPattern.test(line)).join('\n').replace(/\n\s*\n+/g, '\n\n').trim()
           const refBlock = refLinks.length ? '\n' + refLabel + '\n' + refLinks.join('\n') : ''
-          const content = (body || refBlock.trim()).trim()
+          const content = (body + (refBlock ? '\n' + refBlock.trim() : '')).trim()
           if (!content) return null
           return h + '\n\n' + content
         }).filter(Boolean).join('\n\n---\n\n')
