@@ -307,6 +307,21 @@ if (fs.existsSync(pageImagesPath)) {
   }
 }
 
+// Clean rendering/translation artifacts out of served doc HTML. The cached pages
+// (built from the translated RAG chunks) sometimes contain leftover garbage:
+// repeated translation-draft blocks ("překlad po úpravách:", "text v češtině:", …),
+// code line-number runs ("1 2 3 4 …" before <pre>), and filename-hash image alts.
+function cleanDocHtml(html) {
+  // A: whole <p> blocks that are translation drafts (marker may be preceded by a space)
+  html = html.replace(/<p>\s*(?:překlad\s+(?:po\s+úpravách|po\s+úpravě|prozatím(?:\s+(?:ne\s+)?prozatímně)?)|text\s+v\s+češtině|translated(?:\s+text)?):?.*?<\/p>/gis, '')
+  // B: interior code line-number runs ("<br>1 2 3 …") right before a <pre> block
+  html = html.replace(/<br>\s*(?:\d+\s*){3,}(?=<pre)/gi, '<br>')
+  // C: strip filename-hash artifacts from image alt attributes
+  html = html.replace(/alt="([^"]*?)\s+(?:hu)?[0-9a-f]{32}\s+\d+\s+\d+x\d+(?:\s*(?:resize\s+)?box\s+\d+)?[^"]*?"/gi,
+    (match, alt) => 'alt="' + alt.trim().replace(/\s+/g, ' ') + '"')
+  return html
+}
+
 function injectImages(bodyHtml, pageUrl) {
   const images = pageImagesMap[pageUrl]
   if (!images || images.length === 0) return bodyHtml
@@ -353,7 +368,7 @@ async function getTranslatedDoc(lang, docPath) {
     if (BASE_PATH) {
       html = html.replace(/src="\/images\/docs\//g, `src="${BASE_PATH}/images/docs/`)
     }
-    return html
+    return cleanDocHtml(html)
   }
 
   // Reconstruct page from RAG index
@@ -375,7 +390,7 @@ async function getTranslatedDoc(lang, docPath) {
   if (lang === 'en') {
     const bodyHtml = renderContentToHtml(bodyText)
     const bodyWithImages = injectImages(bodyHtml, pageUrl)
-    const enHtml = DOC_TEMPLATE(title, bodyWithImages, 'en')
+    const enHtml = cleanDocHtml(DOC_TEMPLATE(title, bodyWithImages, 'en'))
     if (!fs.existsSync(cacheDir)) fs.mkdirSync(cacheDir, { recursive: true })
     fs.writeFileSync(cacheFile, enHtml, 'utf-8')
     return enHtml
@@ -398,7 +413,7 @@ async function getTranslatedDoc(lang, docPath) {
 
   const bodyHtml = renderContentToHtml(translatedBody)
   const bodyWithImages = injectImages(bodyHtml, pageUrl)
-  const html = DOC_TEMPLATE(title, bodyWithImages, htmlLang)
+  const html = cleanDocHtml(DOC_TEMPLATE(title, bodyWithImages, htmlLang))
 
   if (!fs.existsSync(cacheDir)) fs.mkdirSync(cacheDir, { recursive: true })
   fs.writeFileSync(cacheFile, html, 'utf-8')
@@ -413,7 +428,7 @@ async function getProductTranslatedDoc(lang, product, docPath) {
   const cacheFile = path.join(productCacheDir, finalName + '.html')
 
   if (fs.existsSync(cacheFile)) {
-    return fs.readFileSync(cacheFile, 'utf-8')
+    return cleanDocHtml(fs.readFileSync(cacheFile, 'utf-8'))
   }
 
   const bases = Array.isArray(PRODUCT_BASE_URLS[product]) ? PRODUCT_BASE_URLS[product] : [PRODUCT_BASE_URLS[product]]
@@ -444,7 +459,7 @@ async function getProductTranslatedDoc(lang, product, docPath) {
 
   if (lang === 'en') {
     const bodyHtml = renderContentToHtml(bodyText)
-    const html = DOC_TEMPLATE(title, bodyHtml, 'en')
+    const html = cleanDocHtml(DOC_TEMPLATE(title, bodyHtml, 'en'))
     if (!fs.existsSync(productCacheDir)) fs.mkdirSync(productCacheDir, { recursive: true })
     fs.writeFileSync(cacheFile, html, 'utf-8')
     return html
@@ -465,7 +480,7 @@ async function getProductTranslatedDoc(lang, product, docPath) {
   }
 
   const bodyHtml = renderContentToHtml(translatedBody)
-  const html = DOC_TEMPLATE(title, bodyHtml, htmlLang)
+  const html = cleanDocHtml(DOC_TEMPLATE(title, bodyHtml, htmlLang))
 
   if (!fs.existsSync(productCacheDir)) fs.mkdirSync(productCacheDir, { recursive: true })
   fs.writeFileSync(cacheFile, html, 'utf-8')
