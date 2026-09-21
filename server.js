@@ -1142,6 +1142,10 @@ io.on('connection', (socket) => {
             outLines.push(raw)
           }
           body = outLines.join('\n').replace(/\n\s*\n+/g, '\n\n').trim()
+          // Remove no-info sentences wherever they appear (also mid-paragraph), e.g.
+          // "V tomto zdroji nejsou žádné relevantní informace o SSL certifikátu."
+          const noInfoClauseRe = /(?:\bV\s+tomto\s+zdroji\s+nejsou\s+žádné\s+(?:relevantní\s+)?informace|žádné\s+(?:relevantní\s+)?informace|žádné\s+dokumenty\s+pro\s+tento\s+dotaz|no\s+relevant\s+information[s]?(?:\s+in\s+this\s+source)?|nothing\s+relevant(?:\s+was\s+found)?|keine\s+(?:relevanten\s+)?informationen)[^.!?\n]*[.!?]?/gi
+          body = body.replace(noInfoClauseRe, '')
           // Keep the answer concise — cut long verbatim doc dumps at a paragraph boundary
           const MAX_ANSWER_CHARS = 1200
           if (body.length > MAX_ANSWER_CHARS) {
