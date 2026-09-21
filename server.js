@@ -1040,14 +1040,14 @@ io.on('connection', (socket) => {
         // model uses when a source has nothing relevant (CZ for users, EN/DE defensively),
         // including the "V tomto zdroji nejsou žádné..." phrasing seen in live output.
         const noInfoRe = new RegExp(
-          '^("|\'|\\(\\s*)?(' +
+          '^(?:"|\'|\\(\\s*)?(' +
             'v tomto zdroji nejsou žádné (relevantní )?informace|' +
             'žádné (relevantní )?informace|' +
             'žádné dokumenty pro tento dotaz|' +
             'no relevant information[s]?(\\s+in this source)?|' +
             'nothing relevant(\\s+was found)?|' +
-            'keine relevanten informationen' +
-          ')(\\s*\\)|"|\')?[.!]?$',
+            'keine (relevanten )?informationen' +
+          ').*?(?:\\s*\\)|"|\')?[.!]?$',
           'i'
         )
         // Map header -> its source host (to detect leaked outro links from other sources)
@@ -1117,11 +1117,9 @@ io.on('connection', (socket) => {
           // A source that had no RAG hits must not carry any content — whatever the model
           // wrote under it is content leaked from another source, so drop the whole section.
           if (docs.length === 0) return null
-          if (isNoInfo) {
-            // Docs were retrieved but the model gave nothing usable for this source —
-            // emit just the reference list so the answer still links the docs.
-            return h + '\n\n' + refLabel + '\n' + refLinks.join('\n')
-          }
+          // A source with no usable answer is not mentioned at all (no placeholder,
+          // no reference-only section) — only sources that actually answered appear.
+          if (isNoInfo) return null
           let body = rawBody
           // Remove a single echoed title line that duplicates the previous link's text
           body = body.replace(/(\[([^\]]+)\]\([^)]+\))\n\s*\2(?=\s|$|\.)/g, '$1')
