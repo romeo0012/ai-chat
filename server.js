@@ -1121,6 +1121,34 @@ io.on('connection', (socket) => {
           // no reference-only section) — only sources that actually answered appear.
           if (isNoInfo) return null
           let body = rawBody
+          // Strip raw doc artifacts the model copies verbatim into the answer:
+          //  - image alt-IDs like "install lets encrypt option hu12237..d0 150641 480x0 resize box 3"
+          //  - translation-draft markers ("překlad po úpravách:" / "text v češtině:" / ...)
+          //  - model-written reference headings (we append our own Reference block below)
+          //  - consecutive duplicate paragraphs (repeated draft blocks)
+          const draftMarkerRe = /^(?:překlad(?: po úpravách| po úpravé| prozatím(?: neprozatímně)?)?|text v češtině|translated(?: text)?):?\s*$/i
+          const imgAltRe = /\b\d+ \d+x\d+\s+(?:resize\s+)?box\s+\d+\b/
+          const modelRefRe = /^(?:reference[s]?|referenzen|odkaz(?:y)?|zdroj(?:e)?|links?):?\s*$/i
+          const outLines = []
+          let prevLine = ''
+          for (const raw of body.split('\n')) {
+            const line = raw.trim()
+            if (!line) { outLines.push(''); prevLine = ''; continue }
+            if (draftMarkerRe.test(line)) continue
+            if (modelRefRe.test(line)) continue
+            if (imgAltRe.test(line)) continue
+            if (line === prevLine) continue
+            prevLine = line
+            outLines.push(raw)
+          }
+          body = outLines.join('\n').replace(/\n\s*\n+/g, '\n\n').trim()
+          // Keep the answer concise — cut long verbatim doc dumps at a paragraph boundary
+          const MAX_ANSWER_CHARS = 1200
+          if (body.length > MAX_ANSWER_CHARS) {
+            let cut = body.slice(0, MAX_ANSWER_CHARS)
+            if (!/^\s/.test(body.slice(MAX_ANSWER_CHARS, MAX_ANSWER_CHARS + 1))) cut = cut.replace(/\s+\S*$/, '')
+            body = cut.trim()
+          }
           // Remove a single echoed title line that duplicates the previous link's text
           body = body.replace(/(\[([^\]]+)\]\([^)]+\))\n\s*\2(?=\s|$|\.)/g, '$1')
           // Strip echoed copies of the user's own questions (model repeats them verbatim)
