@@ -310,10 +310,44 @@ if (fs.existsSync(pageImagesPath)) {
 // Clean rendering/translation artifacts out of served doc HTML. The cached pages
 // (built from the translated RAG chunks) sometimes contain leftover garbage:
 // repeated translation-draft blocks ("překlad po úpravách:", "text v češtině:", …),
-// code line-number runs ("1 2 3 4 …" before <pre>), and filename-hash image alts.
+// code line-number runs ("1 2 3 4 …" listed as <br>-separated digits), duplicate
+// consecutive translation paragraphs, and filename-hash image alts.
 function cleanDocHtml(html) {
   // A: whole <p> blocks that are translation drafts (marker may be preceded by a space)
   html = html.replace(/<p>\s*(?:překlad\s+(?:po\s+úpravách|po\s+úpravě|prozatím(?:\s+(?:ne\s+)?prozatímně)?)|text\s+v\s+češtině|translated(?:\s+text)?):?.*?<\/p>/gis, '')
+  // A2: consecutive-duplicate translation paragraphs (same meaning, different wording)
+  const paras = html.split(/(?=<p>)/)
+  const kept = []
+  let prevTok = null
+  for (const seg of paras) {
+    const m = /^<p>([\s\S]*?)<\/p>\s*$/.exec(seg)
+    if (m) {
+      const toWords = (t) => (t.replace(/<br>/g, ' ').toLowerCase().match(/[a-záéíóúýčďěňřšťž0-9']+/g) || [])
+      const cur = toWords(m[1])
+      let dup = false
+      if (prevTok && cur.length > 12 && prevTok.length > 12) {
+        // long shared word run => drafted twice
+        const curStr = ' ' + cur.join(' ') + ' '
+        for (let i = 0; i + 6 <= prevTok.length; i++) {
+          if (curStr.indexOf(' ' + prevTok.slice(i, i + 6).join(' ') + ' ') !== -1) { dup = true; break }
+        }
+        if (!dup) {
+          // else fall back to Jaccard on word sets
+          const cset = new Set(cur)
+          let inter = 0
+          prevTok.forEach(w => { if (cset.has(w)) inter++ })
+          const union = cur.length + prevTok.length - inter
+          if (union > 0 && inter / union > 0.5) dup = true
+        }
+      }
+      if (!dup) { kept.push(seg); prevTok = cur } else { prevTok = null }
+    } else {
+      kept.push(seg)
+    }
+  }
+  html = kept.join('')
+  // A3: paragraphs that are only code line numbers ("1<br>2<br>3 …" or "1 2 3 …")
+  html = html.replace(/<p>\s*(?:(?:\d+\s*(?:<br>\s*|\s+))+)\d+\s*<\/p>/gi, '')
   // B: interior code line-number runs ("<br>1 2 3 …") right before a <pre> block
   html = html.replace(/<br>\s*(?:\d+\s*){3,}(?=<pre)/gi, '<br>')
   // C: strip filename-hash artifacts from image alt attributes
