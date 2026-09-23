@@ -787,7 +787,7 @@ SECURITY RULES:
 7. Never invent documentation URLs, configuration values or product capabilities.
 
 PRAVIDLA:
-1. ODPOVÍDEJ STEJNÝM JAZYKEM JAKO UŽIVATEL – česky na český dotaz, anglicky na anglický dotaz.\n2. VŽDY POUŽÍVEJ POUZE DOKUMENTACI Z KONTEXTU – nepiš z vlastních znalostí. Pokud kontext obsahuje relevantní info, použij HO. Pokud ne, napiš že v dokumentaci nic není.\n3. NEVYMÝŠLEJ SI URL – používej jen URL které jsi dostal v kontextu. Nikdy nevytvářej falešné URL adresy.\n4. KE KAŽDÉMU ZDROJI UVEĎ ODKAZ S NÁZVEM STRÁNKY – použij formát [název stránky](url), například:\n   [PHP Extensions](https://www.virtuozzo.com/application-management-docs/php-extensions/)\n   [Java Versions](https://www.virtuozzo.com/application-management-docs/java-versions/)\n   Odkazy vkládej PŘÍMO DO ODPOVĚDI (inline) u relevantní informace, nebo na konec. NEPOUŽÍVEJ formát "(URL: ...)" ani holé URL bez markdown syntaxe. NEPOUŽÍVEJ číslované reference typu [1], [2] atd. VŽDY použij název stránky z kontextu jako text odkazu.\n5. KDYŽ SE UŽIVATEL PTÁ NA POSTUP (jak něco udělat, zprovoznit, nainstalovat, nastavit), DEJ MU KONKRÉTNÍ KROK ZA KROKEM – číslovaný seznam kroků. U každého kroku uveď co je potřeba udělat a pokud jsou potřeba nějaké parametry (doména, IP adresa, verze, port, název účtu, heslo atd.), zeptej se na ně. Než začneš psát postup, zeptej se na chybějící parametry, pokud jsou z kontextu zřejmé nebo pokud je uživatel neuvedl.\n6. POKUD SE DOTAZ NETÝKÁ WORDPRESSU, NEZMIŇUJ WORDPRESS – nezmiňuj WordPress v odpovědi, pokud na to není uživatelův dotaz přímo zaměřený.\n7. ODPOVÍDEJ POUZE NA KONKRÉTNÍ DOTAZ – nepřidávej kroky ani informace o konfiguracích (PHP engine, databáze, škálování atd.), na které se uživatel neptal. Pokud se ptá na SSL/certifikát, nepiš o PHP ani o databázi.`
+1. ODPOVÍDEJ STEJNÝM JAZYKEM JAKO UŽIVATEL – česky na český dotaz, anglicky na anglický dotaz.\n2. VŽDY POUŽÍVEJ POUZE DOKUMENTACI Z KONTEXTU – nepiš z vlastních znalostí. Pokud kontext obsahuje relevantní info, použij HO. Pokud ne, napiš že v dokumentaci nic není.\n3. NEVYMÝŠLEJ SI URL – používej jen URL které jsi dostal v kontextu. Nikdy nevytvářej falešné URL adresy.\n4. KE KAŽDÉMU ZDROJI UVEĎ ODKAZ S NÁZVEM STRÁNKY – použij formát [název stránky](url), například:\n   [PHP Extensions](https://www.virtuozzo.com/application-management-docs/php-extensions/)\n   [Java Versions](https://www.virtuozzo.com/application-management-docs/java-versions/)\n   Odkazy vkládej PŘÍMO DO ODPOVĚDI (inline) u relevantní informace, nebo na konec. NEPOUŽÍVEJ formát "(URL: ...)" ani holé URL bez markdown syntaxe. NEPOUŽÍVEJ číslované reference typu [1], [2] atd. VŽDY použij název stránky z kontextu jako text odkazu.\n5. KDYŽ SE UŽIVATEL PTÁ NA POSTUP (jak něco udělat, zprovoznit, nainstalovat, nastavit), DEJ MU KONKRÉTNÍ KROK ZA KROKEM – číslovaný seznam kroků. U každého kroku uveď co je potřeba udělat a pokud jsou potřeba nějaké parametry (doména, IP adresa, verze, port, název účtu, heslo atd.), zeptej se na ně. Než začneš psát postup, zeptej se na chybějící parametry, pokud jsou z kontextu zřejmé nebo pokud je uživatel neuvedl.\n6. POKUD SE DOTAZ NETÝKÁ WORDPRESSU, NEZMIŇUJ WORDPRESS – nezmiňuj WordPress v odpovědi, pokud na to není uživatelův dotaz přímo zaměřený.\n7. ODPOVÍDEJ POUZE NA KONKRÉTNÍ DOTAZ – nepřidávej kroky ani informace o konfiguracích (PHP engine, databáze, škálování atd.), na které se uživatel neptal. Pokud se ptá na SSL/certifikát, nepiš o PHP ani o databázi.\n8. NEODPOVÍDEJ NA DOTAZ O JINÉM ZÁSOBNÍKU JAKO NA SVŮJ – když se uživatel ptá na .NET (C#, ASP.NET), neodpovídej postupy pro Javu, Tomcat, PHP, Node.js ani jiné technologie. Není-li pro daný stack v kontextu nic, napiš, že v dokumentaci nic není, a neubírej se k jinému zásobníku.`
 if (HELP_URL) {
   systemPromptBase += `\n\nYour knowledge source is: ${HELP_URL}`
 }
@@ -933,6 +933,9 @@ io.on('connection', (socket) => {
 
     const englishQuery = rag.translateToEnglish(userMsg)
     const isWpQuery = englishQuery.toLowerCase().includes('wordpress') || /\bwp\b/.test(englishQuery.toLowerCase())
+    // A .NET question (no such docs in the index): drop Java/Tomcat/PHP/etc. results so the
+    // model never answers a .NET question from a different-stack tutorial.
+    const isDotnetQuery = /(^|[^a-z0-9.])(\.net|dotnet|asp\.net|net\.core|vb\.net|nuget|c#)([^a-z0-9]|$)/i.test(englishQuery)
     const rawGroups = rag.searchPerSource(englishQuery, 2, 8)
     const sourceGroups = []
     const searchResults = []
@@ -944,6 +947,14 @@ io.on('connection', (socket) => {
           return !r.url.match(/\/wp-|\/wordpress/)
         })
       }
+      if (isDotnetQuery && !userMsg.toLowerCase().includes('java')) {
+        // The index has no .NET docs — keep only results that really mention
+        // .NET/ASP.NET/C#/NuGet. Anything else (Java/Tomcat/PHP/CMS montages)
+        // would make the model answer a .NET question from a different stack.
+        groupResults = groupResults.filter(r =>
+          /\.net|dotnet|asp\.net|c#|nuget|\.net core|visual studio/i.test(r.url + ' ' + r.title + ' ' + (r.content || '').slice(0, 400))
+        )
+      }
       if (groupResults.length > 0) {
         sourceGroups.push({ source: g.source, label: g.label, results: groupResults })
         searchResults.push(...groupResults)
@@ -954,12 +965,12 @@ io.on('connection', (socket) => {
     if (hasContext) {
       // Reject if user named a specific topic not reflected in any top result
       const generic = new Set(['jak','pro','se','si','na','do','je','za','od','s','v','a','i','o','u','k','z','mít','být','může','jsou','bude','který','která','které','jaký','jaká','jaké','tento','tato','toto','nebo','ale','proto','tedy','ovšem','také','jen','již','už','když','tedy','pak','nasadit','nasazení','vytvořit','vytvoření','tvořit','nastavit','nastavím','nastavíte','nastavili','nastavení','nastavovat','prostředí','aplikace','aplikaci','webový','webová','webové','stránka','doména','přístup','přihlásit','uživatel','heslo','škálování','zdroje','paměť','disk','kontejner','databáze','bezpečnost','certifikát','síť','port','adresa','monitorování','log','chyba','záloha','obnova','cena','ceny','platba','cloudlet','dokumentace','nápověda','topologie','průvodce','spustit','běží','smazat','přidat','změnit','použít','použití'])
-      const techTerms = englishQuery.toLowerCase().replace(/[.,!?;:]+/g, '').split(/\s+/).filter(w => w.length > 2 && !generic.has(w))
-      if (techTerms.length > 0) {
-        const topResults = searchResults.slice(0, 12).map(r => (r.url + ' ' + r.title + ' ' + (r.content || '').slice(0, 500)).toLowerCase()).join(' ')
-        hasContext = techTerms.some(t => topResults.includes(t))
-      }
-      if (hasContext) {
+    const techTerms = englishQuery.toLowerCase().replace(/[.,!?;:]+/g, '').split(/\s+/).filter(w => w.length > 2 && !generic.has(w))
+    if (techTerms.length > 0) {
+      const topResults = searchResults.slice(0, 12).map(r => (r.url + ' ' + r.title + ' ' + (r.content || '').slice(0, 500)).toLowerCase()).join(' ')
+      hasContext = techTerms.some(t => new RegExp(`(^|[^a-z0-9])${t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}($|[^a-z0-9])`).test(topResults))
+    }
+    if (hasContext) {
         const sourceHeaderList = rag.SOURCES.map(s => s.header).join('\n')
         const fixedRagPrompt = LANG_INSTRUCTION[lang].length + systemPromptBase.length +
           ragFormatBlock.replace('{}SOURCE_HEADERS{}', sourceHeaderList).length
@@ -982,6 +993,11 @@ io.on('connection', (socket) => {
     }
 
     let systemPrompt = LANG_INSTRUCTION[lang] + '\n\n' + systemPromptBase
+    const noDocsMsg = {
+      cz: 'V dokumentaci k tomuto tématu nic není.',
+      en: 'There is nothing about this topic in the documentation.',
+      de: 'Zu diesem Thema gibt es nichts in der Dokumentation.',
+    }
     if (hasContext) {
       console.log(`[RAG] ${clientIp} ${searchResults.length} výsledků: "${userMsg.slice(0, 50)}"`)
       searchResults.forEach(r => console.log(`[RAG] score=${r.score.toFixed(4)} ${r.url}`))
@@ -990,15 +1006,11 @@ io.on('connection', (socket) => {
         .replace('{}SOURCE_HEADERS{}', sourceHeaderList)
         .replace(/\n\n\{\}$/, '\n\n' + contextStr)
     } else {
-      const noDocsMsg = {
-        cz: 'V dokumentaci k tomuto tématu nic není.',
-        en: 'There is nothing about this topic in the documentation.',
-        de: 'Zu diesem Thema gibt es nichts in der Dokumentation.',
-      }
       systemPrompt += `\n\n=== ŽÁDNÁ DOKUMENTACE ===\nV dokumentaci není o tomto tématu vůbec nic. Odpověz POUZE touto jedinou větou (a nic víc): "${noDocsMsg[lang]}" NEVYMÝŠLEJ SI žádné URL adresy. NEODPOVÍDEJ z vlastních znalostí. Pokud nevíš, NAPIŠ pouze tu jednu větu a nic jiného.`
     }
 
     let fullResponse = ''
+    let gptAnswered = false
     socket.emit('assistant-start')
 
     const validUrls = new Set(searchResults.map(r => r.url.replace(/\/$/, '')))
@@ -1023,11 +1035,14 @@ io.on('connection', (socket) => {
             socket.emit('assistant-chunk', text)
           }
           fullResponse = chunks.join('')
+          gptAnswered = true
         } catch (fallbackErr) {
           console.error(`[fallback error] ${fallbackErr.message}`)
-          fullResponse = await llm.generate(systemPrompt, trimHistoryForLlm(history), (chunk) => {
-            socket.emit('assistant-chunk', chunk)
-          })
+          // No docs in RAG and GPT unavailable: answer with the fixed
+          // "nothing found" sentence instead of letting Mistral hallucinate
+          // a tutorial from another stack.
+          fullResponse = noDocsMsg[lang]
+          socket.emit('assistant-chunk', fullResponse)
         }
       } else {
         fullResponse = await llm.generate(systemPrompt, trimHistoryForLlm(history), (chunk) => {
@@ -1035,7 +1050,6 @@ io.on('connection', (socket) => {
         })
         // Also fetch ChatGPT response
         const chatGptLabel = { cz: 'Odpověď ChatGPT:', en: 'ChatGPT response:', de: 'ChatGPT-Antwort:' }
-        socket.emit('assistant-chunk', '\n\n---\n**' + chatGptLabel[lang] + '**\n\n')
         try {
           const fallbackHistory = history.slice(0, -1).map(m => ({ role: m.role, content: m.content }))
           const resp = await axios.post(`${FALLBACK_URL}/fallback`, {
@@ -1046,6 +1060,7 @@ io.on('connection', (socket) => {
             responseType: 'stream',
             timeout: 60000,
           })
+          socket.emit('assistant-chunk', '\n\n---\n**' + chatGptLabel[lang] + '**\n\n')
           const chatChunks = []
           for await (const chunk of resp.data) {
             const text = chunk.toString()
@@ -1053,6 +1068,7 @@ io.on('connection', (socket) => {
             socket.emit('assistant-chunk', text)
           }
           fullResponse += '\n\n---\n**' + chatGptLabel[lang] + '**\n\n' + chatChunks.join('')
+          gptAnswered = true
         } catch (fallbackErr) {
           console.error(`[fallback error] ${fallbackErr.message}`)
         }
@@ -1355,7 +1371,7 @@ io.on('connection', (socket) => {
       fullResponse = responseText
       const sorryMsgs = new Set(['Omlouvám se', 'I am sorry', 'Es tut mir leid'])
       if (fullResponse && ![...sorryMsgs].some(m => fullResponse.startsWith(m))) {
-        if (!hasContext) {
+        if (!hasContext && gptAnswered) {
           fullResponse += '\n\n---\n*Zdroj: ChatGPT*'
         }
       }
