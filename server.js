@@ -920,16 +920,18 @@ io.on('connection', (socket) => {
   })
 
   socket.on('message', async (msg) => {
-    let userMsg, msgLang, msgSources
+    let userMsg, msgLang, msgSources, msgUseFallback
     if (typeof msg === 'object' && msg !== null) {
       userMsg = (msg.text || '').trim()
       msgLang = msg.lang
       msgSources = Array.isArray(msg.sources) ? msg.sources : null
+      msgUseFallback = msg.useFallback === true
     } else {
       userMsg = (msg || '').trim()
     }
     if (!userMsg) return
     const lang = msgLang || socket.language || 'cz'
+    const useFallback = msgUseFallback
 
     // Which docs sources the user wants to search in. Default (or empty) = only
     // Virtuozzo (PaaS) + CloudSigma (IaaS); anything the client sends is accepted
@@ -1001,7 +1003,8 @@ io.on('connection', (socket) => {
           LLM_OUTPUT_TOKENS + CTX_SAFETY_TOKENS
         const contextTokens = Math.max(LLM_CONTEXT_TOKENS - overheadTokens, Math.ceil(CTX_FLOOR_CHARS / CTX_TOKENS_PER_CHAR))
         const maxChars = Math.floor(contextTokens * CTX_TOKENS_PER_CHAR)
-        contextStr = rag.formatSourceContext(sourceGroups, { charsPerDoc: 2400, maxChars, windowChars: 1100 })
+        contextStr = rag.formatSourceContext(sourceGroups, { charsPerDoc: 2400, maxChars, windowChars: 1100, sources: activeSources })
+        if (process.env.RAG_DEBUG) fs.writeFileSync('/tmp/ragctx.txt', contextStr)
       } else {
         searchResults.length = 0
       }
@@ -1032,30 +1035,36 @@ io.on('connection', (socket) => {
 
     try {
       if (!hasContext) {
-        // Fallback to GPT via FastAPI, then Mistral
-        try {
-          const fallbackHistory = history.slice(0, -1).map(m => ({ role: m.role, content: m.content }))
-          const resp = await axios.post(`${FALLBACK_URL}/fallback`, {
-            query: userMsg,
-            history: fallbackHistory,
-            language: lang,
-          }, {
-            responseType: 'stream',
-            timeout: 60000,
-          })
-          const chunks = []
-          for await (const chunk of resp.data) {
-            const text = chunk.toString()
-            chunks.push(text)
-            socket.emit('assistant-chunk', text)
+        if (useFallback) {
+          // Fallback to GPT via FastAPI
+          try {
+            const fallbackHistory = history.slice(0, -1).map(m => ({ role: m.role, content: m.content }))
+            const resp = await axios.post(`${FALLBACK_URL}/fallback`, {
+              query: userMsg,
+              history: fallbackHistory,
+              language: lang,
+            }, {
+              responseType: 'stream',
+              timeout: 60000,
+            })
+            const chunks = []
+            for await (const chunk of resp.data) {
+              const text = chunk.toString()
+              chunks.push(text)
+              socket.emit('assistant-chunk', text)
+            }
+            fullResponse = chunks.join('')
+            gptAnswered = true
+          } catch (fallbackErr) {
+            console.error(`[fallback error] ${fallbackErr.message}`)
+            // No docs in RAG and GPT unavailable: answer with the fixed
+            // "nothing found" sentence instead of letting Mistral hallucinate
+            // a tutorial from another stack.
+            fullResponse = noDocsMsg[lang]
+            socket.emit('assistant-chunk', fullResponse)
           }
-          fullResponse = chunks.join('')
-          gptAnswered = true
-        } catch (fallbackErr) {
-          console.error(`[fallback error] ${fallbackErr.message}`)
-          // No docs in RAG and GPT unavailable: answer with the fixed
-          // "nothing found" sentence instead of letting Mistral hallucinate
-          // a tutorial from another stack.
+        } else {
+          // Fallback (GPT) disabled: answer the fixed "nothing found" sentence
           fullResponse = noDocsMsg[lang]
           socket.emit('assistant-chunk', fullResponse)
         }
@@ -1063,9 +1072,10 @@ io.on('connection', (socket) => {
         fullResponse = await llm.generate(systemPrompt, trimHistoryForLlm(history), (chunk) => {
           socket.emit('assistant-chunk', chunk)
         })
-        // Also fetch ChatGPT response
+        // Also fetch ChatGPT response (opt-in via the sources panel)
         const chatGptLabel = { cz: 'Odpověď ChatGPT:', en: 'ChatGPT response:', de: 'ChatGPT-Antwort:' }
-        try {
+        if (useFallback) {
+          try {
           const fallbackHistory = history.slice(0, -1).map(m => ({ role: m.role, content: m.content }))
           const resp = await axios.post(`${FALLBACK_URL}/fallback`, {
             query: userMsg,
@@ -1084,8 +1094,9 @@ io.on('connection', (socket) => {
           }
           fullResponse += '\n\n---\n**' + chatGptLabel[lang] + '**\n\n' + chatChunks.join('')
           gptAnswered = true
-        } catch (fallbackErr) {
-          console.error(`[fallback error] ${fallbackErr.message}`)
+          } catch (fallbackErr) {
+            console.error(`[fallback error] ${fallbackErr.message}`)
+          }
         }
       }
       // Strip fake URLs not present in context

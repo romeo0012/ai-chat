@@ -33,6 +33,19 @@ function persistSources() {
   try { localStorage.setItem('chat_sources', JSON.stringify([...selectedSources])) } catch {}
 }
 
+// GPT fallback (Odpověď ChatGPT) is opt-in, off by default
+function loadUseFallback() {
+  try {
+    return localStorage.getItem('chat_use_fallback') === '1'
+  } catch {
+    return false
+  }
+}
+function persistUseFallback(v) {
+  try { localStorage.setItem('chat_use_fallback', v ? '1' : '0') } catch {}
+}
+let useFallback = loadUseFallback()
+
 const i18n = {
   cz: {
     'page-title': 'AI Chat – PaaS Help',
@@ -46,6 +59,7 @@ const i18n = {
     'msg-ai': 'AI',
     'sources-header': 'Zdroje vyhledávání',
     'sources-required': 'povinné',
+    'fallback-label': 'Odpověď ChatGPT (GPT-5.5)',
   },
   en: {
     'page-title': 'AI Chat – PaaS Help',
@@ -59,6 +73,7 @@ const i18n = {
     'msg-ai': 'AI',
     'sources-header': 'Search sources',
     'sources-required': 'required',
+    'fallback-label': 'ChatGPT answer (GPT-5.5)',
   },
   de: {
     'page-title': 'AI Chat – PaaS Help',
@@ -72,6 +87,7 @@ const i18n = {
     'msg-ai': 'KI',
     'sources-header': 'Suchquellen',
     'sources-required': 'Pflicht',
+    'fallback-label': 'ChatGPT-Antwort (GPT-5.5)',
   },
 }
 
@@ -105,7 +121,7 @@ function renderSourcesPanel() {
   const list = document.getElementById('sources-list')
   const t = i18n[currentLang] || i18n.cz
   const sources = window.SOURCES || []
-  list.innerHTML = sources.map(s => {
+  const checkboxes = sources.map(s => {
     const required = REQUIRED_SOURCES.has(s.host)
     const checked = selectedSources.has(s.host)
     const label = SOURCE_LABELS[s.host] || s.host
@@ -114,12 +130,24 @@ function renderSourcesPanel() {
       <span>${label}<span class="src-badge" style="${required ? '' : 'display:none'}">${t['sources-required']}</span></span>
     </label>`
   }).join('')
+  const fallback = `<label class="fallback-opt">
+      <input type="checkbox" id="use-fallback" ${useFallback ? 'checked' : ''}>
+      <span>${t['fallback-label']}</span>
+    </label>`
+  list.innerHTML = checkboxes + fallback
   list.querySelectorAll('input[type="checkbox"]').forEach(cb => {
-    cb.addEventListener('change', () => {
-      if (cb.checked) selectedSources.add(cb.value)
-      else selectedSources.delete(cb.value)
-      persistSources()
-    })
+    if (cb.id === 'use-fallback') {
+      cb.addEventListener('change', () => {
+        useFallback = cb.checked
+        persistUseFallback(useFallback)
+      })
+    } else {
+      cb.addEventListener('change', () => {
+        if (cb.checked) selectedSources.add(cb.value)
+        else selectedSources.delete(cb.value)
+        persistSources()
+      })
+    }
   })
 }
 
@@ -235,7 +263,7 @@ function sendMessage() {
   recordMessage('user', text, chat.lastElementChild)
   showTyping()
 
-  socket.emit('message', { text, lang: currentLang, sources: [...selectedSources] })
+  socket.emit('message', { text, lang: currentLang, sources: [...selectedSources], useFallback })
 }
 
 socket.on('user-message', () => {})

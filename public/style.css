@@ -404,6 +404,14 @@ header .subtitle {
   opacity: 0.9;
 }
 
+#sources-list label.fallback-opt {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px dashed rgba(255,255,255,0.14);
+  font-weight: 600;
+  color: var(--text-dim);
+}
+
 #sources-list .src-badge {
   display: inline-block;
   font-size: 10px;
