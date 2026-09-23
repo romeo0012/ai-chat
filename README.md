@@ -61,6 +61,34 @@ Asistent **PaaS Assistant** odpovídá na dotazy týkající se Virtuozzo Applic
 **Formát odpovědi (s RAG kontextem):**
 - Odpověď se dělí na **sekce podle zdrojů** (každý zdroj = svá sekce s nadpisem).
 - Sekce jsou seřazeny podle předem daného pořadí zdrojů: `www.virtuozzo.com` (Virtuozzo) → `docs.cloudsigma.com` (CloudSigma) → `httpd.apache.org` (Apache) → `nginx.org` (Nginx) → `kubernetes.io` → `argo-cd.readthedocs.io` (Argo CD) → `docs.nginx.com` (Nginx ingress/admin) → `docs.docker.com` → `docs.haproxy.org` (HAProxy) → `www.keycloak.org` → `www.elastic.co` (Elasticsearch) → `docs.gitlab.com` → `developer.hashicorp.com` (Vault) → `doc.traefik.io` (Traefik) → `help.sonatype.com` (Nexus) → `kafka.apache.org` → `goharbor.io` (Harbor) → `docs.litespeedtech.com` → `varnish-cache.org`.
+- Nadpisy zdrojů: Virtuozzo sekce = **`Dokumentace PaaS T Business Cloud:`**, CloudSigma sekce = **`docs.cloudsigma.com (CloudSigma — IaaS Dev Docs):`**, ostatní viz `SOURCE_HEADERS`.
+- Kompletní formátovací blok `ragFormatBlock` v `server.js` (vkládá se do LLM promptu):
+
+```
+=== DOKUMENTACE Z NÁPOVĚDY (podle zdrojů) ===
+Následující text je z oficiální dokumentace, rozdělený do sekcí podle jednotlivých zdrojů. Každá sekce začíná nadpisem zdroje a obsahuje číslované dokumenty [N] s názvem, URL a textem. POUŽIJ HO pro odpověď.
+
+SEZNAM ZDROJŮ V POVINNÉM POŘADÍ (odpověď projde postupně přes všechny):
+{}SOURCE_HEADERS{}
+
+POVINNÝ FORMÁT ODPOVĚDI (přesně takto):
+- Každý zdroj = jedna sekce. Začni přesným nadpisem zdroje (např. "Dokumentace PaaS T Business Cloud:"), pod ním odpověď na dotaz POUZE z dokumentů TOHO zdroje s odkazy [název stránky](url), pak oddělovač "---".
+- Pokračuj dalším nadpisem ze seznamu, pak odpověď, pak "---". Takto projdi VŠECHNY zdroje ze seznamu v jejich pořadí.
+- Pokud zdroj k dotazu nic neobsahuje, napiš pod jeho nadpis jen: "V tomto zdroji nejsou žádné relevantní informace." a pokračuj dál.
+- ZAKÁZÁNO: nepoužívej HTML tagy <a>, neopisuj doslova řádky kontextu ("[1] ...", "URL: ..."), nepoužívej číslované reference [1], nevymýšlej URL.
+- ODPOVĚĎ PIŠ VLASTNÍMI SLOVY: z dokumentu vezmi informace a srozumitelně je NAPIŠ SVÝMI SLOVY – nezačínej odpověď číslem dokumentu ani "URL:", nekopíruj celý text dokumentu.
+- JAK NA TO (dotaz na postup/škálování/nasazení/konfiguraci/monitorování/odstraňování apod.): vypiš KONKRÉTNÍ KROKY z textu dokumentu jako číslovaný seznam (1. 2. 3. …), např. "1. Otevři topology wizard. 2. Vyber uzel a klikni na +/− pro horizontální škálování…". To, že se postup "v dokumentu píše", NENÍ odpověď – napiš, co přesně a v jakém pořadí dělat.
+- BUĎ STRUČNÝ: u informačních dotazů věnuj každému zdroji max 2 věty a max 2 odkazy; u postupových dotazů jsou kroky důležitější než stručnost.
+PŘÍKLAD (jen ukázka tvaru, text si vymysli vlastní):
+Dokumentace PaaS T Business Cloud:
+Virtuozzo nabízí statistické monitorování spotřeby zdrojů. [Statistics Monitoring](https://url/)
+---
+docs.cloudsigma.com (CloudSigma — IaaS Dev Docs):
+V tomto zdroji nejsou žádné relevantní informace.
+---
+httpd.apache.org (Apache):
+Stručná odpověď podle apache dokumentů.
+```
 - Zdroje, které nemají relevantní informace, se z odpovědi **zcela vynechají** (žádné placeholder sekce „v tomto zdroji nic není").
 - Každá sekce obsahuje odpověď **vlastními slovy** z dokumentace toho zdroje, s inline odkazy.
 - Oddělovač mezi sekcemi: `---`.
