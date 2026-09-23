@@ -58,6 +58,8 @@ const LANG_INSTRUCTION = {
 const LANG_LABEL = { cz: 'Čeština', en: 'English', de: 'Deutsch' }
 const LANG_NAME = { cz: 'Czech', en: 'English', de: 'German' }
 const COMMITTED_TRANSLATION_DIR = path.join(dataDir, 'docs_cache')
+const VIRTUOZZO_DOCS_ORIGIN = 'https://www.virtuozzo.com/application-management-docs'
+const BROWSER_UA = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
 
 // Determine a writable cache dir. In CodeNOW the rootfs is read-only, so the
 // committed data/docs_cache may not be writable. Auto-fall back to /tmp if the
@@ -522,6 +524,104 @@ async function getProductTranslatedDoc(lang, product, docPath) {
   return html
 }
 
+// The docs pages are served as the ORIGINAL Virtuozzo page (browser-UA fetch,
+// cached to disk) so they look exactly like the source documentation with its
+// full navigation. No rebuild/translation — every language gets the same page.
+// Doc links are rewritten to local /docs/{lang}/… so navigation stays inside the
+// proxy (the virtuozzo.com domain blocks user browsers via CloudFront). Assets
+// (css/js/images) are rewritten to a local proxy route with a browser UA.
+const ORIGIN_ASSET_RE = /(src|href)=["']?(https:\/\/www\.virtuozzo\.com\/[^"'\s>]+)/g
+
+function isDocAsset(docRelPath) {
+  return /\.(?:css|js|mj?js|png|jpe?g|gif|svg|ico|webmanifest|woff2?|ttf)$/i.test(docRelPath.split('/').pop() || '')
+}
+
+async function fetchOriginalDoc(lang, docPath) {
+  const originDir = path.join(TRANSLATION_DIR, '_origin')
+  const safeName = docPath.replace(/[/\\]/g, '_').replace(/[^a-zA-Z0-9_\-]/g, '').replace(/^_+|_+$/g, '') || 'index'
+  const cacheFile = path.join(originDir, safeName + '.html')
+
+  if (fs.existsSync(cacheFile)) {
+    return fs.readFileSync(cacheFile, 'utf-8')
+  }
+
+  const pageUrl = `${VIRTUOZZO_DOCS_ORIGIN}/${docPath}/`.replace(/\/+$/, '/')
+  console.log(`[docs-proxy] fetching original ${pageUrl}`)
+  let res
+  try {
+    res = await axios.get(pageUrl, {
+      timeout: 30000,
+      maxRedirects: 5,
+      headers: {
+        'User-Agent': BROWSER_UA,
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+        'Accept-Language': 'en-US,en;q=0.9',
+      },
+    })
+  } catch (e) {
+    throw new Error(`Nepodařilo se načíst originální dokumentaci (${pageUrl}): ${e.message}`)
+  }
+
+  let html = typeof res.data === 'string' ? res.data : Buffer.from(res.data).toString('utf-8')
+
+  html = html.replace(ORIGIN_ASSET_RE, (match, attr, url) => {
+    const cleanUrl = url.replace(/[.,!?;:>)]+$/, '')
+    if (!cleanUrl.startsWith(VIRTUOZZO_DOCS_ORIGIN)) {
+      return match
+    }
+    const docRel = cleanUrl.slice(VIRTUOZZO_DOCS_ORIGIN.length).replace(/^\//, '')
+    if (isDocAsset(docRel)) {
+      return `${attr}="${BASE_PATH}/docs-asset?u=${encodeURIComponent(cleanUrl)}"`
+    }
+    const docPathSlash = docRel.replace(/\/$/, '')
+    return `${attr}="${docsUrl(lang, docPathSlash)}"`
+  })
+
+  fs.mkdirSync(originDir, { recursive: true })
+  fs.writeFileSync(cacheFile, html, 'utf-8')
+  console.log(`[docs-proxy] cached ${lang}/${safeName}`)
+  return html
+}
+
+async function proxyOriginalAsset(req, res) {
+  const url = req.query.u
+  if (!url || !url.startsWith('https://www.virtuozzo.com/')) {
+    return res.status(400).send('bad asset url')
+  }
+  try {
+    const r = await axios.get(url, {
+      timeout: 30000,
+      responseType: 'arraybuffer',
+      headers: { 'User-Agent': BROWSER_UA },
+    })
+    const types = {
+      css: 'text/css; charset=utf-8',
+      js: 'application/javascript; charset=utf-8',
+      mjs: 'application/javascript; charset=utf-8',
+      png: 'image/png',
+      jpg: 'image/jpeg',
+      jpeg: 'image/jpeg',
+      gif: 'image/gif',
+      svg: 'image/svg+xml',
+      ico: 'image/x-icon',
+      webmanifest: 'application/manifest+json',
+      woff: 'font/woff',
+      woff2: 'font/woff2',
+      ttf: 'font/ttf',
+    }
+    const ext = url.split('/').pop().split('?')[0].split('.').pop()
+    res.set('Content-Type', types[ext] || 'application/octet-stream')
+    res.set('Cache-Control', 'public, max-age=86400')
+    res.send(Buffer.from(r.data))
+  } catch (e) {
+    if (e.response && e.response.status >= 400 && e.response.status < 500) {
+      return res.status(e.response.status).send('asset not found on origin')
+    }
+    console.error(`[docs-asset error] ${e.message}`)
+    res.status(502).send('asset fetch failed')
+  }
+}
+
 function splitIntoChunks(text, maxLen) {
   if (text.length <= maxLen) return [text]
   const paragraphs = text.split(/\n\n+/)
@@ -559,13 +659,15 @@ app.get(BASE_PATH + '/docs/:lang([a-z]{2})/:path(*)', async (req, res) => {
     return res.status(404).send(`<h1>Stránka nenalezena</h1><p>Neznámý jazyk: ${lang}.</p><a href="/">Zpět na chat</a>`)
   }
   try {
-    const html = await getTranslatedDoc(lang, req.params.path)
-    res.send(html)
+    const html = await fetchOriginalDoc(lang, req.params.path)
+    res.type('html').send(html)
   } catch (err) {
     console.error(`[docs error] ${err.message}`)
     res.status(502).send(`<h1>Chyba při načítání dokumentace</h1><p>${err.message}</p><a href="/">Zpět na chat</a>`)
   }
 })
+
+app.get(BASE_PATH + '/docs-asset', proxyOriginalAsset)
 
 app.get(BASE_PATH + '/p/:lang([a-z]{2})/:product/:path(*)', async (req, res) => {
   const lang = req.params.lang

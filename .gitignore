@@ -5,6 +5,7 @@ package-lock.json
 # Regenerable data caches (kept out of the repo)
 # (docs_cache is now committed so translations ship in the image)
 data/page-images.json
+data/docs_cache/_origin/
 
 # Python cache (FastAPI fallback)
 __pycache__/
