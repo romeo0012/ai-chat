@@ -28,6 +28,7 @@ const publicDir = path.join(__dirname, 'public')
 function serveIndex(req, res) {
   const injectedScript =
     `<script>window.BASE_PATH=${JSON.stringify(BASE_PATH)}</script>` +
+    `<script>window.SOURCES=${JSON.stringify(rag.SOURCES.map(s => ({ host: s.host, header: s.header })))}</script>` +
     `<script src="${BASE_PATH}/socket.io/socket.io.js"></script>` +
     `<script src="${BASE_PATH}/main.js"></script>`
   const html = fs.readFileSync(path.join(publicDir, 'index.html'), 'utf-8')
@@ -60,6 +61,9 @@ const LANG_NAME = { cz: 'Czech', en: 'English', de: 'German' }
 const COMMITTED_TRANSLATION_DIR = path.join(dataDir, 'docs_cache')
 const VIRTUOZZO_DOCS_ORIGIN = 'https://www.virtuozzo.com/application-management-docs'
 const BROWSER_UA = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+// Default search scope: Virtuozzo (PaaS) + CloudSigma (IaaS). The UI checks
+// these two by default (uncheckable) and may opt-in additional sources.
+const DEFAULT_SOURCES_HOST = ['www.virtuozzo.com', 'docs.cloudsigma.com']
 
 // Determine a writable cache dir. In CodeNOW the rootfs is read-only, so the
 // committed data/docs_cache may not be writable. Auto-fall back to /tmp if the
@@ -914,15 +918,24 @@ io.on('connection', (socket) => {
   })
 
   socket.on('message', async (msg) => {
-    let userMsg, msgLang
+    let userMsg, msgLang, msgSources
     if (typeof msg === 'object' && msg !== null) {
       userMsg = (msg.text || '').trim()
       msgLang = msg.lang
+      msgSources = Array.isArray(msg.sources) ? msg.sources : null
     } else {
       userMsg = (msg || '').trim()
     }
     if (!userMsg) return
     const lang = msgLang || socket.language || 'cz'
+
+    // Which docs sources the user wants to search in. Default (or empty) = only
+    // Virtuozzo (PaaS) + CloudSigma (IaaS); anything the client sends is accepted
+    // as an opt-in to additional sources.
+    const selectedHosts = msgSources && msgSources.length
+      ? msgSources
+      : DEFAULT_SOURCES_HOST
+    const activeSources = rag.SOURCES.filter(s => selectedHosts.includes(s.host))
 
     console.log(`[msg] ${clientIp} "${userMsg.slice(0, 100)}" (${lang})`)
     // Track FAQ
@@ -936,7 +949,7 @@ io.on('connection', (socket) => {
     // A .NET question (no such docs in the index): drop Java/Tomcat/PHP/etc. results so the
     // model never answers a .NET question from a different-stack tutorial.
     const isDotnetQuery = /(^|[^a-z0-9.])(\.net|dotnet|asp\.net|net\.core|vb\.net|nuget|c#)([^a-z0-9]|$)/i.test(englishQuery)
-    const rawGroups = rag.searchPerSource(englishQuery, 2, 8)
+    const rawGroups = rag.searchPerSource(englishQuery, 2, 8).filter(g => activeSources.some(s => s.host === g.source))
     const sourceGroups = []
     const searchResults = []
     for (const g of rawGroups) {
@@ -971,7 +984,7 @@ io.on('connection', (socket) => {
       hasContext = techTerms.some(t => new RegExp(`(^|[^a-z0-9])${t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}($|[^a-z0-9])`).test(topResults))
     }
     if (hasContext) {
-        const sourceHeaderList = rag.SOURCES.map(s => s.header).join('\n')
+        const sourceHeaderList = activeSources.map(s => s.header).join('\n')
         const fixedRagPrompt = LANG_INSTRUCTION[lang].length + systemPromptBase.length +
           ragFormatBlock.replace('{}SOURCE_HEADERS{}', sourceHeaderList).length
         // Budget the RAG context against the model window so we never overflow the
@@ -1001,7 +1014,7 @@ io.on('connection', (socket) => {
     if (hasContext) {
       console.log(`[RAG] ${clientIp} ${searchResults.length} výsledků: "${userMsg.slice(0, 50)}"`)
       searchResults.forEach(r => console.log(`[RAG] score=${r.score.toFixed(4)} ${r.url}`))
-      const sourceHeaderList = rag.SOURCES.map(s => s.header).join('\n')
+      const sourceHeaderList = activeSources.map(s => s.header).join('\n')
       systemPrompt += ragFormatBlock
         .replace('{}SOURCE_HEADERS{}', sourceHeaderList)
         .replace(/\n\n\{\}$/, '\n\n' + contextStr)
@@ -1191,7 +1204,7 @@ io.on('connection', (socket) => {
       // Deterministically rebuild the per-source section list in the FIXED source order.
       // The LLM often merges headers, repeats them, or outputs them out of order; we split
       // its output on recognized source-header lines and re-emit each source exactly once.
-      const sourceHeaders = rag.SOURCES.map(s => s.header)
+      const sourceHeaders = activeSources.map(s => s.header)
       const sourceBodies = new Map(sourceHeaders.map(h => [h, []]))
       let currentHeader = null
       let matchedAny = false

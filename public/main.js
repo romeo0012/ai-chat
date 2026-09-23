@@ -9,6 +9,30 @@ let waiting = false
 let currentLang = 'cz'
 let messageLog = []
 
+// Search sources: all available, default checked = Virtuozzo (PaaS) + CloudSigma
+// (IaaS). Those two are required and cannot be unchecked.
+const DEFAULT_SOURCES = ['www.virtuozzo.com', 'docs.cloudsigma.com']
+const REQUIRED_SOURCES = new Set(DEFAULT_SOURCES)
+const SOURCE_LABELS = {}
+for (const s of (window.SOURCES || [])) SOURCE_LABELS[s.host] = s.header.replace(/:$/, '')
+let selectedSources = new Set(loadSelectedSources())
+
+function loadSelectedSources() {
+  try {
+    const raw = localStorage.getItem('chat_sources')
+    if (!raw) return DEFAULT_SOURCES
+    const arr = JSON.parse(raw)
+    if (!Array.isArray(arr)) return DEFAULT_SOURCES
+    return Array.from(new Set([...DEFAULT_SOURCES, ...arr]))
+  } catch {
+    return DEFAULT_SOURCES
+  }
+}
+
+function persistSources() {
+  try { localStorage.setItem('chat_sources', JSON.stringify([...selectedSources])) } catch {}
+}
+
 const i18n = {
   cz: {
     'page-title': 'AI Chat – PaaS Help',
@@ -20,6 +44,8 @@ const i18n = {
     'clear-confirm': 'Smazat celou konverzaci?',
     'msg-you': 'Ty',
     'msg-ai': 'AI',
+    'sources-header': 'Zdroje vyhledávání',
+    'sources-required': 'povinné',
   },
   en: {
     'page-title': 'AI Chat – PaaS Help',
@@ -31,6 +57,8 @@ const i18n = {
     'clear-confirm': 'Clear entire conversation?',
     'msg-you': 'You',
     'msg-ai': 'AI',
+    'sources-header': 'Search sources',
+    'sources-required': 'required',
   },
   de: {
     'page-title': 'AI Chat – PaaS Help',
@@ -42,6 +70,8 @@ const i18n = {
     'clear-confirm': 'Gesamte Unterhaltung löschen?',
     'msg-you': 'Du',
     'msg-ai': 'KI',
+    'sources-header': 'Suchquellen',
+    'sources-required': 'Pflicht',
   },
 }
 
@@ -61,6 +91,36 @@ function translateUI(lang) {
   if (t['clear-title']) clearBtn.title = t['clear-title']
   // update document title
   if (t['page-title']) document.title = t['page-title']
+  renderSourceHeaders()
+}
+
+function renderSourceHeaders() {
+  const t = i18n[currentLang] || i18n.cz
+  document.querySelectorAll('#sources-list label .src-badge').forEach(b => {
+    b.textContent = t['sources-required']
+  })
+}
+
+function renderSourcesPanel() {
+  const list = document.getElementById('sources-list')
+  const t = i18n[currentLang] || i18n.cz
+  const sources = window.SOURCES || []
+  list.innerHTML = sources.map(s => {
+    const required = REQUIRED_SOURCES.has(s.host)
+    const checked = selectedSources.has(s.host)
+    const label = SOURCE_LABELS[s.host] || s.host
+    return `<label class="${required ? 'required' : ''}">
+      <input type="checkbox" value="${s.host}" ${checked ? 'checked' : ''} ${required ? 'disabled' : ''}>
+      <span>${label}<span class="src-badge" style="${required ? '' : 'display:none'}">${t['sources-required']}</span></span>
+    </label>`
+  }).join('')
+  list.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+    cb.addEventListener('change', () => {
+      if (cb.checked) selectedSources.add(cb.value)
+      else selectedSources.delete(cb.value)
+      persistSources()
+    })
+  })
 }
 
 document.querySelectorAll('.lang-btn').forEach(btn => {
@@ -175,7 +235,7 @@ function sendMessage() {
   recordMessage('user', text, chat.lastElementChild)
   showTyping()
 
-  socket.emit('message', { text, lang: currentLang })
+  socket.emit('message', { text, lang: currentLang, sources: [...selectedSources] })
 }
 
 socket.on('user-message', () => {})
@@ -304,4 +364,5 @@ socket.on('faq-update', (questions) => {
 
 sendBtn.addEventListener('click', sendMessage)
 sendBtn.disabled = true
+renderSourcesPanel()
 input.focus()
