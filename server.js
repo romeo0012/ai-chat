@@ -559,6 +559,7 @@ function isDocAsset(docRelPath) {
 // BASE_PATH and language. Cached pages are stored raw so the same file works
 // for every BASE_PATH/lang combination.
 function rewriteOriginLinks(html, lang) {
+  html = html.replace(/Virtuozzo Dev Docs/g, 'T Business Cloud Dev Docs')
   return html.replace(ORIGIN_ASSET_RE, (match, attr, url) => {
     const cleanUrl = url.replace(/[.,!?;:>)]+$/, '')
     if (!cleanUrl.startsWith(VIRTUOZZO_DOCS_ORIGIN)) {
