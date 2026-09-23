@@ -804,7 +804,9 @@ rag.loadIndex(path.join(dataDir, 'index.json'))
 
 // FAQ tracker – global across all sessions
 const faqCounts = new Map()
-const seedFaq = [
+// Seed FAQs from FAq_DEFAULT (.env, '|'-separated) so they appear before real usage
+const seedFaq = (process.env.FAQ_DEFAULT || '').split('|').map(s => s.trim()).filter(Boolean)
+if (seedFaq.length === 0) seedFaq.push(...[
   'Jak přidat PHP rozšíření?',
   'Jak nastavit SSL certifikát?',
   'Jak škálovat zdroje aplikace?',
@@ -813,7 +815,7 @@ const seedFaq = [
   'Jak provést zálohu aplikace?',
   'Jak monitorovat výkon?',
   'Jak nakonfigurovat databázi?',
-]
+])
 // Seed FAQs with initial count so they appear before real usage
 for (const q of seedFaq) {
   faqCounts.set(q, 1)
