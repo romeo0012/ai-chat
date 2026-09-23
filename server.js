@@ -949,7 +949,7 @@ io.on('connection', (socket) => {
     // A .NET question (no such docs in the index): drop Java/Tomcat/PHP/etc. results so the
     // model never answers a .NET question from a different-stack tutorial.
     const isDotnetQuery = /(^|[^a-z0-9.])(\.net|dotnet|asp\.net|net\.core|vb\.net|nuget|c#)([^a-z0-9]|$)/i.test(englishQuery)
-    const rawGroups = rag.searchPerSource(englishQuery, 2, 8).filter(g => activeSources.some(s => s.host === g.source))
+    const rawGroups = rag.searchPerSource(englishQuery, 2, 8, { hosts: activeSources.map(s => s.host) })
     const sourceGroups = []
     const searchResults = []
     for (const g of rawGroups) {
