@@ -236,12 +236,17 @@ socket.on('cleared', () => {
 })
 
 socket.on('history-translated', (data) => {
-  const translations = data.translations || []
-  let userIdx = 0
+  const qTrans = data.userTranslations || data.translations || []
+  const aTrans = data.answerTranslations || []
+  let qIdx = 0
+  let aIdx = 0
   messageLog.forEach(m => {
-    if (m.role === 'user') {
-      if (userIdx < translations.length) m.content = translations[userIdx]
-      userIdx++
+    if (m.role === 'user' && qIdx < qTrans.length) {
+      m.content = qTrans[qIdx]
+      qIdx++
+    } else if (m.role === 'assistant' && aIdx < aTrans.length) {
+      m.content = aTrans[aIdx]
+      aIdx++
     }
   })
   reRenderHistory()

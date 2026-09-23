@@ -204,6 +204,25 @@ async function translateQuestionWithLLM(text, targetLang) {
   return out || text
 }
 
+async function translateAnswerWithLLM(text, targetLang) {
+  const langName = LANG_NAME[targetLang]
+  const systemMsg = `You are a professional technical translator. Translate the given text into ${langName}. Preserve the overall structure and meaning. Keep markdown formatting, code blocks, commands, file paths, technical terms, and URLs exactly as they are. Do not invent new information.`
+  const userMsg = `Translate the following text into ${langName}. Keep all markdown links [text](url) — including the URLs and their paths — code blocks, commands, and technical terms unchanged. Preserve paragraph structure.\n\nTEXT:\n${text}`
+  const body = {
+    model: llm.model,
+    messages: [
+      { role: 'system', content: systemMsg },
+      { role: 'user', content: userMsg }
+    ],
+    temperature: 0.1,
+    max_tokens: 4096,
+  }
+  const headers = { 'Content-Type': 'application/json' }
+  if (llm.apiKey) headers['Authorization'] = `Bearer ${llm.apiKey}`
+  const res = await axios.post(`${llm.endpoint}/v1/chat/completions`, body, { headers, timeout: 120000 })
+  return res.data.choices?.[0]?.message?.content || text
+}
+
 function renderContentToHtml(text) {
   let html = text
     .replace(/&/g, '&amp;')
@@ -536,13 +555,32 @@ function isDocAsset(docRelPath) {
   return /\.(?:css|js|mj?js|png|jpe?g|gif|svg|ico|webmanifest|woff2?|ttf)$/i.test(docRelPath.split('/').pop() || '')
 }
 
+// Rewrite doc links + assets of a fetched (RAW) original page for the current
+// BASE_PATH and language. Cached pages are stored raw so the same file works
+// for every BASE_PATH/lang combination.
+function rewriteOriginLinks(html, lang) {
+  return html.replace(ORIGIN_ASSET_RE, (match, attr, url) => {
+    const cleanUrl = url.replace(/[.,!?;:>)]+$/, '')
+    if (!cleanUrl.startsWith(VIRTUOZZO_DOCS_ORIGIN)) {
+      return match
+    }
+    const docRel = cleanUrl.slice(VIRTUOZZO_DOCS_ORIGIN.length).replace(/^\//, '')
+    if (isDocAsset(docRel)) {
+      return `${attr}="${BASE_PATH}/docs-asset?u=${encodeURIComponent(cleanUrl)}"`
+    }
+    const docPathSlash = docRel.replace(/\/$/, '')
+    return `${attr}="${docsUrl(lang, docPathSlash)}"`
+  })
+}
+
 async function fetchOriginalDoc(lang, docPath) {
   const originDir = path.join(TRANSLATION_DIR, '_origin')
   const safeName = docPath.replace(/[/\\]/g, '_').replace(/[^a-zA-Z0-9_\-]/g, '').replace(/^_+|_+$/g, '') || 'index'
   const cacheFile = path.join(originDir, safeName + '.html')
 
   if (fs.existsSync(cacheFile)) {
-    return fs.readFileSync(cacheFile, 'utf-8')
+    const raw = fs.readFileSync(cacheFile, 'utf-8')
+    return rewriteOriginLinks(raw, lang)
   }
 
   const pageUrl = `${VIRTUOZZO_DOCS_ORIGIN}/${docPath}/`.replace(/\/+$/, '/')
@@ -562,25 +600,12 @@ async function fetchOriginalDoc(lang, docPath) {
     throw new Error(`Nepodařilo se načíst originální dokumentaci (${pageUrl}): ${e.message}`)
   }
 
-  let html = typeof res.data === 'string' ? res.data : Buffer.from(res.data).toString('utf-8')
-
-  html = html.replace(ORIGIN_ASSET_RE, (match, attr, url) => {
-    const cleanUrl = url.replace(/[.,!?;:>)]+$/, '')
-    if (!cleanUrl.startsWith(VIRTUOZZO_DOCS_ORIGIN)) {
-      return match
-    }
-    const docRel = cleanUrl.slice(VIRTUOZZO_DOCS_ORIGIN.length).replace(/^\//, '')
-    if (isDocAsset(docRel)) {
-      return `${attr}="${BASE_PATH}/docs-asset?u=${encodeURIComponent(cleanUrl)}"`
-    }
-    const docPathSlash = docRel.replace(/\/$/, '')
-    return `${attr}="${docsUrl(lang, docPathSlash)}"`
-  })
+  const raw = typeof res.data === 'string' ? res.data : Buffer.from(res.data).toString('utf-8')
 
   fs.mkdirSync(originDir, { recursive: true })
-  fs.writeFileSync(cacheFile, html, 'utf-8')
+  fs.writeFileSync(cacheFile, raw, 'utf-8')
   console.log(`[docs-proxy] cached ${lang}/${safeName}`)
-  return html
+  return rewriteOriginLinks(raw, lang)
 }
 
 async function proxyOriginalAsset(req, res) {
@@ -844,23 +869,31 @@ io.on('connection', (socket) => {
     if (!VALID_LANGS.has(lang)) return
     socket.language = lang
     console.log(`[lang] ${clientIp} → ${lang}`)
-    // Re-translate already-asked user questions to the new language
-    const translations = []
+    // Re-translate already-asked questions AND answers to the new language.
+    // Translations are sent as two parallel arrays (user questions, then assistant
+    // answers) so the client can apply them to the matching messages.
+    const userTranslations = []
+    const answerTranslations = []
     for (let i = 0; i < history.length; i++) {
       const m = history[i]
-      if (m.role === 'user') {
-        try {
+      try {
+        if (m.role === 'user') {
           const translated = await translateQuestionWithLLM(m.content, lang)
           history[i] = { ...m, content: translated }
-          translations.push(translated)
-        } catch (e) {
-          translations.push(m.content)
-          console.error(`[translate-history] ${e.message}`)
+          userTranslations.push(translated)
+        } else if (m.role === 'assistant') {
+          const translated = await translateAnswerWithLLM(m.content, lang)
+          history[i] = { ...m, content: translated }
+          answerTranslations.push(translated)
         }
+      } catch (e) {
+        if (m.role === 'user') userTranslations.push(m.content)
+        else answerTranslations.push(m.content)
+        console.error(`[translate-history] ${e.message}`)
       }
     }
-    if (translations.length > 0) {
-      socket.emit('history-translated', { lang, translations })
+    if (userTranslations.length > 0 || answerTranslations.length > 0) {
+      socket.emit('history-translated', { lang, userTranslations, answerTranslations })
     }
     // Re-translate the FAQ panel questions to the new language
     try {
