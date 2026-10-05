@@ -11,7 +11,7 @@ let messageLog = []
 
 // Search sources: all available, default checked = Virtuozzo (PaaS) + CloudSigma
 // (IaaS). Those two are required and cannot be unchecked.
-const DEFAULT_SOURCES = ['www.virtuozzo.com', 'docs.cloudsigma.com']
+const DEFAULT_SOURCES = ['www.virtuozzo.com/application-management-docs', 'docs.cloudsigma.com']
 const REQUIRED_SOURCES = new Set(DEFAULT_SOURCES)
 const SOURCE_LABELS = {}
 for (const s of (window.SOURCES || [])) SOURCE_LABELS[s.host] = s.header.replace(/:$/, '')

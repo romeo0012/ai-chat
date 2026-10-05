@@ -63,7 +63,7 @@ const VIRTUOZZO_DOCS_ORIGIN = 'https://www.virtuozzo.com/application-management-
 const BROWSER_UA = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
 // Default search scope: Virtuozzo (PaaS) + CloudSigma (IaaS). The UI checks
 // these two by default (uncheckable) and may opt-in additional sources.
-const DEFAULT_SOURCES_HOST = ['www.virtuozzo.com', 'docs.cloudsigma.com']
+const DEFAULT_SOURCES_HOST = ['www.virtuozzo.com/application-management-docs', 'docs.cloudsigma.com']
 
 // Determine a writable cache dir. In CodeNOW the rootfs is read-only, so the
 // committed data/docs_cache may not be writable. Auto-fall back to /tmp if the
@@ -155,6 +155,7 @@ const PRODUCT_BASE_URLS = {
   litespeed: 'https://docs.litespeedtech.com/',
   varnish: 'https://varnish-cache.org/docs/7.6/',
   cloudsigma: 'https://docs.cloudsigma.com/en/latest/',
+  'virtuozzo-server': 'https://www.virtuozzo.com/server-docs/9.0/',
 }
 const VALID_PRODUCTS = new Set(Object.keys(PRODUCT_BASE_URLS))
 // Map domain → product name for URL rewriting
@@ -798,7 +799,7 @@ if (HELP_URL) {
 
 // Fixed RAG instruction block appended to the system prompt whenever docs are used.
 // Kept as a const so its size is measurable for the context-token budget.
-const ragFormatBlock = `\n\n=== DOKUMENTACE Z NÁPOVĚDY (podle zdrojů) ===\nNásledující text je z oficiální dokumentace, rozdělený do sekcí podle jednotlivých zdrojů. Každá sekce začíná nadpisem zdroje a obsahuje číslované dokumenty [N] s názvem, URL a textem. POUŽIJ HO pro odpověď.\n\nSEZNAM ZDROJŮ V POVINNÉM POŘADÍ (odpověď projde postupně přes všechny):\n{}SOURCE_HEADERS{}\n\nPOVINNÝ FORMÁT ODPOVĚDI (přesně takto):\n- Každý zdroj = jedna sekce. Začni přesným nadpisem zdroje (např. "Dokumentace PaaS T Business Cloud:"), pod ním odpověď na dotaz POUZE z dokumentů TOHO zdroje s odkazy [název stránky](url), pak oddělovač "---".\n- Pokračuj dalším nadpisem ze seznamu, pak odpověď, pak "---". Takto projdi VŠECHNY zdroje ze seznamu v jejich pořadí.\n- Pokud zdroj k dotazu nic neobsahuje, napiš pod jeho nadpis jen: "V tomto zdroji nejsou žádné relevantní informace." a pokračuj dál.\n- ZAKÁZÁNO: nepoužívej HTML tagy <a>, neopisuj doslova řádky kontextu ("[1] ...", "URL: ..."), nepoužívej číslované reference [1], nevymýšlej URL.\n- ODPOVĚĎ PIŠ VLASTNÍMI SLOVY: z dokumentu vezmi informace a srozumitelně je NAPIŠ SVÝMI SLOVY – nezačínej odpověď číslem dokumentu ani "URL:", nekopíruj celý text dokumentu.\n- JAK NA TO (dotaz na postup/škálování/nasazení/konfiguraci/monitorování/odstraňování apod.): vypiš KONKRÉTNÍ KROKY z textu dokumentu jako číslovaný seznam (1. 2. 3. …), např. "1. Otevři topology wizard. 2. Vyber uzel a klikni na +/− pro horizontální škálování…". To, že se postup "v dokumentu píše", NENÍ odpověď – napiš, co přesně a v jakém pořadí dělat.\n- BUĎ STRUČNÝ: u informačních dotazů věnuj každému zdroji max 2 věty a max 2 odkazy; u postupových dotazů jsou kroky důležitější než stručnost.\nPŘÍKLAD (jen ukázka tvaru, text si vymysli vlastní):\nDokumentace PaaS T Business Cloud:\nVirtuozzo nabízí statistické monitorování spotřeby zdrojů. [Statistics Monitoring](https://url/)\n---\ndocs.cloudsigma.com (CloudSigma — IaaS Dev Docs):\nV tomto zdroji nejsou žádné relevantní informace.\n---\nhttpd.apache.org (Apache):\nStručná odpověď podle apache dokumentů.\n\n{}`
+const ragFormatBlock = `\n\n=== DOKUMENTACE Z NÁPOVĚDY (podle zdrojů) ===\nNásledující text je z oficiální dokumentace, rozdělený do sekcí podle jednotlivých zdrojů. Každá sekce začíná nadpisem zdroje a obsahuje číslované dokumenty [N] s názvem, URL a textem. POUŽIJ HO pro odpověď.\n\nSEZNAM ZDROJŮ V POVINNÉM POŘADÍ (odpověď projde postupně přes všechny):\n{}SOURCE_HEADERS{}\n\nPOVINNÝ FORMÁT ODPOVĚDI (přesně takto):\n- Každý zdroj = jedna sekce. Začni PŘESNÝM nadpisem zdroje (zkopíruj ho doslova ze "SEZNAM ZDROJŮ" výše), pod ním odpověď na dotaz POUZE z dokumentů TOHO zdroje s odkazy [název stránky](url), pak oddělovač "---".\n- Pokračuj dalším nadpisem ze seznamu, pak odpověď, pak "---". Takto projdi VŠECHNY zdroje ze seznamu v jejich pořadí.\n- Pokud zdroj k dotazu nic neobsahuje, napiš pod jeho nadpis jen: "V tomto zdroji nejsou žádné relevantní informace." a pokračuj dál.\n- ZAKÁZÁNO: nepoužívej HTML tagy <a>, neopisuj doslova řádky kontextu ("[1] ...", "URL: ..."), nepoužívej číslované reference [1], nevymýšlej URL.\n- ODPOVĚĎ PIŠ VLASTNÍMI SLOVY: z dokumentu vezmi informace a srozumitelně je NAPIŠ SVÝMI SLOVY – nezačínej odpověď číslem dokumentu ani "URL:", nekopíruj celý text dokumentu.\n- JAK NA TO (dotaz na postup/škálování/nasazení/konfiguraci/monitorování/odstraňování apod.): vypiš KONKRÉTNÍ KROKY z textu dokumentu jako číslovaný seznam (1. 2. 3. …), např. "1. Otevři topology wizard. 2. Vyber uzel a klikni na +/− pro horizontální škálování…". To, že se postup "v dokumentu píše", NENÍ odpověď – napiš, co přesně a v jakém pořadí dělat.\n- BUĎ STRUČNÝ: u informačních dotazů věnuj každému zdroji max 2 věty a max 2 odkazy; u postupových dotazů jsou kroky důležitější než stručnost.\nPŘÍKLAD (jen ukázka tvaru, text si vymysli vlastní; použij PŘESNÝ nadpis prvního zdroje ze seznamu výše):\nNadpis prvního zdroje:\nVirtuozzo nabízí statistické monitorování spotřeby zdrojů. [Statistics Monitoring](https://url/)\n---\nNadpis druhého zdroje:\nV tomto zdroji nejsou žádné relevantní informace.\n---\nNadpis třetího zdroje:\nStručná odpověď podle dokumentace.\n\n{}`
 
 rag.loadIndex(path.join(dataDir, 'index.json'))
 
@@ -1100,20 +1101,23 @@ io.on('connection', (socket) => {
         }
       }
       // Strip fake URLs not present in context
+      // virtuozzo.com hosts two doc trees: /application-management-docs (PaaS) and
+      // /server-docs (IaaS Server); both must survive the pipeline below.
+      const vzDocRe = 'application-management-docs|server-docs'
       let responseText = fullResponse
         // Remove markdown links with fake URLs (keep text, drop link)
         .replace(
-          /\[([^\]]*)\]\(https?:\/\/www\.virtuozzo\.com\/application-management-docs\/([^)]+)\)/g,
-          (match, text, path) => validUrls.has(`https://www.virtuozzo.com/application-management-docs/${path.replace(/\/$/, '')}`) ? match : text
+          new RegExp(`\\[([^\\]]*)\\]\\((https?:\\/\\/www\\.virtuozzo\\.com\\/(?:${vzDocRe})\\/[^)]+)\\)`, 'g'),
+          (match, text, url) => validUrls.has(url.replace(/\/$/, '')) ? match : text
         )
         // Remove bare fake URLs
         .replace(
-          /https?:\/\/www\.virtuozzo\.com\/application-management-docs\/([^\s.,!?;:)\]>]+)/g,
-          (match, path) => validUrls.has(`https://www.virtuozzo.com/application-management-docs/${path.replace(/\/$/, '')}`) ? match : ''
+          new RegExp(`(https?:\\/\\/www\\.virtuozzo\\.com\\/(?:${vzDocRe})\\/[^\\s.,!?;:\\])>]+)`, 'g'),
+          (match, url) => validUrls.has(url.replace(/\/$/, '')) ? match : ''
         )
         // Remove markdown links to non-virtuozzo domains and raw HTML <a> tags
         .replace(
-          /\[([^\]]*)\]\(https?:\/\/(?!www\.virtuozzo\.com\/application-management-docs)[^\s)]+\)/g,
+          /\[([^\]]*)\]\(https?:\/\/(?!www\.virtuozzo\.com\/(?:application-management-docs|server-docs))[^\s)]+\)/g,
           (match, text) => text.trim() || ''
         )
         // Remove raw HTML anchor tags (LLM sometimes generates these) – must run before bare URL removal
@@ -1149,24 +1153,24 @@ io.on('connection', (socket) => {
       // Remove remaining bare non-virtuozzo URLs (after [N] conversion so echoed
       // [N] Title\nURL: url blocks were already turned into valid local links)
       responseText = responseText.replace(
-        /https?:\/\/(?!www\.virtuozzo\.com\/application-management-docs)[^\s<>"'\)]+/g,
+        /https?:\/\/(?!www\.virtuozzo\.com\/(?:application-management-docs|server-docs))[^\s<>"'\)]+/g,
         ''
       )
       // Unwrap <URL> to URL (LLM sometimes wraps URLs in angle brackets)
-      responseText = responseText.replace(/<https?:\/\/www\.virtuozzo\.com\/application-management-docs\/[^>]+>/g, (m) => m.slice(1, -1))
+      responseText = responseText.replace(new RegExp(`<https?:\\/\\/www\\.virtuozzo\\.com\\/(?:${vzDocRe})\\/[^>]+>`, 'g'), (m) => m.slice(1, -1))
       // Lookup map: URL → title for link text replacement
       const urlToTitle = new Map(searchResults.map(r => [r.url.replace(/\/$/, ''), r.title]))
       // Rewrite markdown links pointing to virtuozzo docs (must happen before punctuation cleanup)
       // If the link text is generic (tady, zde, odkaz, link, etc.), replace with page title
       const genericLabels = new Set(['tady', 'zde', 'sem', 'odkaz', 'link', 'this page', 'this link', 'more info', 'více', 'více info', 'details', 'zde', 'here'])
       responseText = responseText.replace(
-        /\[([^\]]+)\]\(https?:\/\/www\.virtuozzo\.com\/application-management-docs\/([^)]*)\)/g,
-        (match, text, path) => {
+        new RegExp(`\\[([^\\]]+)\\]\\((https?:\\/\\/www\\.virtuozzo\\.com\\/(?:${vzDocRe})\\/)([^)]*)\\)`, 'g'),
+        (match, text, base, path) => {
           const cleanPath = path.replace(/[.,!?;:)>]+$/, '')
-          const fullUrl = `https://www.virtuozzo.com/application-management-docs/${cleanPath}`.replace(/\/$/, '')
+          const fullUrl = `${base}${cleanPath}`.replace(/\/$/, '')
           const title = urlToTitle.get(fullUrl)
           const label = (title && genericLabels.has(text.toLowerCase().trim())) ? title : text
-          return cleanPath ? `[${label}](${docsUrl(lang, cleanPath)})` : match
+          return cleanPath ? `[${label}](${localUrl(lang, fullUrl)})` : match
         }
       )
       // Remove trailing punctuation from any remaining bare URLs
@@ -1174,18 +1178,18 @@ io.on('connection', (socket) => {
 
       // Strip (URL: ...) wrappers around valid URLs
       responseText = responseText.replace(
-        /\(URL:\s*(https?:\/\/www\.virtuozzo\.com\/application-management-docs\/[^\s)]+)\)/g,
+        new RegExp(`\\(URL:\\s*(https?:\\/\\/www\\.virtuozzo\\.com\\/(?:${vzDocRe})\\/[^\\s)]+)\\)`, 'g'),
         '$1'
       )
       // Wrap bare virtuozzo.com URLs in markdown links with page titles
       responseText = responseText.replace(
-        /https?:\/\/www\.virtuozzo\.com\/application-management-docs\/([^\s.,!?;:)>]+)/g,
-        (match, path) => {
+        new RegExp(`(https?:\\/\\/www\\.virtuozzo\\.com\\/(?:${vzDocRe})\\/)([^\\s.,!?;:)>]+)`, 'g'),
+        (match, base, path) => {
           const cleanPath = path.replace(/[.,!?;:)>]+$/, '')
-          const fullUrl = `https://www.virtuozzo.com/application-management-docs/${cleanPath}`.replace(/\/$/, '')
+          const fullUrl = `${base}${cleanPath}`.replace(/\/$/, '')
           const title = urlToTitle.get(fullUrl)
           const text = title || match
-          return `[${text}](${docsUrl(lang, cleanPath)})`
+          return `[${text}](${localUrl(lang, fullUrl)})`
         }
       )
       // Clean up empty bullet points that may appear in lists
@@ -1283,7 +1287,7 @@ io.on('connection', (socket) => {
         // Virtuozzo right after another source's content. Those paragraphs carry a
         // /docs/ (virtuozzo) link and land in a foreign section — drop them here.
         const stripForeignOutro = (body, host) => {
-          if (host === 'www.virtuozzo.com') return body
+          if (host === 'www.virtuozzo.com/application-management-docs') return body
           const paras = body.split(/\n+/)
           while (paras.length > 1) {
             const last = paras[paras.length - 1]
