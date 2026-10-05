@@ -1120,6 +1120,14 @@ io.on('connection', (socket) => {
           /\[([^\]]*)\]\(https?:\/\/(?!www\.virtuozzo\.com\/(?:application-management-docs|server-docs))[^\s)]+\)/g,
           (match, text) => text.trim() || ''
         )
+        // Unwrap markdown links whose target is a truncated URL fragment (the model
+        // sometimes splits a long virtuozzo URL mid-string, e.g. "[Title](.0/admin-…/)"
+        // from "…/server-docs/9.0/admin-…/"). These are never valid targets — keep the
+        // link text only; the correct link is re-attached from the reference block below.
+        .replace(
+          /\[([^\]]+)\]\((\.[^\s)]*|\d+\.0\/[^\s)]*)\)/g,
+          (match, text) => text.trim() || ''
+        )
         // Remove raw HTML anchor tags (LLM sometimes generates these) – must run before bare URL removal
         .replace(
           /<a\s+[^>]*href="https?:\/\/[^"]+"[^>]*>[^<]*<\/a>/gi,
