@@ -14,7 +14,7 @@ let messageLog = []
 const DEFAULT_SOURCES = ['www.virtuozzo.com/application-management-docs', 'docs.cloudsigma.com']
 const REQUIRED_SOURCES = new Set(DEFAULT_SOURCES)
 const SOURCE_LABELS = {}
-for (const s of (window.SOURCES || [])) SOURCE_LABELS[s.host] = s.header.replace(/:$/, '')
+for (const s of (window.SOURCES || [])) SOURCE_LABELS[s.host] = s.name && s.docsUrl ? `${s.name} (${s.docsUrl})` : s.header.replace(/:$/, '')
 let selectedSources = new Set(loadSelectedSources())
 
 function loadSelectedSources() {
@@ -124,7 +124,9 @@ function renderSourcesPanel() {
   const checkboxes = sources.map(s => {
     const required = REQUIRED_SOURCES.has(s.host)
     const checked = selectedSources.has(s.host)
-    const label = SOURCE_LABELS[s.host] || s.host
+    const label = s.name && s.docsUrl
+      ? `${s.name} (<a href="${s.docsUrl}" target="_blank" rel="noopener">${s.docsUrl}</a>)`
+      : (SOURCE_LABELS[s.host] || s.host)
     return `<label class="${required ? 'required' : ''}">
       <input type="checkbox" value="${s.host}" ${checked ? 'checked' : ''} ${required ? 'disabled' : ''}>
       <span>${label}<span class="src-badge" style="${required ? '' : 'display:none'}">${t['sources-required']}</span></span>

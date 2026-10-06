@@ -28,7 +28,7 @@ const publicDir = path.join(__dirname, 'public')
 function serveIndex(req, res) {
   const injectedScript =
     `<script>window.BASE_PATH=${JSON.stringify(BASE_PATH)}</script>` +
-    `<script>window.SOURCES=${JSON.stringify(rag.SOURCES.map(s => ({ host: s.host, header: s.header })))}</script>` +
+    `<script>window.SOURCES=${JSON.stringify(rag.SOURCES.map(s => ({ host: s.host, header: s.header, name: s.name, docsUrl: s.docsUrl })))}</script>` +
     `<script src="${BASE_PATH}/socket.io/socket.io.js"></script>` +
     `<script src="${BASE_PATH}/main.js"></script>`
   const html = fs.readFileSync(path.join(publicDir, 'index.html'), 'utf-8')
@@ -1128,6 +1128,13 @@ io.on('connection', (socket) => {
           /\[([^\]]+)\]\((\.[^\s)]*|\d+\.0\/[^\s)]*)\)/g,
           (match, text) => text.trim() || ''
         )
+        // Drop bare truncated-path fragments the model leaves as its own line (no link
+        // wrapper), e.g. a stray ".0/admin-guide-…/" under a valid [Title](…) link
+        // (the tail of "…/server-docs/9.0/admin-guide-…/" after a mid-URL split).
+        .replace(
+          /^[\s>*_-]*(?:\.\d+|\d+\.\d+)\/[a-z0-9][^\s]*$/gim,
+          ''
+        )
         // Remove raw HTML anchor tags (LLM sometimes generates these) – must run before bare URL removal
         .replace(
           /<a\s+[^>]*href="https?:\/\/[^"]+"[^>]*>[^<]*<\/a>/gi,
@@ -1407,6 +1414,19 @@ io.on('connection', (socket) => {
         }).filter(Boolean).join('\n\n---\n\n')
       }
       fullResponse = responseText
+      // Always attach the documentation sites this answer was built from, in
+      // "Name (URL)" form, so every answer carries working doc links even when
+      // the model produced no reference block at all.
+      if (hasContext && fullResponse) {
+        const docs = sourceGroups
+          .map(g => rag.SOURCES.find(s => s.host === g.source))
+          .filter(s => s && s.name && s.docsUrl)
+        if (docs.length) {
+          const footerLabel = { cz: 'Zdroje dokumentace:', en: 'Documentation sources:', de: 'Dokumentationsquellen:' }[lang] || 'Zdroje dokumentace:'
+          fullResponse = fullResponse.replace(/\n+$/, '') + '\n\n**' + footerLabel + '**\n' +
+            docs.map(s => `- ${s.name} (${s.docsUrl})`).join('\n')
+        }
+      }
       const sorryMsgs = new Set(['Omlouvám se', 'I am sorry', 'Es tut mir leid'])
       if (fullResponse && ![...sorryMsgs].some(m => fullResponse.startsWith(m))) {
         if (!hasContext && gptAnswered) {
