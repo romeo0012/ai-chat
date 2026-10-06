@@ -1232,6 +1232,21 @@ io.on('connection', (socket) => {
       responseText = responseText
         .replace(/\n\s*URL:\s*([.:]?\s)*/g, '\n')
         .replace(/^URL:\s*$/gm, '')
+      // Final pass: the model often splits a long virtuozzo URL mid-string across a line
+      // break ("…/server-docs/9" newline ".0/admin-guide-…/"). The URL-wrapping step above
+      // turns the first half into a local link and leaves the ".0/admin-…/" tail as a bare
+      // fragment line, so strip such fragments one last time before rebuilding sections,
+      // along with any truncated-fragment markdown links that survived to this point.
+      responseText = responseText
+        .replace(
+          /^[\s>*_-]*(?:\.\d+|\d+\.\d+)\/[a-z0-9][^\s]*$/gim,
+          ''
+        )
+        .replace(
+          /\[([^\]]+)\]\((\.[^\s)]*|\d+\.\d+\/[^\s)]*)\)/g,
+          (match, text) => text.trim() || ''
+        )
+        .replace(/\n{3,}/g, '\n\n')
 
       // Deterministically rebuild the per-source section list in the FIXED source order.
       // The LLM often merges headers, repeats them, or outputs them out of order; we split
