@@ -174,6 +174,64 @@ for (const [name, urls] of Object.entries(PRODUCT_BASE_URLS)) {
   }
 }
 
+// Cache for RAG page-title translations, keyed [lang][normalized-english-title].
+const titleTranslationsCache = new Map()
+
+// Translate a batch of short doc page titles into targetLang. One title per line
+// out; used to localize markdown link labels to the UI language flag.
+async function translateTitlesWithLLM(titles, targetLang) {
+  const langName = LANG_NAME[targetLang]
+  const systemMsg = `You are a technical translator. Translate each English page title into ${langName}. Output EXACTLY one translated title per line, in the same order. Do not add numbering, bullets, quotes, explanations or blank lines. Keep proper nouns and product names (Virtuozzo, PostgreSQL, PHP, Java, etc.) unchanged.`
+  const userMsg = titles.join('\n')
+  const body = {
+    model: llm.model,
+    messages: [
+      { role: 'system', content: systemMsg },
+      { role: 'user', content: userMsg }
+    ],
+    temperature: 0.1,
+    max_tokens: 4096,
+  }
+  const headers = { 'Content-Type': 'application/json' }
+  if (llm.apiKey) headers['Authorization'] = `Bearer ${llm.apiKey}`
+  const res = await axios.post(`${llm.endpoint}/v1/chat/completions`, body, { headers, timeout: 120000 })
+  const out = res.data.choices?.[0]?.message?.content || titles.join('\n')
+  const lines = out.split('\n').map(l => l.replace(/^\s*(?:[-•*]|\d+[.)])\s*/, '').trim()).filter(Boolean)
+  return titles.map((_, i) => lines[i] || titles[i])
+}
+
+// Localize every markdown link label that matches a RAG page title to `lang`.
+// Leaves the URL/target untouched; no-op for English. Uses the cache so repeated
+// queries never re-translate the same title.
+async function localizeLinkTitles(response, lang, titles) {
+  if (lang === 'en' || !response || !titles.length) return response
+  let byLang = titleTranslationsCache.get(lang)
+  if (!byLang) {
+    byLang = new Map()
+    titleTranslationsCache.set(lang, byLang)
+  }
+  const target = new Map(titles.map(t => [t.replace(/\s+/g, ' ').trim().toLowerCase(), t]))
+  // Collect the distinct titles actually used as link labels right now
+  const used = new Set()
+  for (const m of response.matchAll(/\[([^\]]+)\]\(([^)\s]+)\)/g)) {
+    const key = m[1].replace(/\s+/g, ' ').trim().toLowerCase()
+    if (target.has(key) && !byLang.has(key)) used.add(key)
+  }
+  if (used.size) {
+    const need = [...used].map(k => target.get(k))
+    const translated = await translateTitlesWithLLM(need, lang)
+    need.forEach((t, i) => byLang.set(t.replace(/\s+/g, ' ').trim().toLowerCase(), translated[i]))
+  }
+  return response.replace(
+    /\[([^\]]+)\]\(([^)\s]+)\)/g,
+    (whole, label, url) => {
+      const key = label.replace(/\s+/g, ' ').trim().toLowerCase()
+      const done = byLang.get(key)
+      return done && done.toLowerCase() !== key ? `[${done}](${url})` : whole
+    }
+  )
+}
+
 async function translateWithLLM(text, targetLang) {
   const langName = LANG_NAME[targetLang]
   const systemMsg = 'You are a professional technical translator. Translate the given text accurately while preserving all code, commands, and formatting.'
@@ -1500,6 +1558,11 @@ io.on('connection', (socket) => {
         if (!hasContext && gptAnswered) {
           fullResponse += '\n\n---\n*Zdroj: ChatGPT*'
         }
+      }
+      // Localize markdown link labels to the UI language flag: the link text is the
+      // English RAG page title, so translate it into the requested language (CZ/DE).
+      if (hasContext && fullResponse) {
+        fullResponse = await localizeLinkTitles(fullResponse, lang, searchResults.map(r => r.title))
       }
       if (hasContext) console.log(`[response] ${fullResponse.slice(0, 200)}`)
     } catch (err) {
