@@ -799,7 +799,7 @@ if (HELP_URL) {
 
 // Fixed RAG instruction block appended to the system prompt whenever docs are used.
 // Kept as a const so its size is measurable for the context-token budget.
-const ragFormatBlock = `\n\n=== DOKUMENTACE Z NÁPOVĚDY (podle zdrojů) ===\nNásledující text je z oficiální dokumentace, rozdělený do sekcí podle jednotlivých zdrojů. Každá sekce začíná nadpisem zdroje a obsahuje číslované dokumenty [N] s názvem, URL a textem. POUŽIJ HO pro odpověď.\n\nSEZNAM ZDROJŮ V POVINNÉM POŘADÍ (odpověď projde postupně přes všechny):\n{}SOURCE_HEADERS{}\n\nPOVINNÝ FORMÁT ODPOVĚDI (přesně takto):\n- Každý zdroj = jedna sekce. Začni PŘESNÝM nadpisem zdroje (zkopíruj ho doslova ze "SEZNAM ZDROJŮ" výše), pod ním odpověď na dotaz POUZE z dokumentů TOHO zdroje s odkazy [název stránky](url), pak oddělovač "---".\n- Pokračuj dalším nadpisem ze seznamu, pak odpověď, pak "---". Takto projdi VŠECHNY zdroje ze seznamu v jejich pořadí.\n- Pokud zdroj k dotazu nic neobsahuje, napiš pod jeho nadpis jen: "V tomto zdroji nejsou žádné relevantní informace." a pokračuj dál.\n- ZAKÁZÁNO: nepoužívej HTML tagy <a>, neopisuj doslova řádky kontextu ("[1] ...", "URL: ..."), nepoužívej číslované reference [1], nevymýšlej URL.\n- ODPOVĚĎ PIŠ VLASTNÍMI SLOVY: z dokumentu vezmi informace a srozumitelně je NAPIŠ SVÝMI SLOVY – nezačínej odpověď číslem dokumentu ani "URL:", nekopíruj celý text dokumentu.\n- JAK NA TO (dotaz na postup/škálování/nasazení/konfiguraci/monitorování/odstraňování apod.): vypiš KONKRÉTNÍ KROKY z textu dokumentu jako číslovaný seznam (1. 2. 3. …), např. "1. Otevři topology wizard. 2. Vyber uzel a klikni na +/− pro horizontální škálování…". To, že se postup "v dokumentu píše", NENÍ odpověď – napiš, co přesně a v jakém pořadí dělat.\n- BUĎ STRUČNÝ: u informačních dotazů věnuj každému zdroji max 2 věty a max 2 odkazy; u postupových dotazů jsou kroky důležitější než stručnost.\nPŘÍKLAD (jen ukázka tvaru, text si vymysli vlastní; použij PŘESNÝ nadpis prvního zdroje ze seznamu výše):\nNadpis prvního zdroje:\nVirtuozzo nabízí statistické monitorování spotřeby zdrojů. [Statistics Monitoring](https://url/)\n---\nNadpis druhého zdroje:\nV tomto zdroji nejsou žádné relevantní informace.\n---\nNadpis třetího zdroje:\nStručná odpověď podle dokumentace.\n\n{}`
+const ragFormatBlock = `\n\n=== DOKUMENTACE Z NÁPOVĚDY (podle zdrojů) ===\nNásledující text je z oficiální dokumentace, rozdělený do sekcí podle jednotlivých zdrojů. Každá sekce začíná nadpisem zdroje a obsahuje číslované dokumenty [N] s názvem, URL a textem. POUŽIJ HO pro odpověď.\n\nSEZNAM ZDROJŮ V POVINNÉM POŘADÍ (odpověď projde postupně přes všechny):\n{}SOURCE_HEADERS{}\n\nPOVINNÝ FORMÁT ODPOVĚDI (přesně takto):\n- Každý zdroj = jedna sekce. Začni PŘESNÝM nadpisem zdroje (zkopíruj ho doslova ze "SEZNAM ZDROJŮ" výše), pod ním odpověď na dotaz POUZE z dokumentů TOHO zdroje s odkazy [název stránky](url), pak oddělovač "---".\n- Pokračuj dalším nadpisem ze seznamu, pak odpověď, pak "---". Takto projdi VŠECHNY zdroje ze seznamu v jejich pořadí.\n- Pokud zdroj z "SEZNAM ZDROJŮ" k dotazu nic neobsahuje, napiš pod JEHO nadpis jen: "V tomto zdroji nejsou žádné relevantní informace." a pokračuj dál.\n- Věta "V tomto zdroji nejsou žádné relevantní informace." smí být JEN pod nadpisem z "SEZNAM ZDROJŮ". NEPIŠ ji pod vlastní vymyšlený nadpis ani jako samostatnou sekci.\n- ZAKÁZÁNO: do odpovědi NEPŘIDÁVEJ technologie nebo nástroje, které v dotazu ani v dodané dokumentaci nejsou (např. ptá-li se uživatel na PostgreSQL, neuváděj MySQL, MongoDB ani SQLite). Odpovídej POUZE o tom, na co se ptá, a pouze z dokumentů níže. Nevymýšlej si nadpisy sekcí – jediné povolené nadpisy jsou přesné kopie z "SEZNAM ZDROJŮ".\n- ZAKÁZÁNO: nepoužívej HTML tagy <a>, neopisuj doslova řádky kontextu ("[1] ...", "URL: ..."), nepoužívej číslované reference [1], nevymýšlej URL.\n- ODPOVĚĎ PIŠ VLASTNÍMI SLOVY: z dokumentu vezmi informace a srozumitelně je NAPIŠ SVÝMI SLOVY – nezačínej odpověď číslem dokumentu ani "URL:", nekopíruj celý text dokumentu.\n- JAK NA TO (dotaz na postup/škálování/nasazení/konfiguraci/monitorování/odstraňování apod.): vypiš KONKRÉTNÍ KROKY z textu dokumentu jako číslovaný seznam (1. 2. 3. …), např. "1. Otevři topology wizard. 2. Vyber uzel a klikni na +/− pro horizontální škálování…". To, že se postup "v dokumentu píše", NENÍ odpověď – napiš, co přesně a v jakém pořadí dělat.\n- BUĎ STRUČNÝ: u informačních dotazů věnuj každému zdroji max 2 věty a max 2 odkazy; u postupových dotazů jsou kroky důležitější než stručnost.\nPŘÍKLAD (jen ukázka tvaru, text si vymysli vlastní; použij PŘESNÝ nadpis prvního zdroje ze seznamu výše):\nNadpis prvního zdroje:\nVirtuozzo nabízí statistické monitorování spotřeby zdrojů. [Statistics Monitoring](https://url/)\n---\nNadpis druhého zdroje:\nV tomto zdroji nejsou žádné relevantní informace.\n---\nNadpis třetího zdroje:\nStručná odpověď podle dokumentace.\n\n{}`
 
 rag.loadIndex(path.join(dataDir, 'index.json'))
 
@@ -1427,6 +1427,43 @@ io.on('connection', (socket) => {
           if (!content) return null
           return h + '\n\n' + content
         }).filter(Boolean).join('\n\n---\n\n')
+      } else {
+        // The model did not reproduce the exact source headers, so the per-source
+        // rebuild above was skipped. The raw output therefore still contains
+        // unattributed "V tomto zdroji nejsou žádné relevantní informace…" clauses,
+        // invented per-technology placeholder blocks and stray "---" separators.
+        // Salvage it: drop everything not attributable to a real doc link; if that
+        // leaves nothing usable, rebuild a per-source reference list from the actual
+        // RAG hits so the answer still names its sources and carries working links.
+        const noInfoUnattrib = /(?:\bV\s+tomto\s+zdroji\s+nejsou\s+žádné\s+(?:relevantní\s+)?informace|žádné\s+(?:relevantní\s+)?informace|žádné\s+dokumenty\s+pro\s+tento\s+dotaz|no\s+relevant\s+information[s]?(?:\s+in\s+this\s+source)?|nothing\s+relevant(?:\s+was\s+found)?|keine\s+(?:relevanten\s+)?informationen)[^.!?\n]*[.!?]?/gi
+        const localValidUrls = new Set(searchResults.map(r => localUrl(lang, r.url).split('#')[0].replace(/\/$/, '')))
+        const hasValidLink = (line) => [...line.matchAll(/\]\(([^)]+)\)/g)].some((m) => localValidUrls.has(m[1].split('#')[0].replace(/\/$/, '')))
+        const keptLines = String(responseText)
+          .replace(noInfoUnattrib, '')
+          .split('\n')
+          .map(l => l.trim())
+          .filter(l => l && !/^[\s>]*[-*_]{3,}\s*$/i.test(l) && !/^URL:\s*$/i.test(l))
+          .filter(hasValidLink)
+        const keptText = keptLines.join('\n').replace(/\n{3,}/g, '\n\n').trim()
+        if (keptText.length >= 40) {
+          responseText = keptText
+        } else {
+          const refLabel = { cz: 'Reference:', en: 'References:', de: 'Referenzen:' }[lang] || 'Reference:'
+          const refParts = []
+          for (const g of sourceGroups) {
+            const so = rag.SOURCES.find(s => s.host === g.source)
+            if (!so) continue
+            const docLines = g.results
+              .map(r => ({ url: r.url.replace(/\/$/, ''), title: r.title }))
+              .filter(d => validUrls.has(d.url))
+              .map(d => `- [${d.title}](${localUrl(lang, d.url)})`)
+            if (!docLines.length) continue
+            refParts.push(`**${so.name}**\n${docLines.join('\n')}`)
+          }
+          responseText = refParts.length
+            ? 'Nejbližší dokumentace k tomuto dotazu:\n\n' + refLabel + '\n' + refParts.join('\n\n')
+            : noDocsMsg[lang]
+        }
       }
       fullResponse = responseText
       // Always attach the documentation sites this answer was built from, in
