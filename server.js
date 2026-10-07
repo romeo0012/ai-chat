@@ -1033,6 +1033,26 @@ io.on('connection', (socket) => {
     socket.emit('assistant-start')
 
     const validUrls = new Set(searchResults.map(r => r.url.replace(/\/$/, '')))
+    const refLabelL = { cz: 'Reference:', en: 'References:', de: 'Referenzen:' }[lang] || 'Reference:'
+    // Per-source reference list built from the actual RAG hits; used when the
+    // model output is unusable (no exact source headers) so the answer still
+    // names its sources and carries working links.
+    const buildRefFallback = () => {
+      const refParts = []
+      for (const g of sourceGroups) {
+        const so = rag.SOURCES.find(s => s.host === g.source)
+        if (!so) continue
+        const docLines = g.results
+          .map(r => ({ url: r.url.replace(/\/$/, ''), title: r.title }))
+          .filter(d => validUrls.has(d.url))
+          .map(d => `- [${d.title}](${localUrl(lang, d.url)})`)
+        if (!docLines.length) continue
+        refParts.push(`**${so.name}**\n${docLines.join('\n')}`)
+      }
+      return refParts.length
+        ? 'Nejbližší dokumentace k tomuto dotazu:\n\n' + refLabelL + '\n' + refParts.join('\n\n')
+        : noDocsMsg[lang]
+    }
 
     try {
       if (!hasContext) {
@@ -1448,24 +1468,16 @@ io.on('connection', (socket) => {
         if (keptText.length >= 40) {
           responseText = keptText
         } else {
-          const refLabel = { cz: 'Reference:', en: 'References:', de: 'Referenzen:' }[lang] || 'Reference:'
-          const refParts = []
-          for (const g of sourceGroups) {
-            const so = rag.SOURCES.find(s => s.host === g.source)
-            if (!so) continue
-            const docLines = g.results
-              .map(r => ({ url: r.url.replace(/\/$/, ''), title: r.title }))
-              .filter(d => validUrls.has(d.url))
-              .map(d => `- [${d.title}](${localUrl(lang, d.url)})`)
-            if (!docLines.length) continue
-            refParts.push(`**${so.name}**\n${docLines.join('\n')}`)
-          }
-          responseText = refParts.length
-            ? 'Nejbližší dokumentace k tomuto dotazu:\n\n' + refLabel + '\n' + refParts.join('\n\n')
-            : noDocsMsg[lang]
+          responseText = buildRefFallback()
         }
       }
       fullResponse = responseText
+      // If the model produced nothing usable (e.g. matchedAny rebuilding dropped
+      // every section), never return an empty answer: fall back to the per-source
+      // reference list so the user still gets named sources and working links.
+      if (hasContext && (!fullResponse || !fullResponse.trim())) {
+        fullResponse = buildRefFallback()
+      }
       // Always attach the documentation sites this answer was built from, in
       // "Name (URL)" form, so every answer carries working doc links even when
       // the model produced no reference block at all.
