@@ -752,7 +752,16 @@ app.get(BASE_PATH + '/docs/:lang([a-z]{2})/:path(*)', async (req, res) => {
     return res.status(404).send(`<h1>Stránka nenalezena</h1><p>Neznámý jazyk: ${lang}.</p><a href="/">Zpět na chat</a>`)
   }
   try {
-    const html = await fetchOriginalDoc(lang, req.params.path)
+    // EN: serve the full original page (raw proxy, best fidelity). CZ/DE: serve the
+    // translated page (committed docs_cache/cz|de if present, else reconstruct from
+    // the RAG index and translate via LLM, caching the result). Fall back to the raw
+    // original when a page has no indexed/translated content yet.
+    let html
+    try {
+      html = lang === 'en' ? await fetchOriginalDoc(lang, req.params.path) : await getTranslatedDoc(lang, req.params.path)
+    } catch (transErr) {
+      html = await fetchOriginalDoc(lang, req.params.path)
+    }
     res.type('html').send(html)
   } catch (err) {
     console.error(`[docs error] ${err.message}`)
