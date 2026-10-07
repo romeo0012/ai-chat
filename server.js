@@ -114,6 +114,10 @@ function localUrl(lang, url) {
     const docPath = clean.slice(vUrl.length).replace(/\/$/, '')
     return docsUrl(lang, docPath)
   }
+  const sdocUrl = 'https://www.virtuozzo.com/server-docs'
+  if (clean === sdocUrl || clean === sdocUrl + '/') {
+    return `${BASE_PATH}/p/${lang}/virtuozzo-server/`
+  }
   for (const [pname, bases] of Object.entries(PRODUCT_BASE_URLS)) {
     const list = Array.isArray(bases) ? bases : [bases]
     for (const base of list) {
@@ -1488,7 +1492,7 @@ io.on('connection', (socket) => {
         if (docs.length) {
           const footerLabel = { cz: 'Zdroje dokumentace:', en: 'Documentation sources:', de: 'Dokumentationsquellen:' }[lang] || 'Zdroje dokumentace:'
           fullResponse = fullResponse.replace(/\n+$/, '') + '\n\n**' + footerLabel + '**\n' +
-            docs.map(s => `- ${s.name} (${s.docsUrl})`).join('\n')
+            docs.map(s => `- [${s.name}](${localUrl(lang, s.docsUrl)})`).join('\n')
         }
       }
       const sorryMsgs = new Set(['Omlouvám se', 'I am sorry', 'Es tut mir leid'])
